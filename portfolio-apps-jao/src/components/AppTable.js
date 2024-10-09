@@ -43,7 +43,7 @@ const apps = [
       description: "Aplicación para gestionar contactos con front de react y back en Node-Express yMongoDB",
       technology: "React, MongoDB",
       repoUrl: "https://github.com/tu-usuario/react-persons-mongodb",
-      appUrl: "https://persosmongodb.onrender.com"
+      appUrl: "https://persosmongodb.onrender.com/"
     },
     {
       name: "Login Angular",
