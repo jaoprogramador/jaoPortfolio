@@ -14,7 +14,7 @@ const apps = [
     {
 
       name: "Twitter Follow",
-      imageUrl: "/img/shopping-card.jpg",
+      imageUrl: "/img/twitterFollow.jpg",
       description: "Aplicación que contine un componente Follow como el de twitter",
       technology: "React",
       repoUrl: "https://github.com/jaoprogramador/jaoPortfolio/tree/master/00-hola-mundo",
@@ -27,7 +27,7 @@ const apps = [
       description: "Aplicación para tomar notas con React",
       technology: "React, Express",
       repoUrl: "https://github.com/tu-usuario/react-notes",
-      appUrl: "https://react-xhzi.onrender.com/api/notes"
+      appUrl: "https://react-xhzi.onrender.com/"
     },
     {
       name: "Agenda de Personas",
@@ -35,7 +35,7 @@ const apps = [
       description: "Aplicación para gestionar contactos",
       technology: "React, Express",
       repoUrl: "https://github.com/tu-usuario/react-persons",
-      appUrl: "https://reactpersons.onrender.com/api/persons"
+      appUrl: "https://reactpersons.onrender.com"
     },
     {
       name: "Agenda MongoDB",
@@ -43,7 +43,7 @@ const apps = [
       description: "Aplicación para gestionar contactos con front de react y back en Node-Express yMongoDB",
       technology: "React, MongoDB",
       repoUrl: "https://github.com/tu-usuario/react-persons-mongodb",
-      appUrl: "https://persosmongodb.onrender.com/api/personsMG"
+      appUrl: "https://persosmongodb.onrender.com"
     },
     {
       name: "Login Angular",

@@ -10,6 +10,7 @@ const AppCard = ({ app }) => {
         <h3>{app.name}</h3>
         <p><strong>Descripción:</strong> {app.description}</p>
         <p><strong>Tecnología:</strong> {app.technology}</p>
+        <p><a href={app.appUrl} target="_blank" rel="noopener noreferrer">Visitar App</a></p>
         <p><a href={app.repoUrl} target="_blank" rel="noopener noreferrer">Repositorio en GitHub</a></p>
       </div>
     </div>
