@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Ejercicios MySQL</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="MySQL, sql, pl/sql, programacion MySQL, ejercicios MySQL, ejemplos MySQL, select">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2>U N I O N</h2></td>
+  </tr>
+  <tr> 
+    <td><h3>Sintaxis de UNION</h3>
+      <p>SELECT ...<br>
+        UNION [ALL | DISTINCT]<br>
+        SELECT ...<br>
+        [UNION [ALL | DISTINCT]<br>
+        SELECT ...]<br>
+        UNION se usa para combinar el resultado de un n&uacute;mero de comandos 
+        SELECT en un conjunto de resultados.<br>
+        Las columnas seleccionadas lisatadas en posiciones correspondientes de 
+        cada comando SELECT deben tener el mismo tipo. (Por<br>
+        ejemplo, la primera columna seleccionada por el primer comando debe tener 
+        el mismo tipo que la primer columna seleccionada por<br>
+        otros comandos.) Los nombres de columna usados por el primer comando SELECT 
+        se usan como nombres de columna para los resultados<br>
+        retornados.<br>
+        Los comandos SELECT son comandos select normales, pero con las siguientes 
+        restricciones:<br>
+        &#8226; S&oacute;lo el &uacute;ltimo comando SELECT puede usar INTO OUTFILE.<br>
+        &#8226; HIGH_PRIORITY no puede usarse con comandos SELECT que sean parte 
+        de una UNION. Si lo especifica para el primer SELECT,<br>
+        no tiene efecto. Si lo especifica para cualquier SELECT posterior, aparece 
+        un error de sintaxis.<br>
+        Si no usa la palabra clave ALL para UNION, todos los registros retornados 
+        son &uacute;nicos, como si hubiera hecho un DISTINCT para<br>
+        el conjunto de resultados total. Si especifica ALL, obtiene todos los 
+        registros coincidentes de todos los comandos SELECT usados.<br>
+        La palabra clave DISTINCT es una palabra opcional que no tiene efecto, 
+        pero se permite en la sintaxis como requiere el est&aacute;ndar<br>
+        SQL . (En MySQL, DISTINCT representa el comportamiento por defecto de 
+        una union.)<br>
+        En MySQL 5.0, puede mezclar UNION ALL y UNION DISTINCT en la misma consulta. 
+        Tipos de UNION mezclados se tratan de<br>
+        forma que una uni&oacute;n DISTINCT sobreescribe cualquier uni&oacute;n 
+        ALL a su izquierda. Una uni&oacute;n DISTINCT puede producirse expl&iacute;citamente<br>
+        usando UNION DISTINCT o impl&iacute;citamente usando UNION sin palabra 
+        clave DISTINCT o ALL a continuaci&oacute;n.<br>
+        Si quiere usar una cl&aacute;usula ORDER BY o LIMIT para ordenar o limitar 
+        el resultado UNION entero, ponga entre par&eacute;ntesis los comandos<br>
+        SELECT individuales y ponga el ORDER BY o LIMIT tras el &uacute;ltimo. 
+        El siguiente ejemplo usa ambas cl&aacute;usulas:<br>
+        (SELECT a FROM tbl_name WHERE a=10 AND B=1)<br>
+        UNION<br>
+        (SELECT a FROM tbl_name WHERE a=11 AND B=2)<br>
+        ORDER BY a LIMIT 10;<br>
+        Este tipo de ORDER BY no puede usar referencias de columnas que incluyan 
+        un nombre de columna (esto es, nombres en formato<br>
+        tbl_name.col_name ). En su lugar, proporcione un alias de columna al primer 
+        comando SELECT y refi&eacute;rase al alias en el ORDER<br>
+        BY, o a la columna en el ORDER BY usando su posici&oacute;n de columna. 
+        (Un alias es preferible porque el uso de la posici&oacute;n de<br>
+        la columna est&aacute; obsoleto.)<br>
+        Para aplicar ORDER BY o LIMIT a un SELECT individual, ponga la cl&aacute;usula 
+        dentro de los par&eacute;ntesis alrededor del SELECT:<br>
+        (SELECT a FROM tbl_name WHERE a=10 AND B=1 ORDER BY a LIMIT 10)<br>
+        UNION<br>
+        (SELECT a FROM tbl_name WHERE a=11 AND B=2 ORDER BY a LIMIT 10);<br>
+        Los ORDER BY para comandos SELECT individuales entre par&eacute;ntesis 
+        tienen efecto s&oacute;lo al combinarlos con LIMIT. De otro modo,<br>
+        el ORDER BY se optimiza a parte.<br>
+        En MySQL 5.0, los tipos y longitudes de las columnas en el conjunto de 
+        resultados de una UNION tienen en cuenta los valores recibidos<br>
+        por todos los comandos SELECT. Por ejemplo, considere lo siguiente:<br>
+        mysql&gt; SELECT REPEAT('a',1) UNION SELECT REPEAT('b',10);<br>
+        +---------------+<br>
+        | REPEAT('a',1) |<br>
+        +---------------+<br>
+        | a |<br>
+        | bbbbbbbbbb |<br>
+        +---------------+<br>
+        (En alguna versi&oacute;n anterior de MySQL, el segundo registro se habr&iacute;a 
+        truncado a una longitud de 1.) </p>
+        </td>
+    <td>&nbsp;</td>
+    <td><a href="http://www.euskalnet.net/juanarana/oraclezip/Ejer3.rar"><img src="../../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td>
+<div align="right"><a href="http://www.euskalnet.net/juanarana/index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a>
+      </div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Indice J2ME</title>
+<META http-equiv=Content-Language content=es>
+<META content="Manual J2ME, ejemplos J2ME, codigos J2ME" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Manual J2ME, ejemplos J2ME, codigos J2ME">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> Clases</h2></td>
+  </tr>
+  <tr> 
+    <td colspan="3"><p>- Connector extends Object. La &uacute;nica clase de la 
+        especificaci&oacute;n act&uacute;a como factor&iacute;a con la que instanciar 
+        todos los tipos de conexiones que estudiaremos. Con ella, podemos realizar 
+        cualquier conexi&oacute;n sin importarnos c&oacute;mo se implementa internamente 
+        la adecuada al protocolo que le estamos requiriendo. Se usar&aacute;n 
+        para ello llamadas del estilo de:</p>
+      <p> Connector.open(&quot;http://www.site.com&quot;);<br>
+        Connector.open(&quot;datagram://127.0.0.1:8090&quot;);<br>
+        Connector.open(&quot;file://fichero.txt&quot;);<br>
+        Connector.open(&quot;comm://9600:18N);</p>
+      <p>Con dichas llamadas dejamos en manos de Connector la decisi&oacute;n 
+        de utilizar una u otra de las clases privadas disponibles para establecer 
+        la conexi&oacute;n de forma transparente a nosotros. Si es capaz de ello, 
+        el m&eacute;todo devuelve una instancia que implementa Connection, la 
+        cual recogeremos en una u otra conexi&oacute;n concreta mediante casting. 
+        Por ejemplo, para HTTP de la forma:<br>
+        HttpConnection conex =<br>
+        (HttpConnection)Connector.open(&quot;http://www.site.com&quot;);<br>
+        &Eacute;sta ser&aacute; la forma de trabajar para la cual nos servimos 
+        de esta importante clase, tanto aqu&iacute; como heredada en MIDP. Sus 
+        m&eacute;todos y constantes son:</p>
+      <p> &#8226; static int READ: constante que nos indicar&aacute; la apertura 
+        de una conexi&oacute;n de<br>
+        lectura.<br>
+        &#8226; static int READ_WRITE: constante que nos indicar&aacute; la apertura 
+        de una conexi&oacute;n<br>
+        de lectura y escritura.<br>
+        &#8226; static int WRITE: constante que nos indicar&aacute; la apertura 
+        de una conexi&oacute;n de<br>
+        escritura.<br>
+        &#8226; static Connection open(String name): primero de los m&eacute;todos 
+        est&aacute;ticos con los que obtener una instancia de conexi&oacute;n, 
+        en este caso, pas&aacute;ndole s&oacute;lo una cadena. Esta cadena representa 
+        el objetivo al que deseamos conectar y tendr&aacute; el siguiente<br>
+        esquema:<br>
+        &lt;protocolo&gt;://&lt;destino&gt;;&lt;par&aacute;metros&gt;<br>
+        Donde damos el protocolo o forma en que la conexi&oacute;n se desea establecer 
+        (http, socket, datagrama, file, comm, etc.), el destino con el cual se 
+        quiere conectar (sitio Internet, fichero, puerto serie, etc.) y, si son 
+        necesarios, se dan tambi&eacute;n los par&aacute;metros que determinan 
+        la conexi&oacute;n, dados como pares de valores (param1=val1; param2=val2).<br>
+        &#8226; static Connection open(String name, int mode): tambi&eacute;n 
+        ofrece una instancia de conexi&oacute;n, dando en el primer par&aacute;metro 
+        una cadena de igual formato que el visto para el m&eacute;todo anterior. 
+        Adem&aacute;s, ahora tenemos un segundo par&aacute;metro de entrada (mode) 
+        para indicar con &eacute;l, el modo de acceso a la conexi&oacute;n, dando 
+        para ello una de las tres constantes ya estudiadas: READ, READ_WRITE o 
+        WRITE.</p>
+      <p> &#8226; static Connection open(String name, int mode, boolean timeouts): 
+        aunque es an&aacute;logo al open() anterior, ahora ofrece la posibilidad 
+        de determinar una espera tras la cual se eleve una excepci&oacute;n InterruptedIOException. 
+        &Eacute;sta ser&aacute; lanzada si el tiempo que tarda la conexi&oacute;n 
+        en quedar totalmente establecida supera el dado por el par&aacute;metro 
+        timeouts.<br>
+        &#8226; static DataInputStream openDataInputStream(String name): con &eacute;ste 
+        y los tres siguientes m&eacute;todos crearemos flujos de entrada y salida 
+        al mismo tiempo que es creada internamente la instancia de Connection 
+        deseada. En estos casos, la conexi&oacute;n queda oculta, permiti&eacute;ndonos 
+        trabajar directamente con los flujos. Es m&aacute;s, en cuanto el flujo 
+        se devuelve, se invoca al m&eacute;todo close() de la conexi&oacute;n 
+        utilizada de forma que queda en manos del cierre del flujo la finalizaci&oacute;n 
+        con la vida de la conexi&oacute;n, como ya hablamos al pasar por la interface 
+        Connection. Esto<br>
+        puede verse en el c&oacute;digo fuente del m&eacute;todo openDataInputStream(): 
+        (en los dem&aacute;s se act&uacute;a an&aacute;logamente).<br>
+        public static DataInputStream openDataInputStream(String name) throws 
+        IOException {<br>
+        InputConnection con = (InputConnection)Connector.open(name, Connector.READ);<br>
+        try { return con.openDataInputStream(); }<br>
+        finally { con.close(); }<br>
+        &#8226; static DataOutputStream openDataOutputStream(String name): en 
+        este caso, el flujo devuelto es un DataOutputStream en el que escribir.<br>
+        &#8226; static InputStream openInputStream(String name): en este caso, 
+        el flujo devuelto es un InputStream del que leer.<br>
+        &#8226; static OutputStream openOutputStream(String name): en este caso, 
+        el flujo devuelto es un OutputStream en el que escribir.<br>
+      </p></td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Indice J2ME</title>
+<META http-equiv=Content-Language content=es>
+<META content="Manual J2ME, ejemplos J2ME, codigos J2ME" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Manual J2ME, ejemplos J2ME, codigos J2ME">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2>abstract Layer extends Object</h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <p>Esta clase representa un elemento abstracto 
+        susceptible de ser dibujado en pantalla, dado un tama&ntilde;o y una posici&oacute;n 
+        determinada. Estos objetos implementan lo que anteriormente denomin&aacute;bamos 
+        capas, por medio de las cuales podremos superponer, mover y ocultar o 
+        mostrar ciertos elementos gr&aacute;ficos en el juego.<br>
+        La posici&oacute;n de una capa es siempre relativa al sistema de coordenadas 
+        del objeto Graphics pasado al m&eacute;todo paint() del Layer. Denominaremos 
+        a partir de ahora a este sistema &quot;sistema de coordenadas global&quot;. 
+        La posici&oacute;n inicial de una capa ser&aacute; la (0,0).<br>
+        La clase Layer s&oacute;lo oferta m&eacute;todos, los cuales detallamos 
+        a continuaci&oacute;n:<br>
+        - int getHeight(). Altura en p&iacute;xeles de la capa.<br>
+        - int getWidth(). Anchura en p&iacute;xeles de la capa.<br>
+        - int getX(). Posici&oacute;n en el eje X de la capa, relativa al sistema 
+        de coordenadas global.<br>
+        - int getY(). Posici&oacute;n en Y de la capa (recordemos que Y avanza 
+        hacia abajo), relativa al sistema de coordenadas global.<br>
+        - boolean isVisible(). Devuelve un booleano indicando si la capa est&aacute; 
+        marcada como visible o invisible.<br>
+        - void move(int dx, int dy). Mueve la capa la distancia determinada por 
+        los par&aacute;metros de entrada. Para X, si el valor dado es negativo 
+        la mover&aacute; a la izquierda; para Y, si es negativo la mover&aacute; 
+        hacia arriba.<br>
+        - abstract void paint(Graphics g). Pinta el Layer usando el Graphics par&aacute;metro. 
+        Al ser un m&eacute;todo abstracto, las clases hijas de Layer deben sobrescribirlo. 
+        Ellas se ocupar&aacute;n, por ejemplo, de comprobar si la capa es visible, 
+        no debiendo dibujar nada en ella si no lo es.<br>
+        - void setPosition(int x, int y). Modifica la posici&oacute;n actual del 
+        Layer, siendo la posici&oacute;n por defecto la (0,0). Los valores dados 
+        ser&aacute;n asignados a la posici&oacute;n, relativa al sistema de coordenadas 
+        global, de la esquina superior izquierda de la capa.<br>
+        - void setVisible(boolean visible). Modifica la visibilidad del Layer 
+        actual.</p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

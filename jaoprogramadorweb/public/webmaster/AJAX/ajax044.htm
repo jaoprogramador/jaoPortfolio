@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>C&oacute;mo hacer una p&aacute;gina AJAX</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta name="keywords" content="Primera página AJAX, Como hacer una pagina AJAX, Manual AJAX, tutorial AJAX, Ejemplos AJAX, ejercicios AJAX">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2>Evitar el problema de los dominios diferentes</h2></td>
+  </tr>
+  <tr> 
+    <td height="394" colspan="3"> <p>Como ya se ha explicado y se ha podido comprobar 
+        en algunos de los ejercicios, los navegadores imponen restricciones muy 
+        severas a las conexiones de red que se pueden realizar mediante AJAX. 
+        Esta caracter&iacute;stica se conoce como &quot;el problema de los dominios 
+        diferentes&quot; (en ingl&eacute;s, &quot;cross-domain problem&quot;).<br>
+        El c&oacute;digo JavaScript alojado en un servidor, no puede realizar 
+        conexiones con otros dominios externos. Tambi&eacute;n existen problemas 
+        entre subdominios de un mismo sitio web, que se pueden evitar con el uso 
+        de la propiedad document.domain.</p>
+      <p><br>
+        Afortunadamente, existen opciones para poder realizar conexiones con cualquier 
+        dominio externo al servidor que aloja el c&oacute;digo JavaScript. Todas 
+        las soluciones que son viables t&eacute;cnicamente y que funcionan de 
+        la misma forma en cualquier navegador hacen uso de recursos en el servidor 
+        que aloja el c&oacute;digo JavaScript original.La soluci&oacute;n m&aacute;s 
+        sencilla es la de habilitar el m&oacute;dulo mod_rewrite en los servidores 
+        web de tipo Apache. Con este m&oacute;dulo activado, Apache se puede convertir 
+        en un proxy transparente que realice las peticiones externas en nombre 
+        del script y le devuelva los resultados.</p>
+      <p> En el siguiente ejemplo, el navegador descarga el script desde el servidor1. 
+        Por este motivo, el c&oacute;digo del script puede solicitar recursos 
+        del servidor1, pero no puede establecer conexiones con el servidor2:<br>
+        El script descargado desde el servidor1 no puede establecer conexiones 
+        de red con el servidor2<br>
+        La soluci&oacute;n m&aacute;s sencilla para resolver este problema consiste 
+        en configurar el servidor web del servidor1. Si se utiliza el servidor 
+        web Apache, para configurar el proxy transparente, se habilita el m&oacute;dulo 
+        mod_rewrite y se a&ntilde;aden las siguientes directivas a la configuraci&oacute;n 
+        de Apache:<br>
+        RewriteEngine on<br>
+        RewriteRule ^/ruta/al/recurso$ http://www.servidor2.com/ruta/al/recurso 
+        [P]<br>
+        Ahora, el c&oacute;digo de la aplicaci&oacute;n puede acceder a cualquier 
+        recurso del servidor2 ya que:<br>
+        El script realiza peticiones a: http://www.servidor1.com/ruta/al/recurso<br>
+        En el servidor1 se transforma autom&aacute;ticamente a: http://www.servidor2.com/ruta/al/<br>
+        recurso<br>
+        El servidor1 obtiene la respuesta del servidor2 y la env&iacute;a de nuevo 
+        al script<br>
+        <br>
+        Adem&aacute;s de utilizar el servidor web como proxy transparente, tambi&eacute;n 
+        es posible dise&ntilde;ar un proxy a medida mediante software. Yahoo por 
+        ejemplo ofrece una extensa documentaci&oacute;n para los desarrolladores 
+        de aplicaciones web. Entre esta documentaci&oacute;n, se encuentra un 
+        art&iacute;culo sobre el uso de proxys para evitar el problema de las 
+        peticiones externas de AJAX:<br>
+        http://developer.yahoo.com/javascript/howto-proxy.html<br>
+        Adem&aacute;s, Yahoo ofrece un proxy de ejemplo realizado con PHP y que 
+        puede ser utilizado para conectar aplicaciones JavaScript con sus servicios 
+        web.</p></td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

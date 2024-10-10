@@ -1,0 +1,207 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>JavaServer Faces</title>
+<META http-equiv=Content-Language content=es>
+<META content="Manual JSP, ejemplos JSP, codigos JSP" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Manual JSP, ejemplos JSP, codigos JSP">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2> JSF versus Struts</h2></td>
+  </tr>
+    
+  <tr> 
+    <td height="39" colspan="3"> <p>En este apartado describiremos las principales 
+        caracter&iacute;sticas de JSF frente a uno de los framework de desarrollo 
+        m&aacute;s extendidos (Struts), con el objeto de obtener una regla de 
+        valoraci&oacute;n en cuanto a qu&eacute; nos aporta JSF.<br>
+        Debido a que Struts es un framework mucho m&aacute;s maduro que JSF (&eacute;ste 
+        tan s&oacute;lo lleva dos a&ntilde;os utiliz&aacute;ndose), en principio, 
+        puede parecer mucho m&aacute;s seguro y rentable abordar el desarrollo 
+        de una aplicaci&oacute;n utiliz&aacute;ndolo. No obstante, como veremos, 
+        esto no tiene por qu&eacute; ser as&iacute; en todos los casos, ya que, 
+        JSF adem&aacute;s de ser un framework con mucho potencial, presenta ventajas 
+        sobre Struts como por ejemplo, que JSF proporciona la capacidad de construir 
+        componentes desde distintas tecnolog&iacute;as por lo que se presta a 
+        ser desarrollado desde una amplia variedad de herramientas.<br>
+        Por otra parte, aunque Struts se dise&ntilde;&oacute; inicialmente para 
+        ser independiente de la capa del modelo, normalmente los datos de las 
+        p&aacute;ginas deben pasar al ActionForm siguiendo un modelo espec&iacute;fico 
+        de entrada, lo que requiere realizar codificaci&oacute;n manual. JSF, 
+        sin embargo, oculta los detalles de los datos dentro del &aacute;rbol 
+        componentes, permitiendo vincular a cualquier clase Java componentes ricos 
+        como rejillas de datos.
+<h3> Escalabilidad</h3>
+        Tanto Struts como JSF proporcionan un nivel de escalabilidad tal que les 
+      permite satisfacer futuros requerimientos. As&iacute;, una de las caracter&iacute;sticas 
+      de Struts es poseer una clase RequestProcessor que tiene varios m&eacute;todos 
+      para recuperar informaci&oacute;n a lo largo de todo el ciclo de vida de 
+      la petici&oacute;n. Podemos extender esta clase con el objetivo de reemplazar 
+      o mejorar el framework.<br>
+      Asimismo, JSF proporciona una funcionalidad equivalente permiti&eacute;ndonos 
+      extender determinadas interfaces del ciclo de vida. Adem&aacute;s, JSF desacopla 
+      totalmente el pintado del Controlador permitiendo a los desarrolladores 
+      proporcionar sus propias herramientas de pintado para construir componentes 
+      personalizados. &Eacute;sta es una de las caracter&iacute;sticas m&aacute;s 
+      potentes de JSF que no proporciona Struts.<br>
+        
+      <h3>Controlador</h3>
+        Podemos considerar que las caracter&iacute;sticas m&aacute;s importantes 
+      de un framework son el controlador y la navegaci&oacute;n. Struts utiliza 
+      para la capa del controlador los patrones Front Controller y Command Patterm. 
+      As&iacute;, la forma de trabajar es la siguiente: un servlet realiza una 
+      solicitud, transforma los par&aacute;metros http en un Java ActionForm y 
+      &eacute;ste en una clase Action (un comando). El framework de Struts utiliza 
+      s&oacute;lo un manejador de eventos para las peticiones http de tal forma 
+      que, una vez satisfecha la petici&oacute;n, el ActionForm devuelve el resultado 
+      al Controlador que lo utiliza para seleccionar la navegaci&oacute;n siguiente.<br>
+      JSF, sin embargo, utiliza el patr&oacute;n Page Controller. Aunque s&oacute;lo 
+      dispone de un &uacute;nico servlet para recibir p&aacute;gina con componentes, 
+      se ejecutar&aacute;n distintos eventos por cada uno de ellos, traduci&eacute;ndolos 
+      gracias a un traductor de componentes.<br>
+      Asimismo, los componentes tambi&eacute;n pueden vincularse a los datos desde 
+      el Modelo. De esta forma, JSF a&ntilde;ade m&aacute;s ventajas al Controlador 
+      y, al mismo tiempo, proporciona toda la flexibilidad del patr&oacute;n Page 
+      Controller.<br>
+      Como hemos indicado, JSF puede tener varios manejadores de eventos en una 
+      sola p&aacute;gina mientras que Struts s&oacute;lo es capaz de procesar 
+      un evento por petici&oacute;n. Adem&aacute;s, con Struts el ActionForm debe 
+      extender clases creando as&iacute; otra capa de c&oacute;digo engorroso 
+      y con posibilidad de dise&ntilde;arse mal, forzando de esta forma a la capa 
+      de modelo a ser un ActionForm. Sin embargo, en JSF esta capa es totalmente 
+      independiente.</p> <h3> Navegaci&oacute;n</h3>
+      Respecto a la navegaci&oacute;n, tanto Struts como JSF se basan en un modelo 
+      declarativo, defini&eacute;ndola mediante el uso de reglas en ficheros de 
+      configuraci&oacute;n XML (struts-config.xml, faces-config.xml). Ambos soportan 
+      tanto la navegaci&oacute;n est&aacute;tica (cuando de una p&aacute;gina 
+      se navega directamente a la siguiente), como la din&aacute;mica (cuando 
+      es una acci&oacute;n o l&oacute;gica la que determina a qu&eacute; p&aacute;gina 
+      se navega).<br>
+      Struts utiliza el concepto de forwards para definir la navegaci&oacute;n. 
+      Bas&aacute;ndose en cadenas el framework de Struts decide qu&eacute; p&aacute;gina 
+      es la siguiente y la traduce. De esta forma, para definirla, se puede utilizar 
+      un Action tal y como mostramos a continuaci&oacute;n:<br>
+      &lt;action path=&quot;/myForward&quot; forward=&quot;/target.jsp&quot;&gt; 
+      &lt;/action&gt;<br>
+      Struts soporta la navegaci&oacute;n din&aacute;mica mediante la definici&oacute;n 
+      de especificaciones en la definici&oacute;n de un Action, permitiendo tener 
+      m&uacute;ltiples forwards en un mismo Action:<br>
+      &lt;action-mappings&gt;<br>
+      &lt;action name=&quot;myForm&quot; path=&quot;/myACtion&quot; scope=&quot;request&quot;<br>
+      type=&quot;strutsnav.actions.MyAction&quot;&gt;<br>
+      &lt;forward name=&quot;success&quot; path=&quot;./target.jsp&quot;&gt;<br>
+      &lt;/forward&gt;<br>
+      &lt;forward name=&quot;error&quot; path=&quot;./error.jsp&quot;&gt;<br>
+      &lt;/forward&gt;<br>
+      &lt;/action&gt;<br>
+      &lt;/action-mappings&gt;<br>
+      Siendo posible programar qu&eacute; forward devolver:<br>
+      public ActionForward execute(<br>
+      ActionMapping mapping,<br>
+      ActionForm form,<br>
+      HttpServletRequest request,<br>
+      HttpServletResponse response)<br>
+      throws Exception {<br>
+      ActionErrors errors = new ActionErrors();ActionForward forward = new ActionForward(); 
+      // return value<br>
+      MyForm myForm = (MyForm) form;<br>
+      try {<br>
+      // &#8230;<br>
+      } catch (Exception e) {<br>
+      // Error<br>
+      errors.add(&quot;name&quot;, new ActionError(&quot;id&quot;));<br>
+      forward = mapping.findForward(&quot;success&quot;);<br>
+      return (forward);<br>
+      }<br>
+      forward = mapping.findForward(&quot;success&quot;);<br>
+      return (forward);<br>
+      }<br>
+      Sin embargo, en JSF la navegaci&oacute;n est&aacute;tica se soporta gracias 
+      a la definici&oacute;n de reglas de navegaci&oacute;n en el fichero de configuraci&oacute;n 
+      de las faces(faces-config.xml). En el siguiente ejemplo, mostramos en una 
+      regla de navegaci&oacute;n c&oacute;mo navegar de una p&aacute;gina a la 
+      siguiente:<br>
+      &lt;navigation-rule&gt;<br>
+      &lt;from-view-id&gt;/FromPage.jsp&lt;/from-view-id&gt;<br>
+      &lt;navigation-case&gt;<br>
+      &lt;from-outcome&gt;success&lt;/from-outcome&gt;<br>
+      &lt;to-view-id&gt;/ToPage.jsp&lt;/to-view-id&gt;<br>
+      &lt;/navigation-case&gt;<br>
+      &lt;/navigation-rule&gt;<br>
+      A diferencia de Struts, la navegaci&oacute;n en JSF se aplica a nivel de 
+      p&aacute;gina y puede ser independiente de la acci&oacute;n. &Eacute;sta 
+      hay que especificarla impl&iacute;citamente en el componente, permitiendo 
+      de esta forma un control de grano m&aacute;s fino en la p&aacute;gina. Es 
+      posible, adem&aacute;s, tener varios componentes en una p&aacute;gina definiendo 
+      distintas acciones y compartiendo las mismas reglas de navegaci&oacute;n 
+      tal y como podemos observar en el siguiente ejemplo:<br>
+      &lt;af:commandButton type=&quot;submit&quot; value=&quot;Submit&quot;<br>
+      styleClass=&quot;commandExButton&quot; id=&quot;button1&quot; action=&quot;success&quot; 
+      /&gt;Con respecto a la navegaci&oacute;n din&aacute;mica, JSF la soporta 
+      permitiendo a los componentes comportarse como un manejador de acciones:<br>
+      &lt;af:commandButton type=&quot;submit&quot; value=&quot;Submit&quot;<br>
+      styleClass=&quot;commandExButton&quot; id=&quot;button1&quot; action=&quot;#<br>
+      {pc_FromPage.doButton1Action}&quot; /&gt;<br>
+      Asimismo, es posible codificar manejadores de acciones en cualquier clase 
+      implementando<br>
+      as&iacute; la navegaci&oacute;n din&aacute;mica:<br>
+      public String doButton1Action() {<br>
+      return &quot;success&quot;;<br>
+      }<br>
+      Aunque para soportar la navegaci&oacute;n din&aacute;mica las reglas de 
+      navegaci&oacute;n no necesitan especificar la acci&oacute;n, JSF nos permite 
+      definir la acci&oacute;n en la regla de navegaci&oacute;n. De esta forma, 
+      estamos obligando a una regla de navegaci&oacute;n espec&iacute;fica a realizar 
+      una acci&oacute;n:<br>
+      &lt;navigation-rule&gt;<br>
+      &lt;from-view-id&gt;/FromPage.jsp&lt;/from-view-id&gt;<br>
+      &lt;navigation-case&gt;<br>
+      &lt;from-action&gt;#{pc_FromPage.doButton1Action}&lt;/from-action&gt;<br>
+      &lt;from-outcome&gt;success&lt;/from-outcome&gt;<br>
+      &lt;to-view-id&gt;/ToPage.jsp&lt;/to-view-id&gt;<br>
+      &lt;/navigation-case&gt;<br>
+      &lt;/navigation-rule&gt;<h3>Conclusiones</h3>
+      Como hemos podido observar, aunque tanto Struts como JSF son suficientemente 
+      flexibles desde el punto de vista de la navegaci&oacute;n, JSF permite una 
+      mayor flexibilidad y un mejor dise&ntilde;o de las reglas. Adem&aacute;s, 
+      es mucho m&aacute;s sencillo en JSF tener una p&aacute;gina con varias reglas 
+      de navegaci&oacute;n sin necesidad de codificar un mont&oacute;n de l&oacute;gica 
+      del tipo if-else. Por todo ello, es posible preveer que JSF superar&aacute; 
+      a Struts debido a la flexibilidad de su controlador y a la navegaci&oacute;n.<br>
+      Como hemos podido ver, en general, JSF es mucho m&aacute;s flexible que 
+      Struts (que no deja de ser un framework robusto que funciona bien). Volviendo 
+      al principio de este punto, en el queindic&aacute;bamos que a priori por 
+      ser m&aacute;s maduro parec&iacute;a m&aacute;s rentable el uso de Struts, 
+      debemos decir que cuando se piensa en abordar un nuevo proyecto hay que 
+      considerar muchos factores. As&iacute;, por ejemplo, si estamos limitados 
+      por un calendario ajustado y sin tiempo para evaluar diferentes proveedores 
+      que nos den soporte de implementaciones de JSF, lo m&aacute;s conservador 
+      es decantarse por el uso de Struts.<br>
+      Sin embargo, para seguir una direcci&oacute;n estrat&eacute;gica y un modelo 
+      de programaci&oacute;n, la opci&oacute;n seleccionada para el desarrollo 
+      de nuevas aplicaciones deber&iacute;a ser JSF. Es por todo esto que merece 
+      la pena que los desarrolladores inviertan tiempo en aprender JSF y se utilice. 
+      JSF es m&aacute;s sencillo que Struts cuando se desarrolla manualmente, 
+      increment&aacute;ndose de manera notable la productividad al utilizar un 
+      IDE de Desarrollo de Aplicaciones como Jdeveloper.</td>
+
+  </tr>
+  <tr> 
+    <td width="341"></td>
+    <td width="74">&nbsp;</td>
+    <td width="124"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+</body>
+</html>

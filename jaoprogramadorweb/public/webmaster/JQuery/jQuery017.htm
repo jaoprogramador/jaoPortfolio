@@ -1,0 +1,67 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Introducci&oacute;n a JQuery</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta name="keywords" content="Introduccion a JQuery, Manual JQuery, tutorial JQuery, Ejemplos JQuery, ejercicios JQuery">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos"><tr> 
+    <td height="39" colspan="3"> <h2>Añadir los eventos mouseover y mouseout para añadir y
+quitar una clase CSS</h2></td>
+  </tr>
+  <tr> 
+    <td height="268" colspan="3"> <p>En este paso vamos a crear un par de eventos 
+        que asociaremos a los enlaces. Este par de<br>
+        eventos ser&aacute;n lanzados cuando el usuario coloque el puntero del 
+        rat&oacute;n sobre el enlace<br>
+        (mouseover) y cuando el usuario retire el rat&oacute;n del enlace (mouseout).<br>
+        Por ejemplo, para definir un evento mouseover se tiene que llamar al m&eacute;todo 
+        mouseover()<br>
+        sobre el elemento que queremos asociar el evento. Adem&aacute;s, al m&eacute;todo 
+        mouseover() se le<br>
+        env&iacute;a por par&aacute;metro una funci&oacute;n con el c&oacute;digo 
+        que se quiere ejecutar como respuesta a ese<br>
+        evento.<br>
+        En el caso de a&ntilde;adir una clase tenemos que utilizar el m&eacute;todo 
+        addClass(), que se tiene que<br>
+        invocar sobre el elemento al que queremos a&ntilde;adirle la clase. A 
+        addClass() tenemos que<br>
+        pasarle una cadena con el nombre de la clase CSS que queremos a&ntilde;adir.<br>
+        Para seleccionar el elemento que queremos a&ntilde;adir la clase hacemos 
+        $(&quot;#idElemento&quot;), es<br>
+        decir, utilizamos la funci&oacute;n d&oacute;lar pas&aacute;ndole el identificador 
+        del elemento que queremos<br>
+        seleccionar, precedida del car&aacute;cter &quot;#&quot;. Por ejemplo, 
+        con $(&quot;#capa&quot;) estamos seleccionando un<br>
+        elemento de la p&aacute;gina cuyo id=&quot;capa&quot;.<br>
+        $(&quot;a&quot;).mouseover(function(event){<br>
+        $(&quot;#capa&quot;).addClass(&quot;clasecss&quot;);<br>
+        });<br>
+        De manera an&aacute;loga, pero con el m&eacute;todo mouseout(), definimos 
+        el evento para cuando el<br>
+        usuario saca el puntero del rat&oacute;n del enlace.<br>
+        $(&quot;a&quot;).mouseout(function(event){<br>
+        $(&quot;#capa&quot;).removeClass(&quot;clasecss&quot;);<br>
+        });</p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

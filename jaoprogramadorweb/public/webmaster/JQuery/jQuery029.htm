@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Introducci&oacute;n a JQuery</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta name="keywords" content="Introduccion a JQuery, Manual JQuery, tutorial JQuery, Ejemplos JQuery, ejercicios JQuery">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos"><tr> 
+    <td height="39" colspan="3"> <h2>Pasar parámetros y ejecutar acciones después de la
+llamada a Ajax</h2></td>
+  </tr>
+  <tr> 
+    <td height="268" colspan="3"> 
+      <h3>Introducci&oacute;n</h3>
+      <p>El m&eacute;todo load() que hemos visto en el ejemplo anterior tiene 
+        otros dos par&aacute;metros opcionales<br>
+        que podemos utilizar si fuera necesario:<br>
+        Par&aacute;metros a pasar a la p&aacute;gina: la p&aacute;gina que carguemos 
+        con Ajax puede recibir<br>
+        par&aacute;metros por la URL, que se especifican con la t&iacute;pica 
+        notaci&oacute;n de propiedades y valores de<br>
+        jQuery.<br>
+        {nombre: &quot;Pepe&quot;, edad: 45}<br>
+        Por ejemplo, con ese c&oacute;digo estar&iacute;amos enviando a la p&aacute;gina 
+        los datos nombre y edad, con los<br>
+        valores &quot;pepe&quot; y 45. Esos datos viajar&iacute;an en la URL, 
+        por el m&eacute;todo &quot;POST&quot;.<br>
+        Funci&oacute;n callback: como otros m&eacute;todos de jQuery, podemos 
+        especificar opcionalmente una<br>
+        funci&oacute;n a ser ejecutada cuando se termine de ejecutar el m&eacute;todo. 
+        En este caso, cuando se<br>
+        termine la llamada Ajax, se pueden hacer acciones, como borrar un mensaje 
+        t&iacute;pico de<br>
+        &quot;cargando...&quot;.<br>
+        Ahora veamos un c&oacute;digo donde hacemos uso de estos dos par&aacute;metros:<br>
+        $(document).ready(function(){<br>
+        $(&quot;#enlaceajax&quot;).click(function(evento){<br>
+        evento.preventDefault();<br>
+        $(&quot;#destino&quot;).load(&quot;recibe-parametros.php&quot;, {nombre: 
+        &quot;Pepe&quot;, edad: 45}, function(){<br>
+        alert(&quot;recibidos los datos por ajax&quot;);<br>
+        });<br>
+        });<br>
+        })<br>
+        En este caso estamos cargando con load() una p&aacute;gina PHP llamada 
+        &quot;recibe-parametros.php&quot;.<br>
+        Estamos pasando los par&aacute;metros &quot;nombre&quot; y &quot;edad&quot; 
+        a una p&aacute;gina, que podremos recoger por<br>
+        GET. Adem&aacute;s, hemos colocado una funci&oacute;n callback en la que 
+        simplemente hacemos un alert(),<br>
+        que se ejecutar&aacute; cuando la llamada a Ajax haya terminado.<br>
+        Este ser&iacute;a el c&oacute;digo fuente de &quot;recibe-parametros.php&quot;:<br>
+        Recibido el siguiente dato:<br>
+        &lt;br&gt;<br>
+        Nombre: &lt;?php echo $_POST[&quot;nombre&quot;];?&gt;<br>
+        &lt;br&gt;<br>
+        Edad: &lt;?php echo $_POST[&quot;edad&quot;];?&gt;<br>
+        Podemos ver este ejemplo en una p&aacute;gina aparte.<br>
+        Con esto hemos podido comprobar lo sencillo que es realizar con jQuery 
+        una carga de<br>
+        contenidos que se reciben por Ajax. Como dec&iacute;a, existen muchas 
+        otras maneras de hacer<br>
+        conexiones Ajax con jQuery, como el ejemplo del art&iacute;culo siguiente 
+        que nos ense&ntilde;a a mostrar<br>
+        un mensaje de carga miestr&aacute;s esperamos la respuesta Ajax del servidor. 
+        Adem&aacute;s, para<br>
+        complementar esta informaci&oacute;n, tambi&eacute;n pod&eacute;is ver 
+        el v&iacute;deo de Ajax con jQuery.</p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

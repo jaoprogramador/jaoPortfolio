@@ -1,0 +1,229 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Ejemplo DAO</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación en JDBC,Programas JDBC,Aplicaciones en JDBC,Ejercicios en JDBC, Ejemplos de JDBC,Tutoriales de JDBC,Manuales JDBC" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="JDBC, Manual JDBC, tutorial JDBC, Ejemplos JDBC, ejercicios JDBC">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> Ejemplos DAO</h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <p>package com.jao.dao;<br>
+        import com.jao.controladores.consultas.forms.consultaUsuariosForm;<br>
+        import com.jao.controladores.forms.login;<br>
+        import com.jao.model.Usuario;<br>
+        import com.jao.utilidades.ConexionJAO;<br>
+        import java.sql.Statement;<br>
+        import java.sql.Connection;<br>
+        import java.sql.DriverManager;<br>
+        import java.sql.SQLException;<br>
+        import java.sql.ResultSet;<br>
+        import java.util.ArrayList;</p>
+      <p>/**<br>
+        *<br>
+        * @author JAO<br>
+        */<br>
+        public class usuarioDao {<br>
+        public int insert( consultaUsuariosForm usu ) throws SQLException {<br>
+        int numFilas = 0;<br>
+        Statement sentencia=null;<br>
+        Connection con=null;<br>
+        try {<br>
+        ConexionJAO conecJAO=new ConexionJAO();</p>
+      <p> con=conecJAO.getConexion();<br>
+        String strSQL = &quot;INSERT INTO usuarios VALUES (&quot; +<br>
+        &quot;'&quot;+usu.getUsuario()+&quot;','&quot; + usu.getClave()+<br>
+        &quot;','&quot;+ usu.getEdad()+&quot;','&quot; + usu.getFechanacimiento() 
+        + &quot;',&quot;+<br>
+        &quot;'&quot; + usu.getProfesion()+ &quot;',null)&quot;;</p>
+      <p> sentencia = (Statement) con.createStatement();<br>
+        numFilas=sentencia.executeUpdate(strSQL);<br>
+        System.out.println(&quot;DAO:Hace una insert&quot;);<br>
+        } catch (Exception e) {<br>
+        e.printStackTrace();<br>
+        }<br>
+        sentencia.close();<br>
+        con.close();<br>
+        return numFilas;</p>
+      <p> }<br>
+        public int update( consultaUsuariosForm usu ) throws SQLException {<br>
+        int numFilas = 0;<br>
+        Statement sentencia=null;<br>
+        Connection con=null;<br>
+        String strUsu=usu.getUsuario()==&quot;&quot; ? &quot;&quot; : &quot; usuario 
+        = '&quot;+usu.getUsuario()+&quot;'&quot;;<br>
+        String strCla=usu.getClave()==&quot;&quot; ? &quot;&quot; : &quot; , clave 
+        = '&quot;+usu.getClave()+&quot;'&quot;;<br>
+        String strEdad=usu.getEdad()==&quot;&quot; ? &quot;&quot; : &quot; , edad 
+        = '&quot;+usu.getEdad()+&quot;'&quot;;<br>
+        String strFecNac=usu.getFechanacimiento()==&quot;&quot; ? &quot;&quot; 
+        : &quot; , fechanacimiento = '&quot;+usu.getFechanacimiento()+&quot;'&quot;;<br>
+        String strProfesion=usu.getProfesion()==&quot;&quot; ? &quot;&quot; : 
+        &quot; , profesion = '&quot;+usu.getProfesion()+&quot;'&quot;;<br>
+        try {<br>
+        ConexionJAO conecJAO=new ConexionJAO();</p>
+      <p> con=conecJAO.getConexion();<br>
+        String strSQL = &quot;UPDATE usuarios SET &quot;+strUsu+strCla+strEdad+strFecNac+strProfesion+&quot; 
+        WHERE id=&quot;+usu.getId()+&quot;&quot;;</p>
+      <p> sentencia = (Statement) con.createStatement();<br>
+        numFilas=sentencia.executeUpdate(strSQL);</p>
+      <p></p>
+      <p> System.out.println(&quot;DAO:Hace una update&quot;);<br>
+        } catch (Exception e) {<br>
+        e.printStackTrace();<br>
+        }<br>
+        sentencia.close();<br>
+        con.close();<br>
+        return numFilas;</p>
+      <p> }</p>
+      <p><br>
+        public Usuario consulta( login usu ) throws SQLException {</p>
+      <p> Connection con = null;<br>
+        Usuario rsUsu= null;<br>
+        ConexionJAO conecJAO=new ConexionJAO();<br>
+        try{<br>
+        con=conecJAO.getConexion();<br>
+        boolean encontrado = false;<br>
+        String strUsu=&quot;&quot;;<br>
+        String strCla=&quot;&quot;;</p>
+      <p> String strSQL=&quot;SELECT * from usuarios where usuario='&quot;+usu.getUsuario()+&quot;' 
+        AND clave='&quot;+usu.getPwd()+&quot;'&quot;;</p>
+      <p> Statement sentencia = (Statement) con.prepareStatement(strSQL);</p>
+      <p><br>
+        ResultSet rs = sentencia.executeQuery(strSQL);</p>
+      <p> while (rs.next()||encontrado==false) {<br>
+        //while (rs.next()) {<br>
+        strUsu=rs.getString(&quot;usuario&quot;);<br>
+        strCla=rs.getString(&quot;clave&quot;);<br>
+        encontrado=true;<br>
+        }<br>
+        rsUsu=new Usuario();<br>
+        rsUsu.setUsuario(strUsu);<br>
+        rsUsu.setPwd(strCla);<br>
+        sentencia.close();<br>
+        con.close();<br>
+        } catch (Exception e) {<br>
+        e.printStackTrace();<br>
+        con.close();<br>
+        }</p>
+      <p><br>
+        return rsUsu;<br>
+        }public consultaUsuariosForm consulta1Usuario( consultaUsuariosForm usu 
+        ) throws SQLException {</p>
+      <p> Connection con = null;<br>
+        ConexionJAO conecJAO=new ConexionJAO();<br>
+        consultaUsuariosForm rsUsu= null;<br>
+        try{<br>
+        con=conecJAO.getConexion();<br>
+        boolean encontrado = false;<br>
+        String strUsu=usu.getUsuario()==&quot;&quot; ? &quot;&quot; : &quot; usuario 
+        like '&quot;+usu.getUsuario()+&quot;'&quot;;<br>
+        String strCla=usu.getClave()==&quot;&quot; ? &quot;&quot; : &quot; AND 
+        clave like '&quot;+usu.getClave()+&quot;'&quot;;<br>
+        String strEdad=usu.getEdad()==&quot;&quot; ? &quot;&quot; : &quot; AND 
+        edad like '&quot;+usu.getEdad()+&quot;'&quot;;<br>
+        String strFecNac=usu.getFechanacimiento()==&quot;&quot; ? &quot;&quot; 
+        : &quot; AND fechanacimiento like '&quot;+usu.getFechanacimiento()+&quot;'&quot;;<br>
+        String strProfesion=usu.getProfesion()==&quot;&quot; ? &quot;&quot; : 
+        &quot; AND profesion like '&quot;+usu.getProfesion()+&quot;'&quot;;<br>
+        String strSQL=&quot;SELECT * from usuarios where &quot;+strUsu+strCla+strEdad+strFecNac+strProfesion;</p>
+      <p> Statement sentencia = (Statement) con.prepareStatement(strSQL);</p>
+      <p><br>
+        ResultSet rs = sentencia.executeQuery(strSQL);<br>
+        int numFilas=0;<br>
+        numFilas=rs.getRow();<br>
+        rsUsu=rsUsu=new consultaUsuariosForm();;</p>
+      <p> if(numFilas&gt;0){<br>
+        while (rs.next()||encontrado==false) {<br>
+        //rsUsu=new consultaUsuariosForm();<br>
+        rsUsu.setUsuario(rs.getString(&quot;usuario&quot;));<br>
+        rsUsu.setClave(rs.getString(&quot;clave&quot;));<br>
+        rsUsu.setEdad(rs.getString(&quot;edad&quot;));<br>
+        rsUsu.setFechanacimiento(rs.getString(&quot;fechanacimiento&quot;));<br>
+        rsUsu.setProfesion(rs.getString(&quot;profesion&quot;));<br>
+        encontrado=true;<br>
+        }</p>
+      <p> }</p>
+      <p> sentencia.close();</p>
+      <p> con.close();<br>
+        } catch (Exception e) {<br>
+        e.printStackTrace();<br>
+        con.close();<br>
+        }<br>
+        return rsUsu;<br>
+        }<br>
+        public ArrayList vConsulta() throws SQLException {<br>
+        Connection con = null;<br>
+        ConexionJAO conecJAO=new ConexionJAO();<br>
+        ArrayList alUsuarios= null;<br>
+        try{<br>
+        con=conecJAO.getConexion();</p>
+      <p><br>
+        alUsuarios=new ArrayList();</p>
+      <p> String strSQL=&quot;SELECT * from usuarios &quot;;</p>
+      <p> Statement sentencia = (Statement) con.prepareStatement(strSQL);</p>
+      <p><br>
+        ResultSet rs = sentencia.executeQuery(strSQL);</p>
+      <p> consultaUsuariosForm rsUsu=null;<br>
+        while (rs.next()) {<br>
+        rsUsu=new consultaUsuariosForm();<br>
+        rsUsu.setUsuario(rs.getString(&quot;usuario&quot;));<br>
+        rsUsu.setClave(rs.getString(&quot;clave&quot;));<br>
+        rsUsu.setEdad(rs.getString(&quot;edad&quot;));<br>
+        rsUsu.setFechanacimiento(rs.getString(&quot;fechanacimiento&quot;));<br>
+        rsUsu.setProfesion(rs.getString(&quot;profesion&quot;));<br>
+        rsUsu.setId(new Integer(rs.getString(&quot;id&quot;).toString()));<br>
+        alUsuarios.add(rsUsu);</p>
+      <p> }</p>
+      <p><br>
+        sentencia.close();</p>
+      <p> con.close();<br>
+        } catch (Exception e) {<br>
+        e.printStackTrace();<br>
+        con.close();<br>
+        }<br>
+        return alUsuarios;<br>
+        }<br>
+        public int eliminar( String strId ) throws SQLException {<br>
+        Connection con = null;<br>
+        ConexionJAO conecJAO=new ConexionJAO();<br>
+        int regBorrados=0;<br>
+        try{<br>
+        con=conecJAO.getConexion(); </p>
+      <p> String strSQL=&quot;DELETE FROM usuarios where id=&quot;+ strId;</p>
+      <p> Statement sentencia = (Statement) con.prepareStatement(strSQL);<br>
+        regBorrados =sentencia.executeUpdate(strSQL);<br>
+        } catch (Exception e) {<br>
+        e.printStackTrace();<br>
+        con.close();<br>
+        }<br>
+        return regBorrados;<br>
+        }<br>
+        <br>
+        }</p>
+      <p>&nbsp; </p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

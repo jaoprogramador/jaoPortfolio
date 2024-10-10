@@ -1,0 +1,67 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Tipos de drivers JDBC</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación en JDBC,Programas JDBC,Aplicaciones en JDBC,Ejercicios en JDBC, Ejemplos de JDBC,Tutoriales de JDBC,Manuales JDBC" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="JDBC, Manual JDBC, tutorial JDBC, Ejemplos JDBC, ejercicios JDBC">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> <strong>Tipos de drivers JDBC</strong></h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <p>Los drivers que son susceptibles de clasificarse 
+        en una de estas cuatro categor&iacute;as.</p>
+      <p>1.- puente JDBC-ODBC m&aacute;s driver ODBC: El producto de JavaSoft 
+        suministra acceso v&iacute;a drivers ODBC. N&oacute;tese que el c&oacute;digo 
+        binario ODBC, y en muchos casos el c&oacute;digo cliente de base de datos, 
+        debe cargarse en cada m&aacute;quina cliente que use este driver. Como 
+        resultado, este tipo de driver es el m&aacute;s apropiado en un red corporativa 
+        donde las instalaciones clientes no son un problema mayor, o para una 
+        aplicaci&oacute;n en el servidor escrito en Java en una arquitectura en 
+        tres-niveles.</p>
+      <p>2.- driver Java parcialmente Nativo. Este tipo de driver convierte llamadas 
+        JDBC en llamadas del API cliente para Oracle, Sybase, Informix, DB2 y 
+        otros DBMS. N&oacute;tese que como el driver puente, este estilo de driver 
+        requiere que cierto c&oacute;digo binario sea cargado en cada m&aacute;quina 
+        cliente.</p>
+      <p>3.- driver Java nativo JDBC-Net. Este driver traduce llamadas JDBC al 
+        protocolo de red independiente del DBMS que despu&eacute;s es traducido 
+        en el protocolo DBMS por el servidor. Este middleware en el servidor de 
+        red es capaz de conectar a los clientes puros Java a muchas bases de datos 
+        diferentes. El protocolo espec&iacute;fico usado depender&aacute; del 
+        vendedor. En general esta es la alternativa m&aacute;s flexible.</p>
+      <p>4.- driver puro Java y nativo-protocolo.. Este tipo de driver convierte 
+        llamadas JDBC en el protocolo de la red usado por DBMS directamente. Esto 
+        permite llamadas directas desde la m&aacute;quina cliente al servidor 
+        DBMS y es la soluci&oacute;n m&aacute;s pr&aacute;ctica para accesos en 
+        intranets. Dado que muchos de estos protocolos son propietarios, los fabricantes 
+        de bases de datos ser&aacute;n los principales suministradores.</p>
+      <p>Esperamos que las alternativas 3 y 4 sean las formas preferidas de acceder 
+        a las bases de datos desde JDBC. Las categor&iacute;as 1 y 2 son soluciones 
+        interinas cuando no est&aacute;n disponibles drivers directos puros Java.<br>
+      </p>
+      <p>&nbsp; </p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

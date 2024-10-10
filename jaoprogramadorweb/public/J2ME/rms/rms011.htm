@@ -1,0 +1,189 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Indice J2ME</title>
+<META http-equiv=Content-Language content=es>
+<META content="Manual J2ME, ejemplos J2ME, codigos J2ME" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Manual J2ME, ejemplos J2ME, codigos J2ME">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> Clases</h2></td>
+  </tr>
+  <tr> 
+    <td colspan="3"><p><br>
+        - RecordStore. &Uacute;nica clase del paquete, la cual instancia un almac&eacute;n 
+        de datos y ofrece<br>
+        23 m&eacute;todos y dos constantes. Las excepciones que eleva cada m&eacute;todo 
+        las<br>
+        comentaremos m&aacute;s adelante.<br>
+        &#8226; static int AUTHMODE_ANY. Constante. Indica que cualquier suite 
+        tiene<br>
+        permitido el acceso a este almac&eacute;n.<br>
+        &#8226; static int AUTHMODE_PRIVATE. Constante. S&oacute;lo se permite 
+        el acceso a la suite<br>
+        actual.<br>
+        &#8226; int addRecord(byte[] data, int offset, int numBytes). A&ntilde;ade 
+        un nuevo<br>
+        registro al RecordStore, devolviendo el identificador que le toque. Le 
+        pasamos el<br>
+        array de bytes que lleva el contenido a almacenar, el &iacute;ndice de 
+        este array desde<br>
+        donde se considera el contenido y el n&uacute;mero de elementos del array 
+        a almacenar a<br>
+        partir de &eacute;l.</p>
+      <p>&#8226;addRecordListener(RecordListener listener). A&ntilde;ade el escuchador<br>
+        par&aacute;metro al RecordStore, si &eacute;ste a&uacute;n no ha sido 
+        asignado.<br>
+        &#8226; void closeRecordStore(). Cierra el almac&eacute;n, necesit&aacute;ndose 
+        para ello que este<br>
+        m&eacute;todo sea llamado tantas veces como ocasiones se llam&oacute; 
+        a su apertura. Cuando<br>
+        se cierra el RecordStore, todos sus escuchadores son eliminados y los<br>
+        RecordEnumerations asociados invalidados.<br>
+        &#8226; void deleteRecord(int recordId). Elimina el registro identificado 
+        del almac&eacute;n.<br>
+        Su &iacute;ndice no es reutilizado.<br>
+        &#8226; static void deleteRecordStore(String recordStoreName). Eliminaci&oacute;n 
+        del<br>
+        RecordStore identificado de la base de datos RMS, exclusivamente a manos 
+        de su<br>
+        suite propietaria. Eleva excepci&oacute;n si el almac&eacute;n est&aacute; 
+        abierto (por su suite o<br>
+        cualquier otra, si existe ese permiso) o si &eacute;ste no existe.<br>
+        Este m&eacute;todo no provoca llamada alguna a los recordDeleted() de 
+        los escuchadores<br>
+        asociados.<br>
+        &#8226; RecordEnumeration enumerateRecords(RecordFilter filter,<br>
+        RecordComparator comparator, boolean keepUpdated). Devuelve un<br>
+        enumerador con el cual podremos recorrer los registros que almacena el<br>
+        RecordStore. Si se especifica el par&aacute;metro filter (si no se desea, 
+        dar null) s&oacute;lo se<br>
+        recorrer&aacute;n los registros que cumplan el filtro.<br>
+        El RecordComparator definir&aacute; el orden en el que se recorren los 
+        registros (tambi&eacute;n<br>
+        opcional), y el tercer par&aacute;metro indica si el enumerador se mantiene 
+        actualizado o<br>
+        no ante cambios en los registros del RecordStore que lo origina.<br>
+        &#8226; long getLastModified(). Devuelve el atributo &#8220;fecha de la 
+        &uacute;ltima modificaci&oacute;n<br>
+        producida en el almac&eacute;n&#8221; de la cabecera del almac&eacute;n 
+        comentada anteriormente.<br>
+        &#8226; String getName(). Proporciona el nombre identificativo del RecordStore.<br>
+        Tambi&eacute;n en la cabecera del almac&eacute;n.<br>
+        &#8226; int getNextRecordID(). Devuelve un atributo de la cabecera del 
+        almac&eacute;n. En<br>
+        este caso, el identificador que le tocar&aacute; al siguiente registro 
+        que se inserte.<br>
+        &#8226; int getNumRecords(). Devuelve el atributo &#8220;n&uacute;mero 
+        de registros del almac&eacute;n&#8220;de<br>
+        la cabecera del almac&eacute;n.<br>
+        &#8226; byte[] getRecord(int recordId). Obtiene una copia de los datos 
+        almacenados en<br>
+        el registro identificado del RecordStore. Si est&aacute;n vac&iacute;os 
+        devuelve null, y si el id<br>
+        no es v&aacute;lido elevar&aacute; excepci&oacute;n.<br>
+        &#8226; int getRecord(int recordId, byte[] buffer, int offset). An&aacute;logamente 
+        al<br>
+        anterior, obtiene una copia del registro identificado por recordId, aunque 
+        esta vez<br>
+        se guarda en el array de E/S dado como par&aacute;metro. La copia se hace 
+        en el buffer a<br>
+        partir del &iacute;ndice dado por el offset y devuelve el n&uacute;mero 
+        de bytes que se han<br>
+        copiado.<br>
+        &#8226; int getRecordSize(int recordId). Tama&ntilde;o en bytes del contenido 
+        del registro<br>
+        identificado.<br>
+        &#8226; int getSize(). Aunque no es atributo de la cabecera del almac&eacute;n, 
+        tambi&eacute;n da<br>
+        informaci&oacute;n general del RecordStore. En este caso, el tama&ntilde;o 
+        en bytes que el<br>
+        almac&eacute;n ocupa.<br>
+        &#8226; int getSizeAvailable(). No atributo de la cabecera, da la cantidad 
+        de bytes<br>
+        disponible para que el almac&eacute;n actual crezca.<br>
+        &#8226; int getVersion(). Devuelve el atributo &#8220;n&uacute;mero de 
+        versi&oacute;n hist&oacute;rica del<br>
+        almac&eacute;n&#8220;de la cabecera del almac&eacute;n.<br>
+        &#8226; static String[] listRecordStores(). Array de nombres de los almacenes 
+        de la<br>
+        suite actual. Si no tiene ning&uacute;n almac&eacute;n reservado devolver&aacute; 
+        null.<br>
+        &#8226; static RecordStore openRecordStore(String recordStoreName, boolean<br>
+        createIfNecessary). Abre un RecordStore asociado a la suite actual, el 
+        cual se<br>
+        devuelve como salida. Si no existe, se crea previamente, siempre que el 
+        segundo<br>
+        par&aacute;metro lo permita: Si createIfNecessary vale false se elevar&aacute; 
+        excepci&oacute;n al<br>
+        intentar abrir un almac&eacute;n que no exista.<br>
+        Si ya ha sido abierto por otro MIDlet de la suite, se devuelve una referencia 
+        a esa<br>
+        instancia abierta. Este m&eacute;todo abre el almac&eacute;n de forma 
+        que s&oacute;lo es accesible por<br>
+        los MIDlets de la suite actual (AUTHMODE_PRIVATE intr&iacute;nseco).<br>
+        &#8226; static RecordStore openRecordStore(String recordStoreName, boolean<br>
+        createIfNecessary, int authmode, boolean writable). An&aacute;logo al 
+        anterior,<br>
+        aunque ahora se nos permite dar con el tercer par&aacute;metro, permisos 
+        de lectura para<br>
+        otras suites, usando una de las dos constantes vistas anteriormente<br>
+        (AUTHMODE_PRIVATE o AUTHMODE_ANY). Con el cuarto par&aacute;metro damos,<br>
+        adem&aacute;s, permisos de escritura a las dem&aacute;s suites que no 
+        sean la actual, la cual<br>
+        siempre se considera la propietaria del almac&eacute;n y tiene permiso 
+        total sobre &eacute;l.<br>
+        &#8226; static RecordStore openRecordStore(String recordStoreName, String<br>
+        vendorName, String suiteName). Abre un almac&eacute;n existente identificando 
+        una<br>
+        suite mediante el nombre del proveedor de la suite y el nombre de &eacute;sta.<br>
+        La apertura del almac&eacute;n se permitir&aacute; si la suite actual 
+        es la identificada (si el<br>
+        almac&eacute;n se cre&oacute; s&oacute;lo con permiso AUTHMODE_PRIVATE) 
+        o en cualquier caso si<br>
+        el almac&eacute;n se cre&oacute; con AUTHMODE_ANY. &Eacute;ste y el anterior 
+        son propios de MIDP<br>
+        2.0.<br>
+        &#8226; void removeRecordListener(RecordListener listener). Elimina el 
+        escuchador<br>
+        especificado. Si no existe asociado al almac&eacute;n, no har&aacute; 
+        nada.<br>
+        &#8226; void setMode(int authmode, boolean writable). S&oacute;lo permitido 
+        su uso por<br>
+        parte de la suite propietaria del RecordStore, var&iacute;a los permisos 
+        de acceso por<br>
+        otras suites al almac&eacute;n. El primer par&aacute;metro proporciona 
+        o restringe el permiso de<br>
+        lectura (constantes ya estudiadas) y el segundo el permiso de lectura. 
+        Propio de<br>
+        MIDP 2.0.<br>
+        &#8226; void setRecord(int recordId, byte[] newData, int offset, int numBytes). 
+        Por<br>
+        &uacute;ltimo, este m&eacute;todo modifica el contenido del registro identificado 
+        con el array<br>
+        newData. Este array se tendr&aacute; en cuenta s&oacute;lo a partir del 
+        elemento de la posici&oacute;n<br>
+        offset, y s&oacute;lo un n&uacute;mero numBytes de elementos.</p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

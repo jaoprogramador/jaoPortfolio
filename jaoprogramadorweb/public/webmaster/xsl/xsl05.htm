@@ -1,0 +1,145 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Siblings, children, descendants y ancestros</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación en CSS,Programas CSS,Aplicaciones en CSS,Ejercicios en CSS, Ejemplos de CSS,Tutoriales de CSS,Manuales CSS" name=description>
+<meta name="keywords" content="CSS, Manual CSS, tutorial CSS, Ejemplos CSS, ejercicios CSS, Cascading Style Sheet">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos"><tr> 
+    <td height="39" colspan="3"> <h2> Varios conceptos</h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <p>Dentro de la jerarqu&iacute;a de un &aacute;rbol 
+        tenemos que saber bien varios conceptos: siblings o nodos hermanos (mismo 
+        nivel que un nodo cualquiera), children o hijos inmediatos, descendants 
+        o descendientes(todos los hijos ya sean inmediatos o no) y ancestros o 
+        ancestros(desde un nodo hasta el ra&iacute;z, sin contar dicho nodo).</p>
+      <p><br>
+        Existen una serie de condiciones que se pueden utilizar para filtrar el 
+        contenido:</p>
+      <p> - Existencia de un nodo hijo: crucero[marinero]/yate (Si existe un crucero 
+        que tiene un hijo marinero, y ademas un hijo yate&#8230;, es decir yate 
+        y marinero son hermanos. Dentro del corchete tambien permite poner un 
+        path: crucero[yate/marinero]/yate)<br>
+        - Valor de un nodo: crucero[precio&lt;1000] Si existe un crucero que tiene 
+        un hijo precio cuyo valor es menor de 1000<br>
+        - Existencia de un atributo crucero[@estado=&#8217;disponible&#8217;] 
+        Si existe un crucero con un atributo estado con valor disponible.</p>
+      <p><br>
+        Se pueden hacer combinaciones de las anteriores opciones:</p>
+      <p><br>
+        a) operadores l&oacute;gicos<br>
+        and [@id and @estado] si tiene un atributo y otro<br>
+        or: [@id or @estado] si tiene un atributo u otro<br>
+        union: &lt;xsl:template match=&#8221;yate|marinero&#8221; un elemento 
+        y otro&#8230;<br>
+        b) Operaciones aritm&eacute;ticas<br>
+        Count(): &lt;xsl:value-of select=count(crucero)/&gt; o xsl:value-of select 
+        =&#8221;count(//crucero[Precio&lt;680])&#8221;/&gt; funci&oacute;n que 
+        nos dice el n&uacute;mero de nodos que hay respecto al nodo en el que 
+        estamos colocado cumpliendo unas condiciones.<br>
+        *precio * 3 (multiplica)<br>
+        +precio + 1000(suma)<br>
+        -: precio-@descuento(resta)</p>
+      <p><br>
+        Para dividir no se usa &#8220;/&#8221; porque est&aacute; ya posee una 
+        funci&oacute;n, en su lugar se utiliza la funci&oacute;n div().<br>
+        Por lo tanto tambi&eacute;n se puede hacer una identificaci&oacute;n por 
+        atributos:<br>
+      </p>
+      <table cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="288" valign="top"><p>xsl:template match =&#8221;crucero&#8221;</p></td>
+          <td width="288" valign="top"><p>Cuando encuentro un elemento crucero</p></td>
+        </tr>
+        <tr>
+          <td width="288" valign="top"><p>xsl:template match =&#8221;crucero[@estado]&#8221;</p></td>
+          <td width="288" valign="top"><p>Cuando encuentres un elemento crucero 
+              que tiene un stributo llamado estado&#8230;</p></td>
+        </tr>
+        <tr>
+          <td width="288" valign="top"><p>xsl:template match =&#8221;crucero[@estado=&#8217;disponible&#8217;]&#8221;</p></td>
+          <td width="288" valign="top"><p>Cuando encuentres un elemento crucero 
+              que tiene un atributo llamado estado y su valor es disponible</p></td>
+        </tr>
+        
+      </table>
+      <p>Para la presentaci&oacute;n de valores y atributos se utiliza la sentencia 
+        &lt;xsl:value-of select=&#8221;&#8221;/&gt;<br>
+        &lt;xsl:value-of select=&#8221;@estado&#8221;/&gt; (si es un atributo)<br>
+        &lt;xsl:value-of select=&#8221;puertosalida&#8221;/&gt; (si es un elemento)<br>
+        Tambi&eacute;n se puede identificar por posiciones(utilizando las funcioes 
+        position() y last ()):</p>
+      <table>
+        <tr>
+          <td>&nbsp;="puerto[position()=1]"</td>
+          <td>Es cierto si: el nodo existe y es un nodo elemento.<br>
+            La expresi&oacute;n position()=1 es evaluado y el resultado es true<br></td>
+        </tr>
+        <tr>
+          <td>=&#8221;puerto[position()=last()]&#8221;</td>
+          <td>Es cierto si: el nodo puerto existe y es un nodo elemento, la expresi&oacute;n 
+            position()=Last() es evaluada y el resultado es true</td>
+        </tr>
+      </table>
+      <p>Ejemplo: Si tuviesemos elemntos puerto que nos indicad<br>
+        Ra todos los puertos en los que se hace escala de un crucero y queremos 
+        identificarlos por posiciones:<br>
+        &lt;xsl:template match=&#8221;ruta[puerto[position=1]=&#8217;PATRAS&#8217;]&#8221;&gt;<br>
+        &lt;br&gt;<br>
+        La ruta comienza en PATRAS y finaliza en :<br>
+        &lt;xsl:value-of select=&#8221;puerto[last()]&#8221;/&gt;<br>
+        &lt;/xsl:template&gt;<br>
+        Con las funciones anteriores se puede utilizar &#8220;=&#8221; y &#8220;!=&#8221; 
+        pero no &#8220;&lt;&#8221; ni &#8220;&gt;&#8221; entre valores aunque 
+        si en funciones. En su lugar, para n&uacute;meros que utilizan &#8220;&amp;lt;&#8221; 
+        y &#8220;&amp;gt;&#8221;:<br>
+        Position()=2<br>
+        Position&lt;last()<br>
+        Last()!=&#8217;PATRAS&#8217;<br>
+        Position()&amp;lt;3</p>
+      <p>Hay otras funciones adem&aacute;s de count(), position() o last(), como 
+        puede ser not(): esta nos devuelve , si es un elemento u atributo lo que 
+        contiene entre par&eacute;ntesis: si existe o no, y si es una sentencia; 
+        si se da o no.<br>
+        Ejemplos de expresiones XPath:<br>
+      </p>
+      <table>
+        <tr> 
+          <td>&nbsp;Expresion</td>
+          <td>&nbsp;Descripción</td>
+        </tr>
+        <tr> 
+          <td>Crucero[not(@estado)]<br>
+            Crucero[@estado]=&#8217;disponible&#8217;<br></td>
+          <td>Identifica los cruceros que no tienen atributo estado o los cruceros 
+            donde el atributo estado tiene el valor disponible</td>
+        </tr>
+        <tr>
+          <td>$X+1</td>
+          <td>&nbsp;</td>
+        </tr>
+      </table>
+      <p><br>
+      </p></td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

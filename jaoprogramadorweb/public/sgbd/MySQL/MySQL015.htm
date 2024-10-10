@@ -1,0 +1,166 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Ejercicios MySQL</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="MySQL, sql, pl/sql, programacion MySQL, ejercicios MySQL, ejemplos MySQL, select">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2>P A T R O N E S</h2></td>
+  </tr>
+  <tr> 
+    <td><h3>Coincidencia de patrones</h3>
+      <p>MySQL posee capacidades est&aacute;ndar para utilizar patrones as&iacute; 
+        como tambi&eacute;n una forma de patrones basada en expresiones regulares<br>
+        extendidas similares a las que se encuentran en utilidades de UNIX, como 
+        ser vi, grep, y sed.<br>
+        Los patrones SQL permiten emplear el caracter '_' para representar coincidencia 
+        con un car&aacute;cter individual y '%' En MySQL, por<br>
+        defecto, los patrones SQL no son case-sensitive. Abajo se muestran algunos 
+        ejemplos. Advierta que no se emplean los operadores<br>
+        = o &lt;&gt; para trabajar con patrones SQL, en lugar de eso se usan los 
+        operadores de comparaci&oacute;n LIKE o NOT LIKE.<br>
+        Para encontrar nombres que comiencen con 'b':<br>
+        mysql&gt; SELECT * FROM pet WHERE name LIKE 'b%';<br>
+        +--------+--------+---------+------+------------+------------+<br>
+        | name | owner | species | sex | birth | death |<br>
+        +--------+--------+---------+------+------------+------------+<br>
+        | Buffy | Harold | dog | f | 1989-05-13 | NULL |<br>
+        | Bowser | Diane | dog | m | 1989-08-31 | 1995-07-29 |<br>
+        +--------+--------+---------+------+------------+------------+<br>
+        Para encontrar nombres que terminen con 'fy':<br>
+        mysql&gt; SELECT * FROM pet WHERE name LIKE '%fy';<br>
+        +--------+--------+---------+------+------------+-------+<br>
+        | name | owner | species | sex | birth | death |<br>
+        +--------+--------+---------+------+------------+-------+<br>
+        | Fluffy | Harold | cat | f | 1993-02-04 | NULL |<br>
+        | Buffy | Harold | dog | f | 1989-05-13 | NULL |<br>
+        +--------+--------+---------+------+------------+-------+<br>
+        Para encontrar nombres que contengan 'w':<br>
+        mysql&gt; SELECT * FROM pet WHERE name LIKE '%w%';<br>
+        +----------+-------+---------+------+------------+------------+<br>
+        | name | owner | species | sex | birth | death |<br>
+        +----------+-------+---------+------+------------+------------+<br>
+        | Claws | Gwen | cat | m | 1994-03-17 | NULL |<br>
+        | Bowser | Diane | dog | m | 1989-08-31 | 1995-07-29 |<br>
+        | Whistler | Gwen | bird | NULL | 1997-12-09 | NULL |<br>
+        +----------+-------+---------+------+------------+------------+<br>
+        Para encontrar nombres que contengan exactamente 5 caracteres, use 5 veces 
+        el caracter patr&oacute;n '_':<br>
+        mysql&gt; SELECT * FROM pet WHERE name LIKE '_____';<br>
+        +-------+--------+---------+------+------------+-------+<br>
+        | name | owner | species | sex | birth | death |<br>
+        +-------+--------+---------+------+------------+-------+<br>
+        | Claws | Gwen | cat | m | 1994-03-17 | NULL |<br>
+        | Buffy | Harold | dog | f | 1989-05-13 | NULL |<br>
+        +-------+--------+---------+------+------------+-------+<br>
+        Los otros patrones que pueden emplearse con MySQL usan expresiones regulares 
+        extendidas. Cuando busque coincidencias con este<br>
+        tipo de patrones, use los operadores REGEXP y NOT REGEXP (o bien los sin&oacute;nimos 
+        RLIKE y NOT RLIKE).<br>
+        Algunas caracter&iacute;sticas de las expresiones regulares extendidas:<br>
+        &#8226; '.' detecta coincidencia con cualquier car&aacute;cter individual.<br>
+        &#8226; Una clase de car&aacute;cter '[...]' detecta coincidencia con 
+        cualquier caracter entre los corchetes. Por ejemplo, '[abc]' coincidir&aacute;<br>
+        con 'a', 'b', o 'c'. Para hacer referencia a un rango de caracteres, use 
+        un gui&oacute;n. '[a-z]' detecta coincidencia con cualquier letra,<br>
+        mientras que '[0-9]' lo hace con cualquier d&iacute;gito.<br>
+        &#8226; '*' detecta coincidencia con cero o m&aacute;s apariciones de 
+        los caracteres que lo preceden. Por ejemplo, 'x*' detecta cualquier n&uacute;mero<br>
+        de caracteres 'x', '[0-9]*' detecta cualquier cantidad de d&iacute;gitos, 
+        y '.*' coincidir&aacute; con cualquier n&uacute;mero de cualquier car&aacute;c-<br>
+        ter.<br>
+        &#8226; REGEXP tendr&aacute; &eacute;xito si el patr&oacute;n suministrado 
+        encuentra coincidencia en cualquier parte del valor examinado (esto difiere 
+        de<br>
+        LIKE en que este &uacute;ltimo solo tiene &eacute;xito si el patr&oacute;n 
+        concuerda con todo el valor).<br>
+        &#8226; Para lograr que un patr&oacute;n detecte coincidencias solamente 
+        al principio o al final del valor examinado, utilice '^' al principio 
+        o '$'<br>
+        al final del patr&oacute;n.<br>
+        Para demostrar el funcionamiento de las expresiones regulares extendidas, 
+        las consultas con LIKE expuestas anteriormente se han<br>
+        reescrito utilizando REGEXP.<br>
+        Para hallar nombres que comiencen con 'b', use '^' para buscar coincidencia 
+        al principio del valor:<br>
+        mysql&gt; SELECT * FROM pet WHERE name REGEXP '^b';<br>
+        +--------+--------+---------+------+------------+------------+<br>
+        | name | owner | species | sex | birth | death |<br>
+        +--------+--------+---------+------+------------+------------+<br>
+        | Buffy | Harold | dog | f | 1989-05-13 | NULL |<br>
+        | Bowser | Diane | dog | m | 1989-08-31 | 1995-07-29 |<br>
+        +--------+--------+---------+------+------------+------------+<br>
+        En MySQL 5.0, si realmente quiere forzar a que la comparaci&oacute;n realizada 
+        por REGEXP sea case sensitive, utilice la palabra clave<br>
+        BINARY para convertir a una de las cadenas en una cadena binaria. Esta 
+        consulta solamente encontrar&aacute; coincidencia con 'b' min&uacute;sculas<br>
+        al comienzo de un nombre:<br>
+        mysql&gt; SELECT * FROM pet WHERE name REGEXP BINARY '^b';<br>
+        Para hallar nombres finalizados en 'fy', emplee '$' para buscar la coincidencia 
+        en el final del nombre:<br>
+        mysql&gt; SELECT * FROM pet WHERE name REGEXP 'fy$';<br>
+        +--------+--------+---------+------+------------+-------+<br>
+        | name | owner | species | sex | birth | death |<br>
+        +--------+--------+---------+------+------------+-------+<br>
+        | Fluffy | Harold | cat | f | 1993-02-04 | NULL |<br>
+        | Buffy | Harold | dog | f | 1989-05-13 | NULL |<br>
+        +--------+--------+---------+------+------------+-------+<br>
+        Para encontrar nombres conteniendo una 'w', utilice esta consulta:<br>
+        mysql&gt; SELECT * FROM pet WHERE name REGEXP 'w';<br>
+        +----------+-------+---------+------+------------+------------+<br>
+        | name | owner | species | sex | birth | death |<br>
+        +----------+-------+---------+------+------------+------------+<br>
+        | Claws | Gwen | cat | m | 1994-03-17 | NULL |<br>
+        | Bowser | Diane | dog | m | 1989-08-31 | 1995-07-29 |<br>
+        | Whistler | Gwen | bird | NULL | 1997-12-09 | NULL |<br>
+        +----------+-------+---------+------+------------+------------+<br>
+        Debido a que un patr&oacute;n de expresi&oacute;n regular encuentra coincidencia 
+        sin importar el lugar del valor donde se produce, en la consulta<br>
+        previa no es necesario colocar un comod&iacute;n a cada lado del patr&oacute;n 
+        para obtener coincidencia en cualquier parte del valor, como hubiera<br>
+        sucedido de utilizar un patr&oacute;n SQL<br>
+        Para hallar nombres conteniendo exactamente cinco caracteres, use '^' 
+        y '$' para obligar a que la coincidencia deba estar al principio<br>
+        y al final del nombre, y cinco instancias de '.' entre ellas.<br>
+        mysql&gt; SELECT * FROM pet WHERE name REGEXP '^.....$';<br>
+        +-------+--------+---------+------+------------+-------+<br>
+        | name | owner | species | sex | birth | death |<br>
+        +-------+--------+---------+------+------------+-------+<br>
+        | Claws | Gwen | cat | m | 1994-03-17 | NULL |<br>
+        | Buffy | Harold | dog | f | 1989-05-13 | NULL |<br>
+        +-------+--------+---------+------+------------+-------+<br>
+        La consulta anterior tambi&eacute;n se podr&iacute;a haber escrito empleando 
+        el operador '{n}' &#8220;repetir-n-veces&#8221;:<br>
+        mysql&gt; SELECT * FROM pet WHERE name REGEXP '^.{5}$';<br>
+        +-------+--------+---------+------+------------+-------+<br>
+        | name | owner | species | sex | birth | death |<br>
+        +-------+--------+---------+------+------------+-------+<br>
+        | Claws | Gwen | cat | m | 1994-03-17 | NULL |<br>
+        | Buffy | Harold | dog | f | 1989-05-13 | NULL |<br>
+        +-------+--------+---------+------+------------+-------+ </p>
+        </td>
+    <td>&nbsp;</td>
+    <td><a href="http://www.euskalnet.net/juanarana/oraclezip/Ejer3.rar"><img src="../../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td>
+<div align="right"><a href="http://www.euskalnet.net/juanarana/index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a>
+      </div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Procesamiento de Beans y Formularios</title>
+<META http-equiv=Content-Language content=es>
+<META content="Manual JSP, ejemplos JSP, codigos JSP" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Manual JSP, ejemplos JSP, codigos JSP">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> Procesamiento de Beans y Formularios</h2></td>
+  </tr>
+  <tr> 
+    <td colspan="3"> <p>Los formularios son un m&eacute;todo muy com&uacute;n 
+        de las interacciones en los sitios web. JSP hace que el procesamiento 
+        de formularios especialmente f&aacute;cil.</p>
+      <p>La manera est&aacute;ndar de gesti&oacute;n de formularios en JSP es 
+        definir una &quot;bean&quot;. Esto no es un bean Java completo. Solo tiene 
+        que definir una clase que tiene un campo correspondiente a cada campo 
+        del formulario. Los campos de la clase debe tener &quot;setters &quot;que 
+        coinciden con los nombres de los campos de formulario. Por ejemplo, vamos 
+        a modificar nuestra GetName.html tambi&eacute;n recoger la direcci&oacute;n 
+        de correo electr&oacute;nico y la edad.</p>
+      <p>La nueva versi&oacute;n de GetName.html es</p>
+      <p> &lt;HTML&gt; <br>
+        &lt;BODY&gt; <br>
+        &lt;FORM METHOD=POST ACTION=&quot;SaveName.jsp&quot;&gt;<br>
+        &iquest;Cual es tu nombre? &lt;INPUT TYPE=TEXT NAME=username SIZE=20&gt;&lt;br&gt;<br>
+        &iquest;Cual es tu direcci&Atilde;&sup3;n de e-mail? &lt;INPUT TYPE=TEXT 
+        NAME=email SIZE=20&gt;&lt;br&gt;<br>
+        &iquest;Cual es tu edad? &lt;INPUT TYPE=TEXT NAME=age SIZE=4&gt;<br>
+        &lt;P&gt;&lt;INPUT TYPE=SUBMIT&gt; <br>
+        &lt;/FORM&gt; <br>
+        &lt;/BODY&gt; <br>
+        &lt;/HTML&gt; </p>
+      <p> Para recolectar esos datos, se define una clase de Java con los campos 
+        &quot;usuario&quot;, &quot;correo electr&oacute;nico&quot; y la &quot;edad&quot; 
+        y nos proporcionan m&eacute;todos setter &quot;setUserName&quot;, &quot;setEmail&quot; 
+        y &quot;setAge&quot;, como se muestra. A &quot;regulador&quot; m&eacute;todo 
+        es un m&eacute;todo que empieza por &quot;set&quot; seguido del nombre 
+        del campo. El primer car&aacute;cter del nombre del campo es superior 
+        entubados. As&iacute;, si el campo es &quot;email&quot;, su &quot;regulador&quot; 
+        m&eacute;todo ser&aacute; &quot;setEmail&quot;. m&eacute;todos Getter 
+        se definen de manera similar, con &quot;get&quot; en lugar de &quot;set&quot;. 
+        Tenga en cuenta que los organismos de elaboraci&oacute;n (y captadores) 
+        debe ser p&uacute;blica.</p>
+
+      <p>
+        public class UserData { </p>
+      <p>String username; <br>
+        String email; <br>
+        int age; <br>
+        public void setUsername( <br>
+        String value ) <br>
+        { <br>
+        username = value; <br>
+        } <br>
+        public void setEmail( <br>
+        String value ) <br>
+        { <br>
+        email = value; <br>
+        } <br>
+        public void setAge( int value ) {<br>
+        age = value; <br>
+        } <br>
+        public String getUsername() { <br>
+        return username; <br>
+        } <br>
+        public String getEmail() { <br>
+        return email; <br>
+        } <br>
+        public int getAge() { <br>
+        return age; <br>
+        } </p>
+      <p></p>
+      <p><br>
+        Los nombres de los m&eacute;todos debe ser exactamente como se muestra. 
+        Una vez que haya definido la clase, compilarlo y asegurese de que est&aacute; 
+        disponible en la web-classpath servidor. El servidor tambi&eacute;n puede 
+        definir carpetas especiales donde se pueden colocar las clases de beans, 
+        por ejemplo, con Blazix puede lugar en las &quot;clases&quot; carpeta. 
+        Si tienes que cambiar la ruta de clase, el servidor web tendr&aacute; 
+        que ser detenido y reiniciado, si ya se est&aacute; ejecutando. classpath 
+        cambiar (Si usted no est&aacute; familiarizado con la configuraci&oacute;n 
+        /, consulte las notas sobre la evoluci&oacute;n classpath.)</p>
+      <p> Tenga en cuenta que estamos usando el nombre de usuario de paquetes, 
+        por lo tanto el UserData.class archivo debe ser colocado en una carpeta 
+        con el nombre de usuario en la entrada CLASSPATH.</p>
+      <p>Ahora vamos a cambiar &quot;SaveName.jsp&quot;, para usar un grano de 
+        recoger los datos.</p>
+      <p>&lt;jsp:useBean id=&quot;user&quot; class=&quot;user.UserData&quot; scope=&quot;session&quot;/&gt; 
+        <br>
+        &lt;jsp:setProperty name=&quot;user&quot; property=&quot;*&quot;/&gt; 
+        <br>
+        &lt;HTML&gt; <br>
+        &lt;BODY&gt; <br>
+        &lt;A HREF=&quot;NextPage.jsp&quot;&gt;Continue&lt;/A&gt; <br>
+        &lt;/BODY&gt; <br>
+        &lt;/HTML&gt; </p>
+      <p> Todo lo que necesitamos hacer ahora es agregar el jsp: tag useBean y 
+        el jsp: setProperty tag! La etiqueta useBean buscar&aacute; una instancia 
+        de la user.UserData &quot;en la sesi&oacute;n. Si la instancia que ya 
+        est&aacute; ah&iacute;, se actualizar&aacute; la instancia de edad. De 
+        lo contrario, se crear&Atilde;&iexcl; una nueva instancia de user.UserData 
+        (la instancia de la user.UserData se llama un bean), y la puso en la sesi&oacute;n.</p>
+      <p> La etiqueta setProperty autom&aacute;ticamente recoger los datos de 
+        entrada, los nombres coinciden con los nombres del bean m&eacute;todo, 
+        y colocar los datos en el grano!</p>
+      <p> Vamos a modificar NextPage.jsp para recuperar los datos desde el grano 
+        ..</p>
+      <p> &lt;jsp:useBean id=&quot;user&quot; class=&quot;user.UserData&quot; 
+        scope=&quot;session&quot;/&gt; </p>
+      <p> &lt;HTML&gt; <br>
+        &lt;BODY&gt; <br>
+        Ha introducido &lt;BR&gt;<br>
+        &lt;BR&gt; Nombre: &lt;% = user.getUsername ()%&gt; &lt;BR&gt;<br>
+        &lt;BR&gt; E-mail: &lt;% = user.getEmail ()%&gt; &lt;BR&gt;<br>
+        &lt;BR&gt; Edad: &lt;% = user.getAge ()%&gt; &lt;BR&gt;<br>
+        &lt;/BODY&gt; <br>
+        &lt;/HTML&gt; </p>
+      <p>Tenga en cuenta que se repite la etiqueta useBean mismo. El grano est&aacute; 
+        disponible en la variable llamada &quot;usuario&quot; de clase &quot;user.UserData&quot;. 
+        Los datos introducidos por el usuario es todo lo recogido en el grano.</p>
+      <p> En realidad no necesita el &quot;SaveName.jsp&quot;, el objetivo de 
+        GetName.html podr&aacute; haber sido NextPage.jsp, y los datos aun se 
+        dispondr&aacute; de la misma manera que siempre hemos a&ntilde;adido un 
+        jsp: setProperty etiqueta. Pero en los pr&oacute;ximos tutorial, utilice 
+        realmente SaveName.jsp como un controlador de errores que autom&Atilde;&iexcl;ticamente 
+        reenvia la petici&oacute;n a NextPage.jsp, o le pide al usuario corregir 
+        los datos erroneos. </p>
+      <p> </p>
+
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

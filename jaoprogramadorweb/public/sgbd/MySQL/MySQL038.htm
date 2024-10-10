@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Ejercicios MySQL</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="MySQL, sql, pl/sql, programacion MySQL, ejercicios MySQL, ejemplos MySQL, select">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2>J O I N</h2></td>
+  </tr>
+  <tr> 
+    <td><h3>Sintaxis de JOIN</h3>
+			
+      <p>MySQL soporta las siguientes sintaxis de JOIN para la parte table_references 
+        de comandos SELECT y DELETE y UPDATE<br>
+        de m&uacute;ltiples tablas:<br>
+        table_reference, table_reference<br>
+        table_reference [INNER | CROSS] JOIN table_reference [join_condition]<br>
+        table_reference STRAIGHT_JOIN table_reference<br>
+        table_reference LEFT [OUTER] JOIN table_reference join_condition<br>
+        table_reference NATURAL [LEFT [OUTER]] JOIN table_reference<br>
+        { ON table_reference LEFT OUTER JOIN table_reference<br>
+        ON conditional_expr }<br>
+        table_reference RIGHT [OUTER] JOIN table_reference join_condition<br>
+        table_reference NATURAL [RIGHT [OUTER]] JOIN table_reference<br>
+        table_reference se define como:<br>
+        tbl_name [[AS] alias]<br>
+        [[USE INDEX (key_list)]<br>
+        | [IGNORE INDEX (key_list)]<br>
+        | [FORCE INDEX (key_list)]]<br>
+        join_condition se define como:<br>
+        ON conditional_expr | USING (column_list)<br>
+        Generalmente no deber&iacute;a tener ninguna condici&oacute;n en la parte 
+        ON que se usa para restringir qu&eacute; registros desea en el conjunto 
+        de resultados,<br>
+        pero en su lugar especificar esas condiciones en la cl&aacute;usula WHERE 
+        . Hay excepciones a esta regla.<br>
+        La sintaxis { OJ ... LEFT OUTER JOIN ...} mostrada en la lista precedente 
+        existe s&oacute;lo por compatibilidad con ODBC.<br>
+        &#8226; Puede poner un alias en una referencia de tabla usando tbl_name 
+        AS alias_name o tbl_name alias_name:<br>
+        mysql&gt; SELECT t1.name, t2.salary FROM employee AS t1, info AS t2<br>
+        -&gt; WHERE t1.name = t2.name;<br>
+        mysql&gt; SELECT t1.name, t2.salary FROM employee t1, info t2<br>
+        -&gt; WHERE t1.name = t2.name;<br>
+        &#8226; El condicional ON es cualquier expresi&oacute;n condicional de 
+        la forma que puede usarse en una cl&aacute;usula WHERE .<br>
+        &#8226; Si no hay ning&uacute;n registro coincidiente para la tabla de 
+        la derecha en la parte ON o USING en un LEFT JOIN, se usa un registro<br>
+        con todos las columnas a NULL para la tabla de la derecha. Puede usar 
+        este hecho para encontrar registros en una tabla que<br>
+        no tengan contraparte en otra tabla:<br>
+        mysql&gt; SELECT table1.* FROM table1<br>
+        -&gt; LEFT JOIN table2 ON table1.id=table2.id<br>
+        -&gt; WHERE table2.id IS NULL;<br>
+        Este ejemplo encuentra todos los registros en table1 con un valor id no 
+        presente en table2 (esto es, todos los registros en<br>
+        table1 sin registro correspondiente en table2). Esto asume que table2.id 
+        se declara NOT NULL. Consulte Secci&oacute;n<br>
+        7.2.9, &#8220;C&oacute;mo optimiza MySQL los LEFT JOIN y RIGHT JOIN&#8221;.<br>
+        &#8226; La cl&aacute;usula USING (column_list) muestra una lista de columnas 
+        que deben existir en ambas tablas. Las siguientes dos<br>
+        cl&aacute;usulas son sem&aacute;nticamente id&eacute;nticas:<br>
+        a LEFT JOIN b USING (c1,c2,c3)<br>
+        a LEFT JOIN b ON a.c1=b.c1 AND a.c2=b.c2 AND a.c3=b.c3<br>
+        &#8226; El NATURAL [LEFT] JOIN de dos tablas se define sem&aacute;nticamente 
+        equivalente a un INNER JOIN o LEFT JOIN con<br>
+        una cl&aacute;usula USING que nombra todas las columnas que existen en 
+        ambas tablas.<br>
+        &#8226;<br>
+        INNER JOIN y , (coma) son sem&aacute;nticamente equivalentes en la ausencia 
+        de una condicic&oacute;n de join: ambos producen un producto<br>
+        Cartesiano entre las tablas especificadas (esto es, cada registro en la 
+        primera tabla se junta con cada registro en la segunda<br>
+        tabla).<br>
+        &#8226; RIGHT JOIN funciona an&aacute;logamente a LEFT JOIN. Para mantener 
+        el c&oacute;digo portable entre bases de datos, se recomienda<br>
+        que use LEFT JOIN en lugar de RIGHT JOIN.<br>
+        &#8226;<br>
+        STRAIGHT_JOIN es id&eacute;ntico a JOIN, excepto que la tabla de la izquierda 
+        se lee siempre antes que la de la derecha. Esto puede<br>
+        usarse para aqu&eacute;llos casos (escasos) en que el optimizador de join 
+        pone las tablas en orden incorrecto.<br>
+        Puede proporcionar pistas de qu&eacute; &iacute;ndice debe usar MySQL 
+        cuando recibe informaci&oacute;n de una tabla. Especificando USE INDEX<br>
+        (key_list), puede decirle a MySQL que use s&oacute;lo uno de los posibles 
+        &iacute;ndices para encontrar registros en la tabla. La sintaxis alternativa<br>
+        IGNORE INDEX (key_list) puede usarse para decir a MySQL que no use alg&uacute;n 
+        &iacute;ndice particular. Estos trucos son<br>
+        &uacute;tiles si EXPLAIN muestra que MySQL est&aacute; usando el &iacute;ndice 
+        incorrecto de la lista de posibles &iacute;ndices.<br>
+        Tambi&eacute;n puede usar FORCE INDEX, que act&uacute;a como USE INDEX 
+        (key_list) pero con la adici&oacute;n que un escaneo de tabla se<br>
+        asume como operaci&oacute;n muy cara. En otras palabras, un escaneo de 
+        tabla se usa s&oacute;lo si no hay forma de usar uno de los &iacute;ndices 
+        dados<br>
+        para encontrar registros en la tabla.<br>
+        USE KEY, IGNORE KEY, y FORCE KEY son sin&oacute;nimos de USE INDEX, IGNORE 
+        INDEX, y FORCE INDEX.<br>
+        Nota: USE INDEX, IGNORE INDEX, y FORCE INDEX s&oacute;lo afecta los &iacute;ndices 
+        usados cuando MySQL decide c&oacute;mo encontrar<br>
+        registros en la tabla y c&oacute;mo hacer el join. No afecta si un &iacute;ndice 
+        est&aacute; en uso cuando se resuelve unORDER BY o GROUP BY.<br>
+        Algunos ejemplos de join:<br>
+        mysql&gt; SELECT * FROM table1,table2 WHERE table1.id=table2.id;<br>
+        mysql&gt; SELECT * FROM table1 LEFT JOIN table2 ON table1.id=table2.id;<br>
+        mysql&gt; SELECT * FROM table1 LEFT JOIN table2 USING (id);<br>
+        mysql&gt; SELECT * FROM table1 LEFT JOIN table2 ON table1.id=table2.id<br>
+        -&gt; LEFT JOIN table3 ON table2.id=table3.id;<br>
+        mysql&gt; SELECT * FROM table1 USE INDEX (key1,key2)<br>
+        -&gt; WHERE key1=1 AND key2=2 AND key3=3;<br>
+        mysql&gt; SELECT * FROM table1 IGNORE INDEX (key3)<br>
+        -&gt; WHERE key1=1 AND key2=2 AND key3=3; </p>
+        </td>
+    <td>&nbsp;</td>
+    <td><a href="http://www.euskalnet.net/juanarana/oraclezip/Ejer3.rar"><img src="../../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td>
+<div align="right"><a href="http://www.euskalnet.net/juanarana/index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a>
+      </div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

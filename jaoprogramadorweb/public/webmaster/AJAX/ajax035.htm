@@ -1,0 +1,149 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>C&oacute;mo hacer una p&aacute;gina AJAX</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta name="keywords" content="Primera página AJAX, Como hacer una pagina AJAX, Manual AJAX, tutorial AJAX, Ejemplos AJAX, ejercicios AJAX">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<table width="555" height="1588" align="left" background="../../imagenes/fondologo.jpg">
+  <tr> 
+    <td height="39" colspan="3"> <h2>Funciones para AJAX</h2></td>
+  </tr>
+  <tr> 
+    <td height="1518" colspan="3"> 
+      <p>Como sucede con Prototype, las funciones 
+        y utilidades relacionadas con AJAX son parte fundamental de jQuery. El 
+        m&eacute;todo principal para realizar peticiones AJAX es $.ajax()<br>
+        (importante no olvidar el punto entre $ y ajax). A partir de esta funci&oacute;n 
+        b&aacute;sica, se han definido otras funciones relacionadas, de m&aacute;s 
+        alto nivel y especializadas en tareas concretas: $.get(),<br>
+        $.post(), $.load(), etc.<br>
+        La sintaxis de $.ajax() es muy sencilla:<br>
+        $.ajax(opciones);<br>
+        Al contrario de lo que sucede con Prototype, la URL que se solicita tambi&eacute;n 
+        se incluye dentro del array asociativo de opciones. A continuaci&oacute;n 
+        se muestra el mismo ejemplo b&aacute;sico que se utiliz&oacute; en Prototype 
+        realizado con $.ajax():<br>
+        $.ajax({<br>
+        url: '/ruta/hasta/pagina.php',<br>
+        type: 'POST',<br>
+        async: true,<br>
+        data: 'parametro1=valor1&amp;parametro2=valor2',<br>
+        success: procesaRespuesta,<br>
+        error: muestraError<br>
+        });<br>
+        La siguiente tabla muestra todas las opciones que se pueden definir para 
+        el m&eacute;todo $.ajax():<br>
+        Opci&oacute;n Descripci&oacute;n<br>
+        async<br>
+        Indica si la petici&oacute;n es as&iacute;ncrona. Su valor por defecto 
+        es true, el habitual para las peticiones AJAX<br>
+        beforeSend<br>
+        Permite indicar una funci&oacute;n que modifique el objeto XMLHttpRequest 
+        antes de realizar la petici&oacute;n. El propio objeto XMLHttpRequest 
+        se pasa como &uacute;nico argumento de la funci&oacute;n complete<br>
+        Permite establecer la funci&oacute;n que se ejecuta cuando una petici&oacute;n 
+        se ha completado (y despu&eacute;s de ejecutar, si se han establecido, 
+        las funciones de success o error). La funci&oacute;n recibe el objeto 
+        XMLHttpRequest como primer par&aacute;metro y el resultado de la petici&oacute;n 
+        como segundo argumento contentType Indica el valor de la cabecera Content-Type 
+        utilizada para realizar la petici&oacute;n. Su valor por defecto es application/x-www-form-urlencoded 
+        data<br>
+        Informaci&oacute;n que se incluye en la petici&oacute;n. Se utiliza para 
+        enviar par&aacute;metros al servidor. Si es una cadena de texto, se env&iacute;a 
+        tal cual, por lo que su formato deber&iacute;a ser parametro1=valor1&amp;parametro2=valor2. 
+        Tambi&eacute;n se puede indicar un array asociativo de pares clave/valor 
+        que se convierten autom&aacute;ticamente en una cadena tipo query string 
+        dataType El tipo de dato que se espera como respuesta. Si no se indica 
+        ning&uacute;n valor, jQuery lo deduce a partir de las cabeceras de la 
+        respuesta. Los posibles valores son: xml (se devuelve un documento XML 
+        correspondiente al valor responseXML), html (devuelve directamente la<br>
+        respuesta del servidor mediante el valor responseText), script (se eval&uacute;a 
+        la respuesta como si fuera JavaScript y se devuelve el resultado) y json 
+        (se eval&uacute;a la respuesta como si fuera JSON y se devuelve el objeto 
+        JavaScript generado)error Indica la funci&oacute;n que se ejecuta cuando 
+        se produce un error durante la petici&oacute;n. Esta funci&oacute;n recibe 
+        el objeto XMLHttpRequest como primer par&aacute;metro, una cadena de texto 
+        indicando el error como segundo par&aacute;metro y un objeto con la excepci&oacute;n 
+        producida como tercer par&aacute;metro ifModified Permite considerar como 
+        correcta la petici&oacute;n solamente si la respuesta recibida es diferente 
+        de la anterior respuesta. Por defecto su valor es false<br>
+        processData Indica si se transforman los datos de la opci&oacute;n data 
+        para convertirlos en una cadena de texto. Si se indica un valor de false, 
+        no se realiza esta transformaci&oacute;n autom&aacute;tica success Permite 
+        establecer la funci&oacute;n que se ejecuta cuando una petici&oacute;n 
+        se ha completado de forma correcta. La funci&oacute;n recibe como primer 
+        par&aacute;metro los datos recibidos del servidor, previamente formateados 
+        seg&uacute;n se especifique en la opci&oacute;n dataType timeout Indica 
+        el tiempo m&aacute;ximo, en milisegundos, que la petici&oacute;n espera 
+        la respuesta del servidor antes de anular la petici&oacute;n type El tipo 
+        de petici&oacute;n que se realiza. Su valor por defecto es GET, aunque 
+        tambi&eacute;n se puede utilizar el m&eacute;todo POST url La URL del 
+        servidor a la que se realiza la petici&oacute;n Adem&aacute;s de la funci&oacute;n 
+        $.ajax() gen&eacute;rica, existen varias funciones relacionadas que son 
+        versiones simplificadas y especializadas de esa funci&oacute;n. As&iacute;, 
+        las funciones $.get() y $.post() se utilizan para realizar de forma sencilla 
+        peticiones GET y POST:<br>
+        // Petici&oacute;n GET simple<br>
+        $.get('/ruta/hasta/pagina.php');<br>
+        // Petici&oacute;n GET con env&iacute;o de par&aacute;metros y funci&oacute;n 
+        que<br>
+        // procesa la respuesta<br>
+        $.get('/ruta/hasta/pagina.php',<br>
+        { articulo: '34' },<br>
+        function(datos) {<br>
+        alert('Respuesta = '+datos);<br>
+        });<br>
+        Las peticiones POST se realizan exactamente de la misma forma, por lo 
+        que s&oacute;lo hay que cambiar<br>
+        $.get() por $.post(). La sintaxis de estas funciones son:<br>
+        $.get(url, datos, funcionManejadora);<br>
+        El primer par&aacute;merto (url) es el &uacute;nico obligatorio e indica 
+        la URL solicitada por la petici&oacute;n. Los otros dos par&aacute;metros 
+        son opcionales, siendo el segundo (datos) los par&aacute;metros que se 
+        env&iacute;an junto con la petici&oacute;n y el tercero (funcionManejadora) 
+        el nombre o el c&oacute;digo JavaScript de la funci&oacute;n que se encarga 
+        de procesar la respuesta del servidor. La funci&oacute;n $.get() dispone 
+        a su vez de una versi&oacute;n especializada denominada $.getIfModified(), 
+        que tambi&eacute;n obtiene una respuesta del servidor mediante una petici&oacute;n 
+        GET,<br>
+        pero la respuesta s&oacute;lo est&aacute; disponible si es diferente de 
+        la &uacute;ltima respuesta recibida.<br>
+        jQuery tambi&eacute;n dispone de la funci&oacute;n $.load(), que es id&eacute;ntica 
+        a la funci&oacute;n Ajax.Updater() de Prototype. La funci&oacute;n $.load() 
+        inserta el contenido de la respuesta del servidor en el elementode la 
+        p&aacute;gina que se indica. La forma de indicar ese elemento es lo que 
+        diferencia a jQuery de Prototype:<br>
+        &lt;div id=&quot;info&quot;&gt;&lt;/div&gt;<br>
+        // Con Prototype<br>
+        new Ajax.Updater('info', '/ruta/hasta/pagina.php');<br>
+        // Con jQuery<br>
+        $('#info').load('/ruta/hasta/pagina.php');<br>
+        Al igual que suced&iacute;a con la funci&oacute;n $.get(), la funci&oacute;n 
+        $.load() tambi&eacute;n dispone de una versi&oacute;n espec&iacute;fica 
+        denominada $.loadIfModified() que carga la respuesta del servidor en el 
+        elemento s&oacute;lo si esa respuesta es diferente a la &uacute;ltima 
+        recibida.<br>
+        Por &uacute;ltimo, jQuery tambi&eacute;n dispone de las funciones $.getJSON() 
+        y $.getScript() que cargan y eval&uacute;an/ejecutan respectivamente una 
+        respuesta de tipo JSON y una respuesta con c&oacute;digo JavaScript</p></td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

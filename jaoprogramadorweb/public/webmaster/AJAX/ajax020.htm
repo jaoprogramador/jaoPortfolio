@@ -1,0 +1,143 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>C&oacute;mo hacer una p&aacute;gina AJAX</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta name="keywords" content="Primera página AJAX, Como hacer una pagina AJAX, Manual AJAX, tutorial AJAX, Ejemplos AJAX, ejercicios AJAX">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2>Funciones y m&eacute;todos b&aacute;sicos</h2></td>
+  </tr>
+  <tr> 
+    <td height="394" colspan="3"> <p>La primera funci&oacute;n que se estudia 
+        cuando se est&aacute; aprendiendo Prototype es tan &uacute;til como impronunciable: 
+        $(). La &quot;funci&oacute;n d&oacute;lar&quot; es un atajo mejorado de 
+        la funci&oacute;n document.getElementById().<br>
+        Si se le pasa una cadena de texto con el identificador de un elemento, 
+        obtiene ese elemento. La funci&oacute;n admite uno o m&aacute;s par&aacute;metros: 
+        si se le pasa un par&aacute;metro, devuelve un objeto; si se le pasan 
+        varios par&aacute;metros, devuelve un array simple con todos los objetos.</p>
+      <p>// Con JavaScript<br>
+        var elemento = document.getElementById('primero');<br>
+        // Con Prototype<br>
+        var elemento = $('primero');<br>
+        // Con JavaScript<br>
+        var elemento1 = document.getElementById('primero');<br>
+        var elemento2 = document.getElementById('segundo');<br>
+        // Con Prototype<br>
+        var elementos = $('primero', 'segundo');</p>
+      <p>Otra de las funciones m&aacute;s &uacute;tiles de Prototype es $F(), 
+        que es similar a la anterior funci&oacute;n, pero se utiliza para obtener 
+        directamente el valor de los campos de formulario:</p>
+      <p>&lt;input id=&quot;municipio&quot; /&gt;<br>
+        // Con JavaScript<br>
+        document.getElementById(&quot;municipio&quot;).value<br>
+        // Con Prototype<br>
+        $F(&quot;municipio&quot;)<br>
+        &lt;select id=&quot;municipio&quot;&gt;<br>
+        &lt;option&gt;...&lt;/option&gt;<br>
+        &lt;/select&gt;<br>
+        // Con JavaScript</p>
+      <p><br>
+        document.getElementById(&quot;municipio&quot;).options<br>
+        [document.getElementById(&quot;municipio&quot;).selectedIndex].value<br>
+        // Con Prototype<br>
+        $F(&quot;municipio&quot;) </p>
+      <p>Una de las funciones m&aacute;s espectaculares de Prototype y que no 
+        tiene equivalente en JavaScript es $$(), que permite seleccionar elementos 
+        de la p&aacute;gina utilizando selectores de CSS.<br>
+        &lt;div id=&quot;principal&quot;&gt;<br>
+        &lt;p&gt;Primer p&aacute;rrafo&lt;/p&gt;<br>
+        &lt;p&gt;Segundo p&aacute;rrafo&lt;/p&gt;<br>
+        &lt;/div&gt;<br>
+        &lt;p&gt;Tercer p&aacute;rrafo&lt;/p&gt;<br>
+        var todosParrafos = $$('p');<br>
+        var parrafosInteriores = $$('#principal p');</p>
+      <p>Prototype incluye una funci&oacute;n muy &uacute;til llamada $A(), para 
+        convertir en array &quot;cualquier cosa que se parezca a un array&quot;. 
+        Algunas funciones de JavaScript, como por ejemplo getElementsByTagName() 
+        devuelven objetos de tipo NodeList o HTMLCollection, que no son arrays, 
+        aunque pueden recorrerse como tales.<br>
+        &lt;select id=&quot;lista&quot;&gt;<br>
+        &lt;option value=&quot;1&quot;&gt;Primer valor&lt;/option&gt;<br>
+        &lt;option value=&quot;2&quot;&gt;Segundo valor&lt;/option&gt;&lt;option 
+        value=&quot;3&quot;&gt;Tercer valor&lt;/option&gt;<br>
+        &lt;/select&gt;<br>
+        // 'lista_nodos' es una variable de tipo NodeList<br>
+        var lista_nodos = $('lista').getElementsByTagName('option');<br>
+        // 'nodos' es una variable de tipo array<br>
+        var nodos = $A(lista_nodos);<br>
+        // nodos = [objeto_html_opcion1, objeto_html_opcion2, objeto_html_opcion3]<br>
+        Una funci&oacute;n similar a $A() es $H(), que crea arrays asociativos 
+        (tambi&eacute;n llamados &quot;hash&quot;) a partir del argumento que 
+        se le pasa:<br>
+        var usuarios = { usuario1: &quot;password1&quot;,<br>
+        usuario2: &quot;password2&quot;,<br>
+        usuario3: &quot;password3&quot; };<br>
+        var hash_usuarios = $H(usuarios);<br>
+        var logins = hash_usuarios.keys();<br>
+        // logins = [&quot;usuario1&quot;, &quot;usuario2&quot;, &quot;usuario3&quot;]<br>
+        var passwords = hash_usuarios.values();// passwords = [&quot;password1&quot;, 
+        &quot;password2&quot;, &quot;password3&quot;]<br>
+        var queryString = hash_usuarios.toQueryString();<br>
+        // queryString = &quot;usuario1=password1&amp;usuario2=password2&amp;usuario3=password3&quot;<br>
+        var debug = hash_usuarios.inspect();<br>
+        // #&lt;Hash:{'usuario1':'password1', 'usuario2':'password2&#8217;,'usuario3':'password3'}&gt;<br>
+        Por &uacute;ltimo, Prototype incluye la funci&oacute;n $R() para crear 
+        rangos de valores. El rango de valores se crea desde el valor del primer 
+        argumento hasta el valor del segundo argumento. El tercer argumento de 
+        la funci&oacute;n indica si se excluye o no el &uacute;ltimo valor (por 
+        defecto, el tercer argumento vale false, que indica que s&iacute; se incluye 
+        el &uacute;ltimo valor).<br>
+        var rango = $R(0, 100, false);<br>
+        // rango = [0, 1, 2, 3, ..., 100]<br>
+        var rango = $R(0, 100);<br>
+        // rango = [0, 1, 2, 3, ..., 100]<br>
+        var rango = $R(0, 100, true);<br>
+        // rango = [0, 1, 2, 3, ..., 99]<br>
+        var rango2 = $R(100, 0);<br>
+        // rango2 = [100]<br>
+        var rango = $R(0, 100);<br>
+        var incluido = rango.include(4);<br>
+        // incluido = true<br>
+        var rango = $R(0, 100);<br>
+        var incluido = rango.include(400);<br>
+        // incluido = false;Los rangos que se pueden crear van mucho m&aacute;s 
+        all&aacute; de simples sucesiones num&eacute;ricas. La<br>
+        &quot;inteligencia&quot; de la funci&oacute;n $R() permite crear rangos 
+        tan avanzados como los siguientes:<br>
+        var rango = $R('a', 'k');<br>
+        // rango = ['a', 'b', 'c', ..., 'k']<br>
+        var rango = $R('aa', 'ak');<br>
+        // rango = ['aa', 'ab', 'ac', ..., 'ak']<br>
+        var rango = $R('a_a', 'a_k');<br>
+        // rango = ['a_a', 'a_b', 'a_c', ..., 'a_k']<br>
+        Por &uacute;ltimo, una funci&oacute;n muy &uacute;til que se puede utilizar 
+        con cadenas de texto, objetos y arrays de cualquier tipo es inspect(). 
+        Esta funci&oacute;n devuelve una cadena de texto que es una representaci&oacute;n 
+        de los contenidos del objeto. Se trata de una utilidad imprescindible 
+        cuando se est&aacute;n depurando las aplicaciones, ya que permite visualizar 
+        el contenido de variables complejas.</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p></td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

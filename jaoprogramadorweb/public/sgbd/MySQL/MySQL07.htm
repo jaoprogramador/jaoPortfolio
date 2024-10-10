@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Ejercicios MySQL</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="MySQL, sql, pl/sql, programacion MySQL, ejercicios MySQL, ejemplos MySQL, select">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2>C O N E X I O N E S</h2></td>
+  </tr>
+  <tr> 
+    <td><h3>Conectarse y desconectarse del servidor</h3>
+      <p>Para conectarse al servidor, generalmente se le porporcionar&aacute; a 
+        mysql un nombre de usuario y una contrase&ntilde;a. Si el servidor se 
+        est&aacute;<br>
+        ejecutando en un ordenador distinto a donde est&aacute; estableciendo 
+        la conexi&oacute;n, tambi&eacute;n se deber&aacute; especificar el nombre 
+        de host.<br>
+        Consulte con su administrador para saber los par&aacute;metros de conexi&oacute;n 
+        (nombre de usuario, contrase&ntilde;a y host) que debe emplear.<br>
+        Una vez que conozca los par&aacute;metros apropiados, deber&iacute;a poder 
+        conectarse de este modo:<br>
+        shell&gt; mysql -h host -u user -p<br>
+        Enter password: ********<br>
+        host y user representan el nombre del ordenador donde se est&aacute; ejecutando 
+        el servidor de bases de datos MySQL y el nombre de<br>
+        usuario de la cuenta que se usar&aacute; para conectarse. Reempl&aacute;celos 
+        por los valores apropiados para elcaso. Los asteriscos<br>
+        (********) representan la contrase&ntilde;a, debe ingresarse cuando mysql 
+        muestra Enter password:.<br>
+        Si todo funciona bien, se ver&aacute; una informaci&oacute;n de ingreso 
+        seguida por el prompt mysql&gt;:<br>
+        shell&gt; mysql -h host -u user -p<br>
+        Enter password: ********<br>
+        Welcome to the MySQL monitor. Commands end with ; or \g.<br>
+        Your MySQL connection id is 25338 to server version: 5.0.9-beta-standard<br>
+        Type 'help;' or '\h' for help. Type '\c' to clear the buffer.<br>
+        mysql&gt;<br>
+        El prompt anuncia que mysql est&aacute; listo para procesar comandos.<br>
+        Algunas instalaciones de MySQL permiten conectarse como usuario an&oacute;nimo 
+        (sin nombre) si el servidor se est&aacute; ejecutando en el<br>
+        ordenador local. Si esto sucede en su caso, deberia poder conectarse al 
+        servidor ejecutando mysql sin ning&uacute;n par&aacute;metro:<br>
+        shell&gt; mysql<br>
+        Despu&eacute;s de haberse conectado, puede desconectarse en cualquier 
+        momento escribiendo QUIT (o \q) en el prompt mysql&gt;:<br>
+        mysql&gt; QUIT<br>
+        Bye<br>
+        En Unix, tambi&eacute;n puede desconectarse presionando Control-D.<br>
+        La mayor&iacute;a de los ejemplos en las secciones siguientes asumen que 
+        ya se ha conectado al servidor. Por eso muestran el prompt<br>
+        mysql&gt;. </p>
+        </td>
+    <td>&nbsp;</td>
+    <td><a href="http://www.euskalnet.net/juanarana/oraclezip/Ejer3.rar"><img src="../../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td>
+<div align="right"><a href="http://www.euskalnet.net/juanarana/index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a>
+      </div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

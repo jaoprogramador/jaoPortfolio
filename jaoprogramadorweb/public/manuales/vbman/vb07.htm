@@ -1,0 +1,278 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Tipos de Variables</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Tipos de variables en Visual Basic,Manual Visual Basic,Tutorial Visual Basic, Ejemplos Visual Basic">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="2"> <h2>Tipos 
+        de Variables</h2></td>
+  </tr>
+  <tr> 
+    <td height="3135" colspan="2">
+<table width="100%" border="0" >
+        <tr> 
+          <td><h3>Contenido</h3></td>
+          <td><a href="vb07.htm#variant">- Utilizaci&oacute;n del 
+            tipo Variant</a></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="vb07.htm#string">- El tipo String</a></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="vb07.htm#enumerado">- El tipo Enumerado</a></td>
+        </tr>
+      </table>
+      <h3>Utilizaci&oacute;n del tipo Variant<a name="variant"></a></h3>
+      <p>El tipo de datos Variant permite almacenar todos los tipos de datos definidos 
+        en el sistema; por ejemplo, datos enteros, fraccionarios en coma fija 
+        o variable, cadenas de caracteres, o datos relativos a la fecha y a la 
+        hora. Estos le define como un tipo de datos gen&eacute;rico. Cuando Visual 
+        Basic opera con datos de tipo Variant, ejecuta autom&aacute;ticamente 
+        las conversiones necesarias. No obstante, hay que tener en cuenta las 
+        siguientes consideraciones:<br>
+      <blockquote>- Cuando se ejecutan operaciones aritm&eacute;ticas sobre una 
+        variable Variant, su contenido tiene que poderse convertir a 
+        un valor num&eacute;rico.<br>
+        <br>
+        - Cuando se ejecutan operaciones aritm&eacute;ticas sobre una variable 
+        Variant que contiene un byte, un integer, un long o un single 
+        y el resultado excede del rango del tipo original, el tipo de variable 
+        para a ser el necesario para contener el resultado.<br>
+        <br>
+        - Como el operador + puede ser utilizado para sumar valores y concatenar 
+        cadenas de caracteres, dependiendo del contenido de las variables, los 
+        resultados pueden ser inesperados. Por ello, para concatenar variables 
+        de tipo variant, y en general para evitar ambig&uuml;edades, utilizaremos 
+        en operador &amp; en lugar del operador +. El operador &amp; ejecuta la 
+        concatenaci&oacute;n sin tener en consideraci&oacute;n qu&eacute; contienen 
+        las variables. </blockquote>
+      Cuando utilice el operador &amp;, tenga cuidado de dejar un espacio entre 
+      el nombre de la variable y el operador, de lo contrario Visual Basic interpretar&iacute;a 
+      que se trata del car&aacute;cter de declaraci&oacute;n de tipo Long. <br> 
+      <br>
+      Si intenta ejecutar una operaci&oacute;n o funci&oacute;n matem&aacute;tica 
+      sobre una variable Variant que o contenga un valor que pueda 
+      ser interpretado como un n&uacute;mer&oacute;, ocurrir&aacute; un error. 
+      Para evitar esto, utilice la funci&oacute;n IsNumeric para interrogar 
+      si dicha variable contiene un valor que puede ser utilizado como uyn n&uacute;mero. 
+      Por ejemplo:<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br> &nbsp;&nbsp;&nbsp;&nbsp; 
+      Dim Dato 'Variant por omisi&oacute;n<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dato = &quot;123&quot; ' cadena de caracteres<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If IsNumeric(Dato) Then<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dato = Dato 
+      + 1111 'resultado double 1234<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;End if<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dato = Dato &amp;&quot;5&quot; 'cadena 
+      de caracteres &quot;12345&quot;<br>
+      <br>
+      Cuando asignamos un valor num&eacute;rico a una variable Variant, Visual 
+      Basic utiliza la representaci&oacute;n m&aacute;s compacta para asignar 
+      en el valor.<br> <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Dim dato ' variable 
+      de tipo variant<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; dato= 123 ' connstituye un valor integer<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; dato = dato + 1111 'resultado integer 1234<br> 
+      <br>
+      Una variable varian no es una variable sin tipo; m&aacute;s bien, es una 
+      variable que puede cambiar su tipo libremente (una variable gen&eacute;rica). 
+      Cuando usted quiera conocer el tipo de dato que almacena una variable Variant, 
+      utilice la funci&oacute;n VarType. Cada tipo de dato tiene asociado 
+      en Visual Basic un n&uacute;mero entero que lo diferencia de los dem&aacute;s 
+      (por ejemplo, Integer tiene asociado el 2,Single el 4, 
+      etc). Este n&uacute;mero entero es devuelto por la funci&oacute;n VarType. 
+      En ocasiones, cuando operamos con variables Variant obtenemos resultados 
+      de tipo Double, cuando en realidad esperamos otro tipo de resultado. 
+      Por ejemplo:<br> <br> <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dato = Dato 
+      + 1111' para Dato=&quot;123&quot;, valor double 1234<br> <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;En 
+      este ejemplo quiz&aacute; usted esperaba obtener un valor integer. Para 
+      que as&iacute; sea, utilice la funci&oacute;n CInt para convertir 
+      la variable Variant a un valor entero.<br> <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+      Las variables Variant tambi&eacute;n pueden contener variables 
+      de tipo Date y, con ellas, pueden ejecutar operaciones aritm&eacute;ticas 
+      y comparaciones. Por ejemplo:<br> <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dim 
+      Dato 'Variant por omisi&oacute;n<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dato = Now 'contenido: dd/mm/aa hh:mm:ss<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dato = Dato - 1 ' menos 1 dia<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if Dato &gt; #24/10/99 3:00:00# then<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dato = Dato 
+      -1 /24 'menos una hora<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;End If<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dato = Dato -10 / 24 / 60 'menos 10 
+      minutos<br>
+      <br>
+      Visual Basic acepta para una variable Variant, datos en diversos 
+      formatos de fecha/hora, incluidos entre #. Por ejemplo:<br> <br> &nbsp;&nbsp;&nbsp;&nbsp;Dim 
+      Dato 'Variant por omisi&oacute;n<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;Dato = #18-4-99 15:30#<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;Dato = #18 Apr, 1999 3:30pm# <br>
+      &nbsp;&nbsp;&nbsp;&nbsp;Dato = #18-Apr-99#<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;Dato = #18 April 1999#  <p>Para verificar si 
+        un determinado valor puede considerarse como uno del tipo Date 
+        (fecha/hora), utilice la funci&oacute;n IsDate. Para convertir 
+        dicho valor en uno del tipo Date, utilice la funci&oacute;n CDate. 
+        Por ejemplo, suponga que el contenido de una caja de texto Text1 
+        es 18 4 99. Las siguientes sentencias<br>
+        &nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;If IsDate(Text1.Text) Then<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dato = CDate(Text.Text)<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;End If<br>
+        <br>
+        almacenan en la variable Dato el valor18/04/99. Una alternativa 
+        a la funci&oacute;n SDate es DateValue.<br>
+        <br>
+        Para saber si una variable Variant no ha sido iniciada, esto es, si est&aacute; 
+        vac&iacute;a, utilice la funci&oacute;n IsEmpty. El valor Empty(vac&iacute;o) 
+        denota una variable Variant que no ha sido iniciada (no se le 
+        ha asignado un valor inicial). Una variable Variant que contiene 
+        el valor Empty es 0 si se usa en un contexto num&eacute;rico, 
+        o una cadena de longitud cero (&quot;&quot;) si se usa en un contexto 
+        de cadenas.<br>
+        <br>
+        Para iniciar que una variable Variant contiene un dato no v&aacute;lidoque 
+        utiliza el valor especial Null. Evidentemente, Null 
+        no es lo mismo que Empty.<br>
+        <br>
+        Cualquier operaci&oacute;n entre expresiones que contenga Null 
+        da como resultado Null. Esto puede ser &uacute;til cuando en 
+        las expresiones intervienen funciones escritas para que retornen Null 
+        cuando ocurra un error. Para verificar si el resultado final de la expresi&oacute;n 
+        es Null, utilice la funci&oacute;n IsNull.<br>
+        <br>
+        <h3>El tipo String<a name="string"></a></h3>
+      <p>Una variable de tipo String permite almacenar una cadena de caracteres 
+        y manipular utilizando las funciones proporcionadas por Visual Basic. 
+        Por ejemplo:<br>
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dim Nombre As String<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nombre =&quot;Juantxu Arana Olalde&quot;<br>
+        <br>
+        La variable Nombre est&aacute; definida como una cadena de caracteres 
+        de longitud variable. Para declarar Nombre como una cadena de caracteres 
+        de longitud fija, por ejemplo, 60 caracteres, proceda como se indica a 
+        continuaci&oacute;n: <br>
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dim Nombre As String * 60<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nombre =&quot;Juantxu Arana Olalde&quot; 
+        <br>
+        <br>
+        En el ejemplo anterior, si asignamos a nombre menos de 60 caracteres, 
+        se completa con espacios en blanco hasta 60 caracteres.<br>
+        <br>
+        Las cadenas de longitud variable, pueden contener hasta 2 a la 31 caracteres 
+        y las cadenas de longitud fija pueden contener hasta 64K caracteres.<br>
+        <br>
+        En un modulo est&aacute;ndar,las cadenas de caracteres de longitud fija 
+        hay que declararlas Private o Public. En un formulario 
+        o en una clase hay que declararlas Private.<br>
+        <br>
+        Si el contenido de una cadena de caracteres coincide con un valor num&eacute;rico, 
+        se puede asignar la cadena de caracteres a una variable num&eacute;rica. 
+        Tambi&eacute;n es posible asignar un valor num&eacute;rica a una cadena 
+        de caracteres. Por ejemplo:<br>
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;Dim x as integer, y as single<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;Dim Str as string<br>
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;Y = 50.65<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;Str = Y'o tambi&eacute;n Str = &quot;50.65&quot;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;X = Str 'el valor de X es 51<br>
+        <br>
+        <h3>Tipo enumerado<a name="enumerado"></a></h3><br>
+        <br>
+        La declaraci&oacute;n de un tipo enumerado es simplemente una lista de 
+        valores que pueden ser tomados por una variable de ese tipo. Los valores 
+        de un tipo enumerado se presentar&aacute;n con identificadores, que ser&aacute;n 
+        las constantes del nuevo tipo:<br>
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Public Enum DiasSemana<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lunes<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Martes <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Miercoles<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Jueves<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Viernes<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;S&aacute;bado<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Domingo <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;End Enum<br>
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dim hoy as DiasSemana<br>
+        <br>
+        Este ejemplo declara la variable hoy del tipo enumerado DiasSemana. 
+        Esta variable puede tomar cualquier valor de los especificados, lunes 
+        a domingo. Las constantes son del tipo Long y sus valores por omisi&oacute;n 
+        son 0, 1, 2 etc. Seg&uacute;n esto, El valor de lunes es 0, el valor de 
+        martes es 1, y as&iacute; sucesivamente. Por lo tanto, una sentencia como<br>
+        <br>
+        hoy = domingo<br>
+        <br>
+        ser&iacute;a equivalente a<br>
+        <br>
+        hoy = 6<br>
+        <br>
+        A cualquier identificador de la lista se le puede asignar un valor inicial 
+        de tipo Long por medio de una expresi&oacute;n constante. Los identificadores 
+        sucesivos tomar&aacute;n valores correlativos a partir de &eacute;ste. 
+        Por ejemplo:<br>
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Public Enum DiasLaborales<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;S&aacute;bado<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Domingo<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lunes<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Martes <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Miercoles<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Jueves<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Viernes<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NoV&aacute;lido 
+        = -1<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;End Enum<br>
+        <br>
+        Este ejemplo declara un tipo enumerado llamado DiasLaborales. Los valores 
+        asociados con cada una de las constantes son: sabado=0, domingo=0, lunes=1, 
+        martes=2, miercoles=3, jueves=4, viernes=5,NoValido=-1.<br>
+        <br>
+        A los tipos enumerados se les aplican las siguientes reglas:<br>
+      <blockquote>- Un tipo enumerado puede declararse Private o Public.<br>
+        <br>
+        - De forma predeterminada, la primera constante de una enumeraci&oacute;n 
+        se inicia a 0 y las siguientes constantes reciben un valor superior en 
+        una unidad al de la constante anterior.<br>
+        <br>
+        - Dos o m&aacute;s constantes pueden tener un mismo valor.<br>
+        <br>
+        - Una constante puede aparecer en m&aacute;s de un tipo.<br>
+        <br>
+        - Para evitar referencias ambiguas cuando haga referencia a una constante 
+        individual, califique el nombre de la constante mediante su enumeraci&oacute;n 
+        Por ejemplo :<br>
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hoy = DiasSemana.domingo<br>
+        <br>
+        - No es posible leer o escribir directamente un valor de un tipo enumerado; 
+        esto es, cuando se escribe una variable de un tipo enumerado lo que se 
+        describe es el valor asociado. En cambio en asignaciones o en comparaciones 
+        s&iacute; se pueden utilizar los identificadores del tipo enumerado.</blockquote></td>
+  </tr>
+  <tr> 
+    <td>&nbsp;</td>
+    <td> <div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

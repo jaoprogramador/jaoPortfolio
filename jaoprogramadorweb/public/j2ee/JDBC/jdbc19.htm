@@ -1,0 +1,60 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Tipos de datos y conversiones.</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación en JDBC,Programas JDBC,Aplicaciones en JDBC,Ejercicios en JDBC, Ejemplos de JDBC,Tutoriales de JDBC,Manuales JDBC" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="JDBC, Manual JDBC, tutorial JDBC, Ejemplos JDBC, ejercicios JDBC">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> Tipos de datos y conversiones.</h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <p>Para los m&eacute;todos getXXX, el driver 
+        JDBC intenta convertir los datos subyacentes a tipos de datos Java . Por 
+        ejemplo, si el m&eacute;todo getXXX es getString y los tipos de datos 
+        de la base de datos en la base subyacente es VARCHAR, el driver JDBC convertir&aacute; 
+        VARCHAR en String de Java. El valor devuelto por getString ser&aacute; 
+        un objeto Java de tipo String.</p>
+      <p>La siguiente tabla muestra que tipos JDBC est&aacute; permitido devolver 
+        para un m&eacute;todo getXXX y que tipos JDBC (tipos gen&eacute;ricos 
+        de SQL) se recomiendan para recuperarlos. Una x indica un m&eacute;todo 
+        getXXX legal para un tipo de dato particular. Por ejemplo, cualquier m&eacute;todo 
+        getXXX excepto getBytes o getBinaryStream puede usarse para recuperar 
+        valores de tipo LONGVARCHAR, pero se recomienda usar getAsciiStream o 
+        getUnicodeStream, dependiendo de que tipo de dato se devuelve. El m&eacute;todo 
+        getObject devolver&aacute; cualquier tipo de dato como un Object Java 
+        y es util cuando los tipos de datos de la DBMS subyacente son abstractos 
+        espec&iacute;ficos de &eacute;sta o cuando una aplicaci&oacute;n gen&eacute;rica 
+        necesita aceptar cualquier tipo de datos.</p>
+      <p>El uso de los m&eacute;todos ResultSet.getXXX recuperan tipos de datos 
+        comunes JDBC</p>
+      <p>Una &#8220;x&#8221; indica que el m&eacute;todo getXXX puede legalmente 
+        usarse para recuperar el tipo JDBC dado.</p>
+      <p>Una &#8220;X&#8221; indica que el m&eacute;todo getXXX es el recomendado 
+        para recuperar el tipo de dato dado.<br>
+      </p>
+      <p>&nbsp; </p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

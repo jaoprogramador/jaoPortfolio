@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Ejercicios MySQL</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="MySQL, sql, pl/sql, programacion MySQL, ejercicios MySQL, ejemplos MySQL, select">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2>I N F O R M A C I O N  T A B L A S</h2></td>
+  </tr>
+  <tr> 
+    <td><h3>Obtener información sobre bases de datos y tablas</h3>
+      <p>&iquest;Qu&eacute; tal si no se recuerda el nombre de una base de datos 
+        o una tabla, o c&oacute;mo es su estructura (por ejemplo, nombres de columnas)?<br>
+        MySQL aborda este problema a trav&eacute;s de varias sentencias que proveen 
+        informaci&oacute;n acerca de las bases de datos y tablas que<br>
+        soporta.<br>
+        Ya se ha visto SHOW DATABASES, la cual informa las bases de datos gestionadas 
+        por el servidor. Para conocer la base de datos<br>
+        actualmente seleccionada, se utiliza la funcion DATABASE():<br>
+        mysql&gt; SELECT DATABASE();<br>
+        +------------+<br>
+        | DATABASE() |<br>
+        +------------+<br>
+        | menagerie |<br>
+        +------------+<br>
+        Si a&uacute;n no se hubiese seleccionado ninguna base de datos, el resultado 
+        ser&iacute;a NULL.<br>
+        Para conocer las tablas contenidas en la base de datos actual (por ejemplo, 
+        si no se est&aacute; seguro del nombre de una tabla) se usa el siguiente<br>
+        comando:<br>
+        mysql&gt; SHOW TABLES;<br>
+        +---------------------+<br>
+        | Tables in menagerie |<br>
+        +---------------------+<br>
+        | event |<br>
+        | pet |<br>
+        +---------------------+<br>
+        Si lo que se desea es ver la estructura de una tabla, el comando DESCRIBE 
+        es &uacute;til; muestra informaci&oacute;n acerca de cada columna de<br>
+        la tabla:<br>
+        mysql&gt; DESCRIBE pet;<br>
+        +---------+-------------+------+-----+---------+-------+<br>
+        | Field | Type | Null | Key | Default | Extra |<br>
+        +---------+-------------+------+-----+---------+-------+<br>
+        | name | varchar(20) | YES | | NULL | |<br>
+        | owner | varchar(20) | YES | | NULL | |<br>
+        | species | varchar(20) | YES | | NULL | |<br>
+        | sex | char(1) | YES | | NULL | |<br>
+        | birth | date | YES | | NULL | |<br>
+        | death | date | YES | | NULL | |<br>
+        +---------+-------------+------+-----+---------+-------+<br>
+        Field contiene el nombre de la columna, Type es el tipo de dato, NULL 
+        se&ntilde;ala si la columna puede contener valores NULL, Key<br>
+        indica si la columna est&aacute; indexada, y Default informa el valor 
+        por defecto de la columna.<br>
+        Si una tabla tiene &iacute;ndices, SHOW INDEX FROM tbl_name muestra informaci&oacute;n 
+        sobre ellos.</p>
+
+        </td>
+    <td>&nbsp;</td>
+    <td><a href="http://www.euskalnet.net/juanarana/oraclezip/Ejer3.rar"><img src="../../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td>
+<div align="right"><a href="http://www.euskalnet.net/juanarana/index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a>
+      </div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

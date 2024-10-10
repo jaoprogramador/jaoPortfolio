@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>C&oacute;mo hacer una p&aacute;gina AJAX</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta name="keywords" content="Primera página AJAX, Como hacer una pagina AJAX, Manual AJAX, tutorial AJAX, Ejemplos AJAX, ejercicios AJAX">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<table width="555" height="1240" align="left" background="../../imagenes/fondologo.jpg">
+  <tr> 
+    <td height="39" colspan="3"> <h2>Procesando respuestas XML</h2></td>
+  </tr>
+  <tr> 
+    <td height="1170" colspan="3"> 
+      <p>Adem&aacute;s del env&iacute;o de par&aacute;metros 
+        en formato XML, el objeto XMLHttpRequest tambi&eacute;n permite la recepci&oacute;n 
+        de respuestas de servidor en formato XML. Una vez obtenida la respuesta 
+        del servidor mediante la propiedad petici&oacute;n_http.responseXML, es 
+        posible procesarla empleando los m&eacute;todos DOM de manejo de documentos 
+        XML/HTML.<br>
+        En este caso, se modifica la respuesta del servidor para que no sea un 
+        texto sencillo, sino que la respuesta est&eacute; definida mediante un 
+        documento XML:<br>
+        &lt;respuesta&gt;<br>
+        &lt;mensaje&gt;...&lt;/mensaje&gt;<br>
+        &lt;parametros&gt;<br>
+        &lt;telefono&gt;...&lt;/telefono&gt;<br>
+        &lt;codigo_postal&gt;...&lt;/codigo_postal&gt;<br>
+        &lt;fecha_nacimiento&gt;...&lt;/fecha_nacimiento&gt;<br>
+        &lt;/parametros&gt;<br>
+        &lt;/respuesta&gt;<br>
+        La respuesta del servidor incluye un mensaje sobre el &eacute;xito o fracaso 
+        de la operaci&oacute;n de validaci&oacute;n de los par&aacute;metros y 
+        adem&aacute;s incluye la lista completa de par&aacute;metros enviados 
+        al servidor.<br>
+        La funci&oacute;n encargada de procesar la respuesta del servidor se debe 
+        modificar por completo para tratar el nuevo tipo de respuesta recibida:<br>
+        function procesaRespuesta() {<br>
+        if(peticion_http.readyState == READY_STATE_COMPLETE) {<br>
+        if(peticion_http.status == 200) {<br>
+        var documento_xml = peticion_http.responseXML;<br>
+        var root = documento_xml.getElementsByTagName(&quot;respuesta&quot;)[0];<br>
+        var mensajes = root.getElementsByTagName(&quot;mensaje&quot;)[0];<br>
+        var mensaje = mensajes.firstChild.nodeValue;<br>
+        var parametros = root.getElementsByTagName(&quot;parametros&quot;)[0];<br>
+        var telefono =<br>
+        parametros.getElementsByTagName(&quot;telefono&quot;)[0].firstChild.nodeValue;<br>
+        var fecha_nacimiento =<br>
+        parametros.getElementsByTagName(&quot;fecha_nacimiento&quot;)[0].firstChild.nodeValue;<br>
+        var codigo_postal =<br>
+        parametros.getElementsByTagName(&quot;codigo_postal&quot;)[0].firstChild.nodeValue;<br>
+        document.getElementById(&quot;respuesta&quot;).innerHTML = mensaje + &quot;&lt;br/&gt;&quot; 
+        + &quot;Fecha<br>
+        nacimiento = &quot; + fecha_nacimiento + &quot;&lt;br/&gt;&quot; + &quot;Codigo 
+        postal = &quot; + codigo_postal +<br>
+        &quot;&lt;br/&gt;&quot; + &quot;Telefono = &quot; + telefono;<br>
+        }<br>
+        }<br>
+        }<br>
+        El primer cambio importante es el de obtener el contenido de la respuesta 
+        del servidor. Hasta ahora, siempre se utilizaba la propiedad responseText, 
+        que devuelve el texto simple que incluye la respuesta del servidor. Cuando 
+        se procesan respuestas en formato XML, se debe utilizar la propiedad responseXML.<br>
+        El valor devuelto por responseXML es un documento XML que contiene la 
+        respuesta del servidor.<br>
+        Como se trata de un documento XML, es posible utilizar con sus contenidos 
+        todas las funciones DOM que se vieron en el cap&iacute;tulo correspondiente 
+        a DOM.<br>
+        Aunque el manejo de repuestas XML es mucho m&aacute;s pesado y requiere 
+        el uso de numerosas funciones DOM, su utilizaci&oacute;n se hace imprescindible 
+        para procesar respuestas muy complejas o respuestas recibidas por otros 
+        sistemas que exportan sus respuestas internas a un formato est&aacute;ndar 
+        XML.<br>
+        El mecanismo para obtener los datos var&iacute;a mucho seg&uacute;n cada 
+        documento XML, pero en general, se trata de obtener el valor almacenado 
+        en algunos elementos XML que a su vez pueden ser descendientes de otros 
+        elementos. Para obtener el primer elemento que se corresponde con una 
+        etiqueta XML, se utiliza la siguiente instrucci&oacute;n:<br>
+        var elemento = root.getElementsByTagName(&quot;nombre_etiqueta&quot;)[0];<br>
+        En este caso, se busca la primera etiqueta &lt;nombre_etiqueta&gt; que 
+        se encuentra dentro del elemento root (en este caso se trata de la ra&iacute;z 
+        del documento XML). Para ello, se buscan todas las etiquetas &lt;nombre_etiqueta&gt; 
+        del documento y se obtiene la primera mediante [0], que corresponde al 
+        primer elemento del array de elementos.<br>
+        Una vez obtenido el elemento, para obtener su valor se debe acceder a 
+        su primer nodo hijo (que es el nodo de tipo texto que almacena el valor) 
+        y obtener la propiedad nodeValue, que es la propiedad que guarda el texto 
+        correspondiente al valor de la etiqueta:<br>
+        var valor = elemento.firstChild.nodeValue;<br>
+        Normalmente, las dos instrucciones anteriores se unen en una sola instrucci&oacute;n:<br>
+        var tfno = parametros.getElementsByTagName(&quot;telefono&quot;)[0].firstChild.nodeValue; 
+      </p></td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

@@ -1,0 +1,263 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Seguimiento de Sesi&oacute;n</title>
+<META http-equiv=Content-Language content=es>
+<META content="Manual Servlet, ejemplos Servlet, codigos Servlet" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Manual Servlet, ejemplos Servlet, codigos Servlet">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2> Seguimiento de Sesi&oacute;n</h2></td>
+  </tr>
+  <tr> 
+    <td colspan="3"> <p>El seguimiento de sesi&oacute;n es un mecanismo 
+        que los servlets utilizan para mantener el estado sobre la
+        serie de peticiones desde un mismo usuario (esto es, peticiones originadas 
+        desde el mismo navegador)
+        durante un periodo de tiempo.
+        Las sesiones son compartidas por los servlets a los que accede el cliente. 
+        Esto es conveniente para
+        aplicaciones compuestas por varios servlets. Por ejemplo, Duke's Bookstore 
+        utiliza seguimiento de
+        sesi&oacute;n para seguir la pista de los libros pedidos por el usuario. 
+        Todos los servlets del ejemplo tienen
+        acceso a la sesi&oacute;n del usuario.
+        Para utilizar el seguimiento de sesi&oacute;n debemos.
+        Obtener una sesi&oacute;n (un objeto HttpSession) para un usuario. 
+        Almacenar u obtener datos desde el objeto HttpSession. 
+        Invalidar la sesi&oacute;n (opcional). 
+        Obtener una Sesi&oacute;n<br>
+        El m&eacute;todo getSession del objeto HttpServletRequest devuelve una 
+        sesi&oacute;n de usuario. Cuando
+        llamamos al m&eacute;todo con su argumento create como true, la implementaci&oacute;n 
+        crear&aacute; una sesi&oacute;n si es
+        necesario.
+        Para mantener la sesi&oacute;n apropiadamente, debemos lamar a getSession 
+        antes de escribir cualquier
+        respuesta. (Si respondemos utilizando un Writer, entonces debemos llamar 
+        a getSession antes de
+        acceder al Writer, no s&oacute;lo antes de enviar cualquier respuesta).
+        El ejemplo Duke's Bookstore utiliza seguimiento de sesi&oacute;n para 
+        seguir la pista de los libros que hay en
+        la hoja de pedido del usuario. Aqu&iacute; tenemos un ejemplo de CatalogServlet 
+        obteniendo una sesi&oacute;n de
+        usuario.<br>
+        public class CatalogServlet extends HttpServlet {<br>
+        public void doGet (HttpServletRequest request,<br>
+        HttpServletResponse response)<br>
+        throws ServletException, IOException<br>
+        {<br>
+        // Get the user's session and shopping cart<br>
+        HttpSession session = request.getSession(true);<br>
+        ...<br>
+        out = response.getWriter();<br>
+        ...<br>
+        }<br>
+        } </p>
+      <p>Almacenar y Obtener Datos desde la Sesi&oacute;n<br>
+        El Interface HttpSession proporciona m&eacute;todos que almacenan y recuperan.
+        Propiedades de Sesi&oacute;n Est&aacute;ndard, como un identificador de 
+        sesi&oacute;n. 
+        Datos de la aplicaci&oacute;n, que son almacenados como parejas nombre-valor, 
+        donde el nombre es un string y
+        los valores son objetos del lenguaje de programaci&oacute;n Java. Como 
+        varios servlets pueden acceder a la sesi&oacute;n
+        de usuario, deberemos adoptar una convenci&oacute;n de nombrado para organizar 
+        los nombres con los datos de la
+        aplicaci&oacute;n. Esto evitar&aacute; que los servlets sobreescriban 
+        accidentalmente otros valores de la sesi&oacute;n. Una de
+        esas convenciones es servletname.name donde servletname es el nombre completo 
+        del servlet,
+        incluyendo sus paquetes. Por ejemplo, com.acme.WidgetServlet.state es 
+        un cookie con el servletname
+        com.acme.WidgetServlet y el name state.<br>
+         <br>
+        El ejemplo Duke's Bookstore utiliza seguimiento de sesi&oacute;n para 
+        seguir la pista de los libros de la hoja<br>
+        de pedido del usuario. Aqu&iacute; hay un ejemplo de CatalogServlet obteniendo 
+        un identificador de sesi&oacute;n de<br>
+        usuario, y obteniendo y seleccionando datos de la aplicaci&oacute;n asociada 
+        con la sesi&oacute;n de usuario.<br>
+        public class CatalogServlet extends HttpServlet {<br>
+        public void doGet (HttpServletRequest request,<br>
+        HttpServletResponse response)<br>
+        throws ServletException, IOException<br>
+        {<br>
+        // Get the user's session and shopping cart<br>
+        HttpSession session = request.getSession(true);<br>
+        ShoppingCart cart =<br>
+        (ShoppingCart)session.getValue(session.getId());<br>
+        // If the user has no cart, create a new one<br>
+        if (cart == null) {<br>
+        cart = new ShoppingCart();<br>
+        session.putValue(session.getId(), cart);<br>
+        }<br>
+        ...<br>
+        }<br>
+        }<br>
+        Como un objeto puede ser asociado con una sesi&oacute;n, el ejemplo Duke's 
+        Bookstore sigue la pista de los<br>
+        libros que el usuario ha pedido dentro de un objeto. El tipo del objeto 
+        es ShoppingCart y cada libro que<br>
+        el usuario a seleccionado es almacenado en la hoja de pedidos como un 
+        objeto ShoppingCartItem. Por<br>
+        ejemplo, el siguiente c&oacute;digo procede del m&eacute;todo doGet de 
+        CatalogServlet.<br>
+        public void doGet (HttpServletRequest request,<br>
+        HttpServletResponse response)<br>
+        throws ServletException, IOException<br>
+        {<br>
+        HttpSession session = request.getSession(true);<br>
+        ShoppingCart cart = (ShoppingCart)session.getValue(session.getId());<br>
+        ...<br>
+        // Check for pending adds to the shopping cart<br>
+        String bookId = request.getParameter(&quot;Buy&quot;);<br>
+        //If the user wants to add a book, add it and print the result<br>
+        String bookToAdd = request.getParameter(&quot;Buy&quot;);<br>
+        if (bookToAdd != null) {<br>
+        BookDetails book = database.getBookDetails(bookToAdd);<br>
+        cart.add(bookToAdd, book);<br>
+        out.println(&quot;&lt;p&gt;&lt;h3&gt;&quot; + ...);<br>
+        }<br>
+        }<br>
+        Finalmente, observa que una sesi&oacute;n puede ser designada como nueva. 
+        Una sesi&oacute;n nueva hace que el
+        m&eacute;todo isNew de la clase HttpSession devuelva true, indicando que, 
+        por ejemplo, el cliente, todav&iacute;a
+        no sabe nada de la sesi&oacute;n. Una nueva sesi&oacute;n no tiene datos 
+        asociados.
+        Podemos tratar con situaciones que involucran nuevas sesisones. En el 
+        ejemplo Duke's Bookstore, si el
+        usuario no tiene hoja de pedido (el &uacute;nico dato asociado con una 
+        sesi&oacute;n), el servlet crea una nueva.
+        Alternativamente, si necesitamos informaci&oacute;n sobre el usuario al 
+        iniciar una sesi&oacute;n (como el nombre de
+        usuario), podr&iacute;amos querer redireccionar al usuario a un &quot;p&aacute;gina 
+        de entrada&quot; donde recolectamos la
+        informaci&oacute;n necesaria.<br>
+        Invalidar la Sesi&oacute;n</p>
+      <p>Una sesi&oacute;n de usuario puede ser invalidada manual o autom&aacute;ticamente, 
+        dependiendo de donde se est&eacute;
+        ejecutando el servlet. (Por ejemplo, el Java Web Server, invalida una 
+        sesi&oacute;n cuando no hay peticiones de
+        p&aacute;gina por un periodo de tiempo, unos 30 minutos por defecto). 
+        Invalidar una sesi&oacute;n significa eliminar el
+        objeto HttpSession y todos sus valores del sistema.
+        Para invalidar manualmente una sesi&oacute;n, se utiliza el m&eacute;todo 
+        invalidate de &quot;session&quot;. Algunas<br>
+        aplicaciones tienen un punto natural en el que invalidar la sesi&oacute;n. 
+        El ejemplo Duke's Bookstore invalida<br>
+        una sesi&oacute;n de usuario despu&eacute;s de que el usuario haya comprado 
+        los libros. Esto sucede en el
+        ReceiptServlet.<br>
+        public class ReceiptServlet extends HttpServlet {<br>
+        public void doPost(HttpServletRequest request,<br>
+        HttpServletResponse response)<br>
+        throws ServletException, IOException {<br>
+        ...<br>
+        scart = (ShoppingCart)session.getValue(session.getId());<br>
+        ...<br>
+        // Clear out shopping cart by invalidating the session<br>
+        session.invalidate();<br>
+        // set content type header before accessing the Writer<br>
+        response.setContentType(&quot;text/html&quot;);<br>
+        out = response.getWriter();<br>
+        ...<br>
+        }<br>
+        }<br>
+        Manejar todos los Navegadores<br>
+        Por defecto, el seguimiento de sesi&oacute;n utiliza cookies para asociar 
+        un identificador de sesi&oacute;n con un
+        usuario. Para soportar tambi&eacute;n a los usuarios que acceden al servlet 
+        con un navegador que no soporta
+        cookies, o si este est&aacute; programado para no aceptarlas. debemos 
+        utilizar reescritura de URL en su lugar.
+        Cuando se utiliza la reescritura de URL se llama a los m&eacute;todos 
+        que, cuando es necesario, incluyen el ID
+        de sesi&oacute;n en un enlace. Debemos llamar a esos m&eacute;todos por 
+        cada enlace en la respuesta del servlet.
+        El m&eacute;todo que asocia un ID de sesi&oacute;n con una URL es HttpServletResponse.encodeUrl. 
+        Si
+        redirecionamos al usuario a otra p&aacute;gina, el m&eacute;todo para 
+        asociar el ID de sesi&oacute;n con la URL redirecionada
+        se llama HttpServletResponse.encodeRedirectUrl.
+        Los m&eacute;todos encodeUrl y encodeRedirectUrl deciden si las URL necesitan 
+        ser reescritas, y devolver la
+        URL cambiada o sin cambiar. (Las reglas para las URLs y las URLs redireccionadas 
+        son diferentes, pero
+        en general si el servidor detecta que el navegador soporta cookies, entonces 
+        la URL no se reescribir&aacute;).
+        El ejemplo Duke's Bookstore utiliza reescritura de URL para todos los 
+        enlaces que devuelve a sus
+        usuarios. Por ejemplo, el CatalogServlet devuelve un catalogo con dos 
+        enlaces para cada libro. Un
+        enlace ofrece detalles sobre el libro y el otro ofrece al usuario a&ntilde;adir 
+        el libro a su hoja de pedidos.<br>
+        Ambas URLs son reescritas.<br>
+        public class CatalogServlet extends HttpServlet {<br>
+        public void doGet (HttpServletRequest request,<br>
+        HttpServletResponse response)
+        throws ServletException, IOException<br>
+        {<br>
+        // Get the user's session and shopping cart, the Writer, etc.<br>
+        ...<br>
+        // then write the data of the response<br>
+        out.println(&quot;&lt;html&gt;&quot; + ...);<br>
+        ...<br>
+        // Get the catalog and send it, nicely formatted<br>
+        BookDetails[] books = database.getBooksSortedByTitle();<br>
+        ...<br>
+        for(int i=0; i &lt; numBooks; i++) {<br>
+        ...<br>
+        //Print out info on each book in its own two rows<br>
+        out.println(&quot;&lt;tr&gt;&quot; + ...<br>
+        &quot;&lt;a href=\&quot;&quot; +<br>
+        response.encodeUrl(&quot;/servlet/bookdetails?bookId=&quot; +<br>
+        bookId) +<br>
+        &quot;\&quot;&gt; &lt;strong&gt;&quot; + books[i].getTitle() +<br>
+        &quot; &lt;/strong&gt;&lt;/a&gt;&lt;/td&gt;&quot; + ...<br>
+        &quot;&lt;a href=\&quot;&quot; +<br>
+        response.encodeUrl(&quot;/servlet/catalog?Buy=&quot; + bookId)<br>
+        + &quot;\&quot;&gt; Add to Cart &lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&quot; 
+        +<br>
+        }<br>
+        }<br>
+        }<br>
+        Si el usuario pulsa sobre un enlace con una URL re-escrita, el servlet 
+        reconoce y extrae el ID de sesi&oacute;n.
+        Luego el m&eacute;todo getSessionutiliza el ID de sesi&oacute;n para obtener 
+        el objeto HttpSession del usuario.
+        Por otro lado, si el navegador del usuario no soporta cookies y el usuario 
+        pulsa sobre una URL no
+        re-escrita. Se pierde la sesi&oacute;n de usuario. El servlet contactado 
+        a trav&eacute;s de ese enlace crea una nueva
+        sesi&oacute;n, pero la nueva sesi&oacute;n no tiene datos asociados con 
+        la sesi&oacute;n anterior. Una vez que un servlet
+        pierde los datos de una sesi&oacute;n, los datos se pierden para todos 
+        los servlets que comparten la sesi&oacute;n.
+        Debemos utilizar la re-escritura de URLs consistentemente para que nuestro 
+        servlet soporte clientes que
+        no soportan o aceptan cookies.<br>
+      </p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

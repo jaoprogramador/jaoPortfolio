@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Session Bean</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación en Session Bean,Programas Session Bean,Aplicaciones en Session Bean,Ejercicios en Session Bean, Ejemplos de Session Bean,Tutorial de Session Bean,Manual Session Bean" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Session Bean, Manual Session Bean, tutorial Session Bean, Ejemplos Session Bean, ejercicios Session Bean">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> <strong>Session Bean</strong></h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <p>Se usan para gestionar un aspecto concreto 
+        de la aplicaci&oacute;n, por ejemplo el &#8220;carro de compra&#8221;. 
+        Dada esta aproximaci&oacute;n de &#8220;un s&oacute;lo uso&#8221; no sobreviven 
+        a un apagado del servidor. Existen dos tipos: beans con estado y sin estado.</p>
+      <p> Los primeros recuerdan los datos entre llamadas del cliente. como por 
+        ejemplo el nombrado &#8220;Carro de compra&#8221;. Los segundos no mantienen 
+        estado, simplemente realizan una tarea. </p>
+      <p>Esta diferencia influye en la forma de trabajo: los beans sin estado 
+        consumen menos recursos y responden mejor ante grandes cargas de trabajo. 
+        Tambi&eacute;n delimita como se puede acceder a los beans: los beans sin 
+        estado pueden exponerse como web-services mientras que los beans con estado 
+        se exponen como objetos para llamadas RMI. Ejemplo Stateless Session Beans:</p>
+      <p>@Remote<br>
+        public interface JAOHola {<br>
+        public void dimeAlgo();<br>
+        }<br>
+        @Stateless<br>
+        public class JAO implements JAOHola {<br>
+        public void dimeAlgo() {<br>
+        System.out.println(&quot;Hola JAO&quot;);<br>
+        }<br>
+        }</p>
+      <p>Ejemplo Stateful Session Beans:</p>
+      <p>@Stateful<br>
+        public class CestaBean implements CestaRemote {<br>
+        protected Vector&lt;Producto&gt; cesta= new Vector&lt;Producto&gt;();<br>
+        public void insertarProducto(Producto producto) throws CestaException 
+        {<br>
+        if (producto== null)<br>
+        throw new CestaException(&quot;Cesta ist null&quot;);<br>
+        producto setUnidadesPedidas(best.getUnidades());<br>
+        cesta.add(producto);<br>
+        }<br>
+        public Vector&lt;Producto&gt; getProductos() {<br>
+        return cesta;<br>
+        }<br>
+        }<br>
+      </p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

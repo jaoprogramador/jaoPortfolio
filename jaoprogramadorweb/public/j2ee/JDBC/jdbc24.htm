@@ -1,0 +1,157 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Pasar par&amp;aacute;metros IN</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación en JDBC,Programas JDBC,Aplicaciones en JDBC,Ejercicios en JDBC, Ejemplos de JDBC,Tutoriales de JDBC,Manuales JDBC" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="JDBC, Manual JDBC, tutorial JDBC, Ejemplos JDBC, ejercicios JDBC">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> Pasar par&aacute;metros IN</h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <p>Antes de que un objeto PreparedStatement 
+        sea ejecutado debe fijarse el valor de cada encaje &#8216;?&#8217;. Se 
+        hace esto mediante la llamada a un m&eacute;todo setXXX, donde XXX es 
+        el tipo apropiado para el par&aacute;metro. Por ejemplo, si el par&aacute;metro 
+        tiene un tipo Java long, el m&eacute;todo a usar ser&aacute; setLong. 
+        El primero de los argumentos del m&eacute;todo setXXX es la posici&oacute;n 
+        ordinal del par&aacute;metro a fijar, y el segundo argumento es el valor 
+        que queremos que adquiera el par&aacute;metro. Por ejemplo, lo siguiente 
+        fija el primer par&aacute;metro a 123456789 y el segundo a 10000000.</p>
+      <p>pstmt.setLong(1, 123456789);<br>
+        pstmt.setLong(2, 100000000);</p>
+      <p>Una vez que el valor ha sido fijado para una sentencia dada, puede usarse 
+        para m&uacute;ltiples ejecuciones de esa sentencia hasta que se limpie 
+        mediante el m&eacute;todo ClearParameters.</p>
+      <p>En el modo por defecto para una conexi&oacute;n (modo auto-commit activo), 
+        cada sentencia es conmitada o rechazada autom&aacute;ticamente cuando 
+        se completa.</p>
+      <p>El mismo objeto PreparedStatement puede ejecutarse m&uacute;ltiples veces 
+        si la base de datos subyacente y el driver guardan las sentencias abiertas 
+        despu&eacute;s que hayan sido &#8216;conmitadas&#8217;. A menos que se 
+        de este caso, no hay un punto en el que intentar mejorar el rendimiento 
+        mediante el uso de objetos PreparedStatement en lugar de objetos Statement.</p>
+      <p>Usando pstmt, el objeto PreparedStatement creado anteriormente, el siguiente 
+        ejemplo ilustra como fijar los par&aacute;metros de los dos &#8216;encajes&#8217; 
+        y ejecutar pstmt 10 veces. Como se ha mencionado anteriormente, la base 
+        de datos no debe cerrar pstmt. En este ejemplo, el primer par&aacute;metro 
+        se fija a &#8220;Hi&#8221; y permanece constante. El segundo par&aacute;metro 
+        se fija a un valor diferente en cada ejecuci&oacute;n mediante el bucle 
+        for comenzando en 0 y terminando en 9.</p>
+      <p>pstmt.setString(1, &quot;Hi&quot;); <br>
+        for (int i = 0; i &lt; 10; i++) {<br>
+        pstmt.setInt(2, i);<br>
+        int rowCount = pstmt.executeUpdate();<br>
+        }<br>
+        <br>
+        Conformidad de tipos de datos en par&aacute;metros IN</p>
+      <p>El XXX en los m&eacute;todos setXXX son tipos Java. Estos son los tipos 
+        impl&iacute;citos de JDBC (tipos gen&eacute;ricos SQL) porque el driver 
+        mapear&aacute; el tipo Java en su correspondiente tipo JDBC (ver la secci&oacute;n 
+        8 para m&aacute;s informaci&oacute;n sobre el mapeo de tipos), y env&iacute;an 
+        ese tipo JDBC a la base de datos. El siguiente ejemplo fija el segundo 
+        par&aacute;metro del objeto PreparedStatement pstmt a 44 con un tipo Java 
+        short.</p>
+      <p>pstmt.setShort(2, 44);</p>
+      <p>El driver enviar&aacute; 44 a la base de datos como un JDBC SMALLINT 
+        que es el mapeo est&aacute;ndar para un short Java.</p>
+      <p>Es responsabilidad del programador asegurarse que el tipo Java en cada 
+        par&aacute;metro IN mapeado a un tipo de JDBC es compatible con el tipo 
+        de dato JDBC esperado por la base de datos. Consideremos el caso en el 
+        que la base de datos espera un tipo de datos SMALLINT. SI se usa el m&eacute;todo 
+        setByte , el driver enviar&aacute; un JDBC TINYINT a la base de datos. 
+        Esto probablemente funcionar&aacute; porque muchas bases de datos convierten 
+        un tipo relacionado en otro, y, generalmente, un tipo TINYINT puede ser 
+        usado donde un SMALLINT. De cualquier modo, una aplicaci&oacute;n que 
+        trabaje para la mayor&iacute;a de bases de datos posibles, es preferible 
+        que use tipos Java que se correspondan con el tipo exacto JDBC esperado 
+        por la base de datos. Si el tipo esperado es SMALLINT, usar setShort en 
+        vez de setByte y esto har&aacute; la aplicaci&oacute;n m&aacute;s portable.</p>
+      <p> Usar setObject</p>
+      <p>Un programador puede convertir explicitamente un par&aacute;metro de 
+        entrada en un tipo particular JDBC mediante el uso de setObject. Este 
+        m&eacute;todo puede tomar un tercer argumento que especifica el tipo JDBC 
+        objetivo. EL driver convertir&aacute; el Object Java al tipo especificado 
+        JDBC anten de enviarlo a la base de datos.</p>
+      <p>Si no se da el tipo JDBC, el driver simplemente mapear&aacute; el Object 
+        Java a su tipo JDBC por defecto (usando la tabla de la secci&oacute;n 
+        8) y lo enviar&aacute; a la base de datos. Esto es similar a lo que ocurre 
+        con los m&eacute;todos setXXX regulares. En ambos casos, el driver mapea 
+        el tipo Java del valor al tipo JDBC apropiado antes de enviarlo a la base 
+        de datos. La diferencia est&aacute; en que los m&eacute;todos setXXX usan 
+        el mapeo est&aacute;ndar de los tipos Java a tipos JDBC, mientras que 
+        el m&eacute;todo usa el mapeo desde typos Object de Java a tipos JDBC 
+        (ver la tabla en la secci&oacute;n 8.6.4).<br>
+      </p>
+      <p>La capacidad de el m&eacute;todo setObject para aceptar cualquier objeto 
+        Java permite a una aplicaci&oacute;n ser gen&eacute;rica y aceptar entradas 
+        para un par&aacute;metro en tiempo de ejecuci&oacute;n. En esta situaci&oacute;n 
+        el tipo de entrada no es conocido cuando la aplicaci&oacute;n es compilada. 
+        Mediante el uso de setObject, la aplicaci&oacute;n puede aceptar cualquier 
+        tipo de objeto Java como entrada al tipo JDBC esperado por la base de 
+        datos. La tabla de la secci&oacute;n 8.6.5 muestra todas las posibles 
+        conversiones qiue setObject puede realizar.</p>
+      <p> Env&iacute;o de JDBC NULL como un par&aacute;metro IN</p>
+      <p>El m&eacute;todo setNull permite a los programadores enviar valores JDBC 
+        NULL a la base de datos como un par&aacute;metro IN. Notese de cualquier 
+        modo, que debe especificarse el tipo del par&aacute;metro.</p>
+      <p>Tambi&eacute;n se enviar&aacute; un JDBC NULL a la base de datos cuando 
+        un valor Java null se pasa mediante un m&eacute;todo setXXX (si los acepta 
+        los objetos Java como argumentos). El m&eacute;todo setObject, en cualquier 
+        caso, puede tomar un valor null &uacute;nicamente si se ha especificado 
+        el tipo JDBC.</p>
+      <p> Envio de par&aacute;metros IN muy grandes.</p>
+      <p>Los m&eacute;todos setBytes y setString son capaces de enviar cantidades 
+        ilimitadas de datos. De cualquier forma, a veces los programadores prefiern 
+        pasar los grandes blobs de datos en peque&ntilde;os &#8216;pedazos&#8217;. 
+        Esto puede realizarse fijando un par&aacute;metro IN a una corriente Java. 
+        Cuando se ejecuta la sentencia, el driver JDBC realizar&aacute; repetidas 
+        llamadas a esta corriente de entrada, leyendo sus contenidos y transmitiendo 
+        estos contenidos con los datos actuales de los par&aacute;metros.</p>
+      <p>JDBC suministra tres m&eacute;todos para fijar par&aacute;metros IN a 
+        corrientes de entrada. setBinaryStream para corrientes que contienen bytes, 
+        setAsciiStream para corrientes que contienen caracteres ASCII y setUnicodeStream 
+        para corrientes que contienen caracteres Unicode. Estos m&eacute;todos 
+        toman un argumento mas que los otros m&eacute;todos setXXX porque debe 
+        especificarse la longitud de la corriente. Esto es necesario porque algunas 
+        bases de datos necesitan conocer el tama&ntilde;o total de los datos a 
+        transferir antes de enviarlos.</p>
+      <p>El siguiente ejemplo ilustra el uso de una corriente para enviar el contenido 
+        de un fichero en un par&aacute;metro IN<br>
+      </p>
+      <p> java.io.File file = new java.io.File(&quot;/tmp/data&quot;);<br>
+        int fileLength = file.length();<br>
+        java.io.InputStream fin = new java.io.FileInputStream(file);<br>
+        java.sql.PreparedStatement pstmt = con.prepareStatement(<br>
+        &quot;UPDATE Table5 SET stuff = ? WHERE index = 4&quot;);<br>
+        pstmt.setBinaryStream (1, fin, fileLength);<br>
+        pstmt.executeUpdate();</p>
+      <p>Cuando la sentencia se ejecuta, la corriente de entrada fin ser&aacute; 
+        llamada repetidamente hasta completar los datos.<br>
+      </p>
+      <p>&nbsp; </p>
+      <p>&nbsp; </p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

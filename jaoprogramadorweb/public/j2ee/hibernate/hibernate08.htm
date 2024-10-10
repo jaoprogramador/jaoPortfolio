@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Patr&oacute;n de aplicaci&oacute;n</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación en hibernate,Programas hibernate,Aplicaciones en hibernate,Ejercicios en hibernate, Ejemplos de hibernate,Tutoriales de hibernate,Manuales hibernate" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="hibernate, Manual hibernate, tutorial hibernate, Ejemplos hibernate, ejercicios hibernate">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2>Patr&oacute;n de aplicaci&oacute;n</h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <p>A continuaci&oacute;n, expondr&eacute; un 
+        esquema (discutible, sin duda) que es el que acostumbro a usar en las 
+        aplicaciones Hibernate.<br>
+        Primero, defino las 3 propiedades b&aacute;sicas y las asigno a null:<br>
+        Configuration configuration = null;<br>
+        SessionFactory sessionFactory = null;<br>
+        Session session = null;<br>
+        Despu&eacute;s, defino los m&eacute;todos de acceso a estas propiedades 
+        siguiendo siempre el mismo patr&oacute;n: si la propiedad es nula, la 
+        creo y la devuelvo. Si no es nula, simplemente la devuelvo:<br>
+        /**<br>
+        * [1] Construye y/o devuelve una Configuration.<br>
+        */<br>
+        public Configuration getConfiguration() {<br>
+        if (configuration == null) {<br>
+        // [1.1] Aqu&iacute; lee el archivo de propiedades de Hibernate<br>
+        configuration = new Configuration();<br>
+        // [1.2] Aqu&iacute; lee el archivo de emparejamientos Categoria.hbm.xml<br>
+        try {<br>
+        configuration.addClass(escuela.beans.Categoria.class);<br>
+        } catch (MappingException e) {<br>
+        // Actuamos en consecuencia<br>
+        }<br>
+        }<br>
+        return configuration;<br>
+        }<br>
+        /**<br>
+        * [2] Construye y/o devuelve una SessionFactory.<br>
+        */public SessionFactory getSessionFactory() {<br>
+        if (sessionFactory == null) {<br>
+        try {<br>
+        sessionFactory = getConfiguration().buildSessionFactory();<br>
+        } catch (HibernateException e) {<br>
+        // Actuamos en consecuencia<br>
+        }<br>
+        }<br>
+        return sessionFactory;<br>
+        }<br>
+        /**<br>
+        * [3] Construye y/o devuelve una Session.<br>
+        */<br>
+        public Session getSession() {<br>
+        // [3.1] La crea si es nula o est&aacute; cerrada<br>
+        if (session == null || !session.isOpen()) {<br>
+        try {<br>
+        session = getSessionFactory().openSession();<br>
+        } catch (HibernateException e) {<br>
+        // Actuamos en consecuencia<br>
+        }<br>
+        }<br>
+        return session;<br>
+        }<br>
+        [1] Lo primero que hacemos es crear una instancia de Configuration. Esta 
+        clase, como hemos visto, es la encargada de procesar el archivo de propiedades, 
+        hibernate.properties y el de emparejamiento, nombreDeClasse.hbm.xml.<br>
+        [1.1] En el momento de crearla, Hibernate va a buscar el archivo hibernate.properties 
+        al<br>
+        directorio padre del package en el que se encuentra nuestra clase. As&iacute;, 
+        si nuestra clase se encuentra en el package escuela.abm, y la estructura 
+        de directorios es:<br>
+        C:\INTRODUCCION_HIBERNATE\EJEMPLO\escuela\abm\CategoriaABM.java<br>
+        El archivo hibernate.properties tiene que estar en C:\INTRODUCCION_HIBERNATE\EJEMPLO<br>
+        [1.2] Una vez creada la instancia de Configuration, le pasamos la informaci&oacute;n 
+        sobre el emparejamiento:<br>
+        configuration.addClass(escuela.beans.Categoria.class);<br>
+        Esto hace que Hibernate vaya a buscar el archivo de emparejamiento en 
+        el mismo directorio en el que se encuentra la clase:<br>
+        C:\INTRODUCCION_HIBERNATE\EJEMPLO\escuela\beans\Categoria.hbm.xml<br>
+        [2] En estos momentos, Hibernate ya sabe c&oacute;mo conectarse a la base 
+        de datos que nos interesa y c&oacute;mo se emparejan propiedades y columnas. 
+        Pero, como hemos visto m&aacute;s arriba, para comunicarnos con Hibernate 
+        desde nuestra aplicaci&oacute;n, necesitamos una Session, y para crearla, 
+        necesitamos una f&aacute;brica de Sessions. Una SessionFactory:<br>
+        sessionFactory = getConfiguration().buildSessionFactory();<br>
+        [3] Una vez tenemos la f&aacute;brica, ya podemos crear Sessions:<br>
+        session = getSessionFactory().openSession();</p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

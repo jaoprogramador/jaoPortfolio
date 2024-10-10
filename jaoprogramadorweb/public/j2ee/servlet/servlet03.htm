@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Un Servlet Sencillo</title>
+<META http-equiv=Content-Language content=es>
+<META http-equiv=Content-Language content=es>
+<META content="Manual Servlet, ejemplos Servlet, codigos Servlet" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Manual Servlet, ejemplos Servlet, codigos Servlet">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2> Un Servlet Sencillo</h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <p>La siguiente clase define completamente un 
+        servlet:</p>
+      <p><br>
+        public class SimpleServlet extends HttpServlet<br>
+        {<br>
+        /**<br>
+        * Maneja el m&eacute;todo GET de HTPP para construir una sencilla p&aacute;gina 
+        Web.<br>
+        */<br>
+        public void doGet (HttpServletRequest request,<br>
+        HttpServletResponse response)<br>
+        throws ServletException, IOException<br>
+        {<br>
+        PrintWriter out;<br>
+        String title = &quot;Simple Servlet Output&quot;;<br>
+        // primero selecciona el tipo de contenidos y otros campos de cabecera 
+        de<br>
+        la respuesta<br>
+        response.setContentType(&quot;text/html&quot;);<br>
+        // Luego escribe los datos de la respuesta<br>
+        out = response.getWriter();<br>
+        out.println(&quot;&lt;HTML&gt;&lt;HEAD&gt;&lt;TITLE&gt;&quot;);<br>
+        out.println(title);<br>
+        out.println(&quot;&lt;/TITLE&gt;&lt;/HEAD&gt;&lt;BODY&gt;&quot;);<br>
+        out.println(&quot;&lt;H1&gt;&quot; + title + &quot;&lt;/H1&gt;&quot;);<br>
+        out.println(&quot;&lt;P&gt;Esta es la salida de SimpleServlet.&quot;);<br>
+        out.println(&quot;&lt;/BODY&gt;&lt;/HTML&gt;&quot;);<br>
+        out.close();<br>
+        }<br>
+        }<br>
+        <p>Esto es todo!<br>
+        Las clases mencionadas en la p&aacute;gina Arquitectura del Paquete Servlet 
+        se han mostrado en negrita.
+        SimpleServlet extiende la clase HttpServlet, que implementa el interface 
+        Servlet. 
+        SimpleServlet sobreescribe el m&eacute;todo doGet de la clase HttpServlet. 
+        Este m&eacute;todo es llamado cuando un cliente hace
+        un petici&oacute;n GET (el m&eacute;todo de petici&oacute;n por defecto 
+        de HTTP), y resulta en una sencilla p&aacute;gina HTML devuelta al
+        cliente.</p>
+		<p>
+        Dentro del m&eacute;todo doGet<br>
+        La petici&oacute;n del usuario est&aacute; representada por un objeto 
+        HttpServletRequest. 
+        La respuesta al usuario esta representada por un objeto HttpServletResponse. 
+        
+        Como el texto es devuelto al cliente, el respuesta se env&iacute;a utilizando 
+        el objeto Writer obtenido desde el objeto
+        HttpServletResponse.
+
+      </p>
+      <p>&nbsp; </p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

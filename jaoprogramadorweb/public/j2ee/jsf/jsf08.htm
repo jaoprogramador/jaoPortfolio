@@ -1,0 +1,180 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Creaci&oacute;n una aplicaci&oacute;n JSF en JDeveloper</title>
+<META http-equiv=Content-Language content=es>
+<META content="Manual JSP, ejemplos JSP, codigos JSP" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Manual JSP, ejemplos JSP, codigos JSP">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2> Creación una aplicación JSF en JDeveloper</h2></td>
+  </tr>
+    
+  <tr> 
+    <td height="39" colspan="3">
+<p>&nbsp;</p>
+      <p>En este apartado vamos a crear una aplicaci&oacute;n en JDeveloper donde 
+        trabajaremos para realizar el desarrollo de la agenda.<br>
+        1. Seleccionamos en el men&uacute; File, New y en la ventana emergente 
+        General, Application.</p>
+      <p>2. Indicamos el nombre de la aplicaci&oacute;n &#8220;Agenda&#8221;, 
+        el prefijo del paquete de la aplicaci&oacute;n &#8220;agenda&#8221; y 
+        seleccionamos como plantilla de aplicaci&oacute;n Web Application [JSF, 
+        EJB].</p>
+      <p>3. Para finalizar, pulsamos Aceptar y tendremos creada la aplicaci&oacute;n 
+        con dos proyectos, uno para la parte del modelo de la aplicaci&oacute;n 
+        Model y otro para la parte del controlador y la vista ViewController.</p>
+      <h3> Propiedades de los proyectos</h3>
+        En las propiedades de los proyectos se define informaci&oacute;n relativa 
+      al mismo, como las carpetas en las que se almacenan los fuentes y las clases, 
+      las librer&iacute;as que incluye, etc. Para acceder a las propiedades de 
+      los proyectos de la aplicaci&oacute;n de Agenda:<br>
+      1. Marcamos con el rat&oacute;n por ejemplo el proyecto de Model, pulsamos 
+      el bot&oacute;n derecho del rat&oacute;n y seleccionamos Proyect Properties.</p> 
+      <p>2. En la pesta&ntilde;a Proyect Content se definen: las capetas que contienen 
+        las fuentes Java, el directorio con las clases, la lista de subcarpetas 
+        incluidas o excluidas y el paquete por defecto. Para nuestra aplicaci&oacute;n 
+        Agenda.</p>
+      <p>3. La pesta&ntilde;a Compiler contiene las propiedades del compilador.</p>
+      <p>4. Si pulsamos sobre la pesta&ntilde;a J2EE Application podemos modificar 
+        el nombre por defecto de la aplicaci&oacute;n web y el contexto con el 
+        que se desplegar&aacute;.</p>
+      <p>5. La pesta&ntilde;a JSP Tag Libraries muestra las librer&iacute;as de 
+        etiquetas que tenemos dadas de alta en el proyecto. El proyecto Model 
+        no debe tener incluidas librer&iacute;as de etiquetas debido a que, es 
+        un proyecto para la capa de Modelo siguiendo el paradigma de desarrollo 
+        J2EE. Para ver las librer&iacute;as de etiquetas podemos acceder a las 
+        propiedades del proyecto ViewController. </p>
+      <p>6. Como podemos observar, por defecto el proyecto de ViewController tiene 
+        dadas de alta las librer&iacute;as de JSF de la implementaci&oacute;n 
+        de SUN. Para a&ntilde;adir las librer&iacute;as de JSF de la implementaci&oacute;n 
+        de Oracle pulsamos el bot&oacute;n Add y seleccionamos ADF Faces Components 
+        y ADF Faces HTML.</p>
+      <p>7. Para ver las librer&iacute;as que tenemos incluidas en el proyecto 
+        pulsamos sobre la opci&oacute;n Libraries.</p>
+      <h3> Preparaci&oacute;n del Modelo</h3>
+        En este apartado vamos a preparar la capa de modelo. Como hemos mencionado 
+      antes, la tecnolog&iacute;a que se usar&aacute; ser&aacute; CMP Entity Beans 
+      y EJB.<br>
+      La mayor&iacute;a de las aplicaciones J2EE requieren servicios transaccionales, 
+      los EJB Session Bean ofrecen este servicio de l&oacute;gica de negocio transaccional. 
+      Los EJB Session Bean trabajan con objetos del dominio del negocio. Estos 
+      objetos de dominio se representas en el sistema por los CMP (Container-Managed 
+      Persistence) Entity Beans.<br>
+        <h3> Creaci&oacute;n de los Objetos de Dominio</h3>
+        
+      <p>Vamos a crear los objetos de dominio a partir de las tablas de datos 
+        de la Base de Datos Test:<br>
+        1. Seleccionamos el proyecto Model, pulsamos el bot&oacute;n derecho del 
+        rat&oacute;n y New.</p> </p>
+      <p>2. En el men&uacute;, elegimos Business Tier, EJB, CMP Entity Beans from 
+        Tables y pulsamos Aceptar.</p>
+      <p>3. Despu&eacute;s de la ventana de bienvenida, seleccionamos la versi&oacute;n 
+        de los Enterprise JavaBeans 3.0 (J2EE 5.0).</p>
+      <p>4. A continuaci&oacute;n, seleccionamos el nombre de la conexi&oacute;n 
+        de la Base de Datos Test.</p>
+      <p>5. Pulsamos Siguiente, marcamos Auto-Query y como tipos de objetos Tables.<br>
+        Pasamos al &aacute;rea de Selected las tres tablas que conforman el esquema 
+        de la Agenda (Contacto, Domicilio y TipoContacto).</p>
+      <p>6. Pulsamos Siguiente, indicamos el nombre del paquete donde se crear&aacute;n 
+        los Entity Beans. Seleccionamos como tipo de acceso PROPERTY, marcamos 
+        implementaci&oacute;n de la interfaz java.io.Serializable. Usaremos la 
+        clase java.util.List como tipo de colecci&oacute;n.</p>
+      <p>7. La siguiente pantalla nos muestra el nombre de los beans para cada 
+        una de las tablas del esquema. En esta pantalla podemos cambiar los nombres 
+        de los Entity Beans que se van a generar.</p>
+      <p>8. La pantalla final muestra un resumen. Pulsamos Terminar para generar 
+        las clases Java de las entidades.</p>
+      <p>Como resultado de este proceso hemos creado las clases Java de los Entity 
+        Beans. Pulsamos<br>
+        en el men&uacute; File, Save All para guardar todo el trabajo.<br>
+        Si desplegamos el proyecto de model, abrimos la carpeta de Application 
+        Sources y expandimos el paquete agenda.model podemos ver los nuevos Entity 
+        Beans.</p>
+      <p>Si seleccionamos y hacemos doble click con el rat&oacute;n sobre la clase 
+        Contacto podemos ver que tenemos un atributo por cada campo de la tabla 
+        contacto. 
+      <h3> Creaci&oacute;n del EJB de Sesi&oacute;n</h3>
+        
+      <p>A continuaci&oacute;n, vamos a crear el EJB de Sesi&oacute;n para encapsular 
+        la l&oacute;gica de negocio de la aplicaci&oacute;n. La capa de Modelo, 
+        como mencion&aacute;bamos, est&aacute; compuesta por CMP Entity Beans 
+        como tecnolog&iacute;a de persistencia y EJB para la implementar la l&oacute;gica 
+        de negocio.<br>
+        1. Marcamos con el rat&oacute;n el proyecto Model y pulsamos bot&oacute;n 
+        derecho New como hicimos anteriormente.</p>
+      </p>
+      <p>2. En el men&uacute; en forma de &aacute;rbol seleccionamos Business 
+        Tier, EJB, Session Bean.</p>
+      <p>3. En el primer paso, indicamos el nombre del EJB de sesi&oacute;n &#8220;AgendaSessionEJB&#8221;, 
+        tipo de sesi&oacute;n Stateless y tipo de transacci&oacute;n Container. 
+        Marcamos Generate Session Facade Methods e implementaci&oacute;n de las 
+        entidades EJB 3.0 Entities.</p>
+      <p>4. El siguiente paso muestra los m&eacute;todos que se generan autom&aacute;ticamente 
+        para las entidades que tenemos en el proyecto de model (Contacto, Domicilio 
+        y Tipocontacto) adem&aacute;s de los m&eacute;todos de fachada. Marcamos 
+        todos para crearlos en el Data Control.<br>
+        5. En el siguiente paso indicamos el nombre de la clase del EJB de sesi&oacute;n 
+        agenda.model.AgendaSessionEJBBean y la carpeta del proyecto donde se crear&aacute;.</p>
+      <p>6. Por &uacute;ltimo, indicamos el nombre de las interfaces Local que 
+        implementar&aacute; el EJB. Para desarrollar con JSF s&oacute;lo necesitaremos 
+        implementar la interfaz Local.<br>
+        7. Para concluir el proceso, pulsamos Finalizar y en el men&uacute; File, 
+        Save para guardar los cambios. En el paquete agenda.model tenemos la clase 
+        Java con el EJB de sesi&oacute;n.</p>
+      <h3>
+        Creaci&oacute;n del Data Control</h3>
+        
+      <p>En este apartado vamos a crear el Data Control a partir del EJB de Sesi&oacute;n 
+        que encapsula la l&oacute;gica de negocio de la aplicaci&oacute;n. El 
+        Data Control es una interfaz para blindar el modelo con la capa cliente 
+        de la aplicaci&oacute;n J2EE en este caso las p&aacute;ginas Web JSF. 
+        Para crear el Data Control:<br>
+        - Marcamos con el rat&oacute;n el EJB AgendaSessionEJBBean, pulsamos el 
+        bot&oacute;n derecho y Create Data Control.<br>
+        Como resultado de esta operaci&oacute;n tendremos:<br>
+        &#8226; Un fichero Xml para cada CMP Entity Bean donde se describen los 
+        atributos, los par&aacute;metros y los m&eacute;todos de acceso.<br>
+        &#8226; Un fichero UpdateableSingleValue.xml donde se describen las operaciones 
+        de control sobre objetos con valores simples.<br>
+        &#8226; Un fichero UpdateableCollection.xml donde se especifican las operaciones 
+        de control sobre los objetos con valores m&uacute;ltiples.<br>
+        &#8226; El fichero DataControls.dcx que define la interfaz del Data Control. </p>
+      </p>
+      <p>-Es necesario incluir en Jdeveloper la librer&iacute;a del driver de 
+        conexi&oacute;n a la base de datos MySql (&#8220;mysql-connector-java-3.1.7-bin.jar&#8221;).<br>
+        - Tendremos que dar de alta la conexi&oacute;n con la Base de Datos Test 
+        en la paleta de conexiones.<br>
+        - Adem&aacute;s, deberemos crear el DataSource jdbc/TestDS.<br>
+        - El tipo de aplicaci&oacute;n que crearemos ser&aacute; Web Application 
+        [JSF, EJB].<br>
+        - Para la Capa de Modelo, los objetos de dominio del sistema de la agenda 
+        se representar&aacute;n por medio de CMP (Container-Managed Persistence)<br>
+        Entity Beans.<br>
+        - Usamos un EJB de sesi&oacute;n 3.0 para implementar la l&oacute;gica 
+        de negocio.<br>
+        - El Data Control es una interfaz que se genera a partir del EJB de sesi&oacute;n 
+        y que sirve para relacionar el modelo con los componentes UI. Esta interfaz 
+        hace posible el pintado mediante &#8220;drag-and-drop&#8221; lo que hace 
+        muy productivo el entorno de desarrollo.</p></td>
+
+  </tr>
+  <tr> 
+    <td width="341"></td>
+    <td width="74">&nbsp;</td>
+    <td width="124"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+</body>
+</html>

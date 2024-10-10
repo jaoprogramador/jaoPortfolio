@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>C&oacute;mo hacer una p&aacute;gina AJAX</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta name="keywords" content="Primera página AJAX, Como hacer una pagina AJAX, Manual AJAX, tutorial AJAX, Ejemplos AJAX, ejercicios AJAX">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<table width="555" height="1329" align="left" background="../../imagenes/fondologo.jpg">
+  <tr> 
+    <td height="39" colspan="3"> <h2>La librería scriptaculous</h2></td>
+  </tr>
+  <tr> 
+    <td height="1256" colspan="3"> 
+      <p>Script.aculo.us (http://script.aculo.us/) 
+        es una de las muchas librer&iacute;as que han surgido para facilitar el 
+        desarrollo de aplicaciones JavaScript y que est&aacute;n basadas en Prototype. 
+        El autor original de la librer&iacute;a es Thomas Fuchs, aunque actualmente 
+        recibe contribuciones de numerosos programadores, ya que la librer&iacute;a 
+        se distribuye de forma completamente gratuita y dispone de una buena documentaci&oacute;n: 
+        http://wiki.script.aculo.us/scriptaculous/<br>
+        La librer&iacute;a est&aacute; dividida en varios m&oacute;dulos:<br>
+        Efectos: permite a&ntilde;adir de forma muy sencilla efectos especiales 
+        a cualquier elemento de la p&aacute;gina. La librer&iacute;a incluye una 
+        serie de efectos b&aacute;sicos y otros efectos complejos construidos 
+        con la combinaci&oacute;n de esos efectos b&aacute;sicos. Entre los efectos 
+        predise&ntilde;ados se encuentran el parpadeo, movimiento r&aacute;pido, 
+        aparecer/desaparecer, aumentar/disminuir de tama&ntilde;o, desplegarse, 
+        etc.<br>
+        Controles: define varios controles que se pueden a&ntilde;adir directamente 
+        a cualquier<br>
+        aplicaci&oacute;n web. Los tres controles que forman este m&oacute;dulo 
+        son: &quot;arrastrar y soltar&quot;, que permite definir los elementos 
+        que se pueden arrastrar y las zonas en las que se pueden soltar elementos; 
+        &quot;autocompletar&quot;, que permite definir un cuadro de texto en el 
+        que los valores que se escriben se autocompletan con ayuda del servidor; 
+        editor de contenidos, que permite modificar los contenidos de cualquier 
+        p&aacute;gina web a&ntilde;adiendo un sencillo editor AJAX en cada elemento.<br>
+        Utilidades: la utilidad principal que incluye se llama builder, que se 
+        utiliza para crear f&aacute;cilmente nodos y fragmentos complejos de DOM.<br>
+        La documentaci&oacute;n de script.aculo.us es muy completa e incluye muchos 
+        ejemplos, por lo que a continuaci&oacute;n s&oacute;lo se muestra el uso 
+        de uno de sus componentes m&aacute;s populares. En uno de los ejercicios 
+        anteriores, se realizaba un ejemplo de autocompletar el texto introducido 
+        por el usuario. El c&oacute;digo completo del ejercicio ocupa m&aacute;s 
+        de 140 l&iacute;neas. El siguiente c&oacute;digo hace uso de script.aculo.us 
+        para conseguir el mismo resultado con un 90% menos de l&iacute;neas de 
+        c&oacute;digo:<br>
+        window.onload = function() {<br>
+        // Crear elemento de tipo &lt;div&gt; para mostrar las sugerencias del 
+        servidor<br>
+        var elDiv = Builder.node('div', {id:'sugerencias'});<br>
+        document.body.appendChild(elDiv);<br>
+        new Ajax.Autocompleter('municipio', 'sugerencias',<br>
+        'http://localhost/autocompletaMunicipios.php?modo=ul',<br>
+        {paramName: 'municipio'}<br>
+        );<br>
+        }<br>
+        La sintaxis del control Ajax.Autocompleter() es la siguiente:<br>
+        new Ajax.Autocompleter(idCuadroTexto, idDivResultados, url, opciones);<br>
+        El primer par&aacute;metro (idCuadroTexto) es el identificador del cuadro 
+        de texto en el que el usuario escribe las letras que se van a autocompletar. 
+        El segundo par&aacute;metro (idDivResultados) indica elidentificador del 
+        elemento &lt;div&gt; en el que se va a mostrar la respuesta del servidor. 
+        En el ejemplo anterior, este &lt;div&gt; se crea din&aacute;micamente 
+        cuando se carga la p&aacute;gina. El tercer par&aacute;metro (url) indica 
+        la URL del script de servidor que recibe las letras escritas por el usuario<br>
+        y devuelve la lista de sugerencias que se muestran. El &uacute;ltimo par&aacute;metro 
+        (opciones) permite modificar algunas de las opciones por defecto de este 
+        control.<br>
+        A continuaci&oacute;n se muestran las opciones m&aacute;s importantes 
+        disponibles para el control de autocompletar:<br>
+        Opci&oacute;n Descripci&oacute;n<br>
+        paramName<br>
+        El nombre del par&aacute;metro que se env&iacute;a al servidor con el 
+        texto escrito por el<br>
+        usuario. Por defecto es igual que el atributo name del cuadro de texto 
+        utilizado<br>
+        para autocompletar tokens<br>
+        Permite autocompletar m&aacute;s de un valor en un mismo cuadro de texto. 
+        M&aacute;s<br>
+        adelante se explica con un ejemplo.<br>
+        minChars<br>
+        N&uacute;mero m&iacute;nimo de caracteres que el usuario debe escribir 
+        antes de que se realice<br>
+        la petici&oacute;n al servidor. Por defecto es igual a 1 car&aacute;cter.<br>
+        indicator<br>
+        Elemento que se muestra mientras se realiza la petici&oacute;n al servidor 
+        y que se vuelve<br>
+        a ocultar al recibir la respuesta del servidor. Normalmente es una imagen 
+        animada<br>
+        que se utiliza para indicar al usuario que en ese momento se est&aacute; 
+        realizando una<br>
+        petici&oacute;n al servidor<br>
+        updateElement<br>
+        Funci&oacute;n que se ejecuta despu&eacute;s de que el usuario seleccione 
+        un elemento de la<br>
+        lista de sugerencias. Por defecto el comportamiento consiste en seleccionar 
+        el<br>
+        elemento, mostrarlo en el cuadro de texto y ocultar la lista de sugerencias. 
+        Si se<br>
+        indica una funci&oacute;n propia, no se ejecuta este comportamiento por 
+        defecto.<br>
+        afterUpdateElement<br>
+        Similar a la opci&oacute;n updateElement. En este caso, la funci&oacute;n 
+        indicada se ejecuta<br>
+        despu&eacute;s de la funci&oacute;n por defecto y no en sustituci&oacute;n 
+        de esa funci&oacute;n por defecto.<br>
+        La opci&oacute;n tokens permite indicar los caracteres que separan los 
+        diferentes elementos de un cuadro de texto. En el siguiente ejemplo:<br>
+        new Ajax.Autocompleter('municipio', 'sugerencias',<br>
+        'http://localhost/autocompletaMunicipios.php?modo=ul',<br>
+        { paramName: 'municipio', tokens: ',' }<br>
+        );<br>
+        La opci&oacute;n tokens indica que el car&aacute;cter &quot;,&quot; separa 
+        los diferentes elementos dentro de un mismo<br>
+        cuadro de texto. De esta forma, si despu&eacute;s de autocompletar una 
+        palabra se escribe un car&aacute;cter<br>
+        &quot;,&quot; el script autocompletar&aacute; la siguiente palabra.</p></td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

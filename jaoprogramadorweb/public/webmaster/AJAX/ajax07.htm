@@ -1,0 +1,224 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>C&oacute;mo hacer una p&aacute;gina AJAX</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta name="keywords" content="Primera página AJAX, Como hacer una pagina AJAX, Manual AJAX, tutorial AJAX, Ejemplos AJAX, ejercicios AJAX">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<table width="555" height="2641" align="left" background="../../imagenes/fondologo.jpg">
+  <tr> 
+    <td height="39" colspan="3"> <h2>Interacción con el servidor</h2></td>
+  </tr>
+  <tr> 
+    <td height="2571" colspan="3"> 
+      <h3>Envío de parámetros con la petición HTTP</h3>
+      <p>&nbsp;</p>
+      
+      <p>Hasta ahora, el objeto XMLHttpRequest se ha empleado para realizar peticiones 
+        HTTP sencillas.<br>
+        Sin embargo, las posibilidades que ofrece el objeto XMLHttpRequest son 
+        muy superiores, ya que tambi&eacute;n permite el env&iacute;o de par&aacute;metros 
+        junto con la petici&oacute;n HTTP.<br>
+        El objeto XMLHttpRequest puede enviar par&aacute;metros tanto con el m&eacute;todo 
+        GET como con el<br>
+        m&eacute;todo POST de HTTP. En ambos casos, los par&aacute;metros se env&iacute;an 
+        como una serie de pares<br>
+        clave/valor concatenados por s&iacute;mbolos &amp;. El siguiente ejemplo 
+        muestra una URL que env&iacute;a<br>
+        par&aacute;metros al servidor mediante el m&eacute;todo GET:<br>
+        http://localhost/aplicacion?parametro1=valor1&amp;parametro2=valor2&amp;parametro3=valor3<br>
+        La principal diferencia entre ambos m&eacute;todos es que mediante el 
+        m&eacute;todo POST los par&aacute;metros se env&iacute;an en el cuerpo 
+        de la petici&oacute;n y mediante el m&eacute;todo GET los par&aacute;metros 
+        se concatenan a la URL accedida. El m&eacute;todo GET se utiliza cuando 
+        se accede a un recurso que depende de la informaci&oacute;n proporcionada 
+        por el usuario. El m&eacute;todo POST se utiliza en operaciones que crean, 
+        borran o actualizan informaci&oacute;n.<br>
+        T&eacute;cnicamente, el m&eacute;todo GET tiene un l&iacute;mite en la 
+        cantidad de datos que se pueden enviar. Si se intentan enviar m&aacute;s 
+        de 512 bytes mediante el m&eacute;todo GET, el servidor devuelve un error 
+        con c&oacute;digo 414 y mensaje Request-URI Too Long (&quot;La URI de 
+        la petici&oacute;n es demasiado larga&quot;).<br>
+        Cuando se utiliza un elemento &lt;form&gt; de HTML, al pulsar sobre el 
+        bot&oacute;n de env&iacute;o del formulario, se crea autom&aacute;ticamente 
+        la cadena de texto que contiene todos los par&aacute;metros que se env&iacute;an 
+        al servidor. Sin embargo, el objeto XMLHttpRequest no dispone de esa posibilidad 
+        y la cadena que contiene los par&aacute;metros se debe construir manualmente.<br>
+        A continuaci&oacute;n se incluye un ejemplo del funcionamiento del env&iacute;o 
+        de par&aacute;metros al servidor. Se trata de un formulario con tres campos 
+        de texto que se validan en el servidor mediante AJAX. El c&oacute;digo 
+        HTML tambi&eacute;n incluye un elemento &lt;div&gt; vac&iacute;o que se 
+        utiliza para mostrar la respuesta del servidor:<br>
+        &lt;form&gt;<br>
+        &lt;label for=&quot;fecha_nacimiento&quot;&gt;Fecha de nacimiento:&lt;/label&gt;<br>
+        &lt;input type=&quot;text&quot; id=&quot;fecha_nacimiento&quot; name=&quot;fecha_nacimiento&quot; 
+        /&gt;&lt;br/&gt;<br>
+        &lt;label for=&quot;codigo_postal&quot;&gt;Codigo postal:&lt;/label&gt;<br>
+        &lt;input type=&quot;text&quot; id=&quot;codigo_postal&quot; name=&quot;codigo_postal&quot; 
+        /&gt;&lt;br/&gt;<br>
+        &lt;label for=&quot;telefono&quot;&gt;Telefono:&lt;/label&gt;<br>
+        &lt;input type=&quot;text&quot; id=&quot;telefono&quot; name=&quot;telefono&quot; 
+        /&gt;&lt;br/&gt;<br>
+        &lt;input type=&quot;button&quot; value=&quot;Validar datos&quot; /&gt;<br>
+        &lt;/form&gt;<br>
+        &lt;div id=&quot;respuesta&quot;&gt;&lt;/div&gt;<br>
+        El c&oacute;digo anterior produce la siguiente p&aacute;gina:<br>
+        Formulario de ejemplo<br>
+        El c&oacute;digo JavaScript necesario para realizar la validaci&oacute;n 
+        de los datos en el servidor se muestra a continuaci&oacute;n:<br>
+        var READY_STATE_COMPLETE=4;<br>
+        var peticion_http = null;<br>
+        function inicializa_xhr() {<br>
+        if(window.XMLHttpRequest) {<br>
+        return new XMLHttpRequest();<br>
+        }<br>
+        else if(window.ActiveXObject) {<br>
+        return new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);<br>
+        }<br>
+        }<br>
+        function crea_query_string() {<br>
+        var fecha = document.getElementById(&quot;fecha_nacimiento&quot;);<br>
+        var cp = document.getElementById(&quot;codigo_postal&quot;);<br>
+        var telefono = document.getElementById(&quot;telefono&quot;);<br>
+        return &quot;fecha_nacimiento=&quot; + encodeURIComponent(fecha.value) 
+        +<br>
+        &quot;&amp;codigo_postal=&quot; + encodeURIComponent(cp.value) +<br>
+        &quot;&amp;telefono=&quot; + encodeURIComponent(telefono.value) +<br>
+        &quot;&amp;nocache=&quot; + Math.random();<br>
+        }<br>
+        function valida() {<br>
+        peticion_http = inicializa_xhr();<br>
+        if(peticion_http) {<br>
+      </p>
+      <p>peticion_http.onreadystatechange = procesaRespuesta;<br>
+        peticion_http.open(&quot;POST&quot;, &quot;http://localhost/validaDatos.php&quot;, 
+        true);<br>
+        peticion_http.setRequestHeader(&quot;Content-Type&quot;, <br>
+        &quot;application/x-www-form-urlencoded&quot;);<br>
+        var query_string = crea_query_string();<br>
+        peticion_http.send(query_string);<br>
+        }<br>
+        }<br>
+        function procesaRespuesta() {<br>
+        if(peticion_http.readyState == READY_STATE_COMPLETE) {<br>
+        if(peticion_http.status == 200) {<br>
+        document.getElementById(&quot;respuesta&quot;).innerHTML = <br>
+        peticion_http.responseText;<br>
+        }<br>
+        }<br>
+        }<br>
+        La clave del ejemplo anterior se encuentra en estas dos l&iacute;neas 
+        de c&oacute;digo:<br>
+        peticion_http.setRequestHeader(&quot;Content-Type&quot;, <br>
+        &quot;application/x-www-form-urlencoded&quot;);<br>
+        peticion_http.send(query_string);<br>
+        En primer lugar, si no se establece la cabecera Content-Type correcta, 
+        el servidor descarta todos los datos enviados mediante el m&eacute;todo 
+        POST. De esta forma, al programa que se ejecuta en el servidor no le llega 
+        ning&uacute;n par&aacute;metro. As&iacute;, para enviar par&aacute;metros 
+        mediante el m&eacute;todo POST, es obligatorio incluir la cabecera Content-Type 
+        mediante la siguiente instrucci&oacute;n:<br>
+        peticion_http.setRequestHeader(&quot;Content-Type&quot;, &quot;application/x-www-form-urlencoded&quot;);<br>
+        Por otra parte, el m&eacute;todo send() es el que se encarga de enviar 
+        los par&aacute;metros al servidor. En todos los ejemplos anteriores se 
+        utilizaba la instrucci&oacute;n send(null) para indicar que no se env&iacute;an 
+        par&aacute;metros al servidor. Sin embargo, en este caso la petici&oacute;n 
+        si que va a enviar los par&aacute;metros.<br>
+        Como ya se ha comentado, los par&aacute;metros se env&iacute;an en forma 
+        de cadena de texto con las<br>
+        variables y sus valores concatenados mediante el s&iacute;mbolo &amp; 
+        (esta cadena normalmente se conoce como &quot;query string&quot;). La 
+        cadena con los par&aacute;metros se construye manualmente, para lo cual 
+        se utiliza la funci&oacute;n crea_query_string():<br>
+        function crea_query_string() {<br>
+        var fecha = document.getElementById(&quot;fecha_nacimiento&quot;);<br>
+        var cp = document.getElementById(&quot;codigo_postal&quot;);<br>
+        var telefono = document.getElementById(&quot;telefono&quot;);<br>
+        return &quot;fecha_nacimiento=&quot; + encodeURIComponent(fecha.value) 
+        +<br>
+        &quot;&amp;codigo_postal=&quot; + encodeURIComponent(cp.value) +<br>
+        &quot;&amp;telefono=&quot; + encodeURIComponent(telefono.value) +<br>
+        &quot;&amp;nocache=&quot; + Math.random();<br>
+        }<br>
+        La funci&oacute;n anterior obtiene el valor de todos los campos del formulario 
+        y los concatena junto con el nombre de cada par&aacute;metro para formar 
+        la cadena de texto que se env&iacute;a al servidor. El uso de la funci&oacute;n 
+        encodeURIComponent() es imprescindible para evitar problemas con algunos 
+        caracteres especiales.<br>
+        La funci&oacute;n encodeURIComponent() reemplaza todos los caracteres 
+        que no se pueden utilizar de forma directa en las URL por su representaci&oacute;n 
+        hexadecimal. Las letras, n&uacute;meros y los caracteres - _ . ! ~ * ' 
+        ( ) no se modifican, pero todos los dem&aacute;s caracteres se sustituyen 
+        por su equivalente hexadecimal.<br>
+        Las sustituciones m&aacute;s conocidas son las de los espacios en blanco 
+        por %20, y la del s&iacute;mbolo &amp; por %26. Sin embargo, como se muestra 
+        en el siguiente ejemplo, tambi&eacute;n se sustituyen todos los acentos 
+        y cualquier otro car&aacute;cter que no se puede incluir directamente 
+        en una URL: var cadena = &quot;cadena de texto&quot;;<br>
+        var cadena_segura = encodeURIComponent(cadena);<br>
+        // cadena_segura = &quot;cadena%20de%20texto&quot;;<br>
+        var cadena = &quot;otra cadena &amp; caracteres problem&aacute;ticos / 
+        : =&quot;;<br>
+        var cadena_segura = encodeURIComponent(cadena);<br>
+        // cadena_segura =</p>
+      <p>&quot;otra%20cadena%20%26%20caracteres%20problem%C3%<br>
+        A1ticos%20%2F%20%3A%20%3D&quot;;<br>
+        JavaScript incluye una funci&oacute;n contraria llamada decodeURIComponent() 
+        y que realiza la<br>
+        transformaci&oacute;n inversa. Adem&aacute;s, tambi&eacute;n existen las 
+        funciones encodeURI() y decodeURI() que codifican/decodifican una URL 
+        completa. La principal diferencia entre encodeURIComponent() y encodeURI() 
+        es que esta &uacute;ltima no codifica los caracteres ; / ? : @ &amp; = 
+        + $ , #:<br>
+        var cadena = &quot;http://www.ejemplo.com/ruta1/index.php?<br>
+        parametro=valor con &ntilde; y &amp;&quot;;<br>
+        var cadena_segura = encodeURIComponent(cadena);<br>
+        // cadena_segura =<br>
+        &quot;http%3A%2F%2Fwww.ejemplo.com%2Fruta1%2Findex.php%<br>
+        3Fparametro%3Dvalor%20con%20%C3%B1%20y%20%26&quot;;<br>
+        var cadena_segura = encodeURI(cadena);<br>
+        // cadena_segura = &quot;http://www.ejemplo.com/ruta1/<br>
+        index.php?parametro=valor%20con%20%C3%B1%20y%20&quot;;<br>
+        Por &uacute;ltimo, la funci&oacute;n crea_query_string() a&ntilde;ade 
+        al final de la cadena un par&aacute;metro llamado<br>
+        nocache y que contiene un n&uacute;mero aleatorio (creado mediante el 
+        m&eacute;todo Math.random()).<br>
+        A&ntilde;adir un par&aacute;metro aleatorio adicional a las peticiones 
+        GET y POST es una de las estrategias m&aacute;s utilizadas para evitar 
+        problemas con la cach&eacute; de los navegadores. Como cada petici&oacute;n 
+        var&iacute;a al menos en el valor de uno de los par&aacute;metros, el 
+        navegador est&aacute; obligado siempre a realizar la petici&oacute;n directamente 
+        al servidor y no utilizar su cache. A continuaci&oacute;n se muestra un 
+        ejemplo de la query string creada por la funci&oacute;n definida:<br>
+        Query String creada para el formulario de ejemplo<br>
+        En este ejemplo sencillo, el servidor simplemente devuelve el resultado 
+        de una supuesta<br>
+        validaci&oacute;n de los datos enviados mediante AJAX:Figura 7.5. Mostrando 
+        el resultado devuelto por el servidor En las aplicaciones reales, las 
+        validaciones de datos mediante AJAX s&oacute;lo se utilizan en el caso 
+        de validaciones complejas que no se pueden realizar mediante el uso de 
+        c&oacute;digo JavaScript b&aacute;sico.<br>
+        En general, las validaciones complejas requieren el uso de bases de datos: 
+        comprobar que un nombre de usuario no est&eacute; previamente registrado, 
+        comprobar que la localidad se corresponde con el c&oacute;digo postal 
+        indicado, etc. </p></td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

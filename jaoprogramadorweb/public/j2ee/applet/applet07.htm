@@ -1,0 +1,74 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Carga de applets</title>
+<META http-equiv=Content-Language content=es>
+<META content="Manual Applets, ejemplos Applets, codigos Applets" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Manual Applets, ejemplos Applets, codigos Applets">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> Carga de applets</h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <p>&nbsp; </p>
+      <table width="472" border="0" >
+        <tr> 
+          <td width="21%"><h3>Contenido:</h3></td>
+          <td width="79%"></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="struts09.htm#Locali">- Localizaci&oacute;n de ficheros</a></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="struts09.htm#Archivos">- Archivos JAR (Java Archives)</a></td>
+        </tr>
+      </table>
+      <h3>Localizaci&oacute;n de ficheros<a name="Locali"></a></h3>
+      <p>Por defecto se supone que los ficheros *.class del applet est&aacute;n 
+        en el mismo directorio que el fichero HTML. </p>
+      <p>Si el applet pertenece a un package, el browser utiliza el nombre del 
+        package para construir un path de directorio relativo al directorio donde 
+        est&aacute; el HTML. </p>
+      <p>El atributo CODEBASE permite definir un URL para los ficheros que continen 
+        el c&oacute;digo y dem&aacute;s elementos del applet. Si el directorio 
+        definido por el URL de CODEBASE es relativo, se interpreta respecto al 
+        directorio donde est&aacute; el HTML; si es absoluto se interpreta en 
+        sentido estricto y puede ser cualquier directorio de la Internet.</p>
+      <h3>Archivos JAR (Java Archives)<a name="Archivos"></a></h3>
+      <p>Si un applet consta de varias clases, cada fichero *.class requiere una 
+        conexi&oacute;n con el servidor de Web (servidor de protocolo HTTP), lo 
+        cual puede requerir algunos segundos. En este caso es conveniente agrupar 
+        todos los ficheros en un archivo &uacute;nico, que se puede comprimir 
+        y cargar con una sola conexi&oacute;n HTTP. </p>
+      <p>Los archivos JAR est&aacute;n basados en los archivos ZIP y pueden crearse 
+        con el programa jar que viene con el JDK. </p>
+      <p>Por ejemplo: jar cvf myFile.jar *.class *.gif crea un fichero llamado 
+        myFile.jar que contiene todos los ficheros *.class y *.gif del directorio 
+        actual. Si las clases pertenecieran a un package llamado es.ceit.infor2 
+        se utilizar&iacute;a el comando: jar cvf myFile.jar es\ceit\infor2\*.class 
+        *.gif</p>
+      <p>&nbsp;</p></td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

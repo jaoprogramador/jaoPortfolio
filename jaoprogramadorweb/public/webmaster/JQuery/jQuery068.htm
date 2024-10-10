@@ -1,0 +1,54 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Introducci&oacute;n a JQuery</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta name="keywords" content="Introduccion a JQuery, Manual JQuery, tutorial JQuery, Ejemplos JQuery, ejercicios JQuery">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos"><tr> 
+    <td height="39" colspan="3"> <h2>Función para mostrar la posición de un elemento</h2></td>
+  </tr>
+  <tr> 
+    <td height="268" colspan="3"> <p>Ahora vamos a hacer una funci&oacute;n similar 
+        a la anterior para mostrar un ejemplo de uso de las<br>
+        funciones position() y offset(). Esta funci&oacute;n recibe un selector 
+        y muestra la localizaci&oacute;n de este<br>
+        elemento, tal como me la devuelven los m&eacute;todos position() y offset().<br>
+        function posicionCapa(capa){<br>
+        capa = $(capa);<br>
+        var posicion = &quot;&quot;;<br>
+        posicion += &quot;Posici&oacute;n relativo al documento:\nLEFT: &quot; 
+        + capa.offset().left + &quot;\nTOP:&quot; + capa.offset().top;<br>
+        posicion += &quot;\n\nPosici&oacute;n si no tuviera margen:\nLEFT: &quot; 
+        + capa.position().left + &quot;\nTOP:&quot; + capa.position().top;<br>
+        alert(posicion);<br>
+        }<br>
+        Si invocamos esta funci&oacute;n sobre un elemento cualquiera que no tenga 
+        margen, las dos<br>
+        posiciones devueltas por position() y offset() ser&aacute;n las mismas, 
+        pero si aplicamos un margen a<br>
+        ese elemento, el elemento cambiar&aacute; de lugar en la p&aacute;gina 
+        y entonces el valor de offset()<br>
+        tambi&eacute;n cambir&aacute;, pero no el de position().</p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

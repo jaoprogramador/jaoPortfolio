@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Introducci&oacute;n a JQuery</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta name="keywords" content="Introduccion a JQuery, Manual JQuery, tutorial JQuery, Ejemplos JQuery, ejercicios JQuery">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos"><tr> 
+    <td height="39" colspan="3"> <h2>Función jQuery pasando una función</h2></td>
+  </tr>
+  <tr> 
+    <td height="268" colspan="3"> <p>En la funci&oacute;n $() una &uacute;ltima 
+        posibilidad es pasarle como par&aacute;metro una funci&oacute;n y entonces 
+        lo<br>
+        que tenemos es una funci&oacute;n callback que se invoca autom&aacute;ticamente 
+        cuando el DOM est&aacute; listo.<br>
+        En esa funci&oacute;n podemos colocar cualquier c&oacute;digo, que se 
+        ejecutar&aacute; s&oacute;lo cuando el DOM est&aacute;<br>
+        listo para recibir comandos que lo modifiquen. Con ello, esta funci&oacute;n 
+        nos vale perfectamente<br>
+        para hacer cualquier cosa dentro de la p&aacute;gina que afecte al DOM.<br>
+        Ejemplo:<br>
+        $(function (){<br>
+        //Aqu&iacute; puedo hacer cualquier cosa con el DOM<br>
+        });<br>
+        Este callback con la funci&oacute;n jQuery $() ser&iacute;a una abreviatura 
+        de otro m&eacute;todo que hemos visto<br>
+        repetidas veces a lo largo de este manual para definir acciones cuando 
+        el DOM est&aacute; listo:<br>
+        $(document).ready(function(){<br>
+        //Aqu&iacute; puedo hacer cualquier cosa con el DOM<br>
+        });<br>
+        Incluso podemos hacer varios callback, para agregar distintas acciones 
+        a realizar cuando el<br>
+        DOM est&aacute; listo, las veces que queramos, igual que cuando defin&iacute;amos 
+        el evento ready() sobre<br>
+        el objeto document.<br>
+        Podemos ver el c&oacute;digo de una p&aacute;gina que hace uso de la funci&oacute;n 
+        d&oacute;lar, pasando por par&aacute;metro<br>
+        una funci&oacute;n.<br>
+        &lt;html&gt;<br>
+        &lt;head&gt;<br>
+        &lt;title&gt;funci&oacute;n jquery&lt;/title&gt;<br>
+        &lt;script src=&quot;../jquery-1.3.2.min.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;<br>
+        &lt;script&gt;<br>
+        $(function (){<br>
+        var documento = $(&quot;p&quot;);<br>
+        documento.css(&quot;background-color&quot;, &quot;#ff8833&quot;);<br>
+        });<br>
+        $(function (){<br>
+        var documento = $(&quot;b&quot;);<br>
+        documento.css(&quot;color&quot;, &quot;#fff&quot;);<br>
+        });<br>
+        //si colocase aqu&iacute; este c&oacute;digo, no funcionar&iacute;a, porque 
+        el DOM no estar&iacute;a listo para realizar acciones<br>
+        //var documento = $(&quot;p&quot;);<br>
+        //documento.css(&quot;background-color&quot;, &quot;#ff8833&quot;);<br>
+        &lt;/script&gt;<br>
+        &lt;/head&gt;<br>
+        &lt;body&gt;<br>
+        &lt;p&gt;&lt;b&gt;P&aacute;rrafo&lt;/b&gt;!!&lt;/p&gt;<br>
+        &lt;p&gt;Otro &lt;b&gt;p&aacute;rrafo&lt;/b&gt;&lt;/p&gt;<br>
+        &lt;/body&gt;<br>
+        &lt;/html&gt;</p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

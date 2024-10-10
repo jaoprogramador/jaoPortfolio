@@ -1,0 +1,344 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Indice J2ME</title>
+<META http-equiv=Content-Language content=es>
+<META content="Manual J2ME, ejemplos J2ME, codigos J2ME" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Manual J2ME, ejemplos J2ME, codigos J2ME">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2>javax.microedition.media</h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"><h3>Interfaces</h3>
+        
+      <p>&#8226; Control. Heredando de ella en MIDP 2.0 s&oacute;lo las interfaces 
+        VolumeControl y ToneControl, que m&aacute;s adelante estudiaremos, en 
+        MMA 1.1 veremos que heredar&aacute;n de ella algunas m&aacute;s, todas 
+        dando capacidad de ejercer control sobre ciertas funcionalidades de un 
+        objeto Player. Obtendremos del Player el Control deseado (Controllable.getControl()) 
+        y, al modificarlo, estaremos definiendo nuevas caracter&iacute;sticas 
+        en la reproducci&oacute;n del Player del cual hemos obtenido ese Control.<br>
+        Esta interface no tiene m&eacute;todos; nos servir&aacute; simplemente 
+        para abstraer todos los controles (de MIDP o MMA) que se definan para 
+        el elemento Player. As&iacute;, todos ellos ser&aacute;n un Control en 
+        &uacute;ltimo t&eacute;rmino.<br>
+        &#8226; Controllable. Asumiremos a partir de ahora que usamos los m&eacute;todos 
+        de Controllable asociados siempre al Player que hereda de ella, as&iacute; 
+        podremos acceder a los controles definidos para un objeto Player.<br>
+        Los m&eacute;todos que ofrece Controllable (y por herencia, Player) son:<br>
+        o Control getControl(String controlType): m&eacute;todo que nos devuelve 
+        la instancia de Control asociada al Player, sea la hija Control que sea, 
+        pas&aacute;ndole el nombre de la clase que identifica al control.<br>
+        El nombre de la clase se debe dar con su ruta de paquetes completa, si 
+        no es as&iacute; se asume la ruta javax.microedition.media.control.<br>
+        Por otra parte, si existe m&aacute;s de una instancia de la clase indicada, 
+        s&oacute;lo se devolver&aacute; una de ellas. Para obtenerlas todas, deber&aacute; 
+        usarse el m&eacute;todo getControls() y buscar las deseadas de entre los 
+        controles que devuelve, por ejemplo as&iacute;:<br>
+        Controllable controllable; //En la pr&aacute;ctica se usar&aacute; un 
+        Player hijo<br>
+        Control controles[];<br>
+        Vector controlesVolumen = new Vector();<br>
+        controles = controllable.getControls();<br>
+        for (int i = 0; i &lt; controles.length; i++)<br>
+        if (controles [i] instanceof<br>
+        javax.microedition.media.control.VolumeControl)<br>
+        controlesVolumen.addElement(controles [i]);<br>
+        o Control[] getControls(). Como hemos visto, devuelve un array con todos 
+        los controles asociados al Player actual, devolviendo un array vac&iacute;o 
+        si no tiene ninguno. Entre los controles devueltos no existir&aacute;n 
+        duplicados y el contenido de este array no variar&aacute; en ejecuci&oacute;n.<br>
+        &#8226; Player extends Controllable. Esta interface hereda de la anterior 
+        y representa un reproductor con el que presentar un media determinado. 
+        Al igual que ocurr&iacute;a en el cap&iacute;tulo anterior con las conexiones 
+        y la clase factor&iacute;a Connector, para instanciar un Player recurriremos 
+        a la clase factor&iacute;a Manager y a sus m&eacute;todos createPlayer() 
+        que ya estudiaremos.<br>
+        Las constantes disponibles en Player son:<br>
+        o static int CLOSED. Representa el estado cerrado del Player. Valor 0.<br>
+        o static int PREFETCHED. Estado en el que ha terminado de adquirir los 
+        recursos del dispositivo que necesita para comenzar la reproducci&oacute;n 
+        del media.<br>
+        Valor 300.<br>
+        o static int REALIZED. Estado en el cual ha adquirido el media a reproducir 
+        pero no los recursos del dispositivo (salida de audio, driver de v&iacute;deo, 
+        etc.) que necesita para hacerlo. Valor 200.<br>
+        o static int STARTED. Estado en el que la reproducci&oacute;n ya ha comenzado. 
+        Valor 400.<br>
+        o static long TIME_UNKNOWN. Para indicar que el tiempo solicitado es desconocido. 
+        Valor -1.o static int UNREALIZED. Estado en el que a&uacute;n no ha adquirido 
+        ni la informaci&oacute;n inicial ni los recursos. Valor 100.<br>
+        Excepto TIME_UNKNOWN, el resto de constantes representan cada uno de los 
+        estados en los que puede encontrarse un objeto Player durante su ciclo 
+        de vida, elcual est&aacute; orientado a capacitarnos para separar program&aacute;ticamente 
+        operaciones sobre el Player que podr&aacute;n ser muy costosas.<br>
+        El ciclo de vida de un reproductor Player es el siguiente:<br>
+        o Comienza al construir una instancia suya vac&iacute;a, quedando en ese 
+        momento en el estado UNREALIZED, a&uacute;n sin informaci&oacute;n alguna 
+        (en este estado no deben ser usados los m&eacute;todos heredados de Controllable).<br>
+        o Tras ello, el reproductor necesita localizar el media a reproducir, 
+        ya sea de forma local o en alg&uacute;n servidor remoto.<br>
+        o Una vez localizado, estar&aacute; en el estado REALIZED. En &eacute;l 
+        puede comenzar a adquirir el media, lo cual podr&aacute; suponer un consumo 
+        de tiempo considerable.<br>
+        o Una vez conseguido y tras pasar por el estado PREFETCHED (en el cual 
+        se llenan buffers y se reservan recursos en exclusividad) podr&aacute; 
+        reproducirse, pasando para ello al estado STARTED.<br>
+        o Del estado STARTED, al parar la reproducci&oacute;n, se volver&aacute; 
+        al estado PREFETCHED.<br>
+        o Cuando se desee cerrar el reproductor y liberar los recursos que ha 
+        necesitado, se pasa &eacute;ste al estado CLOSED en el cual finaliza su 
+        ciclo de vida, del cual ya no podr&aacute; salir.<br>
+        Aunque &eacute;ste es el ciclo de vida recomendado, pueden existir saltos 
+        en estos cambios de estado del Player. Con ello, perdemos el control program&aacute;tico 
+        que nos da el ciclo de vida original, donde podemos actuar si no se ha 
+        conseguido pasar de un estado determinado a otro. Por ejemplo, el siguiente 
+        c&oacute;digo ser&iacute;a v&aacute;lido, pero al no cuidar de pasar program&aacute;ticamente 
+        por REALIZED y PREFETCHED, no tendremos tanto control ante un posible 
+        fallo al lanzar directamente (start()) la reproducci&oacute;n del media.try 
+        {<br>
+        Player p = Manager.createPlayer(&quot;http://www.site.com/media/media.wav&quot;);<br>
+        p.start();<br>
+        }<br>
+        catch (MediaException pe) {<br>
+        }catch (IOException ioe) { } <br>
+        <br>
+        Los m&eacute;todos de la interface, de los que parte nos podremos imaginar 
+        su funcionalidad dada la figura anterior, son:<br>
+        o void addPlayerListener(PlayerListener playerListener). Asocia el escuchador 
+        de eventos PlayerListener par&aacute;metro al Player actual. Si se pasa 
+        a null no se hace nada.<br>
+        o void close(). Liber recursos y cierra el reproductor, pas&aacute;ndolo 
+        al estado CLOSED. Si ya estaba cerrado no se hace nada.<br>
+        o void deallocate(). Libera los posibles recursos exclusivos de los que 
+        se haya podido apropiar el Player para realizar su reproducci&oacute;n 
+        como, por ejemplo, la salida de audio.<br>
+        En el caso de que la llamada a realize() bloquee el Player, ya que &eacute;sta 
+        puede ser muy costosa, una llamada a deallocate() lo desbloquear&aacute; 
+        y pasar&aacute; al estado UNREALIZED.<br>
+        Por otro lado, si se llama a este m&eacute;todo desde PREFETCHED devolver&aacute; 
+        el Player al estado REALIZED, y si se llama estando en STARTED la llamada 
+        derivar&aacute; a un stop() internamente.<br>
+        o String getContentType(). Devuelve el tipo de contenido que est&aacute; 
+        reproduciendo el Player.</p> </p>
+      <p>Este tipo de contenido se da con la cadena correspondiente a su tipo 
+        MIME. Los m&aacute;s utilizados son:<br>
+        audio/x-wav Formato de audio WAV.<br>
+        audio/mpeg Formato MP3.<br>
+        audio/midi Formato MIDI.<br>
+        audio/x-tone-seq Formato de secuencia de tonos.<br>
+        video/mpeg Formato de v&iacute;deo MPEG (A usar con la MMA, no en MIDP) 
+        Depender&aacute;n de cada dispositivo los formatos soportados. En el emulador 
+        WTK 2.2 que usamos en nuestras pr&aacute;cticas, los tipos permitidos 
+        son: audio/x-toneseq, audio/x-wav, audio/midi, audio/sp-midi, image/gif, 
+        video/mpeg y video/vnd.sun.rgb565.<br>
+        o long getDuration(). Obtiene la duraci&oacute;n en microsegundos del 
+        media, cuando &eacute;ste se reproduce a su velocidad por defecto. Si 
+        la duraci&oacute;n no puede ser determinada (elementos multimedia &quot;en 
+        vivo&quot;) se devolver&aacute; la constante TIME_UNKNOWN.<br>
+        o long getMediaTime(). Obtiene el media-time en microsegundos del elemento 
+        multimedia. Si este tiempo no puede ser determinado se devolver&aacute; 
+        TIME_UNKNOWN. Este media-time se define como el momento actual de la reproducci&oacute;n 
+        y se mover&aacute; desde 0 a la duraci&oacute;n total del media.<br>
+        o int getState(). Estado actual del Player, a saber: UNREALIZED, REALIZED, 
+        PREFETCHED, STARTED y CLOSED.<br>
+        o void prefetch(). Provocar&aacute; el paso a PREFETCHED, adquiriendo 
+        para ello recursos en exclusividad y todo lo necesario para que la latencia 
+        al comenzar la reproducci&oacute;n (start() ) sea m&iacute;nima.<br>
+        o void realize(). Provocar&aacute; el paso a REALIZED, tray&eacute;ndose 
+        localmente el media a reproducir. Esta operaci&oacute;n puede ser costosa 
+        en tiempo.<br>
+        o void removePlayerListener(PlayerListener playerListener). Desasocia 
+        del Player actual el escuchador pasado como par&aacute;metro. Si no est&aacute; 
+        asociado o el objeto pasado es nulo, no se hace nada.</p>
+      <p>o void setLoopCount(int count). Fija cu&aacute;ntas veces se podr&aacute; 
+        reproducir en bucle el media. Por defecto, una &uacute;nica vez (1), si 
+        damos -1 reproducir&aacute; en bucle infinito y si damos 0 se elevar&aacute; 
+        una IllegalArgumentException. No debe ser usado si el Player se encuentra 
+        en estado STARTED.<br>
+        o long setMediaTime(long now). Fija el media-time al valor dado en microsegundos, 
+        es decir, var&iacute;a el momento actual de reproducci&oacute;n cuando 
+        el tipo que se reproduce acepta esto.<br>
+        El hecho de no ser demasiado preciso este m&eacute;todo para algunos formatos, 
+        hace necesario que se devuelva como par&aacute;metro de salida el momento 
+        actual que finalmente se ha conseguido fijar tras su invocaci&oacute;n.<br>
+        El media-time toma valores desde 0 a la duraci&oacute;n del media a reproducir, 
+        por lo que si damos un valor negativo se fijar&aacute; 0, y si damos un 
+        valor m&aacute;s all&aacute; de la duraci&oacute;n, &eacute;sta ser&aacute; 
+        la fijada. No debe ser usado si el Player se encuentra a&uacute;n en estado 
+        UNREALIZED.<br>
+        o void start(). Comenzar&aacute; la reproducci&oacute;n del media desde 
+        el principio o desde donde se qued&oacute; ante una llamada al m&eacute;todo 
+        stop(), pasando al estado STARTED tan pronto como pueda. No se garantiza 
+        que se pase por este estado de todas formas, ya que, el media puede tener 
+        duraci&oacute;n 0 o muy corta y haber finalizado ya (volviendo a PREFETCHED). 
+        S&iacute; se asegura que se genere un evento STARTED.<br>
+        o void stop(). Parar&aacute; la reproducci&oacute;n, paus&aacute;ndola 
+        en el media-time actual. Esto har&aacute; pasar al Player al estado PREFETCHED.<br>
+        &#8226; PlayerListener. Define un escuchador de eventos as&iacute;ncronos 
+        para un objeto Player. Como es usual, nuestro MIDlet implementar&aacute; 
+        esta interface y asociaremos ese MIDlet al Player usando el m&eacute;todo 
+        addPlayerListener(&lt;MIDlet&gt;).<br>
+        Un reproductor podr&aacute; tener tantos PlayerListener como desee y todos 
+        ellos estar&aacute;n escuchando los eventos que el Player emita. Adem&aacute;s, 
+        se garantiza que los eventos son recogidos por el listener en el orden 
+        que son emitidos. Por ejemplo, si una reproducci&oacute;n finaliza muy 
+        r&aacute;pidamente se garantiza que llegar&aacute;n en orden un evento 
+        STARTED y tras &eacute;l un END_OF_MEDIA, aunque quiz&aacute;s no haya 
+        dado tiempo a que el Player haya pasado por el estado STARTED.Reflejados 
+        en constantes de la resente interface, estos eventos podr&aacute;n ser 
+        (damos para cada uno de ellos un valor eventData, ya veremos m&aacute;s 
+        adelante para qu&eacute;):<br>
+        o static String CLOSED. Evento emitido al cerrar un Player invocando al 
+        m&eacute;todo close(). eventData: null.<br>
+        o static String DEVICE_AVAILABLE. Emitido al ser liberado un recurso que 
+        el sistema u otra aplicaci&oacute;n de m&aacute;s prioridad que la nuestra 
+        ten&iacute;a asignado en exclusividad, y al cual nosotros est&aacute;bamos 
+        esperando. Nuestro Player se encontrar&aacute; en el estado REALIZED y 
+        podr&aacute; entonces pasar al siguiente estado invocando al m&eacute;todo 
+        prefetch() o start().<br>
+        eventData: cadena identificando el nombre del recurso ya accesible.<br>
+        o static String DEVICE_UNAVAILABLE. Emitido cuando el sistema u otra aplicaci&oacute;n 
+        de m&aacute;s prioridad que la nuestra tiene asignado en exclusividad 
+        un recurso que necesitamos para llevar a cabo nuestra reproducci&oacute;n. 
+        Nuestro Player se encontrar&aacute; en el estado REALIZED y podr&aacute;, 
+        al emitirse finalmente un DEVICE_AVAILABLE, pasar al siguiente estado 
+        invocando al m&eacute;todo prefetch() o start(). Si no se consigue el 
+        recurso tras un tiempo, un evento ERROR es generado.<br>
+        eventData: cadena identificando el nombre del recurso no accesible.<br>
+        o static String DURATION_UPDATED. Emitido cuando la duraci&oacute;n del 
+        Player es modificada.<br>
+        eventData: un objeto Long con la nueva duraci&oacute;n del media.<br>
+        o static String END_OF_MEDIA. Emitido al alcanzar el media el final de 
+        su contenido, en cada bucle de reproducci&oacute;n.<br>
+        eventData: un objeto Long con el media-time en el cual el objeto ha alcanzado 
+        su fin.o static String ERROR. Emisi&oacute;n de un error en el tratamiento 
+        del listener.<br>
+        eventData: una cadena identificando el error.<br>
+        o static String STARTED. Enviado cuando comienza la reproducci&oacute;n 
+        del Player.<br>
+        o static String STOPPED. Enviado cuando termina la reproducci&oacute;n 
+        del Player.<br>
+        o static String VOLUME_CHANGED. Emitido al variar el volumen del<br>
+        dispositivo.<br>
+        Tras ver los eventos disponibles, el &uacute;nico m&eacute;todo que presenta 
+        la interface es void playerUpdate(Player player, String event, Object 
+        eventData). A ella daremos cuerpo en la aplicaci&oacute;n que implemente 
+        PlayerListener, ya que, &eacute;l ser&aacute; el encargado de recoger 
+        todos los eventos relacionados con el tratamiento multimedia que sucedan 
+        sobre ella. Por este motivo, en &eacute;l definiremos qu&eacute; hacer 
+        al recibir alguno de los eventos anteriores.<br>
+        Los par&aacute;metros que recibimos para ello son: el Player al que &quot;escuchamos&quot;, 
+        el evento que ha sido lanzado y el eventData asociado a este evento, el 
+        cual nos dar&aacute; informaci&oacute;n sobre &eacute;l (para este m&eacute;todo 
+        dimos en cada constante el valor de eventData asociado).<br>
+        eventData: un objeto Long con el media-time en el cual se ha comenzado 
+        (o retomado) la reproducci&oacute;n.<br>
+        eventData: un objeto Long con el media-time en el cual se ha terminado 
+        la reproducci&oacute;n.<br>
+        eventData: un objeto VolumeControl con la informaci&oacute;n del nuevo 
+        volumen.</p>
+      <p>o static String ERROR. Emisi&oacute;n de un error en el tratamiento del 
+        listener.<br>
+        eventData: una cadena identificando el error.<br>
+        o static String STARTED. Enviado cuando comienza la reproducci&oacute;n 
+        del Player.<br>
+        o static String STOPPED. Enviado cuando termina la reproducci&oacute;n 
+        del Player.<br>
+        o static String VOLUME_CHANGED. Emitido al variar el volumen del dispositivo.<br>
+        Tras ver los eventos disponibles, el &uacute;nico m&eacute;todo que presenta 
+        la interface es void playerUpdate(Player player, String event, Object 
+        eventData). A ella daremos cuerpo en la aplicaci&oacute;n que implemente 
+        PlayerListener, ya que, &eacute;l ser&aacute; el encargado de recoger 
+        todos los eventos relacionados con el tratamiento multimedia que sucedan 
+        sobre ella. Por este motivo, en &eacute;l definiremos qu&eacute; hacer 
+        al recibir alguno de los eventos anteriores.<br>
+        Los par&aacute;metros que recibimos para ello son: el Player al que &quot;escuchamos&quot;, 
+        el evento que ha sido lanzado y el eventData asociado a este evento, el 
+        cual nos dar&aacute; informaci&oacute;n sobre &eacute;l (para este m&eacute;todo 
+        dimos en cada constante el valor de eventData asociado).<br>
+        eventData: un objeto Long con el media-time en el cual se ha comenzado 
+        (o retomado) la reproducci&oacute;n.<br>
+        eventData: un objeto Long con el media-time en el cual se ha terminado 
+        la reproducci&oacute;n.<br>
+        eventData: un objeto VolumeControl con la informaci&oacute;n del nuevo 
+        volumen.</p>
+      <h3>
+        Clases</h3>
+      <p> &#8226; Manager extends Object. Con esta clase a modo de factor&iacute;a 
+        construiremos los objetos Player que vayamos a utilizar en nuestras aplicaciones 
+        para reproducir y controlar los elementos multimedia deseados. Tendremos 
+        una sola constante y varios m&eacute;todos en esta clase:<br>
+        o static String TONE_DEVICE_LOCATOR. Constante que daremos como par&aacute;metro 
+        locator al ir a crear un reproductor de secuencia de tonos. Por ejemplo, 
+        har&iacute;amos:<br>
+        o static Player createPlayer(InputStream stream, String type). Con este 
+        m&eacute;todo instanciamos un Player tomando como origen un flujo de entrada 
+        del que leemos el media a reproducir del tipo MIME marcado por el par&aacute;metro 
+        type.<br>
+        o static Player createPlayer(String locator). Con &eacute;ste instanciamos 
+        un Player ahora tomando como origen de datos los que descarguemos de la 
+        URL dada como par&aacute;metro, v&iacute;a HTTP. Esto supondr&aacute; 
+        un coste de tiempo que obliga a llevar esta comunicaci&oacute;n en un 
+        hilo de ejecuci&oacute;n aparte (recordar tema anterior), adem&aacute;s 
+        del coste monetario que le supone al usuario de un dispositivo real acceder 
+        a la red.<br>
+        o static String[] getSupportedContentTypes(String protocol). Nos devuelve 
+        los tipos MIME soportados para el protocolo par&aacute;metro o todos los 
+        soportados por la implementaci&oacute;n si damos null. Por ejemplo, si 
+        damos la cadena &quot;http&quot; como par&aacute;metro, nos devolver&aacute; 
+        en un array de String los tipos MIME a los que podremos acceder por medio 
+        de una comunicaci&oacute;n de este tipo.<br>
+        try {<br>
+        Player p = Manager.createPlayer( Manager.TONE_DEVICE_LOCATOR );<br>
+        p.realize();<br>
+        ToneControl tc = (ToneControl)p.getControl(&quot;ToneControl&quot;);<br>
+        tc.setSequence(secuenciaAReproducir);<br>
+        p.start();<br>
+        }<br>
+        catch (IOException ioe) { }<br>
+        catch (MediaException me) { }</p>
+      <p>o static String[] getSupportedProtocols(String content_type). Estamos 
+        ante el caso contrario al anterior, es decir, dado el tipo MIME al que 
+        queremos acceder, este m&eacute;todo nos da los protocolos permitidos 
+        para ello.<br>
+        o static void playTone(int note, int duration, int volume). Este m&eacute;todo 
+        hace que el dispositivo emita una &uacute;nica nota de sonido. Por su 
+        simpleza, se incluye en la clase directamente, sin que haya que construir 
+        un Player para realizar esta reproducci&oacute;n tan simple. Damos la 
+        nota a reproducir (valor de 0 a 127), la duraci&oacute;n en milisegundos 
+        y su volumen (valor de 0 a 100).<br>
+        Este m&eacute;todo puede saturar la CPU del dispositivo si &eacute;ste 
+        no soporta creaci&oacute;n de melod&iacute;as.</p>
+      <h3>Excepciones</h3>
+      <p>MediaException extends Exception. Excepci&oacute;n que usar&aacute;n 
+        los m&eacute;todos del API multimedia para reflejar un error en su ejecuci&oacute;n, 
+        tal como los errores provocados por los m&eacute;todos de cambio de estado 
+        (realice(), prefetch(), etc.) cuando no son capaces de llevar a cabo ese 
+        cambio o los provocados por el m&eacute;todo setMediaTime() cuando el 
+        formato no admite que se modifique el momento actual de la reproducci&oacute;n, 
+        etc.</p></td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

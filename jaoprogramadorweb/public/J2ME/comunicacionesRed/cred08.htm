@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Indice J2ME</title>
+<META http-equiv=Content-Language content=es>
+<META content="Manual J2ME, ejemplos J2ME, codigos J2ME" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Manual J2ME, ejemplos J2ME, codigos J2ME">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> Como almacena datos MIDP</h2></td>
+  </tr>
+  <tr> 
+    <td colspan="3"><br>
+      Cada suite podr&aacute; reservar una o varias zonas de almacenamiento o 
+      almac&eacute;n de registros en<br>
+      el RMS (implementada, como veremos, con la clase RecordStore), los cuales 
+      se<br>
+      identificar&aacute;n con nombres, de c&oacute;mo m&aacute;ximo 32 caracteres, 
+      donde se distingue entre<br>
+      may&uacute;sculas y min&uacute;sculas. Asimismo, distintas suites pueden 
+      reservar almacenes d&aacute;ndoles el<br>
+      mismo nombre y el RMS seguir&aacute; consider&aacute;ndolas como zonas claramente 
+      separadas al<br>
+      pertenecer a distintas aplicaciones.<br>
+      Adem&aacute;s de este nombre, el cual s&iacute; debe ser &uacute;nico entre 
+      los distintos almacenes que pueda<br>
+      reservar una misma suite, un almac&eacute;n de registros poseer&aacute; 
+      distintos atributos consultables<br>
+      mediante m&eacute;todos de la clase RecordStore:<br>
+      - N&uacute;mero de registros, inici&aacute;ndose en 0 y aumentando/disminuyendo 
+      conforme se<br>
+      vayan insertando o eliminando registros del almac&eacute;n (getNumRecords()).<br>
+      - N&uacute;mero de versi&oacute;n, el cual ir&aacute; actualiz&aacute;ndose 
+      seg&uacute;n var&iacute;e el estado del almac&eacute;n<br>
+      dado (getVersion()); comienza en 0 y va aumentando conforme efectuemos acciones<br>
+      sobre el almac&eacute;n.<br>
+      - Fecha de &uacute;ltima modificaci&oacute;n, n&uacute;mero de milisegundos 
+      desde el 01/01/1970 hasta<br>
+      el instante en que se haya modificado por &uacute;ltima vez el almac&eacute;n 
+      (getLastModified()).<br>
+      - Identificador del siguiente registro que se cree en el almac&eacute;n, 
+      comenzando en 1 e<br>
+      increment&aacute;ndose cada vez que se inserte un nuevo registro en la zona 
+      de<br>
+      almacenamiento de la suite (getNextRecordID()).<br>
+      Tras estos atributos, pertenecientes a la cabecera del almac&eacute;n (gris 
+      oscuro en el gr&aacute;fico<br>
+      anterior), aparecer&aacute;n los registros en los cuales guardaremos la 
+      informaci&oacute;n a almacenar como pares &iacute;ndice - contenido. As&iacute;, 
+      cada fila de una zona de almacenamiento ir&aacute; identificada<br>
+      un&iacute;vocamente por un &iacute;ndice (1..n) el cual da acceso al valor 
+      que se haya guardado en ella.<br>
+      Este valor, sea del tipo que sea, se almacena en forma de array de bytes.<br>
+      Por &uacute;ltimo, indicaremos que la implementaci&oacute;n RMS asegura 
+      la atomicidad, sincronizaci&oacute;n y<br>
+      serializaci&oacute;n de las operaciones sobre un almac&eacute;n de registros 
+      de forma que no exista<br>
+      corrupci&oacute;n alguna provocada por accesos simult&aacute;neos a los 
+      mismos recursos. No obstante,<br>
+      en aplicaciones multitarea con acceso a datos es responsabilidad del programador 
+      sincronizar<br>
+      las operaciones sobre &eacute;stos.</td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Model</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación en Struts,Programas Struts,Aplicaciones en Struts,Ejercicios en Struts, Ejemplos de Struts,Tutoriales de Struts,Manuales Struts" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Struts, Manual Struts, tutorial Struts, Ejemplos Struts, ejercicios Struts">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2> Model</h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <table width="472" border="0" >
+        <tr> 
+          <td width="21%"><h3>Contenido:</h3></td>
+          <td width="79%"></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="struts04.htm#1">- Introducci&oacute;n</a></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="struts04.htm#2">- Action Bean</a></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="struts04.htm#3">- System State Beans</a></td>
+        </tr>
+		        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="struts04.htm#4">- BusinessLogic Beans</a></td>
+        </tr>
+		        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="struts04.htm#5">- Accediendo a BD</a></td>
+        </tr>
+		  
+      </table>
+      <h3>Introducci&oacute;n<a name="1"></a></h3>
+      <p>El Model comprende todos los Objetos de Negocio donde se implementa la 
+        l&oacute;gica de negocio (el &quot;how it's done&quot;) y donde se debe 
+        soportar todos los requisitos funcionales del Sistema sin mezclarlo con 
+        partes correspondientes al workflow (el &quot;what to do&quot;) que corresponden 
+        al Controller.</p>
+      <h3>
+        Action Bean<a name="2"></a></h3>
+      <p>Generalmente, los Action Beans siempre realizan las siguientes acciones:</p>
+      <p> 1. Obtener los valores necesarios del Action Form, JavaBean, request, 
+        session o de donde sea.<br>
+        2. Llamar a los objetos de negocio del Model.<br>
+        3. Analizar los resultados, y seg&uacute;n los mismos retornar el ActionForward 
+        correspondiente.</p>
+      <p>Veamos entonces un ejemplo de Action Bean:</p>
+      <p>package com.jao.controladores.consultas.actions;</p>
+      <p>import com.jao.controladores.consultas.forms.consultaUsuariosForm;<br>
+        import com.jao.dao.usuarioDao;<br>
+        import java.util.ArrayList;<br>
+        import javax.servlet.http.HttpServletRequest;<br>
+        import javax.servlet.http.HttpServletResponse;<br>
+        import org.apache.struts.action.ActionForm;<br>
+        import org.apache.struts.action.ActionForward;<br>
+        import org.apache.struts.action.ActionMapping;</p>
+      <p>/**<br>
+        *<br>
+        * @author JAO<br>
+        */<br>
+        public class altaUsuariosAction extends org.apache.struts.action.Action 
+        {<br>
+        <br>
+        private static final String SUCCESS = &quot;success&quot;;<br>
+        private static final String ERROR = &quot;error&quot;;<br>
+        private consultaUsuariosForm formulario;<br>
+        <br>
+        public ActionForward execute(ActionMapping mapping, ActionForm form,<br>
+        HttpServletRequest request, HttpServletResponse response)<br>
+        throws Exception {<br>
+        String paginaRetorno=&quot;&quot;;<br>
+        int numFilas=0;<br>
+        try {<br>
+        formulario =(consultaUsuariosForm) form;<br>
+        usuarioDao usuDAO=new usuarioDao();<br>
+        numFilas=usuDAO.insert(formulario);<br>
+        if(0&lt;numFilas){<br>
+        ArrayList alUsuarioAlta= new ArrayList();<br>
+        alUsuarioAlta.add(formulario);<br>
+        request.setAttribute(&quot;MiLista&quot;, alUsuarioAlta);<br>
+        paginaRetorno=SUCCESS;<br>
+        }else{<br>
+        request.setAttribute(&quot;mensaje&quot;, &quot;no se ha podido realizar 
+        la insercion&quot;);<br>
+        paginaRetorno=ERROR;<br>
+        }<br>
+        <br>
+        } catch (Exception e) {<br>
+        e.printStackTrace();<br>
+        request.setAttribute(&quot;mensaje&quot;, &quot;no se ha podido realizar 
+        la insercion&quot;);<br>
+        paginaRetorno=ERROR;<br>
+        }<br>
+        <br>
+        return mapping.findForward(paginaRetorno);<br>
+        }<br>
+        }</p>
+      <p>&nbsp;</p>
+      <h3> System State Beans<a name="3"></a></h3>
+
+      <p>Los System State Beans son el conjunto de objetos de negocio que representan 
+        el estado actual del sistema, por ejemplo: el carrito de la compra que 
+        el usuario va modificando a lo largo de su interacci&oacute;n con la aplicaci&oacute;n. 
+        Estos objetos de negocio ser&aacute;n t&iacute;picamente JavaBeans o EJBs 
+        de los que se guardar&aacute; referencia en la sesi&oacute;n del usuario, 
+        que ser&aacute;n modificados desde los Action y que ser&aacute;n consultados 
+        desde las JSPs.</p>
+      <p>Esta clase de objetos no debiera tener ning&uacute;n conocimiento de 
+        la View.</p>
+      <h3>
+         BusinessLogic Beans<a name="4"></a></h3>
+
+      <p>Los objetos de negocio son los que implementan la l&oacute;gica de negocio, 
+        el c&oacute;mo hacer las cosas y su propia persistencia. Estos objetos 
+        de negocio no debiera tener ning&uacute;n conocimiento de la View o el 
+        Controller de forma que debieran ser perfectamente reutilizables para 
+        implementar soporte a distintas interfaces y hasta para incluirse en nuevas 
+        aplicaciones.<br></p>
+        <h3> Accediendo a BD<a name="5"></a></h3>
+
+      <p>Con Struts se puede definir un datasource para una aplicaci&oacute;n 
+        desde el struts-config.xml (m&aacute;s informaci&oacute;n en la secci&oacute;n 
+        &quot;The Action Mappings Configuration File&quot; del &quot;Struts User 
+        Manual&quot;). Este datasource nos permite obtener una connection desde 
+        un Action y desde all&iacute; utilizarlo o pasarlo al Model. Muy pr&aacute;ctico.</p>
+      <p>Este es un ejemplo de acceso a una conexi&oacute;n desde un Action:</p>
+      <p>public ActionForward perform(ActionMapping mapping, <br>
+        ActionForm form, <br>
+        HttpServletRequest request, <br>
+        HttpServletResponse response) {</p>
+      <p>javax.sql.DataSource dataSource;<br>
+        java.sql.Connection myConnection;<br>
+        ...<br>
+        try {<br>
+        dataSource = servlet.findDataSource(null);<br>
+        myConnection = dataSource.getConnection();<br>
+        ...<br>
+        } catch (SQLException sqle) {<br>
+        getServlet().log(&quot;Connection.process&quot;, sqle);<br>
+        } finally {<br>
+        ...<br>
+        try {<br>
+        myConnection.close();<br>
+        } catch (SQLException e) {<br>
+        getServlet().log(&quot;Connection.close&quot;, e);<br>
+        }<br>
+        }<br>
+        }<br>
+      </p>
+      <p><br>
+      </p></td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

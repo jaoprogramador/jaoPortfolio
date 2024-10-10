@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>XSL:FO</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación en CSS,Programas CSS,Aplicaciones en CSS,Ejercicios en CSS, Ejemplos de CSS,Tutoriales de CSS,Manuales CSS" name=description>
+<meta name="keywords" content="CSS, Manual CSS, tutorial CSS, Ejemplos CSS, ejercicios CSS, Cascading Style Sheet">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos"><tr> 
+    <td height="39" colspan="3"> <h2> XSL:FO</h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <p>Como su propio nombre indica XSL-FO se utiliza 
+        para formatear el contenldo de un documento XML. Es decir, se le aplica 
+        un formato a los datos selecoionados por el XSL a partir de los datos 
+        originales en XML. Por tanto, en el proceso de formateo ademas de intervenir 
+        patrones de busqueda y transformacion (hoja de estilo), debe existir un 
+        convertidor 0 FOP, que es un procesador de hojas de estilo capaz de interpretar 
+        XSL-FO y generar documentos formateados como PDF.<br>
+        Uno de los incovenientes del XSL-FO es que esta en working-draft, pero 
+        es mas facil que XSLT.<br>
+        Para utiIizarXSL-FO Ie indicamos el namespace usado en el atributo xm/ns:f0, 
+        y debemos saber que una hojaXSL-FO posee regiones o areas:<br>
+        - Region: Contiene areas de tipo block u otras areas de tipo region. Es 
+        un nivel mas alto en una XSL&#8212;FO. Un objeto formateado contiene las 
+        siguientes regiones: fo:region-body, fosregion-before,<br>
+        fo:region-after, fo:region-start y fo:region-end.<br>
+        - Block: Contiene areas de tipo line, espacios de visualizacion, otras 
+        areas de tipo block o areas de tipo region.<br>
+        - Line: Representan una Iinea de texto dentro de un block. Contiene areas 
+        de tipo in/ine o areas de espacios en blanco. Permite asociar atributos 
+        de tipo font.<br>
+        Inline:<br>
+        Define cada uno de los caracteres o graficos dentro de una Iinea.</p>
+      <p>&lt;?xml versi0n=&quot;1.0&quot;?&gt;<br>
+        &lt;xsl:stylesheet<br>
+        xmlns:xsl=&quot;http://www.w3.0rg/TRNVD-xsl&quot;<br>
+        xmlns:fo=&quot;http://www.w3.0rg/TRNVD-xsl/FO&quot;&gt;<br>
+        &lt;xsl:template match=&quot;/&quot;&gt;<br>
+        &lt;fo:display-sequence font-size=&quot;10pt&quot; font-famiIy=&quot;serif&quot;&gt;<br>
+        &lt;xsl:apply-templates/&gt;<br>
+        &lt;/fo:display-sequence&gt;<br>
+        &lt;/xsl:template&gt;<br>
+        &lt;xsl:template match=&quot;crucero&quot;&gt;<br>
+        &lt;fo:block font-size=&quot;12pt&quot; font-weight=&quot;bold&quot;&gt;<br>
+        &lt;xsl:apply-templates/&gt;<br>
+        &lt;/fo:block&gt;<br>
+        &lt;/xsl:template&gt;<br>
+        &lt;/xsl:stylesheet&gt;</p>
+      <p></p>
+      <p><br>
+      </p></td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

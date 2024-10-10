@@ -1,0 +1,174 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Indice J2ME</title>
+<META http-equiv=Content-Language content=es>
+<META content="Manual J2ME, ejemplos J2ME, codigos J2ME" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Manual J2ME, ejemplos J2ME, codigos J2ME">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> Interfaces</h2></td>
+  </tr>
+  <tr> 
+    <td colspan="3"><p> 
+        - Connection. Esta interface representa la conexi&oacute;n padre de todas 
+        las conexiones 
+        J2ME, la m&aacute;s b&aacute;sica. Para abrir una instancia de ella, como 
+        con todas las dem&aacute;s, 
+        necesitaremos invocar al m&eacute;todo open() de la clase Connector que 
+        ya estudiaremos 
+        m&aacute;s adelante. Dispone de un &uacute;nico m&eacute;todo, el cual 
+        ser&aacute; heredado por todas las 
+        conexiones definidas en CLDC y MIDP: void close() 
+        void close() cierra la conexi&oacute;n. Una vez cerrada, cualquier operaci&oacute;n 
+        sobre ella eleva 
+        una excepci&oacute;n IOException, salvo un nuevo close(), el cual no tendr&aacute; 
+        efecto alguno 
+        si ya est&aacute; cerrada. Si existe alg&uacute;n flujo asociado a la 
+        conexi&oacute;n que a&uacute;n est&eacute; abierto al 
+        llamar a close(), har&aacute; que la conexi&oacute;n aguante abierta mientras 
+        no se cierre ese flujo. 
+        El acceso al flujo ya abierto, pues, estar&aacute; permitido tras el close(), 
+        pero no se podr&aacute; 
+        acceder de nuevo a la conexi&oacute;n.</p>
+      <p> 
+        - Datagram extends java.io.DataInput, java.io.DataOutput. Esta interface 
+        no 
+        pertenece a la jerarqu&iacute;a de la Generic Connection Framework, sino 
+        que hereda de 
+        las interfaces DataInput y DataOutput de java.io para definir las caracter&iacute;sticas 
+        de 
+        un paquete Datagrama. 
+        Las instancias de esta interface, por tanto, nos servir&aacute;n para 
+        almacenar datos a leer o 
+        escribir por medio de una conexi&oacute;n DatagramConnection.</p>
+      <p> - DatagramConnection extends Connection. Con esta interface se define 
+        una conexi&oacute;n basada en datagramas, a partir de la cual se podr&aacute;n 
+        definir distintos protocolos basados en ellos ya a manos de cada perfil. 
+        (M&aacute;s adelante, veremos c&oacute;mo lo hace el perfil MIDP usando 
+        el protocolo UDP con la UDPDatagramConnection). La comunicaci&oacute;n 
+        por medio de datagramas se basa en el env&iacute;o de paquetes de datos 
+        por la red, a utilizar en defecto de una comunicaci&oacute;n por sockets, 
+        m&aacute;s fiable, en los casos en que la conexi&oacute;n entre los dos 
+        puntos no se considere estable. Los datagramas no proporcionan soporte 
+        para la reorganizaci&oacute;n de paquetes, ni se garantiza que &eacute;stos 
+        lleguen en el orden en que fueron enviados, aunque habr&aacute; m&eacute;todos 
+        para corregir esto por programaci&oacute;n. La principal raz&oacute;n 
+        del uso de datagramas es la velocidad, ya que, se evita el control del 
+        orden de los paquetes y la comprobaci&oacute;n de su n&uacute;mero o integridad.</p>
+      <p>Por ejemplo, las aplicaciones que necesiten comunicaci&oacute;n de audio 
+        o v&iacute;deo se servir&aacute;n 
+        com&uacute;nmente de este tipo de conexi&oacute;n, ya que, ella se considera 
+        siempre exitosa 
+        aunque se haya producido la p&eacute;rdida de algunos paquetes: esto aparecer&aacute; 
+        temporalmente en forma de ruido, a la espera de que una nueva recepci&oacute;n 
+        proporcione 
+        los paquetes que falten. 
+        - InputConnection extends Connection. Con esta interface definimos una 
+        conexi&oacute;n 
+        por medio de la cual podremos leer datos, por tanto, est&aacute; basada 
+        en flujos de entrada. 
+        Sus dos &uacute;nicos m&eacute;todos son:</p>
+      <p> 
+        &#8226; DataInputStream openDataInputStream(). Con este m&eacute;todo 
+        obtenemos un 
+        flujo de entrada del que leer, cuyos elementos son de un tipo de dato 
+        conocido. 
+        Para poder obtener este flujo, previamente debemos haber obtenido una 
+        instancia 
+        de InputConnection sobre la que llamar a este m&eacute;todo, usando la 
+        clase 
+        Connector como ya veremos.</p>
+      <p> 
+        &#8226; InputStream openInputStream(). &Eacute;ste obtiene un InputStream 
+        asociado a la 
+        conexi&oacute;n. Un InputStream es padre de DataInputStream en J2SE, 
+        representando este &uacute;ltimo un flujo m&aacute;s concreto donde sabemos 
+        qu&eacute; tipo de dato 
+        deseamos leer. Cuando deseemos leer bytes en general, podremos obtener 
+        simplemente un InputStream. 
+        - OutputConnection extends Connection. En contraposici&oacute;n a la interface 
+        anterior, 
+        &eacute;sta representar&aacute; conexiones de escritura. Los dos m&eacute;todos 
+        que posee ser&aacute;n an&aacute;logos 
+        a los de la interface anterior, siendo en este caso de salida:</p>
+      <p> 
+        &#8226; DataOutputStream openDataOutputStream(): con este m&eacute;todo 
+        obtenemos un 
+        flujo de salida en el que escribir, cuyos elementos son de un tipo de 
+        dato conocido. 
+        &#8226; OutputStream openOutputStream(): &Eacute;ste obtiene un OutputStream 
+        asociado a 
+        la conexi&oacute;n para escribir en &eacute;l bytes en general.</p>
+      <p> - StreamConnectionNotifier extends Connection. Utiliz&aacute;ndose para 
+        sockets que act&uacute;en como servidor, esta interface representa la 
+        espera de establecimiento de la conexi&oacute;n que lanzar&aacute; un 
+        posible socket cliente. Con un &uacute;nico m&eacute;todo public StreamConnection 
+        acceptAndOpen(), nos notificar&aacute; si la conexi&oacute;n a emplear 
+        con el cliente se ha realizado con &eacute;xito, devolviendo &eacute;sta 
+        de forma que ya podremos trasvasar los datos deseados. (Comentaremos este 
+        tipo de conexi&oacute;n m&aacute;s detalladamente al llegar a MIDP).</p>
+      <p> 
+        - StreamConnection extends InputConnection, OutputConnection. Esta conexi&oacute;n 
+        se basa tanto en flujos de entrada como de salida, es decir, por ella 
+        se nos permitir&aacute; 
+        tanto leer como escribir datos. No a&ntilde;ade ning&uacute;n m&eacute;todo 
+        nuevo a los heredados de sus 
+        interfaces padre, simplemente representa un ente con toda la funcionalidad 
+        de E/S de 
+        sus dos ancestros inmediatos.</p>
+      <p> 
+        - ContentConnection extends StreamConnection. Padre de la HttpConnection, 
+        esta interface define las caracter&iacute;sticas de una conexi&oacute;n 
+        que puede describir el 
+        contenido que viaja por ella. 
+        Las conexiones vistas hasta ahora transmiten datos sin importar qu&eacute; 
+        representan, pero 
+        en &eacute;sta su estructura debe ser conocida de antemano, ya que, aglutinar&aacute; 
+        a los 
+        protocolos en los que aparecen campos describiendo los datos que se transportan 
+        de 
+        un punto a otro. Los tres m&eacute;todos que heredar&aacute;n todas ellas 
+        son:</p>
+      <p> 
+        &#8226; String getEncoding(). Informa sobre la codificaci&oacute;n del 
+        contenido que se est&aacute; 
+        transmitiendo con una cadena identificativa. Si la conexi&oacute;n es 
+        de tipo 
+        HttpConnection heredar&aacute; este m&eacute;todo, informando en ese caso 
+        del valor del 
+        campo de cabecera HTTP content-encoding. Devuelve null si no es conocido.</p>
+      <p> 
+        &#8226; long getLength(). Longitud en bytes del contenido a transmitir. 
+        Si la conexi&oacute;n es 
+        una HttpConnection, dar&aacute; con este m&eacute;todo el valor del campo 
+        de cabecera 
+        content-length. Devuelve -1 si no es conocido.</p>
+      <p> 
+        &#8226; String getType(). Devuelve el tipo de contenido que se est&aacute; 
+        transmitiendo por la 
+        conexi&oacute;n. En el caso de una HttpConnection, se da con este m&eacute;todo 
+        el valor del 
+        campo de cabecera content-type. Devuelve null si no es conocido.</p></td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

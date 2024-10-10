@@ -1,0 +1,196 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Ejercicios Java</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Descargar Ejercicios de Java, Ejemplos de java, Aplicaciones  de java, JBuilder, J Builder, codigo java">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2>E 
+        J E R C I C I O S</h2></td>
+  </tr>
+  <tr> 
+    <td height="170" > 
+      <h3>Controles</h3>
+      <p> 54.- Aplicación que nos permite mostrar los distintos caracteres ascii 
+        a través de edits y Command </p>
+      <p>// En la clase ventana.java</p>
+      <p>package pasciiventana;<br>
+        import javax.swing.UIManager;<br>
+        <br>
+        public class ventana {<br>
+        boolean packFrame = false;<br>
+        //Construir la aplicaci&oacute;n<br>
+        public ventana() {<br>
+        Marco1 frame = new Marco1();<br>
+        //Validar marcos que tienen tama&ntilde;os preestablecidos<br>
+        //Empaquetar marcos que cuentan con informaci&oacute;n de tama&ntilde;o 
+        preferente &uacute;til. Ej. de su dise&ntilde;o.<br>
+        if (packFrame) {<br>
+        frame.pack();<br>
+        }<br>
+        else {<br>
+        frame.validate();<br>
+        }<br>
+        frame.setVisible(true);<br>
+        }<br>
+        //M&eacute;todo Main<br>
+        public static void main(String[] args) {<br>
+        try {<br>
+        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());<br>
+        }<br>
+        catch(Exception e) {<br>
+        e.printStackTrace();<br>
+        }<br>
+        new ventana();<br>
+        }<br>
+        }</p>
+      <p>//en la clase ascii.java</p>
+      <p>package pasciiventana;<br>
+        <br>
+        public class Acsii {<br>
+        static public String CombertirAcci(String num){<br>
+        return String.valueOf((char)Integer.parseInt(num));<br>
+        }<br>
+        static public short AsciiNumero(String ascii){<br>
+        return (short)ascii.charAt(0);<br>
+        }<br>
+        }</p>
+      <p>//en la clase marco1.java</p>
+      <p>package pasciiventana;<br>
+        import java.awt.*;<br>
+        import java.awt.event.*;<br>
+        import javax.swing.*;<br>
+        import com.borland.jbcl.layout.*;<br>
+        <br>
+        public class Marco1 extends JFrame {<br>
+        JPanel contentPane;<br>
+        JButton jButton1 = new JButton();<br>
+        XYLayout xYLayout1 = new XYLayout();<br>
+        JButton jButton2 = new JButton();<br>
+        JTextField jTextField3 = new JTextField();<br>
+        JTextField jTextField4 = new JTextField();<br>
+        JLabel jLabel1 = new JLabel();<br>
+        JLabel jLabel2 = new JLabel();<br>
+        JLabel jLabel3 = new JLabel();<br>
+        JLabel jLabel4 = new JLabel();<br>
+        //Construir el marco<br>
+        public Marco1() {<br>
+        enableEvents(AWTEvent.WINDOW_EVENT_MASK);<br>
+        try {<br>
+        jbInit();<br>
+        }<br>
+        catch(Exception e) {<br>
+        e.printStackTrace();<br>
+        }<br>
+        }<br>
+        //Inicializaci&oacute;n de componentes<br>
+        private void jbInit() throws Exception {<br>
+        contentPane = (JPanel) this.getContentPane();<br>
+        jButton1.setFont(new java.awt.Font(&quot;Dialog&quot;, 0, 30));<br>
+        jButton1.setToolTipText(&quot;Pulsa para pasar cadena a codigo Ascii&quot;);<br>
+        jButton1.setText(&quot;---&gt;&quot;);<br>
+        jButton1.addActionListener(new Marco1_jButton1_actionAdapter(this));<br>
+        contentPane.setLayout(xYLayout1);<br>
+        this.setSize(new Dimension(400, 300));<br>
+        this.setTitle(&quot;:.: Aplicaciones J A O :.:.:&quot;);<br>
+        jButton2.setFont(new java.awt.Font(&quot;Dialog&quot;, 0, 30));<br>
+        jButton2.setText(&quot;&lt;---&quot;);<br>
+        jButton2.addActionListener(new Marco1_jButton2_actionAdapter(this));<br>
+        jTextField3.setFont(new java.awt.Font(&quot;Dialog&quot;, 0, 11));<br>
+        jTextField3.setText(&quot;&quot;);<br>
+        jTextField3.addActionListener(new Marco1_jTextField3_actionAdapter(this));<br>
+        jLabel1.setFont(new java.awt.Font(&quot;Dialog&quot;, 1, 18));<br>
+        jLabel1.setForeground(SystemColor.activeCaptionText);<br>
+        jLabel1.setText(&quot;Cadena:&quot;);<br>
+        jLabel2.setFont(new java.awt.Font(&quot;Dialog&quot;, 1, 18));<br>
+        jLabel2.setForeground(SystemColor.activeCaptionText);<br>
+        jLabel2.setText(&quot;Ascii:&quot;);<br>
+        contentPane.setBackground(UIManager.getColor(&quot;CheckBoxMenuItem.selectionBackground&quot;));<br>
+        contentPane.setMinimumSize(new Dimension(301, 200));<br>
+        contentPane.setPreferredSize(new Dimension(301, 200));<br>
+        jLabel3.setFont(new java.awt.Font(&quot;Bauhaus 93&quot;, 3, 36));<br>
+        jLabel3.setForeground(SystemColor.activeCaptionText);<br>
+        jLabel3.setText(&quot;Generador Asii by:&quot;);<br>
+        jLabel4.setFont(new java.awt.Font(&quot;Arial Black&quot;, 1, 38));<br>
+        jLabel4.setForeground(SystemColor.activeCaptionText);<br>
+        jLabel4.setText(&quot;J A O&quot;);<br>
+        contentPane.add(jButton2, new XYConstraints(199, 217, 102, 42));<br>
+        contentPane.add(jButton1, new XYConstraints(57, 219, 102, 41));<br>
+        contentPane.add(jTextField3, new XYConstraints(66, 168, 91, 32));<br>
+        contentPane.add(jTextField4, new XYConstraints(201, 168, 92, 32));<br>
+        contentPane.add(jLabel1, new XYConstraints(83, 133, 75, 27));<br>
+        contentPane.add(jLabel2, new XYConstraints(201, 132, 69, 29));<br>
+        contentPane.add(jLabel4, new XYConstraints(127, 81, 133, 38));<br>
+        contentPane.add(jLabel3, new XYConstraints(36, 10, 335, 74));<br>
+        }<br>
+        //Modificado para poder salir cuando se cierra la ventana<br>
+        protected void processWindowEvent(WindowEvent e) {<br>
+        super.processWindowEvent(e);<br>
+        if (e.getID() == WindowEvent.WINDOW_CLOSING) {<br>
+        System.exit(0);<br>
+        }<br>
+        }<br>
+        void jTextField3_actionPerformed(ActionEvent e) {<br>
+        }<br>
+        void jButton1_actionPerformed(ActionEvent e) {<br>
+        jTextField4.setText(String.valueOf(Acsii.AsciiNumero(jTextField3.getText())));<br>
+        }<br>
+        void jButton2_actionPerformed(ActionEvent e) {<br>
+        jTextField3.setText(Acsii.CombertirAcci(jTextField4.getText()));<br>
+        }<br>
+        }<br>
+        class Marco1_jTextField3_actionAdapter implements java.awt.event.ActionListener 
+        {<br>
+        Marco1 adaptee;<br>
+        Marco1_jTextField3_actionAdapter(Marco1 adaptee) {<br>
+        this.adaptee = adaptee;<br>
+        }<br>
+        public void actionPerformed(ActionEvent e) {<br>
+        adaptee.jTextField3_actionPerformed(e);<br>
+        }<br>
+        }<br>
+        class Marco1_jButton1_actionAdapter implements java.awt.event.ActionListener 
+        {<br>
+        Marco1 adaptee;<br>
+        Marco1_jButton1_actionAdapter(Marco1 adaptee) {<br>
+        this.adaptee = adaptee;<br>
+        }<br>
+        public void actionPerformed(ActionEvent e) {<br>
+        adaptee.jButton1_actionPerformed(e);<br>
+        }<br>
+        }<br>
+        class Marco1_jButton2_actionAdapter implements java.awt.event.ActionListener 
+        {<br>
+        Marco1 adaptee;<br>
+        Marco1_jButton2_actionAdapter(Marco1 adaptee) {<br>
+        this.adaptee = adaptee;<br>
+        }<br>
+        public void actionPerformed(ActionEvent e) {<br>
+        adaptee.jButton2_actionPerformed(e);<br>
+        }<br>
+        }</p>
+      </td>
+    <td>&nbsp;</td>
+    <td><a href="http://www.euskalnet.net/juanarana/JBuilderZip/PAsciiVentana.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  
+  <tr> 
+    <td height="53"> 
+      <div align="right"><a href="http://www.euskalnet.net/juanarana/index3.htm" target="_parent">&lt;&lt;Menu Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

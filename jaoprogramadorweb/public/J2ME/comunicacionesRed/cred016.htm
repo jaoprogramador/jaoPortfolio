@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Indice J2ME</title>
+<META http-equiv=Content-Language content=es>
+<META content="Manual J2ME, ejemplos J2ME, codigos J2ME" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Manual J2ME, ejemplos J2ME, codigos J2ME">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> Redireccionamiento URL</h2></td>
+  </tr>
+  <tr> 
+    <td colspan="3"> <p>Es circunstancia habitual en la navegaci&oacute;n por 
+        Internet que tras pedir un determinado 
+        recurso, como puede ser una p&aacute;gina HTML, seamos redirigidos a otra 
+        URL diferente de la 
+        que hab&iacute;amos solicitado inicialmente (portales, p&aacute;ginas 
+        trasladadas, etc.). Esto debemos 
+        preveerlo en nuestros MIDlets, si es que deseamos hacer una conexi&oacute;n 
+        robusta que no se 
+        pierda f&aacute;cilmente y, por tanto, sea capaz de &quot;perseguir&quot; 
+        autom&aacute;ticamente su objetivo a lo 
+        largo de todas las redirecciones a las que deseen enfrentarla.</p>
+      <p> 
+        La soluci&oacute;n que ofrecemos es bastante sencilla. Extrayendo las 
+        ideas clave ser&iacute;a: 
+        1. Intentamos la conexi&oacute;n con la URL que conocemos, como siempre 
+        con 
+        (HttpConnection) Connector.open(url).</p>
+      <p> 
+        2. Comprobamos el c&oacute;digo HTTP de respuesta ofrecido con 
+        HttpConnection.getResponseCode(). Si &eacute;ste ha sido un c&oacute;digo 
+        que indica 
+        redireccionamiento (constantes 3xx de la clase HttpConnection: HTTP_MOVED_PERM, 
+        HTTP_MOVED_TEMP, HTTP_SEE_OTHER, HTTP_TEMP_REDIRECT, etc.) sabremos que 
+        nuestra conexi&oacute;n no va a tener &eacute;xito a la primera: debemos 
+        redireccionar, pero &iquest;a 
+        d&oacute;nde?.</p>
+      <p> 
+        3. La respuesta se nos env&iacute;a a la vez que el c&oacute;digo anterior, 
+        en el campo de cabecera 
+        Location. Llamando a HttpConnection.getHeaderField(&quot;Location&quot;) 
+        tendremos esa 
+        URL donde se ha movido al recurso y all&iacute; reintentaremos conectar.</p>
+      <p> 
+        4. La URL de Location puede haberse ofrecido localmente, por ejemplo 
+        &quot;/nuevoDirectorio/servlet&quot;. En este caso, hacia el cual nos 
+        llevar&aacute; preguntar por 
+        if(urlLocation.startsWith(&quot;/&quot;), debemos componer la url de nuevo 
+        con algo similar a: 
+        nuevaUrl = &quot;http://&quot; + conex.getHost() + &quot;:&quot; + Integer.toString(conex.getPort()) 
+        + 
+        urlLocation.</p>
+      <p> 
+        As&iacute; seguir&iacute;amos en bucle hasta que se nos ofrezca una respuesta 
+        HTTP de c&oacute;digo distinto a 
+        los de redireccionamiento indicados. Con esto, logramos que nuestro MIDlet 
+        consiga realizar 
+        su petici&oacute;n del recurso deseado al servidor, aunque existan varios 
+        redireccionamientos entrela URL que nuestro MIDlet conoce (donde cree 
+        inicialmente que est&aacute; el recurso que desea) y 
+        la URL donde finalmente se ha trasladado a ese recurso.</p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

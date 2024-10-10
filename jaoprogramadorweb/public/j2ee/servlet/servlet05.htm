@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Peticiones y Respuestas</title>
+<META http-equiv=Content-Language content=es>
+<META content="Manual Servlet, ejemplos Servlet, codigos Servlet" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Manual Servlet, ejemplos Servlet, codigos Servlet">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2> Peticiones y Respuestas</h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <table border="0" >
+        <tr> 
+          <td width="21%"><h3>Contenido:</h3></td>
+          <td width="79%"></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="struts09.htm#Peti">- Peticiones y Respuestas</a></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="struts09.htm#Req">- Objetos HttpServletRequest</a></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="struts09.htm#Res">- Objetos HttpServletResponse</a></td>
+        </tr>
+		<tr> 
+          <td>&nbsp;</td>
+          <td><a href="struts09.htm#Cab">- Cabecera de Datos HTTP</a></td>
+        </tr>
+      </table>
+      <p>&nbsp;</p>
+      <h3>Peticiones y Respuestas:<a name="Peti"></a></h3>
+      <p>Los m&eacute;todos de la clase HttpServlet que manejan peticiones de 
+        cliente toman dos argumentos.<br>
+        Un objeto HttpServletRequest, que encapsula los datos desde el cliente. 
+        <br>
+        Un objeto HttpServletResponse, que encapsula la respuesta hacia el cliente.</p>
+	  <h3>Objetos HttpServletRequest:<a name="Req"></a></h3>
+      <p>Un objeto HttpServletRequest proporciona acceso a los datos de cabecera 
+        HTTP, como cualquier
+        cookie encontrada en la petici&oacute;n, y el m&eacute;todo HTTP con el 
+        que se ha realizado la petici&oacute;n. El objeto
+        HttpServletRequest tambi&eacute;n permite obtener los argumentos que el 
+        cliente env&iacute;a como parte de
+        la petici&oacute;n.<br>
+        Para acceder a los datos del cliente<br>
+        El m&eacute;todo getParameter devuelve el valor de un par&aacute;metro 
+        nombrado. Si nuestro par&aacute;metro pudiera
+        tener m&aacute;s de un valor, deber&iacute;amos utilizar getParameterValues 
+        en su lugar. El m&eacute;todo
+        getParameterValues devuelve un array de valores del par&aacute;metro nombrado. 
+        (El m&eacute;todo
+        getParameterNames proporciona los nombres de los par&aacute;metros.<br>
+        
+        Para peticiones GET de HTTP, el m&eacute;todo getQueryString devuelve 
+        en un String una l&iacute;nea de datos
+        desde el cliente. Debemos analizar estos datos nosotros mismos para obtener 
+        los par&aacute;metros y los
+        valores.<br>
+        
+        Para peticones POST, PUT, y DELETE de HTTP.<br>
+        Si esperamos los datos en formato texto, el m&eacute;todo getReader devuelve 
+        un BufferedReader
+        utilizado para leer la l&iacute;nea de datos.<br>
+        
+        Si esperamos datos binarios, el m&eacute;todo getInputStream devuelve 
+        un ServletInputStream
+        utilizado para leer la l&iacute;nea de datos.<br>
+        
+        
+        Nota:<br>
+        Se debe utilizar el m&eacute;todo getParameter[Values] o uno de los m&eacute;todos 
+        que permitan analizar
+        los datos. No pueden utilizarse juntos en una &uacute;nica petici&oacute;n.</p>
+	  <h3>Objetos HttpServletResponse:<a name="Res"></a></h3>
+      <p>Un objeto HttpServletResponse proporciona dos formas de devolver datos 
+        al usuario.<br>
+        - El m&eacute;todo getWriter devuelve un Writer  <br>
+        - El m&eacute;todo getOutputStream devuelve un ServletOutputStream  <br>
+        Se utiliza el m&eacute;todo getWriter para devolver datos en formato texto 
+        al usuario y el m&eacute;todo
+        getOutputStream para devolver datos binarios.
+        Si cerramos el Writer o el ServletOutputStream despu&eacute;s de haber 
+        enviado la respuesta,
+        permitimos al servidor saber cuando la respuesta se ha completado.</p>
+	  <h3>Cabecera de Datos HTTP:<a name="Cab"></a></h3>
+      <p>Debemos seleccionar la cabecera de datos HTTP antes de acceder a Writer 
+        o a OutputStream. La
+        clase HttpServletResponse proporciona m&eacute;todos para acceder a los 
+        datos de la cabecera. Por
+        ejemplo, el m&eacute;todo setContentType selecciona el tipo del contenido. 
+        (Normalmente esta es la
+        &uacute;nica cabecera que se selecciona manualmente).</p>
+      <p>&nbsp; </p>
+      <p><br>
+      </p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>JDBC frente a ODBC y otros API&#8217;s</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación en JDBC,Programas JDBC,Aplicaciones en JDBC,Ejercicios en JDBC, Ejemplos de JDBC,Tutoriales de JDBC,Manuales JDBC" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="JDBC, Manual JDBC, tutorial JDBC, Ejemplos JDBC, ejercicios JDBC">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> JDBC frente a ODBC y otros API&#8217;s</h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <p>En este punto, el ODBC de Microsoft (Open 
+        Database Connectvity), es probablemente el API m&aacute;s extendido para 
+        el acceso a bases de datos relacionales. Ofrece la posibilidad de conectar 
+        a la mayor&iacute;a de las bases de datos en casi todas las plataformas. 
+        &iquest;Por qu&eacute; no usar, entonces, ODBC, desde Java?.</p>
+      <p>La respuesta es que se puede usar ODBC desde Java, pero es preferible 
+        hacerlo con la ayuda de JDBC mediante el puente JDBC-ODBC. La pregunta 
+        es ahora &iquest;por qu&eacute; necesito JDBC?. Hay varias respuestas 
+        a estas preguntas:</p>
+      <p> 1.- ODBC no es apropiado para su uso directo con Java porque usa una 
+        interface C. Las llamadas desde Java a c&oacute;digo nativo C tienen un 
+        n&uacute;mero de inconvenientes en la seguridad, la implementaci&oacute;n, 
+        la robustez y en la portabilidad autom&aacute;tica de las aplicaciones.</p>
+      <p> 2.- Una traducci&oacute;n literal del API C de ODBC en el API Java podr&iacute;a 
+        no ser deseable. Por ejemplo, Java no tiene punteros, y ODBC hace un uso 
+        copioso de ellos, incluyendo el notoriamente propenso a errores &#8220;void 
+        * &#8220;. Se puede pensar en JDBC como un ODBC traducido a una interfase 
+        orientada a objeto que es el natural para programadores Java.</p>
+      <p> 3. ODBC es dif&iacute;cil de aprender. Mezcla caracter&iacute;sticas 
+        simples y avanzadas juntas, y sus opciones son complejas para &#8216;querys&#8217; 
+        simples. JDBC por otro lado, ha sido dise&ntilde;ado para mantener las 
+        cosas sencillas mientras que permite las caracter&iacute;sticas avanzadas 
+        cuando &eacute;stas son necesarias.</p>
+      <p> 4. Un API Java como JDBC es necesario en orden a permitir una soluci&oacute;n 
+        Java &#8220;pura&#8221;. Cuando se usa ODBC, el gestor de drivers de ODBC 
+        y los drivers deben instalarse manualmente en cada m&aacute;quina cliente. 
+        Como el driver JDBC esta completamente escrito en Java, el c&oacute;digo 
+        JDBC es autom&aacute;ticamente instalable, portable y seguro en todas 
+        las plataformas Java.</p>
+      <p>En resumen, el API JDBC es el interfase natural de Java para las abstracciones 
+        y conceptos b&aacute;sicos de SQL. JDBC retiene las caracter&iacute;sticas 
+        b&aacute;sicas de dise&ntilde;o de ODBC; de hecho, ambos interfaces est&aacute;n 
+        basados en el X/Open SQL CLI (Call Level Interface).</p>
+      <p>M&aacute;s recientemente Microsoft ha introducido nuevas API detr&aacute;s 
+        de ODBC. RDO, ADO y OLE DB. Estos dise&ntilde;os se mueven en la misma 
+        direcci&oacute;n que JDBC en muchas maneras, puesto que se les da una 
+        orientaci&oacute;n a objeto bas&aacute;ndose en clases que se implementan 
+        sobre ODBC.<br>
+      </p>
+      <p><br>
+      </p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

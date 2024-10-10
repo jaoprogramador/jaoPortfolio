@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Introducci&oacute;n a JQuery</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta name="keywords" content="Introduccion a JQuery, Manual JQuery, tutorial JQuery, Ejemplos JQuery, ejercicios JQuery">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos"><tr> 
+    <td height="39" colspan="3"> <h2>Callback de funciones jQuery</h2></td>
+  </tr>
+  <tr> 
+    <td height="268" colspan="3"> <p> A menudo cuando hacemos aplicaciones enriquecidas 
+        del lado del cliente con jQuery nos<br>
+        vemos en la necesidad de encadenar varias llamadas a funciones, para que 
+        una se ejecute<br>
+        detr&aacute;s de otra, creando un efecto m&aacute;s elaborado. En este 
+        art&iacute;culo veremos lo sencillo que es<br>
+        realizar lo que en ingl&eacute;s se llama &quot;callback&quot;, es decir 
+        una funci&oacute;n que se ejecuta despu&eacute;s de<br>
+        otra.<br>
+        Apilar funciones, para que se ejecuten una detr&aacute;s de otra, nos 
+        servir&aacute; para hacer muchas<br>
+        cosas. En nuestro d&iacute;a a d&iacute;a con jQuery iremos encontrando 
+        la utilidad, pero de momento para<br>
+        explicar un caso en el que nos resultar&aacute; imprescindible, se me 
+        ocurre que deseemos hacer una<br>
+        secuencia de efectos y cambios din&aacute;micos en un elemento.<br>
+        Por ejemplo imaginemos que se desea ocultar una capa con un efecto de 
+        fundido (de opaco a<br>
+        transparente), luego moverla a otra posici&oacute;n y volverla a mostrar 
+        (ya en la nueva posici&oacute;n) con<br>
+        otro efecto de fundido (en este caso de transparente a opaco). En principio 
+        podr&iacute;amos pensar<br>
+        en hacer un c&oacute;digo como este:<br>
+        $(&quot;#micapa&quot;).fadeOut(2000);<br>
+        $(&quot;#micapa&quot;).css({top: 300, left:200});<br>
+        $(&quot;#micapa&quot;).fadeIn(2000);<br>
+        En este caso estamos alterando las propiedades de una capa con id=&quot;micapa&quot;. 
+        Primero<br>
+        llamamos a fadeOut() para ocultarla con un fundido, que durar&aacute; 
+        2 segundos (v&eacute;ase el<br>
+        par&aacute;metro 2000, que son los milisegundos que durar&aacute; el efecto). 
+        Luego alteramos la posici&oacute;n<br>
+        de la capa, cambiando sus atributos CSS. Para acabar la volvemos a mostrar 
+        con un fundido de<br>
+        otros 2000 milisegundos.<br>
+        Si lanzamos la ejecuci&oacute;n de estas sentencias, tal como aparece 
+        en el c&oacute;digo, ser&aacute; como si se<br>
+        ejecutasen todas a la vez. Como los fadeOut y fadeIn tardar&aacute;n 2 
+        segundos en ejecutarse y los<br>
+        cambios de las propiedades CSS top y left son inmediatos, lo que ocurrir&aacute; 
+        ser&aacute; que primero<br>
+        veremos la capa moverse a la nueva posici&oacute;n y luego veremos los 
+        dos efectos de fundido.<br>
+        Lo mejor para darse cuenta de este caso es verlo en marcha. </p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

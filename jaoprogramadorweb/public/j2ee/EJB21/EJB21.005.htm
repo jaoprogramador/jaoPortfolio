@@ -1,0 +1,51 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>LIntroducci&amp;oacute;n a EJB 2.1</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación en EJB 2.1,Programas EJB 2.1,Aplicaciones en EJB 2.1,Ejercicios en EJB 2.1, Ejemplos de EJB 2.1,Tutorial de EJB 2.1,Manual EJB 2.1" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="EJB 2.1, Manual EJB 2.1, tutorial EJB 2.1, Ejemplos EJB 2.1, ejercicios EJB 2.1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> <strong>Elementos del EJB</strong></h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <p>A la hora de desarrollar un EJB es necesario definir:
+•	Un interfaz local, que es un conjunto de métodos para la creación, acceso y destrucción 
+de las instancias de los beans (home objects). Este interfaz no está implementado en la 
+propia clase bean, sino en el contenedor. Por ejemplo, define el método create() para 
+instanciar la clase.
+
+•	A través del interfaz remoto se accede a los métodos de negocio (business methods),
+ que han sido implementados en el bean. 
+
+•	La clase bean define la lógica de negocio, a la que se accede a través del interfaz remoto.
+Cuando el cliente llama a un método es el contenedor el que recibe la solicitud y la 
+delega (reenvia) a la instancia de la clase.
+Los servicios de transacciones, seguridad y persistencia ya dijimos que los gestiona el servidor, 
+pero podría ocurrir que los gestionase el propio bean.
+
+      </p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

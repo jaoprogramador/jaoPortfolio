@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Archivo de propiedades</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación en hibernate,Programas hibernate,Aplicaciones en hibernate,Ejercicios en hibernate, Ejemplos de hibernate,Tutoriales de hibernate,Manuales hibernate" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="hibernate, Manual hibernate, tutorial hibernate, Ejemplos hibernate, ejercicios hibernate">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2>Archivo de propiedades</h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <p>Para no complicar las cosas de entrada, vamos 
+        a plantear un archivo de propiedades de Hibernate sencillo que nos permita 
+        interactuar con HSQLDB y un archivo de emparejamiento simple entre la 
+        clase Categoria y la tabla Categorias.<br>
+        Para que tenga lugar la boda, hay que presentar dos documentos:<br>
+        &#8226; Hibernate.properties: En el que se dice qu&eacute; gestor de bases 
+        de datos usaremos y a qu&eacute; base de datos nos conectaremos y c&oacute;mo 
+        lo haremos.<br>
+        &#8226; NombreDeClasse.hbm.xml: En el que se describe c&oacute;mo se relacionan 
+        clases y tablas y propiedades y columnas.<br>
+        A continuaci&oacute;n, los describiremos con m&aacute;s detalle.<br>
+        El archivo de propiedades de Hibernate:<br>
+        &#8220;Hibernate.properties&#8221;<br>
+        En este archivo, se pueden especificar much&iacute;simas cosas. Nos limitaremos, 
+        por ahora, a proporcionar los datos necesarios para que Hibernate se pueda 
+        conectar a nuestra base de datos HSQLDB. Este ser&iacute;a, pues, el m&iacute;nimo 
+        necesario para funcionar:<br>
+        ## HypersonicSQL<br>
+        hibernate.dialect net.sf.hibernate.dialect.HSQLDialect<br>
+        hibernate.connection.driver_class org.hsqldb.jdbcDriver<br>
+        hibernate.connection.username sa <br>
+        hibernate.connection.password<br>
+        hibernate.connection.url jdbc:hsqldb:hsql://localhost<br>
+        La configuraci&oacute;n es sencilla. Especificamos el dialecto SQL y los 
+        datos necesarios para poder establecer una conexi&oacute;n con la base 
+        de datos v&iacute;a JDBC (Driver, URL, usuario y contrase&ntilde;a).<br>
+        El archivo de emparejamiento (mapping):<br>
+        &#8220;Categoria.hbm.xml&#8221;<br>
+        Este es el archivo que casa los mundos relacional y objetual. El ejemplo, 
+        sencill&iacute;simo, que presentamos aqu&iacute; es el que se corresponde 
+        con la clase Categoria.<br>
+        &lt;?xml version=&quot;1.0&quot;?&gt;<br>
+        &lt;!DOCTYPE hibernate-mapping PUBLIC<br>
+        &quot;-//Hibernate/Hibernate Mapping DTD//EN&quot;<br>
+        &quot;http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd&quot;&gt;<br>
+        &lt;hibernate-mapping&gt;<br>
+        &lt;class name=&quot;escuela.beans.Categoria&quot; table=&quot;categorias&quot;&gt;<br>
+        &lt;id name=&quot;id&quot; type=&quot;integer&quot; column=&quot;ID&quot; 
+        unsaved-value=&quot;-1&quot;&gt;<br>
+        &lt;generator class=&quot;identity&quot;/&gt;<br>
+        &lt;/id&gt;<br>
+        &lt;property name=&quot;categoria&quot; column=&quot;CATEGORIA&quot;<br>
+        type=&quot;string&quot;<br>
+        unique=&#8221;true&#8221;<br>
+        not-null=&quot;true&quot;/&gt;<br>
+        &lt;/class&gt;<br>
+        &lt;/hibernate-mapping&gt;<br>
+        Como vemos, para definir los emparejamientos se usa un documento XML.</p>
+      <p> 
+      </p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

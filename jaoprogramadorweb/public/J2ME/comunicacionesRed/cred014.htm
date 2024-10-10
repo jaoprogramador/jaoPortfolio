@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Indice J2ME</title>
+<META http-equiv=Content-Language content=es>
+<META content="Manual J2ME, ejemplos J2ME, codigos J2ME" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Manual J2ME, ejemplos J2ME, codigos J2ME">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> Fases en la comunicaci&oacute;n HTTP</h2></td>
+  </tr>
+  <tr> 
+    <td colspan="3"> <p>HTTP es un protocolo de petici&oacute;n (cliente) - respuesta 
+        (servidor), donde los par&aacute;metros de la petici&oacute;n deben ser 
+        fijados antes que &eacute;sta sea enviada. La comunicaci&oacute;n que 
+        nos permite hacer una petici&oacute;n y recibir una respuesta pasa por 
+        tres fases o estados, los cuales ya enumeramos anteriormente y ahora detallamos:</p>
+      <p>Establecimiento ---&gt; Conectado ---&gt;Cierre</p>
+      <p>- ESTABLECIMIENTO. En esta fase, los par&aacute;metros de la petici&oacute;n 
+        son establecidos y con ellos se intenta la conexi&oacute;n con el servidor. 
+        De los vistos para HttpConnection, existen dos m&eacute;todos que s&oacute;lo 
+        pueden ser invocados en este estado y con los cuales informamos al servidor 
+        de las caracter&iacute;sticas de nuestra petici&oacute;n, como son los 
+        ya estudiados setRequestMethod() y setRequestProperty(). El primero determina 
+        un valor de entre GET, HEAD o POST, y con el segundo se podr&aacute;n 
+        a&ntilde;adir tantos campos de cabecera de petici&oacute;n como deseemos, 
+        de entre los m&aacute;s de 40 existentes. Algunos de ellos son:<br>
+        &#8226; User-Agent. Tipo de cliente que realiza la petici&oacute;n.<br>
+        &#8226; Content-Language. Pa&iacute;s e idioma del cliente.<br>
+        &#8226; Accept. Formatos de respuesta que acepta el cliente.<br>
+        &#8226; Expires. Tiempo m&aacute;ximo que el cliente espera la respuesta 
+        del servidor.<br>
+        &#8226; Content-Length. Longitud en bytes de la petici&oacute;n.<br>
+        Instanciamos pues la conexi&oacute;n y la preparamos para ser lanzada, 
+        lo cual se codificar&aacute; de una forma u otra. Un ejemplo b&aacute;sico 
+        de petici&oacute;n GET ser&iacute;a:</p>
+      <p>//Creamos la conexi&oacute;n dando al m&eacute;todo Connector.open() 
+        una URL donde, en el caso de GET, los datos //a enviar en el mensaje forman 
+        parte de ella (Query). En este caso, el volumen del cuerpo est&aacute; 
+        limitado.<br>
+        String URL = &quot;http://www.site.com/servlet?accion=inicio&amp;digo=hola&quot;;<br>
+        HttpConnection con = (HttpConnection)Connector.open(URL);<br>
+        //Establecemos par&aacute;metros para la conversaci&oacute;n:<br>
+        con.setRequestMethod(HttpConnection.GET);<br>
+        con.setRequestProperty(&quot;User-Agent&quot;, &quot;Profile/MIDP-2.0 
+        Configuration/CLDC-1.1&quot;);<br>
+        En el caso de una petici&oacute;n POST, los datos de la petici&oacute;n 
+        (cuerpo) se enviar&aacute;n en un<br>
+        flujo aparte. Veamos c&oacute;mo en el siguiente ejemplo:<br>
+        //Creamos la conexi&oacute;n dando al m&eacute;todo Connector.open() una 
+        URL sin dato alguno:<br>
+        String URL = &quot;http://www.site.com/servlet&quot;;<br>
+        HttpConnection con = (HttpConnection)Connector.open(URL);<br>
+        //Establecemos par&aacute;metros para la conversaci&oacute;n:<br>
+        con.setRequestMethod(HttpConnection.POST);<br>
+        con.setRequestProperty(&quot;User-Agent&quot;, &quot;Profile/MIDP-2.0 
+        Configuration/CLDC-1.1&quot;);<br>
+        //En el tipo POST debemos enviar los datos en un flujo separado:<br>
+        OutputStream cuerpo = con.openOutputStream();<br>
+        cuerpo.write(&quot;accion=inicio&quot;.getBytes());<br>
+        cuerpo.write(&quot;&amp;digo=hola&quot;.getBytes());<br>
+        cuerpo.flush();<br>
+        - CONECTADO. Con la fase anterior la conexi&oacute;n ya ha sido preparada 
+        y lista para ser lanzada, tras lo cual se comenzar&aacute; la conversaci&oacute;n 
+        con el servidor. Para ello, debemos provocar el paso del estado anterior 
+        al presente lanzando la petici&oacute;n preparada, lo cual se consigue 
+        invocando alguno de los siguientes m&eacute;todos:<br>
+        openInputStream(), openDataInputStream(), getLength(), getType(), getEncoding(),<br>
+        getHeaderField(), getResponseCode(), getResponseMessage(), getHeaderFieldInt(),<br>
+        getHeaderFieldDate(), getExpiration(), getDate getLastModified(), getHeaderField(),<br>
+        getHeaderFieldKey().<br>
+        Dado que todos ellos necesitan la respuesta del servidor para devolver 
+        su resultado, MIDP espera hasta el momento en que se invoque alguno de 
+        ellos para lanzar la petici&oacute;n. En ese momento, estaremos ya en 
+        el estado CONECTADO disponi&eacute;ndonos a esperar la respuesta del servidor 
+        para una vez recibida tratarla convenientemente. En el ejemplo del apartado 
+        siguiente veremos c&oacute;mo recogemos lo que el servidor nos responde, 
+        adem&aacute;s de comprobar fehacientemente el paso de un estado a otro 
+        de la conexi&oacute;n.<br>
+        - CIERRE. Estado final donde se da por concluida la comunicaci&oacute;n. 
+        Para ello, simplemente lanzamos desde nuestro MIDlet cliente el m&eacute;todo 
+        close() heredado de Connection, con &eacute;l cual cortamos la comunicaci&oacute;n 
+        con el servidor, quedando &eacute;ste a la espera de nuevas conexiones 
+        (aunque esto no nos ata&ntilde;e a nosotros como cliente).<br>
+        Como ya vimos, si a&uacute;n no hemos cerrado los flujos utilizados durante 
+        la conexi&oacute;n, permanecer&aacute; abierta hasta el cierre de estos.</p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

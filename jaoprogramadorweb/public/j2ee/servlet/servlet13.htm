@@ -1,0 +1,155 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Manejar Threads de Servicio a la Terminaci&oacute;n de un Servelt</title>
+<META http-equiv=Content-Language content=es>
+<META content="Manual Servlet, ejemplos Servlet, codigos Servlet" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Manual Servlet, ejemplos Servlet, codigos Servlet">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2> Manejar Threads de Servicio a la Terminaci&oacute;n 
+        de un Servelt</h2></td>
+  </tr>
+  <tr> 
+    <td colspan="3"> <p>Todos los m&eacute;todos de servicio de un 
+        servlet deber&iacute;an estar terminados cuando se elimina el servlet. 
+        El
+        servidor intenta asegurarse llamando al m&eacute;todo destroy s&oacute;lo 
+        despu&eacute;s de que todas las peticiones de
+        servicio hayan retornado, o despu&eacute;s del periodo de tiempo de gracia 
+        espec&iacute;fico del servido, lo que ocurra
+        primero. Si nuestro servlet tiene operaciones que tardan mucho tiempo 
+        en ejecutarse (esto es,
+        operaciones que tardan m&aacute;s que el tiempo concedido por el servidor), 
+        estas operaciones podr&iacute;an estar
+        ejecut&aacute;ndose cuando se llame al m&eacute;todo destroy. Debemos 
+        asegurarnos de que cualquier thread que
+        maneje peticiones de cliente se hayan completado; el resto de est&aacute; 
+        p&aacute;gina describe una t&eacute;cnica para
+        hacer esto.
+        Si nuestro servlet tiene peticiones de servicio potencialmente largas, 
+        debemos utilizar las t&eacute;cnicas de
+        esta lecci&oacute;n para.
+        Seguir la pista de cuantos threads est&aacute;n ejecutando el m&eacute;todo 
+        service actualmente. 
+        Proporcionar una limpieza de desconexi&oacute;n haciendo que el m&eacute;todo 
+        destroy notifique a los threads la
+        desconexi&oacute;n y espere a que ellos se hayan completado.
+        
+        Haciendo que todos los m&eacute;todos de larga duraci&oacute;n comprueben 
+        peri&oacute;dicamente la desconexi&oacute;n y, si es
+        necesario, paren su trabajo, limpien y retornen.
+        <p>
+        Peticiones de Seguimiento de Servicio</p><p>
+        Para seguir la pista a una petici&oacute;n de servicio, incluimos un campo 
+        en nuestra clase servlet que cuente el
+        n&uacute;mero de m&eacute;todos de servicio que se est&aacute;n ejecutando. 
+        El campo deber&aacute; tener acceso a m&eacute;todos para
+        incrementar, decrementar y devolver su valor. Por ejemplo.</p>
+        <p>public ShutdownExample extends HttpServlet {<br>
+        private int serviceCounter = 0;<br>
+        ...<br>
+        //Access methods for serviceCounter<br>
+        protected synchronized void enteringServiceMethod() {<br>
+        serviceCounter++;<br>
+        }<br>
+        protected synchronized void leavingServiceMethod() {<br>
+        serviceCounter--;<br>
+        }<br>
+        protected synchronized int numServices() {<br>
+        return serviceCounter;<br>
+        }<br>
+        }<br>
+        El m&eacute;todo service deber&iacute;a incrementar el contador de servicios 
+        cada vez que se entre en &eacute;l y
+        decrementarlo cada vez que se salga de &eacute;l. Esta es una de las pocas 
+        veces que al subclasificar la clase
+        HttpServlet debamos sobreescribir el m&eacute;todo service. El nuevo m&eacute;todo 
+        deber&iacute;a llamar al
+        super.service para preservar la funcionalidad del m&eacute;todo HttpServlet.service 
+        original.
+      <p>protected void service(HttpServletRequest req, HttpServletResponse resp)<br>
+        throws ServletException, IOException<br>
+        {<br>
+        enteringServiceMethod();<br>
+        try {<br>
+        super.service(req, resp);<br>
+        } finally {<br>
+        leavingServiceMethod();<br>
+        }<br>
+        }</p>
+      <p>Proporcionar Limpieza a la Desconexi&oacute;n</p>
+        <p>Para proporcionar esta limpieza, nuestro m&eacute;todo destroy no deber&iacute;a 
+        destruir ning&uacute;n recurso compartido
+        hasta que todas las peticiones de servicio se hayan completado. Una parte 
+        de esto es chequear el
+        contador de servicos. Otra parte es notificar a los m&eacute;todos de 
+        larga duraci&oacute;n que es la hora de la
+        desconexi&oacute;n. Para esto, se necesita otro campo con sus m&eacute;todos 
+        de acceso normales. Por ejemplo.
+        public ShutdownExample extends HttpServlet {<br>
+        private Boolean shuttingDown;<br>
+        ...<br>
+        //Access methods for shuttingDown<br>
+        protected setShuttingDown(Boolean flag) {<br>
+        shuttingDown = flag;<br>
+        }<br>
+        protected Boolean isShuttingDown() {<br>
+        return shuttingDown;<br>
+        }<br>
+        }<br>
+        Abajo podemos ver un m&eacute;todo destroy que utiliza estos campos para 
+        proporcionar una limpieza de
+        desconexi&oacute;n.
+        <p>public void destroy() {<br>
+        /* Check to see whether there are still service methods running,<br>
+        * and if there are, tell them to stop. */<br>
+        if (numServices() &gt; 0) {<br>
+        setShuttingDown(true);<br>
+        }<br>
+        /* Wait for the service methods to stop. */<br>
+        while(numServices() &gt; 0) {<br>
+        try {<br>
+        Thread.sleep(interval);<br>
+        } catch (InterruptedException e) {<br>
+        }<br>
+        }<br>
+        }<br>
+        <p>Crear M&eacute;todos de Larga Duraci&oacute;n Educados</p><p>
+        El paso final para proporcionar una limpieza de desconexi&oacute;n es 
+        crear m&eacute;todos de larga duraci&oacute;n que
+        sean educados. Estos m&eacute;todos deber&iacute;an comprobar el valor 
+        del campo que notifica las desconexiones, e
+        interrumpir su trabajo si es necesario. Por ejemplo.<p>
+        public void doPost(...) {<br>
+        ...<br>
+        for(i = 0; ((i &lt; lotsOfStuffToDo) &amp;&amp; !isShuttingDown()); i++) 
+        {<br>
+        try {<br>
+        partOfLongRunningOperation(i);<br>
+        } catch (InterruptedException e) {<br>
+        }<br>
+        }<br>
+        } </p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

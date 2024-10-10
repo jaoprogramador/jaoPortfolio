@@ -1,0 +1,67 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>LIntroducci&amp;oacute;n a EJB 2.1</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación en EJB 2.1,Programas EJB 2.1,Aplicaciones en EJB 2.1,Ejercicios en EJB 2.1, Ejemplos de EJB 2.1,Tutorial de EJB 2.1,Manual EJB 2.1" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="EJB 2.1, Manual EJB 2.1, tutorial EJB 2.1, Ejemplos EJB 2.1, ejercicios EJB 2.1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> <strong>Introducci&oacute;n a EJB 2.1</strong></h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <p>
+    	Los EJB son componentes del contexto de servidor que cubren la necesidad de intermediar entre la capa web y diversos sistemas empresariales. En este sentido conviene releer la arquitectura J2EE para ver el papel de interfaz que juegan estos componentes. Los EJB nacen para encapsular la lógica de negocio de una forma integrada, no quedando dispersa su representación en una pléyade de sistemas empresariales. Los EJB están especialmente pensados para integrar la lógica de la empresa que se encuentra en sistemas distribuidos, de tal forma que el desarrollador no tenga que preocuparse por la programación a nivel de sistema (como control de transsacciones, seguridad, etc.), sino que se centre en la representación de entidades y reglas de negocio.
+Un ejemplo, supongamos que necesitamos que nuestra web presente información del producto, tales como características técnicas, precio, productos relacionados, disponibilidad en stock, fecha de entrega estimada por parte del operador logístico, etc. El proceso sería:
+•	En el formulario HTML el usuario identifica el producto y el navegador llama a un JSP.
+
+•	El JSP recupera el código de identificación del producto (por ejemplo, mediante request.getParameter()) y lo envia al EJB.
+
+•	El EJB busca la información en bases de datos propias o ajenas (del fabricante, del operador logístico, etc.).
+El estándar EJB especifica normas para la gestión de la transacción y para su seguridad, así como procedimientos de persistencia.
+La tendencia apunta a que algunos de los EJB que tendremos en nuestras empresas sean componentes producidos por terceros, por ejemplo, componentes de integración de lógica de negocio que proveen los vendedores del ERP, CRM, etc. Incluso ocurre que el proveedor del EJB no sea el que te vende el contenedor de beans. Hay que diferenciar diversos roles que están surgiendo en el mercado:
+•	La empresa que produce el EJB.
+
+•	Los que lo distribuyen o despliegan.
+•	Aquellos que venden los contenedores y los servidores de EJB.
+
+•	Consultoras que integran/personalizan/configuran el componente, etc.
+Dicho de forma preliminar y por resumir: un EJB es un conjunto de clases y un archivo XML que describe el despliegue de dichas clases en un contenedor de EJB. Un EJB se ejecuta en un contenedor de EJB y ofrece al desarrollador del bean servicios que no necesita progranar (persistencia, seguridad, etc.). 
+La especificación J2EE insiste en conseguir la reusabilidad, ya que el programador de EJB debe centrarse en los problemas de representación de entidades y relaciones de negocio, tratando de que los detalles más concretos, más dependientes de la plataforma o del sistema queden para el contenedor EJB.
+El servidor es el recipiente y gestor de los contenedores de EJB. Los contenedores son el contexto donde se ejecutan los beans. El servidor debe ofrecer una serie de servicios:
+•	Servicio de acceso por nombres.
+•	Servicio de transacciones con otros servidores.
+•	Seguridad.
+•	Persistencia.
+Los contenedores son el contexto de ejecución, que sirve de interfaz entre el bean y el servidor:
+•	Tienen herramientas para la generación y despliegue de los bean.
+
+•	Un servidor puede albergar a varios contenedores, pero un EJB sólo puede estar en un contenedor.
+
+•	Para los desarrolladores los servicios que ofrece el contenedor son transparentes, no necesita entrar en su modo interno de trabajo. Aparecen como servicios ofrecidos por servidor (transacciones, seguridad, etc.).
+
+
+      </p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

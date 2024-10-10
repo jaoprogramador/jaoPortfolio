@@ -1,0 +1,309 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Indice J2ME</title>
+<META http-equiv=Content-Language content=es>
+<META content="Manual J2ME, ejemplos J2ME, codigos J2ME" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Manual J2ME, ejemplos J2ME, codigos J2ME">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> Manipulaci&oacute;n de almacenes</h2></td>
+  </tr>
+  <tr> 
+    <td colspan="3"><p>A continuaci&oacute;n, emplearemos los elementos descritos 
+        para llevar a cabo un ejemplo simple<br>
+        de uso del RMS por parte de una suite compuesta de un solo MIDlet.<br>
+        Debemos observar que para la clase RecordStore no dispondremos de ning&uacute;n 
+        constructor<br>
+        p&uacute;blico, debiendo usarse uno de los m&eacute;todos est&aacute;ticos 
+        openRecordStore vistos, que<br>
+        internamente crear&aacute;n una instancia de almac&eacute;n. El c&oacute;digo 
+        del ejemplo b&aacute;sico, el cual hemos<br>
+        comentado exhaustivamente, es el siguiente:</p>
+      <p>RMSEjemploMIDlet.java<br>
+        import javax.microedition.midlet.*;</p>
+      <p>import javax.microedition.rms.*;<br>
+        import javax.microedition.io.*;<br>
+        public class RMSEjemploMIDlet extends MIDlet {<br>
+        //Declaramos como atributo el almac&eacute;n que asociaremos al MIDlet<br>
+        private RecordStore rs = null;<br>
+        //Constructor del MIDlet<br>
+        +++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br>
+        public RMSEjemploMIDlet(){<br>
+        //1) Creamos el almac&eacute;n, el cual queda asociado al MIDlet actual-------------------------------<br>
+        -------------------------------------<br>
+        System.out.println(&quot;1. Creamos el almac&eacute;n&quot;);<br>
+        try{<br>
+        //Llamamos al m&eacute;todo est&aacute;tico, cre&aacute;ndolo si a&uacute;n 
+        no existiera. Por defecto, permiso de</p>
+      <p>acceso s&oacute;lo para este MIDlet<br>
+        rs = RecordStore.openRecordStore(&quot;Peliculas&quot;, true);<br>
+        System.out.println(&quot;Versi&oacute;n del estado del almac&eacute;n: 
+        &quot; + rs.getVersion());<br>
+        }catch(RecordStoreFullException e){<br>
+        //Si el almacenamiento est&aacute; lleno<br>
+        System.out.println(e.toString());<br>
+        }catch(RecordStoreException e){<br>
+        //Cualquier otra excepci&oacute;n relacionada. Al dar el par&aacute;metro 
+        createIfNecessary=true, no se<br>
+        elevar&aacute; //RecordStoreNotFoundException<br>
+        System.out.println(e.toString());<br>
+        }<br>
+        //2) Almacenamos tres nuevos registros en el RecordStore--------------------------------------<br>
+        --------------------------------------<br>
+        System.out.println(&quot;2. Almacenamos tres nuevos registros&quot;);<br>
+        try{<br>
+        byte[] registro;<br>
+        String[] peliculas = {&quot;Matrix&quot;, &quot;La Dolce Vita&quot;, &quot;Torrente 
+        II&quot;};<br>
+        for(int i=0; i&lt;peliculas.length; i++){<br>
+        //Pasamos a array de bytes el contenido a almacenar (siempre se almacena 
+        este tipo)<br>
+        registro = peliculas[i].getBytes();<br>
+        //A&ntilde;adimos el array de bytes completo (desde su &iacute;ndice 0, 
+        todos sus bytes)<br>
+        rs.addRecord(registro, 0, registro.length);<br>
+        System.out.println(&quot;Pel&iacute;cula almacenada: &quot; + peliculas[i]);<br>
+        }<br>
+        //Preguntamos por el n&uacute;mero de registros que han entrado en el 
+        almac&eacute;n<br>
+        int numRegistros = rs.getNumRecords();<br>
+        System.out.println(&quot;N&uacute;mero de Pel&iacute;culas almacenadas: 
+        &quot; + numRegistros);<br>
+        //Llamo a funci&oacute;n auxiliar que usa un enumerador para sacar todos 
+        los registros del rs<br>
+        System.out.println(&quot;En el RecordStore aparecen como:&quot;);<br>
+        this.recorreRegistros();<br>
+        }catch(RecordStoreNotOpenException e){<br>
+        //Si el almacenamiento estaba cerrado (al intentar insertar o al preguntar 
+        por su n&uacute;mero de<br>
+        elementos)<br>
+        System.out.println(e.toString());<br>
+        }<br>
+        catch(RecordStoreFullException e){<br>
+        //Si el almacenamiento estaba completo al intentar insertarSystem.out.println(e.toString());<br>
+        }<br>
+        catch(RecordStoreException e){<br>
+        //Cualquier otra excepci&oacute;n relacionada<br>
+        System.out.println(e.toString());<br>
+        }<br>
+        //3) Variamos el contenido del penultimo registro en el almac&eacute;n. 
+        A este punto deben existir<br>
+        al menos 2 elementos----<br>
+        System.out.println(&quot;3. Variamos el contenido del pen&uacute;ltimo 
+        registro por 'Una Historia del<br>
+        Bronx'&quot;);<br>
+        try{<br>
+        int penultimo = rs.getNextRecordID() - 2;<br>
+        //Extraigo el tama&ntilde;o del penultimo registro<br>
+        int tamRegistro = rs.getRecordSize(penultimo);<br>
+        //Con &eacute;l instancio el buffer donde lo guardo para presentarlo<br>
+        byte[] registro = new byte[tamRegistro];<br>
+        //Lo copio completo en el buffer<br>
+        tamRegistro = rs.getRecord(penultimo, registro, 0);<br>
+        System.out.println(&quot;El pen&uacute;ltimo registro contiene inicialmente: 
+        &quot; +<br>
+        new String(registro) + &quot;. N&uacute;mero de Bytes: &quot; + tamRegistro);<br>
+        //Var&iacute;o el contenido del registro en el RecordStore<br>
+        String nuevaCadena = &quot;Una Historia del Bronx&quot;;<br>
+        rs.setRecord(penultimo, nuevaCadena.getBytes(), 0, nuevaCadena.getBytes().length);<br>
+        //Lo vuelvo a consultar<br>
+        tamRegistro = rs.getRecordSize(penultimo);<br>
+        byte[] registroNuevo = new byte[tamRegistro];<br>
+        tamRegistro = rs.getRecord(penultimo, registroNuevo, 0);<br>
+        System.out.println(&quot;El pen&uacute;ltimo registro contiene posteriormente: 
+        &quot; +<br>
+        new String(registroNuevo) + &quot;. N&uacute;mero de Bytes: &quot; + tamRegistro);<br>
+        }<br>
+        catch(RecordStoreNotOpenException e){<br>
+        //Si el almacenamiento estaba cerrado (al consultar o modificar)<br>
+        System.out.println(e.toString());<br>
+        }catch(RecordStoreFullException e){<br>
+        //Si el almacenamiento est&aacute; lleno al modificar el registro</p>
+      <p>System.out.println(e.toString());<br>
+        }<br>
+        catch(InvalidRecordIDException e){<br>
+        //Si el &iacute;ndice pasado es inv&aacute;lido<br>
+        System.out.println(e.toString());<br>
+        }<br>
+        catch(RecordStoreException e){<br>
+        //Cualquier otra excepci&oacute;n relacionada<br>
+        System.out.println(e.toString());<br>
+        }<br>
+        //4) Eliminamos el &uacute;ltimo registro. Probamos enumeradores-------------------------------------<br>
+        --------------------------------------<br>
+        System.out.println(&quot;4. Eliminamos el &uacute;ltimo registro y probamos 
+        un enumerador&quot;);<br>
+        try{<br>
+        //Llamo a funci&oacute;n auxiliar que usa un enumerador para sacar todos 
+        los registros del rs<br>
+        this.recorreRegistros();<br>
+        System.out.println(&quot;El siguiente id que tocar&iacute;a, antes de 
+        eliminar: &quot; +<br>
+        rs.getNextRecordID());<br>
+        //Elimino el &uacute;ltimo registro<br>
+        rs.deleteRecord(rs.getNextRecordID() - 1);<br>
+        System.out.println(&quot;&Uacute;LTIMO REGISTRO ELIMINADO&quot;);<br>
+        //Vuelvo a presentar los registros<br>
+        this.recorreRegistros();<br>
+        //Comprobamos con lo siguiente que los &iacute;ndices no se actualizan<br>
+        System.out.println(&quot;El siguiente id que tocar&iacute;a, tras eliminar: 
+        &quot; + rs.getNextRecordID());<br>
+        }<br>
+        catch(InvalidRecordIDException e){<br>
+        //Si el &iacute;ndice pasado es inv&aacute;lido<br>
+        System.out.println(e.toString());<br>
+        }<br>
+        catch(RecordStoreException e){<br>
+        //Cualquier otra excepci&oacute;n relacionada<br>
+        System.out.println(e.toString());<br>
+        }<br>
+        //5) Cerramos el Almac&eacute;n---------------------------------------------------------------------------<br>
+        ---------------------------------------------System.out.println(&quot;5. 
+        Cerramos el almac&eacute;n&quot;);<br>
+        try{<br>
+        rs.closeRecordStore();<br>
+        }<br>
+        catch(RecordStoreNotOpenException e){<br>
+        //Si el RecordStore no est&aacute; abierto<br>
+        System.out.println(e.toString());<br>
+        }<br>
+        catch(RecordStoreException e){<br>
+        //Cualquier otra excepci&oacute;n relacionada<br>
+        System.out.println(e.toString());<br>
+        }<br>
+        //6) Eliminamos el almac&eacute;n, liberando as&iacute; al RMS (INICIALMENTE 
+        COMENTADO)---------------<br>
+        -----------------------------<br>
+        System.out.println(&quot;6. Eliminamos el almac&eacute;n. Inicialmente 
+        comentamos este punto para<br>
+        comprobar en sucesivas ejecuciones del MIDlet que los datos persisten&quot;);<br>
+        /* try{<br>
+        RecordStore.deleteRecordStore(&quot;Peliculas&quot;);<br>
+        }<br>
+        catch(RecordStoreNotFoundException e){<br>
+        //Si el nombre dado no es v&aacute;lido<br>
+        System.out.println(e.toString());<br>
+        }<br>
+        catch(RecordStoreException e){<br>
+        //Cualquier otra excepci&oacute;n relacionada<br>
+        System.out.println(e.toString());<br>
+        }*/<br>
+        }//f&iacute;n del constructor<br>
+        //Funci&oacute;n auxiliar de<br>
+        recorrido++++++++++++++++++++++++++++++++++++++++++++++++++++<br>
+        +++++++++++++<br>
+        //Creamos un enumerador para pasar por los registros del almac&eacute;n. 
+        Sin filtro ni comparador<br>
+        (se recorrer&aacute;n en el //mismo orden que est&aacute;n en el RecordStore 
+        original) ni actualizaci&oacute;n<br>
+        ante cambios en el rs<br>
+        public void recorreRegistros(){try {<br>
+        int numRegistros = rs.getNumRecords();<br>
+        System.out.println(&quot;Recorremos &quot; + numRegistros + &quot; registros&quot;);<br>
+        if(numRegistros &gt; 0){<br>
+        //Creamos el enumerador<br>
+        RecordEnumeration renum = rs.enumerateRecords(null, null, false);<br>
+        while(renum.hasNextElement())<br>
+        {<br>
+        //Recogemos el id del registro y avanzamos en el recorrido. Si us&aacute;ramos 
+        tanto<br>
+        nextRecordId()<br>
+        //como nextRecord() avanzar&iacute;amos de 2 en 2; cada uno de estos m&eacute;todos 
+        mueve<br>
+        el puntero.<br>
+        int id = renum.nextRecordId();<br>
+        byte[] contenido = rs.getRecord(id);<br>
+        System.out.println(&quot;&Iacute;ndice: &quot; + id + &quot;, Contenido: 
+        &quot; + new String(contenido));<br>
+        }<br>
+        //Liberamos el contenido del enumerador<br>
+        renum.destroy();<br>
+        }<br>
+        }catch(RecordStoreException e){<br>
+        System.out.println(e.toString());<br>
+        }<br>
+        }<br>
+        Vida del MIDlet<br>
+        +++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br>
+        ++++++++++++++++++<br>
+        public void startApp(){<br>
+        //Simplemente tras pasar por el constructor (donde est&aacute; el c&oacute;digo 
+        que nos interesa)<br>
+        destruye el MIDlet<br>
+        this.destroyApp(true);<br>
+        this.notifyDestroyed();<br>
+        }<br>
+        public void pauseApp(){ }<br>
+        public void destroyApp(boolean flag){ }<br>
+        }//f&iacute;n del MIDlet//</p>
+      <p>Al ejecutar por primera vez este c&oacute;digo, la salida por consola 
+        que se obtiene es:</p>
+      <p>1. Creamos el almac&eacute;n<br>
+        Versi&oacute;n del estado del almac&eacute;n: 0<br>
+        2. Almacenamos tres nuevos registros<br>
+        Pel&iacute;cula almacenada: Matrix<br>
+        Pel&iacute;cula almacenada: La Dolce Vita<br>
+        Pel&iacute;cula almacenada: Torrente II<br>
+        N&uacute;mero de Pel&iacute;culas almacenadas: 3<br>
+        En el RecordStore aparecen como:<br>
+        Recorremos 3 registros<br>
+        &Iacute;ndice: 3, Contenido: Torrente II<br>
+        &Iacute;ndice: 2, Contenido: La Dolce Vita<br>
+        &Iacute;ndice: 1, Contenido: Matrix<br>
+        3. Variamos el contenido del pen&uacute;ltimo registro por 'Una Historia 
+        del Bronx'<br>
+        El pen&uacute;ltimo registro contiene inicialmente: La Dolce Vita. N&uacute;mero 
+        de Bytes: 13<br>
+        El pen&uacute;ltimo registro contiene posteriormente: Una Historia del 
+        Bronx. N&uacute;mero de<br>
+        Bytes: 22<br>
+        4. Eliminamos el &uacute;ltimo registro y probamos un enumerador<br>
+        Recorremos 3 registros<br>
+        &Iacute;ndice: 2, Contenido: Una Historia del Bronx<br>
+        &Iacute;ndice: 3, Contenido: Torrente II<br>
+        &Iacute;ndice: 1, Contenido: Matrix<br>
+        El siguiente id que tocar&iacute;a, antes de eliminar: 4<br>
+        &Uacute;LTIMO REGISTRO ELIMINADO<br>
+        Recorremos 2 registros<br>
+        &Iacute;ndice: 2, Contenido: Una Historia del Bronx<br>
+        &Iacute;ndice: 1, Contenido: Matrix<br>
+        El siguiente id que tocar&iacute;a, tras eliminar: 4<br>
+        5. Cerramos el almac&eacute;n<br>
+        6. Eliminamos el almac&eacute;n. Inicialmente comentamos este punto para 
+        comprobar en<br>
+        sucesivas ejecuciones del MIDlet que los datos persisten.</p>
+      <p>Ser&aacute; muy interesante ir ejecutando sucesivamente el MIDlet para 
+        comprobar c&oacute;mo var&iacute;a el<br>
+        contenido del almac&eacute;n que reserva y el orden de sus elementos en 
+        &eacute;l; as&iacute; como verificar<br>
+        fehacientemente como los datos van quedando almacenados de forma persistente. 
+        Si se<br>
+        desea reiniciar el almac&eacute;n, descomentar el punto 6. del c&oacute;digo. 
+        Por &uacute;ltimo, tambi&eacute;n<br>
+        comprobaremos, si variamos sucesivamente el nombre dado al RecordStore 
+        al crearlo, c&oacute;mo<br>
+        un mismo MIDlet puede reservar varios almacenes diferentes del RMS.</p>
+      <p>&nbsp;</p></td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Indice J2ME</title>
+<META http-equiv=Content-Language content=es>
+<META content="Manual J2ME, ejemplos J2ME, codigos J2ME" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Manual J2ME, ejemplos J2ME, codigos J2ME">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2>javax.microedition.media</h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <p>Aqu&iacute; las novedades son escasas: las 
+        interfaces Control y Controllable quedan intactas, variando de las siguientes 
+        lo que detallamos:<h3>
+        INTERFACES</h3>
+        
+      <p>&#8226; Player. La interface Player provee ahora mecanismos para sincronizarse 
+        con otros Player y reproducirse conjuntamente a ellos. Para esto, aparece 
+        un nuevo concepto que estudiaremos al llegar a la interface que lo define: 
+        el TimeBase. En MMA todo Player debe tener asociado un TimeBase. Para 
+        manejarlo, aparecen en la interface dos nuevos m&eacute;todos:<br>
+        o TimeBase getTimeBase(): obtiene el TimeBase asociado al reproductor.<br>
+        o void setTimeBase(TimeBase master): modifica el TimeBase asociado al 
+        reproductor. </p>
+      <p>Dos Player podr&aacute;n sincronizarse obteniendo el TimeBase de uno 
+        y asoci&aacute;ndolo al otro, si el segundo Player admite un TimeBase 
+        distinto al suyo. En caso contrario, se elevar&aacute; una MediaException. 
+        As&iacute;, el Player cuyo TimeBase es variado sincronizar&aacute; la 
+        frecuencia (rate) de su reproducci&oacute;n acorde a ese nuevo TimeBase. 
+      </p>
+      <p>Por otro lado, un Player deten&iacute;a su reproducci&oacute;n al alcanzar 
+        el fin del media o ante una llamada a stop(). Ahora tambi&eacute;n se 
+        detendr&aacute; si se alcanza un tiempo stopTime que podremos definir 
+        con la nueva interface StopTimeControl que veremos m&aacute;s adelante. 
+        El resto de la especificaci&oacute;n de la interface Player queda invariable 
+        respecto a la ya estudiada de MIDP 2.0. </p>
+      </p>
+      <p>&#8226; PlayerListener. La novedad en esta interface es la aparici&oacute;n 
+        de 7 nuevas 
+        constantes, representando nuevos eventos a escuchar: 
+        o static String BUFFERING_STARTED. Emitido cuando el Player entra en 
+        modo buffer.</p>
+      <p>eventData. Long con el media-time en el cual ha entrado en modo buffer.</p>
+      <p> 
+        o static String BUFFERING_STOPPED. Emitido cuando el Player sale del modo 
+        buffer.</p>
+      <p>eventData. Long con el media-time en el cual ha salido del modo buffer.</p>
+      <p> 
+        o static String RECORD_ERROR. Emitido ante un error en la grabaci&oacute;n 
+        del 
+        media.</p>
+      <p>eventData. String con la causa del error de almacenamiento.</p>
+      <p> 
+        o static String RECORD_STARTED. Emitido al comenzar a grabar el media 
+        del 
+        ambiente.</p>
+      <p>eventData. Long con el media-time de inicio de grabaci&oacute;n.</p>
+      <p> 
+        o static String RECORD_STOPPED: emitido al parar la grabaci&oacute;n del 
+        media.</p>
+      <p>eventData. Long con el media-time de parada de grabaci&oacute;n.</p>
+      <p> 
+        o static String SIZE_CHANGED. Para v&iacute;deo, es emitido cuando el 
+        tama&ntilde;o de la 
+        ventana donde se muestra es variado.</p>
+      <p>eventData. Objeto VideoControl del cual poder consultar el nuevo tama&ntilde;o. 
+      </p>
+      <p>o static String STOPPED_AT_TIME. Emitido cuando el Player se detiene 
+        al 
+        alcanzar el stopTime definido con un StopTimeControl.</p>
+      <p>eventData. Long con el media-time en el cual el Player se detiene.</p>
+      <p> 
+        &#8226; TimeBase. Esta interface aparece totalmente nueva, ya que, no 
+        exist&iacute;a en MIDP 
+        2.0. Como ya mencionamos, se usar&aacute; para sincronizar la reproducci&oacute;n 
+        de dos o 
+        m&aacute;s objetos Placer y actuar&aacute; como fuente de continuos &quot;ticks&quot; 
+        de tiempo, los 
+        cuales ser&aacute;n usados como medida del progreso de la reproducci&oacute;n 
+        del Player al que 
+        le asociemos este &quot;cron&oacute;metro&quot;. &Eacute;sta ser&aacute; 
+        la herramienta base para sincronizar un 
+        Player con otro, ofreciendo un &uacute;nico m&eacute;todo: 
+        <br>o long getTime(). Obtiene el momento actual del &quot;cron&oacute;metro&quot; 
+        en 
+        microsegundos; valores no negativos y valores que no se decrecen con el 
+        paso 
+        del tiempo. </p>
+      <h3>Clases</h3>
+      <p>&#8226; Manager. La clase Manager presenta importantes novedades. Ahora 
+        nos ofrece la 
+        construcci&oacute;n de objetos Player tomando de base un DataSource (propio 
+        de la 
+        javax.microedition.media.protocol que no trataremos) que definir&aacute; 
+        un protocolo y 
+        formato personalizado, gracias al cual podremos crear reproductores que 
+        manejen 
+        formatos no reconocidos por la especificaci&oacute;n o que se nos ofrezcan 
+        mediante 
+        protocolos no especificados a&uacute;n. 
+        Por otra parte, existir&aacute;n ahora muchos m&aacute;s protocolos predefinidos 
+        que podremos 
+        utilizar a la hora de dar la URI de la que recoger el media a reproducir, 
+        adem&aacute;s de 
+        los protocolos ya disponibles en MIDP 2.0. Algunos son: 
+        o capture://. Con &eacute;l obtendremos el media captur&aacute;ndolo del 
+        ambiente, audio 
+        y/o v&iacute;deo, usando el micr&oacute;fono y/o la c&aacute;mara del 
+        dispositivo, siempre que 
+        est&eacute;n disponibles estos recursos. 
+        Por ejemplo: 
+        capture:// devcam0?encoding=rgb888&amp;width=160&amp;height=120&amp;fps=7.</p>
+      <p>o rtp://. Con este protocolo se accede a elementos multimedia de tipo 
+        streaming por medio de una sesi&oacute;n RTP. Un ejemplo ser&iacute;a: 
+        rtp://224.1.2.3:12344/audio. 
+        <br>o capture://radio. Utilizado para conseguir la entrada a la aplicaci&oacute;n 
+        del 
+        contenido de audio ofrecido por una emisora de radio. Por ejemplo, capture://radio?f=91.9M&amp;st=auto. 
+        Respecto a los elementos de la API, aparecen incorporados a los que ya 
+        vimos en 
+        MIDP 2.0: 
+        <br>o static String MIDI_DEVICE_LOCATOR. Constante que daremos como 
+        par&aacute;metro locator al ir a crear un reproductor MIDI en el cual 
+        deseemos tener 
+        disponible su control MIDIControl. 
+        <br>o static Player createPlayer(DataSource source). M&eacute;todo para instanciar 
+        un 
+        reproductor tomando de base un DataSource definido por el programador. 
+        <br>o static TimeBase getSystemTimeBase(). TimeBase por defecto, a usar para 
+        todo Player donde no se le d&eacute; expl&iacute;citamente, ya que, en 
+        MMA todo Player debe 
+        tener un TimeBase asociado. Depender&aacute; del dispositivo.</p></td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

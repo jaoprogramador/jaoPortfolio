@@ -1,0 +1,169 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Indice J2ME</title>
+<META http-equiv=Content-Language content=es>
+<META content="Manual J2ME, ejemplos J2ME, codigos J2ME" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Manual J2ME, ejemplos J2ME, codigos J2ME">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> Uso de cookies</h2></td>
+  </tr>
+  <tr> 
+    <td colspan="3"> <p>Una de las caracter&iacute;sticas clave de HTTP, y que 
+        a&uacute;n no hemos comentado, es que se define 
+        como un protocolo SIN ESTADO, esto es, no recuerda los par&aacute;metros 
+        de una llamada al 
+        realizar la siguiente. Por este motivo, el servidor no tiene conocimiento 
+        de si un cliente le ha 
+        realizado varias peticiones seguidas ni recuerda las caracter&iacute;sticas 
+        de &eacute;ste de una a otra 
+        conexi&oacute;n, a no ser que se usen estrategias externas al propio protocolo. 
+        Si consideramos las 
+        distintas conexiones que pueden producirse en una misma sesi&oacute;n 
+        de trabajo del usuario, la 
+        necesidad de estas estrategias se hace mucho m&aacute;s evidente.</p>
+      <p> 
+        Dichas estrategias forman parte del seguimiento de sesiones. Para conseguir 
+        este 
+        seguimiento, cada cliente debe informar al servidor de su identidad en 
+        cada una de las 
+        peticiones que le realice. As&iacute;, el servidor podr&aacute; seguir 
+        la relaci&oacute;n que mantiene con sus 
+        clientes creando una sesi&oacute;n de trabajo para cada uno de ellos, 
+        a las cuales dar&aacute; cuerpo 
+        almacenando en su m&aacute;quina informaci&oacute;n relativa a cada cliente 
+        concreto.</p>
+      <p> 
+        Esta informaci&oacute;n la podr&aacute; recuperar de una a otra conexi&oacute;n 
+        simplemente reconociendo qui&eacute;n 
+        es el cliente que le reclama en cada momento. Con esto, en el ejemplo 
+        anterior podr&iacute;amos 
+        variar el servlet para que fuera capaz de responderle al MIDlet &quot;Esto 
+        ya me lo dijiste antes&quot;, 
+        almacenando en alg&uacute;n lado el texto &quot;frase&quot; de todas las 
+        peticiones que le llegan del cliente x. 
+        Sin esto, la potencia de las aplicaciones web se ver&iacute;a mermada: 
+        pensemos en un servidor 
+        atendiendo a 10 clientes a la vez y que de una a otra petici&oacute;n 
+        no sea capaz de recordar qu&eacute; 
+        comunic&oacute; anteriormente con cada uno de ellos.</p>
+      <p> La forma en que el servidor reconoce a cada cliente concreto suele ser 
+        por medio de un identificador &uacute;nico que el cliente env&iacute;a 
+        adjunto a cada petici&oacute;n que realice. Este identificador ser&aacute; 
+        inicialmente asignado por el servidor a cada cliente la primera vez que 
+        &eacute;ste haga una petici&oacute;n y enviado por medio de una cookie 
+        de sesi&oacute;n (breve cadena de informaci&oacute;n codificada) que viajar&aacute; 
+        como campo de la cabecera de respuesta. De &eacute;l extraer&aacute; el 
+        cliente el valor del identificador de sesi&oacute;n, debi&eacute;ndolo 
+        almacenar para as&iacute; poder reenviarlo al servidor en la cabecera 
+        de las posteriores peticiones que le haga. &Eacute;sta no ser&aacute; 
+        la &uacute;nica cookie que pueden intercambiar cliente y servidor, aunque 
+        s&iacute; la imprescindible para el seguimiento de sesiones. En servidores 
+        J2EE suele denominarse JSESSIONID a la cookie de identificaci&oacute;n 
+        de sesi&oacute;n.</p>
+      <p>En aplicaciones web J2EE, donde la interface se le ofrece al usuario 
+        por medio de un navegador web como Mozilla o Internet Explorer, el almacenamiento 
+        de cookies en la m&aacute;quina cliente es transparente al programador, 
+        quedando &eacute;ste en manos del navegador web. En cada petici&oacute;n 
+        que el cliente haga al servidor ser&aacute; el navegador el encargado 
+        de enviar las cookies necesarias y de recibir y almacenar las que el servidor 
+        devuelva.</p>
+      <p><br>
+        En J2ME no tendremos un navegador web que haga este trabajo por nosotros, 
+        aun as&iacute; podremos llevar a cabo este seguimiento de sesiones codific&aacute;ndolo 
+        adecuadamente ayud&aacute;ndonos del almacenamiento persistente (RMS) 
+        disponible en el dispositivo, el cual estudi&aacute;bamos en el primer 
+        tema.</p>
+      <p><br>
+        El proceso a seguir para ello, adem&aacute;s de la cookie de sesi&oacute;n, 
+        lo podr&aacute; ejecutar cualquier otra cookie. Dicho proceso lo podemos 
+        resumir de la siguiente manera:</p>
+      <p><br>
+        1. Declaramos como atributo del MIDlet un RecordStore donde almacenar 
+        la cookie de sesi&oacute;n que nos enviar&aacute; el servidor la primera 
+        vez que conectemos a &eacute;l y la cual mantendremos en el lmacenamiento 
+        mientras dure nuestra sesi&oacute;n de trabajo.<br>
+        Tambi&eacute;n como atributo tendremos el valor de nuestra cookie.<br>
+        private String cookieSesionId = null;<br>
+        private RecordStore cookieRs = null;</p>
+      <p><br>
+        2. En el startApp() del MIDlet abrimos el RecordStore y leemos la cookie 
+        almacenada (si existe):<br>
+        cookieRs = RecordStore.openRecordStore(&quot;AlmacenCookie&quot;, true);<br>
+        byte[] cad = new byte[100];<br>
+        cookieRs.getRecord(1, cad, 0);<br>
+        cookieSesionId = new String(cad);<br>
+        3. Tras esto, cuando el cliente decida hacer una petici&oacute;n al servlet, 
+        lo primero que hacemos es preparar una cabecera de petici&oacute;n con 
+        la cookie almacenada, si ya la tenemos. As&iacute; informamos al servidor 
+        de nuestra identidad:</p>
+      <p><br>
+        HttpConnection con = (HttpConnection)Connector.open(url);<br>
+        if (cookieSesionId != null)<br>
+        con.setRequestProperty(&quot;cookie&quot;, cookieSesionId);4. Una vez 
+        establecida la conexi&oacute;n, leemos la respuesta del servidor. Si nos 
+        ha enviado una cabecera donde va una cookie de sesi&oacute;n significar&aacute; 
+        que no nos conoce (no le habremos enviado nosotros previamente ninguna, 
+        ya que, a&uacute;n no la tendr&iacute;amos<br>
+        almacenada); debemos recoger nuestra nueva identificaci&oacute;n y almacenarla:<br>
+        String cookieConocida = con.getHeaderField(&quot;set-cookie&quot;);<br>
+        if(cookieConocida != null){<br>
+        byte[] cad = cookieConocida.getBytes();<br>
+        cookieRs.addRecord(cad, 0, cad.length);<br>
+        cookieSesionId = cookieConocida;<br>
+        }<br>
+        5. Por su parte, de una u otra forma el servlet debe encargarse de observar 
+        las cabeceras de la petici&oacute;n donde van las cookies, usando la apropiada 
+        que reciba para reconocer al cliente y tratarlo convenientemente. Si no 
+        le llega la cookie en la petici&oacute;n deber&aacute; asignarle a este 
+        nuevo cliente un identificador y envi&aacute;rselo en la cookie de sesi&oacute;n 
+        que espera el MIDlet.<br>
+        - La caracter&iacute;stica m&aacute;s importante en un dispositivo m&oacute;vil 
+        MIDP es su permanente posibilidad de conexi&oacute;n con el exterior, 
+        la cual nos permitir&aacute; establecer una conexi&oacute;n HTTP con un 
+        servidor J2EE (entre otras muchas).<br>
+        - Toda conexi&oacute;n en MIDP hereda de la interface Connection. Dicha 
+        interface representa la conexi&oacute;n m&aacute;s abstracta posible. 
+        Para obtener una instancia de ella o de cualquiera de sus hijas debemos 
+        usar alguno de los m&eacute;todos open() de la clase factor&iacute;a Connector.<br>
+        - Los tipos de conexi&oacute;n actualmente soportados por MIDP 2.0 son 
+        el HTTP, su versi&oacute;n segura HTTPS, las conexiones basadas en SOCKETS 
+        (de espera, en servidor, seguros, comunes), la realizada por medio de 
+        DATAGRAMAS y la comunicaci&oacute;n con puertos serie COMM.<br>
+        - Una conexi&oacute;n HTTP siempre se encontrar&aacute; en alguno de los 
+        tres estados<br>
+        siguientes:<br>
+        &#8226; Establecimiento, donde se fijan los par&aacute;metros de la comunicaci&oacute;n 
+        con el servidor.<br>
+        &#8226; Conectado, donde se intercambia la informaci&oacute;n deseada 
+        entre el cliente y el servidor.<br>
+        &#8226; Cierre, donde finaliza la conexi&oacute;n.<br>
+        - Podremos mejorar las aplicaciones que requieran comunicaci&oacute;n 
+        HTTP con m&uacute;ltiples consideraciones. Dos de ellas son: cuidar un 
+        redireccionamiento adecuado de la URL a buscar y otra, el uso de cookies 
+        utilizando el RMS del dispositivo para permitir que el servidor a conectar 
+        mantenga un seguimiento adecuado de nuestra sesi&oacute;n.</p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

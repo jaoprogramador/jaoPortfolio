@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Bajas</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación en hibernate,Programas hibernate,Aplicaciones en hibernate,Ejercicios en hibernate, Ejemplos de hibernate,Tutoriales de hibernate,Manuales hibernate" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="hibernate, Manual hibernate, tutorial hibernate, Ejemplos hibernate, ejercicios hibernate">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2>Bajas</h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <p>El esquema general para dar de baja una categor&iacute;a 
+        es b&aacute;sicamente el mismo que el de darla de alta.<br>
+        Me centrar&eacute;, pues, en la parte espec&iacute;fica de darla de baja:<br>
+        public void borrar(int idCategoria) {<br>
+        [...]<br>
+        Categoria unaCategoria = new Categoria();<br>
+        unaCategoria.setId(idCategoria);<br>
+        Transaction tx = session.beginTransaction();<br>
+        session.delete(unaCategoria);<br>
+        tx.commit();<br>
+        [...]<br>
+        }<br>
+        En el ejemplo anterior, creamos una Categoria y le asignamos el identificador 
+        que se nos pasa<br>
+        como par&aacute;metro, Este identificador es el que usar&aacute; Hibernate 
+        para eliminar la Categoria de la<br>
+        base de datos.<br>
+        Hay tres estrategias para borrar registros. Por ejemplo, podemos usar 
+        una consulta bas&aacute;ndonos en el<br>
+        identificador de clave primaria:<br>
+        public void borrar(int idCategoria) {<br>
+        [...]<br>
+        session.beginTransaction();<br>
+        Categoria unaCategoria = (Categoria)session.load(Categoria.class,<br>
+        new Integer(id));<br>
+        session.delete(unaCategoria);<br>
+        tx.commit();<br>
+        [...]<br>
+        }<br>
+        Fij&eacute;monos en el m&eacute;todo load() de Session. Este m&eacute;todo 
+        nos devuelve un objeto a partir de un<br>
+        identificador de clave primaria, Como es l&oacute;gico, le hemos de pasar 
+        la clase (Categoria.class)<br>
+        para que sepa en qu&eacute; tabla ha de buscar. Recordemos que en el archivo 
+        de emparejamiento<br>
+        (Categoria.hbm.xml) hemos emparejado la clase Categoria con la tabla CATEGORIAS.<br>
+        Con esta informaci&oacute;n, Hibernate genera una instrucci&oacute;n SQL 
+        similar a esta:<br>
+        SELECT * FROM CATEGORIAS WHERE ID = miID<br>
+        Hibernate nos proporciona un lenguaje de consulta orientado a objetos 
+        bastante avanzado. Se llama<br>
+        HQL y hablaremos de &eacute;l con m&aacute;s detalle, m&aacute;s adelante.<br>
+        El m&eacute;todo delete() admite una consulta en HQL como par&aacute;metro. 
+        En este caso, eliminar&iacute;a todos<br>
+        los objetos devueltos por la consulta:<br>
+        [...]<br>
+        String sel = &#8220;FROM Categoria AS C WHERE C.id = &#8220; + idCategoria;<br>
+        session.delete(sel);<br>
+        [...]En este caso, s&oacute;lo borrar&iacute;a un registro. Si, por ejemplo, 
+        nos interesase borrar todos los registros que<br>
+        tuvieran &#8220;r&#8221; en el campo CATEGORIA, s&oacute;lo tendr&iacute;amos 
+        que cambiar la consulta:<br>
+        [...]<br>
+        String sel = &#8220;FROM Categoria AS C WHERE C.categoria LIKE &#8220;%r%&#8221;;<br>
+        session.delete(sel);<br>
+        [...]<br>
+        Fij&eacute;monos un poco en la sintaxis de la consulta. Se parece bastante 
+        a la sintaxis SQL habitual, pero<br>
+        est&aacute; adaptada al mundo de los objetos:<br>
+        &#8226; No hay SELECT ya que no devuelve valores de columnas, sino objetos.<br>
+        &#8226; No especificamos ninguna tabla en el FROM . Especificamos una 
+        clase. Es a partir de esta clase<br>
+        y de las definiciones que hemos hecho en el archivo de emparejamientos 
+        que Hibernate<br>
+        deducir&aacute; qu&eacute; tablas est&aacute;n implicadas.<br>
+        &#8226; No usamos nombres de columnas en el WHERE . Usamos propiedades 
+        de objetos.</p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

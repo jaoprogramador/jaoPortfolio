@@ -1,0 +1,316 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>La clase Statement</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación en JDBC,Programas JDBC,Aplicaciones en JDBC,Ejercicios en JDBC, Ejemplos de JDBC,Tutoriales de JDBC,Manuales JDBC" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="JDBC, Manual JDBC, tutorial JDBC, Ejemplos JDBC, ejercicios JDBC">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> La clase Statement</h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <p>Un objeto Statement se usa para enviar sentencias 
+        SQL a la base de datos. Actualmente hay tres tipos de objetos Statement, 
+        todos los cuales act&uacute;an como contenedores para la ejecuci&oacute;n 
+        de sentencias en una conexi&oacute;n dada: Statement, PreparedStatement 
+        que hereda de Statement y CallableStatement que hereda de PreparedStatement. 
+        Estas est&agrave;n especializadas para enviar tipos particulares de sentencias 
+        SQL, Un objeto Statement se usa para ejecutar una sentencia SQL simple 
+        sin par&aacute;metros. Un objeto PreparedStatement se usa para ejecutar 
+        sentencias SQL precompiladas con o sin par&aacute;metros IN; y un objeto 
+        CallableStatement se usa para ejecutar un procedimieno de base de datos 
+        almacenado.</p>
+      <p>La interfase Statement suminstra m&eacute;todos b&aacute;sicos para ejecutar 
+        sentencias y devolver resultados. La interfase PreparedStatement a&ntilde;ade 
+        m&eacute;todos para trabajat con los par&aacute;metros IN; y la interfase 
+        CallableStatement a&ntilde;ade m&eacute;todos para trabajar con parameters 
+        OUT.</p>
+      <p> Creaci&oacute;n de objetos Statement</p>
+      <p>Una vez establecida la conexi&oacute;n con una base de datos particular, 
+        esta conexi&oacute;n puede usarse para enviar sentencias SQL. Un objeto 
+        Statement se crea mediante el m&eacute;todo de Connection createStatement, 
+        como podemos ver en el siguiente fragmento de c&oacute;digo.</p>
+      <p> Connection con = DriverManager.getConnection(url, &quot;sunny&quot;, 
+        &quot;&quot;);<br>
+        Statement stmt = con.createStatement();</p>
+      <p>La sentencia SQL que ser&aacute; enviada a la base de datos es alimentada 
+        como un argumento a uno de los m&eacute;todos de ejecuci&oacute;n del 
+        objeto Statement. Por ejemplo:</p>
+      <p>ResultSet rs = stmt.executeQuery(&quot;SELECT a, b, c FROM Table2&quot;);</p>
+      <p> <br>
+        Ejecuci&oacute;n de sentencias usando objetos Statement.</p>
+      <p>La interfase Statement nos suministra tres m&eacute;todos diferentes 
+        para ejecutar sentencias SQL, executeQuery, executeUpdate y execute. El 
+        m&eacute;todo a usar esta determinado por el producto de la sentencia 
+        SQL</p>
+      <p>El m&eacute;todo executeQuery esta dise&ntilde;ado para sentencias que 
+        producen como resultado un &uacute;nico result set tal como las sentencias 
+        SELECT. <br>
+        El m&eacute;todo executeUpdate se usa para ejecutar sentencias INSERT, 
+        UPDATE &oacute; DELETE as&iacute; como sentencias SQL DDL (Data Definition 
+        Language) como CREATE TABLE o DROP TABLE. El efecto de una sentencia INSERT, 
+        UPDATE o DELETE es una modificaci&oacute;n de una o m&aacute;s columnas 
+        en cero o m&aacute;s filas de una tabla. El valor devuelto de executeUpdate 
+        es un entero que indica el n&uacute;mero de filas que han sido afectadas 
+        (referido como update count). Para sentencias tales como CREATE TABLE 
+        o DROP TABLE, que no operan sobre filas, le valor devuelto por executeUpdate 
+        es siempre cero.</p>
+      <p>El m&eacute;todo execute se usa para ejecutar sentencias que devuelven 
+        m&aacute;s de un result set, m&aacute;s que un update count o una combinaci&oacute;n 
+        de ambos. Como es esta una caracter&iacute;stica avanzada que muchos programadores 
+        no necesitar&ntilde;an nunca se ver&aacute; en su propia secci&oacute;n.</p>
+      <p>Todos los m&eacute;todos que ejecutan sentencias cierran los objetos 
+        Resultset abiertos como resultado de las llamadas a Statement. Esto quiere 
+        decir que es necesario completar el proceso con el actual objeto Resulset 
+        antes de reejecutar una sentencia Statement.</p>
+      <p>Debe notarse que la interfase PreparedStatement, que hereda los m&eacute;todos 
+        de la interfase Statement, tiene sus propias versiones de los m&eacute;todos 
+        executeQuery, executeUpdate y execute. Los objetos Statement en si mismos 
+        no contienen una sentencia SQL, por tanto debe suministrarse como un argumento 
+        a los m&eacute;todos Statement.execute. Los objetos PreparedStatement 
+        no suministran una sentencia SQL como argumento a estos m&eacute;todos 
+        puesto que ya tienen la sentencia precompilada. Los objetos CallableStatement 
+        heredan las formas de estos m&eacute;todos de PreparedStatement. Usar 
+        un parametro de query con las versiones de los m&eacute;todos de PreparedStatement 
+        o CallableStatement producir&aacute;i una SQLException,.</p>
+      <p> <br>
+        Realizaci&oacute;n de Statement<br>
+        Cuando una conexi&oacute;n est&aacute; en modo auto-commit, las sentencias 
+        ejecutadas son &#8216;comitadas&#8217; o rechazadas cuando se completan. 
+        Un sentencia se considera completa cuando ha sido ejecutada y se han devuelto 
+        todos los resultados. Pare el m&eacute;todo executeQuery, que devuelve 
+        un &uacute;nico result set, la sentencia se completa cuando todas las 
+        filas del objeto ResultSet se han devuelto. Para el m&eacute;todo executeUpdate, 
+        un sentencia se completa cuando se ejecuta. En los raros casos en que 
+        se llama al m&eacute;todo execute, de cualquier modo, no se completa hasta 
+        que los result sets o update counts que se generan han sido devueltos.</p>
+      <p>Algunos DBMS tratan cada sentencia en un procedimiento almacenado como 
+        sentencias separadas. Otros tratan el procedimiento entero como una sentencia 
+        compuesta. Esta diferencia se convierte en importante cuando est&aacute; 
+        activo el modo auto-commit porque afecta cuando se llama al m&eacute;todo 
+        commit. En el primer caso, cada sentencia individual es commitada. En 
+        el segundo, se commiten todas juntas.</p>
+      <p> Cerrar objetos Statement.</p>
+      <p>Los objetos Statement se cerrar&aacute;n autom&aacute;ticamente por el 
+        colector de basura de Java (garbage collector). No obstante se recomienda 
+        como una buena pr&aacute;ctica de programaci&oacute;n que se cierren explicitamente 
+        cuando no sean ya necesarios. Esto libera recursos DBMS inmediatamente 
+        y ayuda a evitar potenciales problemas de memoria.</p>
+      <p> Sintaxis de Escape SQL en objetos Statement</p>
+      <p>Los objetos Statement pueden contener sentencias SQL que usen sintaxis 
+        de escape SQL. La sintaxis de escape se&ntilde;ala al driver que el c&oacute;digo 
+        que lleva debe ser tratado diferentemente. El driver buscar&aacute; por 
+        cualquier sintaxis de escape y lo traducir&aacute; en c&oacute;digo que 
+        entiende la base de datos en particular. Esto hace que la sintaxis de 
+        escape sea independiente de la DBMS y permite al programador usar caracter&iacute;sticas 
+        que de otro modo no estar&iacute;an disponibles.</p>
+      <p>Una clausula de escape se enmarca entre llaves y tiene una palabra clave:</p>
+      <p>{keyword . . . parameters . . . }</p>
+      <p> <br>
+        La palabra clave (keyword) indica el tipo de clausula de escape, seg&uacute;n 
+        se muestra:</p>
+      <p>&#8226; escape para caracteres LIKE</p>
+      <p>Los caracteres &#8220;%&#8221; y &#8220;_&#8221; trabajan como wildcards 
+        en la clausula SQL LIKE (&#8220;%&#8221; significa cero o m&aacute;s caracteres 
+        y &#8220;_&#8221; significa exactamente un car&aacute;cter&#8221;. En 
+        orden a interpretarlos literalmente, pueden estar precedidos por un backslash 
+        (&#8216;\&#8217;), que es un car&aacute;cter de escape especial en cadenas. 
+        Se puede especificar un car&aacute;cter que se use como car&aacute;cter 
+        de escape por la inclusi&oacute;n de la sintaxis siguiente al final de 
+        la consulta.</p>
+      <p>{escape 'escape-character'}</p>
+      <p>Por ejemplo, la siguiente query, usando backslash como caracter de escape, 
+        encuentra nombres de identificador que comiencen con &#8216;_&#8217;.</p>
+      <p>stmt.executeQuery(&quot;SELECT name FROM Identifiers <br>
+        WHERE Id LIKE `\_%' {escape `\'};</p>
+      <p><br>
+        &#8226; fn para funciones escalares</p>
+      <p>Casi todas las DBMS tienen funciones num&egrave;ricas, de cadena, de 
+        fecha y conversi&oacute;n sobre valores escalares. Una de estas funciones 
+        puede usarse coloc&aacute;ndola en la sintaxis de escape con la clave 
+        fn seguida del nombre de la funci&oacute;n deseada y sus argumentos. Por 
+        ejemplo, para llamar a la funci&oacute;n concat con dos argumentos que 
+        ser&aacute;n concatenados:</p>
+      <p>{fn concat(&quot;Hot&quot;, &quot;Java&quot;)};</p>
+      <p>El nombre del usuario actual de la base de datos puede obtenerse mediante:</p>
+      <p> {fn user()};</p>
+      <p>Las funciones escalares pueden estar soportadas por diferentes DBMS con 
+        ligeras diferencias de sintaxis, y pueden no estar disponibles en todos 
+        los drivers. Varios m&eacute;todos de DatabaseMetaData nos listar&aacute;n 
+        las funciones que est&aacute;n soportadas. Por ejemplo, el m&eacute;todo 
+        getNumericFunctions devuelve una lista de los nombres de las funciones 
+        num&eacute;ricas separadas por comas, el m&eacute;todo getStringFunction 
+        nos devuelve los nombres de las funciones de cadena, y as&iacute; var&iacute;as 
+        m&aacute;s.</p>
+      <p>EL driver o bien mapear&aacute; la llamada a la funci&oacute;n &#8216;escapada&#8217; 
+        en su propia sintaxis o implementar&aacute; la funci&oacute;n el mismo.<br>
+      </p>
+      <p>&#8226; d, t y ts para literales de fecha y tiempo</p>
+      <p>Las DBMS difieren en la sintaxis que usan para los literales de fecha, 
+        tiempo y timestamp. JDBC soporta un formato est&aacute;ndar ISO para estos 
+        literales y usa una clausula de escape que el driver debe traducir a la 
+        representaci&oacute;n del DBMS.</p>
+      <p>Por ejemplo, una fecha se especifica en SQL JDBC mediante la sintaxis:</p>
+      <p>{d `yyyy-mm-dd'}</p>
+      <p>En esta sintaxis, yyyy es el a&ntilde;o, mm es el mes y dd es el dia. 
+        El driver reemplazar&aacute; la clausula de escape por la representaci&ograve;n 
+        propia equivalente de la DBMS. Por ejemplo, el driver reemplazar&iacute;a 
+        {d 1999-02-28} por &#8217;28-FEB-99&#8217; si este es el formato apropiado 
+        para la base subyacente.</p>
+      <p>Hay clausulas de escape an&aacute;logas para TIME y TIMESTAMP</p>
+      <p>{t `hh:mm:ss'}<br>
+        {ts `yyyy-mm-dd hh:mm:ss.f . . .'}<br>
+        La parte fraccional de los segundos (.f . . .) del TIMESTAMP puede omitirse.</p>
+      <p>&#8226; call &oacute; ? = call para procedimientos almacenados</p>
+      <p>Si una database soporta procedimientos almacenados, estos pueden ser 
+        invocados desde JDBC mediante:</p>
+      <p>{call procedure_name[(?, ?, . . .)]}</p>
+      <p>o, cuando el procedimiento devuelve como resultado un par&aacute;metro</p>
+      <p>{? = call procedure_name[(?, ?, . . .)]}</p>
+      <p>Los corchetes indican que el material encerrado en ellos es opcional. 
+        Estos no forman parte de la sintaxis.</p>
+      <p>Los argumentos de entrada pueden ser bien literales, bien par&aacute;metros. 
+        Ver la secci&oacute;n 7 &#8220;CallableStatement&#8221; de esta gu&iacute;a.</p>
+      <p>Se puede llamar al m&eacute;todo DatabaseMetaData.supportsStoredProcedures 
+        para ver si la base de datos soporta procedimientos almacenados.<br>
+      </p>
+      <p>&#8226; oj para joins de salida</p>
+      <p>La sintaxis para un outer join es:</p>
+      <p>{oj outer-join}</p>
+      <p>donde outer-join es de la forma:</p>
+      <p>table LEFT OUTER JOIN {table | outer-join} ON search-condition<br>
+        Las Outer joins son una caracter&iacute;stica avanzada, y solo puede chequearse 
+        la gram&aacute;tica SQL mediente una explicaci&oacute;n de ella. JDBC 
+        provee tres m&eacute;todos de DatabaseMetaData para determinar que tipos 
+        de outer joins soporta un driver: supportsOuterJoins, supportsFullOuterJoins, 
+        y supportsLimitedOuterJoins. <br>
+        El m&eacute;todo Statement.setEscapeProcessing activa o desactiva el procesamiento 
+        de escape. Por defecto la caracter&iacute;stica se encuentra activada. 
+        Un programador deber&iacute;a desactivar esta caracter&iacute;stica en 
+        tiempo de ejecuci&oacute;n cuando el rendimiento ha de ser m&aacute;ximo, 
+        pero normalmente debe estar activado. Deber&iacute;a notarse que setEscapeProcesing 
+        no trabaja con objetos PreparedStatement por que la sentencia ya est&aacute; 
+        preparada para enviar a la base de datos antes de poder ser llamada.<br>
+      </p>
+      <p>Uso del m&eacute;todo execute</p>
+      <p>El m&eacute;todo execute deber&iacute;a usarse solamente cuando es posible 
+        que una sentencia nos devuelva m&aacute;s de un objeto Resultset., mas 
+        de un update count o una combinaci&oacute;n de ambos. Estas m&uacute;ltiples 
+        posibilidades para resultados, aunque raras, son posibles cuando se ejecutan 
+        ciertos procedimientos almacenados o por la ejecuci&oacute;n din&aacute;mica 
+        de una string SQL desconocida (esto es, desconocida para el programador 
+        de la aplicaci&oacute;n en tiempo de compilaci&oacute;n). Por ejemplo, 
+        una usuario podr&iacute;a ejecutar un procedimiento almacenado (usando 
+        una objeto CallableStatement y este procedimiento podr&iacute;a ejecutar 
+        una actualizaci&oacute;n, despu&eacute;s una select, luego una actualizaci&oacute;n, 
+        despu&eacute;s una select y as&iacute;. Normalmente, alguien que usa un 
+        procedimiento almacenado sabr&aacute; que se le va a devolver.</p>
+      <p>Porque el m&eacute;todo execute maneja los casos que se salen de lo ordinario, 
+        no sorprende que los resultados devueltos requieren algun manejo especial. 
+        Por ejemplo, supongamos que se sabe que el procedimiento devuelve dos 
+        result sets. <br>
+        <br>
+        Despu&eacute;s de usar el m&eacute;todo execute para ejecutar el procedimiento, 
+        se debe llamar al m&eacute;todo getResultSet para conseguir el primer 
+        result set y despu&eacute;s los m&eacute;todos apropiados getXXX para 
+        recuperar los valores de &eacute;l. Para conseguir el segundo result set, 
+        se necesita llamar al m&eacute;todo getMoreResults y y despues a getResultSet 
+        de nuevo. Si se sabe que el procedimiento devuelve dos upadte counts, 
+        se llama primero al m&eacute;todo getUpdateCount, seguido de getMoreResults 
+        y de nuevo getUpdateCount.</p>
+      <p>Aquellos casos en los que no se conoce que devolver&aacute; se nos presenta 
+        una situaci&oacute;n m&aacute;s compleja. El m&eacute;todo execute devuelve 
+        true si el resultado es un objeto ResultSet y false si es un int Java. 
+        Si devuelve un int, esto quiere decir que el resultado o bien es un update 
+        count o que la sentencia que ha ejecutado es un comando DDL. Lo primero 
+        que hay que hacer despu&eacute;s de llamar execute es llmar o bien a getResultSet 
+        o getUpdateCount. Al m&eacute;todo getResultSet se le llama para conseguir 
+        el primero de los dos o m&aacute;s objetos ResultSet y al m&eacute;todo 
+        getUpdateCount para conseguir el primero de dos o m&aacute;s update counts.</p>
+      <p>Cuando el resultado de una sentencia SQL no es un result set, el m&eacute;todo 
+        getResultSet devolver&aacute; null. Esto quiere decir que el resultado 
+        es un update count o que no hay m&aacute;s resultados. La &uacute;nica 
+        manera de encontrar que significa el valor null en este caso es llamar 
+        al m&eacute;todo getUpdateCount, que devolver&aacute; un entero. Este 
+        entero ser&aacute; el n&uacute;mero de filas afectadas por la sentencia 
+        ejecutada o &#8211;1 para indicar o bien que el resultado es un result 
+        set o bien que no hay m&aacute;s resultados. Si el m&eacute;todo getResultSet 
+        ya ha devuelto null, el resultado no puede ser un objeto ResultSet, por 
+        lo que el valor devuelto de &#8211;1 tiene que ser que no hay m&aacute;s 
+        resultados. En otras palabras, no hay m&aacute;s resultados cuando lo 
+        siguiente es cierto:</p>
+      <p>((stmt.getResultSet() == null) &amp;&amp; (stmt.getUpdateCount() == -1))</p>
+      <p>Si se ha llamado al m&eacute;todo getResultSet y se ha procesado el objeto 
+        ResultSet devuelto, es necesario llamar al m&eacute;todo getMoreResults 
+        para ver si hay m&aacute;s result sets o update counts.. Si getMoreResults 
+        devuelve true, entonces es necesario llamar de nuevo a getResultSet para 
+        recuperar el siguiente result set. Como ya se ha indicado anteriormente, 
+        si getResultset devuelve null hay que llamar a GetUpdateCount para buscar 
+        que significa ese null si un update count o que no hay m&aacute;s resultados.</p>
+      <p>Cuando getMoreResults devuelve false quiere decir que la sentencia SQL 
+        ha devuelto un update count o que no hay m&aacute;s resultados. Por tanto 
+        es necesario llamar al m&eacute;todo getUpdateCount para encontrar cual 
+        es el caso. En esta situaci&oacute;n, no habr&aacute; m&aacute;s resultados 
+        cuando lo siguiente es cierto:<br>
+        <br>
+        ((stmt.getMoreResults() == false) &amp;&amp; (stmt.getUpdateCount() == 
+        -1))</p>
+      <p>El siguiente c&oacute;digo muestra una forma de asegurarse que se ha 
+        accedido a todos los result sets y update counts de una llamada al m&eacute;todo 
+        execute:</p>
+      <p> stmt.execute(queryStringWithUnknownResults);<br>
+        while (true) {<br>
+        int rowCount = stmt.getUpdateCount();<br>
+        if (rowCount &gt; 0) { // this is an update count<br>
+        System.out.println(&quot;Rows changed = &quot; + count);<br>
+        stmt.getMoreResults();<br>
+        continue;<br>
+        }<br>
+        if (rowCount == 0) { // DDL command or 0 updates<br>
+        System.out.println(&quot; No rows changed or statement was DDL<br>
+        command&quot;);<br>
+        stmt.getMoreResults();<br>
+        continue;<br>
+        }<br>
+        <br>
+        // if we have gotten this far, we have either a result set <br>
+        // or no more results<br>
+        <br>
+        ResultSet rs = stmt.getResultSet; <br>
+        if (rs != null) {<br>
+        . . . // use metadata to get info about result set columns<br>
+        while (rs.next()) {<br>
+        . . . // process results<br>
+        stmt.getMoreResults();<br>
+        continue;<br>
+        }<br>
+        break; // there are no more results<br>
+      </p>
+      <p><br>
+      </p>
+      <p><br>
+      </p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

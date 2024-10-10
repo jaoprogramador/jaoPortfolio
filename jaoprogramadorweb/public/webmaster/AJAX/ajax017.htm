@@ -1,0 +1,264 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>C&oacute;mo hacer una p&aacute;gina AJAX</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta name="keywords" content="Primera página AJAX, Como hacer una pagina AJAX, Manual AJAX, tutorial AJAX, Ejemplos AJAX, ejercicios AJAX">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<table width="555" height="1222" align="left" background="../../imagenes/fondologo.jpg">
+  <tr> 
+    <td height="39" colspan="3"> <h2>Google Maps</h2></td>
+  </tr>
+  <tr> 
+    <td height="1149" colspan="3"> 
+      <h3>Contexto</h3>
+      
+      <p>&nbsp;
+      <p>Contexto<br>
+        Google Maps fue una de las primeras aplicaciones basadas en AJAX de uso 
+        masivo por parte de<br>
+        los usuarios. Su gran &eacute;xito ha provocado que todos sus rivales 
+        hayan copiado el funcionamiento<br>
+        de sus mapas.<br>
+        Adem&aacute;s, Google ofrece de forma gratuita una API con la que poder 
+        desarrollar aplicaciones a<br>
+        medida basadas en los mapas de Google, integrar los mapas en otras aplicaciones 
+        e incluso hacer<br>
+        &quot;mash-up&quot; o mezclas de Google Maps y otras aplicaciones web 
+        que tambi&eacute;n disponen de una API<br>
+        p&uacute;blica.<br>
+        9.3.2. Soluci&oacute;n propuesta<br>
+        Antes de utilizar la API de los mapas de Google, es necesario obtener 
+        una clave personal y &uacute;nica<br>
+        para cada sitio web donde se quiere utilizar. El uso de la API es gratuito 
+        para cualquier<br>
+        aplicaci&oacute;n que pueda ser accedida libremente por los usuarios. 
+        La clave de la API se puede<br>
+        obtener desde: http://www.google.com/apis/maps/<br>
+        Para usos comerciales de la API tambi&eacute;n existen servicios de pago 
+        que requieren el uso de otras<br>
+        claves.<br>
+        Las claves se solicitan por cada ruta del servidor. De esta forma, si 
+        se solicita una clave para<br>
+        http://www.misitio.com/ruta1, cualquier aplicaci&oacute;n o p&aacute;gina 
+        que se encuentre bajo esa ruta del<br>
+        servidor podr&aacute; hacer uso de la API de los mapas con esa clave.
+      <p>Si no se dispone de un sitio web p&uacute;blico, es posible indicar como 
+        servidor el valor<br>
+        http://localhost para poder hacer pruebas en un servidor local. Para solicitar 
+        la clave, es<br>
+        necesario disponer de una cuenta de usuario de Google (se puede utilizar 
+        por ejemplo la cuenta<br>
+        de Gmail). La clave generada depende por tanto del dominio de la aplicaci&oacute;n 
+        y de la cuenta de<br>
+        usuario.<br>
+        Las claves de la API de Google Maps consisten en una cadena de texto muy 
+        larga con un aspecto<br>
+        similar al siguiente:<br>
+        ABQIAAAA30JtKUU8se-7KKPRGSfCMBT2yXp_ZAY8_ufC3CFXhHIE1NvwkxRZNdns2BwZvEY-V68DvlyUYwi1-Q.<br>
+        Una vez obtenida la clave, cualquier p&aacute;gina que quiera hacer uso 
+        de la API debe enlazar el<br>
+        siguiente archivo de JavaScript:<br>
+        &lt;script src=&quot;http://maps.google.com/<br>
+        maps?file=api&amp;amp;v=2&amp;amp;hl=es&amp;amp;key=ABQIAAAA30JtKUU8se-7KKPRGSfCMBT2yXp_ZAY8_ufC3CFXhHIE1NvwkxRZNdns2BwZvEY-type=&quot;text/javascript&quot;&gt;&lt;/script&gt;<br>
+        Los par&aacute;metros necesarios son file, que indica el tipo de archivo 
+        que se quiere cargar (en este<br>
+        caso la API), v, que indica la versi&oacute;n de la API (en este caso 
+        2), hl, que permite indicar el idioma<br>
+        en el que se muestran los mapas (si no se indica este par&aacute;metro, 
+        los mapas se muestran en<br>
+        ingl&eacute;s) y el par&aacute;metro key, que contiene la clave que se 
+        acaba de obtener.<br>
+        Una vez obtenida la clave, es muy sencillo crear el primer mapa de Google:<br>
+        &lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot;<br>
+        &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;<br>
+        &lt;html&gt;<br>
+        &lt;head&gt;<br>
+        &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; 
+        charset=iso-8859-1&quot; /&gt;<br>
+        &lt;title&gt;Ejemplo de uso de Google Maps&lt;/title&gt;<br>
+        &lt;script src=&quot;http://maps.google.com/<br>
+        maps?file=api&amp;amp;v=2&amp;amp;hl=es&amp;amp;key=ABQIAAAA30JtKUU8se-7KKPRGSfCMBT2yXp_ZAY8_ufC3CFXhHIE1NvwkxRZNdns2BwZvEY-type=&quot;text/javascript&quot;&gt;&lt;/script&gt;<br>
+        &lt;script type=&quot;text/javascript&quot;&gt;<br>
+        function load() {<br>
+        if (GBrowserIsCompatible()) {<br>
+        var latitud = 48.858729;<br>
+        var longitud = 2.352448;<br>
+        var zoom = 15;<br>
+        var mapa = new GMap2(document.getElementById(&quot;mapa&quot;));<br>
+        mapa.setCenter(new GLatLng(latitud, longitud), zoom);<br>
+        }<br>
+        }<br>
+        &lt;/script&gt;<br>
+        &lt;/head&gt;<br>
+        &lt;body onload=&quot;load()&quot; onunload=&quot;GUnload()&quot;&gt;<br>
+        &lt;div id=&quot;mapa&quot; style=&quot;width: 500px; height: 400px&quot;&gt;&lt;/div&gt;<br>
+        &lt;/body&gt;<br>
+        &lt;/html&gt;
+      <p>En primer lugar, se define un elemento (normalmente un &lt;div&gt;) en 
+        el que se mostrar&aacute; el mapa.<br>
+        El tama&ntilde;o del mapa ser&aacute; igual al tama&ntilde;o de su elemento 
+        contenedor, a no ser que se indique<br>
+        expl&iacute;citamente otro tama&ntilde;o:<br>
+        &lt;div id=&quot;mapa&quot; style=&quot;width: 500px; height: 400px&quot;&gt;&lt;/div&gt;<br>
+        Una vez definido el contenedor del mapa, se establecen los eventos necesarios 
+        en la p&aacute;gina que<br>
+        lo contiene:<br>
+        &lt;body onload=&quot;load()&quot; onunload=&quot;GUnload()&quot;&gt;<br>
+        Los ejemplos que se pueden consultar en la documentaci&oacute;n de Google 
+        utilizan esa asignaci&oacute;n<br>
+        directa de eventos en la etiqueta &lt;body&gt;. Evidentemente, los eventos 
+        tambi&eacute;n se podr&iacute;an asignar<br>
+        de forma sem&aacute;ntica mediante el siguiente c&oacute;digo:<br>
+        window.onload = load;<br>
+        window.onunload = GUnload;<br>
+        La funci&oacute;n load() es la que se ejecuta al cargar la p&aacute;gina 
+        y la que establece las opciones con las<br>
+        que se crea el mapa. En primer lugar, se ejecuta la funci&oacute;n GBrowserIsCompatible(), 
+        que indica<br>
+        si el navegador actual del usuario es compatible con el uso de los mapas 
+        de Google. En caso<br>
+        contrario, no se ejecutan las instrucciones y no se muestra el mapa:if 
+        (GBrowserIsCompatible()) {<br>
+        ...<br>
+        }Para crear un nuevo mapa, se utiliza la clase GMap2, que representa un 
+        mapa en una p&aacute;gina. Las<br>
+        p&aacute;ginas pueden contener m&aacute;s de un mapa, pero cada uno de 
+        ellos hace referencia a una instancia<br>
+        diferente de la clase GMap2. El &uacute;nico argumento obligatorio para 
+        crear el mapa es la referencia al<br>
+        elemento que contendr&aacute; el mapa (obtenida mediante su id):<br>
+        var mapa = new GMap2(document.getElementById(&quot;mapa&quot;));<br>
+        Una vez instanciada la clase GMap2, el mapa ya ha sido creado. Sin embargo, 
+        el mapa no se<br>
+        muestra correctamente hasta que se indique en que punto geogr&aacute;fico 
+        est&aacute; centrado. El m&eacute;todo<br>
+        setCenter() permite centrar un mapa y opcionalmente, indicar el nivel 
+        de zoom y el tipo de<br>
+        mapa que se muestra:<br>
+        var latitud = 42.845007;<br>
+        var longitud = -2.673;<br>
+        var zoom = 15;<br>
+        mapa.setCenter(new GLatLng(latitud, longitud), zoom);<br>
+        El punto geogr&aacute;fico en el que est&aacute; centrado el mapa se indica 
+        mediante un objeto de tipo<br>
+        GLatLng() que toma dos par&aacute;metros: el primero es el valor de la 
+        latitud del punto geogr&aacute;fico y el<br>
+        otro par&aacute;metro indica la longitud de esa posici&oacute;n geogr&aacute;fica. 
+        De forma opcional se puede indicar<br>
+        el nivel de zoom del mapa.<br>
+        La latitud puede tomar un valor entre +90 (90 grados al norte del ecuador) 
+        y -90 (90 grados al<br>
+        sur del ecuador), la longitud puede tomar un valor entre +180 (180 grados 
+        al este de Greenwitch)<br>
+        y -180 (180 grados al oeste de Greenwitch). El nivel de zoom puede variar 
+        entre 1 (en el que se<br>
+        ve la Tierra entera) y 18 (en el que se ven los detalles de cada calle). 
+        No obstante, se debe tener<br>
+        en cuenta que no todos los puntos geogr&aacute;ficos disponen de todos 
+        los niveles de zoom.Despu&eacute;s de crear un mapa b&aacute;sico, es 
+        muy sencillo a&ntilde;adir los controles para aumentar o<br>
+        disminuir el nivel de zoom y el control que indica el tipo de mapa que 
+        se muestra:<br>
+        mapa.addControl(new GSmallMapControl());<br>
+        mapa.addControl(new GMapTypeControl());<br>
+        Ahora, el mapa permite variar el nivel de zoom y mostrar otro tipo de 
+        mapa, como se muestra en<br>
+        la siguiente imagen:Google Maps incluye una documentaci&oacute;n muy extensa 
+        sobre el uso de la API y todos los m&eacute;todos<br>
+        disponibles. La documentaci&oacute;n inicial con ejemplos b&aacute;sicos 
+        se puede consultar en:<br>
+        http://www.google.com/apis/maps/documentation/<br>
+        La referencia completa de clases, propiedades y m&eacute;todos de la API 
+        est&aacute; disponible en:<br>
+        http://www.google.com/apis/maps/documentation/reference.html<br>
+        Los mapas de Google permiten controlar un gran n&uacute;mero de eventos, 
+        pudiendo asociar<br>
+        funciones o ejecutar directamente c&oacute;digo JavaScript cada vez que 
+        se produce un evento. El<br>
+        siguiente ejemplo muestra un mensaje de tipo alert() con las coordenadas 
+        del centro del mapa<br>
+        cada vez que el usuario suelta el mapa despu&eacute;s de haberlo movido:<br>
+        GEvent.addListener(mapa, &quot;moveend&quot;, function() {<br>
+        var centro = mapa.getCenter();<br>
+        alert(centro.toString());<br>
+        });<br>
+        Adem&aacute;s del evento moveend existen muchos otros, como por ejemplo 
+        move que permite ejecutar<br>
+        cualquier funci&oacute;n de forma repetida a medida que el usuario mueve 
+        el mapa. Los mapas tambi&eacute;n<br>
+        permiten colocar marcadores para mostrar una posici&oacute;n. El siguiente 
+        ejemplo hace uso del<br>
+        evento click sobre los mapas para mostrar marcadores:<br>
+        GEvent.addListener(mapa, &quot;click&quot;, function(marcador, punto) 
+        {<br>
+        mapa.addOverlay(new GMarker(punto));Ahora, cada vez que se pulsa sobre 
+        un punto del mapa, se a&ntilde;ade un nuevo marcador en ese<br>
+        punto:Modificando ligeramente el ejemplo anterior, es posible borrar un 
+        marcador si se pulsa sobre el:<br>
+        GEvent.addListener(mapa, &quot;click&quot;, function(marcador, punto) 
+        {<br>
+        if(marcador) {<br>
+        mapa.removeOverlay(marcador);<br>
+        } else {<br>
+        mapa.addOverlay(new GMarker(punto));<br>
+        Modificando de nuevo el c&oacute;digo anterior, es posible a&ntilde;adir 
+        eventos a los marcadores para que<br>
+        cada vez que se pinche en uno de ellos se muestre un mensaje con sus coordenadas 
+        geogr&aacute;ficas:<br>
+        GEvent.addListener(mapa, &quot;click&quot;, function(marcador, punto) 
+        {<br>
+        var nuevoMarcador = new GMarker(punto);<br>
+        GEvent.addListener(nuevoMarcador, &quot;click&quot;, function() {<br>
+        this.openInfoWindowHtml(&quot;Lat: &quot; + this.getPoint().lat() + &quot;&lt;br/&gt;Lon: 
+        &quot; +<br>
+        this.getPoint().lng());<br>
+        });<br>
+        mapa.addOverlay(nuevoMarcador);<br>
+        });A continuaci&oacute;n se muestra la explicaci&oacute;n detallada del 
+        c&oacute;digo anterior. En primer lugar se<br>
+        establece un nuevo evento cada vez que se pincha sobre el mapa:<br>
+        GEvent.addListener(mapa, &quot;click&quot;, function(marcador, punto) 
+        {<br>
+        Cada vez que se pincha, se crea un nuevo marcador con las coordenadas 
+        de la posici&oacute;n en la que<br>
+        se ha pinchado:<br>
+        var nuevoMarcador = new GMarker(punto);<br>
+        Antes de mostrar el marcador en el mapa, se a&ntilde;ade un evento al 
+        propio marcador, que se<br>
+        ejecutar&aacute; cada vez que se pinche sobre el:<br>
+        GEvent.addListener(nuevoMarcador, &quot;click&quot;, function() {<br>
+        El m&eacute;todo openInfoWindowHtml() permite mostrar una peque&ntilde;a 
+        ventana con un mensaje que<br>
+        puede contener c&oacute;digo HTML. Dentro de la funci&oacute;n manejadora 
+        del evento, la variable this se<br>
+        resuelve en el propio marcador, por lo que se puede hacer uso de ella 
+        para obtener sus<br>
+        coordenadas y para mostrar el mensaje:<br>
+        this.openInfoWindowHtml(&quot;Lat: &quot; + this.getPoint().lat() + &quot;&lt;br/&gt;Lon: 
+        &quot; +<br>
+        this.getPoint().lng());<br>
+        Por &uacute;ltimo, se a&ntilde;ade el marcador al mapa:<br>
+        mapa.addOverlay(nuevoMarcador);<br>
+        Ejercicio
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

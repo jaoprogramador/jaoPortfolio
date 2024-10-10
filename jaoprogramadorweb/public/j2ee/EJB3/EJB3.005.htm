@@ -1,0 +1,64 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Message-driven Beans</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación en Message-driven Beans,Programas Message-driven Beans,Aplicaciones en Message-driven Beans,Ejercicios en Message-driven Beans, Ejemplos de Message-driven Beans,Tutorial de Message-driven Beans,Manual Message-driven Beans" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Message-driven Beans, Manual Message-driven Beans, tutorial Message-driven Beans, Ejemplos Message-driven Beans, ejercicios Message-driven Beans">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> Message-driven Beans</h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <p>Los MDB tambi&eacute;n se usan para la l&oacute;gica 
+        de negocio, pero a diferencia de los session beans nunca son llamados 
+        directamente por el cliente, sino que se crean como resultado de ciertos 
+        mensajes enviados al servidor. </p>
+      <p>Permiten el env&iacute;o de mensajes as&iacute;ncronos entre sistemas, 
+        como por ejemplo indicar al sistema de un cliente que hemos enviado la 
+        mercanc&iacute;a. Ejemplo:</p>
+      <p>@MessageDriven(mappedName = &quot;MDBAuditoria&quot;, activationConfig 
+        = {<br>
+        @ActivationConfigProperty(propertyName = &quot;acknowledgeMode&quot;, 
+        propertyValue = &quot;Auto-acknowledge&quot;),<br>
+        @ActivationConfigProperty(propertyName = &quot;destinationType&quot;, 
+        propertyValue = &quot;javax.jms.Queue&quot;)<br>
+        })<br>
+        @Interceptors(ej4.AuditoriaListener.class)<br>
+        public class MDBAuditoriaBean implements MessageListener {<br>
+        public MDBAuditoriaBean() {<br>
+        }<br>
+        public void onMessage(Message message) {<br>
+        try {<br>
+        TextMessage text = (TextMessage) message;<br>
+        String msg = text.getText();<br>
+        System.out.println(&quot;MENSAJE=&quot;+msg);<br>
+        } catch (Exception ex) {<br>
+        ex.printStackTrace();<br>
+        }<br>
+        }<br>
+        }<br>
+      </p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

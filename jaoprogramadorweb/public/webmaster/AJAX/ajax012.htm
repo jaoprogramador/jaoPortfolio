@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>C&oacute;mo hacer una p&aacute;gina AJAX</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta name="keywords" content="Primera página AJAX, Como hacer una pagina AJAX, Manual AJAX, tutorial AJAX, Ejemplos AJAX, ejercicios AJAX">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2>Seguridad</h2></td>
+  </tr>
+  <tr> 
+    <td height="394" colspan="3"> <p>La ejecuci&oacute;n de aplicaciones JavaScript 
+        puede suponer un riesgo para el usuario que permite su ejecuci&oacute;n. 
+        Por este motivo, los navegadores restringen la ejecuci&oacute;n de todo 
+        c&oacute;digo JavaScript a un entorno de ejecuci&oacute;n limitado y pr&aacute;cticamente 
+        sin recursos ni permisos para realizar tareas b&aacute;sicas.<br>
+        Las aplicaciones JavaScript no pueden leer ni escribir ning&uacute;n archivo 
+        del sistema en el que se ejecutan. Tampoco pueden establecer conexiones 
+        de red con dominios distintos al dominio en el que se aloja la aplicaci&oacute;n 
+        JavaScript. Adem&aacute;s, un script s&oacute;lo puede cerrar aquellas 
+        ventanas de navegador que ha abierto ese script.</p>
+      <p><br>
+        La restricci&oacute;n del acceso a diferentes dominios es m&aacute;s restrictiva 
+        de lo que en principio puede parecer. El problema es que los navegadores 
+        emplean un m&eacute;todo demasiado simple para diferenciar entre dos dominios 
+        ya que no permiten ni subdominios ni otros protocolos ni otros puertos.Por 
+        ejemplo, si el c&oacute;digo JavaScript se descarga desde la siguiente 
+        URL:<br>
+        http://www.ejemplo.com/scripts/codigo.js, las funciones y m&eacute;todos 
+        incluidos en ese c&oacute;digo no pueden acceder a los recursos contenidos 
+        en los siguientes archivos:<br>
+        http://www.ejemplo.com:8080/scripts/codigo2.js<br>
+        https://www.ejemplo.com/scripts/codigo2.js<br>
+        http://192.168.0.1/scripts/codigo2.js<br>
+        http://scripts.ejemplo.com/codigo2.js<br>
+        Afortunadamente, existe una forma de solucionar parcialmente el problema 
+        del acceso a recursos no originados exactamente en el mismo dominio. La 
+        soluci&oacute;n se basa en establecer el valor de la propiedad document.domain<br>
+        As&iacute;, si el c&oacute;digo alojado en http://www.ejemplo.com/scritps/codigo1.js 
+        establece la variable document.domain = &quot;ejemplo.com&quot;; y por 
+        otra parte, el c&oacute;digo alojado en http://scripts.ejemplo.com/codigo2.js 
+        establece la variable document.domain =<br>
+        &quot;ejemplo.com&quot;; los recursos de ambos c&oacute;digos pueden interactuar 
+        entre s&iacute;.<br>
+        La propiedad document.domain se emplea para permitir el acceso entre subdominios 
+        del dominio principal de la aplicaci&oacute;n. Evidentemente, los navegadores 
+        no permiten establecer cualquier valor en esa propiedad, por lo que s&oacute;lo 
+        se puede indicar un valor que corresponda a una parte del subdominio completo 
+        donde se encuentra el script.</p></td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

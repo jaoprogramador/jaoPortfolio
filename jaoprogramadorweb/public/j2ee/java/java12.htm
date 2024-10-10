@@ -1,0 +1,312 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>M&eacute;todos en Java</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación en Java,Programas Java,Aplicaciones en Java,Ejercicios en Java, Ejemplos de Java,Tutorial de Java,Manual Java" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Java, Manual Java, tutorial Java, Ejemplos Java, ejercicios Java">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> M&eacute;todos en Java</h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <h3>M&eacute;todos de objeto</h3><p>
+        Los m&eacute;todos son funciones definidas dentro de una clase. Salvo 
+        los m&eacute;todos static o de clase, se<br>
+        aplican siempre a un objeto de la clase por medio del operador punto (.). 
+        Dicho objeto es su<br>
+        argumento impl&iacute;cito. Los m&eacute;todos pueden adem&aacute;s tener 
+        otros argumentos expl&iacute;citos que van entre<br>
+        par&eacute;ntesis, a continuaci&oacute;n del nombre del m&eacute;todo.<br>
+        La primera l&iacute;nea de la definici&oacute;n de un m&eacute;todo se 
+        llama declaraci&oacute;n o header; el c&oacute;digo<br>
+        comprendido entre las llaves {&#8230;} es el cuerpo o body del m&eacute;todo. 
+        Consid&eacute;rese el siguiente m&eacute;todo<br>
+        tomado de la clase Circulo:<br>
+        public Circulo elMayor(Circulo c) { // header y comienzo del m&eacute;todo<br>
+        if (this.r&gt;=c.r) // body<br>
+        return this; // body<br>
+        else // body<br>
+        return c; // body<br>
+        } // final del m&eacute;todo<br>
+        El header consta del cualificador de acceso (public, en este caso), del 
+        tipo del valor de retorno<br>
+        (Circulo en este ejemplo, void si no tiene), del nombre de la funci&oacute;n 
+        y de una lista de argumentos<br>
+        expl&iacute;citos entre par&eacute;ntesis, separados por comas. Si no 
+        hay argumentos expl&iacute;citos se dejan los<br>
+        par&eacute;ntesis vac&iacute;os.<br>
+        Los m&eacute;todos tienen visibilidad directa de las variables miembro 
+        del objeto que es su<br>
+        argumento impl&iacute;cito, es decir, pueden acceder a ellas sin cualificarlas 
+        con un nombre de objeto y el<br>
+        operador punto (.). De todas formas, tambi&eacute;n se puede acceder a 
+        ellas mediante la referencia this, de<br>
+        modo discrecional (como en el ejemplo anterior con this.r) o si alguna 
+        variable local o argumento<br>
+        las oculta.<br>
+        El valor de retorno puede ser un valor de un tipo primitivo o una referencia. 
+        En cualquier<br>
+        caso no puede haber m&aacute;s que un &uacute;nico valor de retorno (que 
+        puede ser un objeto o un array). Se<br>
+        puede devolver tambi&eacute;n una referencia a un objeto por medio de 
+        un nombre de interface. El objeto<br>
+        devuelto debe pertenecer a una clase que implemente esa interface.<br>
+        Se puede devolver como valor de retorno un objeto de la misma clase que 
+        el m&eacute;todo o de una<br>
+        sub-clase, pero nunca de una super-clase.<br>
+        Los m&eacute;todos pueden definir variables locales. Su visibilidad llega 
+        desde la definici&oacute;n al final<br>
+        del bloque en el que han sido definidas. No hace falta inicializar las 
+        variables locales en el punto en<br>
+        que se definen, pero el compilador no permite utilizarlas sin haberles 
+        dado un valor. A diferencia de<br>
+        las variables miembro, las variables locales no se inicializan por defecto.Si 
+        en el header del m&eacute;todo se incluye la palabra native (Ej: public 
+        native void miMetodo();)<br>
+        no hay que incluir el c&oacute;digo o implementaci&oacute;n del m&eacute;todo. 
+        Este c&oacute;digo deber&aacute; estar en una librer&iacute;a<br>
+        din&aacute;mica (Dynamic Link Library o DLL). Estas librer&iacute;as son 
+        ficheros de funciones compiladas<br>
+        normalmente en lenguajes distintos de Java (C, C++, Fortran, etc.). Es 
+        la forma de poder utilizar<br>
+        conjuntamente funciones realizadas en otros lenguajes desde c&oacute;digo 
+        escrito en Java. Este tema<br>
+        queda fuera del caracter fundamentalmente introductorio de este manual.<br>
+        Un m&eacute;todo tambi&eacute;n puede declararse como synchronized (Ej: 
+        public synchronized double<br>
+        miMetodoSynch(){...}). Estos m&eacute;todos tienen la particularidad de 
+        que sobre un objeto no pueden<br>
+        ejecutarse simult&aacute;neamente dos m&eacute;todos que est&eacute;n 
+        sincronizados (v&eacute;ase Apartado 6.3, en la p&aacute;gina<br>
+        121).</p>
+      <h3>M&eacute;todos sobrecargados (overloaded)</h3>
+      <p>Al igual que C++, Java permite m&eacute;todos sobrecargados (overloaded), 
+        es decir, m&eacute;todos distintos<br>
+        que tienen el mismo nombre, pero que se diferencian por el n&uacute;mero 
+        y/o tipo de los argumentos. El<br>
+        ejemplo de la clase Circulo del Apartado 3.2 presenta dos casos de m&eacute;todos 
+        sobrecargados: los<br>
+        cuatro constructores y los dos m&eacute;todos llamados elMayor().<br>
+        A la hora de llamar a un m&eacute;todo sobrecargado, Java sigue unas reglas 
+        para determinar el<br>
+        m&eacute;todo concreto que debe llamar:<br>
+        1. Si existe el m&eacute;todo cuyos argumentos se ajustan exactamente 
+        al tipo de los argumentos de<br>
+        la llamada (argumentos actuales), se llama ese m&eacute;todo.<br>
+        2. Si no existe un m&eacute;todo que se ajuste exactamente, se intenta 
+        promover los argumentos<br>
+        actuales al tipo inmediatamente superior (por ejemplo char a int, int 
+        a long, float a double,<br>
+        etc.) y se llama el m&eacute;todo correspondiente.<br>
+        3. Si s&oacute;lo existen m&eacute;todos con argumentos de un tipo m&aacute;s 
+        restringido (por ejemplo, int en<br>
+        vez de long), el programador debe hacer un cast expl&iacute;cito en la 
+        llamada,<br>
+        responsabiliz&aacute;ndose de esta manera de lo que pueda ocurrir.<br>
+        4. El valor de retorno no influye en la elecci&oacute;n del m&eacute;todo 
+        sobrecargado. En realidad es<br>
+        imposible saber desde el propio m&eacute;todo lo que se va a hacer con 
+        &eacute;l. No es posible crear<br>
+        dos m&eacute;todos sobrecargados, es decir con el mismo nombre, que s&oacute;lo 
+        difieran en el valor<br>
+        de retorno.<br>
+        Diferente de la sobrecarga de m&eacute;todos es la redefinici&oacute;n. 
+        Una clase puede redefinir<br>
+        (override) un m&eacute;todo heredado de una superclase. Redefinir un m&eacute;todo 
+        es dar una nueva definici&oacute;n.<br>
+        En este caso el m&eacute;todo debe tener exactamente los mismos argumentos 
+        en tipo y n&uacute;mero que el<br>
+        m&eacute;todo redefinido. Este tema se ver&aacute; de nuevo al hablar 
+        de la herencia.</p>
+      <h3>Paso de argumentos a m&eacute;todos</h3>
+      <p>En Java los argumentos de los tipos primitivos se pasan siempre por valor. 
+        El m&eacute;todo recibe una<br>
+        copia del argumento actual; si se modifica esta copia, el argumento original 
+        que se incluy&oacute; en la<br>
+        llamada no queda modificado. La forma de modificar dentro de un m&eacute;todo 
+        una variable de un tipo<br>
+        primitivo es incluirla como variable miembro en una clase y pasar como 
+        argumento una referencia a<br>
+        un objeto de dicha clase. Las referencias se pasan tambi&eacute;n por 
+        valor, pero a trav&eacute;s de ellas se<br>
+        pueden modificar los objetos referenciados.<br>
+        En Java no se pueden pasar m&eacute;todos como argumentos a otros m&eacute;todos 
+        (en C/C++ se pueden<br>
+        pasar punteros a funci&oacute;n como argumentos). Lo que se puede hacer 
+        en Java es pasar una referencia<br>
+        a un objeto y dentro de la funci&oacute;n utilizar los m&eacute;todos 
+        de ese objeto.<br>
+        Dentro de un m&eacute;todo se pueden crear variables locales de los tipos 
+        primitivos o referencias.<br>
+        Estas variables locales dejan de existir al terminar la ejecuci&oacute;n 
+        del m&eacute;todo1. Los argumentos<br>
+        formales de un m&eacute;todo (las variables que aparecen en el header 
+        del m&eacute;todo para recibir el valor de<br>
+        los argumentos actuales) tienen categor&iacute;a de variables locales 
+        del m&eacute;todo.<br>
+        Si un m&eacute;todo devuelve this (es decir, un objeto de la clase) o 
+        una referencia a otro objeto, ese<br>
+        objeto puede encadenarse con otra llamada a otro m&eacute;todo de la misma 
+        o de diferente clase y as&iacute;sucesivamente. En este caso aparecer&aacute;n 
+        varios m&eacute;todos en la misma sentencia unidos por el<br>
+        operador punto (.), por ejemplo,<br>
+        String numeroComoString = &#8221;8.978&#8221;;<br>
+        float p = Float.valueOf(numeroComoString).floatValue();<br>
+        donde el m&eacute;todo valueOf(String) de la clase java.lang.Float devuelve 
+        un objeto de la clase Float<br>
+        sobre el que se aplica el m&eacute;todo floatValue(), que finalmente devuelve 
+        una variable primitiva de<br>
+        tipo float. El ejemplo anterior se pod&iacute;a desdoblar en las siguientes 
+        sentencias:<br>
+        String numeroComoString = &#8221;8.978&#8221;;<br>
+        Float f = Float.valueOf(numeroComoString);<br>
+        float p = f.floatValue();<br>
+        Obs&eacute;rvese que se pueden encadenar varias llamadas a m&eacute;todos 
+        por medio del operador punto<br>
+        (.) que, como todos los operadores de Java excepto los de asignaci&oacute;n, 
+        se ejecuta de izquierda a<br>
+        derecha (ver Apartado 2.2.11, en la p&aacute;gina 28).</p>
+      <h3>M&eacute;todos de clase (static)</h3>
+      <p>An&aacute;logamente, puede tambi&eacute;n haber m&eacute;todos que no 
+        act&uacute;en sobre objetos concretos a trav&eacute;s del<br>
+        operador punto. A estos m&eacute;todos se les llama m&eacute;todos de 
+        clase o static. Los m&eacute;todos de clase<br>
+        pueden recibir objetos de su clase como argumentos expl&iacute;citos, 
+        pero no tienen argumento impl&iacute;cito<br>
+        ni pueden utilizar la referencia this. Un ejemplo t&iacute;pico de m&eacute;todos 
+        static son los m&eacute;todos<br>
+        matem&aacute;ticos de la clase java.lang.Math (sin(), cos(), exp(), pow(), 
+        etc.). De ordinario el argumento<br>
+        de estos m&eacute;todos ser&aacute; de un tipo primitivo y se le pasar&aacute; 
+        como argumento expl&iacute;cito. Estos m&eacute;todos<br>
+        no tienen sentido como m&eacute;todos de objeto.<br>
+        Los m&eacute;todos y variables de clase se crean anteponiendo la palabra 
+        static. Para llamarlos se<br>
+        suele utilizar el nombre de la clase, en vez del nombre de un objeto de 
+        la clase (por ejemplo,<br>
+        Math.sin(ang), para calcular el seno de un &aacute;ngulo).<br>
+        Los m&eacute;todos y las variables de clase son lo m&aacute;s parecido 
+        que Java tiene a las funciones y<br>
+        variables globales de C/C++ o Visual Basic.</p>
+      <h3>Constructores</h3>
+      <p>Un punto clave de la Programaci&oacute;n Orientada Objetos es el evitar 
+        informaci&oacute;n incorrecta por no<br>
+        haber sido correctamente inicializadas las variables. Java no permite 
+        que haya variables miembro<br>
+        que no est&eacute;n inicializadas2. Ya se ha dicho que Java inicializa 
+        siempre con valores por defecto las<br>
+        variables miembro de clases y objetos. El segundo paso en la inicializaci&oacute;n 
+        correcta de objetos es el<br>
+        uso de constructores.<br>
+        Un constructor es un m&eacute;todo que se llama autom&aacute;ticamente 
+        cada vez que se crea un objeto de<br>
+        una clase. La principal misi&oacute;n del constructor es reservar memoria 
+        e inicializar las variables<br>
+        miembro de la clase.<br>
+        Los constructores no tienen valor de retorno (ni siquiera void) y su nombre 
+        es el mismo que<br>
+        el de la clase. Su argumento impl&iacute;cito es el objeto que se est&aacute; 
+        creando.<br>
+        De ordinario una clase tiene varios constructores, que se diferencian 
+        por el tipo y n&uacute;mero de<br>
+        sus argumentos (son un ejemplo t&iacute;pico de m&eacute;todos sobrecargados). 
+        Se llama constructor pordefecto al constructor que no tiene argumentos. 
+        El programador debe proporcionar en el c&oacute;digo<br>
+        valores iniciales adecuados para todas las variables miembro.<br>
+        Un constructor de una clase puede llamar a otro constructor previamente 
+        definido en la<br>
+        misma clase por medio de la palabra this. En este contexto, la palabra 
+        this s&oacute;lo puede aparecer en la<br>
+        primera sentencia de un constructor.<br>
+        El constructor de una sub-clase puede llamar al constructor de su super-clase 
+        por medio de la<br>
+        palabra super, seguida de los argumentos apropiados entre par&eacute;ntesis. 
+        De esta forma, un constructor<br>
+        s&oacute;lo tiene que inicializar por s&iacute; mismo las variables no 
+        heredadas.<br>
+        El constructor es tan importante que, si el programador no prepara ning&uacute;n 
+        constructor para<br>
+        una clase, el compilador crea un constructor por defecto, inicializando 
+        las variables de los tipos<br>
+        primitivos a su valor por defecto, y los Strings y las dem&aacute;s referencias 
+        a objetos a null. Si hace<br>
+        falta, se llama al constructor de la super-clase para que inicialice las 
+        variables heredadas.<br>
+        Al igual que los dem&aacute;s m&eacute;todos de una clase, los constructores 
+        pueden tener tambi&eacute;n los<br>
+        modificadores de acceso public, private, protected y package. Si un constructor 
+        es private, ninguna<br>
+        otra clase puede crear un objeto de esa clase. En este caso, puede haber 
+        m&eacute;todos public y static<br>
+        (factory methods) que llamen al constructor y devuelvan un objeto de esa 
+        clase.<br>
+        Dentro de una clase, los constructores s&oacute;lo pueden ser llamados 
+        por otros constructores o por<br>
+        m&eacute;todos static. No pueden ser llamados por los m&eacute;todos de 
+        objeto de la clase.</p>
+      <h3>Inicializadores</h3>
+      <p>Por motivos que se ver&aacute;n m&aacute;s adelante, Java todav&iacute;a 
+        dispone de una tercera l&iacute;nea de actuaci&oacute;n para<br>
+        evitar que haya variables sin inicializar correctamente. Son los inicializadores, 
+        que pueden ser static<br>
+        (para la clase) o de objeto.<br>
+        a) Inicializadores static: Un inicializador static es un algo parecido 
+        a un m&eacute;todo (un bloque {&#8230;} de c&oacute;digo, sin nombre y<br>
+        sin argumentos, precedido por la palabra static) que se llama autom&aacute;ticamente 
+        al crear la clase (al<br>
+        utilizarla por primera vez). Tambi&eacute;n se diferencia del constructor 
+        en que no es llamado para cada<br>
+        objeto, sino una sola vez para toda la clase.<br>
+        Los tipos primitivos pueden inicializarse directamente con asignaciones 
+        en la clase o en el<br>
+        constructor, pero para inicializar objetos o elementos m&aacute;s complicados 
+        es bueno utilizar un<br>
+        inicializador (un bloque de c&oacute;digo {&#8230;}), ya que permite gestionar 
+        excepciones3 con try&#8230;catch.<br>
+        Los inicializadores static se crean dentro de la clase, como m&eacute;todos 
+        sin nombre, sin<br>
+        argumentos y sin valor de retorno, con tan s&oacute;lo la palabra static 
+        y el c&oacute;digo entre llaves {...}. En una<br>
+        clase pueden definirse varios inicializadores static, que se llamar&aacute;n 
+        en el orden en que han sido<br>
+        definidos.<br>
+        Los inicializadores static se pueden utilizar para dar valor a las variables 
+        static. Adem&aacute;s se<br>
+        suelen utilizar para llamar a m&eacute;todos nativos, esto es, a m&eacute;todos 
+        escritos por ejemplo en C/C++<br>
+        (llamando a los m&eacute;todos System.load() o System.loadLibrary(), que 
+        leen las librer&iacute;as nativas). Por<br>
+        ejemplo:static{<br>
+        System.loadLibrary(&quot;MyNativeLibrary&quot;);<br>
+        }<br>
+        b) Inicializadores de objeto: A partir de Java 1.1 existen tambi&eacute;n 
+        inicializadores de objeto, que no llevan la palabra static. Se<br>
+        utilizan para las clases an&oacute;nimas, que por no tener nombre no pueden 
+        tener constructor. En este<br>
+        caso, los inicializadores de objeto se llaman cada vez que se crea un 
+        objeto de la clase an&oacute;nima.</p>
+		
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

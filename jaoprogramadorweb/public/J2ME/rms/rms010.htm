@@ -1,0 +1,130 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Indice J2ME</title>
+<META http-equiv=Content-Language content=es>
+<META content="Manual J2ME, ejemplos J2ME, codigos J2ME" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Manual J2ME, ejemplos J2ME, codigos J2ME">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> Interfaces</h2></td>
+  </tr>
+  <tr> 
+    <td colspan="3"><p>- RecordComparator.Con esta interface construimos m&eacute;todos 
+        de ordenaci&oacute;n sobre el<br>
+        almac&eacute;n. Ser&aacute; un comparador que nos proporciona tres constantes 
+        p&uacute;blicas y un solo<br>
+        m&eacute;todo para comparar dos registros:<br>
+        &#8226; static int EQUIVALENT. El contenido de los dos registros a comparar 
+        coincide.<br>
+        &#8226; static int FOLLOWS. El primer registro queda tras el segundo al 
+        compararlos.<br>
+        &#8226; static int PRECEDES. El primer registro queda delante del segundo 
+        al<br>
+        compararlos.<br>
+        &#8226; int compare(byte[] rec1, byte[] rec2). Devuelve una de las constantes<br>
+        anteriores tras comparar los dos contenidos de registro dados.<br>
+        - RecordEnumeration. Con ella tendremos un enumerador para recorrer el 
+        almac&eacute;n<br>
+        que lo origine en ambas direcciones, inici&aacute;ndose justo antes del 
+        primer elemento.<br>
+        Los m&eacute;todos disponibles son:<br>
+        &#8226; void destroy(). Libera los recursos asignados a este enumerador.<br>
+        &#8226; boolean hasNextElement(). Indica si existe un siguiente elemento 
+        en la<br>
+        direcci&oacute;n de avance.<br>
+        &#8226; boolean hasPreviousElement(). Indica si existe un siguiente elemento 
+        en la<br>
+        direcci&oacute;n de retroceso.<br>
+        &#8226; boolean isKeptUpdated(). Indica si el enumerador se mantiene actualizado 
+        con<br>
+        los cambios en el RecordStore origen.<br>
+        &#8226; void keepUpdated(boolean keepUpdated). Modifica la condici&oacute;n 
+        que observaba<br>
+        el anterior m&eacute;todo.<br>
+        &#8226; byte[] nextRecord(). Devuelve una copia del contenido del registro 
+        siguiente en<br>
+        el enumerador, avanzando el puntero de registro actual con el que hacemos 
+        el<br>
+        recorrido y, tras ello, retornando el elemento que encuentre.<br>
+        Al crear el enumerador (ver m&aacute;s adelante el m&eacute;todo enumerateRecords() 
+        de la<br>
+        clase RecordStore) podremos proporcionarle un comparador y/o un filtro, 
+        los<br>
+        cuales impondr&aacute;n la secuencia de registros que pasan al enumerador, 
+        obviamente<br>
+        marcando con ello qui&eacute;n es el siguiente registro.<br>
+        &#8226; int nextRecordId(). Devuelve el identificador de ese registro 
+        siguiente tras<br>
+        avanzar en el recorrido.<br>
+        &#8226; int numRecords(). N&uacute;mero de registros en el enumerador.<br>
+        &#8226; byte[] previousRecord(). An&aacute;logo al m&eacute;todo nextRecord, 
+        para el registro<br>
+        anterior al actual en el enumerador.<br>
+        &#8226; int previousRecordId(). Identificador de ese registro anterior.<br>
+        &#8226; void rebuild(). Refresca el enumerador con los datos actuales 
+        del RecordStore<br>
+        que lo origin&oacute;.</p>
+      <p>&#8226;void.reset(). Devuelve el enumerador a su estado original, tal 
+        y como se<br>
+        encontraba al crearse.<br>
+        - RecordFilter. Con esta interface implementaremos b&uacute;squedas sobre 
+        los elementos del<br>
+        almac&eacute;n. Un solo m&eacute;todo para devolver si el contenido par&aacute;metro 
+        cumple con el<br>
+        criterio que demos al implementarlo:<br>
+        &#8226; boolean matches(byte[] candidate)<br>
+        - RecordListener. Con &eacute;l implementamos un escuchador de eventos 
+        (listener) para<br>
+        capturar qu&eacute; ha sucedido sobre un registro dado:<br>
+        &#8226; void recordAdded(RecordStore recordStore, int recordId). Registro 
+        a&ntilde;adido<br>
+        al almac&eacute;n.<br>
+        &#8226; void recordChanged(RecordStore recordStore, int recordId). Registro<br>
+        modificado en el almac&eacute;n.<br>
+        &#8226; void recordDeleted(RecordStore recordStore, int recordId). Registro<br>
+        eliminado del almac&eacute;n.<br>
+        1.2.2.2. Clases<br>
+        - RecordStore. &Uacute;nica clase del paquete, la cual instancia un almac&eacute;n 
+        de datos y ofrece<br>
+        23 m&eacute;todos y dos constantes. Las excepciones que eleva cada m&eacute;todo 
+        las<br>
+        comentaremos m&aacute;s adelante.<br>
+        &#8226; static int AUTHMODE_ANY. Constante. Indica que cualquier suite 
+        tiene<br>
+        permitido el acceso a este almac&eacute;n.<br>
+        &#8226; static int AUTHMODE_PRIVATE. Constante. S&oacute;lo se permite 
+        el acceso a la suite<br>
+        actual.<br>
+        &#8226; int addRecord(byte[] data, int offset, int numBytes). A&ntilde;ade 
+        un nuevo<br>
+        registro al RecordStore, devolviendo el identificador que le toque. Le 
+        pasamos el<br>
+        array de bytes que lleva el contenido a almacenar, el &iacute;ndice de 
+        este array desde<br>
+        donde se considera el contenido y el n&uacute;mero de elementos del array 
+        a almacenar a<br>
+        partir de &eacute;l.</p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

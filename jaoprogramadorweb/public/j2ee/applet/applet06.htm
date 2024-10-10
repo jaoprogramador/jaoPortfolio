@@ -1,0 +1,69 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Paso de par&aacute;metros a un applet </title>
+<META http-equiv=Content-Language content=es>
+<META content="Manual Applets, ejemplos Applets, codigos Applets" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Manual Applets, ejemplos Applets, codigos Applets">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> <strong> Paso de par&aacute;metros a un 
+        applet </strong></h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <p>Los tags PARAM permiten pasar diversos par&aacute;metros 
+        desde el fichero HTML al programa Java del
+        applet, de una forma an&aacute;loga a la que se utiliza para pasar argumentos 
+        a main().</p>
+      <p>
+        Cada par&aacute;metro tiene un nombre y un valor. Ambos se dan en forma 
+        de String, aunque el
+        valor sea num&eacute;rico. El applet recupera estos par&aacute;metros 
+        y, si es necesario, convierte los Strings en
+        valores num&eacute;ricos. El valor de los par&aacute;metros se obtienen 
+        con el siguiente m&eacute;todo de la clase
+        Applet:</p>
+      <p>
+        String getParameter(String name)</p>
+      <p> La conversi&oacute;n de Strings a los tipos primitivos se puede hacer 
+        con los m&eacute;todos asociados a los wrappers que Java proporciona para 
+        dichos tipo fundamentales (Integer.parseInt(String), Double.valueOf(String), 
+        &#8230;). </p>
+      <p>En los nombres de los par&aacute;metros no se distingue entre may&uacute;sculas 
+        y min&uacute;sculas, pero s&iacute; en los valores, ya que ser&aacute;n 
+        interpretados por un programa Java, que s&iacute; distingue. El programador 
+        del applet deber&iacute;a prever siempre unos valores por defecto para 
+        los par&aacute;metros del applet, para el caso de que en la p&aacute;gina 
+        HTML que llama al applet no se definan. </p>
+      <p>El m&eacute;todo getParameterInfo() devuelve una matriz de Strings (String[][]) 
+        con informaci&oacute;n sobre cada uno de los par&aacute;metros soportados 
+        por el applet: nombre, tipo y descripci&oacute;n, cada uno de ellos en 
+        un String. Este m&eacute;todo debe ser redefinido por el programador del 
+        applet y utilizado por la persona que prepara la p&aacute;gina HTML que 
+        llama al applet. </p>
+      <p>En muchas ocasiones ser&aacute;n personas distintas, y &eacute;sta es 
+        una forma de que el programador del applet d&eacute; informaci&oacute;n 
+        al usuario. </p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>C&oacute;mo hacer una p&aacute;gina AJAX</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta name="keywords" content="Primera página AJAX, Como hacer una pagina AJAX, Manual AJAX, tutorial AJAX, Ejemplos AJAX, ejercicios AJAX">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2>Listas desplegables encadenadas</h2></td>
+  </tr>
+  <tr> 
+    <td height="394" colspan="3"> <h3>Contexto</h3>
+      <p>Algunas aplicaciones web disponen de varias listas desplegables encadenadas. 
+        En este tipo de listas, cuando se selecciona un elemento de la primera 
+        lista desplegable, se cargan en la segunda lista unos valores que dependen 
+        del valor seleccionado en la primera lista.<br>
+        El mayor inconveniente de este tipo de listas se produce cuando existen 
+        un gran n&uacute;mero de opciones posibles. Si se considera por ejemplo 
+        el caso de una tienda, en la primera lista desplegable se pueden mostrar 
+        decenas de productos y en la segunda lista se muestran los diferentes 
+        modelos de cada producto y sus precios.<br>
+        Si todos los elementos de las listas desplegables se almacenan mediante 
+        arrays de JavaScript en la propia p&aacute;gina, los tiempos de carga 
+        se pueden disparar y hacerlo completamente inviable.<br>
+        Por otra parte, se puede optar por recargar completamente la p&aacute;gina 
+        cada vez que se selecciona un valor diferente en la primera lista desplegable. 
+        Sin embargo, recargar la p&aacute;gina entera cada vez que se selecciona 
+        un valor, aumenta la carga en el servidor y el tiempo de espera del usuario.<br>
+        Una posible soluci&oacute;n intermedia consiste en actualizar las listas 
+        desplegables mediante AJAX.<br>
+        Los valores de la primera lista se incluyen en la p&aacute;gina web y 
+        cuando se selecciona un valor de esta lista, se realiza una consulta al 
+        servidor que devuelve los valores que se deben mostrar en la<br>
+        otra lista desplegable.</p>
+      <p><br>
+        Crear un script que cargue de forma din&aacute;mica mediante AJAX la lista 
+        de provincias de un pa&iacute;s y la lista de los municipios de cada provincia 
+        seleccionada.<br>
+        1) Definir el c&oacute;digo HTML de las dos listas desplegables vac&iacute;as.<br>
+        2) Cuando se cargue la p&aacute;gina, cargar la lista de provincias en 
+        la primera lista desplegable. El script<br>
+        del servidor se llama cargaProvinciasXML.php. El formato de la respuesta 
+        es XML, con la siguiente<br>
+        estructura:<br>
+        &lt;provincias&gt;<br>
+        &lt;provincia&gt;<br>
+        &lt;codigo&gt;01&lt;/codigo&gt;<br>
+        &lt;nombre&gt;&Aacute;lava&lt;/nombre&gt;<br>
+        &lt;/provincia&gt;<br>
+        ...<br>
+        &lt;/provincias&gt;<br>
+        Para insertar las opciones en la lista desplegable, se pueden utilizar 
+        dos t&eacute;cnicas:<br>
+        1. Propiedad innerHTML de la lista y c&oacute;digo HTML de cada etiqueta 
+        &lt;option&gt;.<br>
+        2. Crear elementos de tipo opci&oacute;n (new Option(nombre, valor)) y 
+        a&ntilde;adirlo al array<br>
+        options[] de la lista desplegable.<br>
+        3) A&ntilde;adir de forma sem&aacute;ntica el evento adecuado a la lista 
+        de provincias para que cuando se<br>
+        seleccione una provincia, se carguen autom&aacute;ticamente todos sus 
+        municipios en la otra lista.</p>
+      <p>Cuando se seleccione una determinada provincia, se carga mediante AJAX 
+        la lista completa de municipios en la otra lista desplegable. El script 
+        del servidor se llama cargaMunicipiosXML.php. El par&aacute;metro que 
+        se debe enviar al servidor es el c&oacute;digo de la provincia y el par&aacute;metro 
+        se llama provincia. El m&eacute;todo que espera el servidor es POST. El 
+        formato de la respuesta es XML, con la siguiente estructura:<br>
+        &lt;municipios&gt;<br>
+        &lt;municipio&gt;<br>
+        &lt;codigo&gt;0014&lt;/codigo&gt;<br>
+        &lt;nombre&gt;Alegr&iacute;a-Dulantzi&lt;/nombre&gt;<br>
+        &lt;/municipio&gt;<br>
+        ...<br>
+        &lt;/municipios&gt;</p>
+      
+      <p></p>
+</td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

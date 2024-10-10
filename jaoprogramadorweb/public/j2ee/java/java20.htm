@@ -1,0 +1,144 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Polimorfismo</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación en Java,Programas Java,Aplicaciones en Java,Ejercicios en Java, Ejemplos de Java,Tutorial de Java,Manual Java" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Java, Manual Java, tutorial Java, Ejemplos Java, ejercicios Java">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> Polimorfismo</h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <h3>Introducci&oacute;n</h3>
+      <p> Ya se vio en el ejemplo presentado en el Apartado 1.3.8 y en los comentarios 
+        incluidos en qu&eacute;<br>
+        consist&iacute;a el polimorfismo.</p>
+      <p>El polimorfismo tiene que ver con la relaci&oacute;n que se establece 
+        entre la llamada a un m&eacute;todo y<br>
+        el c&oacute;digo que efectivamente se asocia con dicha llamada. A esta 
+        relaci&oacute;n se llama vinculaci&oacute;n<br>
+        (binding). La vinculaci&oacute;n puede ser temprana (en tiempo de compilaci&oacute;n) 
+        o tard&iacute;a (en tiempo de<br>
+        ejecuci&oacute;n). Con funciones normales o sobrecargadas se utiliza vinculaci&oacute;n 
+        temprana (es posible y es<br>
+        lo m&aacute;s eficiente). Con funciones redefinidas en Java se utiliza 
+        siempre vinculaci&oacute;n tard&iacute;a, excepto<br>
+        si el m&eacute;todo es final. El polimorfismo es la opci&oacute;n por 
+        defecto en Java.<br>
+        La vinculaci&oacute;n tard&iacute;a hace posible que, con un m&eacute;todo 
+        declarado en una clase base (o en una<br>
+        interface) y redefinido en las clases derivadas (o en clases que implementan 
+        esa interface), sea el<br>
+        tipo de objeto y no el tipo de la referencia lo que determine qu&eacute; 
+        definici&oacute;n del m&eacute;todo se va a<br>
+        utilizar. El tipo del objeto al que apunta una referencia s&oacute;lo 
+        puede conocerse en tiempo de<br>
+        ejecuci&oacute;n, y por eso el polimorfismo necesita evaluaci&oacute;n 
+        tard&iacute;a.<br>
+        El polimorfismo permite a los programadores separar las cosas que cambian 
+        de las que no<br>
+        cambian, y de esta manera hacer m&aacute;s f&aacute;cil la ampliaci&oacute;n, 
+        el mantenimiento y la reutilizaci&oacute;n de los<br>
+        programas.<br>
+        El polimorfismo puede hacerse con referencias de super-clases abstract, 
+        super-clases<br>
+        normales e interfaces. Por su mayor flexibilidad y por su independencia 
+        de la jerarqu&iacute;a de clases<br>
+        est&aacute;ndar, las interfaces permiten ampliar much&iacute;simo las 
+        posibilidades del polimorfismo.</p>
+      <h3>Conversi&oacute;n de objetos</h3>
+      <p>El polimorfismo visto previamente est&aacute; basado en utilizar referencias 
+        de un tipo m&aacute;s &#8220;amplio&#8221; que<br>
+        los objetos a los que apuntan. Las ventajas del polimorfismo son evidentes, 
+        pero hay una importante<br>
+        limitaci&oacute;n: el tipo de la referencia (clase abstracta, clase base 
+        o interface) limita los m&eacute;todos que se<br>
+        pueden utilizar y las variables miembro a las que se pueden acceder. Por 
+        ejemplo, un objeto puede<br>
+        tener una referencia cuyo tipo sea una interface, aunque s&oacute;lo en 
+        el caso en que su clase o una de<br>
+        sus super-clases implemente dicha interface. Un objeto cuya referencia 
+        es un tipo interface s&oacute;lo<br>
+        puede utilizar los m&eacute;todos definidos en dicha interface. Dicho 
+        de otro modo, ese objeto no puede<br>
+        utilizar las variables y los m&eacute;todos propios de su clase. De esta 
+        forma las referencias de tipo<br>
+        interface definen, limitan y unifican la forma de utilizarse de objetos 
+        pertenecientes a clases muy<br>
+        distintas (que implementan dicha interface).<br>
+        Si se desea utilizar todos los m&eacute;todos y acceder a todas las variables 
+        que la clase de un objeto<br>
+        permite, hay que utilizar un cast expl&iacute;cito, que convierta su referencia 
+        m&aacute;s general en la del tipo<br>
+        espec&iacute;fico del objeto. De aqu&iacute; una parte importante del 
+        inter&eacute;s del cast entre objetos (m&aacute;s bien entre<br>
+        referencias, habr&iacute;a que decir).<br>
+        Para la conversi&oacute;n entre objetos de distintas clases, Java exige 
+        que dichas clases est&eacute;n<br>
+        relacionadas por herencia (una deber&aacute; ser sub-clase de la otra). 
+        Se realiza una conversi&oacute;n impl&iacute;cita<br>
+        o autom&aacute;tica de una sub-clase a una super-clase siempre que se 
+        necesite, ya que el objeto de la<br>
+        sub-clase siempre tiene toda la informaci&oacute;n necesaria para ser 
+        utilizado en lugar de un objeto de la<br>
+        super-clase. No importa que la super-clase no sea capaz de contener toda 
+        la informaci&oacute;n de la subclase.<br>
+        La conversi&oacute;n en sentido contrario -utilizar un objeto de una super-clase 
+        donde se espera<br>
+        encontrar uno de la sub-clase- debe hacerse de modo expl&iacute;cito y 
+        puede producir errores por falta de<br>
+        informaci&oacute;n o de m&eacute;todos. Si falta informaci&oacute;n, se 
+        obtiene una ClassCastException.<br>
+        No se puede acceder a las variables exclusivas de la sub-clase a trav&eacute;s 
+        de una referencia de<br>
+        la super-clase. S&oacute;lo se pueden utilizar los m&eacute;todos definidos 
+        en la super-clase, aunque la definici&oacute;n<br>
+        utilizada para dichos m&eacute;todos sea la de la sub-clase.Por ejemplo, 
+        sup&oacute;ngase que se crea un objeto de una sub-clase B y se referencia 
+        con un<br>
+        nombre de una super-clase A,<br>
+        A a = new B();<br>
+        en este caso el objeto creado dispone de m&aacute;s informaci&oacute;n 
+        de la que la referencia a le permite<br>
+        acceder (podr&iacute;a ser, por ejemplo, una nueva variable miembro j 
+        declarada en B). Para acceder a esta<br>
+        informaci&oacute;n adicional hay que hacer un cast expl&iacute;cito en 
+        la forma (B)a. Para imprimir esa variable j<br>
+        habr&iacute;a que escribir (los par&eacute;ntesis son necesarios):<br>
+        System.out.println( ((B)a).j );<br>
+        Un cast de un objeto a la super-clase puede permitir utilizar variables 
+        -no m&eacute;todos- de la<br>
+        super-clase, aunque est&eacute;n redefinidos en la sub-clase. Consid&eacute;rese 
+        el siguiente ejemplo: La clase C<br>
+        deriva de B y B deriva de A. Las tres definen una variable x. En este 
+        caso, si desde el c&oacute;digo de la<br>
+        sub-clase C se utiliza:<br>
+        x // se accede a la x de C<br>
+        this.x // se accede a la x de C<br>
+        super.x // se accede a la x de B. S&oacute;lo se puede subir un nivel<br>
+        ((B)this).x // se accede a la x de B<br>
+        ((A)this).x // se accede a la x de A </p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

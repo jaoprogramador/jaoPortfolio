@@ -1,0 +1,288 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Control de Excepciones</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación en Java,Programas Java,Aplicaciones en Java,Ejercicios en Java, Ejemplos de Java,Tutorial de Java,Manual Java" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Java, Manual Java, tutorial Java, Ejemplos Java, ejercicios Java">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> Control de Excepciones</h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <h3>Introducci&oacute;n</h3>
+      <p> A diferencia de otros lenguajes de programaci&oacute;n orientados a 
+        objetos como C/C++, Java incorpora en el propio lenguaje la gesti&oacute;n 
+        de errores. El mejor momento para detectar los errores es durante la compilaci&oacute;n. 
+        Sin embargo pr&aacute;cticamente s&oacute;lo los errores de sintaxis son 
+        detectados durante este<br>
+        periodo. El resto de problemas surgen durante la ejecuci&oacute;n de los 
+        programas.<br>
+        En el lenguaje Java, una Exception es un cierto tipo de error o una condici&oacute;n 
+        anormal que se ha producido durante la ejecuci&oacute;n de un programa. 
+        Algunas excepciones son fatales y provocan que se deba finalizar la ejecuci&oacute;n 
+        del programa. En este caso conviene terminar ordenadamente y dar un<br>
+        mensaje explicando el tipo de error que se ha producido. Otras, como por 
+        ejemplo no encontrar un fichero en el que hay que leer o escribir algo, 
+        pueden ser recuperables. En este caso el programa debe dar al usuario 
+        la oportunidad de corregir el error (indicando una nueva localizaci&oacute;n 
+        del fichero no encontrado).<br>
+        Un buen programa debe gestionar correctamente todas o la mayor parte de 
+        los errores que se pueden producir. Hay dos &#8220;estilos&#8221; de hacer 
+        esto:<br>
+        1. A la &#8220;antigua usanza&#8221;: los m&eacute;todos devuelven un 
+        c&oacute;digo de error. Este c&oacute;digo se<br>
+        chequea en el entorno que ha llamado al m&eacute;todo con una serie de 
+        if elseif &#8230;, gestionando de forma diferente el resultado correcto 
+        o cada uno de los posibles errores. Este sistema resulta muy complicado 
+        cuando hay varios niveles de llamadas a los m&eacute;todos.<br>
+        2. Con soporte en el propio lenguaje: En este caso el propio lenguaje 
+        proporciona<br>
+        construcciones especiales para gestionar los errores o Exceptions. Suele 
+        ser lo habitual en lenguajes modernos, como C++, Visual Basic y Java.<br>
+        En los siguientes apartados se examina c&oacute;mo se trabaja con los 
+        bloques y expresiones try, catch, throw, throws y finally, cu&aacute;ndo 
+        se deben lanzar excepciones, cu&aacute;ndo se deben capturar y c&oacute;mo 
+        se crean las clases propias de tipo Exception.</p>
+      <h3>Excepciones est&aacute;ndar en JavaClase Vector</h3>
+      <p>Los errores se representan mediante dos tipos de clases derivadas de 
+        la clase Throwable: Error y Exception. La siguiente figura muestra parcialmente 
+        la jerarqu&iacute;a de clases relacionada con Throwable:</p>
+      <p>La clase Error est&aacute; relacionada con errores de compilaci&oacute;n, 
+        del sistema o de la JVM. De<br>
+        ordinario estos errores son irrecuperables y no dependen del programador 
+        ni debe preocuparse de capturarlos y tratarlos.<br>
+        La clase Exception tiene m&aacute;s inter&eacute;s. Dentro de ella se 
+        puede distinguir:<br>
+        1. RuntimeException: Son excepciones muy frecuentes, de ordinario relacionadas 
+        con errores de programaci&oacute;n. Se pueden llamar excepciones impl&iacute;citas.<br>
+        2. Las dem&aacute;s clases derivadas de Exception son excepciones expl&iacute;citas. 
+        Java obliga a tenerlas en cuenta y chequear si se producen.<br>
+        El caso de RuntimeException es un poco especial. El propio Java durante 
+        la ejecuci&oacute;n de un programa chequea y lanza autom&aacute;ticamente 
+        las excepciones que derivan de RuntimeException. El programador no necesita 
+        establecer los bloques try/catch para controlar este tipo de excepciones.<br>
+        Representan dos casos de errores de programaci&oacute;n:<br>
+        1. Un error que normalmente no suele ser chequeado por el programador, 
+        como por ejemplo recibir una referencia null en un m&eacute;todo.<br>
+        2. Un error que el programador deber&iacute;a haber chequeado al escribir 
+        el c&oacute;digo, como sobrepasar el tama&ntilde;o asignado de un array 
+        (genera un ArrayIndexOutOfBoundsException<br>
+        autom&aacute;ticamente).<br>
+        En realidad ser&iacute;a posible comprobar estos tipos de errores, pero 
+        el c&oacute;digo se complicar&iacute;a excesivamente si se necesitara 
+        chequear continuamente todo tipo de errores (que las referencias son distintas 
+        de null, que todos los argumentos de los m&eacute;todos son correctos, 
+        y un largo etc&eacute;tera).<br>
+        Las clases derivadas de Exception pueden pertenecer a distintos packages 
+        de Java. Algunas perenecen a java.lang (Throwable, Exception, RuntimeException, 
+        &#8230;); otras a java.io (EOFException, FileNotFoundException, ...) o 
+        a otros packages. Por heredar de Throwable todos<br>
+        los tipos de excepciones pueden usar los m&eacute;todos siguientes:<br>
+        1. String getMessage() Extrae el mensaje asociado con la excepci&oacute;n.<br>
+        2. String toString() Devuelve un String que describe la excepci&oacute;n.<br>
+        3. void printStackTrace() Indica el m&eacute;todo donde se lanz&oacute; 
+        la excepci&oacute;n.</p>
+      <h3>Lanzar una Exception</h3>
+      <p>Cuando en un m&eacute;todo se produce una situaci&oacute;n an&oacute;mala 
+        es necesario lanzar una excepci&oacute;n. El proceso de lanzamiento de 
+        una excepci&oacute;n es el siguiente:<br>
+        1. Se crea un objeto Exception de la clase adecuada.<br>
+        2. Se lanza la excepci&oacute;n con la sentencia throw seguida del objeto 
+        Exception creado.<br>
+        // C&oacute;digo que lanza la excepci&oacute;n MyException una vez detectado 
+        el error<br>
+        MyException me = new MyException(&quot;MyException message&quot;);<br>
+        throw me;<br>
+        Esta excepci&oacute;n deber&aacute; ser capturada (catch) y gestionada 
+        en el propio m&eacute;todo o en alg&uacute;n otro lugar del programa (en 
+        otro m&eacute;todo anterior en la pila o stack de llamadas).</p>
+      <p>Al lanzar una excepci&oacute;n el m&eacute;todo termina de inmediato, 
+        sin devolver ning&uacute;n valor.<br>
+        Solamente en el caso de que el m&eacute;todo incluya los bloques try/catch/finally 
+        se ejecutar&aacute; el bloque catch que la captura o el bloque finally 
+        (si existe).<br>
+        Todo m&eacute;todo en el que se puede producir uno o m&aacute;s tipos 
+        de excepciones (y que no utiliza directamente los bloques try/catch/finally 
+        para tratarlos) debe declararlas en el encabezamiento de la funci&oacute;n 
+        por medio de la palabra throws. Si un m&eacute;todo puede lanzar varias 
+        excepciones, se ponen detr&aacute;s de throws separadas por comas, como 
+        por ejemplo:<br>
+        public void leerFichero(String fich) throws EOFException, FileNotFoundException 
+        {&#8230;}<br>
+        Se puede poner &uacute;nicamente una superclase de excepciones para indicar 
+        que se pueden lanzar excepciones de cualquiera de sus clases derivadas. 
+        El caso anterior ser&iacute;a equivalente a:<br>
+        public void leerFichero(String fich) throws IOException {&#8230;}<br>
+        Las excepciones pueden ser lanzadas directamente por leerFichero() o por 
+        alguno de los m&eacute;todos llamados por leerFichero(), ya que las clases 
+        EOFException y FileNotFoundException derivan de IOException.<br>
+        Se recuerda que no hace falta avisar de que se pueden lanzar objetos de 
+        la clases Error o RuntimeException (excepciones impl&iacute;citas).</p>
+      <h3>Capturar una Exception</h3>
+      <p>Como ya se ha visto, ciertos m&eacute;todos de los packages de Java y 
+        algunos m&eacute;todos creados por cualquier programador producen (&#8220;lanzan&#8221;) 
+        excepciones. Si el usuario llama a estos m&eacute;todos sin tenerlo en 
+        cuenta se produce un error de compilaci&oacute;n con un mensaje del tipo: 
+        &#8220;&#8230; Exception java.io.IOException must be caugth or it must 
+        be declared in the throws clause of this method&#8221;. El<br>
+        programa no compilar&aacute; mientras el usuario no haga una de estas 
+        dos cosas:<br>
+        1. Gestionar la excepci&oacute;n con una construcci&oacute;n del tipo 
+        try {&#8230;} catch {&#8230;}.<br>
+        2. Re-lanzar la excepci&oacute;n hacia un m&eacute;todo anterior en el 
+        stack, declarando que su m&eacute;todo tambi&eacute;n lanza dicha excepci&oacute;n, 
+        utilizando para ello la construcci&oacute;n throws en el header del m&eacute;todo.<br>
+        El compilador obliga a capturar las llamadas excepciones expl&iacute;citas, 
+        pero no protesta si se captura y luego no se hace nada con ella. En general, 
+        es conveniente por lo menos imprimir un mensaje indicando qu&eacute; tipo 
+        de excepci&oacute;n se ha producido.</p>
+      <h3>Bloques try y catch</h3>
+      <p>En el caso de las excepciones que no pertenecen a las RuntimeException 
+        y que por lo tanto Java obliga a tenerlas en cuenta habr&aacute; que utilizar 
+        los bloques try, catch y finally. El c&oacute;digo dentro del bloque try 
+        est&aacute; &#8220;vigilado&#8221;: Si se produce una situaci&oacute;n 
+        anormal y se lanza por lo tanto una excepci&oacute;n el control salta 
+        o sale del bloque try y pasa al bloque catch, que se hace cargo de la 
+        situaci&oacute;n y decide lo que hay que hacer. Se pueden incluir tantos 
+        bloques catch como sean necesarios, cada uno de los cuales tratar&aacute; 
+        un tipo de excepci&oacute;n.<br>
+        Las excepciones se pueden capturar individualmente o en grupo, por medio 
+        de una superclase de la que deriven todas ellas.<br>
+        El bloque finally es opcional. Si se incluye sus sentencias se ejecutan 
+        siempre, sea cual sea la excepci&oacute;n que se produzca o si no se produce 
+        ninguna. El bloque finally se ejecuta aunque en el bloque try haya un 
+        return.</p>
+      <p>En el siguiente ejemplo se presenta un m&eacute;todo que debe &quot;controlar&quot; 
+        una IOException relacionada con la lectura ficheros y una MyException 
+        propia:<br>
+        void metodo1(){<br>
+        ...<br>
+        try {<br>
+        // C&oacute;digo que puede lanzar las excepciones IOException y MyException<br>
+        } catch (IOException e1) {// Se ocupa de IOException simplemente dando 
+        aviso<br>
+        System.out.println(e1.getMessage());<br>
+        } catch (MyException e2) {<br>
+        // Se ocupa de MyException dando un aviso y finalizando la funci&oacute;n<br>
+        System.out.println(e2.getMessage()); return;<br>
+        } finally { // Sentencias que se ejecutar&aacute;n en cualquier caso<br>
+        ...<br>
+        }<br>
+        ...<br>
+        } // Fin del metodo1</p>
+      <h3>Relanzar una Exception</h3>
+      <p>Existen algunos casos en los cuales el c&oacute;digo de un m&eacute;todo 
+        puede generar una Exception y no se desea incluir en dicho m&eacute;todo 
+        la gesti&oacute;n del error. Java permite que este m&eacute;todo pase 
+        o relance (throws) la Exception al m&eacute;todo desde el que ha sido 
+        llamado, sin incluir en el m&eacute;todo los bucles try/catch correspondientes. 
+        Esto se consigue mediante la adici&oacute;n de throws m&aacute;s el nombre 
+        de la<br>
+        Exception concreta despu&eacute;s de la lista de argumentos del m&eacute;todo. 
+        A su vez el m&eacute;todo superior deber&aacute; incluir los bloques try/catch 
+        o volver a pasar la Exception. De esta forma se puede ir pasando la Exception 
+        de un m&eacute;todo a otro hasta llegar al &uacute;ltimo m&eacute;todo 
+        del programa, el m&eacute;todo main().<br>
+        El ejemplo anterior (metodo1) realizaba la gesti&oacute;n de las excepciones 
+        dentro del propio m&eacute;todo. Ahora se presenta un nuevo ejemplo (metodo2) 
+        que relanza las excepciones al siguiente m&eacute;todo:<br>
+        void metodo2() throws IOException, MyException {<br>
+        ...<br>
+        // C&oacute;digo que puede lanzar las excepciones IOException y MyException<br>
+        ...<br>
+        } // Fin del metodo2<br>
+        Seg&uacute;n lo anterior, si un m&eacute;todo llama a otros m&eacute;todos 
+        que pueden lanzar excepciones (por ejemplo de un package de Java), tiene 
+        2 posibilidades:<br>
+        1. Capturar las posibles excepciones y gestionarlas.<br>
+        2. Desentenderse de las excepciones y remitirlas hacia otro m&eacute;todo 
+        anterior en el stack para &eacute;ste se encargue de gestionarlas.<br>
+        Si no hace ninguna de las dos cosas anteriores el compilador da un error, 
+        salvo que se trate de una RuntimeException.</p>
+      <h3>M&eacute;todo finally {...}</h3>
+      <p>El bloque finally {...} debe ir detr&aacute;s de todos los bloques catch 
+        considerados. Si se incluye (ya que es opcional) sus sentencias se ejecutan 
+        siempre, sea cual sea el tipo de excepci&oacute;n que se produzca, o incluso 
+        si no se produce ninguna. El bloque finally se ejecuta incluso si dentro 
+        de los bloques try/catch hay una sentencia continue, break o return. La 
+        forma general de una secci&oacute;n donde se controlan las excepciones 
+        es por lo tanto:</p>
+      <p>try {<br>
+        // C&oacute;digo &#8220;vigilado&#8221; que puede lanzar una excepci&oacute;n 
+        de tipo A, B o C<br>
+        } catch (A a1) {<br>
+        // Se ocupa de la excepci&oacute;n A<br>
+        } catch (B b1) {<br>
+        // Se ocupa de la excepci&oacute;n B<br>
+        } catch (C c1) {<br>
+        // Se ocupa de la excepci&oacute;n C<br>
+        } finally {<br>
+        // Sentencias que se ejecutar&aacute;n en cualquier caso<br>
+        }<br>
+        El bloque finally es necesario en los casos en que se necesite recuperar 
+        o devolver a su situaci&oacute;n original algunos elementos. No se trata 
+        de liberar la memoria reservada con new ya que de ello se ocupar&aacute; 
+        autom&aacute;ticamente el garbage collector.<br>
+        Como ejemplo se podr&iacute;a pensar en un bloque try dentro del cual 
+        se abre un fichero para lectura y escritura de datos y se desea cerrar 
+        el fichero abierto. El fichero abierto se debe cerrar tanto si produce 
+        una excepci&oacute;n como si no se produce, ya que dejar un fichero abierto 
+        puede provocar problemas posteriores. Para conseguir esto se deber&aacute; 
+        incluir las sentencias correspondientes a cerrar el fichero dentro del 
+        bloque finally.</p>
+      <h3>Crear nuevas Excepciones</h3>
+      <p>El programador puede crear sus propias excepciones s&oacute;lo con heredar 
+        de la clase Exception o de una de sus clases derivadas. Lo l&oacute;gico 
+        es heredar de la clase de la jerarqu&iacute;a de Java que mejor se adapte 
+        al tipo de excepci&oacute;n. Las clases Exception suelen tener dos constructores:<br>
+        1. Un constructor sin argumentos.<br>
+        2. Un constructor que recibe un String como argumento. En este String 
+        se suele definir un mensaje que explica el tipo de excepci&oacute;n generada. 
+        Conviene que este constructor llame al constructor de la clase de la que 
+        deriva super(String).<br>
+        Al ser clases como cualquier otra se podr&iacute;an incluir variables 
+        y m&eacute;todos nuevos. Por ejemplo:<br>
+        class MiExcepcion extends Exception {<br>
+        public MiExcepcion() { // Constructor por defecto<br>
+        super();<br>
+        }<br>
+        public MiExcepci&oacute;n(String s) { // Constructor con mensaje<br>
+        super(s);<br>
+        }<br>
+        }</p>
+      <h3>HERENCIA DE CLASES Y TRATAMIENTO DE EXCEPCIONES</h3>
+      <p>Si un m&eacute;todo redefine otro m&eacute;todo de una super-clase que 
+        utiliza throws, el m&eacute;todo de la clase derivada no tiene obligatoriamente 
+        que poder lanzar todas las mismas excepciones de la clase base.<br>
+        Es posible en el m&eacute;todo de la subclase lanzar las mismas excepciones 
+        o menos, pero no se pueden lanzar m&aacute;s excepciones. No puede tampoco 
+        lanzar nuevas excepciones ni excepciones de una clase m&aacute;s general.<br>
+        Se trata de una restricci&oacute;n muy &uacute;til ya que como consecuencia 
+        de ello el c&oacute;digo que funciona con la clase base podr&aacute; trabajar 
+        autom&aacute;ticamente con referencias de clases derivadas, incluyendo 
+        el tratamiento de excepciones, concepto fundamental en la Programaci&oacute;n 
+        Orientada a Objetos (polimorfismo).</p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

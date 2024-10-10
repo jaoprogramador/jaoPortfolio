@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Modificaciones</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación en hibernate,Programas hibernate,Aplicaciones en hibernate,Ejercicios en hibernate, Ejemplos de hibernate,Tutoriales de hibernate,Manuales hibernate" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="hibernate, Manual hibernate, tutorial hibernate, Ejemplos hibernate, ejercicios hibernate">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2>Modificaciones</h2>
+      </td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <p>La estrategia va a ser la misma que para 
+        las bajas:<br>
+        public void cambiar(int idCategoria) {<br>
+        [...]<br>
+        Transaction tx = session.beginTransaction();<br>
+        Categoria unaCategoria = (Categoria)session.load(Categoria.class,<br>
+        new Integer(id));<br>
+        // Cambiamos una propiedad del objeto<br>
+        unaCategoria.setCategoria(&#8220;Una nueva categor&iacute;a&#8221;);<br>
+        // Lo modificamos en la base de datos<br>
+        session.update(unaCategoria);<br>
+        tx.commit();<br>
+        [...]<br>
+        }</p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

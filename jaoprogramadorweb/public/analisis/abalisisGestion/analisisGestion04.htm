@@ -1,0 +1,917 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Introduccion al desarrollo de aplicaciones informaticas</title>
+<META http-equiv=Content-Language content=es>
+<META content="Introduccion al desarrollo de aplicaciones informaticas" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Introduccion al desarrollo de aplicaciones informaticas">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> Dise&ntilde;o l&oacute;gico de datos</h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <h3>Sistemas de gesti&oacute;n de datos</h3>
+	  <p>Un sistema de informaci&oacute;n es un conjunto de elementos que est&aacute;n 
+        relacionados entre si y que cooperan para la consecuencia de un determinado 
+        fin.</p>
+
+      <p><br>
+        1.1 DISE&Ntilde;O L&Oacute;GICO DE DATOS</p>
+      <p>Se denomina dise&ntilde;o l&oacute;gico de datos a la apariencia que 
+        presentan estos para las personas que forman un equipo inform&aacute;tico 
+        o para los usuarios, cuando estos est&aacute;n en el ordenador.</p>
+      <p>1.2 DISE&Ntilde;O F&Iacute;SICO DE DATOS</p>
+      <p>Hace referencia al modo en que se guardan los datos en un dispositivo 
+        de almacenamiento, bien sea disco duro, disquete, etc...</p>
+      <p>En un principio los datos se almacenaban en ficheros de datos y los programas 
+        en ficheros de programas. Los lenguajes empleados en el dise&ntilde;o 
+        de programas eran: COBOL, BASIC, C,... Posteriormente comenzaron a utilizarse 
+        las Bases de Datos. Una BD es un sistema integrado de datos y programas 
+        relacionados entre si.<br>
+        Tipos de sistema de gesti&oacute;n de bases de datos: ORACLE, INFORMIX, 
+        MULTIBASE, DB2, ACCESS, Dbase.</p>
+      <p>Los sistemas de gesti&oacute;n de datos se clasifican seg&uacute;n se 
+        almacenan y recuperan los datos.</p>
+      <p></p>
+      <p> Almacenan --&gt; Sistema(S.G.D)--&gt; Recuperan</p>
+      <p>&nbsp; </p>
+      <p>Existen dos tipos de sistemas de gesti&oacute;n de datos:</p>
+      <p>1. Los basados en ficheros.<br>
+        2. Los basados en BD.</p>
+      <p>Una BD es un conjunto de informaciones que se muestra en filas y columnas.Al 
+        conjunto de filas y columnas que poseen informaci&oacute;n para un mismo 
+        tema (objeto), se le denomina Tabla. A la informaci&oacute;n contenida 
+        en cada fila se le llama Registro y a la informaci&oacute;n contenida 
+        en cada columna se le llama Campo.</p>
+      <p>1.3 SISTEMA DE GESTI&Oacute;N DE DATOS BASADOS EN FICHEROS</p>
+      <p>La informaci&oacute;n se encuentra distribuida en varios ficheros de 
+        datos. Con el transcurso del tiempo la empresa se crea nuevas necesidades 
+        que implica la creaci&oacute;n de programas que permitan acceder a los 
+        ficheros de datos e integrar la informaci&oacute;n. El problema es que 
+        estos programas que van resolviendo problemas espec&iacute;ficos, poseen 
+        muy poca integraci&oacute;n y a veces ninguna. Por lo que es necesario 
+        crear nuevos ficheros de datos a partir de los ya existentes.En este ejemplo 
+        vemos que hay ficheros de datos con repeticiones y datos desactualizados. 
+        Los datos de una factura no tienen que ver con los datos de un cliente, 
+        ni con los datos contables, con la excepci&oacute;n de que son empleados 
+        por el mismo programa.</p>
+      <p>Este tipo de estructuras genera la aparici&oacute;n de repeticiones innecesarias 
+        en los datos. Es decir Redundancias, y tambi&eacute;n la existencia respecto 
+        a un mismo dato de distintas informaciones en varios ficheros creando 
+        problemas de consistencia de datos. </p>
+      <p><br>
+        1.3.1 Problemas de los sistemas de gesti&oacute;n de datos basados en 
+        ficheros</p>
+      <p><br>
+        &#8226; Redundancia: una misma informaci&oacute;n puede estar repetida 
+        en varios ficheros.</p>
+      <p>&#8226; Inconsistencia: una misma informaci&oacute;n esta en varios ficheros 
+        y algunos de estos datos no concuerdan entre si.</p>
+      <p><br>
+        Fichero Contabilidad</p>
+      <p> Garc&iacute;a P&eacute;rez, Juan 15/03/98 15000</p>
+      <p> L&oacute;pez Mas, Luis 04/05/98 15000 </p>
+      <p></p>
+      <p> Fichero de Gesti&oacute;n Comercial</p>
+      <p> Garc&iacute;a P&eacute;rez, Juan 15/03/98 15000<br>
+        <br>
+        L&oacute;pez Mas, Luis 04/05/98 20000 </p>
+      <p><br>
+        &#8226; Aislamiento: se produce cuando los datos referentes a una entidad 
+        est&aacute;n almacenados en distintos ficheros, siendo dif&iacute;cil 
+        acceder a toda la informaci&oacute;n de la misma entidad a la vez.</p>
+      <p>&#8226; Dificultad de acceso: se da en dos niveles: </p>
+      <p>- Respecto a los ficheros de datos: Se necesita conocer cuales son los 
+        ficheros que contienen los datos que necesitamos. Si no se tiene la seguridad 
+        sobre cuales son los ficheros que se precisan tendremos que acudir al 
+        departamento de inform&aacute;tica para que nos resuelva el problema, 
+        por lo que se genera un nuevo tipo de dificultad y mas perdida de tiempo.<br>
+        - Respecto a la organizaci&oacute;n: Tendremos que acudir al departamento 
+        de inform&aacute;tica, y esperar el desarrollo de los programas para que 
+        los datos sean consistentes.</p>
+      <p><br>
+        1.3.2 Reglas de validaci&oacute;n y concurrencias de accesos.</p>
+      <p>Las reglas de validaci&oacute;n: tambi&eacute;n se llaman l&iacute;mites 
+        de consistencias. Son un conjunto de instrucciones que permiten o no almacenar 
+        determinados valores en un campo.</p>
+      <p>Concurrencias de accesos: se entiende por tal al acceso simult&aacute;neo 
+        de varios usuarios al mismo fichero de datos. <br>
+        Las reglas de validaci&oacute;n y la concurrencia de accesos crean los 
+        siguientes problemas respecto a los ficheros:</p>
+      <p>1. Integridad: al crearse nuevos programas que permiten la entrada de 
+        nuevos datos por teclado o a partir de determinados ficheros, se hace 
+        que sean almacenados cumpliendo unas reglas de validaci&oacute;n. Si cada 
+        fichero que permite la adici&oacute;n o modificaci&oacute;n de los datos 
+        posee sus propias reglas de validaci&oacute;n, teni&eacute;ndose que tener 
+        en cuenta todas las reglas de validaci&oacute;n de los ficheros utilizados. 
+        Si no se tienen en cuenta estaremos introduciendo informaci&oacute;n inconsistente 
+        si en uno se cumple y en otros no.</p>
+      <p>2. Control de concurrencia: cuando varios usuarios acceden a la vez al 
+        mismo fichero de datos modificando la informaci&oacute;n que contiene 
+        y no hay ning&uacute;n programa que controle el orden de acceso, es decir, 
+        no hay ning&uacute;n control de concurrencia, no se tendr&aacute; la seguridad 
+        de que todas las informaciones modificadas ser&aacute;n consistentes produci&eacute;ndose 
+        inconsistencia en la informaci&oacute;n.3. Seguridad: mientras que en 
+        el control de concurrencia se evita el acceso simult&aacute;neo de usuarios 
+        autorizados, la seguridad tratan de evitar el acceso a los datos a aquellos 
+        usuarios no autorizados. El administrador del sistema es el encargado 
+        de definir los distintos niveles de acceso a los usuarios. 1.4 SISTEMAS 
+        DE GESTION BASADOS EN BASES DE DATOS.</p>
+      <p>Por los problemas que hemos visto en los sistemas de gesti&oacute;n basados 
+        en ficheros se hace necesario un fichero de almacenamiento &uacute;nico, 
+        que sea f&aacute;cil de modificar y sencillo de consultar para dar respuesta 
+        a las necesidades que surjan, estos son los Sistemas de Gesti&oacute;n 
+        de BD (SGBD).</p>
+      <p>La ventaja m&aacute;s importante de las BD es la independencia l&oacute;gica 
+        y f&iacute;sica de los datos. Los cambios de un elemento de la BD no obliga 
+        a modificar los dem&aacute;s. La independencia f&iacute;sica de los datos 
+        significa que no dependen del soporte, es independiente del disco donde 
+        est&aacute;n almacenados ambas condiciones permiten disminuir el coste 
+        de almacenamiento y el coste de mantenimiento respecto a los sistemas 
+        de gesti&oacute;n basados en ficheros.</p>
+      <p>1.4.1 Caracter&iacute;sticas de las BD.</p>
+      <p>a) Afinaci&oacute;n: Consiste en dise&ntilde;ar las BD teniendo prevista, 
+        sin necesidad de volver a escribir los datos, las siguientes posibilidades:</p>
+      <p>- Crear nuevos objetos en la B, es decir, informes, formularios, procedimientos...<br>
+        - Importar o exportar datos.</p>
+      <p>b) Coste m&iacute;nimo: para conseguirlo hay que minimizar los costes 
+        de almacenamiento de datos.</p>
+      <p>c) Flexibilidad: es la posibilidad de crear nuevas consultas, mediante 
+        lenguajes de alto nivel o herramientas de dise&ntilde;o de consultas que 
+        interroguen cualquier tabla de modo que sea sencillo y r&aacute;pido obtener 
+        la informaci&oacute;n deseada.</p>
+      <p>d) Integridad: una BD posee integridad:</p>
+      <p>- Cuando es capaz de conseguir recuperar la informaci&oacute;n que pierde 
+        o queda da&ntilde;ada cuando se producen fallos en el sistema.<br>
+        - Cuando es capaz de conseguir que todos los datos cumplan las reglas 
+        de validaci&oacute;n.</p>
+      <p>e) Seguridad: la seguridad se refiere a los accesos y tiene que cumplir:</p>
+      <p>- Impedir el acceso a los usuarios no autorizados.<br>
+        - Impedir las modificaciones y recuperaciones de datos por quien no tenga 
+        los permisos.<br>
+        - Control de concurrencia, es decir, que se garantice la existencia de 
+        datos &iacute;ntegros, o lo que es lo mismo que la informaci&oacute;n 
+        sea la misma en distintas tablas que est&aacute;n relacionadas entre si.<br>
+      </p>
+      f) Migraci&oacute;n y compatibilidad de datos: es la posibilidad que tienen 
+      las BD de ser capaces de obtener datos que han sido almacenados con otro 
+      tipo de aplicaciones, de modo que puedan importarse adecuadamente. La compatibilidad 
+      de datos se refiere a que estos puedan ser copiados sin la p&eacute;rdida 
+      de informaci&oacute;n ni de propiedades.g) Redundancia: el dise&ntilde;o 
+      de la BD tiene que cumplir las reglas de normalizaci&oacute;n. El proceso 
+      de normalizaci&oacute;n permitir&aacute; que la BD contenga un m&iacute;nimo 
+      de repeticiones.
+      <p>h) Velocidad de respuesta: las consultas de los datos tienen que tener 
+        un tiempo de respuesta lo suficientemente r&aacute;pido para atender todas 
+        las solicitudes de informaci&oacute;n que se les haga por los usuarios.</p>
+      <p>i) Diccionario de datos: en el se almacenara las definiciones y propiedades 
+        de todos los objetos que forman la BD.</p>
+      <p>j) Independencia f&iacute;sica de los datos: con ello se pretende que 
+        al cambiar de unidad de disco a la BD o al cambiarla de S.O los elementos 
+        que conforman la BD no sufran variaciones que no alteren los procesos 
+        y programas que acceden a los mismos.<br>
+      </p> 
+      k) Independencia l&oacute;gica de los datos: las modificaciones que se realizan 
+      en algunos elementos de la BD no obliga a cambiar la estructura general, 
+      es decir, el dise&ntilde;o de la BD.
+      <p>l) Interfaz de alto nivel con los programadores: los programadores han 
+        de disponer del software necesario para desarrollar programas, consultas, 
+        formularios e informes. Sin necesidad de conocer la organizaci&oacute;n 
+        interna del disco.</p>
+      <p><br>
+        DIBUJO 1</p>
+      <p>m) Lenguaje final: es un lenguaje de consulta de alto nivel para la generaci&oacute;n 
+        autom&aacute;tica de consultas, formularios e informes que permita a los 
+        usuarios acceder y visualizar la informaci&oacute;n sin necesidad de conocer 
+        ning&uacute;n lenguaje espec&iacute;fico de programaci&oacute;n.</p>
+      <p>DIBUJO 2 </p>
+      <p>1.4.2 Estructura de un sistema de gesti&oacute;n de BDM, SGBD (Data Base 
+        Management Sistem, DBMS)</p>
+      <p>Un sistema de gesti&oacute;n es un conjunto de datos relacionados entre 
+        si y de programas para acceder a los mismos. Al conjunto de los datos 
+        se les llama BD. Entre los programas de un SGBD destacan los M&oacute;dulos 
+        que son los encargados tanto del almacenamiento como de la gesti&oacute;n, 
+        y a la vez tienen que controlar la seguridad interna frente a perdidas 
+        de integridad, control de concurrencia, fallos del sistema y el control 
+        de acceso a los datos. En todo SGBD hay tres niveles de abstracci&oacute;n 
+        o de trabajo, o lo que es lo mismo tres formas de ver la informaci&oacute;n. 
+      </p>
+      <p>1&ordm; Nivel Mundo Real: es el nivel externo del que se extraen todos 
+        los datos que necesitamos Este nivel es el de los usuarios.</p>
+      <p>2&ordm; Nivel De abstracciones de la realidad: es un nivel conceptual 
+        o de programadores.</p>
+      <p>3&ordm; Nivel Interno o F&iacute;sico: el administrador de la BD transforma 
+        el nivel conceptual en dise&ntilde;os f&iacute;sicos que puede ser interpretados 
+        por el SGBD.<br>
+      </p>
+      1&ordm; Nivel: Nivel de usuarios. Consiste en un conjunto de herramientas 
+      de desarrollo visual que permiten realizar consultas, formularios e informes 
+      y un lenguaje de consulta que sirve la creaci&oacute;n de programas que 
+      permiten acceder a los datos desde la BD.
+      <p>2&ordm; Nivel: Conceptual. Aqu&iacute; se desarrolla la acci&oacute;n 
+        de los programadores y del administrador de la BD. Los programadores realizan 
+        llamadas del sistema mediante el lenguaje de manipulaci&oacute;n de datos 
+        (Data Management Languaje DML). Lenguaje de definici&oacute;n de datos 
+        (Data Definition Languaje DDL) El administrador de la BD acceder&aacute; 
+        al esquema. Esquema es un conjunto de definiciones y reglas de los diversos 
+        elementos de la BD mediante el lenguaje de definici&oacute;n de datos.</p>
+      <p>Lenguaje de manipulaci&oacute;n de datos Programadores</p>
+      <p>Lenguaje de definici&oacute;n de datos Administrador<br>
+        <br>
+        3&ordm; Nivel: Nivel interno. Corresponde al almacenamiento de los datos 
+        en un soporte de almacenamiento. Los elementos de este nivel ser&aacute;n:<br>
+        - Ficheros de datos.<br>
+        - Los &iacute;ndices: elementos dentro de las BD que permiten mostrar 
+        los datos almacenados ordenados por determinados criterios previamente 
+        definidos</p>
+      <p><br>
+        1.4.3 Arquitectura de un sistema de gesti&oacute;n de BD.</p>
+      <p>Las personas que trabajan con las BD no tienen porque ser expertos en 
+        inform&aacute;tica, no necesitan conocer ni la estructura ni la arquitectura 
+        de la BD. Las BD deben de estar construidas atendiendo tres niveles de 
+        abstracci&oacute;n:</p>
+      <p>1&ordm; Nivel: F&iacute;sico<br>
+        2&ordm; Nivel: Conceptual<br>
+        3&ordm; Nivel: Externo</p>
+      <p>1&ordm; Nivel f&iacute;sico o interno: es como se almacenan f&iacute;sicamente 
+        los datos, que estructuras tienen, es decir, como son los ficheros. La 
+        restricci&oacute;n del nivel f&iacute;sico se realiza a trav&eacute;s 
+        del esquema interno. El esquema interno es un conjunto de definiciones 
+        y reglas que nos permiten definir las tablas y como se relacionan entre 
+        si. El administrador de la BD es el encargado de la definici&oacute;n 
+        y descripci&oacute;n de los siguientes elementos:</p>
+      <p>- El nombre de la BD.<br>
+        - La unidad de disco donde se guarda.<br>
+        - Tablas que ha de tener.<br>
+        - Campos y tipo de campo por cada tabla.<br>
+        - &Iacute;ndices y claves.<br>
+        - Diccionario de datos.<br>
+        - Procesos de seguridad e integridad.<br>
+        - Control multiusuario.<br>
+        - Como es la BD (distribuida, centralizada, etc.).</p>
+      <p>2&ordm; Conceptual: en este nivel se estudia como se han organizado los 
+        datos en la BD y cuales son sus relaciones. El esquema conceptual nos 
+        permite definir:</p>
+      <p>- Las reglas de validaci&oacute;n.<br>
+        - Las relaciones entre las tablas.<br>
+        - Los campos y sus propiedades.<br>
+      </p>
+      3&ordm; Externo: define la BD como es percibida por los usuarios. Para los 
+      usuarios las tablas y las BD existen f&iacute;sicamente. En este nivel la 
+      seguridad de la BD hace que a cada usuario se le muestre la parte de la 
+      BD a la que tiene acceso. Para acceso a la informaci&oacute;n existen unas 
+      reglas de correspondencia o mapeo.
+      <p>1. Un usuario solicita ver determinados datos de una tabla creando una 
+        consulta.<br>
+        2. Verificaci&oacute;n del esquema externo para este usuario.<br>
+        3. Aceptaci&oacute;n del esquema externo.<br>
+        4. Transformaci&oacute;n de la solicitud al nivel conceptual.<br>
+        5. Verificaci&oacute;n del esquema conceptual.<br>
+        6. Aceptaci&oacute;n del esquema conceptual.<br>
+        7. Transformaci&oacute;n de la solicitud a nivel interno.<br>
+        8. Selecci&oacute;n de la tabla objeto de la consulta.<br>
+        9. Ejecuci&oacute;n de la consulta.<br>
+        10. Transformaci&oacute;n del nivel interno a conceptual.<br>
+        11. Transformaci&oacute;n del nivel conceptual a externo.<br>
+        12. Se muestran los registros correspondientes al usuario.</p>
+      <p><br>
+        1.4.4 Lenguajes de los SGBD.</p>
+      <p>1. DL / I: es un lenguaje procedimental escrito en c&oacute;digo, utilizado 
+        por las BD jer&aacute;rquicas. Fue desarrollado a principio de los a&ntilde;os 
+        60 por IBM y se utilizo Apolo.<br>
+        2. SQL: en los actuales sistemas de gesti&oacute;n de BD se utiliza este 
+        lenguaje. Esta formado por comandos de descripci&oacute;n de objetos o 
+        lenguaje de descripci&oacute;n de datos (DDL) y por comandos de manipulaci&oacute;n 
+        de acceso y manejo de datos (DML).<br>
+        3. DDL: es el lenguaje empleado por el administrador de la BD. Se emplea 
+        para la descripci&oacute;n de los niveles conceptual y externo. <br>
+        4. DML: una parte del lenguaje de manipulaci&oacute;n de datos es el lenguaje 
+        de consulta espec&iacute;fico a cada sistema de gesti&oacute;n de BD.</p>
+      <p><br>
+        2. BASES DE DATOS DISTRIBUIDAS.</p>
+      <p>Un sistema distribuido de BD es una &uacute;nica BD en la que los datos, 
+        tablas y consultas se almacenan f&iacute;sicamente en distintos ordenadores, 
+        comunic&aacute;ndose mediante redes. A cada ordenador de la red se el 
+        llama Nodo.</p>
+      <p>Si los datos se van guardando en los distintos nodos a la hora de recuperarlos 
+        tendremos que ir a cada uno de ellos y por lo tanto habr&aacute; un incremento 
+        en el tiempo de respuesta y en la velocidad de acceso. Si consideramos 
+        la BD distribuida como BD locales el acceso y el tiempo de respuesta ser&aacute; 
+        m&aacute;s r&aacute;pido, aunque dejaremos la BD con apariencia de &uacute;nica.</p>
+      <p><br>
+        2.1 TIPOS DE REDES</p>
+      <p>BUS</p>
+      <p>ESTRELLA</p>
+      <p>ANILLO</p>
+      <p>JERARQUICA</p>
+      <p></p>
+      <p>La empresa Marpez se dedica a la mercalizacion de pescado fresco. Posee 
+        sucursales en Vigo, Gij&oacute;n, Barcelona y C&aacute;diz, la Sede esta 
+        en Madrid desde donde se centraliza la BD. Cada nodo tiene accedo a sus 
+        clientes y proveedores. El administrador de la BD autoriza a algunos usuarios 
+        de cada nodo la realizaci&oacute;n de tareas de administraci&oacute;n 
+        local, pudiendo gestionar de forma relativamente privada los datos de 
+        un nodo. Esta autonom&iacute;a local permite que se puedan resolver los 
+        problemas all&iacute; donde se producen. Otra ventaja de este tipo de 
+        BD es que si se estropea un nodo el resto puede seguir funcionando con 
+        total fiabilidad.</p>
+      <p><br>
+        2.2 VENTAJAS DE LAS BD DISTRIBUIDAS.</p>
+      <p>1. Todos los usuarios pueden compartir informaci&oacute;n.<br>
+        2. Cada usuario de un nodo es capaz de crear consultas usando datos contenidos 
+        en uno o varios nodos de la BD.</p>
+      <p><br>
+        2.3 INCONVENIENTES DE LAS BD DISTRIBUIDAS.</p>
+      <p>1. La mayor complejidad en el dise&ntilde;o y mantenimiento de las mismas, 
+        esto implica un mayor coste en el desarrollo del software y una mayor 
+        probabilidad de errores.<br>
+        2. Cada nodo tiene sus propios errores por lo que las soluciones ser&aacute;n 
+        particulares.<br>
+        3. Aumenta el tiempo de proceso cuando en una consulta interviene m&aacute;s 
+        de un nodo ya que se tienen que relacionar todos los datos que intervienen 
+        en la consulta.</p>
+      <p><br>
+        2.4 DISE&Ntilde;O DE LAS BD DISTRIBUIDAS.</p>
+      <p>Se siguen los siguientes puntos:</p>
+      <p>1. Nivel de repetici&oacute;n: hay repetici&oacute;n de datos si tenemos 
+        una copia de los mismos en todos los nodos. Hay una repetici&oacute;n 
+        parcial si no esta en todos los nodos. El aumento de redundancia har&aacute; 
+        que se tenga una mayor disponibilidad, una mayor velocidad y un mayor 
+        numero de errores. El administrador de la BD indicara cual debe ser el 
+        nivel de redundancia.<br>
+        2. Fragmentaci&oacute;n: tambi&eacute;n se conoce como divisi&oacute;n 
+        de la BD. Las tablas de la BD se parten en fragmentos que dan lugar a 
+        otras tablas, con este proceso aumenta el numero de tablas, disminuye 
+        el numero de informaci&oacute;n en las tablas y hay un menor trafico en 
+        la red. <br>
+        3. Transparencia de la red: los sistemas de BD distribuidas tienen que 
+        ser transparentes para los usuarios.</p>
+      <p>Tipos de Transparencia:</p>
+      <p>- De repetici&oacute;n: se tiene que conseguir la integridad de todos 
+        los datos de la BD. Las tablas que son modificadas ser&aacute;n sincronizadas 
+        con la copia primaria.</p>
+      <p></p>
+      <p>- De localizaci&oacute;n: un usuario no tiene por que saber el lugar 
+        f&iacute;sico donde se encuentra un dato. Los errores que se producen 
+        cuando se modifica el nombre de un campo en una tabla de datos son:</p>
+      <p>- SINONIMIA: el mismo campo tienen nombre diferentes en tablas distintas. 
+        <br>
+        - POLISEMIA: varios campos con el mismo nombre que se refieren a distintos 
+        datos.</p>
+      <p></p>
+      <p><br>
+        2.5 PROCESAMIENTO DISTRIBUIDO DE LOS DATOS.</p>
+      <p>Para optimizar los costes de una BD distribuida se siguen las siguientes 
+        estrategias:</p>
+      <p>1. Procesamiento de productos simples: cuando una tabla va a ser consultada 
+        por varios nodos.<br>
+        2. Procesamiento de productos en paralelo: el nodo 2 realiza una consulta 
+        a datos de una tabla que se encuentran en el nodo 1. </p>
+      <p>3. Semiproductos: es una estrategia similar a la de productos en paralelo, 
+        pero en esta se minimizan los costes de transmisi&oacute;n de red. </p>
+      <p>2.6 ELEMENTOS DE UNA BD DISTRIBUIDA.</p>
+      <p>1. El procesador de datos: es el software necesario para manejar los 
+        datos que han sido asignados a cada nodo.<br>
+        2. Procesador de aplicaciones: software de cada nodo para acceder a los 
+        datos de los dem&aacute;s nodos.<br>
+      </p>
+      <p>3. Software de comunicaciones: elementos para conectar el procesador 
+        de datos de un nodo con los dem&aacute;s nodos de la BD.</p>
+      <p></p>
+      <p>3. DICCIONARIO DE DATOS. </p>
+      <p>Contiene informaci&oacute;n sobre los datos almacenados es lo que se 
+        llama una Metabase, es decir, una BD formada por tablas sobre los elementos 
+        que conforman la informaci&oacute;n de la BD, es decir, tablas, registros, 
+        campos, relaciones, etc. El administrador de la BD es el responsable de 
+        su creaci&oacute;n y mantenimiento.<br>
+      </p>
+      <p>DESCRIPCION: En esta tabla se guardan todos los elementos que forman 
+        la <br>
+        BD.<br>
+        INFORMACION: En esta tabla se guarda informaci&oacute;n sobre los datos 
+        y las propiedades de los mismos: nombre, tipo, longitud, representaci&oacute;n 
+        de los registros, reglas de validaci&oacute;n...<br>
+        AMORTIZACIONES: En ella se guarda cada uno de los usuarios de la BD.</p>
+      <p> El diccionario de datos contiene el siguiente software transparente 
+        para el usuario:</p>
+      <p>- Un administrador de diccionario encargado de procesar las peticiones 
+        al diccionario y almacenar en una tabla las operaciones realizadas.<br>
+        - Un procesador de consultas que se encarga de procesar las peticiones 
+        del usuario.<br>
+        - Un generador de informes y un producto del lenguaje de manipulaci&oacute;n 
+        de datos que permite a los usuarios modificar el contenido del diccionario. 
+      </p>
+      <p><br>
+        3.1 TIPOS DE TABLAS CREADAS CON DB2.</p>
+      <p>Algunas de las tablas creadas por el diccionario de datos de las BD de 
+        DB2 (creadas por IBM) son los siguientes:</p>
+      <p> TABLAS<br>
+        SYSTABLES Genera un registro por cada tabla o consulta creada.<br>
+        SYSCOLUMNS Genera un registro por cada campo de cada tabla.<br>
+        SYSINDEXES Genera un registro por cada &iacute;ndice definido en las tablas.<br>
+        SYSVIEWS Genera un registro por cada consulta vista.<br>
+        SYSTABAUTH Genera un registro por cada amortizaci&oacute;n concedida.</p>
+      <p> <br>
+        3.2 TIPOS DE TABLAS CREADAS CON ACCESS.</p>
+      <p> TABLAS<br>
+        MSYSOBJECTS Contiene informaciones sobre los objetos creados en la BD.<br>
+        MSYSQUERIES Contiene informaci&oacute;n sobre las consultas creadas en 
+        la BD.<br>
+        MSYRELATIONSHIPS Contiene informaci&oacute;n sobre las relaciones definidas 
+        entre las tablas de BD.<br>
+        4. SEGURIDAD E INTEGRIDAD DE LOS DATOS</p>
+      <p>Las BD a lo largo del tiempo pueden sufrir fallos accidentales o provocados 
+        que hacen la perdida de la consistencia de los datos.</p>
+      <p>CAUSAS ACCIDENTALES.</p>
+      <p>1. Ca&iacute;das del sistema sin posibilidad de recuperar las transacciones 
+        en proceso.<br>
+        2. Problemas derivados del acceso concurrente a la BD.<br>
+        3. Problemas de comunicaci&oacute;n entre ordenadores en BD distribuidas.<br>
+        4. Errores l&oacute;gicos en el dise&ntilde;o de la BD que hacen que no 
+        se cumplan las reglas de validaci&oacute;n.</p>
+      <p>CAUSAS PROVOCADAS.</p>
+      <p>1. Acceso a la informaci&oacute;n por usuarios no autorizados. Este acceso 
+        puede ser desde la propia BD o desde aplicaciones distintas que permiten 
+        interpretar la BD.<br>
+        2. El mas grave es la modificaci&oacute;n o borrado de los datos de la 
+        BD por usuarios no autorizados.</p>
+      <p>PASOS A DAR PARA MINIMIZAR LOS DA&Ntilde;OS ANTERIORES.</p>
+      <p>1. F&iacute;sico: se ha de proteger e impedir si fuese necesario el paso 
+        a personas no autorizadas a zonas desde las que se puede acceder a la 
+        BD, aunque con un sistema de redes esto es muy dif&iacute;cil.<br>
+        2. Humano: los permisos de acceso a datos y sobre todo los de modificaciones 
+        tienen que concederse a personas que tengan que realizar esa tarea. Tambi&eacute;n 
+        hay que poner controles de tipo password que permitan o no acceder a los 
+        datos e incluso restricciones horarias.<br>
+        3. De sistema operativo: hay que crear un nivel de protecci&oacute;n del 
+        S.O mediante el empleo de claves de acceso con limitaciones de uso de 
+        los recursos del sistema, como los accesos a ficheros, dispositivos, etc... 
+        Si el sistema permite el acceso a la BD desde varios nodos de la red, 
+        hay que proteger el sistema de los accesos indebidos telem&aacute;ticos 
+        (claves).</p>
+      <p><br>
+        4.1 SEGURIDAD EN LOS ACCESOS</p>
+      <p>Cuanto menor sea el n&uacute;mero de elementos de una BD a los que puede 
+        acceder una persona menor ser&aacute; el riesgo de fallos de seguridad.<br>
+      </p>
+      <p>Para acceder a los elemento Hardware se necesitan permisos y privilegios, 
+        para acceder a los elementos Software se necesitan niveles de derechos 
+        o autorizaciones.</p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p><br>
+        4.1.1 Niveles de acceso que poseen los usuarios de una BD en Access.</p>
+      <p>Ejecuci&oacute;n Permite abrir la BD y todos sus elementos.<br>
+        Apertura exclusiva Permite abrir una BD con acceso exclusivo, sin permitir 
+        que otros usuarios accedan a la misma.<br>
+        Leer dise&ntilde;o Permite ver la estructura de los objetos de la BD.<br>
+        Modificar dise&ntilde;o Permite ver y cambiar los objetos de la BD o eliminarlos.<br>
+        Administrar Es el nivel de acceso que tiene el administrador, puede establecer 
+        una contrase&ntilde;a, duplicar la BD, cambiar las propiedades y asignar 
+        los permisos de acceso.<br>
+        Leer datos Permite ver los datos.<br>
+        Actualizar datos Permite visualizar y modificar, pero no introducir o 
+        eliminar.<br>
+        Insertar datos Permite visualizar e insertar, pero no modificar o eliminar.<br>
+        Eliminar datos Permite visualizar o eliminar, pero no modificar o insertar.</p>
+      <p>Los niveles de acceso se definen para cada elemento de la BD. <br>
+      </p>
+      <p>4.2 AUDITORIA Y GESTION DE ERRORES.</p>
+      <p>Los mecanismos de auditoria de una BD son aquellos m&eacute;todos que 
+        nos permiten conocer que operaciones han sido realizadas por los usuarios.</p>
+      <p>Identificador de Usuario Fecha y Hora Ordenador al que ha accedido</p>
+      <p>Las operaciones de auditoria se guardan en una tabla especial a la que 
+        solo puede acceder el administrador de la BD. La tabla que almacena las 
+        operaciones realizadas sobre la BD en Access tienen los siguientes campos:</p>
+      <p>Operaci&oacute;n Realizada Usuario que realizo la operaci&oacute;n Nombre 
+        del ordenador o terminal Fecha/ <br>
+        Hora RG. Al que accedi&oacute; Valores<br>
+        Antiguos Valores actuales<br>
+      </p>
+      <p><br>
+        4.3 CODIFICACION DE LA INFORMACI&Oacute;N</p>
+      <p>Cuando la informaci&oacute;n almacenada en una BD es confidencial o no 
+        debe acceder a ella las personas que no tienen permisos es conveniente 
+        codificar la BD. Una BD codificada carece de sentido para la persona que 
+        no disponga del c&oacute;digo.</p>
+      <p>4.3.1 Caracter&iacute;sticas de la codificaci&oacute;n de datos.</p>
+      <p>1. Para los usuarios tiene que ser sencillo de codificar y decodificar 
+        la BD.<br>
+        2. El esquema de codificaci&oacute;n no depende de un algoritmo, depende 
+        de la clave de codificaci&oacute;n. Existen dos tipos de claves:</p>
+      <p>- Claves p&uacute;blicas: conocidas por todos los usuarios de la BD.<br>
+        - Claves privadas: conocidas solo por el usuario que las creo.</p>
+      <p><br>
+        Los datos que contiene una BD pueden ser de dos tipos:</p>
+      <p>- Datos exclusivos: a ellos accede un usuario. Se crean bajo una clave 
+        privada.<br>
+        - Datos no exclusivos: son utilizados por todos los usuarios. Se crean 
+        bajo una clave p&uacute;blica.</p>
+      <p></p>
+      <p><br>
+        <br>
+        4.4 INTEGRIDAD</p>
+      <p>Las tres operaciones que se realizan sobre las BD hacen que estas pierdan 
+        la integridad. El administrador de la BD tiene que crear unas reglas de 
+        integridad para que la informaci&oacute;n sea consistente.<br>
+      </p>
+      <p>Hay seis tipos de reglas o acciones a tomar sobre las BD:</p>
+      <p>1. Restricciones de tipo de dato y de valores permitidos para un campo: 
+        se crean en el tiempo de definici&oacute;n del tipo de campo y cuando 
+        definimos las propiedades del mismo.<br>
+        2. Valores permitidos para un determinado campo: por ejemplo, la clave 
+        primaria de una tabla no puede tener valores nulos (clave primaria es 
+        un campo que identifica al registro, Ej. Para identificar una persona 
+        podemos utilizar el campo NIF como clave primaria).<br>
+        3. Control de valores: por ejemplo, los datos que forman una clave primaria 
+        no pueden estar duplicados ni ser nulos, son &uacute;nicos e invariables 
+        en el tiempo. Esto se conoce con el nombre de integridad de la entidad.<br>
+        4. Integridad referencial: consiste en mantener sin variaci&oacute;n los 
+        valores de la clave primaria.<br>
+        5. Reglas sem&aacute;nticas: tambi&eacute;n se conocen con el nombre de 
+        validaci&oacute;n. Son un conjunto de instrucciones que han de ser cumplidas 
+        por los campos afectados por dichas reglas. Pueden ser de tres tipos:</p>
+      <p>- Est&aacute;ticas: nunca var&iacute;an a lo largo de la vida de la BD. 
+        Ej. La fecha de nacimiento de un empleado ha de ser menor a la fecha de 
+        hoy.<br>
+        - Din&aacute;micas: pueden ser cambiadas cuando se necesiten. Ej. El salario 
+        tiene que ser menor a 200.000 Pts. (se modifica la regla) Posteriormente 
+        se define el salario tiene que estar comprendido entre 200.000 y 400.000. 
+        <br>
+        - D&eacute;biles: no impiden guardar los datos que no cumplan la regla. 
+        Lo que hacen es emitir un aviso de que la regla no se esta cumpliendo.</p>
+      <p>6. Actualizaciones de los datos: las actualizaciones de una tabla se 
+        tienen que producir en cascada, actualiz&aacute;ndose los datos de los 
+        registros de las tablas relacionadas con ellas, as&iacute; se mantiene 
+        la integridad de los datos.</p>
+      <p><br>
+        4.5 DISPARADORES.</p>
+      <p>Un disparador es un conjunto de acciones que se ejecutan autom&aacute;ticamente 
+        cuando se a&ntilde;ade, modifica o borra el contenido de un registro. 
+        Son los responsables del mantenimiento de la BD. Para dise&ntilde;ar un 
+        disparador hay que tener en cuenta:</p>
+      <p>- Las condiciones que lo van a ejecutar.<br>
+        - Las acciones que se van a realizar cuando se ejecute.</p>
+      <p></p>
+      <p><br>
+        4.6 ACCESOS CONCURRENTES Y BLOQUEO DE REGISTROS.</p>
+      <p>Cuando en un entorno multiusuario acceden al mismo registr&oacute; dos 
+        o m&aacute;s usuarios a la vez, tienen que existir reglas que permitan 
+        gestionar los accesos m&uacute;ltiples sin afectar a la consistencia e 
+        integridad de los datos. Una de las soluciones es el bloqueo de registros 
+        y puede realizarse de dos formas:</p>
+      <p>1. Compartido: a un registro pueden acceder &#8220;n&#8221; usuarios. 
+        El primer usuario puede modificar y borrar el registro mientras que el 
+        resto de los usuarios solo pueden ver el contenido. Una vez actualizado 
+        el registro puede ser modificado por un nuevo usuario.<br>
+      </p>
+      <p>2. Bloqueo exclusivo: a un registro pueden acceder &#8220;n&#8221; usuarios. 
+        El primer usuario que accede realiza la operaci&oacute;n. Al resto de 
+        los usuarios no se les permite el acceso hasta que ha terminado el primer 
+        usuario.El control de bloqueo puede realizarse siguiendo una serie de 
+        protocolos:</p>
+      <p>1. Protocolo en dos fases: se realiza una operaci&oacute;n sobre el registro 
+        y el registro queda bloqueado. Se termina la operaci&oacute;n y el registro 
+        queda desbloqueado.<br>
+      </p>
+      2. Protocolo en &aacute;rbol: se bloquea el dato del registro sobre el que 
+      se va a realizar la operaci&oacute;n y todos los registros hijos dependientes 
+      de el quedan bloqueados.
+      <p></p>
+      3. Por hora de entrada: a cada operaci&oacute;n el reloj del sistema le 
+      asigna una hora, el registro queda bloqueado para cada operaci&oacute;n 
+      ya que cada una tiene un tiempo de llegada.5. MODELOS L&Oacute;GICOS DE 
+      DATOS
+      <p>Los modelos de datos pueden ser de dos tipos:</p>
+      <p>- Modelos l&oacute;gicos: trabajan con niveles de abstracci&oacute;n 
+        conceptual y de visi&oacute;n (el mundo de las<br>
+        Ideas).<br>
+        - Modelos f&iacute;sicos: que trabajan con niveles f&iacute;sicos de los 
+        datos.</p>
+      <p>Modelo: es un conjunto de herramientas que nos permiten definir los datos, 
+        sus relaciones, las limitaciones o reglas y la terminolog&iacute;a a emplear. 
+        Los modelos facilitan la presentaci&oacute;n del mundo real transform&aacute;ndola 
+        en datos. </p>
+      <p>5.1 MODELOS L&Oacute;GICOS BASADOS EN OBJETOS.</p>
+      <p>Los modelos l&oacute;gicos describen los datos conceptualmente. Los m&aacute;s 
+        utilizados son:</p>
+      <p>1. Modelo entidad relaci&oacute;n.<br>
+        2. Modelo binario.<br>
+        3. modelo sem&aacute;ntico de datos.<br>
+        4. modelo infol&oacute;gico.</p>
+      <p>1. Modelo entidad relaci&oacute;n: en este modelo los objetos reciben 
+        el nombre de entidades. Las asociaciones entre entidades se denominan 
+        relaciones. La estructura de una BD queda definida por el modelo entidad 
+        relaci&oacute;n. Las caracter&iacute;sticas de este modelo son las siguientes:</p>
+      <p>- Muestra todos los datos independientes de su utilizaci&oacute;n.<br>
+        - Permite crecer y modificarse a medida que lo necesita.<br>
+        - Hace abstracci&oacute;n de las limitaciones de almacenamiento.<br>
+        - Hace abstracci&oacute;n de la velocidad de proceso.</p>
+      <p><br>
+        5.2 DEFINICIONES</p>
+      <p>Entidad: cualquier objeto, persona, animal o cosa que tiene inter&eacute;s 
+        para la empresa. Se nombran mediante un sustantivo en min&uacute;sculas 
+        y se representan mediante un rect&aacute;ngulo.</p>
+      <p> Cliente- Proveedor -Empleado</p>
+      <p>Entidad fuerte: es aquella que no depende de otra entidad para su existencia.<br>
+        Entidad d&eacute;bil: es aquella que depende de otra entidad para su existencia.</p>
+      <p> Cliente- fuerte </p>
+      <p> Factura- d&eacute;bil (depende de cliente)</p>
+      <p></p>
+      <p><br>
+        Una entidad es fuerte o d&eacute;bil dependiendo de las entidades con 
+        que estemos trabajando. Ej.: si estamos trabajando con la entidad persona 
+        y la entidad cliente esta &uacute;ltima ser&aacute; una entidad d&eacute;bil.</p>
+      <p> Persona- Cliente </p>
+      <p><br>
+        Si estamos trabajando con factura y l&iacute;nea de factura, factura ser&aacute; 
+        la entidad fuerte.</p>
+      <p> Factura- l&iacute;nea de Factura</p>
+      <p>Atributo o campo: cada una de las unidades de informaci&oacute;n que 
+        tiene sentido en si mismas, es decir, son las caracter&iacute;sticas que 
+        posee una entidad. Los atributos se representan mediante una elipse horizontal.</p>
+      <p> Nombre</p>
+      <p>Cuando una entidad posee varios atributos se dibujan junto a la entidad 
+        de derecha a izquierda, comenzando por la clave primaria.<br>
+      </p> 
+      <p>Ejemplo de entidad: se corresponde con el concepto de registro. Es un 
+        conjunto de atributos que se refieren a uno de los elementos que forman 
+        la entidad.<br>
+        Superclave o identificador: conjunto de atributos que identifican de forma 
+        &uacute;nica a cada ejemplo de entidad.<br>
+        Clave candidata: cada una de las superclaves que adem&aacute;s son m&iacute;nimas, 
+        es decir, est&aacute;n formada por el m&iacute;nimo n&uacute;mero de campos 
+        posibles.Clave primaria o principal: es la clave candidata seleccionada 
+        por el dise&ntilde;ador de la BD. Tiene que cumplir las siguientes caracter&iacute;sticas:</p>
+      <p>- No puede contener valores nulos.<br>
+        - Ha de ser conocida y sencilla de crear.<br>
+        - No puede variar con el tiempo.</p>
+      <p>Clave alternativa: cada una de las claves candidatas no seleccionadas 
+        como clave primaria o principal.</p>
+      <p>Clave ajena o for&aacute;nea: conjunto de atributos de una entidad que 
+        forman la clave primaria en otra entidad.<br>
+        Clave artificial: es la clave primaria que se ha creado independientemente 
+        del contenido de los atributos. Sirve para crear claves primarias sencillas. 
+        Ha de ser &uacute;nica e invariable y poseen nombres como c&oacute;digo, 
+        identificador, n&ordm; de registro, etc...Relaci&oacute;n: es una asociaci&oacute;n 
+        entre entidades. Las relaciones no tienen atributos. Se utiliza un verbo 
+        en infinitivo para darlas nombre. Se representan mediante un rombo. Las 
+        relaciones que tienen una entidad asociada se representan mediante un 
+        rombo inscripto en un rect&aacute;ngulo. Estas relaciones enmascaran una 
+        entidad y sus atributos dar&aacute;n origen a una nueva tabla.5.3 DIAGRAMAS 
+        DE ESTRUCTURAS DE DATOS.</p>
+      <p>- Modelo entidad relaci&oacute;n</p>
+      <p><br>
+        Domicilio Raz&oacute;n Social Fecha C.I.F</p>
+      <p>Poblaci&oacute;n C.I.F N&uacute;mero <br>
+        Cliente Recibir Factura </p>
+      <p> Clave Primaria Clave Primaria <br>
+        Entidad Relaci&oacute;n Entidad </p>
+      <p></p>
+      <p> - Grado de una relaci&oacute;n: representa la participaci&oacute;n de 
+        cada entidad en la relaci&oacute;n. Hay tres tipos:</p>
+      <p>a. Relaci&oacute;n uno a uno: a cada elemento de la primera entidad le 
+        corresponde no m&aacute;s de un elemento de la segunda entidad y a la 
+        inversa.</p>
+      <p><br>
+        <br>
+        Entidad: Jugadores 1:1 Entidad: Dorsales</p>
+      <p>b. Relaci&oacute;n uno a &#8220;n&#8221;: a cada elemento de la primera 
+        entidad le pueden corresponder uno o m&aacute;s elementos de la segunda 
+        entidad. Y cada elemento de la segunda entidad le corresponde un elemento 
+        de la primera entidad.</p>
+      <p><br>
+        <br>
+        Entidad: 1: N Entidad: Jugadores<br>
+        Equipos de F&uacute;tbol </p>
+      <p><br>
+        c. Relaci&oacute;n N a M: a cada elemento de la primera entidad le pueden 
+        corresponder varios elementos de la segunda entidad y cada elemento de 
+        la segunda entidad le pueden corresponder uno o mas elementos de la primera 
+        entidad.</p>
+      <p> Entidad: N : M Entidad: Actores<br>
+        Pel&iacute;culas </p>
+      <p><br>
+        5.4 MODELOS LOGICOS BASADOS EN REGISTROS</p>
+      <p>Se utilizan para especificar la estructura l&oacute;gica general de las 
+        BD. Los modelos mas conocidos son tres:<br>
+        Modelo relacional: Los datos y las relaciones se representan mediante 
+        tablas. Una BD relacional esta formada por un conjunto de tablas que coincide 
+        con las entidades del modelo entidad relaci&oacute;n.</p>
+      <p> T. Clientes T. Facturas</p>
+      <p> </p>
+      <p> BD contabilidad</p>
+      <p><br>
+        TABLAS: es una estructura formada por filas y columnas que sirve para 
+        organizar los datos de una entidad Las filas reciben el nombre de TUPLAS 
+        o REGISTROS. Las columnas reciben el nombre de ATRIBUTOS o CAMPOS. Una 
+        tabla relacional tiene que cumplir las siguientes condiciones:</p>
+      <p>- Tiene un solo tipo de filas, es decir todas las filas de las tabla 
+        tiene el mismo numero de campos.<br>
+        - Cada columna ha de ser &uacute;nica con un nombre &uacute;nico en la 
+        tabla no puede haber columnas duplicadas. El valor de cada columna es 
+        &uacute;nico y no puede haber mas de un valor por columna</p>
+      <p>Dominio: Es un conjunto de valores para una columna. Hay dos tipos de 
+        dominios:<br>
+        continuos y discretos.</p>
+      <p>Continuos: contienen todos los valores posibles entre dos l&iacute;mites 
+        dados. Por ejemplo para la columna &#8220;salario del mes&#8221; tomar&aacute; 
+        unos valores comprendidos entre 150.000 y 400.000.</p>
+      <p>Discretos: contiene determinados valores que est&aacute;n seleccionados. 
+        Por ejemplo, para la columna tipo de carn&eacute; de conducir los valores 
+        seleccionados son: A, B, C o D</p>
+      <p>Tupla o Registro: es el conjunto de atributos que se refieren a un elemento 
+        de la entidad.</p>
+      <p> Vistas: son tablas creadas a partir de una tabla u otras tablas.</p>
+      <p> <br>
+        5.5 ALGEBRA RELACIONAL.</p>
+      <p>Es un lenguaje de consulta con el que se pueden efectuar operaciones 
+        sobre las tablas, obteni&eacute;ndose como resultado nuevas tablas, consultas 
+        o vistas. Las operaciones que se pueden realizar con las tablas pueden 
+        ser de dos tipos: B&aacute;sicas o Derivadas.<br>
+        - Operaciones B&aacute;sicas Unarias: operaciones que trabajan con una 
+        sola tabla</p>
+      <p>Selecci&oacute;n: es la creaci&oacute;n de una tabla cuyos elementos 
+        forman un subconjunto de la tabla dada, es decir, se incluyen todas las 
+        columnas y algunas filas.<br>
+        Proyecci&oacute;n: es la creaci&oacute;n de una tabla cuyos elementos 
+        forman un subconjunto de una tabla dada. Se incluyen todas las filas y 
+        algunas columnas.- Operaciones B&aacute;sicas Binarias (porque trabajan 
+        con dos tablas)</p>
+      <p>Uni&oacute;n: formar a partir de dos tablas una nueva con todos los campos 
+        de una de ellas y los registros de ambas, excepto los repetidos. Ambas 
+        tablas tienen que tener el mismo n&uacute;mero de columnas.<br>
+      </p>
+      Diferencia: Componer a partir de dos tablas una nueva con todos los campos 
+      de una de ellas y los registros de una de ellas que no est&aacute;n en la 
+      otra. Ambas tablas tienen que tener las mismas columnas. <p>Producto Cartesiano: 
+        crear a partir de dos tablas una nueva con todos los campos de ambas y 
+        los registros son el producto cartesiano de los registros de las dos tablas.-	
+        Operaciones Derivadas</p>
+      <p>Inserci&oacute;n: formar a partir de dos tablas una nueva con todos los 
+        campos de una de ellas y los registros comunes a ambas. Las dos tablas 
+        tienen las mismas columnas.</p>
+      <p></p>
+      Cociente: consiste en la creaci&oacute;n a partir de dos tablas de una nueva 
+      con todos los campos de una de ellas que nos est&aacute;n en la otra. <p>Operaci&oacute;n 
+        de Producto o Reuni&oacute;n: consiste en aplicar el producto cartesiano 
+        a dos tablas y a la tabla resultante se le asigna una selecci&oacute;n 
+        o condici&oacute;n de la reuni&oacute;n.5.6 NORMALIZACION</p>
+      <p>Proceso que permite conseguir tablas con una estructura &oacute;ptima 
+        y eficaz. Consiste en lograr la independencia de los datos respeto a las 
+        aplicaciones que los usen. Para ello se tienen que conocer las tablas 
+        que intervienen ene l proceso y las relaciones que existen entre ellas. 
+        Y se desconocen las tablas a partir del analisis previo se buscan todos 
+        los nombres que han sido empleados en la definici&oacute;n del problema. 
+        Los nombres nos proporcionan las entidades, los atributos dependientes 
+        de las entidades y parte del lenguaje.<br>
+        <br>
+        Ejemplo vamos a encontrar las tablas y atributos que intervienen en el 
+        siguiente texto. Se trata de una conversaci&oacute;n con el jefe de ventas 
+        de un supermercado &#8220;a cada cliente al pasar por caja se marcan por 
+        la aja registradora los art&iacute;culos que se han comprado. Con los 
+        datos de los art&iacute;culos se hace una factura por el importe total 
+        de las mercanc&iacute;as adquiridas que se imprime y se entrega al cliente. 
+        Los datos de al factura se almacena para su posterior tratamiento que 
+        comprende.......&#8221;<br>
+        Algunos de los nombres de esta tabla son atributos de otras.<br>
+        De cada cliente no se piden datos por lo tanto aunque sea una entidad 
+        no se generas una tabla. Caja: se refiere a un objeto con el que realizamos 
+        los procesos. Por lo que no se necesita almacenar nada sobre ellos.<br>
+        Caja registradora: lo podemos necesitar como un dato para las facturas, 
+        por ejemplo: numero de caja entonces lo consideraremos como una entidad 
+        que generara su propia tabla.<br>
+        De toda la lista de sustantivos pasamos a la lista de tablas.</p>
+      <p>5.6.1 RELACIONES</p>
+      <p>Las relaciones entre las entidades las encontramos buscando todos los 
+        verbos que aparecen el la definici&oacute;n del problema. Eliminaremos 
+        aquellos verbos que son necesarios para el lenguaje y buscaremos aquellos 
+        que implican a dos o m&aacute;s entidades. <br>
+      </p>
+      5.6.2. NIVELES DE NORMALIZACI&Oacute;N 
+      <p>Hay cinco niveles de normalizaci&oacute;n siendo cada vez m&aacute;s 
+        complejo el proceso de obtenci&oacute;n de tablas normalizadas. Las bases 
+        de datos sencillas se terminan de normalizar en el tercer nivel.</p>
+      <p>- 1FN (Primera Forma Normal): es la m&aacute;s elemental de todas. Una 
+        tabla esta en primera forma normal si el valor que contiene un atributo 
+        de un registro es &uacute;nico y elemental. En cada uno de los atributos 
+        solo se puede admitir un dato, este puede ser compuesto pero no una lista 
+        de datos.<br>
+      </p>
+      <p>Dependencia funcional: se dice que un atributo o conjunto de atributos 
+        tienen dependencia funcional de otro o de otros si a cada uno de los primeros 
+        le corresponde solo uno de los segundos.</p>
+      <p>- 2FN: una tabla esta en segunda forma normal cuando esta en primera 
+        forma normal y todo atributo que no pertenece a la clave primaria tiene 
+        una dependencia funcional de la clave completa y no de parte de ella. 
+      </p>
+      <p>Para transformar una tabla con dependencias funcionales cuya clave esta 
+        formada por m&aacute;s de un campo entabla de 2FN se necesitan crear tablas 
+        nuevas para eliminar las dependencias funcionales. Una vez creadas las 
+        nuevas tablas se elimina la tabla primera y los atributos que tienen dependencia 
+        funcional.</p>
+      <p>Dependencia Funcional Transitiva: se dice que existe una dependencia 
+        funcional transitiva entre dos atributos cuando un atributo que no pertenece 
+        a la clave primaria permite conocer el valor de otro atributo.</p>
+      <p>- 3FM: una tabla esta en tercera forma normal si esta en segunda forma 
+        normal y no existen atributos que pertenezcan a la clave primaria que 
+        puedan ser conocidos mediante otro atributo que no forma parte de esa 
+        clave primaria, es decir, que no existan dependencias funcionales transitivas. 
+        Si en la tabla tenemos dependencias funcionales transitivas se crea una 
+        nueva tabla con los atributos que tienen esa dependencia funcional, elimin&aacute;ndose 
+        el atributos dependiente de la tabla original. </p>
+      <p>A partir de la tercera forma normal se eliminan todas las dependencias 
+        funcionales y se pasan a crear tablas con m&uacute;ltiples redundancias 
+        aumentando el tama&ntilde;o de la BD.</p>
+      <p>- FNBC ( Forma Normal de Boyce Codd ): una tabla esta en FNBC si solo 
+        existen dependencias funcionales elementales, es decir, que dependen de 
+        la clave primaria o de una clave alternativa.Dependencia funcional Multivalorada 
+        o M&uacute;ltiple: existe una dependencia funcional multivalorada /m&uacute;ltiple 
+        si dados tres atributos de una tabla para cada valor del primer atributo 
+        existen m&uacute;ltiples valores en el segundo y no hay ninguna relaci&oacute;n 
+        entre el tercer atributo y el primero a no ser que empleemos el segundo 
+        atributo.</p>
+      <p><br>
+        - 4FM: una tabla esta en cuarta forma normal si esta en FNBC y las &uacute;nicas 
+        dependencias funcionales multivaloradas son las dependencias funcionales 
+        de la clave con los atributos que no forman parte de ella.<br>
+      </p>
+      <p>- 5 FN: una tabla esta en quinta forma normal si esta en cuarta forma 
+        normal y las &uacute;nicas dependencias que existen son las dependencias 
+        de uni&oacute;n de la tabla con sus proyecciones relacion&aacute;ndose 
+        mediante la clave primaria. Ponemos tablas en al quinta forma normal cuando 
+        estas tienen muchos atributos o m&uacute;ltiples registros.</p>
+      <p>6. FUNCIONES DEL ADMINISTRADOR DE LA BD.</p>
+      <p>El administrador de la BD es la persona encargada del control del sistema, 
+        es decir, controla tanto los datos como los programas.</p>
+      <p>- Definir el dise&ntilde;o general de la BD: Lo primero que realiza es 
+        crear el esquema utilizando las definiciones que ser&aacute;n traducidas 
+        a tablas, para ello se utilizara el lenguaje de definici&oacute;n de datos.<br>
+        - Modificar el dise&ntilde;o general de la BD: Realizara las modificaciones 
+        que sean necesarias al esquema general de la BD. Tambi&eacute;n puede 
+        modificar la descripci&oacute;n de la organizaci&oacute;n, es decir, la 
+        descripci&oacute;n f&iacute;sica de los datos. Para ello utiliza el lenguaje 
+        de definici&oacute;n de datos.<br>
+        - Definir la estructura y los m&eacute;todos de acceso: Crea las estructuras 
+        de almacenamiento y como acceder a ellas.<br>
+        - Crear y mantener la seguridad de la BD: concede las autorizaciones a 
+        los usuarios para poder acceder a los distintos datos almacenados.<br>
+        - Crear las especificaciones de las reglas de validaci&oacute;n defini&eacute;ndolas 
+        como una caracter&iacute;stica m&aacute;s de los elementos tratados o 
+        almacen&aacute;ndolas en una estructura especial.</p>
+      <p>7. BASES DE DATOS ORIENTADAS A OBJETOS</p>
+      <p>Sistema de gesti&oacute;n de este tipo de BD orientadas a objetos Visual 
+        Fox Pro. Es un sistema de gesti&oacute;n de BD relacionales en el sentido 
+        m&aacute;s amplio junto con un entorno visual de aplicaciones. Las herramientas 
+        que posee son las siguientes:</p>
+      <p>1. Generador de clases: crea nuevas clases a partir de las ya existentes, 
+        modifica las clases actualizando las propiedades. </p>
+      <p>Clase: apariencia y funcionalidad de los objetos.</p>
+      <p>2. Herramientas cliente/servidor: con ellas se puede acceder a cualquier 
+        tipo de BD si se conoce su OBDC (Controlador de Origen de la Base de Datos).<br>
+        3. Herramientas visuales de dise&ntilde;o: generan r&aacute;pidamente 
+        consultas, formularios e informes.<br>
+        4. Diccionario de datos: para mantener actualizada la BD, para definir 
+        las reglas de validaci&oacute;n, para crear y mantener las relaciones 
+        y para generar la integridad referencial.<br>
+        5. Asistentes y generadores de tablas: para crear consultas, formularios 
+        e informes.<br>
+        6. Sistemas multiplataforma de usuarios: m&eacute;todo de almacenamiento 
+        de registro, bloqueo de datos en actualizaciones y control de transacciones.<br>
+      </p>
+      <p>&nbsp; </p>
+      <p><br>
+      </p>
+      <p>&nbsp; </p>
+      <p>&nbsp; </p>
+      <p><br>
+      </p>
+      <p><br>
+      </p>
+      <p><br>
+      </p>
+      <p>&nbsp; </p></td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

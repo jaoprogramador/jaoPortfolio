@@ -1,0 +1,462 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Introducci&oacute;n a DLL</title>
+<META http-equiv=Content-Language content=es>
+<META content="Conceptos redes,LAN" name=description>
+<meta name="keywords" content="Conceptos redes,LAN">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2>C O N C E P T O S</h2></td>
+  </tr>
+  <tr> 
+    <td height="197"> 
+      <h3>La arquitectura de las comunicaciones</h3>
+      <p> 1.- &iquest;Qu&eacute; es un nodo host?<br>
+        Es un ordenador con capacidad de interactuar en red, capaz de alojar alg&uacute;n 
+        tipo de servicio de la misma.<br>
+        2.- &iquest;Qu&eacute; es un sistema aislado?<br>
+        Es un ordenador incapaz de comunicarse con el exterior por v&iacute;a 
+        telem&aacute;tica.<br>
+        3.- &iquest;Qu&eacute; es una conexi&oacute;n remota temporal?<br>
+        Son sistemas aislados que pueden en ocasiones realizar intercambios de 
+        informaci&oacute;n con el exterior.<br>
+        4.- &iquest;Qu&eacute; es una red de ordenadores?<br>
+        Es una red en la cual distintos equipos se conectan a trav&eacute;s de 
+        redes de datos, pero sin perder su identidad propia.<br>
+        5.- &iquest;Qu&eacute; es un sistema distribuido?<br>
+        Es una red de ordenadores totalmente transparente al usuario.<br>
+        6.- &iquest;Qu&eacute; es un protocolo?<br>
+        Es un conjunto de reglas perfectamente organizadas y convenidas de mutuo 
+        acuerdo entre los participantes en una comunicaci&oacute;n, cuya misi&oacute;n 
+        es regular alg&uacute;n aspecto de la misma.<br>
+        7.- &iquest;Qu&eacute; es una capa o nivel en una red?<br>
+        Es una parte de la arquitectura de la comunicaci&oacute;n que se encarga 
+        de una funci&oacute;n principal.<br>
+        8.- &iquest;Con cu&aacute;ntas capas mantiene relaci&oacute;n una capa 
+        de red y qu&eacute; tipo de relaci&oacute;n?<br>
+        Mantiene relaci&oacute;n con 2 capas. La inmediatamente inferior, a la 
+        cual solicita servicios y la inmediatamente superior a la cual devuelve 
+        resultados.<br>
+        9.- &iquest;Qu&eacute; es un interfaz de capa?<br>
+        Una norma de comunicaci&oacute;n entre la capa inferior y la capa superior.<br>
+        10.- &iquest;Qu&eacute; es la arquitectura de una red?<br>
+        Es el conjunto organizado de capas y protocolos de la misma.<br>
+        11.- &iquest;Qu&eacute; es un sistema abierto?<br>
+        Un sistema capaz de interconectarse con otros de acuerdo con unas normas 
+        establecidas.<br>
+        12.- &iquest;Qu&eacute; organismo propuso el modelo OSI?<br>
+        OSI (Open System Interconnection).<br>
+        El organismo es la ISO (International Standards Organization).<br>
+        13.- Caracter&iacute;sticas del modelo arquitect&oacute;nico de capas 
+        de red.<br>
+        Simplificaci&oacute;n de las comunicaciones.<br>
+        Poco sensible a los cambios tecnol&oacute;gicos.</p>
+      <p>14.- &iquest;Qu&eacute; nombre recibe la unidad de datos de informaci&oacute;n 
+        que se transmiten entre capas a trav&eacute;s del interfaz?<br>
+        La IDU (Interface Data Unit)<br>
+        15.- &iquest;Qu&eacute; nombre recibe la unidad de datos que se intercambian 
+        entre entidades pares?<br>
+        La PDU (Protocol Data Unit)<br>
+        16.- &iquest;Qu&eacute; nombre recibe la unidad de informaci&oacute;n 
+        que se intercambian entre entidades pares?<br>
+        La SDU (Service Data Unit)<br>
+        17.- &iquest;Qu&eacute; nombres reciben las siete capas del modelo OSI?<br>
+        Nivel f&iacute;sico, nivel de enlace, nivel de red, nivel de transporte, 
+        nivel de sesi&oacute;n, nivel de presentaci&oacute;n y nivel de aplicaci&oacute;n.<br>
+        Nivel de enlace: TRAMAS<br>
+        Nivel de red: PAQUETES<br>
+        18.- &iquest;Qu&eacute; utiliza una capa para solicitar los servicios 
+        de otra a trav&eacute;s del interfaz?<br>
+        Las primitivas.<br>
+        19.- &iquest;Qu&eacute; tipo de primitivas existen?<br>
+        Primitivas fundamentales y primitivas de servicio.<br>
+        20.- &iquest;C&oacute;mo se construye la primitiva de un servicio? <br>
+        Se construye escribiendo el nombre del servicio o funci&oacute;n (normalmente 
+        en may&uacute;sculas) seguido por un punto y por la primitiva fundamental.<br>
+        No todos los servicios tienen necesidad de las cuatro primitivas fundamentales.<br>
+        21.- &iquest;Qu&eacute; diferencia existe entre servicio y protocolo?<br>
+        El servicio es el conjunto de primitivas que cada capa ofrece a trav&eacute;s 
+        de su interfaz.<br>
+        En cambio, el protocolo es el conjunto de reglas que normalizan c&oacute;mo 
+        deben ser los formatos de las tramas, paquetes mensajes, etc.., que se 
+        intercambian las entidades pares de emisor y receptor.<br>
+        22.- &iquest;Qu&eacute; tipos de servicios ofrece OSI?<br>
+        Servicios orientados a la conexi&oacute;n y servicios sin conexi&oacute;n.<br>
+        23.- &iquest;Qu&eacute; es un datagrama?<br>
+        Es el paquete que lleva todos los datos del destinatario.<br>
+        24.- &iquest;Cu&aacute;les son las capas orientadas a la aplicaci&oacute;n 
+        o al usuario?<br>
+        Nivel de aplicaci&oacute;n, nivel de presentaci&oacute;n y nivel de sesi&oacute;n. 
+        (La 5, 6 y 7).<br>
+        25.- &iquest;Cu&aacute;les son las capas orientadas a la red?<br>
+        Nivel f&iacute;sico, nivel de enlace y nivel de red. (La 1, 2 y 3).</p>
+      <p></p>
+      <p></p>
+      <p>26.- &iquest;De qu&eacute; se ocupa el nivel f&iacute;sico?<br>
+        Se ocupa de intercambiar se&ntilde;ales el&eacute;ctricas.<br>
+        Tambi&eacute;n se ocupa de definir las caracter&iacute;sticas mec&aacute;nicas, 
+        funcionales y de procedimiento para poder establecer y liberar conexiones 
+        entre 2 equipos de la red.<br>
+        Se ocupa de las transmisiones de los bits.<br>
+        27.- &iquest;Cu&aacute;l es la misi&oacute;n de la capa de enlace?<br>
+        Acceso y correcci&oacute;n de errores.<br>
+        Control de flujo de datos.<br>
+        Control de acceso al medio.<br>
+        Entramado.<br>
+        28.- &iquest;De qu&eacute; se ocupa el nivel de red?<br>
+        Se ocupa del control de la subred.<br>
+        Se encarga del tratamiento de c&oacute;mo elegir la ruta m&aacute;s adecuada 
+        para que el paquete llegue a su destino (Encaminamiento).<br>
+        Tambi&eacute;n se ocupa del tratamiento de la congesti&oacute;n de paquetes.<br>
+        29.- &iquest;Cu&aacute;les son las funciones de la capa de transporte?<br>
+        Comprueba si la comunicaci&oacute;n ha sido adecuada.<br>
+        Acepta los datos de la capa de sesi&oacute;n, los fracciona adecuadamente 
+        de modo que sean aceptables por la subred y se asegura que lleguen correctamente 
+        al nivel de transporte del destinatario, est&eacute; o no en la misma 
+        red que la fuente de los datos.<br>
+        Comprueba la calidad de la transmisi&oacute;n entre los dos extremos de 
+        la comunicaci&oacute;n.<br>
+        30.- &iquest;Cu&aacute;les son las misiones de la capa de sesi&oacute;n?<br>
+        Permite el di&aacute;logo entre emisor y receptor.<br>
+        31.- &iquest;Cu&aacute;les son las funciones de la capa de presentaci&oacute;n?<br>
+        Se ocupa de la sintaxis y la sem&aacute;ntica de la informaci&oacute;n 
+        que se pretende transmitir.<br>
+        Tambi&eacute;n se encarga de comprimir los datos para que las comunicaciones 
+        sean menos costosas.<br>
+        Incluso se encarga de la encriptaci&oacute;n de la informaci&oacute;n 
+        que garantiza su privacidad.<br>
+        32.- &iquest;Cu&aacute;les son las funciones del nivel de aplicaci&oacute;n?<br>
+        Definir los protocolos que utilizar&aacute;n las aplicaciones y procesos 
+        de los usuarios.<br>
+        33.- &iquest;Cu&aacute;les son los niveles de la arquitectura Arpanet?<br>
+        Nivel f&iacute;sico, nivel de red, nivel de Internet, nivel de transporte 
+        y nivel de aplicaci&oacute;n. (5 niveles).<br>
+        34.- &iquest;Cu&aacute;les son los protocolos m&aacute;s conocidos de 
+        la red Arpanet?<br>
+        TCP (Protocolo de Control de Transmisi&oacute;n)<br>
+        IP (Protocolo entre redes)<br>
+        35.- &iquest;Cu&aacute;les son los protocolos m&aacute;s conocidos de 
+        la capa de aplicaci&oacute;n de Arpanet y su funci&oacute;n?<br>
+        FTP (Protocolo de Transferencia de Ficheros)<br>
+        SMPT (Protocolo Simple de Transferencia de Correo)<br>
+        TELNET (Protocolo de Conexi&oacute;n Remota) <br>
+        HTTP (Protocolo utilizado para la descarga de p&aacute;ginas web en la 
+        World Wide Web)<br>
+        36.- &iquest;En qu&eacute; consiste el c&oacute;digo Manchester diferencial?<br>
+        Es un c&oacute;digo que representa cada bit de mensaje y su se&ntilde;al 
+        de reloj en una misma se&ntilde;al. Es una transmisi&oacute;n s&iacute;ncrona.<br>
+        37.- &iquest;Qu&eacute; dice el teorema de Niquist?<br>
+        Que una se&ntilde;al de ancho de banda H puede serr reconstru&iacute;da 
+        tomando 2H muestras por segundo de la se&ntilde;al. Este teorema se aplica 
+        en la modulaci&oacute;n MIC o PCM a la hora de hacer el muestreo (PAM).</p>
+      <p>Si adem&aacute;s la se&ntilde;al es digital y cada pulso codifica uno 
+        entre V (n&ordm; de estados) niveles discretos, entonces la velocidad 
+        de transmis&oacute;n en un canal SIN RUIDO=</p>
+      <p>Vt.= 2H log2 V (bps, bits por segundo)<br>
+        Donde H es el ancho de banda del canal y V el n&uacute;mero de estados 
+        posibles para la se&ntilde;al.<br>
+        38.- &iquest;Qu&eacute; dice el teorema de Shannon?<br>
+        La m&aacute;xima velocidad de datos sobre un canal ruidoso es:<br>
+        V.t.= H log2 (1+S/R)<br>
+        Donde H es el ancho de banda del canal y S/R es la relaci&oacute;n se&ntilde;al/ruido 
+        expresada en escala lineal (db, decibelios).<br>
+        39.- &iquest;Cu&aacute;les son las topolog&iacute;as b&aacute;sicas de 
+        una red de &aacute;rea local?<br>
+        Topolog&iacute;a en estrella, topolog&iacute;a en anillo y topolog&iacute;a 
+        en bus.<br>
+        40.- &iquest;Cu&aacute;les son los dos est&aacute;ndares m&aacute;s comunes 
+        para las redes de &aacute;rea local y qu&eacute; organismo los propuso?<br>
+        IEEE 802.3 (Redes CSMA/CD o Ethernet)<br>
+        IEEE 802.5 (Red Token Ring)<br>
+        41.- &iquest;Cu&aacute;l es el principal inconveniente de las redes con 
+        topolog&iacute;a en anillo, estrella y en bus?<br>
+        TOPOLOG&Iacute;A EN ANILLO<br>
+        Una rotura del anillo produce el fallo general de la red.<br>
+        TOPOLOG&Iacute;A EN ESTRELLA<br>
+        Si falla el nodo central de la red, que centraliza todas las comunicaciones, 
+        nada funcionar&aacute; en la red.<br>
+        TOPOLOG&Iacute;A EN BUS<br>
+        Si falla el bus central nada funcionar&aacute; en la red.</p>
+      <p>42.- &iquest;Cu&aacute;les son las subcapas de la capa de nivel de enlace?<br>
+        La subcapa MAC (Media Access Control)<br>
+        La subcapa superior del nivel de enlace (LLC)<br>
+        43.- Nombra las funciones del nivel de enlace OSI.<br>
+        Organiza los bits en forma de tramas y los pasa a la capa f&iacute;sica 
+        para que sean transmitidas al receptor (Entramado).<br>
+        Escoge un canal adecuado para la transmisi&oacute;n de la informaci&oacute;n(Control 
+        de flujo).<br>
+        Control de errores.<br>
+        Control de acceso al medio.<br>
+        Gesti&oacute;n del enlace.<br>
+        44.-Nombra los distintos m&eacute;todos de acceso al medio de transmisi&oacute;n 
+        en las redes de &aacute;rea local.<br>
+        CON COLISI&Oacute;N<br>
+        1) Protocolo Aloha<br>
+        Cual quier estaci&oacute;n que tenga datos que transmitir lo hace inmediatamente. 
+        Esto puede provocar colisiones con otras estaciones que tambi&eacute;n 
+        inicieron la transmisi&oacute;n.<br>
+        2) Protocolo CSMA p-persistente<br>
+        Cuando una estaci&oacute;n desea transmitir se pone a la escuha para determinar 
+        si el canal est&aacute; libre o no.<br>
+        Si el canal est&aacute; libre, efetuar&aacute; la transmisi&oacute;n, 
+        pero si no lo est&aacute; deber&aacute; esperar hasta que se libere.<br>
+        Una vez se libere, la estaci&oacute;n emitir&aacute; su trama con probabilidad 
+        p.<br>
+        1- persistente: emisi&oacute;n inmediata.<br>
+        3) Protocolo CSMA/CD (Collision Detected)<br>
+        Las estaciones permanecen a la escucha mientras que retransmiten susu 
+        tramas (CSMA). Si reconocen una colisi&oacute;n en un canal, entonces 
+        suspenden inmediatamente la transmisi&oacute;n: es in&uacute;til seguir 
+        enviando las tramas sabiendo que no se reconocer&aacute;n en el destino. 
+        As&iacute; se ahorra tiempo y ancho de banda en el canal.<br>
+        4) Protocolo CSMA no persistente<br>
+        Cuando la estaci&oacute;n escucha el canal y &eacute;ste se encuentra 
+        ocupado, deja de escuchar y lo vuelve a intentar despu&eacute;s de un 
+        tiempo aleatorio. De esta manera si dos estaciones est&aacute;n a la escucha 
+        con el canal ocupao, ser&aacute; m&aacute;s dificil que coincidan en el 
+        momento de hacer el test al medio de nuevo.</p>
+      <p></p>
+      <p><br>
+        SIN COLISI&Oacute;N<br>
+        1) Protocolo CSMA/CA (Collision Advoidance)<br>
+        Si una estaci&oacute;n est&aacute; preparada para transmitir, debe hacer 
+        un test al medio antes de la transmisi&oacute;n. Sin embargo, si el medio 
+        estuviera ocupado, se esperar&aacute; un tiempo aleatorio, medido en ranuras 
+        de tiempo (slots), antes de volver a intentar la transmisi&oacute;n.<br>
+        As&iacute; se evita cualquier colisi&oacute;n que se pueda producir.<br>
+        2) M&eacute;todo de las ranuras temporales (M&eacute;todo b&aacute;sico 
+        del mapa de bits)<br>
+        Se asigna a cada estaci&oacute;n una ranura de tiempo y se le permite 
+        a cada estaci&oacute;n transmitir durante el tiempo de esa ranura. Si 
+        una estaci&oacute;n no desea transmitir suprimir&aacute; esa ranura de 
+        tiempo y se pasar&aacute; a la siguiente.<br>
+        3) Token Ring<br>
+        4) Sistema polling o sondeo<br>
+        45.- Dibuja como ser&iacute;a la se&ntilde;al para codificar la siguiente 
+        informaci&oacute;n en c&oacute;digo Manchester Diferencial.101011110000101).</p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p>46.- Suponiendo que la l&iacute;nea RTC tenga un ancho de banda de 3 
+        khz y una relaci&oacute;n se&ntilde;al/ruido de 1.000. Calcula la velocidad 
+        m&aacute;xima a la que se puede transmitir por la RTC.</p>
+      <p>Caudal M&aacute;ximo= H.log2 (1+S/R)<br>
+        Caudal M&aacute;ximo= 3000Hz log2(1+1000)= 30000 bps</p>
+      <p><br>
+        47.- &iquest;En qu&eacute; consiste el protocolo CSMA/CD.?<br>
+        El protocolo CSMA se ocupa de disminuir el n&uacute;mero de colisiones 
+        tanto como sea posible.<br>
+        Consiste en que las estaciones permanezcan a la escucha mientras que retransmiten 
+        sus tramas. Si reconocen una colisi&oacute;n en el canal entonces suspenden 
+        inmediatamente la transmisi&oacute;n.<br>
+        48.- &iquest;En qu&eacute; consiste el m&eacute;todo CSMA/CA para acceso 
+        al medio?<br>
+        Consiste en que una estaci&oacute;n que est&aacute; preparada para transmitir 
+        un paquete de informaci&oacute;n, debe hacer un test al medio antes de 
+        la transmisi&oacute;n.<br>
+        Si el medio est&aacute; libre se puede empezar a efectuar la transmisi&oacute;n.<br>
+        En cambio si el medio no est&aacute; libre, se esperar&aacute; un tiempo 
+        aleatorio, medido en ranuras de tiempo (slots), antes de volver a intentar 
+        la transmisi&oacute;n que se efectuar&aacute; utilizando un sistema de 
+        reservas.<br>
+        49.- &iquest;Qu&eacute; nombre reciben las t&eacute;cnicas de asociaci&oacute;n 
+        de bits para formar las tramas?<br>
+        T&eacute;cnicas de entramado o framing.<br>
+        50.- &iquest;Qu&eacute; m&eacute;todos conoces para lograr el sincronismo 
+        de trama?<br>
+        1) C&oacute;mputo de caracteres transmitidos seg&uacute;n el c&oacute;digo 
+        de transmisi&oacute;n<br>
+        Cada trama incorpora un campo inicial en donde escribe el n&uacute;mero 
+        de caracteres que componen la trama. El receptor analizar&aacute; primero 
+        el campo de longitud de trama y averiguar&aacute; el n&uacute;mero de 
+        caracteres que componen esa trama.</p>
+      <p>2) T&eacute;cnica de inserci&oacute;n de car&aacute;cter y caracteres 
+        delimitadores<br>
+        Cada trama comienza y termina con un car&aacute;cter o un conjunto de 
+        caracteres. Al inicio de la trama se inserta los caracteres &lt;DLE&gt;&lt;STX&gt; 
+        y para el final &lt;DLE&gt;&lt;ETX&gt;.<br>
+        Si la informaci&oacute;n de la trama posee un &lt;DLE&gt;, se inserta 
+        otro &lt;DLE&gt; para confirmar que el caracter es informativo y no de 
+        control.</p>
+      <p>3) T&eacute;cnica de inserci&oacute;n de bit y banderas delimitadoras<br>
+        Las banderas o flags son secuencias de bits que delimitan las tramas. 
+        Una muy com&uacute;n es &lt;&lt;01111110&gt;&gt;.<br>
+        Con esta bandera de controla el comienzo y el final de una trama.<br>
+        Si dentro de la trama hay una secuencia igual, despu&eacute;s del quinto 
+        uno, se insertar&aacute; un cero autom&aacute;ticamente con el fin de 
+        no confundirla como el final de trama.</p>
+      <p>4) Alteraciones de c&oacute;digo en la capa f&iacute;sica<br>
+        Consiste en enviar una secuencia de se&ntilde;ales que no pertenecen al 
+        c&oacute;digo de emisi&oacute;n. Esto consistir&aacute; en que mientras 
+        que todo el tiempo que dura el bit, la tensi&oacute;n permanecer&aacute; 
+        alta o baja, es decir, sin transiciones.<br>
+        51.- &iquest;Qu&eacute; m&eacute;todos se emplean en las LAN para la correcci&oacute;n 
+        errores?<br>
+        Se env&iacute;a al emisor alguna informaci&oacute;n de retroalimentaci&oacute;n 
+        o feedback en donde se especifica el estado en que lleg&oacute; la trama.<br>
+        Si esta trama de confirmaci&oacute;n no llega se podr&iacute;a suspender 
+        la emisi&oacute;n de nuevas tramas por tiempo indefinido.</p>
+      <p>Cuando el emisor env&iacute;a una trama dispara un temporizador. Si cuando 
+        caduca el temporizador, el emisor no ha recibido la trama de confirmaci&oacute;n, 
+        &eacute;ste entender&aacute; que no lleg&oacute; o que lo hizo en mal 
+        estado y se proceder&aacute; a volver a transmitir de nuevo.<br>
+        Se utilizan los m&eacute;todos de correcci&oacute;n hacia atr&aacute;s.<br>
+        52.- &iquest;En qu&eacute; consiste el control del flujo?<br>
+        Consiste en regular la cadencia con la que se env&iacute;an las tramas 
+        en la red, dependiendo de qui&eacute;nes son emisor y receptor. Es un 
+        sistema que regula el tr&aacute;fico de la red.<br>
+        Normalmente, las t&eacute;cnicas de control de flujo necesitan informaci&oacute;n 
+        de feedback intercambiable entre emisor y receptor.<br>
+        Tambi&eacute;n adec&uacute;a las velocidades entre los dos terminales.<br>
+        Ejemplo: Ordenador-Impresora<br>
+        M&Eacute;TODOS: Env&iacute;o y espera, ventana deslizante.<br>
+        53.- &iquest;Cu&aacute;les son los protocolos m&aacute;s importantes de 
+        la capa de enlace?<br>
+        Protocolo HDLC (High Data Link Control) y sus derivados:<br>
+        SDLC, LAPB, LAPM, LAPX, LLC etc.<br>
+        54.- &iquest;Por qu&eacute; no tiene importancia el nivel de red en las 
+        LAN? <br>
+        Porque el nivel de red fundamentalmente se ocupa de intercomunicar ordenadores 
+        distantes o de interaccionar ordenadores de distintas redes locales.<br>
+        55.- &iquest;En qu&eacute; consiste el encaminamiento?<br>
+        Consiste en que los paquetes lleguen a su destino eliginedo la ruta apropiada.<br>
+        56.- &iquest;Qu&eacute; es el tratamiento de la congesti&oacute;n?<br>
+        Se encarga de detectar, diagnosticar, y en lo posible, corregir los problemas 
+        generados por sobrecarga de paquetes en la red.<br>
+        57.- Nombra dos protocolos de nivel de red.<br>
+        Redes p&uacute;blicas: X.25<br>
+        Red Arpanet: IP (Internet Protocol)</p>
+      <p></p>
+      <p><br>
+        58.- Nombra alguno de los par&aacute;metros de calidad que gestiona el 
+        nivel de transporte.<br>
+        Retraso en el establecimiento de la conexi&oacute;n.<br>
+        Probabilidad de fallo en la conexi&oacute;n.<br>
+        Nivel de flujo de datos.<br>
+        Probabilidad de fallos en las transferencias de datos.<br>
+        59.- Nombra alg&uacute;n protocolo de transporte.<br>
+        Red Arpanet: TCP (Transmission Control Protocol)<br>
+        60.-Haz una tabla explicativa de los distintos protocolos CSMA. (Cuesti&oacute;n 
+        4).<br>
+        PROTOCOLO CSMA P-PERSISTENTE<br>
+        Cuando una estaci&oacute;n desea transmitir se pone a la escuha para determinar 
+        si el canal est&aacute; libre o no.<br>
+        Si el canal est&aacute; libre, efetuar&aacute; la transmisi&oacute;n, 
+        pero si no lo est&aacute; deber&aacute; esperar hasta que se libere.<br>
+        Una vez se libere, la estaci&oacute;n emitir&aacute; su trama con probabilidad 
+        p.<br>
+        1-persistente: emisi&oacute;n inmediata.</p>
+      <p>PROTOCOLO CSMA NO PERSISTENTE<br>
+        Cuando la estaci&oacute;n escucha el canal y &eacute;ste se encuentra 
+        ocupado, deja de escuchar y lo vuelve a intentar despu&eacute;s de un 
+        tiempo aleatorio. De esta manera si dos estaciones est&aacute;n a la escucha 
+        con el canal ocupao, ser&aacute; m&aacute;s dificil que coincidan en el 
+        momento de hacer el test al medio de nuevo.</p>
+      <p>PROTOCOLO CSMA/CD (Collision Detected)<br>
+        Las estaciones permanecen a la escucha mientras que retransmiten susu 
+        tramas (CSMA). Si reconocen una colisi&oacute;n en un canal, entonces 
+        suspenden inmediatamente la transmisi&oacute;n: es in&uacute;til seguir 
+        enviando las tramas sabiendo que no se reconocer&aacute;n en el destino. 
+        As&iacute; se ahorra tiempo y ancho de banda en el canal.</p>
+      <p>PROTOCOLO CSMA/CA (Collision Advoidance)<br>
+        Si una estaci&oacute;n est&aacute; preparada para transmitir, debe hacer 
+        un test al medio antes de la transmisi&oacute;n. Sin embargo, si el medio 
+        estuviera ocupado, se esperar&aacute; un tiempo aleatorio, medido en ranuras 
+        de tiempo (slots), antes de volver a intentar la transmisi&oacute;n.<br>
+        As&iacute; se evita cualquier colisi&oacute;n que se pueda producir.</p>
+      <p></p>
+      <p></p>
+      <p> Escucha antes de emitir Si est&aacute; de ocupado sigue en la escucha	
+        Escucha despu&eacute;s de emitir Posibilidad de conexi&oacute;n<br>
+        persistente SI SI NO SI<br>
+        CSMA <br>
+        No persistente SI NO NO SI<br>
+        CSMA/CD SI NO S&Iacute; SI</p>
+      <p>CSMA/CA SI NO. DESPU&Eacute;S DE UN TIEMPO VUELVE A ESCUCHAR NO NO</p>
+      <p>61.-Dibuja un cuadro sin&oacute;ptico por capas de red que contenga en 
+        cada uno de los protocolos y funciones de cada capa (Cuesti&oacute;n 5).</p>
+      <p>Ejecuci&oacute;n APLICACI&Oacute;N HTTP TELNET<br>
+        FTP<br>
+        SMTP, POP3<br>
+        Conversi&oacute;n de c&oacute;digos<br>
+        Compresi&oacute;n<br>
+        Encriptaci&oacute;n PRESENTACI&Oacute;N <br>
+        SESI&Oacute;N <br>
+        Calidad de la transmisi&oacute;n TRANSPORTE TCP<br>
+        Encaminamiento<br>
+        Tratamiento de la congesti&oacute;n<br>
+        Internet RED X.25<br>
+        IP<br>
+        Control de errores<br>
+        Entramado<br>
+        Control de acceso al medio<br>
+        Control de flujo<br>
+        Gesti&oacute;n del enlace ENLACE HDLC SDLC, LLC, LAPX<br>
+        IEEE 802.<br>
+        Funciones mec&aacute;nicas, el&eacute;ctricas, funcionales y de procedimiento	
+        F&Iacute;SICO RS-232-C BNC UTP-5 RJ-11<br>
+        V-24<br>
+        USB STP<br>
+        RJ-45</p>
+      <p><br>
+        62.- Modulaci&oacute;n PCM y modulaci&oacute;n delta.<br>
+        Con una modulaci&oacute;n delta los datos anal&oacute;gicos se aproximan 
+        por una funci&oacute;n escal&oacute;n que se mueve arriba o abajo en un 
+        nivel de cuatificaci&oacute;n en cada instante de muestreo.<br>
+        <br>
+        La caracter&iacute;stica m&aacute;s importante de esta funci&oacute;n 
+        es que es binaria. En cada muestreo la funci&oacute;n sube o baja a una 
+        cantidad cionstante. As&iacute;, la salida del proceso de modulaci&oacute;n 
+        DM es s&oacute;lo un d&iacute;gito binario para cad muestreo. Se genera 
+        un 1 si la funci&oacute;n sube durante el siguiente intervalo y un 0 en 
+        caso contrario.</p>
+      <p> La transici&oacute;n que se produce en el instante de cada muestreo 
+        se elige de modo que la funci&oacute;n escal&oacute;n siga la se&ntilde;al 
+        anal&oacute;gica aoriginal tan fielmente como sea posible. <br>
+        Cuando la se&ntilde;al anal&oacute;gica cambia lentamente, habr&aacute; 
+        ruido de cuantificaci&oacute;n. Cuando la se&ntilde;al anal&oacute;gica 
+        cambia m&aacute;s r&aacute;pidamente de lo que la funci&oacute;n escal&oacute;n 
+        puede seguir, hay un ruido por sobrepaso de pendiente tambi&eacute;n llamado 
+        de sobre carga de pendiente (se produce cuando la pendiente sobrepasa 
+        los 45&ordm;).</p>
+      <p>63.- Ejercicio 1 (P&aacute;g. 88)<br>
+        Ancho banda<br>
+        Niveles 100 Hz 1000 Hz 10 000 Hz 100 000 Hz<br>
+        2 niveles 200 2000 20 000 100 000<br>
+        4 niveles 400 4000 40 000 200 000<br>
+        8 niveles 600 6000 60 000 400 000<br>
+        16 niveles 800 8000 80 000 800 000<br>
+        32 niveles 1000 10 000 100 000 1 000 000</p>
+      <p>64.- Ejercicio 2 (P&aacute;g. 88)<br>
+        Ancho banda<br>
+        Niveles 100 Hz 1000 Hz 10 000 Hz 100 000 Hz<br>
+        1 200 2000 20 000 200 000</p>
+      <p> </p></td>
+    
+  </tr>
+ 
+  <tr> 
+    <td height="16"> 
+      <p align="right"><a href="http://www.euskalnet.net/juanarana/index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a> </p></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

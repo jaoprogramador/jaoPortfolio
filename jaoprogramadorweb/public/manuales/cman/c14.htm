@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Objetos y clases en C++</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Lenguaje de programacion C, Lenguaje de programacion C++, Manual Lenguaje de programacion C, Tutorial Lenguaje de programacion C, Manual C, Tutorial C, Manual C, Tutorial C, Objetos y clases">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+   <link href="../../styles/estilos.css" rel="stylesheet" type="text/css"></head>
+  
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="38" colspan="2"> <h2>Objetos 
+        y clases</h2></div></td>
+  </tr>
+  <tr> 
+    <td height="177" colspan="2"> <p>Concepto de 
+        clase  </p>
+      <p  >Una clase es un tipo de dato que contiene uno o m&aacute;s 
+        elementos dato llamados miembros datos, y cero, una o m&aacute;s funciones 
+        que manipulan esos datos llamas funciones miembro. Una clase se define 
+        utilizando la palabra reservada class. La sintaxis es la siguiente: 
+      <blockquote> <em>class nombre_clase
+        {
+        &nbsp;&nbsp;&nbsp;mienbro1;
+        &nbsp;&nbsp;&nbsp;mienbro2;
+        &nbsp;&nbsp;&nbsp;mienbro3;
+        &nbsp;&nbsp;&nbsp;funcion_miembro1();
+        &nbsp;&nbsp;&nbsp;funcion_miembro2();
+        };</em> 
+      </blockquote>
+      <p> y los objetos o instancias de una clase se definen 
+      así:
+      <em>nombre_clase nombre_objeto;
+      </em>El t&eacute;rmino objeto es muy importante, y no son m&aacute;s que 
+      variables, que a su vez no son m&aacute;s que instancias de una clase. Por 
+      consiguiente, una clase es</p>: 
+      <blockquote><em>class cliente
+        {
+        &nbsp;&nbsp;&nbsp;char nombre;
+        &nbsp;&nbsp;&nbsp;char num;
+        };</em></blockquote>
+        <p  > y un objeto , una variable y una instancia 
+        de la clase cliente: <em>Cliente comprador; ----&gt; comprado es un objeto, 
+        una variable de la clase y una instancia de la clase cliente.</em>
+      </p>
+       <p>Diferencia entre clase y estructura  </p>
+      <p  >Una clase es sint&aacute;cticamente igual a una estructura, 
+        con la &uacute;nica diferencia de que el tipo clase <em>(class)</em> todos 
+        los miembros son por defecto privados, es decir s&oacute;lo se puede acceder 
+        a ellos a trav&eacute;s de las funciones miembro, de esa clase, mientras 
+        que en tipo estructura <em>(struct)</em> son por defecto p&uacute;blicos. 
+        Es decir el especificador de acceso a los miembros de una clase es por 
+        defecto <em>private</em> y el de una estructura es <em>public. </em> Una 
+        clase es un tipo de estructura que encapsula datos y funciones en una 
+        entidad.</p>
+       <p>&nbsp; </p>
+      <p  >Una definici&oacute;n de una clase consta de dos 
+        partes: una declaraci&oacute;n y una implementaci&oacute;n. La declaraci&oacute;n 
+        lista los miembros de la clase. La implementaci&oacute;n o cuerpo define 
+        las funciones de la clase:</p>
+      <table width="94%" border="0"  >
+        <tr> 
+          <td  ><p>Declaraci&oacute;n de una clase</td>
+          <td><p>Implementaci&oacute;n de una clase</td>
+        </tr>
+        <tr> 
+          <td><blockquote>class contador
+              {
+              &nbsp;&nbsp;&nbsp;long cuenta; 
+              &nbsp;&nbsp;&nbsp;public: 
+              &nbsp;&nbsp;&nbsp;void leervalor(long); 
+              &nbsp;&nbsp;&nbsp;long obtenervalor();
+              };</blockquote>
+            &nbsp;</td>
+          <td><blockquote>void contador::leervalor(long valor)
+              {
+              &nbsp;&nbsp;&nbsp; cuenta=valor;
+              }
+              long contador::obtenervalor()
+              {
+              &nbsp;&nbsp;&nbsp;return cuenta;
+              }</blockquote>
+            &nbsp;</td>
+        </tr>
+      </table>
+       <p>Representaci&oacute;n gr&aacute;fica de 
+        una clase  </p>
+      <p  >La encapsulaci&oacute;n de datos se produce cuando 
+        la la representaci&oacute;n interna de un objeto junto con sus operaciones, 
+        se encierran en la misma estructura (la clase). La clase define un tipo 
+        abstracto de datos. 
+      <blockquote  >- A un miembro privado s&oacute;lo se puede 
+        acceder por funciones miembro y funciones amigas de la clase.
+        - A un miembro protegido solo es accesible desde desde funciones miembro 
+        y funciones miembro de clase derivadas.
+        - A un miembro p&uacute;blico se puede acceder desde cualquier parte de 
+        un programa, es decir desde cualquier funci&oacute;n. </blockquote></p> 
+       <p>Objetos  </p>
+      <p  >Un objeto es una variable o elemento declarado de 
+        un tipo clase. Se conoce tambi&eacute;n como instancia de una clase. Los 
+        objetos se pueden tratar como cualquier variable. La principal diferencia 
+        es que se puede llamar a cualquiera de las funciones que pertenecen a 
+        un objeto. Para definir un objeto o instancia de la clase se utiliza el 
+        siguiente formato: <em>nombre_clase nombre_objeto; </em></p>
+       <p><em>  Acceso a los miembros de un objeto  </em></p>
+      <p  >La forma de acceder a los miembros de un objetor 
+        es similar a como se acced&iacute;a a los elementos de una estructura. 
+        Aunque aqu&iacute; el acceso a los miembros privados de la clase s&oacute;lo 
+        se puede realizar desde las funciones miembro de esta clase.</p>
+      <p  >Existen dos m&eacute;todos para acceder a un miembro 
+        de un objeto: 
+      <blockquote  >- El operador punto(.). <em>nombre_objeto.nombre_miembro</em>
+        - El operador flecha(->) que act&uacute;a de forma similar al anterior 
+        : <em>nombre_objeto->nombre_miembro</em></blockquote>
+       <p>Para llamar a las funciones miembro se har&aacute; 
+      de forma similar con la siguiente sintaxis: <em>nombre_objeto.nombre_funci&oacute;n(argumentos)</em> </td>
+  </tr>
+  <tr> 
+    <td width="70" height="21"></td>
+    <td height="21"> <div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

@@ -1,0 +1,183 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Introducci&oacute;n a JQuery</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta name="keywords" content="Introduccion a JQuery, Manual JQuery, tutorial JQuery, Ejemplos JQuery, ejercicios JQuery">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos"><tr> 
+    <td height="39" colspan="3"> <h2>Ejemplo completo de los métodos data() y removeData()
+del Core de jQuery</h2></td>
+  </tr>
+  <tr> 
+    <td height="268" colspan="3"> <p>Veamos un ejemplo completo del uso de estos 
+        m&eacute;todos que acabamos de aprender. Se trata<br>
+        de una p&aacute;gina que tiene un elemento sobre el que vamos a guardar 
+        datos. Adem&aacute;s tiene tres<br>
+        botones para guardar un dato, leerlo y borrarlo. El dato que se guardar&aacute; 
+        tendr&aacute; como valor lo<br>
+        que se haya escrito en un campo de texto que aparece tambi&eacute;n en 
+        la p&aacute;gina.</p>
+      <p>Tenemos, para comenzar, un elemento de la p&aacute;gina, que es donde 
+        vamos a guardar los pares<br>
+        dato-valor con data().<br>
+        &lt;div id=&quot;division&quot;&gt;<br>
+        En esta divisi&oacute;n (elemento id=&quot;division&quot;) voy a guardar 
+        datos con la funci&oacute;n data y luego los voy a leer.<br>
+        &lt;/div&gt;<br>
+        Luego tendremos este formulario, que contiene el campo de texto as&iacute; 
+        como los tres botones de<br>
+        los que hemos hablado.<br>
+        &lt;form name=&quot;formul&quot;&gt;<br>
+        Escribe un valor a guardar, leer o eliminar:<br>
+        &lt;input type=&quot;text&quot; name=&quot;valor&quot; id=&quot;valor&quot;&gt;<br>
+        &lt;br&gt;<br>
+        &lt;input type=&quot;button&quot; value=&quot;guardar dato&quot; id=&quot;guardar&quot;&gt;<br>
+        &lt;input type=&quot;button&quot; value=&quot;leer dato&quot; id=&quot;leer&quot;&gt;<br>
+        &lt;input type=&quot;button&quot; value=&quot;eliminar dato&quot; id=&quot;eliminar&quot;&gt;<br>
+        &lt;/form&gt;<br>
+        Ahora se trata de asignar los comportamientos a estos botones con Javascript, 
+        haciendo uso<br>
+        de jQuery.<br>
+        Este ser&iacute;a el script para agregar el evento click al bot&oacute;n 
+        de guardar datos.<br>
+        $(&quot;#guardar&quot;).click(function(evento){<br>
+        var valor = document.formul.valor.value;<br>
+        //Esta misma l&iacute;nea de c&oacute;digo se puede codificar as&iacute; 
+        tambi&eacute;n con jQuery<br>
+        //var valor = $(&quot;#valor&quot;).attr(&quot;value&quot;);<br>
+        $(&quot;#division&quot;).data(&quot;midato&quot;,valor);<br>
+        $(&quot;#division&quot;).html('He guardado en este elemento (id=&quot;division&quot;) 
+        un dato llamado &quot;midato&quot; con el valor &quot;' + valor<br>
+        + '&quot;');<br>
+        });<br>
+        Como se puede ver, primero se recibe el texto del campo de texto que hab&iacute;a 
+        en el formulario.<br>
+        Para ello se muestran dos maneras de hacerlo:<br>
+        &#8226; A trav&eacute;s de la jerarqu&iacute;a de objetos del navegador, 
+        con document.formul.valor.value<br>
+        &#8226; A trav&eacute;s de su identificador, con un m&eacute;todo de jQuery 
+        llamado attr() que sirve para<br>
+        recuperar el valor de un atributo HTML pasado por par&aacute;metro sobre 
+        el elemento que<br>
+        recibe el m&eacute;todo. Este modo de obtener el atributo value del campo 
+        de texto est&aacute;<br>
+        comentado, pues s&oacute;lo lo quer&iacute;a se&ntilde;alar, para que 
+        se vea el modo de acceder a un<br>
+        elemento de formulario utilizando las funciones del framework Javascript 
+        jQuery.<br>
+        Luego, se guarda el dato &quot;midato&quot; con el valor que se recuper&oacute; 
+        del atributo value del campo de<br>
+        texto. Para ello utilizamos el m&eacute;todo data() tal como coment&aacute;bamos.<br>
+        Por &uacute;ltimo se muestra un mensaje en el HTML del elemento con id=&quot;division&quot;, 
+        por medio del<br>
+        m&eacute;todo html() de jQuery, para informar sobre la acci&oacute;n que 
+        acabamos de realizar.<br>
+        Ahora mostramos el c&oacute;digo para asignar un comportamiento al evento 
+        click sobre el segundo<br>
+        bot&oacute;n:<br>
+        $(&quot;#leer&quot;).click(function(evento){<br>
+        valor = $(&quot;#division&quot;).data(&quot;midato&quot;);<br>
+        $(&quot;#division&quot;).html('En este elemento (id=&quot;division&quot;) 
+        leo un dato llamado &quot;midato&quot; con el valor &quot;' + valor + 
+        '&quot;');<br>
+        });<br>
+        Como se puede ver, se recupera el valor del dato &quot;midato&quot; guardado 
+        sobre el elemento<br>
+        &quot;#division&quot; (etiqueta HTML con id=&quot;division&quot;), y se 
+        almacena en una variable. Luego se crea<br>
+        un mensaje para mostrar el valor del dato.<br>
+        Para acabar, tenemos el c&oacute;digo del evento click sobre el bot&oacute;n 
+        de eliminar el contenido de un<br>
+        dato, que hace uso de removeData().<br>
+        $(&quot;#eliminar&quot;).click(function(evento){<br>
+        $(&quot;#division&quot;).removeData(&quot;midato&quot;);<br>
+        $(&quot;#division&quot;).html('Acabo de eliminar del elemento (id=&quot;division&quot;) 
+        el dato llamado &quot;midato&quot;');<br>
+        });<br>
+        Como se ver&aacute;, el m&eacute;todo removeData() se invoca sobre el 
+        elemento que tiene el dato que<br>
+        pretendemos eliminar. M&aacute;s tarde se muestra un mensaje informando 
+        sobre la acci&oacute;n que se ha<br>
+        realizado.<br>
+        Para comprobar el funcionamiento de estos m&eacute;todos habr&iacute;a 
+        que crear un dato, escribiendo el<br>
+        valor en el campo de texto y pulsando el bot&oacute;n &quot;guardar dato&quot;. 
+        Luego podr&iacute;amos leer ese dato<br>
+        con el bot&oacute;n &quot;leer dato&quot;. Por &uacute;ltimo podr&iacute;amos 
+        eliminar el dato con el bot&oacute;n &quot;eliminar dato&quot;. Si,<br>
+        una vez eliminado pulsamos sobre el bot&oacute;n de &quot;leer dato&quot; 
+        veremos que el valor del dato<br>
+        aparece como &quot;undefined&quot;, puesto que ese dato ha sido borrado 
+        (esto tambi&eacute;n ocurre si no se<br>
+        ha guardado ning&uacute;n dato todav&iacute;a, por ejemplo cuando se acaba 
+        de cargar la p&aacute;gina).<br>
+        Ser&iacute;a interesante ver el c&oacute;digo fuente completo de esta 
+        p&aacute;gina, para hacernos una idea m&aacute;s<br>
+        exacta de c&oacute;mo se integrar&iacute;an todos estos elementos. &lt;html&gt;<br>
+        &lt;head&gt;<br>
+        &lt;title&gt;Ejemplos de uso de la funci&oacute;n data del core de jQuery&lt;/title&gt;<br>
+        &lt;script src=&quot;../jquery-1.3.2.min.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;<br>
+        &lt;script&gt;<br>
+        $(document).ready(function(){<br>
+        $(&quot;#guardar&quot;).click(function(evento){<br>
+        var valor = document.formul.valor.value;<br>
+        //Esta misma l&iacute;nea de c&oacute;digo se puede codificar as&iacute; 
+        tambi&eacute;n con jQuery<br>
+        //var valor = $(&quot;#valor&quot;).attr(&quot;value&quot;);<br>
+        $(&quot;#division&quot;).data(&quot;midato&quot;,valor);<br>
+        $(&quot;#division&quot;).html('He guardado en este elemento (id=&quot;division&quot;) 
+        un dato llamado &quot;midato&quot; con el valor &quot;' + valor<br>
+        + '&quot;');<br>
+        });<br>
+        $(&quot;#leer&quot;).click(function(evento){<br>
+        valor = $(&quot;#division&quot;).data(&quot;midato&quot;);<br>
+        $(&quot;#division&quot;).html('En este elemento (id=&quot;division&quot;) 
+        leo un dato llamado &quot;midato&quot; con el valor &quot;' + valor + 
+        '&quot;');<br>
+        });<br>
+        $(&quot;#eliminar&quot;).click(function(evento){<br>
+        $(&quot;#division&quot;).removeData(&quot;midato&quot;);<br>
+        $(&quot;#division&quot;).html('Acabo de eliminar del elemento (id=&quot;division&quot;) 
+        el dato llamado &quot;midato&quot;');<br>
+        });<br>
+        });<br>
+        &lt;/script&gt;<br>
+        &lt;/head&gt;<br>
+        &lt;body&gt;<br>
+        &lt;div id=&quot;division&quot;&gt;<br>
+        En esta divisi&oacute;n (elemento id=&quot;division&quot;) voy a guardar 
+        datos con la funci&oacute;n data y luego los voy a leer<br>
+        &lt;/div&gt;<br>
+        &lt;br&gt;<br>
+        &lt;form name=&quot;formul&quot;&gt;<br>
+        Escribe un valor a guardar, leer o eliminar:<br>
+        &lt;input type=&quot;text&quot; name=&quot;valor&quot; id=&quot;valor&quot;&gt;<br>
+        &lt;br&gt;<br>
+        &lt;input type=&quot;button&quot; value=&quot;guardar dato&quot; id=&quot;guardar&quot;&gt;<br>
+        &lt;input type=&quot;button&quot; value=&quot;leer dato&quot; id=&quot;leer&quot;&gt;<br>
+        &lt;input type=&quot;button&quot; value=&quot;eliminar dato&quot; id=&quot;eliminar&quot;&gt;<br>
+        &lt;/form&gt;<br>
+        &lt;/body&gt;<br>
+        &lt;/html&gt;</p></td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

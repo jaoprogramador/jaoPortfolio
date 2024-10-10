@@ -1,0 +1,142 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>DTD(Declaracion de tipo de Documento)</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación en CSS,Programas CSS,Aplicaciones en CSS,Ejercicios en CSS, Ejemplos de CSS,Tutoriales de CSS,Manuales CSS" name=description>
+<meta name="keywords" content="CSS, Manual CSS, tutorial CSS, Ejemplos CSS, ejercicios CSS, Cascading Style Sheet">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos"><tr> 
+    <td height="39" colspan="3"> <h2> <strong>DTD(Declaracion de tipo de Documento) </strong> </h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> 
+      <p>&nbsp; </p>
+      <p>&#149;&nbsp; Que es un DTD. Para saber qu&eacute; DTD utiliza un documento XML se indica en el propio documento XML de la siguiente forma &lt;! DOCTYPE nombre documento SYSTEM nombreDTD.dtd&gt; </p>
+      <p>&lt;?xml version=" 1.0" encoding="ISO-8859- 1" ?&gt; </p>
+      <p>&lt;! DOCTYPE informe SYSTEM tiempo.dtd&gt; </p>
+      <p>&lt;informe&gt; </p>
+      <p>&lt;fecha&gt;17/5/1990&lt;/fecha&gt; </p>
+      <p>&lt;hora&gt;14:00&lt;/hora&gt; </p>
+      <p>&lt;area&gt; </p>
+      <p>&lt;ciudad&gt;Le&oacute;n&lt;/ciudad&gt; </p>
+      <p>&lt;region&gt;Castilla Leon&lt;/region&gt; </p>
+      <p>&lt;pais&gt;Espa&ntilde;a&lt;/pais&gt; </p>
+      <p>&lt;/area&gt; </p>
+      <p>&lt;mediciones&gt; </p>
+      <p>&lt;cielo&gt;claro&lt;/cielo&gt; </p>
+      <p>&lt;temperatura escala="C"&gt;25&lt;/temperatura&gt; </p>
+      <p>&lt;/mediciones&gt; </p>
+      <p>&nbsp; </p>
+      <p>&lt;/informe&gt; </p>
+      <p>Si el nombre de la DTD es un fichero, lo busca en el mismo directorio del documento XML. Si no est&aacute; en el se pone la direcci&oacute;n relativa o absoluta para llegar al fichero: </p>
+      <p>&lt;! DOCTYPE informe SYSTEM "../dtds/tiempo.dtd"&gt; o &lt;! DOCTYPE informe SYSTEM "C:/xml/dtds/tiempo.dtd"&gt; </p>
+      <p>&nbsp; </p>
+      <p>Tenemos que tener en cuenta que no puede haber dos etiquetas DOCTYPE en el mismo documento a dos DTD en un fichero XML, pero si se puede referenciar una DTD desde otra. </p>
+      <p>Existe otra forma de referenciar a una DTD , y es con public : &lt;! DOCTYPE informe PUBLIC "../dtds/tiempo.dtd"&gt;. No hay apenas diferencias entre una y otra ya que con las direcciones absolutas o relativas encuentra las DTD en los dos casos. Pero cuando unicamente ponemos en nombre de la DTD , SYSTEM lo busca en el mismo directorio, mientras que public lo busca en el &aacute;rbol de directorios de la m&aacute;quina. </p>
+      <p>&nbsp; </p>
+      <p>Pero no solo se puede poner un fichero que est&eacute; en nuestra m&aacute;quina, tambien se puede referenciar a una direcci&oacute;n http: </p>
+      <p>&lt;! DOCTYPE informe SYSTEM "http://123.234.2.34/dtds/tiempo.dtd"&gt; </p>
+      <p>Existen dos tipos de DTDs: externa e interna. La externa es la que emos visto antes; desde el documento XML se referencia a trav&eacute;s de la etiqueta DOCTYPE y SYSTEM o PUBLIC. La interna est&aacute; definida dentro del propio XML y por tanto no tiene ninguna referencia. La referencia de la DTD se encuentra en la etiqueta: &lt;! DOCTYPE nombre documento xml [y despu&eacute;s se cierra con]&gt;. </p>
+      <p>&lt;?xml version=" 1.0" encoding="ISO-8859- 1" ?&gt; </p>
+      <p>&lt;!DOCTYPE informe[ </p>
+      <p>&lt;!ELEMENT informe(fecha, hora,area,mediciones)&gt; </p>
+      <p>&lt;!ELEMENT fecha (#PCDATA)&gt; </p>
+      <p>&lt;!ELEMENT hora (#PCDATA)&gt; </p>
+      <p>&lt;!ELEMENT area (ciudad,region,pais)|(x,y)&gt; </p>
+      <p>...... </p>
+      <p>&lt;informe&gt; </p>
+      <p>&lt;fecha&gt;24 de diciembre de 2000&lt;/fecha&gt; </p>
+      <p>&lt;hora&gt;14:00&lt;/hora&gt; </p>
+      <p>...... </p>
+      <p>&nbsp; </p>
+      <p>&#149;&nbsp; Declaraci&oacute;n de elementos. La declaraci&oacute;n de un elemento es: </p>
+      <p>&lt;!ELEMENT nombre(contenido)&gt; donde nombre , es el elemento que estamos declarando y contenido, lo que va a contener dicho elemento. </p>
+      <p>&nbsp; </p>
+      <p>El contenido es un elemento puede ser otros elementos o un valor (cadena de caracteres ). En este &uacute;ltimo caso se coloca(#PCDATA). </p>
+      <p>&lt;!ELEMENT pais (#PCDATA)&gt; </p>
+      <p>La dificultad est&aacute; cuando contiene a otros elementos ya que le podemos poner tantas restricciones como se pueda para que el documento XML sea v&aacute;lido. MODELO DE CONTENIDO DE LOS ELEMENTOS: </p>
+      <p>Cuando un elemento contiene un &uacute;nico elemento (tenemos que tener en cuenta que de esta forma debe aparecer una vez,en caso contrario el parser da error); </p>
+      <p>&lt;!ELEMENT identidad (DNI)&gt; </p>
+      <p>Cuando aparece una vez o ninguna(se utiliza el car&aacute;cter ?) </p>
+      <p>&lt;!ELEMENT telefono (numero?)&gt; </p>
+      <p>Cuando parece una o masveces (se utiliza el car&aacute;cter +) </p>
+      <p>&lt;!ELEMENT registro (factura+)&gt; </p>
+      <p>Cuando aparece 0 o mas(se utiliza el car&aacute;cter *) </p>
+      <p>&lt;!ELEMENT telefonos (numero*)&gt; </p>
+      <p>Todos los caracteres anteriores pueden ir junto al elemento al que marcan o fuera de los par&eacute;ntesis. Teniendo que al ir fuera de ellos actuar&iacute;an sobre todo lo que contenga. En estos casos como solo contienen un elemento dar&iacute;a lo mismo. </p>
+      <p>Cuando un elemento contiene una secuencia fija de elementos (deben aparecer en el mismo orden y una &uacute;nica vez): </p>
+      <p>&lt;!ELEMENT informe (fecha, hora, area, mediciones)&gt; </p>
+      <p>Cuando un elemento contiene una lista de elementos (es un OR , por lo que debe aparecer s&oacute;lo uno de ellos): </p>
+      <p>&lt;!ELEMENT estacion (verano|oto&ntilde;o|invierno|primavera)&gt; </p>
+      <p>Todos los anteriores pueden mezclarse para conseguirse lo que se desee: </p>
+      <p>&lt;!ELEMENT informe (fecha+, hora?,area,mediciones*)&gt; </p>
+      <p>&lt;!ELEMENT informe (fecha|(hora?) | area|mediciones*)+&gt; </p>
+      <p>&lt;!ELEMENT informe (((fecha,hora)?|(area,mediciones)))+&gt; </p>
+      <p>As&iacute; por ejemplo, si desea una secuencia de elementos pero que no tenga un orden fijo (aparecer&aacute;n una o mas veces cualquiera de ellos: verano y oto&ntilde;o ; o invierno y verano y primavera.) </p>
+      <p>&lt;!ELEMENT estaci&oacute;n (verano|oto&ntilde;o|primavera|verano)+&gt; </p>
+      <p>Tambi&eacute;n puede tener un contenido mixto , es decir , o caracteres u otros elementos: </p>
+      <p>&lt;!ELEMENT contacto (#PCDATA | (email,telefono,direccion))&gt; </p>
+      <p>Puede que no tenga ning&uacute;n contenido( se utiliza empty y el elemento siempre debe estar vac&iacute;o ). Este caso se puede utilizar cuando un elemento tiene atributos que son los que contienen los valores: </p>
+      <p>&lt;!ELEMENT vacio (EMPTY)&gt; </p>
+      <p>O sin condiciones para el contenido(con ANY): </p>
+      <p>&lt;!ELEMENT libre (ANY)&gt; </p>
+      <p>&nbsp; </p>
+      <p>Resumen: </p>
+      <p>&#149;&nbsp; +: uso obligatorio y m&uacute;ltiple; permite uno o mas elementos de este tipo dentro del elemento padre, pero como m&iacute;nimo uno. </p>
+      <p>&#149;&nbsp; : opcional y m&uacute;ltiple, puede haber ninguna ocurrencia, una o varias. </p>
+      <p>&#149;&nbsp; ? : opcional pero singular; puede no haber ninguno o como mucho uno. </p>
+      <p>&#149;&nbsp; | equivale a un OR, es decir, da la opci&oacute;n de usar un elementote entre los que forman la expresi&oacute;n, y solo uno. </p>
+      <p>Ejemplo: </p>
+      <p>&lt;!ELEMENT ficha (nombre+,apellido+,direccion*,foto?,telefono*|fax*)&gt; </p>
+      <p>Sabremos del elemento ficha que puede contener los siguientes elementos: un nombre y un apellido como m&iacute;nimo, pero puede tener m&aacute;s de uno de cada; opcionalmente puede incluirse una o m&aacute;s direcciones, pero no es obligatorio; opcionalmente puede incluirse una &uacute;nica foto; y por fin, pueden incluirse, aunque no es obligatorio en ninguno de los dos casos , uno o mas tel&eacute;fonos o uno o mas n&uacute;meros de fax. </p>
+      <p>&nbsp; </p>
+      <p>&#149;&nbsp; Declaraci&oacute;n de atributos. </p>
+      <p>Se declaran &lt;!ATTLIST elemento atributo tipo_atributo valor_defecto&gt;. Donde elemento es el elemento al cual pertenece y atributo es el nombre del atributo. </p>
+      <p>El tipo de los atributos puede ser: </p>
+      <p>CDATA: Cuando es una cadena de caracteres </p>
+      <p>Una enumeraci&oacute;n de valores que puede tener el atributo: (a|b|c) </p>
+      <p>ID: Si el valor del atributo es &uacute;nico en el documento </p>
+      <p>IDREF: El valor debe coincidir con el atributo ID del mismo documento o est&aacute; vac&iacute;o </p>
+      <p>El valor por defecto puede ser: </p>
+      <p>#REQUIRED: si es un valor obligatorio </p>
+      <p>#IMPLIED: No tiene condiciones, es opcional. </p>
+      <p>#FIXED VALOR: El atributo debe coincidir con el valor definido como defecto. </p>
+      <p>Valor por defecto. </p>
+      <p>Ejemplos: </p>
+      <p>&lt;!ATTLIST temperatura escala CDATA #IMPLIED&gt; El atributo escala es una cadena de caracteres y no es obligatorio, puede que el elementotemperatura no tenga dicho atributo. </p>
+      <p>&lt;!ATTLIST temperatura escala CDATA #REQUIRED&gt; Aqu&iacute; si es obligatorio </p>
+      <p>&lt;!ATTLIST temperatura escala CDATA #FIXED c"&gt; El valor del atributo escala siempre debe valer c. </p>
+      <p>&lt;!ATTLIST temperatura escala CDATA # c &gt; Si no tiene ning&uacute;n valor coge c como predeterminado </p>
+      <p>&lt;!ATTLIST temperatura escala (C|CDATA)REQUIRED&gt; Aqu&iacute; es obligatorio y puede tener C o una cadena de caracteres </p>
+      <p>&lt;!ATTLIST coche color (rojo|azul|blanco) #IMPLIED&gt; No es obligatorio, pero si tiene alg&uacute;n valor debe ser alguno de estos tres. </p>
+      <p>&lt;!ATTLIST table align (left|right|center) left&gt; Este forma parte del DTD que tiene por defecto el HTML. Vemos que dentro del elemento table, tiene un atributo align que puede tener una serie de valores y que por defecto es left. </p>
+      <p>&lt;!ATTLIST temperatura escala (R|J) #FIXED "C"&gt; No ser&iacute;a una declaraci&oacute;n correcta porque le damos a elegir entre dos valores (L y J) pero le decimos que debe ser C. Dar&iacute;a error </p>
+      <p>&lt;!ATTLIST empleado cod ID #REQUIRED jefe IDREF #IMPLIED &gt; Todos los atributos de un elemento se pueden poner juntos en una misma declaraci&oacute;n como vemos en el ejemplo. Aqu&iacute; cod es obligatorio y su valor es &uacute;nico en el documento. El atributo jefe debe coincidir con el ID y no es obligatorio. </p>
+      <p>&nbsp; </p>
+      <p>&lt;empleado cod='1024' jefe='100'/&gt; </p>
+      <p>&lt;empleado cod='4815' jefe='100'/&gt; </p>
+      <p>&lt;empleado cod='100' jefe='100'/&gt; </p>
+      <p>Este ser&iacute;a el XML del ejemplo anterior, donde el empleado con cod=100 ser&iacute;a el jefe y los otros dos sus empleados. El empleado con cod 100 debe existir o dar&iacute;a error en los atributos jefe de los otros. </p>
+      <p>&nbsp; </p>
+    <p>A la hora de elegir si utilizar un atributo o un elemento para tener un valor, depende de si queremos que tenga un valor u otro(utilizamos atributos) o si queremos saber cuando se repite(utilizamos elementos). Desde el punto de vista de la programaci&oacute;n es mas sencillo que todos sean atributos. </p></td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

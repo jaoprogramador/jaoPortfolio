@@ -1,0 +1,156 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Ejercicios MySQL</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="MySQL, sql, pl/sql, programacion MySQL, ejercicios MySQL, ejemplos MySQL, select">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2>R E Q U I S I T O S</h2></td>
+  </tr>
+  <tr> 
+    <td><h3>Requisitos de almacenamiento según el tipo de columna</h3>
+      <p>Los requerimientos de almacenamiento para cada uno de los tipos de columnas 
+        soportados por MySQL se listan por categor&iacute;a.<br>
+        El m&aacute;ximo tama&ntilde;o de un registro en una tabla MyISAM es 65,534 
+        bytes. Cada columna BLOB y TEXT cuenta s&oacute;lo de cinco a nueve<br>
+        bytes m&aacute;s alla de su tama&ntilde;o.<br>
+        Si una tabla MyISAM incluye cualquier tipo de columna de tama&ntilde;o 
+        variable, el formato de rebistro tambi&eacute;n tiene longitud variable.<br>
+        Cuando se crea una tabla. MySQL puede, bajo ciertas condiciones, cambiar 
+        una columna de tama&ntilde;o variable a fijo o viceversa.<br>
+        Consulte Secci&oacute;n 13.1.5.1, &#8220;Cambios t&aacute;citos en la 
+        especificaci&oacute;n de columnas&#8221; para m&aacute;s informaci&oacute;n.<br>
+        Requerimientos de almacenamiento para tipos num&eacute;ricos<br>
+        Tipo de columna Almacenamiento requerido<br>
+        TINYINT 1 byte<br>
+        SMALLINT 2 bytes<br>
+        MEDIUMINT 3 bytes<br>
+        INT, INTEGER 4 bytes<br>
+        BIGINT 8 bytes<br>
+        FLOAT(p) 4 bytes si 0 &lt;= p &lt;= 24, 8 bytes si 25 &lt;= p &lt;= 53<br>
+        FLOAT 4 bytes<br>
+        DOUBLE [PRECISION], objeto REAL 8 bytes<br>
+        DECIMAL(M,D), NUMERIC(M,D) Var&iacute;a; consulte la siguiente explicaci&oacute;n<br>
+        BIT(M) aproximadamente (M+7)/8 bytes<br>
+        Los requerimientos de almacenamiento para DECIMAL (y NUMERIC) son espec&iacute;ficos 
+        para cada versi&oacute;n:<br>
+        Desde MySQL 5.0.3, los valores para columnas DECIMAL m&aacute;s largos 
+        se representan usando un formato binario que empaqueta<br>
+        nueve d&iacute;gitos decimales en cuatro bytes. El almacenamiento para 
+        la parte entera y fraccional se determinan separadamente. Cada<br>
+        m&uacute;ltiplo de nueve d&iacute;gitos requiere cuatro bytes, y el d&iacute;gito 
+        &quot;de resto&quot; requiere alguna fracci&oacute;n de cuatro bytes. 
+        El almacenamiento<br>
+        requerido para los d&iacute;gitos &quot;de resto&quot; se da en la siguiente 
+        tabla:<br>
+        Resto N&uacute;mero<br>
+        D&iacute;tigos de bytes<br>
+        0 0<br>
+        1 1<br>
+        2 1<br>
+        3 2<br>
+        4 2<br>
+        5 3<br>
+        6 3<br>
+        7 4<br>
+        8 4<br>
+        9 4<br>
+        Antes de MySQL 5.0.3, las columnas DECIMAL se representan como cadenas 
+        y el requerimiento de almacenamiento es: M+2 bytes<br>
+        si D &gt; 0, M+1 bytes si D = 0 (D+2, si M &lt; D)<br>
+        Requerimientos de almacenamiento para tipos de fecha y hora<br>
+        Tipo de columna Almacenamiento requerido<br>
+        DATE 3 bytes<br>
+        DATETIME 8 bytes<br>
+        TIMESTAMP 4 bytes<br>
+        TIME 3 bytes<br>
+        YEAR 1 byte<br>
+        Requerimientos de almacenamiento para tipos de cadenas de caracteres<br>
+        Tipo de columna Almacenamiento requerido<br>
+        CHAR(M) M bytes, 0 &lt;= M &lt;= 255<br>
+        VARCHAR(M) L+1 bytes, donde L &lt;= M y 0 &lt;= M &lt;= 255<br>
+        BINARY(M) M bytes, 0 &lt;= M &lt;= 255<br>
+        VARBINARY(M) L+1 bytes, donde L &lt;= M y 0 &lt;= M &lt;= 255<br>
+        TINYBLOB, TINYTEXT L+1 byte, donde L &lt; 2^8<br>
+        BLOB, TEXT L+2 bytes, donde L &lt; 2^16<br>
+        MEDIUMBLOB, MEDIUMTEXT L+3 bytes, donde L &lt; 2^24<br>
+        LONGBLOB, LONGTEXT L+4 bytes, donde L &lt; 2^32<br>
+        ENUM('value1','value2',...) 1 o 2 bytes, dependiendo del n&uacute;mero 
+        de valores de la enumeraci&oacute;n (65,535<br>
+        valores como m&aacute;ximo)<br>
+        SET('value1','value2',...) 1, 2, 3, 4, o 8 bytes, dependiendo del n&uacute;mero 
+        de miembros del conjunto (64<br>
+        miembros como m&aacute;ximo)<br>
+        Los tipos VARCHAR y BLOB y TEXT son de longitud variable. Para cada uno, 
+        los requerimientos de almacenamiento depende de la<br>
+        longitud de los valores de la (representados por L en la tabla precedente), 
+        en lugar que el tama&ntilde;o m&aacute;ximo del tipo. Por ejemplo, una<br>
+        columna VARCHAR(10) puede tratar una cadena con una lengitud m&aacute;xima 
+        de 10. El almacenamiento requerido real es la longitud<br>
+        de la cadena (L), m&aacute;s 1 byte para registrar la longitud de la cadena. 
+        Para la cadena 'abcd', L es 4 y el requerimiento de almacenamiento<br>
+        son 5 bytes.<br>
+        Para los tipos CHAR, VARCHAR, y TEXT, los valores L y M en la tabla precedente 
+        debe interpretarse como n&uacute;meros de caracteres en<br>
+        MySQL 5.0, y las longitudes para estos tipos en las especificaciones de 
+        la colmna indican el n&uacute;mero de caracteres. Por ejemplo, para<br>
+        almacenar un valor TINYTEXT necesita L caracteres + 1 byte.<br>
+        Desde MySQL 5.0.3, el motor NDBCLUSTER soporta s&oacute;lo columnas de 
+        longitud fija. Esto significa que una columna VARCHAR de<br>
+        una tabla en MySQL Cluster se comportar&aacute; casi como si fuera de 
+        tipo CHAR (excepto que cada registro todav&iacute;a tiene un byte extra).<br>
+        Por ejemplo, en una tabla Cluster, cada registro en una columna declarada 
+        como VARCHAR(100) necesitar&aacute; 101 bytes para almacenamiento,<br>
+        sin tener en cuenta la longitud de la columna almacenada en cualquier 
+        registro.<br>
+        Los tipos BLOB y TEXT requieren 1, 2, 3, o 4 bytes para almacenar la longitud 
+        de la columna, dependiendo de la longitud m&aacute;xima<br>
+        posible del tipo. Consulte Secci&oacute;n 11.4.3, &#8220;Los tipos BLOB 
+        y TEXT&#8221;.<br>
+        Las columnas TEXT y BLOB se implementan de forma distinta en el motor 
+        de almacenamiento NDB Cluster , donde cada registro<br>
+        en una columna TEXT se compone de dos partes separadas. Una de estas es 
+        de longitud fija (256 bytes), y se almacena realmente<br>
+        en la tabla original. La otra consiste de cualquier dato de m&aacute;s 
+        de 256 bytes, que se almacena en una tabla oculta. Los registros en<br>
+        esta segunda tabla siempre tienen una longitud de 2,000 bytes . Esto significa 
+        que el tama&ntilde;o de una columna TEXT es 256 si size<br>
+        &lt;= 256 (donde size representa el tama&ntilde;o del registro); de otro 
+        modo, el tama&ntilde;o es 256 + size + (2000 - (size - 256) % 2000).<br>
+        El tama&ntilde;o de un objeto ENUM lo determina el n&uacute;mero de diferentes 
+        valores de la enumeraci&oacute;n. Un byte se usa para enumeraciones<br>
+        de hasta 255 valores posibles. Dos bytes se usan para enumeraciones teniendo 
+        entre 256 y 65,535 valores posibles. Consulte Secci&oacute;n<br>
+        11.4.4, &#8220;El tipo de columna ENUM&#8221;.<br>
+        El tama&ntilde;o de un objeto SET se determina por el n&uacute;mero de 
+        diferentes mienbros del conjunto. Si el tama&ntilde;o del conjunto es 
+        N, el objeto<br>
+        ocupa (N+7)/8 bytes, redondeado a 1, 2, 3, 4, o 8 bytes. Un SET puede 
+        tener como m&aacute;ximo 64 miembros. Consulte Secci&oacute;n<br>
+        11.4.5, &#8220;El tipo SET&#8221;. </p>
+        </td>
+    <td>&nbsp;</td>
+    <td><a href="http://www.euskalnet.net/juanarana/oraclezip/Ejer3.rar"><img src="../../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td>
+<div align="right"><a href="http://www.euskalnet.net/juanarana/index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a>
+      </div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

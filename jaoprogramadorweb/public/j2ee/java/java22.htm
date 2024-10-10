@@ -1,0 +1,757 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Colecciones</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación en Java,Programas Java,Aplicaciones en Java,Ejercicios en Java, Ejemplos de Java,Tutorial de Java,Manual Java" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Java, Manual Java, tutorial Java, Ejemplos Java, ejercicios Java">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> Colecciones</h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <h3>Introducci&oacute;n</h3>
+      <p> Java dispone tambi&eacute;n de clases e interfaces para trabajar con 
+        colecciones de objetos. En primer lugar se ver&aacute;n las clases Vector 
+        y Hashtable, as&iacute; como la interface Enumeration. Estas clases est&aacute;n 
+        presentes en lenguaje desde la primera versi&oacute;n. Despu&eacute;s 
+        se explicar&aacute; brevemente la Java Collections Framework, introducida 
+        en la versi&oacute;n JDK 1.2.</p>
+      <h3>Clase Vector</h3>
+      <p>La clase java.util.Vector deriva de Object, implementa Cloneable (para 
+        poder sacar copias con el m&eacute;todo clone()) y Serializable (para 
+        poder ser convertida en cadena de caracteres).<br>
+        Como su mismo nombre sugiere, Vector representa un array de objetos (referencias 
+        a objetos de tipo Object) que puede crecer y reducirse, seg&uacute;n el 
+        n&uacute;mero de elementos. Adem&aacute;s permite acceder a los elementos 
+        con un &iacute;ndice, aunque no permite utilizar los corchetes [].<br>
+        El m&eacute;todo capacity() devuelve el tama&ntilde;o o n&uacute;mero 
+        de elementos que puede tener el vector. El m&eacute;todo size() devuelve 
+        el n&uacute;mero de elementos que realmente contiene, mientras que capacityIncrement 
+        es una variable que indica el salto que se dar&aacute; en el tama&ntilde;o 
+        cuando se necesite crecer. La Tabla 4.6 muestra los m&eacute;todos m&aacute;s 
+        importantes de la clase Vector. Puede verse que el gran n&uacute;mero 
+        de m&eacute;todos que existen proporciona una notable flexibilidad en 
+        la utilizaci&oacute;n de esta<br>
+        clase.<br>
+        Adem&aacute;s de capacityIncrement, existen otras dos variables miembro: 
+        elementCount, que representa el n&uacute;mero de componentes v&aacute;lidos 
+        del vector, y elementData[] que es el array de Objects donde realmente 
+        se guardan los elementos del objeto Vector (capacity es el tama&ntilde;o 
+        de este array).<br>
+        Las tres variables citadas son protected.</p>
+      <table width="517" border="1">
+        <tr> 
+          <td width="251">M&eacute;todos</td>
+          <td width="250">Funci&oacute;n que realizan</td>
+        </tr>
+        <tr> 
+          <td>Vector(), Vector(int), Vector(int, int)</td>
+          <td>Constructores que crean un vector vac&iacute;o, un vector de la 
+            capacidad<br>
+            indicada y un vector de la capacidad e incremento indicados</td>
+        </tr>
+        <tr> 
+          <td>void addElement(Object obj)</td>
+          <td>A&ntilde;ade un objeto al final</td>
+        </tr>
+        <tr> 
+          <td>boolean removeElement(Object obj)</td>
+          <td>Elimina el primer objeto que encuentra como su argumento y desplaza<br>
+            los restantes. Si no lo encuentra devuelve false</td>
+        </tr>
+        <tr> 
+          <td>void removeAllElements()</td>
+          <td>Elimina todos los elementos</td>
+        </tr>
+        <tr> 
+          <td>Object clone()</td>
+          <td>Devuelve una copia del vector</td>
+        </tr>
+        <tr> 
+          <td>void copyInto(Object anArray[])</td>
+          <td>Copia un vector en un array</td>
+        </tr>
+        <tr> 
+          <td>void trimToSize()</td>
+          <td>Ajusta el tama&ntilde;o a los elementos que tiene</td>
+        </tr>
+        <tr> 
+          <td>void setSize(int newSize)</td>
+          <td>Establece un nuevo tama&ntilde;o</td>
+        </tr>
+        <tr> 
+          <td>int capacity()</td>
+          <td>Devuelve el tama&ntilde;o (capacidad) del vector</td>
+        </tr>
+        <tr> 
+          <td>int size()</td>
+          <td>Devuelve el n&uacute;mero de elementos</td>
+        </tr>
+        <tr> 
+          <td>boolean isEmpty()</td>
+          <td>Devuelve true si no tiene elementos</td>
+        </tr>
+        <tr> 
+          <td>Enumeration elements()</td>
+          <td>Devuelve una Enumeraci&oacute;n con los elementos</td>
+        </tr>
+        <tr> 
+          <td>boolean contains(Object elem)</td>
+          <td>Indica si contiene o no un objeto</td>
+        </tr>
+        <tr> 
+          <td>int indexOf(Object elem, int index)</td>
+          <td>Devuelve la posici&oacute;n de la primera vez que aparece un objeto 
+            a partir<br>
+            de una posici&oacute;n dada</td>
+        </tr>
+        <tr> 
+          <td>int lastIndexOf(Object elem, int index)</td>
+          <td>Devuelve la posici&oacute;n de la &uacute;ltima vez que aparece 
+            un objeto a partir de<br>
+            una posici&oacute;n, hacia atr&aacute;s</td>
+        </tr>
+        <tr> 
+          <td>Object elementAt(int index)</td>
+          <td>Devuelve el objeto en una determinada posici&oacute;n</td>
+        </tr>
+        <tr> 
+          <td>Object firstElement()</td>
+          <td>Devuelve el primer elemento</td>
+        </tr>
+        <tr> 
+          <td>Object lastElement()</td>
+          <td>Devuelve el &uacute;ltimo elemento</td>
+        </tr>
+        <tr> 
+          <td>void setElementAt(Object obj, int index)</td>
+          <td>Cambia el elemento que est&aacute; en una determinada posici&oacute;n</td>
+        </tr>
+        <tr> 
+          <td>void removeElementAt(int index)</td>
+          <td>Elimina el elemento que est&aacute; en una determinada posici&oacute;n</td>
+        </tr>
+        <tr> 
+          <td>void insertElementAt(Object obj, int index)</td>
+          <td>Inserta un elemento por delante de una determinada posici&oacute;n</td>
+        </tr>
+      </table>
+      <p>&nbsp;</p>
+      <h3>Interface Enumeration</h3>
+      <p>La interface java.util.Enumeration define m&eacute;todos &uacute;tiles 
+        para recorrer una colecci&oacute;n de objetos.<br>
+        Puede haber distintas clases que implementen esta interface y todas tendr&aacute;n 
+        un comportamiento similar.<br>
+        La interface Enumeration declara dos m&eacute;todos:<br>
+        1. public boolean hasMoreElements(). Indica si hay m&aacute;s elementos 
+        en la colecci&oacute;n o si se ha llegado ya al final.<br>
+        2. public Object nextElement(). Devuelve el siguiente objeto de la colecci&oacute;n. 
+        Lanza una NoSuchElementException si se llama y ya no hay m&aacute;s elementos.<br>
+        Ejemplo: Para imprimir los elementos de un vector vec se pueden utilizar 
+        las siguientes sentencias:<br>
+        for (Enumeration e = vec.elements(); e.hasMoreElements(); ) {<br>
+        System.out.println(e.nextElement());<br>
+        }<br>
+        donde, como puede verse en la Tabla 4.6, el m&eacute;todo elements() devuelve 
+        precisamente una referencia de tipo Enumeration. Con los m&eacute;todos 
+        hasMoreElements() y nextElement() y un bucle for se pueden ir imprimiendo 
+        los distintos elementos del objeto Vector.</p>
+      <h3>Clase Hashtable</h3>
+      <p>La clase java.util.Hashtable extiende Dictionary (abstract) e implementa 
+        Cloneable y Serializable.<br>
+        Una hash table es una tabla que relaciona una clave con un valor. Cualquier 
+        objeto distinto de null puede ser tanto clave como valor.<br>
+        La clase a la que pertenecen las claves debe implementar los m&eacute;todos 
+        hashCode() y equals(), con objeto de hacer b&uacute;squedas y comparaciones. 
+        El m&eacute;todo hashCode() devuelve un entero &uacute;nico y distinto 
+        para cada clave, que es siempre el mismo en una ejecuci&oacute;n del programa 
+        pero que puede cambiar de una ejecuci&oacute;n a otra. Adem&aacute;s, 
+        para dos claves que resultan iguales seg&uacute;n el m&eacute;todo equals(), 
+        el m&eacute;todo hashCode() devuelve el mismo entero. Las hash tables 
+        est&aacute;n dise&ntilde;adas para mantener una colecci&oacute;n de pares 
+        clave/valor, permitiendo insertar y realizar b&uacute;squedas de un modo 
+        muy eficiente Cada objeto de Hashtable tiene dos variables: capacity y 
+        load factor (entre 0.0 y 1.0). Cuando el n&uacute;mero de elementos excede 
+        el producto de estas variables, la Hashtable crece llamando al<br>
+        m&eacute;todo rehash(). Un load factor m&aacute;s grande apura m&aacute;s 
+        la memoria, pero ser&aacute; menos eficiente en las b&uacute;squedas. 
+        Es conveniente partir de una Hashtable suficientemente grande para no 
+        estar ampliando continuamente.<br>
+        Ejemplo de definici&oacute;n de Hashtable:<br>
+        Hashtable numeros = new Hashtable();<br>
+        numbers.put(&quot;uno&quot;, new Integer(1));<br>
+        numbers.put(&quot;dos&quot;, new Integer(2));<br>
+        numbers.put(&quot;tres&quot;, new Integer(3));<br>
+        donde se ha hecho uso del m&eacute;todo put().</p>
+      <table width="512" border="1">
+        <tr>
+          <td>M&eacute;todos</td>
+          <td>Funci&oacute;n que realizan</td>
+        </tr>
+        <tr>
+          <td>Hashtable(), Hashtable(int nElements),Hashtable(int nElements, float 
+            loadFactor)</td>
+          <td>Constructores</td>
+        </tr>
+        <tr>
+          <td>int size()</td>
+          <td>Devuelve el tama&ntilde;o de la tabla</td>
+        </tr>
+        <tr>
+          <td>boolean isEmpty()</td>
+          <td>Indica si la tabla est&aacute; vac&iacute;a</td>
+        </tr>
+        <tr>
+          <td>Enumeration keys()</td>
+          <td>Devuelve una Enumeration con las claves</td>
+        </tr>
+        <tr>
+          <td>Enumeration elements()</td>
+          <td>Devuelve una Enumeration con los valores</td>
+        </tr>
+        <tr>
+          <td>boolean contains(Object value)</td>
+          <td>Indica si hay alguna clave que se corresponde con el valor</td>
+        </tr>
+        <tr>
+          <td>boolean containsKey(Object key)</td>
+          <td>Indica si existe esa clave en la tabla</td>
+        </tr>
+        <tr>
+          <td>Object get(Object key)</td>
+          <td>Devuelve un valor dada la clave</td>
+        </tr>
+        <tr>
+          <td>void rehash()</td>
+          <td>Ampl&iacute;a la capacidad de la tabla</td>
+        </tr>
+        <tr>
+          <td>Object put(Object key, Object value)</td>
+          <td>Establece una relaci&oacute;n clave-valor</td>
+        </tr>
+        <tr>
+          <td>Object remove(Object key)</td>
+          <td>Elimina un valor por la clave</td>
+        </tr>
+        <tr>
+          <td>void clear()</td>
+          <td>Limpia la tabla</td>
+        </tr>
+        <tr>
+          <td>Object clone()</td>
+          <td>Hace una copia de la tabla</td>
+        </tr>
+        <tr>
+          <td>String toString()</td>
+          <td>Devuelve un string representando la tabla</td>
+        </tr>
+      </table>
+      <p>&nbsp;</p>
+      <h3>El Collections Framework de Java 1.2</h3>
+      <p>En la versi&oacute;n 1.2 del JDK se introdujo el Java Framework Collections 
+        o &#8220;estructura de colecciones de Java&#8221; (en adelante JCF). Se 
+        trata de un conjunto de clases e interfaces que mejoran notablemente las 
+        capacidades del lenguaje respecto a estructuras de datos. Adem&aacute;s, 
+        constituyen un excelente ejemplo de aplicaci&oacute;n de los conceptos 
+        propios de la programaci&oacute;n orientada a objetos. Dada la<br>
+        amplitud de Java en &eacute;ste y en otros aspectos se va a optar por 
+        insistir en la descripci&oacute;n general,dejando al lector la tarea de 
+        buscar las caracter&iacute;sticas concretas de los distintos m&eacute;todos 
+        en la documentaci&oacute;n de Java. En este apartado se va a utilizar 
+        una forma -m&aacute;s breve que las tablas utilizadas en otros apartados- 
+        de informar sobre los m&eacute;todos disponibles en una clase o interface.<br>
+        La Figura 4.1 muestra la jerarqu&iacute;a de interfaces de la Java Collection 
+        Framework (JCF). En letra cursiva se indican las clases que implementan 
+        las correspondientes interfaces. Por ejemplo, hay dos clases que implementan 
+        la interface Map: HashMap y Hashtable.<br>
+        Las clases vistas en los apartados anteriores son clases &#8220;hist&oacute;ricas&#8221;, 
+        es decir, clases que exist&iacute;an antes de la versi&oacute;n JDK 1.2. 
+        Dichas clases se denotan en la Figura 4.1 con la letra &#8220;h&#8221; 
+        entre par&eacute;ntesis. Aunque dichas clases se han mantenido por motivos 
+        de compatibilidad, sus m&eacute;todos no<br>
+        siguen las reglas del dise&ntilde;o general del JCF; en la medida de lo 
+        posible se recomienda utilizar las nuevas clases.En el dise&ntilde;o de 
+        la JCF las interfaces son muy importantes porque son ellas las que determinan 
+        las capacidades de las clases que las implementan. Dos clases que implementan 
+        la misma interface se pueden utilizar exactamente de la misma forma. Por 
+        ejemplo, las clases ArrayList y LinkedList disponen exactamente de los 
+        mismos m&eacute;todos y se pueden utilizar de la misma forma. La diferencia 
+        est&aacute; en la implementaci&oacute;n: mientras que ArrayList almacena 
+        los objetos en un array, la clase LinkedList los almacena en una lista 
+        vinculada. La primera ser&aacute; m&aacute;s eficiente para acceder a 
+        un elemento arbitrario, mientras que la segunda ser&aacute; m&aacute;s 
+        flexible si se desea borrar e insertar elementos.<br>
+        La Figura 4.2 muestra la jerarqu&iacute;a de clases de la JCF. En este 
+        caso, la jerarqu&iacute;a de clases es menos importante desde el punto 
+        de vista del usuario que la jerarqu&iacute;a de interfaces. En dicha figura 
+        se muestran con fondo blanco las clases abstractas, y con fondo gris claro 
+        las clases de las que se pueden crear objetos.<br>
+        Las clases Collections y Arrays son un poco especiales: no son abstract, 
+        pero no tienen constructores p&uacute;blicos con los que se puedan crear 
+        objetos. Fundamentalmente contienen m&eacute;todos<br>
+        static para realizar ciertas operaciones de utilidad: ordenar, buscar, 
+        introducir ciertas caracter&iacute;sticas<br>
+        en objetos de otras clases, etc.</p>
+      <h3>Elementos del Java Collections Framework</h3>
+      <p>Interfaces de la JCF: Constituyen el elemento central de la JCF.<br>
+        &#8226; Collection: define m&eacute;todos para tratar una colecci&oacute;n 
+        gen&eacute;rica de elementos<br>
+        &#8226; Set: colecci&oacute;n que no admite elementos repetidos<br>
+        &#8226; SortedSet: set cuyos elementos se mantienen ordenados seg&uacute;n 
+        el criterio establecido<br>
+        &#8226; List: admite elementos repetidos y mantiene un orden inicial<br>
+        &#8226; Map: conjunto de pares clave/valor, sin repetici&oacute;n de claves<br>
+        &#8226; SortedMap: map cuyos elementos se mantienen ordenados seg&uacute;n 
+        el criterio establecido Interfaces de soporte:<br>
+        &#8226; Iterator: sustituye a la interface Enumeration. Dispone de m&eacute;todos 
+        para recorrer una colecci&oacute;n y para borrar elementos.<br>
+        &#8226; ListIterator: deriva de Iterator y permite recorrer lists en ambos 
+        sentidos.<br>
+        &#8226; Comparable: declara el m&eacute;todo compareTo() que permite ordenar 
+        las distintas colecciones seg&uacute;n un orden natural (String, Date, 
+        Integer, Double, &#8230;).<br>
+        &#8226; Comparator: declara el m&eacute;todo compare() y se utiliza en 
+        lugar de Comparable cuando se desea ordenar objetos no est&aacute;ndar 
+        o sustituir a dicha interface.<br>
+        Clases de prop&oacute;sito general: Son las implementaciones de las interfaces 
+        de la JFC.<br>
+        &#8226; HashSet: Interface Set implementada mediante una hash table.<br>
+        &#8226; TreeSet: Interface SortedSet implementada mediante un &aacute;rbol 
+        binario ordenado.<br>
+        &#8226; ArrayList: Interface List implementada mediante un array.<br>
+        &#8226; LinkedList: Interface List implementada mediante una lista vinculada.<br>
+        &#8226; HashMap: Interface Map implementada mediante una hash table.<br>
+        &#8226; WeekHashMap: Interface Map implementada de modo que la memoria 
+        de los pares clave/valor pueda ser liberada cuando las claves no tengan 
+        referencia desde el exterior de la WeekHashMap.<br>
+        &#8226; TreeMap: Interface SortedMap implementada mediante un &aacute;rbol 
+        binario<br>
+        Clases Wrapper: Colecciones con caracter&iacute;sticas adicionales, como 
+        no poder ser modificadas o estar sincronizadas. No se accede a ellas mediante 
+        constructores, sino mediante m&eacute;todos &#8220;factory&#8221; de la 
+        clase Collections.<br>
+        Clases de utilidad: Son mini-implementaciones que permiten obtener sets 
+        especializados, como por ejemplo sets constantes de un s&oacute;lo elemento 
+        (singleton) o lists con n copias del mismo elemento (nCopies). Definen 
+        las constantes EMPTY_SET y MPTY_LIST. Se accede a trav&eacute;s de la 
+        clase Collections.<br>
+        Clases hist&oacute;ricas: Son las clases Vector y Hashtable presentes 
+        desde las primeras versiones de Java. En las versiones actuales, implementan 
+        respectivamente las interfaces List y Map, aunque conservan tambi&eacute;n 
+        los m&eacute;todos anteriores.<br>
+        Clases abstractas: Son las clases abstract de la Figura 4.2. Tienen total 
+        o parcialmente implementados los m&eacute;todos de la interface correspondiente. 
+        Sirven para que los usuarios deriven de ellas sus<br>
+        propias clases con un m&iacute;nimo de esfuerzo de programaci&oacute;n.<br>
+        Algoritmos: La clase Collections dispone de m&eacute;todos static para 
+        ordenar, esordenar, invertir orden, realizar b&uacute;squedas, llenar, 
+        copiar, hallar el m&iacute;nimo y hallar el m&aacute;ximo. Clase Arrays: 
+        Es una clase de utilidad introducida en el JDK 1.2 que contiene m&eacute;todos 
+        static para ordenar, llenar, realizar b&uacute;squedas y comparar los 
+        arrays cl&aacute;sicos del lenguaje. Permite tambi&eacute;n ver los arrays 
+        como lists.<br>
+        Despu&eacute;s de esta visi&oacute;n general de la Java Collections Framework, 
+        se ver&aacute;n algunos detalles de las clases e interfaces m&aacute;s 
+        importantes.</p>
+      <h3>Interface Collection</h3>
+      <p>La interface Collection es implementada por los conjuntos (sets) y las 
+        listas (lists). Esta interface declara una serie de m&eacute;todos generales 
+        utilizables con Sets y Lists. La declaraci&oacute;n o header de dichos 
+        m&eacute;todos se puede ver ejecutando el comando &gt; javap java.util.Collection 
+        en una ventana de MS-DOS. El resultado se muestra a continuaci&oacute;n:<br>
+        public interface java.util.Collection<br>
+        {<br>
+        public abstract boolean add(java.lang.Object); // opcional<br>
+        public abstract boolean addAll(java.util.Collection); // opcional<br>
+        public abstract void clear(); // opcional<br>
+        public abstract boolean contains(java.lang.Object);<br>
+        public abstract boolean containsAll(java.util.Collection);<br>
+        public abstract boolean equals(java.lang.Object);<br>
+        public abstract int hashCode();<br>
+        public abstract boolean isEmpty();<br>
+        public abstract java.util.Iterator iterator();<br>
+        public abstract boolean remove(java.lang.Object); // opcional<br>
+        public abstract boolean removeAll(java.util.Collection); // opcional<br>
+        public abstract boolean retainAll(java.util.Collection); // opcional<br>
+        public abstract int size();<br>
+        public abstract java.lang.Object toArray()[];<br>
+        public abstract java.lang.Object toArray(java.lang.Object[])[];<br>
+        }<br>
+        A partir del nombre, de los argumentos y del valor de retorno, la mayor 
+        parte de estos m&eacute;todos resultan autoexplicativos. A continuaci&oacute;n 
+        se introducen algunos comentarios sobre los aspectos que pueden resultar 
+        m&aacute;s novedosos de estos m&eacute;todos. Los detalles se pueden consultar 
+        en la documentaci&oacute;n de Java.<br>
+        Los m&eacute;todos indicados como &#8220;// opcional&#8221; (estos caracteres 
+        han sido introducidos por los autores de este manual) no est&aacute;n 
+        disponibles en algunas implementaciones, como por ejemplo en las clases 
+        que no permiten modificar sus objetos. Por supuesto, dichos m&eacute;todos 
+        deben ser definidos, pero lo que hacen al ser llamados es lanzar una UnsupportedOperationException.<br>
+        El m&eacute;todo add() trata de a&ntilde;adir un objeto a una colecci&oacute;n, 
+        pero puede que no lo consiga si la colecci&oacute;n es un set que ya tiene 
+        ese elemento. Devuelve true si el m&eacute;todo ha llegado a modificar 
+        la colecci&oacute;n. Lo mismo sucede con addAll(). El m&eacute;todo remove() 
+        elimina un &uacute;nico elemento (si lo encuentra); devuelve true si la 
+        colecci&oacute;n ha sido modificada. El m&eacute;todo iterator() devuelve 
+        una referencia Iterator que permite recorrer una colecci&oacute;n con 
+        los m&eacute;todos next() y hasNext(). Permite tambi&eacute;n borrar el 
+        elemento actual con remove().<br>
+        Los dos m&eacute;todos toArray() permiten convertir una colecci&oacute;n 
+        en un array.</p>
+      <h3>Interfaces Iterator y ListIterator</h3>
+      <p>La interface Iterator sustituye a Enumeration, utilizada en versiones 
+        anteriores del JDK. Dispone de los m&eacute;todos siguientes:Compiled 
+        from Iterator.java<br>
+        public interface java.util.Iterator<br>
+        {<br>
+        public abstract boolean hasNext();<br>
+        public abstract java.lang.Object next();<br>
+        public abstract void remove();<br>
+        }<br>
+        El m&eacute;todo remove() permite borrar el &uacute;ltimo elemento accedido 
+        con next(). Es la &uacute;nica forma segura de eliminar un elemento mientras 
+        se est&aacute; recorriendo una colecci&oacute;n.<br>
+        Los m&eacute;todos de la interface ListIterator son los siguientes:<br>
+        Compiled from ListIterator.java<br>
+        public interface java.util.ListIterator extends java.util.Iterator<br>
+        {<br>
+        public abstract void add(java.lang.Object);<br>
+        public abstract boolean hasNext();<br>
+        public abstract boolean hasPrevious();<br>
+        public abstract java.lang.Object next();<br>
+        public abstract int nextIndex();<br>
+        public abstract java.lang.Object previous();<br>
+        public abstract int previousIndex();<br>
+        public abstract void remove();<br>
+        public abstract void set(java.lang.Object);<br>
+        }<br>
+        La interface ListIterator permite recorrer una lista en ambas direcciones, 
+        y hacer algunas modificaciones mientras se recorre. Los elementos se numeran 
+        desde 0 a n-1, pero los valores v&aacute;lidos para el &iacute;ndice son 
+        de 0 a n. Puede suponerse que el &iacute;ndice i est&aacute; en la frontera 
+        entre los elementos i-1 e i: en ese caso previousIndex() devolver&iacute;a 
+        i-1 y nextIndex() devolver&iacute;a i. Si el &iacute;ndice es 0, previousIndex() 
+        devuelve &#8211;1 y si el &iacute;ndice es n nextIndex() devuelve el resultado 
+        de size().</p>
+      <h3>Interfaces Comparable y Comparator</h3>
+      <p>Estas interfaces est&aacute;n orientadas a mantener ordenadas las listas, 
+        y tambi&eacute;n los sets y maps que deben mantener un orden. Para ello 
+        se dispone de las interfaces java.lang.Comparable y java.util.Comparator 
+        (obs&eacute;rvese que pertenecen a packages diferentes).<br>
+        La interface Comparable declara el m&eacute;todo compareTo() de la siguiente 
+        forma:<br>
+        public int compareTo(Object obj) que compara su argumento impl&iacute;cito 
+        con el que se le pasa por ventana. Este m&eacute;todo devuelve un entero 
+        negativo, cero o positivo seg&uacute;n el argumento impl&iacute;cito (this) 
+        sea anterior, igual o posterior al objeto obj. Las listas de objetos de 
+        clases que implementan esta interface tienen un orden<br>
+        natural. En Java 1.2 esta interface est&aacute; implementada -entre otras- 
+        por las clases String, Character, Date, File, BigDecimal, BigInteger, 
+        Byte, Short, Integer, Long, Float y Double. T&eacute;ngase en cuenta que 
+        la implementaci&oacute;n est&aacute;ndar de estas clases no asegura un 
+        orden alfab&eacute;tico correcto con may&uacute;sculas y min&uacute;sculas, 
+        y tampoco en idiomas distintos del ingl&eacute;s.<br>
+        Si se redefine, el m&eacute;todo compareTo() debe ser programado con cuidado: 
+        es muy conveniente que sea coherente con el m&eacute;todo equals() y que 
+        cumpla la propiedad transitiva. Para m&aacute;s informaci&oacute;n, consultar 
+        la documentaci&oacute;n del JDK 1.2.<br>
+        Las listas y los arrays cuyos elementos implementan Comparable pueden 
+        ser ordenadas con los m&eacute;todos static Collections.sort() y Arrays.sort().<br>
+        La interface Comparator permite ordenar listas y colecciones cuyos objetos 
+        pertenecen a clases de tipo cualquiera. Esta interface permitir&iacute;a 
+        por ejemplo ordenar figuras geom&eacute;tricas planas por el &aacute;rea 
+        o el per&iacute;metro. Su papel es similar al de la interface Comparable, 
+        pero el usuario debe siempre proporcionar una implementaci&oacute;n de 
+        esta clase. Sus dos m&eacute;todos se declaran en la forma:</p>
+      <p>public int compare(Object o1, Object o2) public boolean equals(Object 
+        obj)<br>
+        El objetivo del m&eacute;todo equals() es comparar Comparators. El m&eacute;todo 
+        compare() devuelve un entero negativo, cero o positivo seg&uacute;n su 
+        primer argumento<br>
+        sea anterior, igual o posterior al segundo. Los objetos que implementan 
+        Comparator pueden pasarse como argumentos al m&eacute;todo Collections.sort() 
+        o a algunos constructores de las clases TreeSet y TreeMap, con la idea 
+        de que las mantengan ordenadas de acuerdo con dicho Comparator.<br>
+        Es muy importante que compare() sea compatible con el m&eacute;todo equals() 
+        de los objetos que hay que mantener ordenados. Su implementaci&oacute;n 
+        debe cumplir unas condiciones similares a las de compareTo().<br>
+        Java 1.2 dispone de clases capaces de ordenar cadenas de texto en diferentes 
+        lenguajes. Para ello se puede consultar la documentaci&oacute;n sobre 
+        las clases CollationKey, Collator y sus clases derivadas, en el package 
+        java.text.</p>
+      <h3>Sets y SortedSets</h3>
+      <p>La interface Set sirve para acceder a una colecci&oacute;n sin elementos 
+        repetidos. La colecci&oacute;n puede estar o no ordenada (con un orden 
+        natural o definido por el usuario, se entiende). La interface Set no declara 
+        ning&uacute;n m&eacute;todo adicional a los de Collection.<br>
+        Como un Set no admite elementos repetidos es importante saber cu&aacute;ndo 
+        dos objetos son considerados iguales (por ejemplo, el usuario puede o 
+        no desear que las palabras Mesa y mesa sean consideradas iguales). Para 
+        ello se dispone de los m&eacute;todos equals() y hashcode(), que el usuario 
+        puede redefinir si lo desea.<br>
+        Utilizando los m&eacute;todos de Collection, los Sets permiten realizar 
+        operaciones algebraicas de uni&oacute;n, intersecci&oacute;n y diferencia. 
+        Por ejemplo, s1.containsAll(s2) permite saber si s2 est&aacute; contenido 
+        en s1; s1.addAll(s2) permite convertir s1 en la uni&oacute;n de los dos 
+        conjuntos; s1.retainAll(s2) permite convertir s1 en la intersecci&oacute;n 
+        de s1 y s2; finalmente, s1.removeAll(s2) convierte s1 en la diferencia 
+        entre s1 y s2.<br>
+        La interface SortedSet extiende la interface Set y a&ntilde;ade los siguientes 
+        m&eacute;todos:<br>
+        Compiled from SortedSet.java<br>
+        public interface java.util.SortedSet extends java.util.Set<br>
+        {<br>
+        public abstract java.util.Comparator comparator();<br>
+        public abstract java.lang.Object first();<br>
+        public abstract java.util.SortedSet headSet(java.lang.Object);<br>
+        public abstract java.lang.Object last();<br>
+        public abstract java.util.SortedSet subSet(java.lang.Object, java.lang.Object);<br>
+        public abstract java.util.SortedSet tailSet(java.lang.Object);<br>
+        }<br>
+        que est&aacute;n orientados a trabajar con el &#8220;orden&#8221;. El 
+        m&eacute;todo comparator() permite obtener el objeto pasado al constructor 
+        para establecer el orden. Si se ha utilizado el orden natural definido 
+        por la interface Comparable, este m&eacute;todo devuelve null. Los m&eacute;todos 
+        first() y last() devuelven el primer y &uacute;ltimo elemento del conjunto. 
+        Los m&eacute;todos headSet(), subSet() y tailSet() sirven para obtener 
+        subconjuntos<br>
+        al principio, en medio y al final del conjunto original (los dos primeros 
+        no incluyen el l&iacute;mite superior especificado).<br>
+        Existes dos implementaciones de conjuntos: la clase HashSet implementa 
+        la interface Set, mientras que la clase TreeSet implementa SortedSet. 
+        La primera est&aacute; basada en una hash table y la segunda en un TreeMap.</p>
+      <p>Los elementos de un HashSet no mantienen el orden natural, ni el orden 
+        de introducci&oacute;n. Los<br>
+        elementos de un TreeSet mantienen el orden natural o el especificado por 
+        la interface Comparator.<br>
+        Ambas clases definen constructores que admiten como argumento un objeto 
+        Collection, lo cual<br>
+        permite convertir un HashSet en un TreeSet y viceversa.</p>
+      <h3>Listas</h3>
+      <p>La interface List define m&eacute;todos para operar con colecciones ordenadas 
+        y que pueden tener<br>
+        elementos repetidos. Por ello, dicha interface declara m&eacute;todos 
+        adicionales que tienen que ver con el<br>
+        orden y con el acceso a elementos o rangos de elementos. Adem&aacute;s 
+        de los m&eacute;todos de Collection, la<br>
+        interface List declara los m&eacute;todos siguientes:<br>
+        Compiled from List.java<br>
+        public interface java.util.List extends java.util.Collection<br>
+        {<br>
+        public abstract void add(int, java.lang.Object);<br>
+        public abstract boolean addAll(int, java.util.Collection);<br>
+        public abstract java.lang.Object get(int);<br>
+        public abstract int indexOf(java.lang.Object);<br>
+        public abstract int lastIndexOf(java.lang.Object);<br>
+        public abstract java.util.ListIterator listIterator();<br>
+        public abstract java.util.ListIterator listIterator(int);<br>
+        public abstract java.lang.Object remove(int);<br>
+        public abstract java.lang.Object set(int, java.lang.Object);<br>
+        public abstract java.util.List subList(int, int);<br>
+        }<br>
+        Los nuevos m&eacute;todos add() y addAll() tienen un argumento adicional 
+        para insertar elementos<br>
+        en una posici&oacute;n determinada, desplazando el elemento que estaba 
+        en esa posici&oacute;n y los siguientes.<br>
+        Los m&eacute;todos get() y set() permiten obtener y cambiar el elemento 
+        en una posici&oacute;n dada. Los<br>
+        m&eacute;todos indexOf() y lastIndexOf() permiten saber la posici&oacute;n 
+        de la primera o la &uacute;ltima vez que un<br>
+        elemento aparece en la lista; si el elemento no se encuentra se devuelve 
+        &#8211;1.<br>
+        El m&eacute;todo subList(int fromIndex, toIndex) devuelve una &#8220;vista&#8221; 
+        de la lista, desde el elemento<br>
+        fromIndex inclusive hasta el toIndex exclusive. Un cambio en esta &#8220;vista&#8221; 
+        se refleja en la lista<br>
+        original, aunque no conviene hacer cambios simult&aacute;neamente en ambas. 
+        Lo mejor es eliminar la<br>
+        &#8220;vista&#8221; cuando ya no se necesita.<br>
+        Existen dos implementaciones de la interface List, que son las clases 
+        ArrayList y LinkedList.<br>
+        La diferencia est&aacute; en que la primera almacena los elementos de 
+        la colecci&oacute;n en un array de Objects,<br>
+        mientras que la segunda los almacena en una lista vinculada. Los arrays 
+        proporcionan una forma de<br>
+        acceder a los elementos mucho m&aacute;s eficiente que las listas vinculadas. 
+        Sin embargo tienen<br>
+        dificultades para crecer (hay que reservar memoria nueva, copiar los elementos 
+        del array antiguo y<br>
+        liberar la memoria) y para insertar y/o borrar elementos (hay que desplazar 
+        en un sentido u en otro<br>
+        los elementos que est&aacute;n detr&aacute;s del elemento borrado o insertado). 
+        Las listas vinculadas s&oacute;lo<br>
+        permiten acceso secuencial, pero tienen una gran flexibilidad para crecer, 
+        para borrar y para insertar<br>
+        elementos. El optar por una implementaci&oacute;n u otra depende del caso 
+        concreto de que se trate.</p>
+      <h3>Maps y SortedMaps</h3>
+      <p>Un Map es una estructura de datos agrupados en parejas clave/valor. Pueden 
+        ser considerados como<br>
+        una tabla de dos columnas. La clave debe ser &uacute;nica y se utiliza 
+        para acceder al valor.<br>
+        Aunque la interface Map no deriva de Collection, es posible ver los Maps 
+        como colecciones<br>
+        de claves, de valores o de parejas clave/valor. A continuaci&oacute;n 
+        se muestran los m&eacute;todos de la<br>
+        interface Map (comando &gt; javap java.util.Map):<br>
+        Compiled from Map.javapublic interface java.util.Map<br>
+        {<br>
+        public abstract void clear();<br>
+        public abstract boolean containsKey(java.lang.Object);<br>
+        public abstract boolean containsValue(java.lang.Object);<br>
+        public abstract java.util.Set entrySet();<br>
+        public abstract boolean equals(java.lang.Object);<br>
+        public abstract java.lang.Object get(java.lang.Object);<br>
+        public abstract int hashCode();<br>
+        public abstract boolean isEmpty();<br>
+        public abstract java.util.Set keySet();<br>
+        public abstract java.lang.Object put(java.lang.Object, java.lang.Object);<br>
+        public abstract void putAll(java.util.Map);<br>
+        public abstract java.lang.Object remove(java.lang.Object);<br>
+        public abstract int size();<br>
+        public abstract java.util.Collection values();<br>
+        public static interface java.util.Map.Entry<br>
+        {<br>
+        public abstract boolean equals(java.lang.Object);<br>
+        public abstract java.lang.Object getKey();<br>
+        public abstract java.lang.Object getValue();<br>
+        public abstract int hashCode();<br>
+        public abstract java.lang.Object setValue(java.lang.Object);<br>
+        }<br>
+        }<br>
+        Muchos de estos m&eacute;todos tienen un significado evidente, pero otros 
+        no tanto. El m&eacute;todo<br>
+        entrySet() devuelve una &#8220;vista&#8221; del Map como Set. Los elementos 
+        de este Set son referencias de la<br>
+        interface Map.Entry, que es una interface interna de Map. Esta &#8220;vista&#8221; 
+        del Map como Set permite<br>
+        modificar y eliminar elementos del Map, pero no a&ntilde;adir nuevos elementos.<br>
+        El m&eacute;todo get(key) permite obtener el valor a partir de la clave. 
+        El m&eacute;todo keySet() devuelve<br>
+        una &#8220;vista&#8221; de las claves como Set. El m&eacute;todo values() 
+        devuelve una &#8220;vista&#8221; de los valores del Map<br>
+        como Collection (porque puede haber elementos repetidos). El m&eacute;todo 
+        put() permite a&ntilde;adir una<br>
+        pareja clave/valor, mientras que putAll() vuelca todos los elementos de 
+        un Map en otro Map (los<br>
+        pares con clave nueva se a&ntilde;aden; en los pares con clave ya existente 
+        los valores nuevos sustituyen a<br>
+        los antiguos). El m&eacute;todo remove() elimina una pareja clave/valor 
+        a partir de la clave.<br>
+        La interface SortedMap a&ntilde;ade los siguientes m&eacute;todos, similares 
+        a los de SortedSet:<br>
+        Compiled from SortedMap.java<br>
+        public interface java.util.SortedMap extends java.util.Map<br>
+        {<br>
+        public abstract java.util.Comparator comparator();<br>
+        public abstract java.lang.Object firstKey();<br>
+        public abstract java.util.SortedMap headMap(java.lang.Object);<br>
+        public abstract java.lang.Object lastKey();<br>
+        public abstract java.util.SortedMap subMap(java.lang.Object, java.lang.Object);<br>
+        public abstract java.util.SortedMap tailMap(java.lang.Object);<br>
+        }<br>
+        La clase HashMap implementa la interface Map y est&aacute; basada en una 
+        hash table, mientras que<br>
+        TreeMap implementa SortedMap y est&aacute; basada en un &aacute;rbol binario.</p>
+      <h3>Clases Collections y Arrays</h3>
+      <p>La clase Collections (no confundir con la interface Collection, en singular) 
+        es una clase que define<br>
+        un buen n&uacute;mero de m&eacute;todos static con diversas finalidades. 
+        No se detallan o enumeran aqu&iacute; porque<br>
+        exceden del espacio disponible. Los m&aacute;s interesantes son los siguientes:<br>
+        &#8226; M&eacute;todos que definen algoritmos:<br>
+        Ordenaci&oacute;n mediante el m&eacute;todo mergesort<br>
+        public static void sort(java.util.List);<br>
+        public static void sort(java.util.List, java.util.Comparator);Eliminaci&oacute;n 
+        del orden de modo aleatorio<br>
+        public static void shuffle(java.util.List);<br>
+        public static void shuffle(java.util.List, java.util.Random);<br>
+        Inversi&oacute;n del orden establecido<br>
+        public static void reverse(java.util.List);<br>
+        B&uacute;squeda en una lista<br>
+        public static int binarySearch(java.util.List, java.lang.Object);<br>
+        public static int binarySearch(java.util.List, java.lang.Object,<br>
+        java.util.Comparator);<br>
+        Copiar una lista o reemplazar todos los elementos con el elemento especificado<br>
+        public static void copy(java.util.List, java.util.List);<br>
+        public static void fill(java.util.List, java.lang.Object);<br>
+        C&aacute;lculo de m&aacute;ximos y m&iacute;nimos<br>
+        public static java.lang.Object max(java.util.Collection);<br>
+        public static java.lang.Object max(java.util.Collection, java.util.Comparator);<br>
+        public static java.lang.Object min(java.util.Collection);<br>
+        public static java.lang.Object min(java.util.Collection, java.util.Comparator);<br>
+        &#8226; M&eacute;todos de utilidad<br>
+        Set inmutable de un &uacute;nico eleento<br>
+        public static java.util.Set singleton(java.lang.Object);<br>
+        Lista inmutable con n copias de un objeto<br>
+        public static java.util.List nCopies(int, java.lang.Object);<br>
+        Constantes para representar el conjunto y la lista vac&iacute;a<br>
+        public static final java.util.Set EMPTY_SET;<br>
+        public static final java.util.List EMPTY_LIST;<br>
+        Adem&aacute;s, la clase Collections dispone de dos conjuntos de m&eacute;todos 
+        &#8220;factory&#8221; que pueden ser<br>
+        utilizados para convertir objetos de distintas colecciones en objetos 
+        &#8220;read only&#8221; y para convertir<br>
+        distintas colecciones en objetos &#8220;synchronized&#8221; (por defecto 
+        las clases vistas anteriormente no est&aacute;n<br>
+        sincronizadas, lo cual quiere decir que se puede acceder a la colecci&oacute;n 
+        desde distintas threads sin<br>
+        que se produzcan problemas. Los m&eacute;todos correspondientes son los 
+        siguientes:<br>
+        public static java.util.Collection synchronizedCollection(java.util.Collection);<br>
+        public static java.util.List synchronizedList(java.util.List);<br>
+        public static java.util.Map synchronizedMap(java.util.Map);<br>
+        public static java.util.Set synchronizedSet(java.util.Set);<br>
+        public static java.util.SortedMap synchronizedSortedMap(java.util.SortedMap);<br>
+        public static java.util.SortedSet synchronizedSortedSet(java.util.SortedSet);<br>
+        public static java.util.Collection unmodifiableCollection(java.util.Collection);<br>
+        public static java.util.List unmodifiableList(java.util.List);<br>
+        public static java.util.Map unmodifiableMap(java.util.Map);<br>
+        public static java.util.Set unmodifiableSet(java.util.Set);<br>
+        public static java.util.SortedMap unmodifiableSortedMap(java.util.SortedMap);<br>
+        public static java.util.SortedSet unmodifiableSortedSet(java.util.SortedSet);<br>
+        Estos m&eacute;todo se utilizan de una forma muy sencilla: se les pasa 
+        como argumento una<br>
+        referencia a un objeto que no cumple la caracter&iacute;stica deseada 
+        y se obtiene como valor de retorno<br>
+        una referencia a un objeto que s&iacute; la cumple.</p>
+      <h3>Desarrollo de clases por el usuario: clases abstract</h3>
+      <p>Las clases abstract indicadas en la Figura 4.2, en la p&aacute;gina 69, 
+        pueden servir como base para que los<br>
+        programadores con necesidades no cubiertas por las clases vistas anteriormente 
+        desarrollen sus<br>
+        propias clases.<h3>
+        Interfaces Cloneable y Serializable</h3>
+        Las clases HashSet, TreeSet, ArrayList, LinkedList, HashMap y TreeMap 
+        (al igual que Vector y<br>
+        Hashtable) implementan las interfaces Cloneable y Serializable, lo cual 
+        quiere decir que escorrecto sacar copias bit a bit de sus objetos con 
+        el m&eacute;todo Object.clone(), y que se pueden<br>
+        convertir en cadenas o flujos (streams) de caracteres.<br>
+        Una de las ventajas de implementar la interface Serializable es que los 
+        objetos de estas clases<br>
+        pueden ser impresos con los m&eacute;todos System.Out.print() y System.Out.println().</p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

@@ -1,0 +1,459 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Matrices Visual Basic</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Matrices en Visual Basic, Manual Visual Basic,Tutorial Visual Basic, Ejemplos Visual Basic">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="2"> 
+      <h2>Matrices</h2></td>
+  </tr>
+  <tr> 
+    <td height="6102" colspan="2"> 
+      <table width="75%" >
+        <tr> 
+          <td><h3>Contenidos</h3></td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td>- <a href="vb04.htm#matriz">Definici&oacute;n de matriz</a><br>
+              - <a href="vb04.htm#declaraciones">Declaraci&oacute;n de una matriz</a><br>
+              -<a href="vb04.htm#sentencia"> Sentencia 
+              Dim</a><br>
+              - <a href="vb04.htm#cajatexto">Caja de texto multil&iacute;nea</a> 
+              <br>
+              - <a href="vb04.htm#trabajar">Trabajar con el texto de la caja de 
+              texto Multil&iacute;nea</a><br>
+              - <a href="vb04.htm#enterceptando">Interceptando la tecla pulsada</a><br>
+              - <a href="vb04.htm#estaticas">Matrices est&aacute;ticas</a><br>
+              - <a href="vb04.htm#dinamicas">Matrices din&aacute;micas</a><br>
+              - <a href="vb04.htm#erase">Sentencia Erase</a><br>
+              - <a href="vb04.htm#option">Sentencia Option Base</a><br>
+              - <a href="vb04.htm#copiarmatriza">Copiar una matriz en otra</a><br>
+            </td>
+        </tr>
+      </table>
+      <h3> Definici&oacute;n de matriz<a name="matriz"></a></h3> 
+      <p >Una matriz es un conjunto de elementos contiguos, 
+        todos del mismo tipo, que comparten un nombre com&uacute;n, a los que 
+        se puede acceder por la posici&oacute;n (&iacute;ndice) que ocupa cada 
+        uno de ellos dentro de la matriz.. Esta disposici&oacute;n permitir&aacute; 
+        escribir c&oacute;digo m&aacute;s peque&ntilde;o y simple, ya que se pueden 
+        establecer bucles mediante el n&uacute;mero del &iacute;ndice. Cada elemento 
+        es una variable que puede contener un dato num&eacute;rico o una cadena 
+        de caracteres, dependiendo esto del tipo de matriz. La representaci&oacute;n 
+        de las matrices se hace mediante variables suscritas o de sub&iacute;ndices 
+        y pueden tener una o varias dimensiones. A las matrices de una dimensi&oacute;n 
+        se les llama tambi&eacute;n listas y a las de dos dimensiones tablas. 
+        En genera, se utiliza la denominaci&oacute;n de matriz (array en ingl&eacute;s). 
+      <p >Desde el punto de vista matem&aacute;tico, en m&aacute;s 
+        de una ocasi&oacute;n necesitaremos representar variables como: A1 
+        A2 A3 ... An 
+      <p >En general, se puede elegir como rango de valores 
+        para cada una de las dimensiones el que se desee. 
+      <p >Una matriz de dos dimensiones se representa con una 
+        variable con dos sub&iacute;ndices (filas, columnas); una matriz de tres 
+        dimensiones se representa con una variable con tres sub&iacute;ndices, 
+        etc. El m&aacute;ximo n&uacute;mero de dimensiones para una matriz en 
+        Visual Basic es 60, aunque las m&aacute;s utilizadas son las de una, dos 
+        y tres dimensiones. Los &iacute;ndices de las matrices deben estar en 
+        el rango de -2 a la 31 a 2 a la 31 en versiones de 32 bits. 
+      <p >Para formar el nombre de una matriz y definir si 
+        &eacute;sta es num&eacute;rica o de caracteres, se siguen las mismas reglas 
+        que para las variables. Por ejemplo:<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;Dim a(24) as integer 'matriz entera unidimensional 
+        de 24 elementos<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;Dim c(12, 5) as string 'matriz de caracteres de 
+        2 dimensiones<br>
+      <p >En Visual Basic hay dos tipos de matrices: matrices 
+        est&aacute;ticas que tiene siempre el mismo tama&ntilde;o y matrices din&aacute;micas 
+        cuyo tama&ntilde;o cambia en tiempo de ejecuci&oacute;n. Ambas ser&aacute;n 
+        estudiadas con con detalle en este mismo cap&iacute;tulo. 
+      <h3>Declaraci&oacute;n de una matriz 
+        <a name="declaraciones"></a> </h3>
+      <p >La declaraci&oacute;n de una matriz especifica el 
+        nombre de la matriz, el n&uacute;mero de elementos de la lista y el tipo 
+        de &eacute;stos. En funci&oacute;n del n&uacute;mero de dimensiones, distinguimos 
+        entre matrices unidimensionales y multidimensionales. 
+      <h3>Sentencia Dim<a name="sentencia"></a></h3>
+      <p >La sentencia Dim, adem&aacute;s de para 
+        declarar variables, se puede utilizar tambi&eacute;n para declarar matrices. 
+        Su sintaxis es: <br>
+      <blockquote >Dim variable[(dims)][As tipo][variable[(dims)][as 
+        tipo]]...</blockquote>
+      <br>
+       variable es un identificador que nombra la matriz.<br></p>
+       dims es una de expresiones num&eacute;ricas, separadas por comas 
+      y que definen las dimensiones de una matriz. Esta lista puedeser de la forma 
+      siguiente: 
+      <blockquote> [inferior to]superior[,[inferior to]superior]...</blockquote>
+      As tipo define el tipo de variable. Puede ser un tipo simple(integer, log, 
+      single, double, string, etc.) o un tipo definido por el usuario.<br>
+      <br>
+      Por ejemplo, la siguiente l&iacute;nea de c&oacute;digo define una matriz 
+      unidimensional llamada temp con sub&iacute;ndices definidos en el rango 
+      de 0 a 59. Esto es, los elementos de la matriz son: temp(0), temp(1), ..., 
+      temp(59). El limite inferior predeterminado es 0.  <blockquote >Dim 
+        temp(1 to 60) as string * 40</blockquote>
+       La sentencia siguiente declara una matriz bidimensional 
+      de 10 por 10 elementos de tipo Double:  <blockquote >Dim 
+        ma(9,9) as double</blockquote>
+      <br>
+      Se puede declarar una o ambas dimensiones con l&iacute;mites inferiores 
+      expl&iacute;citos:  <blockquote >Dim mc(3, 
+        -4 to 5, 1 to 12)</blockquote>
+      <p ><br>
+        La declaraci&oacute;n anterior crea una matriz que tiene tres dimensiones. 
+        El tipo de cada elemento es Variant. El n&uacute;mero total de elementos 
+        es el producto de los tama&ntilde;os de las tres dimensiones(4*10*12); 
+        es decir, 480.</p>
+      <p >El espacio de almacenamiento total que necesita una 
+        matriz depende de su n&uacute;mero de elementos y del tipo de cada elemento. 
+        Por lo tanto, hay que utilizar las matrices multidimensionales con sumo 
+        cuidado. Tambi&eacute;n hay que tener especial cuidado on las matrices 
+        de tipo Variant, ya que este tipo de datos requiere m&aacute;s espacio 
+        de almacenamiento que los otros tipos de datos.</p>
+      <p >Cuando se ejecuta la sentencia dim, se asigna a todos 
+        los elementos de las matrices num&eacute;ricas el valor 0, y a los elementos 
+        de las matrices de caracteres uma cadena de longitud (&quot;&quot;) si 
+        se trata de cadenas de longitud variable, o bien se rellenan los nulos(ANSI 
+        0) si se trata de cadenas de longitud fija.</p>
+      <p >La propiedad ToolTipText de un control almacena una 
+        descripci&oacute;n corta acerca de la funci&oacute;n que desempe&ntilde;a 
+        dicho control.</p>
+      <h3>Caja de texto multil&iacute;nea<a name="cajatexto"></a></h3>
+      <p >El aspecto y el comportammiento de una caja de texto 
+        est&aacute; muy influenciado por dos propiedades, Multiline y ScrollBars, 
+        las cuales s&oacute;lo pueden establecerse durante el dise&ntilde;o. La 
+        propiedad ScrollBars de una caja de texto no tiene que confundirse con 
+        el control scroll bar (barra de desplazamiento) que veremos m&aacute;s 
+        adelante.</p>
+      <p >Cuando la propiedad MultiLine de una caja de texto 
+        tiene un valor True, &eacute;sta permite escribir varias l&iacute;neas 
+        de texto. Por omisi&oacute;n, esta propiedad tiene el valor False, lo 
+        que indica que la caja de texto s&oacute;lo puede contener una l&iacute;nea.</p>
+      <p >As&iacute; mismo, la propiedad scrollBars permite 
+        dotar a la caja de texto con barras de texto horizontales o verticales. 
+        Por omisi&oacute;n esta propiedad tiene la propiedad un valor 0, lo cual 
+        indica que no tiene barras de desplazamiento. Un valor 1 a&ntilde;ade 
+        a la caja de texto solamente la barra de texto horizontal, un valor 2 
+        a&ntilde;ade a la caja de texto solamente la barra de desplazamiento vertical 
+        y un valor 3 a&ntilde;ade ambas barras de desplazamiento.</p>
+      <p >Guarde la aplicaci&oacute;n con el nombre matriz1c 
+        y ejec&uacute;tela. Pruebe a escribir texto, act&uacute;e bobre las barras 
+        de desplazamiento, modifique el texto, inserte texto y seleccione, borre 
+        y mueva bloques de texto. Como podr&aacute; comprobar, todas estas operaciones 
+        est&aacute;n impl&iacute;citas sin escribir nada de c&oacute;digo.</p>
+      <p >Si en una caja de texto multil&iacute;nea no hay 
+        una barra de desplazamiento horizontal y una l&iacute;nea de texto alcanza 
+        el extremo derecho de la caja, &eacute;sta contin&uacute;a autom&aacute;ticamente 
+        en la siguiente l&iacute;nea.</p>
+      <p >Cuando por software asigne texto a una caja de texto 
+        y necesite introducir un salto de l&iacute;nea, proceda como se indica 
+        a continuaci&oacute;n. Por ejemplo, el procedimiento Form_Load que se 
+        escriba a continuaci&oacute;n hace que se visualicen en la caja dos l&iacute;neas 
+        de texto, &quot;l&iacute;nea 01&quot; y &quot;l&iacute;nea 02&quot;.</p>
+      <p >&nbsp;&nbsp;&nbsp;Private Sub Form_Load()<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Text1.Text=&quot;l&iacute;nea 01&quot; 
+        &amp; vbCrLf &amp; &quot;l&iacute;nea 02&quot;<br>
+        &nbsp;&nbsp;&nbsp;End Sub</p>
+      <h3>Trabajar con el texto de la caja de texto 
+        Multil&iacute;nea<a name="trabajar"></a></h3>
+      <p >Como hemos dicho, Visual Basic dota autom&aacute;ticamente 
+        con capacidad de selecci&oacute;n a las cajas de texto. Puede seleccionar 
+        texto utilizando el rat&oacute;n o el teclado. Con el rat&oacute;n apunte 
+        a al comienzo del texto a seleccionar y arrastre con el boton izquierdo 
+        del rat&oacute;n pulsando hasta haber seleccionado todo el texto; con 
+        el teclado, sit&uacute;e el punto de inserci&oacute;n donde desea iniciar 
+        la selecci&oacute;n y mantenimiento pulsada la tecla May&uacute;s(May&uacute;scula) 
+        desplace el punto de inserci&oacute;n utilizando las teclas de desplazamiento.</p>
+      <p >Adem&aacute;s de la capacidad de selecci&oacute;n, 
+        las cajas de texto tienen una serie de propiedades que permiten trabajar 
+        con el texto seleccionado. Estas propiedades son SelStart, SelLength 
+        y SelText.</p>
+      <p >La propiedad SelStart es un entero (Long) que especifica 
+        la posici&oacute;n de comienzo del bloque de texto seleccionado. Si no 
+        hay texto seleccionado, entonces esta propiedad hace referencia al punto 
+        de inserci&oacute;n (cursor intermitente que marca la posici&oacute;n 
+        de escritura). Un valor cero especifica la posici&oacute;n justo antes 
+        del primer car&aacute;cter de la caja de texto, y un valor igual a la 
+        longitud de texto especifica la posici&oacute;n justo despu&eacute;s del 
+        &uacute;ltimo car&aacute;cter de la caja de texto. Por ejemplo:<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;Text1.SelStart=10<br>
+        <br>
+        fija el punto de inserci&oacute;n en la posici&oacute;n 10 de la caja 
+        Text1 y <br>
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;pos = Text1.SelStart<br>
+        <br>
+        devuelve la posici&oacute;n del punto de inserci&oacute;n.</p>
+      <p >La propiedad SelLength es un entero (Long) que especifica 
+        el n&uacute;mero de caracteers seleccionados. Por ejemplo: <br>
+        &nbsp;&nbsp;&nbsp;Text1.SelLength=5 <br>
+        <br>
+        selecciona 5 caracteres a partir del punto de inserci&oacute;n en la caja 
+        Text1 y<br>
+        <br>
+        &nbsp;&nbsp;&nbsp;n = Text1.SelLength<br>
+        <br>
+        devuelve el n&uacute;mero de caracteres seleccionados.</p>
+      <p >La propiedad SelStart devuelve o establece una cadena 
+        de caracteres con el texto actualmete seleccionados. Si no hay texto seleccionado, 
+        su valor es una cadena de longitud cero. El ejemplo siguiente, muestra 
+        una forma r&aacute;pida de a&ntilde;adir texto a una caja de texto multil&iacute;nea 
+        sin necesidad de escribir el contenido de caja:<br>
+        <br>
+        &nbsp;&nbsp;&nbsp;Text1.SelStart=Len(Text1) ' situarse al final<br>
+        &nbsp;&nbsp;&nbsp;Text1.SelText = NuevoTexto ' a&ntilde;adir texto</p>
+      <h3>Interceptando la tecla pulsada<a name="enterceptando"></a></h3>
+      <p >Anteriormente vimos que cuando asignamos los contenidos 
+        de las cajas de texto &Iacute;ndice y ValorElemento a variables num&eacute;ricas, 
+        Visual Basic convierte autom&aacute;ticamente dichos contenidos en valores 
+        num&eacute;ricos, suponiendo l&oacute;gicamente que los contenidos se 
+        correspondan con n&uacute;meros.Pero &iquest;qu&eacute; ocurre si el usuario 
+        introduce los caracteres que no pertenece a un valor num&eacute;rico? 
+        Entonces se obtendr&iacute;a un error. Para evitarlo no queda otra soluci&oacute;n 
+        que interceptar la tecla pulsada y desecharla en el caso de que el car&aacute;cter 
+        correspondiente no sea adecuado.</p>
+      <p >Cada vez que el usuario pulsa una tecla, ocurren 
+        tres eventos sobre el objeto actualmente seleccionado (objeto sobre el 
+        que est&aacute; el punto de inserci&oacute;n): KeyDown, KeyPress y 
+        KeyUp. El evento KeyPress se genera solamente cuando se introduce 
+        un car&aacute;cter ASCII. Esta definici&oacute;n excluye teclas especiales, 
+        como teclas de funci&oacute;n (F1 a F12), teclas de desplazamiento del 
+        cursor o las teclas de edici&oacute;n y retroceso.</p>
+      <p >El juego de caracteres ASCII incluye un subconjunto 
+        del conjunto de caracteres ANSI con el que trabajaVisual Basic. Los caracteres 
+        ANSII incluyen todos los caracteres imprimibles, las combinaciones Ctrl+(A-Z) 
+        y otros caracteres est&aacute;ndar, como Entrar (ASCII 13) y BackSpace 
+        (ASCII 8- retroceso). Para interceptar cualquier otra tecla o combinaci&oacute;n 
+        de teclas que no produzcan un c&oacute;digo ASCII, se utilizar&aacute;n 
+        los eventos KeyDown y KeyUp.</p>
+      <p >Un procedimiento conducido por el evento KeyPress 
+        utiliza el argumento KeyAscii, que contiene el valor ASCII del car&aacute;cter 
+        imprimible.Este valor puede ser convertido a un car&aacute;cter utilizando 
+        la funci&oacute;n Chr y puede ser comparado utilizando los operadores 
+        de relaci&oacute;n (=,&lt;,&gt;&lt;=,&gt;= y &lt;&gt;).</p>
+      <p >Otras funciones relacionadas con caracteres son: 
+        Asc(car), que devuelve ell valor ASCII del car&aacute;cter car,y UCase(car), 
+        que convierte el car&aacute;cter car a may&uacute;sculas. Por ejemplo, 
+        el siguiente procedimiento convierte a may&uacute;sculas el car&aacute;cter 
+        tecleado sobre el objeto Text1.<br>
+        &nbsp;&nbsp;&nbsp;Private Sub Text1_KeyPress(KeyAscii as integer)<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;Dim car as string *1 ' cadena de un solo caracter<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;car = Chr(KeyAscii) ' convierte a caracter<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;car = UCase(car) ' convierte a mayusculas<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;KeyAscii = Asc(car)<br>
+        &nbsp;&nbsp;&nbsp;End Sub</p>
+      <p >El siguiente ejemplo demuestra como cancelar un car&aacute;cter 
+        si no esta dentro del rango permitido. Este ejemplo impide a la caja de 
+        texto Text1 recibir cualquier car&aacute;cter que no sea un d&iacute;gito:<br>
+        Private Sub Text1_KeyPress(KeyAscii as integer)<br>
+        &nbsp;&nbsp;Dim car as string *1 ' cadena de un solo caracter<br>
+        &nbsp;&nbsp;car = Chr(KeyAscii) ' convierte a caracter<br>
+        &nbsp;&nbsp;if car &lt;&quot;0&quot;or car &gt;&quot;9&quot; then ' si 
+        se encuentra entre 0 y 9<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;KeyAscii = 0 ' cancela caracter<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;Beep&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'suena 
+        un beep<br>
+        &nbsp;&nbsp;End If<br>
+        End Sub<br>
+        End Sub <br>
+        Cambiar KeyAscii a 0 acncela la pulsaci&oacute;n de la tecla, de forma 
+        que el objeto, en este caso Text1, no recibe ning&uacute;n car&aacute;cter.</p>
+      <p >En ocasiones, pueden ser &uacute;til responder a 
+        estos eventos desde un procedimiento del formulario. Para ello es necesario 
+        que que dicho formulario reciba los eventos antes de que lo reciban los 
+        controles del mismo. Esto se consigue poniendo su propiedad KeyPreview 
+        a True.</p>
+      <h3>Matrices est&aacute;ticas<a name="estaticas"></a></h3>
+      <p >Para declarar una matriz est&aacute;tica (matriz 
+        con un n&uacute;mero fijo de elementos), Visual Basic hace tres consideraciones 
+        importantes: 
+      <blockquote>- Para declarar una matriz global, h&aacute;galo en la secci&oacute;n 
+        de declaraciones de un m&oacute;dulo utilizando la sentencia p&uacute;blic.<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Public temp(59) as integer<br>
+        - Para declarar una matriz a nivel de m&oacute;dulo, h&aacute;galo en 
+        la secci&oacute;n declaraciones del m&oacute;dulo utilizando la sentencia 
+        Private o Dim.<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Private temp(59) as integer<br>
+        - Para declarar una matriz local a un procedimiento, utilice la sentencia 
+        Dim o Static dentro del propio procedimiento.<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dim temp(59) as integer<br>
+      </blockquote>
+      <p>A diferencia de otras versiones de Basic, Visual Basic no permite declarar 
+        implicitamente una matriz.Una matriz tiene que ser declarada explicitamente, 
+        y los &iacute;ndices de la mismos deben estar en el rango -2 a la 31 a 
+        2 a la 31. A continuaci&oacute;n observaremos algunos ejemplos: <br>
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dim Matriz_A(19) as string<br>
+        <br>
+        Este ejemplo declara una matriz de una dimensi&oacute;n, Matriz_A, con 
+        veinte elementos, Matriz_A(0), Matriz_A(1),...,Matriz_A(19), cada uno 
+        de los cuales permite almacenar una cadena de caracteres de longitud variable.<br>
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Dim Matriz_B(3, 1 to 6) as integer<br>
+        <br>
+        Este ejemplo declara una matriz de dos dimensiones, Matriz_B, con 4*6 
+        elementos, Matriz_B(0,1) ,..., Matriz_B(3,6) de tipo entero.<br>
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Static Matriz_C(1 to 5 to 1 to 
+        5) as integer<br>
+        <br>
+        Este ejemplo declara una matriz est&aacute;tica (Static) de dos dimensiones, 
+        Matriz_C, con 5*5 elementos, Matriz_C (1,1),..., Matriz_C(5,5), de tipo 
+        entero.<br>
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;Public Matriz_D(1 to 12) as string * 60<br>
+        <br>
+        Este ejemplo declara una dimensi&oacute;n, Matriz_D,, con doce elmentos, 
+        Matriz_D(1) ,..., Matriz_D(12)cada uno de los cuale s permite almacenar 
+        una cadena de caracteres de longitud fija (60 caracteres).<br>
+        <h3>
+        Matrices din&aacute;micas<a name="dinamicas"></a></h3>
+      <p>Cuando las dimensiones de una matriz no son siempre las mismas, la mejor 
+        forma de especificarlas es mediante variables. Una matriz declarada de 
+        esta forma es una matriz din&aacute;mica. El espacio necesario para una 
+        matriz est&aacute;tica se asigna al iniciarse la aplicaci&oacute;n y permanecer&aacute; 
+        fijo. En cambio, el espacio para una matriz din&aacute;mica ser&aacute; 
+        asignado durante la ejecuci&oacute;n de la aplicaci&oacute;n. Una matriz 
+        din&aacute;mica puede ser redimensionada en cualquier momento durante 
+        la ejecuci&oacute;n. Para crear una matriz din&aacute;mica: 
+      <blockquote> 
+        <p>- Declare la matriz en la secci&oacute;n de declaraciones de m&oacute;dulo 
+          con una sentencia Public si se quiere global o con Private o Dim. Si 
+          la quiere al nivel del m&oacute;dulo, o en procedimiento con Static 
+          o Dim si la quiere local. Para especificar que la matriz va a ser din&aacute;micadeje 
+          la lista de dimensiones vac&iacute;a. Por ejemplo:<br>
+          <br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dim Matriz_A()<br>
+          <br>
+          - Asigne un n&uacute;mero actual de elementos con la sentencia ReDim. 
+          Se supone que N est&aacute; definida previamente.<br>
+          <br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ReDim Matriz_A(N 
+          + 1) <br>
+          <br>
+          La sentencia Redim puede aparecer solamente en un procedimeinto y permite 
+          cambiar el n&uacute;mero de elementos de la matriz, no el n&uacute;mero 
+          de dimensiones. Sin embargo, no puede declarar un a matriz de un tipo 
+          de datos y luego usar ReDim para cambiar la matriz a otro tipo de datos.<br>
+          Por ejemplo, si declaramos la matriz Matriz_A a nivel de un m&oacute;dulo,<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Private Matriz_A() 
+          as integer <br>
+          m&aacute;s tarde, un procedimiento c&aacute;lculo puede asignar espacio 
+          para la matriz, como se indica a continuaci&oacute;n:<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sub C&aacute;lculo()<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dim 
+          F as integer, C as integer<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ReDim 
+          Matriz_A(F,C) <br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;End Sub<br>
+          <br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cada vez que se ejecuta 
+          la sentencia ReDim, todos los valores almacenados en la matriz se pierden. 
+          Visual Basic restablece los valores del valor Empty en matrices Variant, 
+          a cero en matrices num&eacute;ricas, a una cadena de longitud cero en 
+          matrices de cadenas, o a Nothing en matrices de objetos. Cuando le interese 
+          cambiar el tama&ntilde;o de la matriz conservando los valores de la 
+          misma los valores de la misma, ejecute ReDim con la palabra clave Preserve. 
+          Por ejemplo, supongamos la matriz A de dos dimensiones. La sentencia:<br>
+          <br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ReDim Preserve A(D1, 
+          UBound(A, 2) + 2)<br>
+          <br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Incrementa el tama&ntilde;o 
+          de la matriz multidimensional, s&oacute;lo se puede cambiar el l&iacute;mite 
+          superior de la &uacute;ltima dimensi&oacute;n. Cualquier otro intento 
+          produce un error. Evidentemente, si se disminuye el tama&ntilde;o de 
+          la matriz hay una perdida parcial de los datos.<br>
+      </blockquote>
+      </p><h3>
+      Sentencia Erase 
+      <a name="erase"></a> </h3>
+      <p>Para matrices est&aacute;ticas, Erase asigna cero a cada elemento de 
+        las matrices num&eacute;ricas y nulo (&quot;&quot;) a cada elemento de 
+        las matrices de caracteres.<br>
+        Para matrices din&aacute;micas, Erase libera el espacio de memoria utilizado 
+        por las matrices. Para utilizar de nuevo cualquiera de ellas , es necesario 
+        de nuevo declarar las dimensiones de la matriz utilizando ReDim o Dim.<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Erase nombre_de_la_matriz[,nombre_de_la_matriz]...<br>
+        Cuando se dispone de poco espacio de memoria, resulta &uacute;til la sentencia 
+        Erase para borrar las matrices din&aacute;micas que ya no van a ser utilizadas. 
+        Erase tambi&eacute;n puede utilizarse cuando deseamos redimensionar matrices 
+        en una aplicaci&oacute;n. Por ejemplo:<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dim b() as integer<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;n = 10: m = 20<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dim a(100) as integer<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ReDim b(n, m)<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Erase a,b 'poner a 0 la matriz a y 
+        liberar la memoria de b<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ReDim b(5, 5) 'redimensionar la matriz 
+        b</p>
+      <h3>Sentencia Option Base<a name="option"></a></h3>
+      <p>Se utiliza en el nivel del m&oacute;dulo para definir el l&iacute;mite 
+        inferior predeterminado para los sub&iacute;ndices de una matriz. Su sintaxis 
+        es:<br>
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Option Base n<br>
+        <br>
+        donde n es una expresi&oacute;n entera de valor 0 o 1.<br>
+        <br>
+        El valor predeterminado es 0.Esta sentencia debe ejecutarse antes de definir 
+        cualquier matriz y no se puede utilizar dentro de un procedimiento. Por 
+        ejemplo:<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Option Base 1<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Private Sub Form_Load()<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dim a(100) 
+        as integer 'matriz de 100 elementos: a(1) ... a(100)<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a(1) = 10<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;End Sub<br>
+        <br>
+        Este ejemplo crea una matriz num&eacute;rica unidimensional llamada a 
+        con 100 elementos, a(1) ... a(100).<br>
+        <br>
+        No obstante, la cl&aacute;usula To en las instrucciones Dim, Private, 
+        Public, ReDim y Static proporciona una forma mas flexiblede controlar 
+        los l&iacute;mites inferior y superior de cada dimensi&oacute;n de una 
+        matriz.</p>
+      <h3>Copiar una matriz en otra<a name="copiarmatriza"></a></h3>
+      <p>No existe una funci&oacute;n predefinida que permita copiar una matriz 
+        en otra. Por lo tanto, para realizar esta operaci&oacute;n tendremos que 
+        a&ntilde;adir a nuestra aplicaci&oacute;n el c&oacute;digo correspondiente.<br>
+        <br>
+        Es posible asignar el contenido completo de una matriz a otra matriz, 
+        siempre y cuando la matriz del lado izquierdo de la asignaci&oacute;n 
+        sea una matriz din&aacute;mica. Las matrices est&aacute;ticas solo pueden 
+        aparecer a la derecha de la asignaci&oacute;n. Seg&uacute;n esto, puede 
+        sustituirse la rutina de copiar matriz del ejemplo anterior por:<br>
+        &nbsp;&nbsp;&nbsp;x= m</p> 
+    </td>
+  </tr>
+  <tr> 
+    <td></td>
+    <td> 
+      <div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

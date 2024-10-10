@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>C&oacute;mo hacer una p&aacute;gina AJAX</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta name="keywords" content="Primera página AJAX, Como hacer una pagina AJAX, Manual AJAX, tutorial AJAX, Ejemplos AJAX, ejercicios AJAX">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2>Primera p&aacute;gina AJAX</h2></td>
+  </tr>
+  <tr> 
+    <td height="394" colspan="3"> <h3>La primera aplicación</h3>
+      <p>La aplicaci&oacute;n AJAX completa m&aacute;s sencilla consiste en una 
+        adaptaci&oacute;n del cl&aacute;sico &quot;Hola Mundo&quot;.<br>
+        En este caso, una aplicaci&oacute;n JavaScript descarga un archivo del 
+        servidor y muestra su contenido sin necesidad de recargar la p&aacute;gina.<br>
+        C&oacute;digo fuente completo:<br>
+        &lt;pre&gt;<br>
+        &lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot; 
+        &quot;http://www.w3.org/TR/<br>
+        xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;<br>
+        &lt;html&gt;<br>
+        &lt;head&gt;<br>
+        &lt;title&gt;Hola Mundo con AJAX&lt;/title&gt;<br>
+        &lt;script type=&quot;text/javascript&quot;&gt;<br>
+        function descargaArchivo() {<br>
+        // Obtener la instancia del objeto XMLHttpRequest<br>
+        if(window.XMLHttpRequest) {<br>
+        peticion_http = new XMLHttpRequest();<br>
+        }<br>
+        else if(window.ActiveXObject) {<br>
+        peticion_http = new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);<br>
+        }<br>
+        // Preparar la funcion de respuesta<br>
+        peticion_http.onreadystatechange = muestraContenido;<br>
+        // Realizar peticion HTTP<br>
+        peticion_http.open('GET', 'http://localhost/holamundo.txt', true);<br>
+        peticion_http.send(null);<br>
+        function muestraContenido() {<br>
+        if(peticion_http.readyState == 4) {<br>
+        if(peticion_http.status == 200) {<br>
+        alert(peticion_http.responseText);<br>
+        }<br>
+        }<br>
+        }<br>
+        }<br>
+        window.onload = descargaArchivo;<br>
+        &lt;/script&gt;<br>
+        &lt;/head&gt;<br>
+        &lt;body&gt;&lt;/body&gt;<br>
+        &lt;/html&gt;<br>
+        En el ejemplo anterior, cuando se carga la p&aacute;gina se ejecuta el 
+        m&eacute;todo JavaScript que muestra el contenido de un archivo llamado 
+        holamundo.txt que se encuentra en el servidor. La clave del c&oacute;digo 
+        anterior es que la petici&oacute;n HTTP y la descarga de los contenidos 
+        del archivo se realizan sin necesidad de recargar la p&aacute;gina.</p>
+      <p>&lt;/pre&gt;<br>
+        En el ejemplo anterior, cuando se carga la p&aacute;gina se ejecuta el 
+        m&eacute;todo JavaScript que muestra el contenido de un archivo llamado 
+        holamundo.txt que se encuentra en el servidor. La clave del c&oacute;digo 
+        anterior es que la petici&oacute;n HTTP y la descarga de los contenidos 
+        del archivo se realizan sin necesidad de recargar la p&aacute;gina..</p>
+      <p></p></td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

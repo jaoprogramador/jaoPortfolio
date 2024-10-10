@@ -1,0 +1,61 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Objeto Recordset en ASP</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta name="keywords" content="Objeto Recordset en ASP, Propiedades y m&eacute;todos del objeto Recordset, Manual ASP, tutorial ASP, Ejemplos ASP, ejercicios ASP">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2>Objeto Recordset en ASP</h2></td>
+  </tr>
+  <tr> 
+    <td height="504" colspan="3"> 
+      <h3>Propiedades y m&eacute;todos del objeto Recordset</h3>
+  
+      <p>Se utiliza para almacenar datos de la base de datos y despu&eacute;s 
+        manipularlos. Para crearlo, se utiliza de la siguiente manera:</p>
+      <p>set rec= server.createobject(&#8220;ADODB.recordset&#8221;)</p>
+      <h3>Propiedades:</h3>
+      <p>&#8226; Rec.AbsolutePosition= posicion a la que me quiero mover en BBDD 
+        (empieza en 1)<br>
+        &#8226; Rec.PageSize= numero de registros por pagina (por defecto 10)<br>
+        &#8226; Rec.AbsolutePage= posiciona en la pagina en la que se quiere empezar<br>
+        &#8226; Rec.BOF inicio de fichero<br>
+        &#8226; Rec.EOF final de fichero<br>
+        &#8226; Rec.MaxRecords= numero de registros maximo de la base de datos 
+        <br>
+        &#8226; Rec.PageCount devuelve cuantas paginas tiene la base de datos<br>
+        &#8226; Rec.RecordCount devuelve el numero de registros de la base de 
+        datos</p>
+      <h3>M&eacute;todos</h3>
+      <p>&#8226; Rec=con.execute(&#8220;instrucciones SQL&#8221;)<br>
+        Si la sql es una select devolvera una serie de registros que habra que 
+        almacenar en una variable recordset.<br>
+        Si la sql no devuelve registros, es decir , insert , delete, devolvera 
+        -1 y no es necesario guardar en una variable.<br>
+        &#8226; Rec.MoveNext pasa el cursor al siguiente registro<br>
+        &#8226; Rec.MovePrevious pasa el cursor al registro anterior<br>
+        &#8226; Rec.MoveFirst pasa el cursor al primer registro<br>
+        &#8226; Rec.MoveLast pasa el cursor al ultimo registro</p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

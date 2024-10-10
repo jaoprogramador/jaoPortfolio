@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Utilizaci&oacute;n de threads en appelts</title>
+<META http-equiv=Content-Language content=es>
+<META content="Manual Applets, ejemplos Applets, codigos Applets" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Manual Applets, ejemplos Applets, codigos Applets">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> Utilizaci&oacute;n de threads en appelts</h2></td>
+  </tr>
+  <tr> 
+    <td colspan="3"> <p>Un applet puede ejecutarse con varias threads, y en muchas 
+        ocasiones ser&aacute; necesario o conveniente hacerlo as&iacute;. Hay 
+        que tener en cuenta que un applet se ejecuta siempre en un browser (o 
+        en la aplicaci&oacute;n appletviewer).<br>
+        As&iacute;, las threads en las que se ejecutan los m&eacute;todos mayores 
+        -init(), start(), stop() y destroy()- dependen del browser o del entorno 
+        de ejecuci&oacute;n. Los m&eacute;todos gr&aacute;ficos -paint(), update() 
+        y repaint()- se ejecutan siempre desde una thread especial del AWT.
+      <p><br>
+        Algunos browsers dedican un thread para cada applet en una misma p&aacute;gina; 
+        otros crean un grupo de threads para cada applet (para poderlas matar 
+        al mismo tiempo, por ejemplo). En cuelquier caso se garantiza que todas 
+        las threads creadas por los m&eacute;todos mayores pertenecen al mismo 
+        grupo. Se deben introducir threads en applets siempre que haya tareas 
+        que consuman mucho tiempo (cargar una imagen o un sonido, hacer una conexi&oacute;n 
+        a Internet, &#8230;). Si estas tareas pesadas se ponen en el m&eacute;todo 
+        init() bloquean cualquier actividad del applet o incluso de la p&aacute;gina 
+        HTML hasta que se completan. Las tareas pesadas pueden ser de dos tipos:
+      <p><br>
+        &#8226; Las que s&oacute;lo se hacen una vez.<br>
+        &#8226; Las que se repiten muchas veces.
+      <p><br>
+        Un ejemplo de tarea que se repite muchas veces puede ser una animaci&oacute;n. 
+        En este caso, la tarea repetitiva se pone dentro de un bucle while o do&#8230;while, 
+        dentro del thread. El thread se deber&iacute;a crear dentro del m&eacute;todo 
+        start() del applet y destruirse en stop(). De este modo, cuando el applet 
+        no est&aacute; visible se dejan de consumir recursos.
+      <p><br>
+        Al crear el thread en el m&eacute;todo start() se pasa una referencia 
+        al applet con la palabra this, que se refiere al applet. El applet deber&aacute; 
+        implementar la interface Runnable, y por tanto debe definir el m&eacute;todo 
+        run(), que es el centro del Thread 
+      <p>Un ejemplo de tarea que se realiza una sola vez es la carga de im&aacute;genes 
+        *.gif o *.jpeg, que ya se realiza autom&aacute;ticamente en un thread 
+        especial.<br>
+        Sin embargo, los sonidos no se cargan en threads especiales de forma autom&aacute;tica; 
+        los debe crear el programador para cargarlos en &#8220;background&#8221;. 
+        Este es un caso t&iacute;pico de programa producerconsumer:<br>
+        el thread es el producer y el applet el consumer. Las threads deben estar 
+        sincronizadas, para lo que se utilizan los m&eacute;todos wait() y notifyAll().<br>
+      <p>A continuaci&oacute;n se presenta un ejemplo de thread con tarea repetitiva:<br>
+        public void start() {<br>
+        if (repetitiveThread == null) {<br>
+        repetitiveThread = new Thread(this); // se crea un nuevo thread<br>
+        }<br>
+        repetitiveThread.start(); // se arranca el thread creado: start() llama 
+        a run()<br>
+        }<br>
+        public void stop() {<br>
+        repetitiveThread = null; // para parar la ejecuci&oacute;n del thread<br>
+        }<br>
+        public void run() {<br>
+        ...<br>
+        while (Thread.currentThread() == repetitiveThread) {<br>
+        ... // realizar la tarea repetitiva.<br>
+        }<br>
+        }<br>
+        El m&eacute;todo run() se detendr&aacute; en cuanto se ejecute el m&eacute;todo 
+        stop(), porque la referencia al thread est&aacute; a null.</td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

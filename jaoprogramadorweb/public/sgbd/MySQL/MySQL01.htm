@@ -1,0 +1,233 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Ejercicios MySQL</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="MySQL, sql, pl/sql, programacion MySQL, ejercicios MySQL, ejemplos MySQL, select">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2>I N S T A L A C I O N</h2></td>
+  </tr>
+  <tr> 
+    <td><h3>Introducción</h3>
+      <p>Desde la versi&oacute;n 3.21, MySQL AB proporciona una versi&oacute;n 
+        Windows nativa de MySQL, que representa un apreciable porcentaje<br>
+        de las descargas diarias de MySQL. Esta secci&oacute;n describe el proceso 
+        para instalar MySQL en Windows.<br>
+        El instalador para la versi&oacute;n Windows de MySQL 5.0, en conjunto 
+        con un asistente de configuraci&oacute;n dotado de interfaz gr&aacute;fica,<br>
+        instala autom&aacute;ticamente MySQL, crea un fichero de opciones, inicia 
+        el servidor, y otorga seguridad a las cuentas de usuario por defecto.<br>
+        Si se est&aacute; actualizando una instalaci&oacute;n existente de MySQL 
+        anterior a la versi&oacute;n 4.1.5, deben observarse los siguientes pasos:<br>
+        1. Obtener e instalar la distribuci&oacute;n.<br>
+        2. Establecer un fichero de opciones, de ser necesario.<br>
+        3. Seleccionar el servidor que se desea emplear.<br>
+        4. Iniciar el servidor.<br>
+        5. Colocar contrase&ntilde;as a las cuentas MySQL creadas inicialmente.<br>
+        Este proceso tambi&eacute;n debe realizarse con instalaciones nuevas de 
+        MySQL, cuando el paquete de instalaci&oacute;n no incluya un instalador.<br>
+        MySQL 5.0 para Windows est&aacute; disponible en tres formatos de distribuci&oacute;n:<br>
+        &#8226; La distribuci&oacute;n binaria contiene un programa de instalaci&oacute;n 
+        que instala cada elemento necesario para iniciar el servidor inmediatamente<br>
+        &#8226; La distribuci&oacute;n de c&oacute;digo fuente contiene todo el 
+        c&oacute;digo y ficheros de soporte para generar ejecutables utilizando 
+        el compilador<br>
+        de VC++ 6.0<br>
+        Siempre que sea posible deber&iacute;a emplearse la distribuci&oacute;n 
+        binaria. Es m&aacute;s simple que las otras y no se necesita ninguna herramienta<br>
+        adicional para poner en funcionamiento el servidor MySQL.<br>
+        Esta secci&oacute;n explica c&oacute;mo instalar MySQL para Windows utilizando 
+        una distribuci&oacute;n binaria. Para realizar la instalaci&oacute;n a 
+        partir de<br>
+        una distribuci&oacute;n de c&oacute;digo fuente, consulte Secci&oacute;n 
+        2.8.6, &#8220;Instalar MySQL desde el c&oacute;digo fuente en Windows&#8221;.<br>
+        Requisitos de Windows<br>
+        Para ejecutar MySQL para Windows, se necesita lo siguiente:<br>
+        &#8226; Un sistema operativo Windows de 32 bits, tal como 9x, Me, NT, 
+        2000, XP, o Windows Server 2003.<br>
+        Se recomienda fuertemente el uso de un sistema operativo Windows basado 
+        en NT (NT, 2000, XP, 2003) puesto que &eacute;stos permiten<br>
+        ejecutar el servidor MySQL como un servicio. Consulte Secci&oacute;n 2.3.12, 
+        &#8220;Arrancar MySQL como un servicio de Windows&#8221;.<br>
+        &#8226; Soporte para protocolo TCP/IP.<br>
+        &#8226; Una copia de la distribuci&oacute;n binara de MySQL para Windows, 
+        que se puede descargar de http://dev.mysql.com/downloads/.<br>
+        Consulte Secci&oacute;n 2.1.3, &#8220;C&oacute;mo obtener MySQL&#8221;.<br>
+        Nota: Si se descarga la distribuci&oacute;n a trav&eacute;s de FTP, se 
+        recomienda el uso de un cliente FTP adecuado que posea la caracter&iacute;stica<br>
+        de reanudaci&oacute;n (resume) para evitar la corrupci&oacute;n de ficheros 
+        durante el proceso de descarga.<br>
+        &#8226; Una herramienta capaz de leer ficheros .zip, para descomprimir 
+        el fichero de distribuci&oacute;n.<br>
+        &#8226; Suficiente espacio en disco r&iacute;gido para descomprimir, instalar, 
+        y crear las bases de datos de acuerdo a sus requisitos. Generalmente<br>
+        se recomienda un m&iacute;nimo de 200 megabytes.<br>
+        Tambi&eacute;n podr&iacute;an necesitarse los siguientes &iacute;tems 
+        opcionales:<br>
+        &#8226; Si se planea conectarse al servidor MySQL a trav&eacute;s de ODBC, 
+        se deber&aacute; contar con un driver Connector/ODBC. Consulte Secci&oacute;n<br>
+        25.1, &#8220;MySQL Connector/ODBC&#8221;.<br>
+        &#8226; Si se necesitan tablas con un tama&ntilde;o superior a 4GB, debe 
+        instalarse MySQL en un sistema de ficheros NTFS o posterior. Al<br>
+        crear las tablas no debe olvidarse el uso de MAX_ROWS y AVG_ROW_LENGTH. 
+        <br>
+        <h3>Instalaci&oacute;n de MySQL con un instalador autom&aacute;tico</h3><br>
+      Los usuarios nuevos de MySQL 5.0 pueden emplear el asistente de instalaci&oacute;n 
+      y el asistente de configuraci&oacute;n para instalar MySQL en Windows. &Eacute;stos 
+      est&aacute;n dise&ntilde;ados para instalar y configurar MySQL de tal forma 
+      que los usuarios nuevos pueden comenzar a utilizar MySQL inmediatamente.<br>
+       <h3> Escoger un tipo de instalaci&oacute;n</h3>
+        Hay disponibles tres tipos de instalaci&oacute;n: t&iacute;pica, completa, 
+        y personalizada.<br>
+        La instalaci&oacute;n t&iacute;pica instala el servidor MySQL, el cliente 
+        de l&iacute;nea de comandos mysql, y las utilidades de l&iacute;nea de 
+        comandos.<br>
+        Los clientes y utilidades incluyen mysqldump, myisamchk, y otras herramientas 
+        que ayudan a administrar el servidor MySQL.<br>
+      La instalaci&oacute;n completa instala todos los componentes incluidos en 
+      el paquete. El paquete completo incluye componentes como el servidor incrustado 
+      (embedded), el conjunto de pruebas de rendimiento (benchmarks), scripts 
+      de mantenimiento, y documentaci&oacute;n.<br>
+        La instalaci&oacute;n personalizada otorga un control completo sobre los 
+        paquetes que se desea instalar y el directorio de instalaci&oacute;n que<br>
+      se utilizar&aacute;. <br>
+        Si se escoge la instalaci&oacute;n t&iacute;pica o la completa, al hacer 
+        click sobre el bot&oacute;n SIGUIENTE se avanza a la pantalla de confirmaci&oacute;n 
+        para<br>
+      verificar las opciones y comenzar la instalaci&oacute;n. Si se escoge la 
+      instalaci&oacute;n personalizada, al hacer click sobre el bot&oacute;n SIGUIENTE,<br>
+        <h3> La ventana de di&aacute;logo de instalaci&oacute;n personalizada</h3>
+        Si se desea cambiar el directorio de instalaci&oacute;n o los componentes 
+        que se instalar&aacute;n, se deber&aacute; elegir el tipo de instalaci&oacute;n 
+        personalizada.<br>
+        Todos los componentes disponibles se encuentran en un diagrama de &aacute;rbol 
+        en el lado izquierdo del cuadro de di&aacute;logo de instalaci&oacute;n<br>
+        personalizada. Los componentes que no ser&aacute;n instalados tienen un 
+        icono X rojo; los componentes que se instalar&aacute;n tienen un icono<br>
+        gris. Para indicar si un componente se instalar&aacute; o no, debe hacerse 
+        click en su icono y elegir una opci&oacute;n de la lista desplegable que<br>
+        aparece.<br>
+        Se puede cambiar el directorio de instalaci&oacute;n por defecto haciendo 
+        click en el bot&oacute;n CAMBIAR... a la derecha del directorio de instalaci&oacute;n<br>
+        que se muestra.<br>
+        Despu&eacute;s de elegir los componentes a instalar y el directorio de 
+        instalaci&oacute;n, hacer click en el bot&oacute;n SIGUIENTE har&aacute; 
+        avanzar al cuadro<br>
+        de di&aacute;logo de confirmaci&oacute;n.<br>
+        <h3> La ventana de di&aacute;logo de confirmaci&oacute;n</h3><br>
+        Una vez que se elige un tipo de instalaci&oacute;n y los componentes a 
+        instalar, se avanza al cuadro de di&aacute;logo de confirmaci&oacute;n. 
+        Se muestran<br>
+        el tipo y el directorio de instalaci&oacute;n se para ser confirmados.<br>
+        Para instalar MySQL una vez que se est&aacute; conforme con la configuraci&oacute;n, 
+        debe hacerse click en el bot&oacute;n INSTALAR. Para cambiar la<br>
+        configuraci&oacute;n, debe hacerse click en el bot&oacute;n RETROCEDER. 
+        Para abandonar el asistente de instalaci&oacute;n sin terminar la instalaci&oacute;n 
+        de<br>
+        MySQL, debe hacerse click en el bot&oacute;n CANCEL.<br>
+        Una vez que la instalaci&oacute;n est&aacute; completa, se porporciona 
+        la opci&oacute;n de registrarse en el sitio web de MySQL. El registro 
+        otorga acceso<br>
+        para publicar mensajes en los foros de Mysql, en forums.mysql.com, junto 
+        con la posibilidad de informar errores en<br>
+        bugs.mysql.com y suscribirse al bolet&iacute;n electr&oacute;nico. La 
+        pantalla final del instalador brinda un resumen de la instalaci&oacute;n 
+        y la opci&oacute;n<br>
+        de ejecutar el asistente de configuraci&oacute;n MySQL, que se utiliza 
+        para crear un fichero de configuraci&oacute;n, instalar el servicio MySQL,<br>
+        y establecer la seguridad.<br>
+        <h3> Cambios que realiza el asistente de instalaci&oacute;n MySQL</h3><br>
+        Una vez que se hace click en el bot&oacute;n INSTALAR, el asistente de 
+        instalaci&oacute;n MySQL comienza el proceso de instalaci&oacute;n y realiza<br>
+        ciertos cambios en el sistema, que se describen en la siguiente secci&oacute;n.<br>
+        Cambios al Registro<br>
+        El asistente de instalaci&oacute;n crea una clave de registro, durante 
+        una situaci&oacute;n t&iacute;pica de instalaci&oacute;n, localizada en<br>
+        HKEY_LOCAL_MACHINE\SOFTWARE\MySQL AB.<br>
+        El asistente de instalaci&oacute;n crea una clave cuyo nombre es el n&uacute;mero 
+        de versi&oacute;n principal (n&uacute;mero de la serie) del servidor que 
+        se<br>
+        encuentra instalado, tal como MySQL Server 5.0. Contiene dos valores de 
+        cadena, Location y Version. La cadena Location<br>
+        contiene el directorio de instalaci&oacute;n. En una instalaci&oacute;n 
+        corriente, contiene C:\Program Files\MySQL\MySQL<br>
+        Server 5.0\. La cadena Version contiene el n&uacute;mero de entrega (release). 
+        Por ejemplo, para una instalaci&oacute;n de MySQL Server<br>
+        5.0.9 la clave contiene el valor 5.0.9.<br>
+        Estas claves del registro son &uacute;tiles para ayudar a herramientas 
+        externas a identificar la ubicaci&oacute;n en la que se instal&oacute; 
+        el servidor<br>
+        MySQL, evitando un rastreo completo del disco para descubrirla. Las claves 
+        del registro no son necesarias para la ejecuci&oacute;n del<br>
+        servidor y no se crean cuando se usa el fichero Zip noinstall<br>
+        Cambios en el men&uacute; Inicio<br>
+        El asistente de instalaci&oacute;n crea una nueva entrada en el men&uacute; 
+        INICIO de Windows, bajo una opci&oacute;n cuyo nombre es el n&uacute;mero 
+        de<br>
+        versi&oacute;n principal (n&uacute;mero de la serie) del servidor que 
+        se encuentra instalado. Por ejemplo, si se instala MySQL 5.0, se crea 
+        una<br>
+        secci&oacute;n MySQL Server 5.0 en el men&uacute; INICIO.<br>
+        Se crean las siguientes entradas dentro de la nueva secci&oacute;n del 
+        men&uacute; INICIO:<br>
+        &#8226; MySQL Command Line Client : Es un atajo al cliente de l&iacute;nea 
+        de comandos mysql y est&aacute; configurado para iniciar sesi&oacute;n 
+        como<br>
+        usuario root. El atajo pregunta por una contrase&ntilde;a perteneciente 
+        a un usuario root cuando se conecta.<br>
+        &#8226; MySQL Server Instance Config Wizard : Es un atajo al asistente 
+        de configuraci&oacute;n. Utilice este atajo para configurar un servidor<br>
+        recientemente instalado o reconfigurar uno existente.<br>
+        &#8226; MySQL Documentation : Es un v&iacute;nculo a la documentaci&oacute;n 
+        del servidor MySQL, que se almacena localmente en el directorio<br>
+        de instalaci&oacute;n de MySQL. Esta opci&oacute;n no est&aacute; disponible 
+        cuando el servidor MySQL fue instalado con el paquete Essentials.<br>
+        Instalar MySQL<br>
+        <h3><br>
+        Cambios en el sistema de ficheros</h3><br>
+        El asistente de instalaci&oacute;n MySQL, por defecto instala el servidor 
+        MySQL en C:\Program Files\MySQL\MySQL Server<br>
+        5.0, donde Program Files es el directorio de aplicaciones por defecto 
+        del sistema, y 5.0 es el n&uacute;mero de versi&oacute;n principal<br>
+        (n&uacute;mero de la serie) de servidor MySQL instalado. &Eacute;sta es 
+        la nueva ubicaci&oacute;n donde se recomienda instalar MySQL, en sustituci&oacute;n<br>
+        de la antigua ubicaci&oacute;n por defecto, c:\mysql.<br>
+        Por defecto, todas las aplicaciones MySQL se almacenan en un directorio 
+        com&uacute;n localizado en C:\Program Files\MySQL,<br>
+        donde Program Files es el directorio de aplicaciones por defecto del sistema. 
+        Una instalaci&oacute;n t&iacute;pica de MySQL en el ordenador<br>
+        de un desarrollador podr&iacute;a verse as&iacute;:<br>
+        C:\Program Files\MySQL\MySQL Server 5.0<br>
+        C:\Program Files\MySQL\MySQL Administrator 1.0<br>
+        C:\Program Files\MySQL\MySQL Query Browser 1.0<br>
+        Esta proximidad entre los distintos directorios facilita la administraci&oacute;n 
+        y el mantenimiento de todas las aplicaciones MySQL instaladas<br>
+        en un sistema en particular.</p> </h3>
+        <p>
+        
+        </td>
+    <td>&nbsp;</td>
+    <td><a href="http://www.euskalnet.net/juanarana/oraclezip/Ejer3.rar"><img src="../../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td>
+<div align="right"><a href="http://www.euskalnet.net/juanarana/index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a>
+      </div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

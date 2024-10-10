@@ -1,6 +1,3 @@
-
-
-
  BODY {
   	scrollbar-arrow-color:#0000FF;
   	scrollbar-shadow-color:#0000FF;
@@ -9,6 +6,44 @@
   	scrollbar-darkshadow-color:#0000FF;
   	scrollbar-3dlight-color:#0000FF;
  }
+#contenido-demo div{
+	 position:absolute; 
+	 width:110px; 
+	 height:909px; 
+	 z-index:1; 
+	 left: -32px; 
+	 top: 0px;
+ }
+ /*ul {
+  width: 11px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: 1px solid #7C7C7C;
+  border-bottom: none;
+}*/
+/*#subListaJ2EE li
+{
+	border-bottom: 1px solid #F8727C;/*añade el borde y el color 
+	background: #7385FD;/*especifica el color de fondo 
+	/*
+list-style: none;
+	background-image: url("../imagenes/coltablaAB.gif");
+	background-position: left bottom;
+	background-repeat: repeat-x;
+	padding-left: 15px;
+	list-style-image: url("bordeListaAB.gif"); 		
+	width:120px;
+}
+#subListaJ2EE li
+{
+list-style: none;
+	background-image: url("../imagenes/coltablaAB.gif");
+	background-position: left bottom;
+	background-repeat: repeat-x;
+	padding-left: 15px;
+	list-style-image: url("bordeListaRB.gif"); 		
+}*/
 
  p,pre,em,blockquote,td{
 	font-family: Verdana, Arial, Helvetica, sans-serif;
@@ -19,10 +54,26 @@
  }
 
  h2{
+ 	text-align:center;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	color: #0000FF;
 	text-align:center;
-
+	/*background: url(../imagenes/coltabladeBorde.gif) repeat-x left ;		
+	
+	background-image:url("../imagenes/bordeListaRB.gif");
+	background-repeat:no-repeat;*/
+ }
+ 
+ #cabeceraTabla table tr{
+ 	background-image:url(../imagenes/fondologo.jpg);
+ 	
+ 
+ }
+ table.tablaContenidos {
+	background-image:url(../imagenes/fondologo.jpg);
+	width:660px;
+	background-repeat:  repeat-y;
+	height: 267px;
  }
  h3{
 	font-family: Verdana, Arial, Helvetica, sans-serif;
@@ -42,3 +93,24 @@
 	text-decoration:none;
 	
  }
+a:link {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	font-style: normal;
+	font-weight: bold;
+	color: #0000FF;
+}
+a:visited {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	font-style: normal;
+	font-weight: bold;
+	color: #0000FF;
+}
+a:hover {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-style: normal;
+	font-weight: bold;
+	color: #0000FF;
+}

@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Ejercicios de Java</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Descargar Ejercicios de Java, Ejemplos de java, Aplicaciones  de java, JBuilder, J Builder, codigo java">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2>E J E R C I C I O S</h2></td>
+  </tr>
+  <tr> 
+    <td> <h3> Tipos de datos </h3>
+      <p> ServletSimple.- primer servlet que con el servidor Tomcat nos muestra 
+        como hacer un formulario html que nos cuenta el n&ordm; de visitantes(un 
+        contador de usuarios)</p>
+      <p>//en la clase servlet.java</p>
+      <p>package servletsimple;</p>
+      <p>import javax.servlet.*;<br>
+        import javax.servlet.http.*;<br>
+        import java.io.*;<br>
+        import java.util.*;</p>
+      <p>public class Servlet1 extends HttpServlet {<br>
+        private static final String CONTENT_TYPE = &quot;text/html&quot;;<br>
+        int connections=0;<br>
+        //Inicializar variables globales<br>
+        public void init() throws ServletException {<br>
+        }</p>
+      <p> //Procesar una petici&oacute;n HTTP Get<br>
+        public void doGet(HttpServletRequest request, HttpServletResponse response) 
+        throws ServletException, IOException {<br>
+        //Nombre de usuario<br>
+        String userName = request.getParameter(&quot;UserName&quot;);<br>
+        if (userName == null) {<br>
+        userName = &quot;User&quot;;<br>
+        }<br>
+        response.setContentType(CONTENT_TYPE);<br>
+        PrintWriter out = response.getWriter();<br>
+        out.println(&quot;&lt;html&gt;&quot;);<br>
+        out.println(&quot;&lt;head&gt;&lt;title&gt;Servlet1&lt;/title&gt;&lt;/head&gt;&quot;);<br>
+        out.println(&quot;&lt;body bgcolor=\&quot;#0000ff\&quot;&gt;&quot;);<br>
+        out.println(&quot;&lt;p&gt;El servlet ha recibido un &quot; + request.getMethod() 
+        + &quot;. Esta es la respuesta.&lt;/p&gt;&quot;);<br>
+        out.println(&quot;&lt;/body&gt;&lt;/html&gt;&quot;);<br>
+        }</p>
+      <p> //Procesar una petici&oacute;n HTTP Post<br>
+        public void doPost(HttpServletRequest request, HttpServletResponse response) 
+        throws ServletException, IOException {<br>
+        doGet(request, response);<br>
+        String userName = request.getParameter(&quot;UserName&quot;);<br>
+        if (userName == null) {<br>
+        userName = &quot;User!&quot;;<br>
+        }<br>
+        response.setContentType(CONTENT_TYPE);<br>
+        PrintWriter out = response.getWriter();<br>
+        out.println(&quot;&lt;html&gt;&quot;);<br>
+        out.println(&quot;&lt;h1&gt;Servlet1 doPost method&lt;/h1&gt;&quot;);<br>
+        out.println(&quot;&lt;body&gt;&quot;);<br>
+        out.println(&quot;&lt;p&gt;Gracias por la visita, &quot;);<br>
+        out.println(userName);<br>
+        out.println(&quot;&lt;p&gt;Hola - Primer programa de Servlet de Java! 
+        &quot;);<br>
+        out.println(&quot;&lt;p&gt;Visita n&ordm; &quot;);<br>
+        out.println(Integer.toString(++connections));<br>
+        out.println(&quot;&lt;/html&gt;&lt;/body&gt;&quot;);</p>
+      <p> }</p>
+      <p> //Limpiar recursos<br>
+        public void destroy() {<br>
+        }<br>
+        }<br>
+      </p>
+      <p>//en la ventana servlet.htm</p>
+      <p>&lt;html&gt;<br>
+        &lt;head&gt;<br>
+        &lt;title&gt;<br>
+        Servlet1<br>
+        &lt;/title&gt;<br>
+        &lt;/head&gt;<br>
+        &lt;body bgcolor=&quot;#0000ff&quot;&gt;</p>
+      <p>&lt;form action=&quot;/WebModulo1/servlet1&quot; method=&quot;post&quot;&gt;<br>
+        &lt;p&gt;Nombre de usuario &lt;input type=&quot;text&quot; name=&quot;UserName&quot;&gt;&lt;/p&gt;<br>
+        &lt;p&gt;pulse Enviar para llamar al servlet Servlet1&lt;/p&gt;<br>
+        &lt;p&gt;&lt;input type=&quot;submit&quot; name=&quot;Submit&quot; value=&quot;Enviar&quot;&gt;<br>
+        &lt;input type=&quot;reset&quot; value=&quot;Restablecer&quot;&gt;&lt;/p&gt;<br>
+        &lt;/form&gt;<br>
+        &lt;/body&gt;<br>
+        &lt;/html&gt;</p>
+      <p><br>
+      </p></td>
+    <td>&nbsp;</td>
+    <td><p><a href="http://www.euskalnet.net/juanarana/JBuilderZip/EjemploServletActualizaLVisitas.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></p></td>
+  </tr>
+  
+  <tr> 
+    <td> <div align="right"><a href="http://www.euskalnet.net/juanarana/index3.htm" target="_parent">&lt;&lt;Menu 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Formularios en php</title><META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta name="keywords" content="Manual php, tutorial php, Ejemplos php, ejercicios php">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">  <tr> 
+    <td height="39" colspan="3"> <h2>Formularios</h2></td>
+  </tr>
+  <tr> 
+    <td height="1237" colspan="3"> 
+      <h3>Introducci&oacute;n</h3>
+      <p> Como sabemos, para crear un formulario en 
+        html, debemos utilizar &lt;FORM ... En php se utiliza el mismo formato 
+        pero indicando siempre su env&iacute;o mediante la funci&oacute;n print 
+        (); Veamos un formulario sencillo en html:</p>
+      <p >&lt;HTML&gt;<br>
+        &lt;HEAD&gt;<br>
+        &lt;TITLE&gt;Formulario HTML &lt;/TITLE&gt;</p>
+      <p >&lt;/HEAD&gt;<br>
+        &lt;BODY&gt;<br>
+        &lt;FORM ACTION=&quot;recibir.php&quot; METHOD=POST&gt;<br>
+        Nombre: &lt;INPUT TYPE=TEXT NAME=&quot;Nombre&quot; SIZE=20&gt;&lt;BR&gt;<br>
+        Apellido: &lt;INPUT TYPE=TEXT NAME=&quot;Apellido&quot; SIZE=40&gt;&lt;BR&gt;<br>
+        Emilio: &lt;INPUT TYPE=TEXT NAME=&quot;Email&quot; SIZE=60&gt;&lt;BR&gt;<br>
+        Comentarios: &lt;TEXTAREA NAME=&quot;Chascarrillos&quot; ROWS=5 COLS=40&gt;&lt;/TEXTAREA&gt;&lt;BR&gt;<br>
+        &lt;INPUT TYPE=SUBMIT NAME=&quot;SUBMIT&quot; VALUE=&quot;Enviar&quot;&gt;<br>
+        &lt;/FORM&gt;<br>
+        &lt;/BODY&gt;<br>
+        &lt;/HTML&gt;</p>
+      <p > Comenzamos con las etiquetas habituales y en la 
+        l&iacute;nea 6 definimos el formulario. Al hacerlo seleccionamos su destino: 
+        ACTION=&quot;recibir.php&quot; y el m&eacute;todo de env&iacute;o: METHOD=POST 
+        Desde html puro estamos acostumbrados a enviar correo tecleando ACTION 
+        =&#8221;mailto:nombre@dominio.xx&#8221; aqu&iacute; lo enviaremos a una 
+        p&aacute;gina php que crearemos posteriormente: recibir.php.</p>
+      <p > En cuanto al m&eacute;todo de env&iacute;o, disponemos 
+        de GET y POST. Las diferencias fundamentales son que con GET el volumen 
+        de datos est&aacute; bastante limitado y, adem&aacute;s, env&iacute;a 
+        los datos del formulario junto con la direcci&oacute;n web a la que van 
+        dirigidos, mientras que POST lo hace de forma invisible para el usuario. 
+        Esto quiere decir que desde el punto de vista de la seguridad es m&aacute;s 
+        recomendable POST.</p>
+      <p > Podr&iacute;amos haber codificado la p&aacute;gina 
+        en php:</p>
+      <p >&lt;?php<br>
+        print (&quot;&lt;HTML&gt;&lt;HEAD&gt;&lt;TITLE&gt;Formulario HTML&lt;/TITLE&gt;&lt;/HEAD&gt;&lt;BODY&gt;\n&quot;);<br>
+        print (&quot;&lt;FORM ACTION=\&quot;recibir.php\&quot; METHOD=POST&gt;\n&quot;);<br>
+        print (&quot;Nombre &lt;INPUT TYPE=TEXT NAME=\&quot;Nombre\&quot; SIZE=20&gt;&lt;BR&gt;\n&quot;);<br>
+        print (&quot;Apellido &lt;INPUT TYPE=TEXT NAME=\&quot;Apellido\&quot; <br>
+        SIZE=40&gt;&lt;BR&gt;\n&quot;);<br>
+        print (&quot;Emilio &lt;INPUT TYPE=TEXT NAME=\&quot;Email\&quot; SIZE=60&gt;&lt;BR&gt;\n&quot;);<br>
+        print (&quot;Comentarios &lt;TEXTAREA NAME=\&quot;Chascarrillos\&quot; <br>
+        ROWS=5 --&gt; COLS=40&gt;&lt;/TEXTAREA&gt;&lt;BR&gt;\n&quot;);<br>
+        print (&quot;&lt;INPUT TYPE=SUBMIT NAME=\&quot;SUBMIT\&quot; VALUE=\&quot;Enviar\&quot;&gt;\n&quot;);<br>
+        print (&quot;&lt;/FORM&gt;&quot;);<br>
+        print (&quot;&lt;/BODY&gt;&lt;/HTML&gt;&quot;);<br>
+        ?&gt;</p>
+      <p > F&iacute;jate que en realidad utilizamos c&oacute;digo 
+        html 100%, &uacute;nicamente a&ntilde;adimos los print necesarios para 
+        que el servidor env&iacute;e el c&oacute;digo html necesario al navegador. 
+        F&iacute;jate en los \&#8221; y \n.</p>
+      <p > Veamos recibir.php</p>
+      <p >&lt;HTML&gt;<br>
+        &lt;HEAD&gt;<br>
+        &lt;TITLE&gt;Resultados del formulario&lt;/TITLE&gt;<br>
+        &lt;/HEAD&gt;<br>
+        &lt;BODY&gt;<br>
+        &lt;?php<br>
+        /* Esta p&aacute;gina recibe los datos generados por enviar.php o enviar.html. 
+        */<br>
+        print (&quot;Tu nombre es $Nombre.&lt;BR&gt;\n&quot;);<br>
+        print (&quot;Te apellidas $Apellido.&lt;BR&gt;\n&quot;);<br>
+        print (&quot;Tu direcci&oacute;n de correo electr&oacute;nico es $Email.&lt;BR&gt;\n&quot;);<br>
+        print (&quot;Esto son los chascarrillos que has contado:&lt;BR&gt;\n $Chascarrillos&lt;BR&gt;\n&quot;);<br>
+        ?&gt;<br>
+        &lt;/BODY&gt;<br>
+        &lt;/HTML&gt;</p>
+      <p > En primer lugar, como en el caso anterior, podr&iacute;amos 
+        haber creado las etiquetas de inicio y fin de p&aacute;gina desde php 
+        con sendos print(); A efectos pr&aacute;cticos el resultado va a ser el 
+        mismo.
+        En este script hacemos que aparezcan en pantalla los valores de las variables 
+        $Nombre, $Apellido, $Email y</p>
+      <p >$Chascarillos. Estos valores los obtiene de los campos 
+        creados con el mismo nombre en enviar.php/html</p>
+      
+        <h3>GET sin formulario</h3>
+      <p > Tambi&eacute;n podemos enviar valores sin necesidad 
+        de utilizar un script. Para ello bastar&iacute;a con a&ntilde;adir a la 
+        URL el nombre de la variable que vamos a utilizar con su correspondiente 
+        valor. Veamos un ejemplo:</p>
+      <p >&lt;HTML&gt;<br>
+        &lt;HEAD&gt;<br>
+        &lt;TITLE&gt;Resultados del formulario&lt;/TITLE&gt;<br>
+        &lt;/HEAD&gt;<br>
+        &lt;BODY&gt;<br>
+        &lt;?php<br>
+        /* Entrada de datos desde la URL mediante GET */<br>
+        print (&quot;hola $nombre&quot;);<br>
+        ?&gt;<br>
+        &lt;/BODY&gt;<br>
+        &lt;/HTML&gt;<br>
+        En el navegador podemos ver que creamos la variable $nombre simplemente 
+        tecleando al final de la URL ?nombre=Carlos que php nos mostrar&aacute; 
+        en pantalla. Si no hicieramos esto &uacute;nicamente mostrar&iacute;a 
+        hola</p>
+      <p > Tambi&eacute;n podemos enlazar una p&aacute;gina 
+        con otra enviandole valores para las variables que tengamos predefinidas 
+        en ella:
+        &lt;a href=&#8221;saludo.php?nombre=Carlos&#8221;&gt;Clic para saludo&lt;a&gt;</p>
+      <p> El n&uacute;mero de variables es indeterminado. 
+        Si queremos enviar varias podemos hacerlo utilizando el s&iacute;mbolo 
+        &amp; La &uacute;nica precauci&oacute;n a tomar es que si hubiera espacios 
+        en blanco deber&iacute;amos reemplazarlos por el signo +
+        http://localhost/php/get.php?nombre=Carlos&amp;apellido=Mu&ntilde;oz 
+      </p>
+      </td>
+  </tr>
+  <tr> 
+    <td></td>
+    <td>&nbsp;</td>
+    <td>
+<div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

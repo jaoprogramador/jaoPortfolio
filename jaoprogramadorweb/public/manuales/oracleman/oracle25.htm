@@ -1,0 +1,109 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Disparadores o Triggers Oracle</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta name="keywords" content="Manual Oracle, Tutorial Oracle, Manual SQL, Tutorial SQL, Ejercicios Oracle"><meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="2"> <h2>Disparadores 
+        o Triggers</h2></td>
+  </tr>
+  <tr> 
+    <td height="197" colspan="2"><p>El m&oacute;dulo SQL*Forms tiene incorporado 
+        una colecci&oacute;n de procedimientos y funciones llamados &quot;empaquetados&quot; 
+        que se pueden incluir en el c&oacute;digo de procedimientos o disparadores 
+        o (TRIGGER) definidos por el usuario.</p>
+      <p>El disparador en un bloque de c&oacute;digo que se activa cuando se pulsa 
+        una determinada tecla u ocurre cierto evento, como puede ser:</p>
+      <p>- Mover el cursor hacia o desde un campo, registro, bloque o forma.</p>
+      <p>- Realizar una consulta.</p>
+      <p>- Validar un dato.</p>
+      <p>- Hacer una transacci&oacute;n al insertar, modificar o eliminar registros 
+        de la base de datos.</p>
+      <p>Oracle asocia a cada tecla de funci&oacute;n un procedimiento empaquetado, 
+        pudiendo el usuario redefinir esta asignaci&oacute;n o capturar el el 
+        disparador para ampliarlo o modificarlo con su propio c&oacute;digo.</p>
+      <p>Usaremos como ejemplo la tecla [F9], que tiene asociado el disparador 
+        KEY-LISTVAL, que al activarse llama al procedimiento empaquetado LIST_VALUES, 
+        con el fin de consultar la lista de todos los valores del campo previamente 
+        codificado.</p>
+      <p>Ahora veamos como definimos el disparador KEY-LISTVAL con el objetivo 
+        de capturarlo para consultar, no s&oacute;lo toda la lista de valores 
+        del campo, sino para incluir la potencia del operador LIKE, que nos permitir&aacute; 
+        consultar parte de la lista de valores (a partir de un patr&oacute;n de 
+        consulta), brindando la posibilidad de incluir la consulta del tipo &quot;comienza 
+        con la palabra...&quot; o de la consulta &quot;contiene la palabra...&quot;.</p>
+      <p>En este caso el c&oacute;digo ser&iacute;a:</p>
+      <table width="75%" >
+        <tr> 
+          <td colspan="2"><div align="center">----------------Trigger Definition----------------</div></td>
+        </tr>
+        <tr> 
+          <td width="48%"><pre>Trigger_KEY-LISTVAL
+
+Block:
+Friend:
+Trigger style: V3</pre></td>
+          <td width="52%"><pre>-- For Key Triggers Only --
+[X] Show Keys
+Descrip:</pre></td>
+        </tr>
+        <tr> 
+          <td colspan="2"><div align="center">--------------- Trigger Text--------------- 
+            </div></td>
+        </tr>
+        <tr> 
+          <td height="87"> <pre>BEGIN
+
+  LIST_VALUES(RESTRICT);
+  END;</pre></td>
+          <td>&nbsp;</td>
+        </tr>
+      </table>
+      <p>Donde:</p>
+      <p>KEY-LISTVAL: Disparador que se activa con la tecla [F9] y que, por defecto, 
+        ejecuta el procedimiento LIST_VALUES sin par&aacute;metros, que da la 
+        lista de todos los valores diferentes del campo.</p>
+      <p>LIST_VALUES (RESTRICT) Es el procedimiento empaquetado para obtener la 
+        lista de valores del campo, que con el par&aacute;metro RESTRICT, con 
+        la l&oacute;gica del operador LIKE, permite ampliar las posibidades de 
+        esta consulta; como explicamos anteriormente.</p>
+      <p>A partir de la versi&oacute;n 7 de Oracle, el usuario puede almacenar, 
+        en forma independiente, sus funciones y procedimientos, sin tener que 
+        escribirlos repetidamente para cada forma , y pudiendo compilarlos independientemente 
+        de las formas que lo usen. Pero, adem&aacute;s las funciones y procedimiento 
+        se pueden agrupar en un paquete para compartir definiciones, variables 
+        globales, constantes, cursores, y excepciones, as&iacute; como garantizar 
+        y revocar los permisos a nivel de paquete.</p>
+      <p>En el caso de que sea necesario modificar el contenido del paquete, como 
+        el mismo se encuentra almacenado separadamente, no es necesario recompilar 
+        nada que use ese paquete, lo que facilita la gesti&oacute;n y mantenimiento 
+        de todos los procedimientos almacenados como una sola entidad para una 
+        determinada aplicaci&oacute;n.</p>
+      <p>Adem&aacute;s, en la versi&oacute;n 7, existe un nuevo tipo de disparador, 
+        llamado de <em>base de datos,</em> que es un procedimiento asociado a 
+        una tabla que se activa cuando se produce un suceso que afecta a esa tabla. 
+        Su uso m&aacute;s com&uacute;n consiste en la definici&oacute;n de restricciones 
+        complejas de integridad.</p></td>
+  </tr>
+  <tr> 
+    <td width="70" height="18"></td>
+    <td height="18"> <div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

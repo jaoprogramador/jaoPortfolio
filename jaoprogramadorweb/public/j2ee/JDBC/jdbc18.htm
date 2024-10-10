@@ -1,0 +1,130 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>La clase ResultSet</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación en JDBC,Programas JDBC,Aplicaciones en JDBC,Ejercicios en JDBC, Ejemplos de JDBC,Tutoriales de JDBC,Manuales JDBC" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="JDBC, Manual JDBC, tutorial JDBC, Ejemplos JDBC, ejercicios JDBC">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> La clase ResultSet</h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <p>Un ResultSet contiene todas las filas que 
+        satisfacen las condiciones de una sentencia SQL y proporciona el acceso 
+        a los datos de estas filas mediante un conjunto de m&eacute;todos get 
+        que permiten el acceso a las diferentes columnas de la filas. El m&eacute;todo 
+        ResultSet.next se usa para moverse a la siguiente fila del result set, 
+        convirtiendo a &eacute;sta en la fila act&uacute;al.</p>
+      <p>El formato general de un result set es una tabla con cabeceras de columna 
+        y los valores correspondientes devueltos por la &#8216;query&#8217;. Por 
+        ejemplo, si la &#8216;query&#8217; es SELECT a, b, c FROM Table1, el resultado 
+        tendr&aacute; una forma semejante a :</p>
+      <p> a b c<br>
+        -------- --------- -------- <br>
+        12345 Cupertino CA<br>
+        83472 Redmond WA<br>
+        83492 Boston MA</p>
+      <p>El siguiente fragmento de c&oacute;digo es un ejemplo de la ejecuci&oacute;n 
+        de una sentencia SQL que devolver&aacute; una colecci&oacute;n de filas, 
+        con la columna 1 como un int, la columna 2 como una String y la columna 
+        3 como un array de bytes:</p>
+      <p>java.sql.Statement stmt = conn.createStatement();<br>
+        ResultSet r = stmt.executeQuery(&quot;SELECT a, b, c FROM Table1&quot;);<br>
+        while (r.next()) <br>
+        {<br>
+        // print the values for the current row.<br>
+        int i = r.getInt(&quot;a&quot;);<br>
+        String s = r.getString(&quot;b&quot;);<br>
+        float f = r.getFloat(&quot;c&quot;);<br>
+        System.out.println(&quot;ROW = &quot; + i + &quot; &quot; + s + &quot; 
+        &quot; + f);<br>
+        }</p>
+      <p>5.1.1 Filas y Cursores</p>
+      <p>Un ResultSet mantiene un cursor que apunta a la fila act&uacute;al de 
+        datos. El cursor se mueve una fila hacia abajo cada vez que se llama al 
+        m&eacute;todo next. Incialmente se sit&uacute;a antes de la primera fila, 
+        por lo que hay que llamar al m&eacute;todo next para situarlo en la primera 
+        fila conviertiendola en la fila act&uacute;al. Las filas de ResultSet 
+        se recuperan en secuencia desde la fila m&aacute;s alta a la m&aacute;s 
+        baja.</p>
+      <p>Un cursor se mantiene v&aacute;lido hasta que el objeto Resultset o su 
+        objeto padre Statement se cierra.<br>
+        <br>
+        En SQL, el cursor resultado para una tabla tiene nombre. Si una base de 
+        datos permite upadtes posicionados o deletes posicionados, el nombre del 
+        cursor es necesario y debe ser proporcionado como un par&aacute;metro 
+        del comando update o delete. El nombre del cursor puede obtenerse mediante 
+        una llamada al m&eacute;todo getCursorName.</p>
+      <p>No todas las bases de datos soportan updates o deletes posicionados. 
+        Los m&eacute;todos DatabaseMetaData.supportsPositionedDelete y DatabaseMetaData.supportsPositionedUpdate 
+        nos permiten descubrir si estas operaciones est&aacute;n soportadas en 
+        una conexi&oacute;n dada. Cuando lo est&aacute;n, el driver o la DBMS 
+        deben asegurarse que las filas seleccionadas est&aacute;n apropiadamente 
+        bloquedas y por tanto que estas operaciones no provoquen actualizaciones 
+        anomalas ni otros problemas de concurrencia.</p>
+      <p>5.1.2 Columnas</p>
+      <p>Los m&eacute;todos getXXX suministran los medios para recuperar los valores 
+        de las columnas de la fila act&uacute;al. Dentro de cada fila, los valores 
+        de las columnas pueden recuperarse en cualquier orden, pero para asegurar 
+        la m&aacute;xima portabilidad, deber&iacute;an extraerse las columnas 
+        de izquierda a derecha y leer los valores de las columnas una &uacute;nica 
+        vez.</p>
+      <p>Puede usarse o bien el nombre de la columna o el n&uacute;mero de columna 
+        para referirse a esta. Por ejemplo: si la columna segunda de un objeto 
+        RecordSet rs se denomina &#8220;title&#8221; y almacena valores de cadena, 
+        cualquiera de los dos ejemplos siguientes nos devolver&aacute; el valor 
+        almacenado en la columna.</p>
+      <p>String s = rs.getString(&quot;title&quot;);<br>
+        String s = rs.getString(2);</p>
+      <p>N&oacute;tese que las columnas se numeran de izquierda a derecha comenzando 
+        con la columna 1. Adem&aacute;s los nombres usados como input en los m&eacute;todos 
+        getXXX son insensibles a las may&uacute;sculas.</p>
+      <p>La opci&oacute;n de usar el nombre de columna fue provista para que el 
+        usuario que especifica nombres de columnas en una &#8216;query&#8217; 
+        pueda usar esos nombres como argumentos de los m&eacute;todos getXXX. 
+        Si, por otro lado, la sentencia select no especifica nombres de columnas 
+        (tal como en &#8220;select * from table1&#8221; o en casos donde una columna 
+        es derivada), deben usarse los n&uacute;meros de columna. En estas situaciones 
+        , no hay forma de que el usuario sepa con seguridad cuales son los nombres 
+        de las columnas.<br>
+      </p>
+      <p>En algunos casos, es posible para una query SQL devolver un result set 
+        con m&aacute;s de una columna con el mismo nombre. Si se usa el nombre 
+        de columna como argumento en un m&eacute;todo getXXX, &eacute;ste devolver&aacute; 
+        el valor de la primera columna que coincida con el nombre. Por eso, si 
+        hay m&uacute;ltiples columnas con el mismo nombre, se necesita usar un 
+        &iacute;ndice de columna para asegurarse que se recupera el valor de la 
+        columna correcta. Esto puede ser ligeramente m&aacute;s eficiente que 
+        usar los n&uacute;meros de columna.</p>
+      <p>Informaci&oacute;n acerca de las columnas en un ResultSet es accesible 
+        mediante el m&eacute;todo ResultSet.getMetaData. El objeto ResultSetMetaData 
+        devuelto nos da el numero, tipo y propiedades de las columnas de los objetos 
+        ResultSet.</p>
+      <p>Si se conoce el nombre de una columna, pero no su indice, puede usarse 
+        el m&eacute;todo findColumn para encontrar el n&uacute;mero de columna.</p>
+      <p></p>
+      <p>&nbsp; </p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

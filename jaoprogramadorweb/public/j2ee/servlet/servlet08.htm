@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Problemas con los Threads</title>
+<META http-equiv=Content-Language content=es>
+<META content="Manual Servlet, ejemplos Servlet, codigos Servlet" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Manual Servlet, ejemplos Servlet, codigos Servlet">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2> Problemas con los Threads</h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <p>Los servlets HTTP normalmente pueden servir 
+        a m&uacute;ltiples clientes concurrentemente. Si los m&eacute;todos de 
+        nuestro servlet trabajan con clientes que acceden a recursos compartidos, 
+        podemos manejar la concurrencia creando un servlet que maneje s&oacute;lo 
+        una petici&oacute;n de cliente a la vez. (Tambi&eacute;n se puede sincronizar 
+        el acceso a los recursos, un punto que se cubre en al secci&oacute;n Threads 
+        de Control de este tutorial). Para hacer que el servlet maneje s&oacute;lo 
+        un cliente a la vez, tiene que implementar el interface SingleThreadModel 
+        adem&aacute;s de extender la clase HttpServlet.<br>
+        Implementar el interface SingleThreadModel no implica escribir ning&uacute;n 
+        m&eacute;todo extra. S&oacute;lo se declara que el servlet implementa 
+        el interface, y el servidor se asegura de que nuestro servlet s&oacute;lo 
+        ejecute un m&eacute;todo service cada vez. Por ejemplo, el ReceiptServlet 
+        acepta un nombre de usuario y un n&uacute;mero de tarjeta de credito, 
+        y le agradece al usuario su pedido. Si este servlet actualizara realmente 
+        una base de datos, por ejemplo, una que siga la pista del inventario, 
+        entonces la conexi&oacute;n con la base de datos podr&iacute;a ser un 
+        recurso compartido. El servlet podr&iacute;a sincronizar el acceso a ese 
+        recurso, o implementar el interface SingleThreadModel. Si el servlet implementa 
+        este interface, el &uacute;nico cambio en el c&oacute;digo de la p&aacute;gina 
+        anterior es la l&iacute;nea mostrada en negrita.<br>
+        <p>public class ReceiptServlet extends HttpServlet<br>
+        implements SingleThreadModel {<br>
+        public void doPost(HttpServletRequest request,<br>
+        HttpServletResponse response)<br>
+        throws ServletException, IOException {<br>
+        ...<br>
+        }<br>
+        ...<br>
+        } </p>
+      <p><br>
+      </p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

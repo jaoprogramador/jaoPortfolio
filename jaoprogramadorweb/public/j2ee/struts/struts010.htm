@@ -1,0 +1,301 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Ejemplo c&oacute;digo Struts</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación en Struts,Programas Struts,Aplicaciones en Struts,Ejercicios en Struts, Ejemplos de Struts,Tutoriales de Struts,Manuales Struts" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Struts, Manual Struts, tutorial Struts, Ejemplos Struts, ejercicios Struts">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td colspan="3"><h2> Ejemplo c&oacute;digo Struts</h2></td>
+  </tr>
+  <tr> 
+    <td> <table border="0" >
+        <tr> 
+          <td width="21%"><h3>Contenido:</h3></td>
+          <td width="79%"></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="struts010.htm#1">- Introducci&oacute;n</a></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="struts010.htm#2">- struts-config.xml</a></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="struts010.htm#3">- ActionForm</a></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="struts010.htm#4">- FormBean</a></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="struts010.htm#5">- JSP</a></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="struts010.htm#6">- DAO</a></td>
+        </tr>
+      </table></td>
+  </tr>
+  <tr> 
+    <td colspan="3"> <h3>Introducción:<a name="1"></a></h3>
+      <p>En este apartado veremos la representaci&oacute;n en c&oacute;digo de 
+        un proyecto web con struts y servidor Tomcat 5.5.</p>
+      <p>Trataremos el tipo de parametros que se codifican en el struts-xml para 
+        definir la navegaci&oacute;n web de la aplicaci&oacute;n as&iacute; como 
+        la relaci&oacute;n ActionForm-FormBean, las JSPs que contendr&aacute;n 
+        la informaci&oacute;n que enviaremos a los ActionForm-FormBean y de ahi 
+        a las BD y viceversa.</p>
+      <h3>struts-config.xml<a name="2"></a></h3>
+      <p>Podemos encontrar este fichero tras dentro de nuestro proyecto tras desplegar 
+        &quot;Web Pages&quot; dentro del directorio &quot;WEB-INF&quot;. Su contenido 
+        podr&iacute;a ser similar a esto:</p>
+      <pre>&lt;struts-config&gt;<br>    &lt;form-beans&gt;<br>        
+	  &lt;form-bean name=&quot;consultaUsuariosForm&quot; 
+	  type=&quot;com.jao.controladores.consultas.forms.consultaUsuariosForm&quot;/&gt;
+	  ....
+	  ....
+     &lt;/form-beans&gt;
+     &lt;action-mappings&gt;
+          &lt;action path=&quot;/consultaUsuariosAction&quot; 
+		  type=&quot;com.jao.controladores.consultas.actions.consultaUsuariosAction&quot;<br>
+		  name= &quot;consultaUsuariosForm&quot;   scope=&quot;request&quot;  validate=&quot;false&quot; &gt;<br>
+		  &lt;forward name=&quot;success&quot; path=&quot;JSPs/rsConsultaUsuarios.jsp&quot; /&gt;<br> 
+		                       &lt;forward name=&quot;error&quot; path=&quot;JSPs/formulario.jsp&quot; /&gt;
+          &lt;/action&gt;
+         &lt;action path=&quot;/altaUsuariosAction&quot; <br>
+		 type=&quot;com.jao.controladores.consultas.actions.altaUsuariosAction&quot;<br>
+		 name=&quot;consultaUsuariosForm&quot; scope=&quot;request&quot; validate=&quot;false&quot; &gt;<br>
+		 &lt;forward name=&quot;success&quot; path=&quot;JSPs/altaExito.jsp&quot; /&gt;<br>       
+		 &lt;forward name=&quot;error&quot; path=&quot;JSPs/erroralta.jsp&quot; /&gt;<br>
+     &lt;/action&gt;
+        ......
+        ......<br>
+&lt;/action&gt;</pre> 
+      <h3>Action Form<a name="3"></a></h3>
+      <pre>package com.jao.controladores.consultas.actions;
+        import com.jao.controladores.consultas.forms.consultaUsuariosForm;<br>
+        import com.jao.dao.usuarioDao;<br>
+        import java.util.ArrayList;<br>
+        import javax.servlet.http.HttpServletRequest;<br>
+        import javax.servlet.http.HttpServletResponse;<br>
+        import org.apache.struts.action.ActionForm;<br>
+        import org.apache.struts.action.ActionForward;<br>
+        import org.apache.struts.action.ActionMapping;</pre>
+      <pre>
+        /*<br>
+        *<br>
+        * @author JAO<br>
+        */<br>
+        public class altaUsuariosAction extends org.apache.struts.action.Action 
+        {<br>
+        <br>
+        /* forward name=&quot;success&quot; path=&quot;&quot; */<br>
+        private static final String SUCCESS = &quot;success&quot;;<br>
+        private static final String ERROR = &quot;error&quot;;<br>
+        private consultaUsuariosForm formulario;<br>
+        /**<br>
+        * This is the action called from the Struts framework.<br>
+        * @param mapping The ActionMapping used to select this instance.<br>
+        * @param form The optional ActionForm bean for this request.<br>
+        * @param request The HTTP Request we are processing.<br>
+        * @param response The HTTP Response we are processing.<br>
+        * @throws java.lang.Exception<br>
+        * @return<br>
+        */<br>
+        public ActionForward execute(ActionMapping mapping, ActionForm form,<br>
+        HttpServletRequest request, HttpServletResponse response)<br>
+        throws Exception {<br>
+      String paginaRetorno=&quot;&quot;;<br>
+        int numFilas=0;<br>
+        try {<br>
+               formulario =(consultaUsuariosForm) form;<br>
+               usuarioDao usuDAO=new usuarioDao();<br>
+               numFilas=usuDAO.insert(formulario);<br>
+               if(0&lt;numFilas){<br>
+                      ArrayList alUsuarioAlta= new ArrayList();<br>
+                      alUsuarioAlta.add(formulario);<br>
+                      request.setAttribute(&quot;MiLista&quot;, alUsuarioAlta);<br>
+                     paginaRetorno=SUCCESS;<br>
+               }else{<br>
+                     request.setAttribute(&quot;mensaje&quot;, &quot;no se ha podido realizar 
+                             la insercion&quot;);<br>
+                     paginaRetorno=ERROR;<br>
+               }<br>
+        <br>
+        } catch (Exception e) {<br>
+        e.printStackTrace();<br>
+        request.setAttribute(&quot;mensaje&quot;, &quot;no se ha podido realizar 
+        la insercion&quot;);<br>
+        paginaRetorno=ERROR;<br>
+        }<br>
+        <br>
+        return mapping.findForward(paginaRetorno);<br>
+        }<br>
+        }</pre> 
+      <h3>FormBean<a name="4"></a></h3>
+      <pre>package com.jao.controladores.consultas.forms;</pre>
+      import javax.servlet.http.HttpServletRequest;<br>
+      import org.apache.struts.action.ActionErrors;<br>
+      import org.apache.struts.action.ActionMapping;<br>
+      import org.apache.struts.action.ActionMessage; /**<br>
+      *<br>
+      * @author JAO<br>
+      */<br>
+      public class consultaUsuariosForm extends org.apache.struts.action.ActionForm 
+      { <br>
+      private Integer id;<br>
+      private String usuario;<br>
+      private String clave;<br>
+      private String edad;<br>
+      private String fechanacimiento;<br>
+      private String profesion;<br> <br>
+      public Integer getId() {<br>
+      return id;<br>
+      } public void setId(Integer id) {<br>
+      this.id = id;<br>
+      }<br>
+      public String getClave() {<br>
+      return clave;<br>
+      } public void setClave(String clave) {<br>
+      this.clave = clave;<br>
+      } public String getEdad() {<br>
+      return edad;<br>
+      } public void setEdad(String edad) {<br>
+      this.edad = edad;<br>
+      } public String getFechanacimiento() {<br>
+      return fechanacimiento;<br>
+      } public void setFechanacimiento(String fechanacimiento) {<br>
+      this.fechanacimiento = fechanacimiento;<br>
+      } public String getProfesion() {<br>
+      return profesion;<br>
+      } public void setProfesion(String profesion) {<br>
+      this.profesion = profesion;<br>
+      } public String getUsuario() {<br>
+      return usuario;<br>
+      } public void setUsuario(String usuario) {<br>
+      this.usuario = usuario;<br>
+      } <br>
+      /**<br>
+      *<br>
+      */<br>
+      public consultaUsuariosForm() {<br>
+      super();<br>
+      // TODO Auto-generated constructor stub<br>
+      } /**<br>
+      * This is the action called from the Struts framework.<br>
+      * @param mapping The ActionMapping used to select this instance.<br>
+      * @param request The HTTP Request we are processing.<br>
+      * @return<br>
+      */<br>
+      public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) 
+      {<br>
+      ActionErrors errors = new ActionErrors();<br>
+      if (getUsuario() == null || getUsuario().length() &lt; 1) {<br>
+      errors.add(&quot;name&quot;, new ActionMessage(&quot;error.name.required&quot;));<br>
+      // TODO: add 'error.name.required' key to your resources<br>
+      }<br>
+      return errors;<br>
+      }<br>
+      } 
+      <pre> <br></pre> <p>&nbsp;</p>
+      <h3>JSP<a name="5"></a></h3>
+      <pre>&lt;!--alta.jsp--&gt;</pre> &lt;%@ page language=&quot;java&quot; %&gt; <p>&lt;%@ 
+        taglib uri=&quot;http://struts.apache.org/tags-bean&quot; prefix=&quot;bean&quot; 
+        %&gt;<br>
+        &lt;%@ taglib uri=&quot;http://struts.apache.org/tags-html&quot; prefix=&quot;html&quot; 
+        %&gt;<br>
+        &lt;%@ taglib uri=&quot;http://struts.apache.org/tags-logic&quot; prefix=&quot;logic&quot; 
+        %&gt; 
+      <pre>&nbsp;&lt;html:html&gt;<br>&lt;head&gt;<br>	&lt;title&gt;STRUTS :: ejemplo de ALTA&lt;/title&gt;<br>&lt;/head&gt;</pre> &lt;body&gt;<br> 
+      &lt;html:form action=&quot;/altaUsuariosAction?tipo=A&quot; &gt; <br> &lt;b&gt;&lt;bean:message 
+      key=&quot;titulo.alta&quot;/&gt;&lt;/b&gt;&lt;hr&gt; <br> &lt;bean:message 
+      key=&quot;text1.usuario&quot;/&gt;<br>
+      &lt;html:text property=&quot;usuario&quot; size=&quot;8&quot; maxlength=&quot;8&quot; 
+      /&gt;&lt;br&gt;<br> &lt;bean:message key=&quot;text2.clave&quot;/&gt;<br>
+      &lt;html:password property=&quot;clave&quot; size=&quot;8&quot; maxlength=&quot;8&quot; 
+      /&gt;&lt;br&gt;<br> &lt;bean:message key=&quot;text3.edad&quot;/&gt;<br>
+      &lt;html:text property=&quot;edad&quot; size=&quot;3&quot; maxlength=&quot;3&quot;/&gt;&lt;br&gt;<br> 
+      &lt;bean:message key=&quot;text4.fechanacimiento&quot;/&gt;<br>
+      &lt;html:text property=&quot;fechanacimiento&quot; size=&quot;10&quot; maxlength=&quot;10&quot;/&gt;&lt;br&gt;<br> 
+      &lt;bean:message key=&quot;text5.profesion&quot;/&gt;<br>
+      &lt;html:select property=&quot;profesion&quot;&gt;<br> &lt;html:option value=&quot;-1&quot;&gt;Selecciona 
+      Una categoria&lt;/html:option&gt;<br> &lt;html:option value=&quot;ProgramadorJR&quot;&gt;Programador 
+      Jr&lt;/html:option&gt;<br> &lt;html:option value=&quot;ProgramadorSR&quot;&gt;Programador 
+      Sr&lt;/html:option&gt;<br> &lt;html:option value=&quot;Analista Programador&quot;&gt;Analista 
+      Programador&lt;/html:option&gt;<br> &lt;html:option value=&quot;Analista&quot;&gt;Analista&lt;/html:option&gt;<br> 
+      &lt;html:option value=&quot;Jefe Proyecto&quot;&gt;Jefe Proyecto&lt;/html:option&gt;<br> 
+      &lt;/html:select&gt;&lt;br&gt;<br> &lt;html:hidden property=&quot;id&quot;&gt;&lt;/html:hidden&gt; 
+      <br>
+      &lt;html:submit property=&quot;alta&quot;/&gt;<br> &lt;/html:form&gt; <br>
+      &lt;/body&gt;<br> &lt;/html:html&gt;<br> 
+      <h3>&nbsp;</h3> 
+  <tr>
+    <td><h3>DAO<a name="6"></a></h3>
+      <br> <pre>El ejemplo completo del DAO usuarioDAO.java se puede ver en <br>
+	  el apartado J2EE-&gt;JDBC </pre> 
+		&nbsp;package com.jao.dao;<br>
+		import com.jao.controladores.consultas.forms.consultaUsuariosForm;<br>
+		import com.jao.controladores.forms.login;<br>
+		import com.jao.model.Usuario;<br>
+		import java.sql.Statement;<br>
+		import java.sql.Connection;<br>
+		import java.sql.DriverManager;<br>
+		import java.sql.SQLException;<br>
+		import java.sql.ResultSet;<br>
+		import java.util.ArrayList;<br>
+		
+		/**<br>
+		 *<br>
+		 * @author JAO<br>
+		 */<br>
+		public class usuarioDao {<br>
+			public int insert( consultaUsuariosForm usu )  throws SQLException {<br>
+				int numFilas = 0;<br>
+						Statement sentencia=null;<br>
+						Connection con=null;<br>
+						try {<br>
+							con = getConexion();<br>
+							String strSQL = "INSERT INTO usuarios VALUES (" +<br>
+								"'"+usu.getUsuario()+"','" + usu.getClave()+<br>
+								"','"+ usu.getEdad()+"','" + usu.getFechanacimiento() + "',"+<br>
+								"'" + usu.getProfesion()+ "',null)";<br>
+		
+							sentencia = (Statement) con.createStatement();<br>
+							numFilas=sentencia.executeUpdate(strSQL);<br>
+							System.out.println("DAO:Hace una insert");<br>
+						} catch (Exception e) {<br>
+							e.printStackTrace();<br>
+						}<br>
+				sentencia.close();<br>
+				con.close();<br>
+						return numFilas;<br>
+		
+			}</td>
+  </tr>
+  <tr> 
+    <td  height="21"></td>
+    <td  height="21">&nbsp;</td>
+    <td ><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</body>
+</html>

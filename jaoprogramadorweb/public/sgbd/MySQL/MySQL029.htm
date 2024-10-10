@@ -1,0 +1,1297 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Ejercicios MySQL</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="MySQL, sql, pl/sql, programacion MySQL, ejercicios MySQL, ejemplos MySQL, select">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2>T I P O S  D E  C O L U M N A</h2></td>
+  </tr>
+  <tr> 
+    <td><h3>Introducción</h3>
+      <p>MySQL soporta un n&uacute;mero de tipos de columnas divididos en varias 
+        categor&iacute;as: tipos n&uacute;mericos, tipos de fecha y hora, y tipos 
+        de<br>
+        cadenas de caracteres. Este cap&iacute;tulo primero hace un repaso de 
+        estos tipos de columnas, y luego proporciona una descripci&oacute;n detallada<br>
+        de las propiedades de los tipos de cada categor&iacute;a, y un resumen 
+        de sus requerimientos de almacenamiento. El repaso es intencionalmente<br>
+        breve. Las descripciones m&aacute;s detalladas deben consultarse para 
+        obtener m&aacute;s informaci&oacute;n acerca de los tipos de datos<br>
+        particulares, como los formatos permitidos para especificar los tipos.<br>
+        MySQL 5.0 soporta extensiones para tratar datos espaciales. Informaci&oacute;n 
+        al respecto se proporciona en Cap&iacute;tulo 18, Extensiones<br>
+        espaciales de MySQL.<br>
+        Varias descripciones de los tipos de columnas usan estas convenciones:<br>
+        &#8226; M<br>
+        Indica la m&aacute;xima anchura al mostrar los datos. El m&aacute;ximo 
+        ancho de muestra es 255.<br>
+        &#8226; D<br>
+        Se aplica a tipos de coma flotante y de coma fija e indica el n&uacute;mero 
+        de d&iacute;gitos a continuaci&oacute;n del punto decimal. El valor m&aacute;ximo<br>
+        posible es 30, pero no debe ser mayor que M-2.<br>
+        &#8226;<br>
+        Los corchetes ('[' y ']') indican partes de especificadores de tipos que 
+        son opcionales.<br>
+        <h3>tipos num&eacute;ricos</h3><br>
+        A continuaci&oacute;n hay un resumen de los tipos de columnas num&eacute;ricos. 
+        Para informaci&oacute;n adicional, consulte Secci&oacute;n 11.2, &#8220;Tipos 
+        num&eacute;ricos&#8221;.<br>
+        Los requerimientos de almacenamiento de columna se dan en Secci&oacute;n 
+        11.5, &#8220;Requisitos de almacenamiento seg&uacute;n el tipo<br>
+        de columna&#8221;.<br>
+        M indica la anchura m&aacute;xima para mostrar. La anchura m&aacute;xima 
+        es 255. La anchura de muestra no tiene nada que ver con el tama&ntilde;o<br>
+        de almacenamiento o el rango de valores que el valor puede contener, como 
+        se describe en Secci&oacute;n 11.2, &#8220;Tipos num&eacute;ricos&#8221;.<br>
+        Si especifica ZEROFILL para columnas num&eacute;ricas,, MySQL a&ntilde;ade 
+        autom&aacute;ticamente el atributo UNSIGNED en la columna.<br>
+        SERIAL es un alias para BIGINT UNSIGNED NOT NULL AUTO_INCREMENT.<br>
+        SERIAL DEFAULT VALUE en la definici&oacute;n de una columna de tipo entero 
+        es un alias para NOT NULL AUTO_INCREMENT<br>
+        UNIQUE.<br>
+        Atenci&oacute;n: Debe tener en cuenta que cuando usa la resta entre valores 
+        enteros cuando uno de los operandos es de tipo UNSIGNED,<br>
+        el resultado no tiene signo. Consulte Secci&oacute;n 12.8, &#8220;Funciones 
+        y operadores de cast&#8221;.<br>
+        &#8226; BIT[(M)]<br>
+        En un tipo de datos bit. M indica el n&uacute;mero de bits por valor, 
+        de 1 a 64. El valor por defecto es 1 si se omite M .<br>
+        Este tipo de datos se a&ntilde;adi&oacute; en MySQL 5.0.3 para MyISAM, 
+        una extensi&oacute;n en 5.0.5 para MEMORY, InnoDB, y BDB. Antes de<br>
+        5.0.3, BIT es un sin&oacute;nimo de TINYINT(1).<br>
+        &#8226; TINYINT[(M)] [UNSIGNED] [ZEROFILL]<br>
+        Un entero muy peque&ntilde;o. El rango con signo es de -128 a 127. El 
+        rango sin signo es de 0 a 255.<br>
+        &#8226; BOOL, BOOLEAN<br>
+        Son sin&oacute;nimos para TINYINT(1). Un valor de cero se considera falso. 
+        Valores distintos a cero se consideran ciertos.<br>
+        En el futuro, se introducir&aacute; tratamiento completo de tipos booleanos 
+        seg&uacute;n el est&aacute;ndar SQL.<br>
+        &#8226; SMALLINT[(M)] [UNSIGNED] [ZEROFILL]<br>
+        Un entero peque&ntilde;o. El rango con signo es de -32768 a 32767. El 
+        rango sin signo es de 0 a 65535.<br>
+        &#8226; MEDIUMINT[(M)] [UNSIGNED] [ZEROFILL]<br>
+        Entero de tama&ntilde;o medio. El rango con signo es de -8388608 a 8388607. 
+        El rango sin singo es de 0 a 16777215.<br>
+        &#8226; INT[(M)] [UNSIGNED] [ZEROFILL]<br>
+        Un entero de tama&ntilde;o normal. El rango con signo es de -2147483648 
+        a 2147483647. El rango sin signo es de 0 a<br>
+        4294967295.<br>
+        &#8226; INTEGER[(M)] [UNSIGNED] [ZEROFILL]<br>
+        Es un sin&oacute;nimo de INT.<br>
+        &#8226; BIGINT[(M)] [UNSIGNED] [ZEROFILL]<br>
+        Un entero grande. El rango con signo es de -9223372036854775808 a 9223372036854775807. 
+        El rango sin signo es<br>
+        de 0 a 18446744073709551615.<br>
+        Algunos aspectos a considerar con respecto a las columnas BIGINT :<br>
+        &#8226;<br>
+        Toda la aritm&eacute;tica se hace usando valores BIGINT o DOUBLE, as&iacute; 
+        que no debe usar enteros sin signos mayores que<br>
+        9223372036854775807 (63 bits) except con funciones bit! Si lo hace, algunos 
+        de los &uacute;ltimos d&iacute;gitos en el resultado<br>
+        pueden ser err&oacute;neos por culpa de errores de redondeo al convertir 
+        valores BIGINT a DOUBLE.<br>
+        MySQL 5.0 puede tratar BIGINT en los siguientes casos:<br>
+        &#8226; Cuando usa enteros para almacenar valores grandes sin signo en 
+        una columna BIGINT .<br>
+        &#8226; En MIN(col_name) o MAX(col_name), donde col_name se refiere a 
+        una columna BIGINT .<br>
+        &#8226; Al usar operadores (+, -, *, y as&iacute;) donde ambos operadores 
+        son enteros.<br>
+        &#8226; Siempre puede guardar un valor entero exacto en un columna BIGINT 
+        almacen&aacute;ndolo usando una cadena de caracteres. En<br>
+        este caso, MySQL realiza una conversi&oacute;n cadena de caracteres-n&uacute;mero 
+        que no implica representaci&oacute;n de doble precisi&oacute;n intermedia.<br>
+        &#8226; Los operadores -, +, y * usan BIGINT en operaciones aritm&eacute;ticas 
+        cuando ambos operandos son valores enteros. Esto significa<br>
+        que si multiplica dos enteros grandes (o resultados de funciones que devuelven 
+        enteros), puede obtener resultados inesperados<br>
+        cuando el resultado es mayor que 9223372036854775807.<br>
+        &#8226; FLOAT(p) [UNSIGNED] [ZEROFILL]<br>
+        N&uacute;mero con coma flotante. p representa la precisi&oacute;n. Puede 
+        ir de 0 a 24 para n&uacute;meros de coma flotante de precisi&oacute;n 
+        sencilla y<br>
+        de 25 a 53 para n&uacute;meros de coma flotante con doble precisi&oacute;n. 
+        Estos tipos son como los tipos FLOAT y DOUBLE descritos a<br>
+        continuaci&oacute;n. FLOAT(p) tiene le mismo rango que los tipos correspondientes 
+        FLOAT y DOUBLE, pero la anchura de muestra<br>
+        y el n&uacute;mero de decimales no est&aacute;n definidos.<br>
+        En MySQL 5.0, este es un valor de coma flotante aut&eacute;ntico.<br>
+        Esta sintaxis se proprociona para compatibilidad con ODBC.<br>
+        Usar FLOAT puede darle algunos problemas inesperados ya que todos los 
+        c&aacute;lculos se en MySQL se hacen con doble precisi&oacute;n.<br>
+        Consulte Secci&oacute;n A.5.7, &#8220;Resolver problemas con registros 
+        que no salen&#8221;.<br>
+        &#8226; FLOAT[(M,D)] [UNSIGNED] [ZEROFILL]<br>
+        Un n&uacute;mero de coma flotante peque&ntilde;o (de precisi&oacute;n 
+        simple). Los valores permitidos son de -3.402823466E+38 a -<br>
+        1.175494351E-38, 0, y de 1.175494351E-38 a 3.402823466E+38. Si se especifica 
+        UNSIGNED, los valores negativos<br>
+        no se permiten. M es la anchura de muestra y D es el n&uacute;mero de 
+        d&iacute;gitos significativos. FLOAT sin argumentos o FLOAT(p)<br>
+        (donde p est&aacute; en el rango de 0 a 24) es un n&uacute;mero de coma 
+        flotante con precisi&oacute;n simple.<br>
+        &#8226; DOUBLE[(M,B)] [UNSIGNED] [ZEROFILL]<br>
+        N&uacute;mero de coma flotante de tama&ntilde;o normal (precisi&oacute;n 
+        doble). Los valores permitidos son de -<br>
+        1.7976931348623157E+308 a -2.2250738585072014E-308, 0, y de 2.2250738585072014E-308 
+        a<br>
+        1.7976931348623157E+308. Si se especifica UNSIGNED, no se permiten valores 
+        negativos. M es la anchura de muestra y<br>
+        B es el n&uacute;mero de bits de precisi&oacute;n. DOUBLE sin par&aacute;metros 
+        o FLOAT(p) (donde p est&aacute; en el rango de 25 a 53) es un n&uacute;mero<br>
+        de coma flotante con doble precisi&oacute;n. Un n&uacute;mero de coma 
+        flotante con precision sencilla tiene una precisi&oacute;n de 7 decimales<br>
+        aproximadamente; un n&uacute;mero con coma flotante de doble precisi&oacute;n 
+        tiene una precisi&oacute;n aproximada de 15 decimales.<br>
+        &#8226; DOUBLE PRECISION[(M,D)] [UNSIGNED] [ZEROFILL], REAL[(M,D)] [UNSIGNED] 
+        [ZEROFILL]<br>
+        Son sin&oacute;nimos de DOUBLE. Excepci&oacute;n: Si el modo del servidor 
+        SQL incluye la opci&oacute;n REAL_AS_FLOAT, REAL es un sin&oacute;nimo<br>
+        para FLOAT en lugar de DOUBLE.<br>
+        &#8226; DECIMAL[(M[,D])] [UNSIGNED] [ZEROFILL]<br>
+        A partir de MySQL 5.0.3:<br>
+        N&uacute;mero de punto fijo exacto y empaquetado. M es el n&uacute;mero 
+        total de d&iacute;gitos y D es el n&uacute;mero de decimales. El punto 
+        decimal y<br>
+        (para n&uacute;meros negativos) el signo '-' no se tiene en cuenta en 
+        M. Si D es 0, los valores no tienen punto decimal o parte fraccional.<br>
+        El m&aacute;ximo n&uacute;mero de d&iacute;gitos (M) para DECIMAL es 64. 
+        El m&aacute;ximo n&uacute;mero de decimales soportados (D) es 30. Si UNSIGNED<br>
+        se especifica, no se permiten valores negativos.<br>
+        Si se omite D, el valor por defecto es 0. Si se omite M, el valor por 
+        defecto es 10.<br>
+        Todos los c&aacute;lculos b&aacute;sicos (+, -, *, /) con columnas DECIMAL 
+        se hacen con precisi&oacute;n de 64 d&iacute;gitos decimales.<br>
+        Antes de MySQL 5.0.3:<br>
+        N&uacute;mero de punto decimal fijo sin empaquetar. Se comporta como una 
+        columna CHAR ; &quot;sin empaquetar&quot; significa que el n&uacute;mero<br>
+        se alacena como una cadena de caracteres, usando un car&aacute;cter para 
+        cada d&iacute;gito del valor. M es el n&uacute;mero total de d&iacute;gitos 
+        y D<br>
+        es el n&uacute;mero de decimales. El punto decimal y (para n&uacute;meros 
+        negativos) el signo '-' no se cuenta en M, aunque se reserva espacio<br>
+        para &eacute;l. Si D es 0, los valores no tienen punto decimal ni parte 
+        fraccional. El m&aacute;ximo rango de los valores DECIMAL es el<br>
+        mismo que para DOUBLE, pero el rango real para una columna DECIMAL dada 
+        puede estar restringido por la elecci&oacute;n de M y D.<br>
+        Si se especifica UNSIGNED no se permiten n&uacute;meros negativos.<br>
+        Si se omite D, el valor por defecto es 0. Si se omite M, el valor por 
+        defecto es 10.<br>
+        &#8226; DEC[(M[,D])] [UNSIGNED] [ZEROFILL], NUMERIC[(M[,D])] [UNSIGNED] 
+        [ZEROFILL],<br>
+        FIXED[(M[,D])] [UNSIGNED] [ZEROFILL]<br>
+        Son sin&oacute;nimos para DECIMAL. El sin&oacute;nimo FIXED est&aacute; 
+        disponible por compatibilidad con otros servidores.<br>
+        <h3>Fechas y horas</h3><br>
+        Un resumen de los tipos de columnas temporales se muestra a continuaci&oacute;n. 
+        Para informaci&oacute;n adicional, consulte Secci&oacute;n 11.3,<br>
+        &#8220;Tipos de fecha y hora&#8221;. Los requerimientos de almacenamiento 
+        se dan en Secci&oacute;n 11.5, &#8220;Requisitos de almacenamiento seg&uacute;n 
+        el<br>
+        tipo de columna&#8221;.<br>
+        &#8226; DATE<br>
+        Una fecha. El rango soportado es de '1000-01-01' a '9999-12-31'. MySQL 
+        muestra valores DATE en formato 'YYYYMM-DD', pero permite asignar valores 
+        a columnas DATE usando cadenas de caracteres o n&uacute;meros.<br>
+        &#8226; DATETIME<br>
+        Combinaci&oacute;n de fecha y hora. El rango soportado es de '1000-01-01 
+        00:00:00' a '9999-12-31 23:59:59'.<br>
+        MySQL muestra valores DATETIME en formato 'YYYY-MM-DD HH:MM:SS', pero 
+        permite asignar valores a las columnas<br>
+        DATETIME usando cadenas de caracteres o n&uacute;meros.<br>
+        &#8226; TIMESTAMP[(M)]<br>
+        Una marca temporal. El rango es de '1970-01-01 00:00:00' hasta el a&ntilde;o 
+        2037.<br>
+        Una columna TIMESTAMP es &uacute;til para registrar la fecha y hora de 
+        una operaci&oacute;n INSERT o UPDATE . La primera columna<br>
+        TIMESTAMP en una tabla se rellena autom&aacute;ticamente con la fecha 
+        y hora de la operaci&oacute;n m&aacute;s reciente si no le asigna un valor.<br>
+        Puede asignar a cualquier columna TIMESTAMP la fecha y hora actual asign&aacute;ndole 
+        un valor NULL .<br>
+        En MySQL 5.0, TIMESTAMP se retorna como una cadena de caracteres en el 
+        formato 'YYYY-MM-DD HH:MM:SS' cuya anchura<br>
+        de muestra son 19 caracteres. Si quiere obtener el valor como un n&uacute;mero, 
+        debe a&ntilde;adir +0 a la columa timestamp .<br>
+        &#8226; TIME<br>
+        Una hora. El rango es de '-838:59:59' a '838:59:59'. MySQL muestra los 
+        valores TIME en formato 'HH:MM:SS',<br>
+        pero permite asingar valores a columnas TIME usando n&uacute;meros o cadenas 
+        de caracteres.<br>
+        &#8226; YEAR[(2|4)]<br>
+        Un a&ntilde;o en formato de dos o cuatro d&iacute;gitos. El valor por 
+        defecto est&aacute; en formato de cuatro d&iacute;gitos. En formato de 
+        cuatro d&iacute;gitos,<br>
+        los valores permitidos son de 1901 a 2155, y 0000. En formato de dos d&iacute;gitos, 
+        los valores permitidos son de 70 a 69, representando<br>
+        los a&ntilde;os de 1970 a 2069. MySQL muestra los valores YEAR en formato 
+        YYYY pero permite asignar valores a columnas<br>
+        YEAR usando cadenas de caracteres o n&uacute;meros.<br>
+        <h3>Cadenas de caracteres</h3><br>
+        Un resumen de los tipos de columnas de cadenas de caracteres se muestra 
+        a continuaci&oacute;n. Para informaci&oacute;n adicional, consulte Secci&oacute;n<br>
+        11.4, &#8220;Tipos de cadenas de caracteres&#8221;. Los requerimientos 
+        de almacenamiento de estas columnas se dan en Secci&oacute;n 11.5,<br>
+        &#8220;Requisitos de almacenamiento seg&uacute;n el tipo de columna&#8221;.<br>
+        En algunos casos, MySQL puede cambiar una columna de cadena de caracteres 
+        a un tipo diferente para un comando CREATE TABLE<br>
+        o ALTER TABLE . Consulte Secci&oacute;n 13.1.5.1, &#8220;Cambios t&aacute;citos 
+        en la especificaci&oacute;n de columnas&#8221;.<br>
+        Los tipos de cadenas de caracteres MySQL 5.0 incluyen algunas caracter&iacute;sticas 
+        que puede que no haya encontrado trabajando con<br>
+        versiones anteriores de MySQL anteriores a la 4.1:<br>
+        &#8226; Las definiciones de columnas para varios tipos de datos de cadenas 
+        de caracteres incluyen un atributo CHARACTER SET para<br>
+        especificar el conjunto de caracteres y, ocasionalmente, una colaci&oacute;n. 
+        (CHARSET es sin&oacute;nimo de CHARACTER SET.) Estos<br>
+        atributos se aplican a los tipos CHAR, VARCHAR, TEXT, ENUM, y SET. Por 
+        ejemplo:<br>
+        CREATE TABLE t<br>
+        (<br>
+        c1 CHAR(20) CHARACTER SET utf8,<br>
+        c2 CHAR(20) CHARACTER SET latin1 COLLATE latin1_bin<br>
+        );<br>
+        Esta definici&oacute;n de tabla crea una columna llamada c1 que tiene 
+        un conjunto de caracteres utf8 con la colaci&oacute;n por defecto para<br>
+        ese conjunto de caracteres, y una columna llamada c2 que tiene el conjunto 
+        de caracteres latin1 y la colaci&oacute;n binaria para<br>
+        el conjunto de caracteres. La colaci&oacute;n binaria no es sensible a 
+        may&uacute;sculas.<br>
+        &#8226; MySQL 5.0 interpreta las especificaciones de longitud en las definiciones 
+        de las columnas en unidades de caracteres . (En algunas<br>
+        versiones anteriores de MySQL la longitud se interpreta en bytes.)<br>
+        &#8226; Para los tipos CHAR, VARCHAR, y the TEXT, el atributo BINARY hace 
+        que se asigne a la columna la colaci&oacute;n binaria del conjunto<br>
+        de caracteres.&#8226; Las ordenaciones y comparaciones de las columnas 
+        de tipo car&aacute;cter se basan en el conjunto de caracteres asignado 
+        a la columna.<br>
+        Para versiones anteriores, la comparaci&oacute;n y ordenaci&oacute;n se 
+        basan en la colaci&oacute;n del conjunto de caracteres del servidor. Para<br>
+        columnas CHAR y VARCHAR, puede declarar que la columna con el atributo 
+        BINARY realice la ordenaci&oacute;n y la comparaci&oacute;n<br>
+        usando los c&oacute;digos de los valores subyacentes en lugar del orden 
+        l&eacute;xico.<br>
+        Para m&aacute;s informaci&oacute;n acerca del soporte de conjuntos de 
+        caracteres en MySQL 5.0, consulte Cap&iacute;tulo 10, Soporte de conjuntos 
+        de<br>
+        caracteres.<br>
+        &#8226; [NATIONAL] CHAR(M) [BINARY | ASCII | UNICODE]<br>
+        Una cadena de caracteres de longitud fija que siempre tiene el n&uacute;mero 
+        necesario de espacios a la derecha para ajustarla a la longitud<br>
+        especificada al almacenarla. M representa la longitud de la columna. El 
+        rango de M en MySQL 5.0 es de 0 a 255 caracteres.<br>
+        Nota: Los espacios a la derecha se borran cuando se obtiene los valores 
+        CHAR .<br>
+        Antes de MySQL 5.0.3, una columna CHAR con una longitud especificada mayor 
+        que 255 se convierte al tipo TEXT m&aacute;s peque&ntilde;o<br>
+        que pueda tener los valores de la longitud dada. Por ejemplo, CHAR(500) 
+        se convierte a TEXT, y CHAR(200000) se<br>
+        convierte en MEDIUMTEXT. Esta es una caracter&iacute;stica de compatibilidad. 
+        Sin embargo, esta conversi&oacute;n causa que la columna<br>
+        tenga longitud variable, y tambi&eacute;n afecta a la eliminaci&oacute;n 
+        de espacios.<br>
+        CHAR es una abreviatura para CHARACTER. NATIONAL CHAR (o su forma equivalente 
+        de, NCHAR) es la forma est&aacute;ndar de<br>
+        SQL de definir que una columna CHAR debe usar el conjunto de caracteres 
+        por defecto. Este es el comportamiento por defecto<br>
+        en MySQL.<br>
+        El atributo BINARY es una abreviatura para especificar la colaci&oacute;n 
+        binaria del conjunto de caracteres de la columna. La ordenaci&oacute;n<br>
+        y comparaci&oacute;n se basa en los valores num&eacute;ricos de los caracteres.<br>
+        El tipo de columna CHAR BYTE es un alias para CHAR BINARY. Esta es una 
+        caracter&iacute;stica de compatibilidad.<br>
+        El atributo ASCII puede especificarse para CHAR. Asigna el conjunto de 
+        caracteres latin1.<br>
+        El atributo UNICODE puede especificarse en MySQL 5.0 para CHAR. Asigna 
+        el conjunto de caracteres ucs2 .<br>
+        MySQL le permite crear un tipo de columna CHAR(0). Esto es &uacute;til 
+        cuando tiene que cumplir con las especificaciones de alguna<br>
+        aplicaci&oacute;n vieja que dependa de la existencia de una columna pero 
+        que no usa realmente el valor. Esto es tambi&eacute;n &uacute;til cuando<br>
+        necesita una columna que s&oacute;lo pueda tener dos valores: Una columna 
+        CHAR(0) que no est&eacute; definido como NOT NULL<br>
+        ocupa s&oacute;lo un bit y s&oacute;lo puede tener dos valores NULL y 
+        '' (la cadena de caracteres vac&iacute;a).<br>
+        &#8226; CHAR<br>
+        Es un sin&oacute;nimo de CHAR(1).<br>
+        &#8226; [NATIONAL] VARCHAR(M) [BINARY]<br>
+        Cadena de caracteres de longitud variable. M representa la longitud de 
+        columna m&aacute;xima. En MySQL 5.0, el rango de M es de 0 a<br>
+        255 antes de MySQL 5.0.3, y de 0 a 65,535 en MySQL 5.0.3 y posterior. 
+        (La longitud m&aacute;xima real de un VARCHAR en MySQL<br>
+        5.0 se determina por el tama&ntilde;o de registro m&aacute;ximo y el conjunto 
+        de caracteres que use. La longitud m&aacute;xima efectiva desde<br>
+        MySQL 5.0.3 es de 65,532 bytes.)<br>
+        Nota: Antes de 5.0.3, los espacios finales se eliminaban cuando se almacenaban 
+        los valores VARCHAR, lo que difiere de le especificaci&oacute;n<br>
+        est&aacute;ndar de SQL.<br>
+        Previo a MySQL 5.0.3, una columna VARCHAR con una longitud especificada 
+        mayor a 255 se convert&iacute;a al valor de tipo TEXT<br>
+        m&aacute;s peque&ntilde;o que pod&iacute;a soportar el valor de la longitu 
+        dada. Por ejemplo, VARCHAR(500) se convert&iacute;a a TEXT, y VARCHAR(<br>
+        200000) se convert&iacute;a a MEDIUMTEXT. Esto era una cuesti&oacute;n 
+        de compatibilidad. Sin embargo, esta conversi&oacute;n afectaba<br>
+        la eliminaci&oacute;n de espacios finales.<br>
+        VARCHAR es la abreviaci&oacute;n de CHARACTER VARYING.<br>
+        En MySQL 5.0, el atributo BINARY es abreviatura para especificar la colaci&oacute;n 
+        binaria del conjunto de caracteres de la columna.<br>
+        La ordenaci&oacute;n y la comparaci&oacute;n se basa en los valores num&eacute;ricos 
+        de los caracteres.<br>
+        Desde MySQL 5.0.3, VARCHAR se guarda con un prefijo de longitud de uno 
+        o dos bytes + datos. La longitud del prefijo es de<br>
+        dos bytes si la columna VARCHAR se declara con una longitud mayor a 255.<br>
+        &#8226; BINARY(M)<br>
+        El tipo BINARY es similar al tipo CHAR, pero almacena cadenas de datos 
+        binarios en lugar de cadenas de caracteres no binarias.<br>
+        &#8226; VARBINARY(M)<br>
+        El tipo VARBINARY es similar al tipo VARCHAR, pero almacena cadenas de 
+        caracteres binarias en lugar de cadenas de caracteres<br>
+        no binarias.<br>
+        &#8226; TINYBLOB<br>
+        Una columna BLOB con una longitud m&aacute;xima de 255 (2^8 - 1) bytes.<br>
+        &#8226; TINYTEXT<br>
+        Una columna TEXT con longitud m&aacute;xima de 255 (2^8 - 1) caracteres.<br>
+        &#8226; BLOB[(M)]<br>
+        Una columna BLOB con longitud m&aacute;xima de 65,535 (2^16 - 1) bytes.<br>
+        Una longitud opcional M puede darse para este tipo en MySQL 5.0. Si se 
+        hace, MySQL crear&aacute; las columnas como el tipo BLOB<br>
+        de tama&ntilde;o m&iacute;nimo para tratar los valores de M bytes.<br>
+        &#8226; TEXT[(M)]<br>
+        Una columna TEXT con longitud m&aacute;xima de 65,535 (2^16 - 1) caracteres.<br>
+        En MySQL 5.0, se puede dar una longitud opcional M . En ese caso MySQL 
+        crear&aacute; las columnas con el tipo TEXT de longitud<br>
+        m&iacute;nima para almacenar los valors de longitud M .<br>
+        &#8226; MEDIUMBLOB<br>
+        Una columna BLOB con longitud de 16,777,215 (2^24 - 1) bytes.<br>
+        &#8226; MEDIUMTEXT<br>
+        Una columna TEXT con longitud m&aacute;xima de 16,777,215 (2^24 - 1) caracteres.<br>
+        &#8226; LONGBLOB<br>
+        Una columna BLOB con longitud m&aacute;xima de 4,294,967,295 o 4GB (2^32 
+        - 1) bytes. La longitud m&aacute;xima efectiva (permitida)<br>
+        de las columnas LONGBLOB depende del tama&ntilde;o m&aacute;ximo configurado 
+        para los paquetes en el protocolo cliente/servidor y la<br>
+        memoria disponible.<br>
+        &#8226; LONGTEXT<br>
+        Una columna TEXT con longitud m&aacute;xima de 4,294,967,295 or 4GB (2^32 
+        - 1) caracteres. La longitud m&aacute;xima efectiva<br>
+        (permitida) de columnas LONGTEXT depende del tama&ntilde;o m&aacute;ximo 
+        de paquete configurado en el protocolo cliente/servidor y la<br>
+        memoria disponible.<br>
+        &#8226; ENUM('value1','value2',...)<br>
+        Una enumeraci&oacute;n. Un objeto de cadena de caracteres que s&oacute;lo 
+        puede tener un valor, elegido de una lista de valores 'value1',<br>
+        'value2', ..., NULL o el valor de error especial '' . Una columna ENUM 
+        puede tener un m&aacute;ximo de 65,535 valores distintos.<br>
+        Los valores ENUM se representan internamente como enteros.<br>
+        &#8226; SET('value1','value2',...)<br>
+        Un conjunto. Un objeto de cadena de caracteres que puede tener cero o 
+        m&aacute;s valores que deben pertencer a la lista de valores<br>
+        'value1', 'value2', ... Una columna SET puede tener un m&aacute;ximo de 
+        64 miembros. Los valores SET se representan internamente<br>
+        como enteros.<br>
+        <h3>Tipos num&eacute;ricos</h3><br>
+        MySQL soporta todos los tipos de datos SQL num&eacute;ricos est&aacute;ndar. 
+        Estos tipos incluyen los tipos num&eacute;ricos exactos (INTEGER,<br>
+        SMALLINT, DECIMAL, y NUMERIC), as&iacute; como los tipos de datos aproximados 
+        (FLOAT, REAL, y DOUBLE PRECISION). La palabra<br>
+        clave INT es sin&oacute;nimo de INTEGER, y la palabra clave DEC es sin&oacute;nimo 
+        de DECIMAL.<br>
+        En MySQL 5.0.3, un tipo de datos BIT est&aacute; disponible para almacenar 
+        valores de un bit. (Antes de 5.0.3, MySQL interpreta BIT<br>
+        como TINYINT(1).) En MySQL 5.0.3, BIT lo soporta s&oacute;lo tablas MyISAM. 
+        MySQL 5.0.5 extiende soporte de BIT para MEMORY,<br>
+        InnoDB, y BDB.<br>
+        Como extensi&oacute;n de los est&aacute;ndares SQL, MySQL soporta los 
+        tipos enteros TINYINT, MEDIUMINT, y BIGINT. La siguiente tablas<br>
+        muestra el almacenamiento requerido y el rango para cada uno de los tipos 
+        enteros.<br>
+        Tipo Bytes Valor M&iacute;nimo Valor M&aacute;ximo<br>
+        (Con signo/Sin signo) (Con signo/Sin signo)<br>
+        TINYINT 1 -128 127<br>
+        0 255<br>
+        SMALLINT 2 -32768 32767<br>
+        0 65535<br>
+        MEDIUMINT 3 -8388608 8388607<br>
+        0 16777215<br>
+        INT 4 -2147483648 2147483647<br>
+        0 4294967295<br>
+        BIGINT 8 -9223372036854775808 9223372036854775807<br>
+        0 18446744073709551615<br>
+        MySQL soporta otra extensi&oacute;n para especificar de forma &oacute;ptima 
+        el ancho a mostrar de un tipo entero en par&eacute;ntesis despu&eacute;s 
+        de la<br>
+        palabra clave para el tipo (por ejemplo, INT(4)). Esta especificaci&oacute;n 
+        opcional del ancho de muestra se usa para alinear a la izquierda<br>
+        la muestra de los valores con ancho menor que el ancho especificado para 
+        la columna.<br>
+        El ancho de muestra no restringe el rango de valores que pueden almacenarse 
+        en la columna, no el n&uacute;mero de d&iacute;gitos que se muestran<br>
+        para valores con ancho que exceda el especificado para la columna.<br>
+        Cuando se usa en conjunci&oacute;n con el atributo de extensi&oacute;n 
+        opcional ZEROFILL, el relleno por defecto de espacios se replaza por<br>
+        ceros. Por ejmplo, para una columna declarada como INT(5) ZEROFILL, un 
+        valor de 4 se muestra como 00004. Tenga en<br>
+        cuenta que si almacena valores mayores que el ancho de muestra en una 
+        columna entera, puede tener problemas cuando MySQL<br>
+        genera tablas temporales para algunos joins complicados, ya que en estos 
+        casos MySQL cree que los datos encajan en el ancho original<br>
+        de la columna.<br>
+        Todos los tipos enteros pueden tener un atributo opcional (no est&aacute;ndar) 
+        UNSIGNED. Los valores sin signo pueden usarse cuando<br>
+        quiere permitir s&oacute;lo n&uacute;meros no negativos en una columna 
+        y necesita un rango num&eacute;rico mayor para la columna.<br>
+        Tipos de coma flotante y de coma fija pueden ser UNSIGNED. Como con los 
+        tipos enteros, este atributo evita que los valores negativos<br>
+        se almacenen en la columna. Sin embargo, a diferencia de los tipos enteros, 
+        el rango superior de los valores de la columna sigue<br>
+        siendo el mismo.<br>
+        Si especifica ZEROFILL para una columna num&eacute;rica, MySQL a&ntilde;ade 
+        autom&aacute;ticamente el atributo UNSIGNED a la columna.<br>
+        Para columnas de tipo coma flotante, MySQL usa cuatro bytes para valores 
+        de precisi&oacute;n simple y ocho bytes para valores de doble<br>
+        precisi&oacute;n.<br>
+        El tipo FLOAT se usa para representar tipos num&eacute;ricos aproximados. 
+        El est&aacute;ndar SQL permite una especificaci&oacute;n opcional de la<br>
+        precisi&oacute;n (pero no del rango del exponente) en bits a continaci&oacute;n 
+        de la palabra clave FLOAT entre par&eacute;ntesis. La implementaci&oacute;n<br>
+        de MySQL soporta esta especificaci&oacute;n opcional de precisi&oacute;n, 
+        pero el valor de precisi&oacute;n se usa s&oacute;lo para determinar el 
+        tama&ntilde;o de almacenamiento.<br>
+        Una precisi&oacute;n de 0 a 23 resulta en una columna de precisi&oacute;n 
+        simple de cuatro bytes de tama&ntilde;o FLOAT . Una precisi&oacute;n<br>
+        de 24 a 53 resulta en una columna de doble precisi&oacute;n de ocho bytes 
+        de tama&ntilde;o DOUBLE .<br>
+        Cuando se especifica la palaba clave FLOAT para tipos de columnas sin 
+        especificar la precisi&oacute;n, MySQSL usa cuatro bytes para almacenar<br>
+        los valors.MySQL tambi&eacute;n soporta una sintaxis alternativa con dos 
+        n&uacute;meros entre par&eacute;ntesis a continaci&oacute;n de la palabra<br>
+        clave FLOAT . El primer n&uacute;mero representa el ancho a mostrar y 
+        el segundo n&uacute;mero especifica el n&uacute;mero de d&iacute;gitos 
+        a almacenar a<br>
+        continuaci&oacute;n del punto decimal ( como con DECIMAL y NUMERIC). Cuando 
+        se pide a MySQL que almacene un n&uacute;mero para tales<br>
+        columnas con m&aacute;s d&iacute;gitos decimales a continuaci&oacute;n 
+        del punto decimal del especificado para la columna, el valor se redondea 
+        para<br>
+        elminar los d&iacute;gitos extras cuando se almacena el valor.<br>
+        En SQL est&aacute;ndar, los tipos REAL y DOUBLE PRECISION no aceptan especificaciones 
+        de precisi&oacute;n. MySQL soporta una sintaxis<br>
+        alternativa con dos n&uacute;meros dados entre par&eacute;ntesis a continuaci&oacute;n 
+        del nombre del tipo. El primer n&uacute;mero representa el ancho a<br>
+        mostrar y el segundo n&uacute;mero especifica el n&uacute;mero de d&iacute;gitos 
+        a almacenar y mostrar a continuaci&oacute;n del punto decimal. Como una<br>
+        extensi&oacute;n al est&aacute;ndar SQL, MySQL reconoce DOUBLE como sin&oacute;nimo 
+        del tipo DOUBLE PRECISION . En contraste con el requerimiento<br>
+        est&aacute;ndar que la precisi&oacute;n para REAL sea menor que la usada 
+        para DOUBLE PRECISION, MySQL implementa ambas como<br>
+        valores de punto flotante de doble precisi&oacute;n con tama&ntilde;o 
+        de ocho bytes (a no ser que el modo SQL del servidor incluya la opci&oacute;n<br>
+        REAL_AS_FLOAT ).<br>
+        Para portabilidad m&aacute;xima, el c&oacute;digo que requiera almacenamiento 
+        de datos num&eacute;ricos aproximados debe usar FLOAT o DOUBLE<br>
+        PRECISION sin especificar la precisi&oacute;n ni el n&uacute;mero de d&iacute;gitos 
+        decimales.<br>
+        Los tipos DECIMAL y NUMERIC se implementan como el mismo tipo en MySQL. 
+        Se usan para guardar valores para los que es importante<br>
+        preservar una precisi&oacute;n exacta, por ejemplo con datos monetarios. 
+        Cuando se declara una columna de alguno de estos tipos,<br>
+        la precisi&oacute;n y la escala puede especificarse (y usualmente se hace), 
+        por ejemplo:<br>
+        salary DECIMAL(5,2)<br>
+        En este ejemplo, 5 es la precisi&oacute;n y 2 es la escala. La precisi&oacute;n 
+        representa el n&uacute;mero de d&iacute;gitos decimales significativos 
+        que se almacenan<br>
+        para los valores, y la escala representa el n&uacute;mero de d&iacute;gitos 
+        que pueden almacenarse a continuaci&oacute;n del punto decimal.<br>
+        Desde MySQL 5.0.3, los valores DECIMAL y NUMERIC se almacenan en formato 
+        binario. Antes de 5.0.3, MySQL almacena los<br>
+        valores DECIMAL y NUMERIC como cadenas de caracteres, en lugar de binario. 
+        .Un car&aacute;cter se usa para cada d&iacute;gito del valor, el<br>
+        punto decimal (si la escala es mayor que 0), y el signo '-' (para n&uacute;meros 
+        negativos). Si la escala es 0, los valores DECIMAL y NUMERIC<br>
+        no contienen punto decimal o parte fraccional.<br>
+        SQL est&aacute;ndar requiere que la columna salary sea capaz de almacenar 
+        cualquier valor con cinco d&iacute;gitos y dos decimales. En este<br>
+        caso, por lo tanto, el rango de valores que puede almacenarse en la columna 
+        salary es desde -999.99 a 999.99. MySQL fuerza<br>
+        este l&iacute;mite desde MySQL 5.0.3. Antes de 5.0.3, MySQL 5.0 variaba 
+        este l&iacute;mite de forma que, en el l&iacute;mite positivo del rango, 
+        la<br>
+        columna pod&iacute;a almacenar n&uacute;meros hasta 9999.99. (Para n&uacute;meros 
+        positivos, MySQL 5.0.2 y anteriores usaba el byte reservado<br>
+        para el signo para extender el l&iacute;mite superior del rango.)<br>
+        En SQL est&aacute;ndar, la sintaxis DECIMAL(M) es equivalente a DECIMAL(M,0). 
+        Similarmente, la sintaxis DECIMAL es equivalente<br>
+        a DECIMAL(M,0), donde la implementaci&oacute;n se permite para decidir 
+        el valor de M. Ambas formas de los tipos DECIMAL y NUMERIC<br>
+        se soportan en MySQL 5.0. El valor por defecto de M es 10.<br>
+        El m&aacute;ximo rango de los valores DECIMAL y NUMERIC es el mismo para 
+        DOUBLE, pero el rango real para un valor dado en una<br>
+        columna DECIMAL o NUMERIC puede restringirse con la precisi&oacute;n o 
+        escala para una columna dada. Cuando en tal columna se<br>
+        asigna un valor con m&aacute;s d&iacute;gitos siguiendo el punto decimal 
+        de los permitidos por la escala espec&iacute;fica, el valor se convierte 
+        a tal escala.<br>
+        (El comportamiento preciso depende del sistema operativo, pero generalmente 
+        el efecto es que se trunca al n&uacute;mero de d&iacute;gitos<br>
+        permitidos.)<br>
+        Desde MySQL 5.0.3, el tipo de datos BIT puede usarse para guardar valores 
+        de un bit. Un tipo BIT(M) permite el almacenamiento<br>
+        de valores de M-bit . M tiene un rango de 1 a 64.<br>
+        Para especificar valores bit, puede usar la notaci&oacute;n b'value' . 
+        value es un valor binario escrito usando ceros y unos. Por ejemplo,<br>
+        b'111' y b'100000000' representan 7 y 128, respectivamente. Consulte Secci&oacute;n 
+        9.1.5, &#8220;Valores de bits&#8221;.<br>
+        Si asigna un valor a una columna BIT(M) con menos de M bits , el valor 
+        se alinea a la izquierda con ceros. Por ejemplo, asignar un<br>
+        valor b'101' a una columna BIT(6) es, en efecto, lo mismo que asignar 
+        b'000101'.<br>
+        Cuando se intenta almacenar un valor en una columna num&eacute;rica que 
+        est&aacute; fuera del rango permitido por la columna, MySQL corta<br>
+        el valor en el final del rango permitido y guarda el valor resultante.<br>
+        Por ejemplo, el ranto de una coluna INT es de -2147483648 a 2147483647. 
+        Si intenta insertar -9999999999 en una colum-<br>
+        <h3>Tipos numericos</h3><br>
+        MySQL soporta todos los tipos de datos SQL num&eacute;ricos est&aacute;ndar. 
+        Estos tipos incluyen los tipos num&eacute;ricos exactos (INTEGER,<br>
+        SMALLINT, DECIMAL, y NUMERIC), as&iacute; como los tipos de datos aproximados 
+        (FLOAT, REAL, y DOUBLE PRECISION). La palabra<br>
+        clave INT es sin&oacute;nimo de INTEGER, y la palabra clave DEC es sin&oacute;nimo 
+        de DECIMAL.<br>
+        En MySQL 5.0.3, un tipo de datos BIT est&aacute; disponible para almacenar 
+        valores de un bit. (Antes de 5.0.3, MySQL interpreta BIT<br>
+        como TINYINT(1).) En MySQL 5.0.3, BIT lo soporta s&oacute;lo tablas MyISAM. 
+        MySQL 5.0.5 extiende soporte de BIT para MEMORY,<br>
+        InnoDB, y BDB.<br>
+        Como extensi&oacute;n de los est&aacute;ndares SQL, MySQL soporta los 
+        tipos enteros TINYINT, MEDIUMINT, y BIGINT. La siguiente tablas<br>
+        muestra el almacenamiento requerido y el rango para cada uno de los tipos 
+        enteros.<br>
+        Tipo Bytes Valor M&iacute;nimo Valor M&aacute;ximo<br>
+        (Con signo/Sin signo) (Con signo/Sin signo)<br>
+        TINYINT 1 -128 127<br>
+        0 255<br>
+        SMALLINT 2 -32768 32767<br>
+        0 65535<br>
+        MEDIUMINT 3 -8388608 8388607<br>
+        0 16777215<br>
+        INT 4 -2147483648 2147483647<br>
+        0 4294967295<br>
+        BIGINT 8 -9223372036854775808 9223372036854775807<br>
+        0 18446744073709551615<br>
+        MySQL soporta otra extensi&oacute;n para especificar de forma &oacute;ptima 
+        el ancho a mostrar de un tipo entero en par&eacute;ntesis despu&eacute;s 
+        de la<br>
+        palabra clave para el tipo (por ejemplo, INT(4)). Esta especificaci&oacute;n 
+        opcional del ancho de muestra se usa para alinear a la izquierda<br>
+        la muestra de los valores con ancho menor que el ancho especificado para 
+        la columna.<br>
+        El ancho de muestra no restringe el rango de valores que pueden almacenarse 
+        en la columna, no el n&uacute;mero de d&iacute;gitos que se muestran<br>
+        para valores con ancho que exceda el especificado para la columna.<br>
+        Cuando se usa en conjunci&oacute;n con el atributo de extensi&oacute;n 
+        opcional ZEROFILL, el relleno por defecto de espacios se replaza por<br>
+        ceros. Por ejmplo, para una columna declarada como INT(5) ZEROFILL, un 
+        valor de 4 se muestra como 00004. Tenga en<br>
+        cuenta que si almacena valores mayores que el ancho de muestra en una 
+        columna entera, puede tener problemas cuando MySQL<br>
+        genera tablas temporales para algunos joins complicados, ya que en estos 
+        casos MySQL cree que los datos encajan en el ancho original<br>
+        de la columna.<br>
+        Todos los tipos enteros pueden tener un atributo opcional (no est&aacute;ndar) 
+        UNSIGNED. Los valores sin signo pueden usarse cuando<br>
+        quiere permitir s&oacute;lo n&uacute;meros no negativos en una columna 
+        y necesita un rango num&eacute;rico mayor para la columna.<br>
+        Tipos de coma flotante y de coma fija pueden ser UNSIGNED. Como con los 
+        tipos enteros, este atributo evita que los valores negativos<br>
+        se almacenen en la columna. Sin embargo, a diferencia de los tipos enteros, 
+        el rango superior de los valores de la columna sigue<br>
+        siendo el mismo.<br>
+        Si especifica ZEROFILL para una columna num&eacute;rica, MySQL a&ntilde;ade 
+        autom&aacute;ticamente el atributo UNSIGNED a la columna.<br>
+        Para columnas de tipo coma flotante, MySQL usa cuatro bytes para valores 
+        de precisi&oacute;n simple y ocho bytes para valores de doble<br>
+        precisi&oacute;n.<br>
+        El tipo FLOAT se usa para representar tipos num&eacute;ricos aproximados. 
+        El est&aacute;ndar SQL permite una especificaci&oacute;n opcional de la<br>
+        precisi&oacute;n (pero no del rango del exponente) en bits a continaci&oacute;n 
+        de la palabra clave FLOAT entre par&eacute;ntesis. La implementaci&oacute;n<br>
+        de MySQL soporta esta especificaci&oacute;n opcional de precisi&oacute;n, 
+        pero el valor de precisi&oacute;n se usa s&oacute;lo para determinar el 
+        tama&ntilde;o de almacenamiento.<br>
+        Una precisi&oacute;n de 0 a 23 resulta en una columna de precisi&oacute;n 
+        simple de cuatro bytes de tama&ntilde;o FLOAT . Una precisi&oacute;n<br>
+        de 24 a 53 resulta en una columna de doble precisi&oacute;n de ocho bytes 
+        de tama&ntilde;o DOUBLE .<br>
+        Cuando se especifica la palaba clave FLOAT para tipos de columnas sin 
+        especificar la precisi&oacute;n, MySQSL usa cuatro bytes para almacenar<br>
+        los valors.MySQL tambi&eacute;n soporta una sintaxis alternativa con dos 
+        n&uacute;meros entre par&eacute;ntesis a continaci&oacute;n de la palabra<br>
+        clave FLOAT . El primer n&uacute;mero representa el ancho a mostrar y 
+        el segundo n&uacute;mero especifica el n&uacute;mero de d&iacute;gitos 
+        a almacenar a<br>
+        continuaci&oacute;n del punto decimal ( como con DECIMAL y NUMERIC). Cuando 
+        se pide a MySQL que almacene un n&uacute;mero para tales<br>
+        columnas con m&aacute;s d&iacute;gitos decimales a continuaci&oacute;n 
+        del punto decimal del especificado para la columna, el valor se redondea 
+        para<br>
+        elminar los d&iacute;gitos extras cuando se almacena el valor.<br>
+        En SQL est&aacute;ndar, los tipos REAL y DOUBLE PRECISION no aceptan especificaciones 
+        de precisi&oacute;n. MySQL soporta una sintaxis<br>
+        alternativa con dos n&uacute;meros dados entre par&eacute;ntesis a continuaci&oacute;n 
+        del nombre del tipo. El primer n&uacute;mero representa el ancho a<br>
+        mostrar y el segundo n&uacute;mero especifica el n&uacute;mero de d&iacute;gitos 
+        a almacenar y mostrar a continuaci&oacute;n del punto decimal. Como una<br>
+        extensi&oacute;n al est&aacute;ndar SQL, MySQL reconoce DOUBLE como sin&oacute;nimo 
+        del tipo DOUBLE PRECISION . En contraste con el requerimiento<br>
+        est&aacute;ndar que la precisi&oacute;n para REAL sea menor que la usada 
+        para DOUBLE PRECISION, MySQL implementa ambas como<br>
+        valores de punto flotante de doble precisi&oacute;n con tama&ntilde;o 
+        de ocho bytes (a no ser que el modo SQL del servidor incluya la opci&oacute;n<br>
+        REAL_AS_FLOAT ).<br>
+        Para portabilidad m&aacute;xima, el c&oacute;digo que requiera almacenamiento 
+        de datos num&eacute;ricos aproximados debe usar FLOAT o DOUBLE<br>
+        PRECISION sin especificar la precisi&oacute;n ni el n&uacute;mero de d&iacute;gitos 
+        decimales.<br>
+        Los tipos DECIMAL y NUMERIC se implementan como el mismo tipo en MySQL. 
+        Se usan para guardar valores para los que es importante<br>
+        preservar una precisi&oacute;n exacta, por ejemplo con datos monetarios. 
+        Cuando se declara una columna de alguno de estos tipos,<br>
+        la precisi&oacute;n y la escala puede especificarse (y usualmente se hace), 
+        por ejemplo:<br>
+        salary DECIMAL(5,2)<br>
+        En este ejemplo, 5 es la precisi&oacute;n y 2 es la escala. La precisi&oacute;n 
+        representa el n&uacute;mero de d&iacute;gitos decimales significativos 
+        que se almacenan<br>
+        para los valores, y la escala representa el n&uacute;mero de d&iacute;gitos 
+        que pueden almacenarse a continuaci&oacute;n del punto decimal.<br>
+        Desde MySQL 5.0.3, los valores DECIMAL y NUMERIC se almacenan en formato 
+        binario. Antes de 5.0.3, MySQL almacena los<br>
+        valores DECIMAL y NUMERIC como cadenas de caracteres, en lugar de binario. 
+        .Un car&aacute;cter se usa para cada d&iacute;gito del valor, el<br>
+        punto decimal (si la escala es mayor que 0), y el signo '-' (para n&uacute;meros 
+        negativos). Si la escala es 0, los valores DECIMAL y NUMERIC<br>
+        no contienen punto decimal o parte fraccional.<br>
+        SQL est&aacute;ndar requiere que la columna salary sea capaz de almacenar 
+        cualquier valor con cinco d&iacute;gitos y dos decimales. En este<br>
+        caso, por lo tanto, el rango de valores que puede almacenarse en la columna 
+        salary es desde -999.99 a 999.99. MySQL fuerza<br>
+        este l&iacute;mite desde MySQL 5.0.3. Antes de 5.0.3, MySQL 5.0 variaba 
+        este l&iacute;mite de forma que, en el l&iacute;mite positivo del rango, 
+        la<br>
+        columna pod&iacute;a almacenar n&uacute;meros hasta 9999.99. (Para n&uacute;meros 
+        positivos, MySQL 5.0.2 y anteriores usaba el byte reservado<br>
+        para el signo para extender el l&iacute;mite superior del rango.)<br>
+        En SQL est&aacute;ndar, la sintaxis DECIMAL(M) es equivalente a DECIMAL(M,0). 
+        Similarmente, la sintaxis DECIMAL es equivalente<br>
+        a DECIMAL(M,0), donde la implementaci&oacute;n se permite para decidir 
+        el valor de M. Ambas formas de los tipos DECIMAL y NUMERIC<br>
+        se soportan en MySQL 5.0. El valor por defecto de M es 10.<br>
+        El m&aacute;ximo rango de los valores DECIMAL y NUMERIC es el mismo para 
+        DOUBLE, pero el rango real para un valor dado en una<br>
+        columna DECIMAL o NUMERIC puede restringirse con la precisi&oacute;n o 
+        escala para una columna dada. Cuando en tal columna se<br>
+        asigna un valor con m&aacute;s d&iacute;gitos siguiendo el punto decimal 
+        de los permitidos por la escala espec&iacute;fica, el valor se convierte 
+        a tal escala.<br>
+        (El comportamiento preciso depende del sistema operativo, pero generalmente 
+        el efecto es que se trunca al n&uacute;mero de d&iacute;gitos<br>
+        permitidos.)<br>
+        Desde MySQL 5.0.3, el tipo de datos BIT puede usarse para guardar valores 
+        de un bit. Un tipo BIT(M) permite el almacenamiento<br>
+        de valores de M-bit . M tiene un rango de 1 a 64.<br>
+        Para especificar valores bit, puede usar la notaci&oacute;n b'value' . 
+        value es un valor binario escrito usando ceros y unos. Por ejemplo,<br>
+        b'111' y b'100000000' representan 7 y 128, respectivamente. Consulte Secci&oacute;n 
+        9.1.5, &#8220;Valores de bits&#8221;.<br>
+        Si asigna un valor a una columna BIT(M) con menos de M bits , el valor 
+        se alinea a la izquierda con ceros. Por ejemplo, asignar un<br>
+        valor b'101' a una columna BIT(6) es, en efecto, lo mismo que asignar 
+        b'000101'.<br>
+        Cuando se intenta almacenar un valor en una columna num&eacute;rica que 
+        est&aacute; fuera del rango permitido por la columna, MySQL corta<br>
+        el valor en el final del rango permitido y guarda el valor resultante.<br>
+        Por ejemplo, el ranto de una coluna INT es de -2147483648 a 2147483647. 
+        Si intenta insertar -9999999999 en una colum-<br>
+        na INT, MySQL reemplaza el valor con el m&iacute;nimo valor del rango 
+        y almacena -2147483648 en su lugar. De forma similar, si<br>
+        trata de insertar 9999999999, MySQL reemplaza el valor con el valor m&aacute;ximo 
+        del rango y almacena 2147483647 en su lugar.<br>
+        Si la columna INT es UNSIGNED, el tama&ntilde;o del rango de la columna 
+        es el mismo, pero los l&iacute;mites cambian a 0 y 4294967295.<br>
+        Si intenta almacenar -9999999999 y 9999999999, los valores almacenados 
+        en la columna son 0 y 4294967296.<br>
+        Cuando se asigna un valor fuera de rango especificado (o por defecto) 
+        a una columna de coma flotante o fija, MySQL almacena el<br>
+        valor representado por el valor correspondiente al l&iacute;mite de rango 
+        correspondiente.<br>
+        Las conversiones debidas a valores fuera de rango se reportan como advertencias 
+        para los comandos ALTER TABLE, LOAD DATA<br>
+        INFILE, UPDATE, y INSERT de m&uacute;ltiples registros.<br>
+        <h3>Tipos de fecha y hora</h3><br>
+        Los tipos de fecha y hora para representar valores temporales son DATETIME, 
+        DATE, TIMESTAMP, TIME, y YEAR. Cada tipo<br>
+        temporal tiene un rango de valores legales, as&iacute; como un valor &#8220;zero&#8221; 
+        que se usa cuando se especifica un valor ilegal que MySQL no<br>
+        puede representar. El tipo TIMESTAMP tiene un comportamiento autom&aacute;tico 
+        especial, descrito posteriormente.<br>
+        Desde MySQL 5.0.2, MySQL da advertencias/errores si trata de insertar 
+        una fecha ilegal. Puede hacer que MySQL acepte ciertas<br>
+        fechas, tales como '1999-11-31', usando el modo SQL ALLOW_INVALID_DATES 
+        . (Antes de 5.0.2, este modo era el comportamiento<br>
+        por defecto de MySQL). Esto es &uacute;til cuando quiere almacenar el 
+        valor &#8220;posiblemente err&oacute;neo&#8221; que el usuario especifica<br>
+        (por ejemplo, en un formulario web) en la base de datos para un posterior 
+        procesamiento. En este modo, MySQL s&oacute;lo verifica<br>
+        que el mes est&eacute; en el rango de 0 a 12 y que el d&iacute;a est&eacute; 
+        en el rango de 0 a 31. Estos rangos incluyen cero ya que MySQL permite 
+        almacenar<br>
+        fechas cuando el d&iacute;a o el mes son cero en columnas DATE o DATETIME 
+        . Esto es muy &uacute;til para aplicaciones que necesiten<br>
+        almacenar una fecha de nacimiento para la que no sepa la fecha exacta. 
+        En este caso, simplemente almacena la fecha como<br>
+        '1999-00-00' o '1999-01-00'. Si almacena valores similares a estos, no 
+        debe esperar obtener resultados correctos para<br>
+        funciones tales como DATE_SUB() or DATE_ADD que necesitan fechas completas. 
+        (Si no quiere permitir ceros en las fechas, puede<br>
+        usar el modo SQL NO_ZERO_IN_DATE ).<br>
+        MySQL permite almacenar '0000-00-00' como &#8220;fecha de pruebas&#8221; 
+        (si no est&aacute; usando el modo SQL NO_ZERO_DATE ). Esto<br>
+        es mejor que usar (y usa menos espacio de datos e &iacute;ndice) que usar 
+        valores NULL .<br>
+        Modificando la variable de sistema sql_mode al modo apropiado, puede especificar 
+        exactamente qu&eacute; tipos de datos quiere soportar<br>
+        con MySQL. Consulte Secci&oacute;n 5.3.2, &#8220;El modo SQL del servidor&#8221;.<br>
+        Aqu&iacute; hay algunas consideraciones generales a tener en cuenta cuando 
+        se trabaja con tipos de fecha y hora:<br>
+        &#8226; MySQL muestra los valores para una fecha o hora en un formato 
+        de salida est&aacute;ndar, pero trata de intepretar una variedad de formatos<br>
+        para los valores de entrada que se proporcionan (por ejemplo, cuando especifica 
+        un valor para asignar o comparar con un<br>
+        tipo fecha o hora). S&oacute;lo los formatos descritos en las siguientes 
+        secciones son soportados. Se espera la entrada de valores legales.<br>
+        Si se usan otros formatos pueden ocurrir resultados imprevisibles.<br>
+        &#8226; Las fechas con a&ntilde;os de dos d&iacute;gitos son ambituas, 
+        ya que no se sabe el siglo. MySQL interpreta los a&ntilde;os de dos d&iacute;gitos 
+        usando<br>
+        las siguientes reglas:<br>
+        &#8226; Los a&ntilde;os del rango 70-99 se convierten en 1970-1999.<br>
+        &#8226; Los a&ntilde;os del rango 00-69 se convierten en 2000-2069.<br>
+        &#8226; Aunque MySQL trata de interpretar los valores con varios formatos, 
+        las fechas siempre deben darse en el orden a&ntilde;o-mes-d&iacute;a<br>
+        (por ejemplo, '98-09-04'), en lugar del formato mes-d&iacute;a-a&ntilde;o 
+        o d&iacute;a-mes-a&ntilde;o usados comunmente (por ejemplo,<br>
+        '09-04-98', '04-09-98').<br>
+        &#8226; MySQL convierte autom&aacute;ticamente una fecha o hora a un n&uacute;mero 
+        si el valor se usa en un contexto num&eacute;rico y viceversa.<br>
+        &#8226; Cuando MySQL encuentra un valor para fecha o hora que est&aacute; 
+        fuera de rango o es ilegal para el tipo (como se describe al inicio<br>
+        de la secci&oacute;n), lo convierte al valor &#8220;cero&#8221; para ese 
+        tipo. La excepci&oacute;n es que los valores fuera de rango del tipo TIME 
+        se reemplazan<br>
+        por el valor l&iacute;mite de rango apropiado para el tipo TIME .<br>
+        La siguiente tabla muestra el formato del valor &#8220;cero&#8221; para 
+        cada tipo. Tenga en cuenta que el uso de estos valores produce mensajes<br>
+        de advertencia si el modo SQL NO_ZERO_DATE est&aacute; activado.<br>
+        Tipo de Columna &#8220;Cero&#8221; Valor<br>
+        DATETIME '0000-00-00 00:00:00'<br>
+        DATE '0000-00-00'<br>
+        TIMESTAMP 00000000000000<br>
+        TIME '00:00:00'<br>
+        YEAR 0000<br>
+        &#8226; Los valores &#8220;cero&#8221; son especiales, pero puede almacenarlos 
+        o referirse a ellos expl&iacute;citamente usando los valores mostrados 
+        en<br>
+        la tabla. Tambi&eacute;n puede hacerlo usando los valores '0' o 0, que 
+        son m&aacute;s sencillos de escribir.<br>
+        &#8226; Los valores de fecha o hora &#8220;cero&#8221; usados a trav&eacute;s 
+        de MyODBC se convierten autom&aacute;ticamente a NULL en MyODBC 2.50.12<br>
+        y posterior, ya que ODBC no puede tratar estos valores.<br>
+        <h3>Los tipos de datos DATETIME, DATE y TIMESTAMP</h3><br>
+        Los tipos DATETIME, DATE, and TIMESTAMP est&aacute;n relacionados. Esta 
+        secci&oacute;n describe sus caracter&iacute;sticas, en qu&eacute; se parecen 
+        y<br>
+        en qu&eacute; difieren.<br>
+        El tipo DATETIME se usa cuando necesita valores que contienen informaci&oacute;n 
+        de fecha y hora. MySQL recibe y muestra los valores<br>
+        DATETIME en formato 'YYYY-MM-DD HH:MM:SS' . El rango soportado es de '1000-01-01 
+        00:00:00' a<br>
+        '9999-12-31 23:59:59'. (&#8220;Soportado&#8221; significa que aunque valores 
+        anteriores pueden funcionar, no hay garant&iacute;as)<br>
+        El tipo DATE se usa cuando necesita s&oacute;lo un valor de fecha, sin 
+        una parte de hora. MySQL recibe y muestra los valores DATE en<br>
+        formato 'YYYY-MM-DD' . El rango soportado es de '1000-01-01' a '9999-12-31'.<br>
+        El tipo TIMESTAMP tiene varias propiedades, en funci&oacute;n de la versi&oacute;n 
+        de MySQSL y el modo SQL que est&eacute; ejecutando el servidor.<br>
+        Estas propiedades se describen posteriormente en esta secci&oacute;n.<br>
+        Puede especificar valores DATETIME, DATE, y TIMESTAMP usando cualquier 
+        de los siguientes formatos:<br>
+        &#8226; Como cadena de caracteres en formato 'YYYY-MM-DD HH:MM:SS' o 'YY-MM-DD 
+        HH:MM:SS' . Una sintaxis &#8220;relajada&#8221;<br>
+        se permite: Cualquier car&aacute;cter de puntuaci&oacute;n puede usarse 
+        como delimitador entre partes de fecha o de hora. Por ejemplo,<br>
+        '98-12-31 11:30:45', '98.12.31 11+30+45', '98/12/31 11*30*45', y '98@12@31 
+        11^30^45' son<br>
+        equivalentes.<br>
+        &#8226; Como cadena de caracteres en formato 'YYYY-MM-DD' or 'YY-MM-DD' 
+        . Se permite una sintaxis &#8220;relajada&#8221; . Por ejemplo,<br>
+        '98-12-31', '98.12.31', '98/12/31', y '98@12@31' son equivalentes.<br>
+        &#8226; Como cadena de caracteres sin delimitadores en formato 'YYYYMMDDHHMMSS' 
+        o 'YYMMDDHHMMSS', mientras que la cadena<br>
+        de caracteres tenga sentido como fecha. Por ejemmplo, '19970523091528' 
+        y '970523091528' se interpretan como<br>
+        '1997-05-23 09:15:28', pero '971122129015' es ilegal (tiene una parte 
+        de minutos sin sentido) y se convierte en<br>
+        '0000-00-00 00:00:00'.<br>
+        &#8226; Como cadena de caracteres sin delimitadores en formato 'YYYYMMDD' 
+        o 'YYMMDD' , mientras que el cadena de caracteres<br>
+        tenga sentido como fecha. Por ejemplo, '19970523' y '970523' se interpretan 
+        como '1997-05-23', pero '971332'<br>
+        es ilegal (tiene una parte de mes y d&iacute;a sin sentido) y se convierte 
+        en '0000-00-00'.<br>
+        &#8226; Como n&uacute;mero en formato YYYYMMDDHHMMSS o YYMMDDHHMMSS, mientras 
+        que el n&uacute;mero tenga sentido como fecha. Por<br>
+        ejemplo, 19830905132800 y 830905132800 se interpretan como '1983-09-05 
+        13:28:00'.<br>
+        &#8226; Como n&uacute;mero en formato YYYYMMDD o YYMMDD, mientras que 
+        el n&uacute;mero tenga sentido como fecha. Por ejemplo, 19830905<br>
+        y 830905 se interpretan como '1983-09-05'.<br>
+        &#8226; Como resultado de una funci&oacute;n que retorne un valor acceptable 
+        en un contexto DATETIME, DATE, o TIMESTAMP , como<br>
+        NOW() o CURRENT_DATE.<br>
+        Los valores ilegales de DATETIME, DATE, o TIMESTAMP se convierten al valor 
+        &#8220;cero&#8221; del tipo apropiado ('0000-00-00<br>
+        00:00:00', '0000-00-00', o 00000000000000).<br>
+        Para valores especificados como cadenas de caracteres que incluyan partes 
+        de fecha delimitadas, no es necesario especificar dos d&iacute;gitos<br>
+        para valores de mes o d&iacute;a menores que 10. '1979-6-9' es lo mismo 
+        que '1979-06-09'. Similarmente, para valores especificados<br>
+        como cadenas de caracteres que incluyan delimitadores para la parte de 
+        hora, no es necesario especificar dos d&iacute;gitos para<br>
+        horas, minutos o segundos menores que 10. '1979-10-30 1:2:3' es lo mismo 
+        que '1979-10-30 01:02:03'.<br>
+        Los valores especificados como n&uacute;meros deben tener una longitud 
+        de 6, 8, 12, o 14 d&iacute;gitos. Si un n&uacute;mero tiene una longitud 
+        de 8 o<br>
+        14 d&iacute;gitos, se asume que est&aacute; en formato YYYYMMDD o YYYYMMDDHHMMSS 
+        y que el a&ntilde;o lo dan los primeros 4 d&iacute;gitos. Si el n&uacute;mero<br>
+        tiene 6 o 12 d&iacute;gitos de longitud, se asume que est&aacute; en formato 
+        YYMMDD o YYMMDDHHMMSS y que el a&ntilde;o lo dan los primeros 2<br>
+        d&iacute;gitos. A los n&uacute;meros que no tengan estas longitudes se 
+        les a&ntilde;aden ceros a la izquierda hasta la longitud m&aacute;s cercana 
+        permitida.<br>
+        Los valores especificados como cadenas de caracteres no delimitadas se 
+        interpretan usando su longitud. Si la cadena de caracteres<br>
+        tiene longitud 8 o 14, el a&ntilde;o se asume como dado por los primeros 
+        4 caracteres. En el resto de caso, se supone que el a&ntilde;o lo dan 
+        los<br>
+        primeros 2 caracteres. La cadena de caracteres se interpreta de izquierda 
+        a derecha para encontrar el a&ntilde;o, mes, d&iacute;a, hora, minuto 
+        y<br>
+        segundo, para tantas partes como representa la cadena de caracteres. Esto 
+        significa que no debe usar cadenas de caracteres con menos<br>
+        de 6 caracteres. Por ejemplo, si especifica '9903', pensando que representa 
+        Marzo, 1999, MySQL inserta un valor &#8220;cero&#8221; en<br>
+        la tabla. Esto es porque el valor de a&ntilde;o y mes son 99 y 03, pero 
+        la parte de d&iacute;a no se encuentra, as&iacute; que el valor no es 
+        una fecha legal.<br>
+        Sin embargo, puede especificar expl&iacute;citamente un valor de cero 
+        para representar partes de d&iacute;a y mes. Por ejemplo, puede usar<br>
+        '990300' para insertar el valor '1999-03-00'.<br>
+        Puede asignar valores de un tipo a un objeto de un tipo diferente hasta 
+        un l&iacute;mite. Sin embargo, hay algunas alteraciones del valor o<br>
+        p&eacute;rdidas de informaci&oacute;n:<br>
+        &#8226; Si asigna un valor DATE a un objeto DATETIME o TIMESTAMP, la parte 
+        de hora del valor resultante se cambia a<br>
+        '00:00:00' ya que el valor DATE no contiene informaci&oacute;n temporal.<br>
+        &#8226; Si asigna un valor DATETIME o TIMESTAMP a un objeto DATE, la parte 
+        temporal del valor resultante se borra porque el tipo<br>
+        DATE no tiene informaci&oacute;n temporal.<br>
+        &#8226; Tenga en cuenta que aunque DATETIME, DATE, y TIMESTAMP pueden 
+        especificarse usando el mismo conjunto de formatos,<br>
+        los tipos no tienen el mismo rango de valores. Por ejemplo, TIMESTAMP 
+        no pueden ser anteriores a 1970 o posteriores a<br>
+        2037. Esto significa que una fecha como '1968-01-01', que ser&iacute;a 
+        legal como DATETIME o DATE no es un valor v&aacute;lido<br>
+        TIMESTAMP y se convierte a 0 si se asigna a un objeto de este tipo.<br>
+        Tenga en cuenta ciertas cosas al especificar valores temporales:<br>
+        &#8226; El formato relajado para valores especificados como cadenas de 
+        caracteres puede ser problem&aacute;tico. Por ejemplo, un valor como<br>
+        '10:11:12' puede parecer una hora por el delimitador ':' , pero si se 
+        usa en un contexto de fecha se interpreta como<br>
+        '2010-11-12'. El valor '10:45:15' se convierte a '0000-00-00' ya que '45' 
+        no es un mes legal.<br>
+        &#8226; El servidor MySQL realiza s&oacute;lo chequeo b&aacute;sico de 
+        la validez de las fechas: Los rangos para a&ntilde;o, mes y d&iacute;a 
+        son de 1000 a 9999,<br>
+        00 a 12, y 00 a 31, respectivamente. Cualquier fecha que contenga partes 
+        fuera de estos rangos est&aacute; sujeta a conversi&oacute;n a<br>
+        '0000-00-00'. Tenga en cuenta que esto permite almacenar fechas inv&aacute;lidas 
+        como '2002-04-31'. Para asegurar que<br>
+        una fecha es v&aacute;lida, haga una comprobaci&oacute;n en su aplicaci&oacute;n.<br>
+        &#8226; Fechas con valores de a&ntilde;o de dos d&iacute;gitos son amb&iacute;guas 
+        porque no se conoce el siglo. MySQL interpreta los a&ntilde;os de dos 
+        d&iacute;gitos<br>
+        usando las siguientes reglas:<br>
+        &#8226; Los valores de a&ntilde;os en el rango 00-69 se convierten a 2000-2069.<br>
+        &#8226; Los valores de a&ntilde;os en el rango 70-99 se convierten a 1970-1999.<br>
+        <h3>Los tipos CHAR y VARCHAR</h3> <br>
+        son similares, pero difieren en c&oacute;mo se almacenan y recuperan. 
+        Desde MySQL 5.0.3, tambi&eacute;n difieren<br>
+        en la longitud m&aacute;xima y en c&oacute;mo se tratan los espacios finales.<br>
+        Los tipos CHAR y VARCHAR se declaran con una longitud que indica el m&aacute;ximo 
+        n&uacute;mero de caracteres que quiere almacenar. Por<br>
+        ejemplo, CHAR(30) puede almacenar hasta 30 caracteres.<br>
+        La longitud de una columna CHAR se fija a la longitud que se declara al 
+        crear la tabla. La longitud puede ser cualquier valor de 0 a<br>
+        255. Cuando los valores CHAR se almacenan, se a&ntilde;aden espacios a 
+        la derecha hasta las longitud espec&iacute;fica. Cuando los valores<br>
+        CHAR se recuperan, estos espacios se borran.<br>
+        Los valores en columnas VARCHAR son cadenas de caracteres de longitud 
+        variable. En MySQL 5.0, la longitud puede especficarse<br>
+        de 0 a 255 antes de MySQL 5.0.3, y de 0 a 65,535 en 5.0.3 y versiones 
+        posteriores. (La m&aacute;xima longitud efectiva de un VARCHAR<br>
+        en MySQL 5.0 se determina por el tama&ntilde;o de registro m&aacute;ximo 
+        y el conjunto de caracteres usados. La longitud m&aacute;xima total es 
+        de<br>
+        65,532 bytes.)<br>
+        En contraste con CHAR, VARCHAR almacena los valores usando s&oacute;lo 
+        los caracteres necesarios, m&aacute;s un byte adicional para la longitud<br>
+        (dos bytes para columnas que se declaran con una longitud superior a 255).<br>
+        Los valores VARCHAR no se cortan al almacenarse. El tratamiento de espacios 
+        al final depende de la versi&oacute;n. Desde MySQL 5.0.3,<br>
+        los espacios finales se almacenan con el valor y se retornan, seg&uacute;n 
+        el est&aacute;ndar SQL. Antes de MySQL 5.0.3, los espacios finales se<br>
+        eliminan de los valores cuando se almacenan en una columna VARCHAR, esto 
+        significa que los espacios tambi&eacute;n est&aacute;n ausentes de<br>
+        los valores retornados.<br>
+        Durante el almacenamiento y la recuperaci&oacute;n de valores no hace 
+        ninguna conversi&oacute;n de may&uacute;sculas y min&uacute;sculas.<br>
+        Si asigna un valor a una columna CHAR o VARCHAR que exceda la longitud 
+        m&aacute;xima de la columna, el valor se trunca. Si los caracteres<br>
+        truncados no son espacios, se genera una advertencia. Puede hacer que 
+        aparezca un error en lugar de una advertencia usando<br>
+        modo SQL estricto. Consulte Secci&oacute;n 5.3.2, &#8220;El modo SQL del 
+        servidor&#8221;.<br>
+        Antes de MySQL 5.0.3, si necesita un tipo de datos para el que no se borren 
+        los espacios finales, considere usar un tipo BLOB o<br>
+        TEXT . Tambi&eacute;n, si quiere almacenar valores binarios como resultados 
+        de encriptaci&oacute;n o compresi&oacute;n que puedan contener valores<br>
+        byte arbitrarios, use una columna BLOB en lugar de CHAR o VARCHAR, para 
+        evitar problemas potenciales con eliminaci&oacute;n de espacios<br>
+        finales que puedan cambiar los valores de los datos.<br>
+        La siguiente tabla ilustra las diferencias entre los dos tipos de columnas 
+        mostrando el resultado de almacenar varios valores de cadenas<br>
+        de caracteres en columnas CHAR(4) y VARCHAR(4) :<br>
+        Valor CHAR(4) Almacenamiento necesario VARCHAR(4) Almacenamiento necesario<br>
+        '' ' ' 4 bytes '' 1 byte<br>
+        'ab' 'ab ' 4 bytes 'ab' 3 bytes<br>
+        'abcd' 'abcd' 4 bytes 'abcd' 5 bytes<br>
+        'abcdefgh' 'abcd' 4 bytes 'abcd' 5 bytes<br>
+        Los valores retornados de las columnas CHAR(4) y VARCHAR(4) son los mismos 
+        en cada caso, ya que los espacios finales se eliminan<br>
+        en la recuperaci&oacute;n de valores CHAR.<br>
+        En MySQL 5.0, los valores en columnas CHAR y VARCHAR se almacenan y comparan 
+        seg&uacute;n la colaci&oacute;n del conjunto de caracteres<br>
+        asignado a la columna.<br>
+        CHAR BYTE es un alias para CHAR BINARY. Existe por cuesti&oacute;n de 
+        compatibilidad.<br>
+        El atributo ASCII asigna el conjunto de caracteres latin1 a una columna 
+        CHAR . El atributo UNICODE asigna el conjunto de caracteres<br>
+        ucs2 .<br>
+        MySQL puede cambiar silenciosamente el tipo de una columna CHAR o VARCHAR 
+        en tiempo de creaci&oacute;n. Consulte Secci&oacute;n<br>
+        13.1.5.1, &#8220;Cambios t&aacute;citos en la especificaci&oacute;n de 
+        columnas&#8221;.<br>
+        <h3>Los tipos BINARY y VARBINARY</h3><br>
+        Los tipos BINARY y VARBINARY son similares a CHAR y VARCHAR, excepto que 
+        contienen cadenas de caracteres binarias en lugar<br>
+        de cadenas de caracteres no binarias. Esto es, contienen cadenas de bytes 
+        en lugar de cadenas de caracteres. Esto significa que<br>
+        no tienen conjunto de caracteres asignado, y la comparaci&oacute;n y ordenaci&oacute;n 
+        se basa en los valores num&eacute;ricos de los valores de los bytes.<br>
+        La longitud m&aacute;xima disponible es la m&aacute;xima para BINARY t 
+        VARBINARY como para CHAR y VARCHAR, excepto que la longitud<br>
+        para BINARY y VARBINARY es una longitud en bytes en lugar de en caracteres.<br>
+        El tratamiento de los espacios finales es el mismo para BINARY y VARBINARY 
+        como lo es para CHAR y VARCHAR. Cuando se almacenan<br>
+        los valores BINARY, se rellenan con espacios a la derecha hasta la longitud 
+        especificada. Cuando los valores BINARY se<br>
+        recuperan, los espacios finales se eliminan. Para VARBINARY, los espacios 
+        finales se eliminan cuando los valores se almacenan.<br>
+        Desde MySQL 5.0.3, los espacios finales se mantienen. Debe considerar 
+        estas caracter&iacute;sticas si planea usar estos tipos de datos para<br>
+        almacenar datos binarios que deban acabar con espacios.<br>
+        En MySQL 5.0, BINARY y VARBINARY son tipos de datos distintos. Para CHAR(M) 
+        BINARY y VARCHAR(M) BINARY, el<br>
+        atributo BINARY hace que se use la colaci&oacute;n binaria para la columna, 
+        pero la columna no contiene cadenas de caracteres no binarios<br>
+        en lugar de cadenas binarias de bytes. Por ejemplo CHAR(5) BINARY se trata 
+        como CHAR(5) CHARACTER SET latin1<br>
+        COLLATE latin1_bin, asumiendo que el conjunto de caracteres por defecto 
+        es latin1.<br>
+        <h3>Los tipos BLOB y TEXT</h3><br>
+        Un BLOB es un objeto binario que puede tratar una cantidad de datos variables. 
+        Los cuatro tipos BLOB son TINYBLOB, BLOB,<br>
+        MEDIUMBLOB, y LONGBLOB. Difieren s&oacute;lo en la longitud m&aacute;xima 
+        de los valores que pueden tratar.<br>
+        Los cuatro tipos TEXT son TINYTEXT, TEXT, MEDIUMTEXT, y LONGTEXT. Se corresponden 
+        a los cuatro tipos BLOB y tienen<br>
+        las mismas longitudes y requerimientos de almacenamiento.<br>
+        Consulte Secci&oacute;n 11.5, &#8220;Requisitos de almacenamiento seg&uacute;n 
+        el tipo de columna&#8221;.<br>
+        Las columnas BLOB se tratan como cadenas de caracteres binarias (de bytes). 
+        Las columnas TEXT se tratan como cadenas de caracteres<br>
+        no binarias (de car&aacute;cateres). Las columnas BLOB no tienen conjunto 
+        de caracteres, y la ordenaci&oacute;n y la comparaci&oacute;n se basan<br>
+        en los valores num&eacute;ricos de los bytes. Las columnas TEXT tienen 
+        un conjunto de caracteres y se ordenan y comparan en base<br>
+        de la colaci&oacute;n del conjunto de caracteres asignada a la columna 
+        desde MySQL 4.1.<br>
+        No hay conversi&oacute;n de may&uacute;sculas/min&uacute;sculas para columnas 
+        TEXT o BLOB durante el almacenamiento o la recuperaci&oacute;n.<br>
+        Si asiguna un valor a una columna BLOB o TEXT que exceda la longitud m&aacute;xima 
+        del tipo de la columna, el valor se trunca. Si los<br>
+        caracteres truncados no son espacios, aparece una advertencia. Puede hacer 
+        que aparezca un error en lugar de una advertencia usando<br>
+        el modo SQL estricto. Consulte Secci&oacute;n 5.3.2, &#8220;El modo SQL 
+        del servidor&#8221;.<br>
+        En la mayor&iacute;a de aspectos, puede tratar una columna BLOB como VARBINARY 
+        que puede ser tan grande como desee. Similarmente,<br>
+        puede tratar columnas TEXT como VARCHAR. BLOB y TEXT difieren de VARBINARY 
+        y VARCHAR en los siguientes aspectos::<br>
+        &#8226; No se eliminan espacios al final para columnas BLOB y TEXT cuando 
+        los valores se almacenan o recuperan. Antes de MySQL<br>
+        5.0.3, esto difiere de VARBINARY y VARCHAR, para los que se eliminaban 
+        los epacios al final cuando se almacenaban.<br>
+        Tenga en cuenta que TEXT realiza comparaci&oacute;n espacial extendida 
+        para coincidir con el objeto comparado, exactamente como<br>
+        CHAR y VARCHAR.<br>
+        &#8226; Para &iacute;ndices en columnas BLOB y TEXT, debe especificar 
+        una longitud de prefijo para el &iacute;ndice. Para CHAR y VARCHAR, la<br>
+        longitud de prefijo es opciona. Consulte Secci&oacute;n 7.4.3, &#8220;&Iacute;ndices 
+        de columna&#8221;.<br>
+        &#8226; BLOB y TEXT no pueden tener valores DEFAULT .<br>
+        En MySQL 5.0, LONG y LONG VARCHAR se mapean con el tipo de datos MEDIUMTEXT. 
+        Esto existe por compatibilidad. Si usa el<br>
+        atributo BINARY con el tipo de columna TEXT, se asigna la colaci&oacute;n 
+        binaria del conjunto de caracteres a la columna.<br>
+        MySQL Connector/ODBC define los valores BLOB como LONGVARBINARY y valores 
+        TEXT como LONGVARCHAR.<br>
+        Como los valores BLOB y TEXT pueden ser extremadamente grandes, puede 
+        encontrar algunas restricciones al usarlos:<br>
+        &#8226; S&oacute;lo los primeros max_sort_length bytes de la columna se 
+        usan al ordenar. El valor por defecto de max_sort_length<br>
+        es 1024; este valor puede cambiarse usando la opci&oacute;n --max_sort_length 
+        al arrancar el servidor mysqld . Consulte Secci&oacute;n<br>
+        5.3.3, &#8220;Variables de sistema del servidor&#8221;.<br>
+        Puede hacer que haya m&aacute;s bytes significativos al ordenar o agrupar 
+        incrementando el valor de max_sort_length en tiempo<br>
+        de ejecuci&oacute;n. Cualquier cliente puede cambiar el valor de su variable 
+        de sesi&oacute;n max_sort_length :<br>
+        mysql&gt; SET max_sort_length = 2000;<br>
+        mysql&gt; SELECT id, comment FROM tbl_name<br>
+        -&gt; ORDER BY comment;<br>
+        Otra forma de usar GROUP BY o ORDER BY en una columna BLOB o TEXT conteniendo 
+        valores grandes cuando quiere que<br>
+        m&aacute;s de max_sort_length bytes sean significativos es convertir el 
+        valor de la columna en un objeto de longitud fija. La forma<br>
+        est&aacute;ndar de hacerlo es con la funci&oacute;n SUBSTRING . Por ejemplo, 
+        el siguiente comando causa que 2000 bytes de la columna<br>
+        comment se tengan en cuenta para ordenaci&oacute;n:<br>
+        mysql&gt; SELECT id, SUBSTRING(comment,1,2000) FROM tbl_name<br>
+        -&gt; ORDER BY SUBSTRING(comment,1,2000);<br>
+        &#8226; El tama&ntilde;o m&aacute;ximo de un objeto BLOB o TEXT se determina 
+        por su tipo, pero el valor m&aacute;ximo que puede transmitir entre el<br>
+        cliente y el servidor viene determinado por la cantidad de memoria disponible 
+        y el tama&ntilde;o de los buffers de comunicaci&oacute;n. Pue-<br>
+        de cambiar el tama&ntilde;o de los buffers de comunicaci&oacute;n cambiando 
+        el valor de la variable max_allowed_packet, pero debe<br>
+        hacerlo para el servidor y los clientes . Por ejemplo, mysql y mysqldump 
+        le permite cambiar el valor de la variable del cliente<br>
+        max_allowed_packet . Consulte Secci&oacute;n 7.5.2, &#8220;Afinar par&aacute;metros 
+        del servidor&#8221;, Secci&oacute;n 8.3, &#8220;La herramienta int&eacute;rprete<br>
+        de comandos mysql&#8221;, y Secci&oacute;n 8.7, &#8220;El programa de 
+        copia de seguridad de base de datos mysqldump&#8221;.<br>
+        Cada valor BLOB o TEXT se representa internamente como un objeto a parte. 
+        Esto se hace en contraste con todos los otros tipos de<br>
+        columnas, para los que el almacenamiento se hace una vez por columna cuando 
+        se abre la tabla.<br>
+        <h3>El tipo de columna ENUM</h3><br>
+        Un ENUM es un objeto de cadenas de caracteres con un valor elegido de 
+        una lista de valores permitidos que se enumeran expl&iacute;citamente<br>
+        en la especificaci&oacute;n de columna en tiempo de creaci&oacute;n de 
+        la tabla.<br>
+        El valor puede ser la cadena vac&iacute;a ('') o NULL bajo ciertas circunstancias:<br>
+        &#8226; Si inserta un valor inv&aacute;lido en un ENUM (esto es, una cadena 
+        de caracteres no presente en la lista de valores permitidos), la cadena<br>
+        vac&iacute;a se inserta en lugar de un valor especial de error. Esta cadena 
+        puede distinguirse de una cadena vac&iacute;a &#8220;normal&#8221; por 
+        el<br>
+        hecho que esta cadena tiene un valor num&eacute;rico 0. M&aacute;s informaci&oacute;n 
+        posteriormente.<br>
+        &#8226; Si se declara una columna ENUM para permitir NULL, el valor NULL 
+        es un valor legal para la columna, y el valor por defecto es<br>
+        NULL. Si una columna ENUM se declara NOT NULL, su valor por defecto es 
+        el primer elemento de la lista de valores permitidos.<br>
+        Cada valor de la enumeraci&oacute;n tiene un &iacute;ndice:<br>
+        &#8226; Los valores de la lista de elementos permitidos en la especificaci&oacute;n 
+        de la columna se numeran empezando por 1.<br>
+        &#8226; El valor de &iacute;ndice de la cadena err&oacute;nea es 0. Esto 
+        significa que puede usar el siguiente comando SELECT para encontrar registros<br>
+        con el valor inv&aacute;lido ENUM asignado:<br>
+        mysql&gt; SELECT * FROM tbl_name WHERE enum_col=0;<br>
+        &#8226; El &iacute;ndice del valor NULL es NULL.<br>
+        Por ejemplo, una columna especificada como ENUM('one', 'two', 'three') 
+        puede tener cualquiera de los valores mostrados<br>
+        aqu&iacute;. El &iacute;ndice de cada valor se muestra:<br>
+        Valor &Iacute;ndice<br>
+        NULL NULL<br>
+        '' 0<br>
+        'one' 1<br>
+        'two' 2<br>
+        'three' 3<br>
+        Una enumeraci&oacute;n puede tener un m&aacute;ximo de 65,535 elementos.<br>
+        Los espacios finales se borran autom&aacute;ticamente para valores ENUM 
+        miembros cuando se crea la tabla.<br>
+        Cuando se reciben, los valores almacenados en una columna ENUM se muestran 
+        usando el formato de may&uacute;sculas/min&uacute;sculas usado<br>
+        en la definici&oacute;n de la columna. En MySQL 4.1.1, las columnas ENUM 
+        pueden recibir un conjunto de caracteres y colaci&oacute;n. Para colaciones<br>
+        binarias o sensibles a may&uacute;sculas/min&uacute;sculas, el formato 
+        se tiene en cuenta al asignar valores a la columna.<br>
+        Si recibe un valor ENUM en contexto num&eacute;rico, se retorna el &iacute;ndice 
+        del valor. Por ejemplo, puede recibir valores num&eacute;ricos de una<br>
+        columna ENUM as&iacute;:<br>
+        mysql&gt; SELECT enum_col+0 FROM tbl_name;<br>
+        Si almacena un n&uacute;mero en una columna ENUM, el n&uacute;mero se 
+        trata como &iacute;ndice, y el valor almacenado es el miembro de la enumeraci&oacute;n<br>
+        con ese &iacute;ndice. (Sin embargo, esto no funciona con LOAD DATA, que 
+        trata toda la entrada como cadenas de caracteres.) No<br>
+        es recomendable definir una columna ENUM con valores de enumeraci&oacute;n 
+        que parezcan n&uacute;meros, ya que esto puede causar confusi&oacute;n.<br>
+        Por ejemplo, la siguiente columna tiene miembros de enumeraci&oacute;n 
+        con valores de '0', '1', y '2', pero valores de &iacute;ndice 1,<br>
+        2, y 3:<br>
+        numbers ENUM('0','1','2')<br>
+        Los valores ENUM se ordenan seg&uacute;n el order en que se enumeran los 
+        mienbros en la especificaci&oacute;n de la columna. (En otras palabras,<br>
+        los valores ENUM se ordenan seg&uacute;n sus n&uacute;meros de &iacute;ndice.) 
+        Por ejemplo, 'a' se ordena antes que 'b' para ENUM('a',<br>
+        'b'), pero 'b' se ordena antes de 'a' para ENUM('b', 'a'). La cadena vac&iacute;a 
+        se ordena antes de las cadenas no vac&iacute;as, y los<br>
+        valores NULL se ordenan antes de todos los otros valores de la enumeraci&oacute;n. 
+        Para evitar resultados inesperados, especifique la lista<br>
+        ENUM en orden alfab&eacute;tico. Tambi&eacute;n puede usar GROUP BY CAST(col 
+        AS VARCHAR) o GROUP BY CONCAT(col) para<br>
+        asegurarse que la columna se ordena l&eacute;xicamente en lugar de por 
+        n&uacute;mero de &iacute;ndice.<br>
+        Si quiere determinar todos los valores posibles para una columna ENUM, 
+        use SHOW COLUMNS FROM tbl_name LIKE<br>
+        enum_col y parsee la definici&oacute;n de ENUM en la segunda columna de 
+        la salida.<br>
+        <h3>El tipo SET</h3><br>
+        Un SET es un objeto de cadenas de caracteres que tiene cero o m&aacute;s 
+        valores, cada uno de ellos debe elegirse de una lista de valores<br>
+        posibles especificada cuando se crea la tabla. Los valores de columnas 
+        SET que consisten de m&uacute;ltiples miembros del conjunto se<br>
+        especifican con los miembros separados por comas (','). Una consecuencia 
+        de esto es que los miembros de SET no pueden contener<br>
+        comas ellos mismos.<br>
+        Por ejemplo, una columna especificada como SET('one', 'two') NOT NULL 
+        puede tener cualquiera de estos valores:<br>
+        ''<br>
+        'one'<br>
+        'two'<br>
+        'one,two'<br>
+        Un SET puede tener un m&aacute;ximo de 64 miembros distintos.<br>
+        Los espacios finales se borran autom&aacute;ticamente de los miembros 
+        de un SET cuando se crea la tabla.<br>
+        Cuando se recuperan, los valors almacenados en una columna SET se muestran 
+        usando la sensibilidad de may&uacute;sculas/min&uacute;sculas<br>
+        usando en la definici&oacute;n de la columna. En MySQL 5.0, las columnas 
+        SET pueden tener un conjunto de caracteres y colaci&oacute;n. Para<br>
+        colaciones binarias o sensibles a may&uacute;sculas/min&uacute;sculas, 
+        esta sensibilidad se tiene en cuenta al asignar valores a la columna.<br>
+        MySQL almacena valores SET num&eacute;ricamente, con el bit de menos peso 
+        del valor almacenado correspondiente al primer miembro<br>
+        del conjunto. Si recibe un valor SET en un contexto num&eacute;rico, el 
+        valor recibido tiene los bits asignados correspondientes a los<br>
+        miembros que coinciden con el valor de la columna. Por ejemplo, puede 
+        recuperar los valores num&eacute;ricos de una columna SET as&iacute;:<br>
+        mysql&gt; SELECT set_col+0 FROM tbl_name;<br>
+        Si se almacena un n&uacute;mero en una columna SET, los bits que se asignan 
+        en la representaci&oacute;n binaria del n&uacute;mero determinan los<br>
+        miembros del conjunto en el valor de la columna. Para una columna especificada 
+        como SET('a','b','c','d'), los miembros<br>
+        tienen los siguientes valores decimales y binarios:<br>
+        SET Miembro Valor decimal Valor binario<br>
+        'a' 1 0001<br>
+        'b' 2 0010<br>
+        'c' 4 0100<br>
+        'd' 8 1000<br>
+        Si asigna un valor de 9 a esta columna, esto es 1001 en binario, de forma 
+        que el primer y cuarto miembro delSET 'a' y 'd' se<br>
+        seleccionan y el valor resultante es 'a,d'.<br>
+        Para un valor que contenga m&aacute;s de un elemento SET, no importa el 
+        orden en que se listen los elementos cuando inserte el valor.<br>
+        Tampoco no importa cu&aacute;ntas veces se lista un elemento dado para 
+        el valor. Cuando el valor se recupera posteriormente, cada elemento<br>
+        en el valor aparece una vez, con los elementos listados seg&uacute;n el 
+        orden en que se especificaron al crear la tabla. Si una columna<br>
+        se especifica como SET('a','b','c','d'), 'a,d', 'd,a', y 'd,a,a,d,d' aparecen 
+        como 'a,d' al recuperarse.<br>
+        Si asigna un valor no soportado a una columna SET, el valor se ignora.<br>
+        Los valores SET se ordenan num&eacute;ricamente. Los valores NULL se ordenan 
+        antes de los no NULL.<br>
+        Normalmente, busca valores SET usando la funci&oacute;n FIND_IN_SET() 
+        o el operador LIKE :<br>
+        mysql&gt; SELECT * FROM tbl_name WHERE FIND_IN_SET('value',set_col)&gt;0;<br>
+        mysql&gt; SELECT * FROM tbl_name WHERE set_col LIKE '%value%';<br>
+        El primer comando encuentra registros cuando set_col contiene el miembro 
+        value del conjunto. El segundo es similar, pero no<br>
+        igual: encuentra registros cuando set_col contengan el valor value en 
+        cualquier sitio, incluso cuando es una subcadena de otro<br>
+        miembro del conjunto.<br>
+        Los siguientes comandos tambi&eacute;n son legales:<br>
+        mysql&gt; SELECT * FROM tbl_name WHERE set_col &amp; 1;<br>
+        mysql&gt; SELECT * FROM tbl_name WHERE set_col = 'val1,val2';<br>
+        El primero de estos comandos busca valores que contengan el primer miembro 
+        del conjunto. El segundo busca una coincidencia<br>
+        exacta. Tenga cuidado con las comparaciones del segundo tipo. Comparar 
+        valores del conjunto 'val1,val2' retorna distintos<br>
+        resultados que comparar valores de 'val2,val1'. Debe especificar los valores 
+        en el mismo orden en que se listan en la definici&oacute;n<br>
+        de la columna.<br>
+        Si desea determinar todos los valores posibles para una columna SET, use 
+        SHOW COLUMNS FROM tbl_name LIKE<br>
+        set_col y parsee la definici&oacute;n de SET en la segunda columna de 
+        la salida.</p>
+    
+        </td>
+    <td>&nbsp;</td>
+    <td><a href="http://www.euskalnet.net/juanarana/oraclezip/Ejer3.rar"><img src="../../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td>
+<div align="right"><a href="http://www.euskalnet.net/juanarana/index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a>
+      </div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

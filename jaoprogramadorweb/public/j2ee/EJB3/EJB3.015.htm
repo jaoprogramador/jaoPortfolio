@@ -1,0 +1,143 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Anotaciones</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación en EJB 3.0 Ciclo de vida de la Entidad" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="EJB 3.0 JPA, Manual EJB 3.0 JPA, tutorial EJB 3.0 JPA, Ejemplos EJB 3.0 JPA, ejercicios EJB 3.0 JPA">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> Anotaciones</h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <p>Una anotaci&oacute;n o metadato proporciona 
+        un recurso adicional al elemento de c&oacute;digo al que va asociado en 
+        el momento de su compilaci&oacute;n. Cuando la JVM ejecuta la clase busca 
+        estos metadatos y determina el comportamiento a seguir con el c&oacute;;digo 
+        al que va unido la anotaci&oacute;n. </p>
+      <p>Anotaciones de un Bean de Sesi&oacute;n</p>
+      <p>@Stateful: Indica que el Bean de Sesi&oacute;n es con estado.</p>
+      <p> - name - por defecto el nombre de la clase pero se puede especificar 
+        otra diferente.</p>
+      <p> - mappedName - si se quiere que el contenedor maneje el objeto de manera 
+        espec&iacute;fica. Si incluimos esta opci&oacute;n nuestra aplicaci&oacute;n 
+        puede que no sea portable y no funcione en otro servidor de aplicaciones.</p>
+      <p> - description - descripci&oacute;n de la anotaci&oacute;n. </p>
+      <p>@Stateless: Indica que el Bean de Sesi&oacute;n es sin estado.</p>
+      <p> mismos atributos que @Stateful </p>
+      <p>@Init: Especifica que el m&eacute;todo se corresponde con un m&eacute;todo 
+        create de un EJBHome o EJBLocalHome de EJB 2.1. S&oacute;lo se podr&aacute;; 
+        llamar una &uacute;nica vez a este m&eacute;todo.</p>
+      <p> - value - indica el nombre del correspondiente m&eacute;todo create 
+        de la interfaz home adaptada. S&oacute;lo se debe utilizar cuando se utiliza 
+        el bean anotado con un bean con estado de la especificaci&oacute;n 2.1 
+        o anterior y que disponga de m&aacute;;s de un m&eacute;todo create. </p>
+      <p>@Remove: Indica que el contenedor debe llamar al m&eacute;todo cuando 
+        quiera destruir la instancia del Bean.</p>
+      <p> - retainIfException - indica si el Bean debe mantenerse activo si se 
+        produce una excepci&oacute;n. Por defecto a false. </p>
+      <p>@Local: Indica que la interfaz es local.</p>
+      <p>@Remote: Indica que la interfaz es remota.</p>
+      <p>@PostActivate: Invocado despu&eacute;s de que el Bean sea activado por 
+        el contenedor.</p>
+      <p>@PrePassivate: Invocado antes de que el Bean est&eacute; en estado passivate.</p>
+      <p>Anotaciones de un Bean de Entidad</p>
+      <p>@Entity: Indica que es un Bean de Entidad.</p>
+      <p> - name - por defecto el nombre de la clase pero se puede especificar 
+        otra diferente. </p>
+      <p>M&eacute;todos del ciclo de vida de una Entidad</p>
+      <p>@EntityListeners: Se pueden definir clases oyentes (listeners) con m&eacute;todos 
+        de ciclo de vida de una entidad. Para hacer referencia a un listener se 
+        debe incluir esta anotaci&oacute;n seguido entre par&eacute;ntesis de 
+        la clase: @Entity Listeners(MyListener.class)</p>
+      <p>@ExcludeSuperclassListeners: Indica que ning&uacute;n listener de la 
+        superclase ser&aacute;; invocado por la entidad ni por ninguna de sus 
+        subclases.</p>
+      <p>@ExcludeDefaultListeners: Indica que ning&uacute;n listener por defecto 
+        ser&aacute;; invocado por esta clase ni por ninguna de sus subclases.</p>
+      <p>@PrePersist: El m&eacute;todo se llamar&aacute;; justo antes de la persistencia 
+        del objeto. Podr&iacute;a ser necesario para asignarle la clave primaria 
+        a la entidad a persistir en base de datos.</p>
+      <p>@PostPersist: El m&eacute;todo se llamar&aacute;; despu&eacute;s de la 
+        persistencia del objeto.</p>
+      <p>@PreRemove: El m&eacute;todo se llamar&aacute;; antes de que la entidad 
+        sea eliminada.</p>
+      <p>@PostRemove: El m&eacute;todo se llamar&aacute;; despu&eacute;s de eliminar 
+        la entidad de la base de datos.</p>
+      <p>@PreUpdate: El m&eacute;todo se llamar&aacute;; antes de que una entidad 
+        sea actualizada en base de datos.</p>
+      <p>@PostUpdate: El m&eacute;todo se llamar&aacute;; despu&eacute;s de que 
+        la entidad sea actualizada.</p>
+      <p>@PostLoad: El m&eacute;todo se llamar&aacute;; despu&eacute;s de que 
+        los campos de la entidad sean cargados con los valores de su entidad correspondiente 
+        de la base de datos. Se suele utilizar para inicializar valores no persistidos.</p>
+      <p>@FlushMode: Modo en que se ejecuta la transacci&oacute;n: FlushModeType.AUTO 
+        (por defecto) y FlushModeType.COMMIT.</p>
+      <p>@NamedQuery: Especifica el nombre del objeto query utilizado junto a 
+        EntityManager.</p>
+      <p> - name - nombre del objeto query.</p>
+      <p> - query - especifica la query a la base de datos mediante lenguaje Java 
+        Persistence Query Language (JPQL) </p>
+      <p>@NamedQueries: Especifica varias queries como la anterior.</p>
+      <p>@NamedNativeQuery: Especifica el nombre de una query SQL normal.</p>
+      <p> - name - nombre del objeto query.</p>
+      <p> - query - especifica la query a la base de datos.</p>
+      <p> - resultClass - clase del objeto resultado de la ejecuci&oacute;n de 
+        la query.</p>
+      <p> - resultSetMapping - nombre del SQLResultSetMapping definido (se explica 
+        m&aacute;;s abajo). </p>
+      <p>@NamedNaviteQueries: Especifica varias queries SQL.</p>
+      <p>@SQLResultSetMapping: Permite recoger el resultado de una query SQL.</p>
+      <p> - name - nombre del objeto asignado al mapeo.</p>
+      <p> EntityResult[] entities() - entidades especificadas para el mapeo de 
+        los datos.</p>
+      <p> ColumnResult[] columns() - columnas de la tabla para el mapeo de los 
+        datos. </p>
+      <p>@NamedNativeQuery(name=&quot;nativeResult&quot;, query=&quot;SELECT NOMBRE,APELLIDOS 
+        FROM USUARIOS WHERE USUARIO_ID= 123&quot;, resultSetMapping = &quot;usuarioNamedMapping&quot;)</p>
+      <p>@SqlResultSetMapping(name=&quot;usuarioNamedMapping&quot;,<br>
+        entities = {</p>
+      <p>@EntityResult(entityClass = com.autentia.entidades.Usuario.class,<br>
+        fields = {</p>
+      <p>@ColumnResult(name=&quot;usuarioId&quot;, column=&quot;USUARIO_ID&quot;),</p>
+      <p>@ColumnResult(name=&quot;nombre&quot;, column=&quot;NOMBRE&quot;),<br>
+        @ColumnResult(name=&quot;apellidos&quot;, column=&quot;APELLIDOS&quot;)})})</p>
+      <p>@PersistenceContext: Objeto de la clase EntityManager que nos proporciona 
+        todo lo que necesitamos para manejar la persistencia.</p>
+      <p> - name - nombre del objeto utilizado para la persistencia en caso de 
+        ser diferente al de la clase donde se incluye la anotaci&oacute;n.</p>
+      <p> - unitName - identifica la unidad de la persistencia usada en el bean 
+        en caso de que hubiera m&aacute;;s de una.</p>
+      <p> - type - tipo de persistencia, TRANSACTION (por defecto) | EXTENDED. 
+      </p>
+      <p>@PersistenceContexts: Define varios contextos de persistencia.</p>
+      <p>@PersistenceUnit: Indica la dependencia de una EntityManagerFactory definida 
+        en el archivo persistence.xml.</p>
+      <p> - name - nombre del objeto utilizado para la persistencia en caso de 
+        ser diferente al de la clase donde se incluye la anotaci&oacute;n.</p>
+      <p> - unitName - identifica la unidad de la persistencia usada en el bean 
+        en caso de que hubiera m&aacute;;s de una. </p>
+      <p>&nbsp; </p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Interface Remota y Local</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación en EJB 3.0,Programas EJB 3.0,Aplicaciones en EJB 3.0,Ejercicios en EJB 3.0, Ejemplos de EJB 3.0,Tutorial de EJB 3.0,Manual EJB 3.0" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="EJB 3.0, Manual EJB 3.0, tutorial EJB 3.0, Ejemplos EJB 3.0, ejercicios EJB 3.0">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> <strong>Interface Remota y Local</strong></h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <p>- Interfaz Remote: Los Beans ofrecen m&eacute;todos 
+        concretos que pueden ser llamados por un cliente, aunque pueden existir<br>
+        m&eacute;todos que no sean p&uacute;blicos. Para ello a cada Bean le corresponde 
+        una interfaz ya sea Remota o Local, como m&iacute;nimo un Bean<br>
+        debe implementar UNA de estas interfaces, la interfaz Remote son para 
+        aquellos Beans que puedan ser llamados desde una<br>
+        m&aacute;quina virtual java distinta a donde se encuentra el servidor 
+        de aplicaciones.<br>
+      </p>
+      <p>- Interfaz Home: normalmete se usan para ofrecer servicios a otros Sessions 
+        Beans que se encuentran en el mismo servidor<br>
+        de aplicaciones, es decir, en la misma m&aacute;quina virtual, pueden 
+        tratarse de m&eacute;todos que aparezcan en un Bean cuya interfaz es<br>
+        remota. Si alguien llama a un m&eacute;todo de una interfaz local se encuentra 
+        ejecut&aacute;ndose bajo la misma m&aacute;quina virtual, esto sirve<br>
+        para por ejemplo iniciar subtransacciones.</p>
+      <p>Ejemplo de interface Remota:</p>
+      <p>@Remote<br>
+        public interface DiscosRemote {<br>
+        public void insertarTransaccion()throws Exception;<br>
+        public void grabarDiscos() throws MyException;<br>
+        public void ejbActivate() throws EJBException, RemoteException ;<br>
+        public void ejbPassivate() throws EJBException, RemoteException;<br>
+        public void ejbRemove() throws EJBException, RemoteException;<br>
+        public void setSessionContext(SessionContext arg0) throws EJBException,<br>
+        RemoteException;<br>
+        }<br>
+      </p>
+      <p>Ejemplo de interface local:</p>
+      <p>@Local<br>
+        public interface DiscosLocal {<br>
+        public void insertarTransaccion()throws Exception;<br>
+        public void grabarDiscos() throws MyException;<br>
+        public void ejbActivate() throws EJBException, RemoteException ;<br>
+        public void ejbPassivate() throws EJBException, RemoteException;<br>
+        public void ejbRemove() throws EJBException, RemoteException;<br>
+        public void setSessionContext(SessionContext arg0) throws EJBException,<br>
+        RemoteException;<br>
+        }<br>
+      </p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

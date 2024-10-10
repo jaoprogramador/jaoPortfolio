@@ -1,0 +1,223 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Proyecto EJB 3.0 paso a paso</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación en EJB 3.0 Ciclo de vida de la Entidad" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="EJB 3.0 JPA, Manual EJB 3.0 JPA, tutorial EJB 3.0 JPA, Ejemplos EJB 3.0 JPA, ejercicios EJB 3.0 JPA">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> Proyecto EJB 3.0 paso a paso</h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <p>Pues bien, tras habernos instalado la MVJ, 
+        el IDE NetBeans, la BD MySQL, el servidor JBoss , nos dirpondremos a montar 
+        los proyectos y a adjuntar las librer&iacute;as:</p>
+      <p>1.- Abrimos el IDE NetBeans y clikamos en Men&uacute;-&gt;Archivo-&gt;Proyecto 
+        Nuevo-&gt;Categor&iacute;as: &quot;Java EE&quot;, Proyectos: &quot;EJB 
+        Module&quot; y le damos a &quot;Siguiente&quot;.</p>
+      <table width="414" height="112%" border="1" background="../imagenes/ejb3/1.jpg">
+        <tr>
+          <td>&nbsp;</td>
+        </tr>
+      </table>
+      <p>&nbsp; </p>
+      <p>Luego le damos un nombre al proyecto junto a una hubicaci&oacute;n en 
+        el disco, Project Name: &quot;JAO-EJB&quot; y &quot;Siguiente&quot;.</p>
+      <table width="412" height="285" border="1" background="../imagenes/ejb3/2.jpg">
+        <tr>
+          <td>&nbsp;</td>
+        </tr>
+      </table>
+      <p>&nbsp;</p>
+      <p> Luego seleccionamos el Servidor: &quot;JBoss Application Server&quot; 
+        (Si no aparece el servidor JBoss pulsamos en el bot&oacute;n Add y seleccionamos 
+        la hubicaci&oacute;n donde lo tenemos en disco) y pulsamos &quot;Terminar&quot;.</p>
+      <table width="410" height="282" border="1" background="../imagenes/ejb3/3.jpg">
+        <tr>
+          <td>&nbsp;</td>
+        </tr>
+      </table>
+      <p>&nbsp;</p>
+      <p>2.- Tras esto, se nos habr&aacute; agregado el proyecto &quot;JAO-EJB&quot; 
+        que veremos en la pesta&ntilde;a de &quot;Proyectos&quot; en el IDE y 
+        ahora le a&ntilde;adiremos las bibliotecas haciendo bot&oacute;n derecho 
+        del rat&oacute;n sobre el proyecto &quot;JAO-EJB&quot; ,&quot;Propiedades&quot; 
+        y seleccionamos &quot;Libraries&quot; pulsamos el bot&oacute;n &quot;Add 
+        JAR/Folder&quot; (ejb3-persistence.jar, jboss-aop-client.jar, jboss-aspect-jdk50-client.jar, 
+        jboss-ejb3-common-client.jar y jboss-ejb3-core-client.jar) y &quot;Aceptar&quot;.</p>
+      <table width="413" height="291" border="1" background="../imagenes/ejb3/4.jpg">
+        <tr>
+          <td>&nbsp;</td>
+        </tr>
+      </table>
+      <p>&nbsp;</p>
+      <p>3.- Ahora crearemos el &quot;Cliente&quot; en un proyecto WEB. Men&uacute;-&gt;Archivo-&gt;Proyecto 
+        Nuevo-&gt;Categor&iacute;as: &quot;Java Web&quot;, Proyectos: &quot;Web 
+        Application&quot; y &quot;Siguiente&quot;. </p>
+      <table width="419" height="291" border="1" background="../imagenes/struts/01.jpg">
+        <tr>
+          <td>&nbsp;</td>
+        </tr>
+      </table>
+      <p>Luego en Project Name: &quot;JAO-WEB&quot; y &quot;Siguiente&quot;. </p>
+      <table width="416" height="281" border="1" background="../imagenes/struts/02.jpg">
+        <tr>
+          <td>&nbsp;</td>
+        </tr>
+      </table>
+      <p>Posteriormente seleccionaremos el Framework en este caso Struts y &quot;Terminar&quot;.</p>
+      <table width="417" height="291" border="1" background="../imagenes/struts/03.jpg">
+        <tr>
+          <td>&nbsp;</td>
+        </tr>
+      </table>
+      <p>&nbsp;</p>
+      <p>4.- Tras esto, ejecutamos el NetBeans y en el marco de la izquierda seleccionamos 
+        la pesta&ntilde;a &quot;Prestaciones&quot; y pinchamos boton derecho del 
+        rat&oacute;n sobre la opci&oacute;nn servidores y seleccionamos &quot;Agregar 
+        servidor&quot;. Nos aparecer&aacute;n una lista de servidores y nosotros 
+        seleccionaremos Tomcat 5.5. y le damos al bot&oacute;n de &quot;Siguiente&quot; 
+        y nos aparecer&aacute; una ventana donde especificar donde tenemos almacenado 
+        nuestro servidor Tomcat( Server Location). Pues bien, pulsamos el bot&oacute;n 
+        &quot;Browse&quot; y seleccionamos el directorio donde descargamos el 
+        Tomcat.</p>
+      <p>Posteriormente checkeamos &quot;Use Private Configuration Folder (Catalina 
+        Base)&quot; y seleccionamos el directorio donde tenemos instalado el Tomcat.</p>
+      <p>Luego, introducimos en &quot;Username:&quot; manager, y en &quot;Password:&quot; 
+        admin y pulsamos el bot&oacute;n &quot;Terminar&quot;.</p>
+      <p>Ahora, crearemos el fichero persistence.xml en el Proyecto JAO-EJB en 
+        el directorio &quot;E:\Carpeta nueva\JAO-EJB\src\conf\&quot; con el siguiente 
+        contenido:</p>
+      <p>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;<br>
+        &lt;persistence version=&quot;1.0&quot; xmlns=&quot;http://java.sun.com/xml/ns/persistence&quot; 
+        xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocation=&quot;http://java.sun.com/xml/ns/persistence 
+        http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd&quot;&gt;<br>
+        &lt;persistence-unit name=&quot;PruebaEJBPU&quot; transaction-type=&quot;JTA&quot;&gt;<br>
+        &lt;provider&gt;org.hibernate.ejb.HibernatePersistence&lt;/provider&gt;<br>
+        &lt;jta-data-source&gt;java:/ProyectoBaseDS&lt;/jta-data-source&gt;<br>
+        &lt;exclude-unlisted-classes&gt;true&lt;/exclude-unlisted-classes&gt;<br>
+        &lt;properties&gt;<br>
+        &lt;property name=&quot;hibernate.hbm2ddl.auto&quot; value=&quot;update&quot;/&gt;<br>
+        &lt;/properties&gt;<br>
+        &lt;/persistence-unit&gt;<br>
+        &lt;/persistence&gt;</p>
+      <p>Luego crearemos el documento proyectoBase-ds.xml en el directorio donde 
+        tengamos el servidor JBoss(C:\Archivos de programa\jboss-5.1.0.GA\server\default\deploy\) 
+        con el siguiente contenido:</p>
+      <p>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;<br>
+        &lt;datasources&gt;<br>
+        &lt;local-tx-datasource&gt;<br>
+        &lt;jndi-name&gt;ProyectoBaseDS&lt;/jndi-name&gt;<br>
+        &lt;connection-url&gt;jdbc:mysql://localhost:3306/jao&lt;/connection-url&gt;<br>
+        &lt;driver-class&gt;com.mysql.jdbc.Driver&lt;/driver-class&gt;<br>
+        &lt;user-name&gt;root&lt;/user-name&gt;<br>
+        &lt;password&gt;adminjao&lt;/password&gt;<br>
+        &lt;min-pool-size&gt;2&lt;/min-pool-size&gt;<br>
+        &lt;max-pool-size&gt;10&lt;/max-pool-size&gt;<br>
+        &lt;idle-timeout-minutes&gt;5&lt;/idle-timeout-minutes&gt;<br>
+        &lt;metadata&gt;<br>
+        &lt;type-mapping&gt;mySQL&lt;/type-mapping&gt; <br>
+        &lt;/metadata&gt; <br>
+        &lt;/local-tx-datasource&gt;<br>
+        &lt;/datasources&gt;<br>
+      </p>
+      <p>En este documento se especifica la conexi&oacute;n a la Base de Datos 
+        MySQL con el usuario &quot;jao&quot; y password &quot;adminjao&quot;.</p>
+      <p>Es entonces cuando podremos ver que se nos ha agregado el servidor Tomcat 
+        en el marco de la izquierda en la pesta&ntilde;a &quot;Proyectos&quot; 
+        .Pues bien, pinchamos boton derecho del rat&oacute;n sobre &quot;JAO-WEB&quot; 
+        y seleccionamos &quot;Deploy&quot; para desplegar la aplicaci&oacute;n 
+        en el tomcat. Si todo es correcto, que seguro que si, nos aparecer&aacute;n 
+        estas trazas en la salida del Tomcat 5.5:</p>
+      <table border=1>
+        <tr> 
+          <td>init:<br>
+            deps-module-jar:<br>
+            deps-ear-jar:<br>
+            deps-jar:<br>
+            Created dir: E:\Carpeta nueva\JAO-WEB\build\web\WEB-INF\classes<br>
+            Created dir: E:\Carpeta nueva\JAO-WEB\build\web\META-INF<br>
+            Copying 1 file to E:\Carpeta nueva\JAO-WEB\build\web\META-INF<br>
+            Copying 13 files to E:\Carpeta nueva\JAO-WEB\build\web<br>
+            library-inclusion-in-archive:<br>
+            Copying 1 file to E:\Carpeta nueva\JAO-WEB\build\web\WEB-INF\lib<br>
+            Copying 1 file to E:\Carpeta nueva\JAO-WEB\build\web\WEB-INF\lib<br>
+            Copying 1 file to E:\Carpeta nueva\JAO-WEB\build\web\WEB-INF\lib<br>
+            Copying 1 file to E:\Carpeta nueva\JAO-WEB\build\web\WEB-INF\lib<br>
+            Copying 1 file to E:\Carpeta nueva\JAO-WEB\build\web\WEB-INF\lib<br>
+            Copying 1 file to E:\Carpeta nueva\JAO-WEB\build\web\WEB-INF\lib<br>
+            Copying 1 file to E:\Carpeta nueva\JAO-WEB\build\web\WEB-INF\lib<br>
+            Copying 1 file to E:\Carpeta nueva\JAO-WEB\build\web\WEB-INF\lib<br>
+            Copying 1 file to E:\Carpeta nueva\JAO-WEB\build\web\WEB-INF\lib<br>
+            Copying 1 file to E:\Carpeta nueva\JAO-WEB\build\web\WEB-INF\lib<br>
+            Copying 1 file to E:\Carpeta nueva\JAO-WEB\build\web\WEB-INF\lib<br>
+            Copying 1 file to E:\Carpeta nueva\JAO-WEB\build\web\WEB-INF\lib<br>
+            Copying 1 file to E:\Carpeta nueva\JAO-WEB\build\web\WEB-INF\lib<br>
+            Copying 1 file to E:\Carpeta nueva\JAO-WEB\build\web\WEB-INF\lib<br>
+            Copying 1 file to E:\Carpeta nueva\JAO-WEB\build\web\WEB-INF\lib<br>
+            Copying 1 file to E:\Carpeta nueva\JAO-WEB\build\web\WEB-INF\lib<br>
+            Copying 1 file to E:\Carpeta nueva\JAO-WEB\build\web\WEB-INF\lib<br>
+            Copying 1 file to E:\Carpeta nueva\JAO-WEB\build\web\WEB-INF\lib<br>
+            Copying 1 file to E:\Carpeta nueva\JAO-WEB\build\web\WEB-INF\lib<br>
+            Copying 1 file to E:\Carpeta nueva\JAO-WEB\build\web\WEB-INF\lib<br>
+            library-inclusion-in-manifest:<br>
+            Created dir: E:\Carpeta nueva\JAO-WEB\build\empty<br>
+            Copying 1 file to E:\Carpeta nueva\JAO-WEB\build\web\WEB-INF\classes<br>
+            compile:<br>
+            compile-jsps:<br>
+            Starting Tomcat process...<br>
+            Waiting for Tomcat...<br>
+            Tomcat server started.<br>
+            In-place deployment at E:\Carpeta nueva\JAO-WEB\build\web<br>
+            Deployment is in progress...<br>
+            deploy?config=file%3A%2FC%3A%2FDOCUME%7E1%<br>
+			2FUsuario%2FCONFIG%7E1%2FTemp%<br>
+			2Fcontext6571150464809373152.xml&amp;path=/JAO-WEB<br>
+            OK - Desplegada aplicaci&oacute;n en trayectoria de contexto /JAO-WEB<br>
+            Start is in progress...<br>
+            start?path=/JAO-WEB<br>
+            OK - Arrancada aplicaci&oacute;n en trayectoria de contexto /JAO-WEB<br>
+            run-deploy:<br>
+            GENERACI&Oacute;N CORRECTA (total time: 12 seconds)<br></td>
+        </tr>
+      </table>
+      <p>Para arrancar la aplicaci&oacute;n bastar&aacute; con arrancar un navegador 
+        web y poner la URL &quot;http://localhost:8080/JAO-WEB/&quot;. El resultado 
+        ser&aacute; la pagina de bienvenida a nuestro proyecto con NetBeans y 
+        Struts con este mensaje:</p>
+      <p>- Struts Applications in Netbeans!<br>
+        - It's easy to create Struts applications with NetBeans.</p>
+      <p>Ahora aremos lo mismo pero desplegando la aplicaci&oacute;n de EJB: en 
+        el marco de la izquierda en la pesta&ntilde;a &quot;Proyectos&quot; .Pues 
+        bien, pinchamos boton derecho del rat&oacute;n sobre &quot;JAO-WEB&quot; 
+        y &quot;Deploy&quot;.</p>
+      <p>Cuando se arranque el servidor JBoss abriremos un explorador WEB y pondremos 
+        en el explorador esta URL&quot;http://localhost:8080/&quot;, nos aparecer&aacute; 
+        la consola administrativa del JBoss, clickaremos en &quot;Administration 
+        Console&quot; , introducimos en username y password: admin y pulsamos 
+        &quot;Login&quot; <br>
+      </p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

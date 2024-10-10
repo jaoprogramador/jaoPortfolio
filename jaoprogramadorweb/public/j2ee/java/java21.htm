@@ -1,0 +1,488 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Arrays, String, Double e Integer</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación en Java,Programas Java,Aplicaciones en Java,Ejercicios en Java, Ejemplos de Java,Tutorial de Java,Manual Java" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Java, Manual Java, tutorial Java, Ejemplos Java, ejercicios Java">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> Arrays, String, Double e Integer</h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <h3>Arrays</h3>
+      <p> Los arrays de Java (vectores, matrices, hiper-matrices de m&aacute;s 
+        de dos dimensiones) se tratan como objetos de una clase predefinida. Los 
+        arrays son objetos, pero con algunas caracter&iacute;sticas propias.<br>
+        Los arrays pueden ser asignados a objetos de la clase Object y los m&eacute;todos 
+        de Object pueden ser utilizados con arrays.<br>
+        Algunas de sus caracter&iacute;sticas m&aacute;s importantes de los arrays 
+        son las siguientes:<br>
+        1. Los arrays se crean con el operador new seguido del tipo y n&uacute;mero 
+        de elementos.<br>
+        2. Se puede acceder al n&uacute;mero de elementos de un array con la variable 
+        miembro impl&iacute;cita length (por ejemplo, vect.length).<br>
+        3. Se accede a los elementos de un array con los corchetes [] y un &iacute;ndice 
+        que var&iacute;a de 0 a length-1.<br>
+        4. Se pueden crear arrays de objetos de cualquier tipo. En principio un 
+        array de objetos es un array de referencias que hay que completar llamando 
+        al operador new.<br>
+        5. Los elementos de un array se inicializan al valor por defecto del tipo 
+        correspondiente (cero para valores num&eacute;ricos, el car&aacute;cter 
+        nulo para char, false para boolean, null para Strings y para referencias).<br>
+        6. Como todos los objetos, los arrays se pasan como argumentos a los m&eacute;todos 
+        por referencia.<br>
+        7. Se pueden crear arrays an&oacute;nimos (por ejemplo, crear un nuevo 
+        array como argumento actual en la llamada a un m&eacute;todo).<br>
+        Inicializaci&oacute;n de arrays:<br>
+        1. Los arrays se pueden inicializar con valores entre llaves {...} separados 
+        por comas.<br>
+        2. Tambi&eacute;n los arrays de objetos se pueden inicializar con varias 
+        llamadas a new dentro de unas llaves {...}.<br>
+        3. Si se igualan dos referencias a un array no se copia el array, sino 
+        que se tiene un array con dos nombres, apuntando al mismo y &uacute;nico 
+        objeto.<br>
+        4. Creaci&oacute;n de una referencia a un array. Son posibles dos formas:<br>
+        double[] x; // preferible<br>
+        double x[];<br>
+        5. Creaci&oacute;n del array con el operador new:<br>
+        x = new double[100];<br>
+        6. Las dos etapas 4 y 5 se pueden unir en una sola:<br>
+        double[] x = new double[100];A continuaci&oacute;n se presentan algunos 
+        ejemplos de creaci&oacute;n de arrays:<br>
+        // crear un array de 10 enteros, que por defecto se inicializan a cero<br>
+        int v[] = new int[10];<br>
+        // crear arrays inicializando con determinados valores<br>
+        int v[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};<br>
+        String dias[] = {&quot;lunes&quot;, &quot;martes&quot;, &quot;miercoles&quot;, 
+        &quot;jueves&quot;,<br>
+        &quot;viernes&quot;, &quot;sabado&quot;, &quot;domingo&quot;};<br>
+        // array de 5 objetos<br>
+        MiClase listaObj[] = new MiClase[5]; // de momento hay 5 referencias a 
+        null<br>
+        for( i = 0 ; i &lt; 5;i++)<br>
+        listaObj[i] = new MiClase(...);<br>
+        // array an&oacute;nimo<br>
+        obj.metodo(new String[]={&quot;uno&quot;, &quot;dos&quot;, &quot;tres&quot;});</p>
+      <h3>Arrays bidimensionales</h3>
+      <p>Los arrays bidimensionales de Java se crean de un modo muy similar al 
+        de C++ (con reserva din&aacute;mica de memoria). En Java una matriz es 
+        un vector de vectores fila, o m&aacute;s en concreto un vector de referencias 
+        a los vectores fila. Con este esquema, cada fila podr&iacute;a tener un 
+        n&uacute;mero de elementos diferente.<br>
+        Una matriz se puede crear directamente en la forma,<br>
+        int [][] mat = new int[3][4];<br>
+        o bien se puede crear de modo din&aacute;mico dando los siguientes pasos:<br>
+        1. Crear la referencia indicando con un doble corchete que es una referencia 
+        a matriz,<br>
+        int[][] mat;<br>
+        2. Crear el vector de referencias a las filas,<br>
+        mat = new int[nfilas][];<br>
+        3. Reservar memoria para los vectores correspondientes a las filas,<br>
+        for (int i=0; i&lt;nfilas; i++);<br>
+        mat[i] = new int[ncols];<br>
+        A continuaci&oacute;n se presentan algunos ejemplos de creaci&oacute;n 
+        de arrays bidimensionales:<br>
+        // crear una matriz 3x3<br>
+        // se inicializan a cero<br>
+        double mat[][] = new double[3][3];<br>
+        int [][] b = {{1, 2, 3},<br>
+        {4, 5, 6}, // esta coma es permitida<br>
+        };<br>
+        int c = new[3][]; // se crea el array de referencias a arrays<br>
+        c[0] = new int[5];<br>
+        c[1] = new int[4];<br>
+        c[2] = new int[8];<br>
+        En el caso de una matriz b, b.length es el n&uacute;mero de filas y b[0].length 
+        es el n&uacute;mero de columnas (de la fila 0). Por supuesto, los arrays 
+        bidimensionales pueden contener tipos primitivos de cualquier tipo u objetos 
+        de cualquier clase.</p>
+      <h3>CLASES STRING Y STRINGBUFFER</h3>
+      <p>Las clases String y StringBuffer est&aacute;n orientadas a manejar cadenas 
+        de caracteres. La clase String est&aacute; orientada a manejar cadenas 
+        de caracteres constantes, es decir, que no pueden cambiar. La clase StringBuffer 
+        permite que el programador cambie la cadena insertando, borrando, etc. 
+        La primera es m&aacute;s eficiente, mientras que la segunda permite m&aacute;s 
+        posibilidades.Ambas clases pertenecen al package java.lang, y por lo tanto 
+        no hay que importarlas. Hay que<br>
+        indicar que el operador de concatenaci&oacute;n (+) entre objetos de tipo 
+        String utiliza internamente<br>
+        objetos de la clase StringBuffer y el m&eacute;todo append().<br>
+        Los m&eacute;todos de String se pueden utilizar directamente sobre literals 
+        (cadenas entre comillas), como por ejemplo: &quot;Hola&quot;.length().</p>
+      <h3>M&eacute;todos de la clase String</h3>
+      <p>Los objetos de la clase String se pueden crear a partir de cadenas constantes 
+        o literals, definidas entre dobles comillas, como por ejemplo: &quot;Hola&quot;. 
+        Java crea siempre un objeto String al encontrar una cadena entre comillas. 
+        A continuaci&oacute;n se describen dos formas de crear objetos de la clase 
+        String,<br>
+        String str1 = &quot;Hola&quot;; // el sistema m&aacute;s eficaz de crear 
+        Strings<br>
+        String str2 = new String(&quot;Hola&quot;); // tambi&eacute;n se pueden 
+        crear con un constructor<br>
+        El primero de los m&eacute;todos expuestos es el m&aacute;s eficiente, 
+        porque como al encontrar un texto entre comillas se crea autom&aacute;ticamente 
+        un objeto String, en la pr&aacute;ctica utilizando new se llama al constructor 
+        dos veces. Tambi&eacute;n se pueden crear objetos de la clase String llamando 
+        a otros constructores de la clase, a partir de objetos StringBuffer, y 
+        de arrays de bytes o de chars.</p>
+      <table width="484" border="1">
+        <tr> 
+          <td>M&eacute;todos de String</td>
+          <td>Funci&oacute;n que realizan</td>
+        </tr>
+        <tr> 
+          <td>String(...)</td>
+          <td>Constructores para crear Strings a partir de arrays de bytes o de 
+            caracteres<br>
+            (ver documentaci&oacute;n on-line)</td>
+        </tr>
+        <tr> 
+          <td>String(String str) y String(StringBuffer sb)</td>
+          <td>Costructores a partir de un objeto String o StringBuffer</td>
+        </tr>
+        <tr> 
+          <td>charAt(int)</td>
+          <td>Devuelve el car&aacute;cter en la posici&oacute;n especificada</td>
+        </tr>
+        <tr> 
+          <td>getChars(int, int, char[], int)</td>
+          <td>getChars(int, int, char[], int) Copia los caracteres indicados en 
+            la posici&oacute;n indicada de un array de<br>
+            caracteres</td>
+        </tr>
+        <tr> 
+          <td>indexOf(String, [int])</td>
+          <td>Devuelve la posici&oacute;n en la que aparece por primera vez un 
+            String en otro<br>
+            String, a partir de una posici&oacute;n dada (opcional)</td>
+        </tr>
+        <tr> 
+          <td>lastIndexOf(String, [int])</td>
+          <td>Devuelve la &uacute;ltima vez que un String aparece en otro empezando 
+            en una<br>
+            posici&oacute;n y hacia el principio</td>
+        </tr>
+        <tr> 
+          <td>length()</td>
+          <td>Indica si un String comienza con otro String o no</td>
+        </tr>
+        <tr> 
+          <td>replace(char, char)</td>
+          <td>Sustituye un car&aacute;cter por otro en un String</td>
+        </tr>
+        <tr> 
+          <td>startsWith(String)</td>
+          <td>Indica si un String comienza con otro String o no</td>
+        </tr>
+        <tr> 
+          <td>substring(int, int)</td>
+          <td>Devuelve un String extra&iacute;do de otro</td>
+        </tr>
+        <tr> 
+          <td>toLowerCase()</td>
+          <td>Convierte en min&uacute;sculas (puede tener en cuenta el locale)</td>
+        </tr>
+        <tr> 
+          <td>toUpperCase()</td>
+          <td>Convierte en may&uacute;sculas (puede tener en cuenta el locale)</td>
+        </tr>
+        <tr> 
+          <td>trim()</td>
+          <td>Elimina los espacios en blanco al comienzo y final de la cadena</td>
+        </tr>
+        <tr>
+          <td>valueOf()</td>
+          <td>Devuelve la representaci&oacute;n como String de sus argumento. 
+            Admite<br>
+            Object, arrays de caracteres y los tipos primitivos</td>
+        </tr>
+      </table>
+      <p>Un punto importante a tener en cuenta es que hay m&eacute;todos, tales 
+        como System.out.println(), que exigen que su argumento sea un objeto de 
+        la clase String. Si no lo es, habr&aacute; que utilizar alg&uacute;n metodo 
+        que lo convierta en String.<br>
+        El locale, citado en la Tabla 4.1, es la forma que java tiene para adaptarse 
+        a las peculiaridades de los idiomas distintos del ingl&eacute;s: acentos, 
+        caracteres especiales, forma de escribir las fechas y las horas, unidades 
+        monetarias, etc.</p>
+      <h3>M&eacute;todos de la clase StringBuffer</h3>
+      <p>La clase StringBuffer se utiliza pr&aacute;cticamente siempre que se 
+        desee modificar una cadena de caracteres. Completa los m&eacute;todos 
+        de la clase String ya que &eacute;stos realizan s&oacute;lo operaciones 
+        sobre el texto que no conllevan un aumento o disminuci&oacute;n del n&uacute;mero 
+        de letras del String.<br>
+        Recu&eacute;rdese que hay muchos m&eacute;todos cuyos argumentos deben 
+        ser objetos String, que antes de pasar esos argumentos habr&aacute; que 
+        realizar la conversi&oacute;n correspondiente. </p>
+      <table width="521" border="1">
+        <tr> 
+          <td>M&eacute;todos de StringBuffer</td>
+          <td>Funci&oacute;n que realizan</td>
+        </tr>
+        <tr> 
+          <td>StringBuffer(), StringBuffer(int), StringBuffer(String)</td>
+          <td>Constructores</td>
+        </tr>
+        <tr> 
+          <td>append(...) Tiene muchas definiciones diferentes para a&ntilde;adir 
+            un String</td>
+          <td>Tiene muchas definiciones diferentes para a&ntilde;adir un String<br>
+            o una variable (int, long, double, etc.) a su objeto</td>
+        </tr>
+        <tr> 
+          <td>capacity()</td>
+          <td>Devuelve el espacio libre del StringBuffer</td>
+        </tr>
+        <tr> 
+          <td>charAt(int)</td>
+          <td>Devuelve el car&aacute;cter en la posici&oacute;n especificada</td>
+        </tr>
+        <tr> 
+          <td>getChars(int, int, char[], int)</td>
+          <td>Copia los caracteres indicados en la posici&oacute;n indicada de<br>
+            un array de caracteres</td>
+        </tr>
+        <tr> 
+          <td>insert(int, )</td>
+          <td>Inserta un String o un valor (int, long, double, ...) en la<br>
+            posici&oacute;n especificada de un StringBuffer</td>
+        </tr>
+        <tr> 
+          <td>length()</td>
+          <td>Devuelve el n&uacute;mero de caracteres de la cadena</td>
+        </tr>
+        <tr> 
+          <td>reverse()</td>
+          <td>Cambia el orden de los caracteres</td>
+        </tr>
+        <tr> 
+          <td>setCharAt(int, char)</td>
+          <td>Cambia el car&aacute;cter en la posici&oacute;n indicada</td>
+        </tr>
+        <tr>
+          <td>setLength(int)</td>
+          <td>Cambia el tama&ntilde;o de un StringBuffer</td>
+        </tr>
+        <tr>
+          <td>toString()</td>
+          <td>Convierte en objeto de tipo String</td>
+        </tr>
+      </table>
+      <h3>WRAPPERS</h3>
+      <p>Los Wrappers (envoltorios) son clases dise&ntilde;adas para ser un complemento 
+        de los tipos primitivos.<br>
+        En efecto, los tipos primitivos son los &uacute;nicos elementos de Java 
+        que no son objetos. Esto tiene algunas ventajas desde el punto de vista 
+        de la eficiencia, pero algunos inconvenientes desde el punto de vista 
+        de la funcionalidad. Por ejemplo, los tipos primitivos siempre se pasan 
+        como argumento a los m&eacute;todos por valor, mientras que los objetos 
+        se pasan por referencia. No hay forma de modificar en un m&eacute;todo 
+        un argumento de tipo primitivo y que esa modificaci&oacute;n se trasmita 
+        al<br>
+        entorno que hizo la llamada. Una forma de conseguir esto es utilizar un 
+        Wrapper, esto es un objeto cuya variable miembro es el tipo primitivo 
+        que se quiere modificar. Las clases Wrapper tambi&eacute;n proporcionan 
+        m&eacute;todos para realizar otras tareas con lo tipos primitivos, tales 
+        como conversi&oacute;n con cadenas de caracteres en uno y otro sentido.<br>
+        Existe una clase Wrapper para cada uno de los tipos primitivos num&eacute;ricos, 
+        esto es, existen las clases Byte, Short, Integer, Long, Float y Double 
+        (obs&eacute;rvese que los nombres empiezan por may&uacute;scula, siguiendo 
+        la nomenclatura t&iacute;pica de Java). A continuaci&oacute;n se van a 
+        ver dos de estas clases: Double e Integer. Las otras cuatro son similares 
+        y sus caracter&iacute;sticas pueden consultarse en la documentaci&oacute;n 
+        on-line.</p>
+      <h3>Clase Double</h3>
+      <p>La clase java.lang.Double deriva de Number, que a su vez deriva de Object. 
+        Esta clase contiene un valor primitivo de tipo double. </p>
+      <table width="517" border="1">
+        <tr>
+          <td >M&eacute;todos</td>
+          <td>Funci&oacute;n que desempe&ntilde;an</td>
+        </tr>
+        <tr>
+          <td>Double(double) y Double(String)</td>
+          <td>Los constructores de esta clase</td>
+        </tr>
+        <tr>
+          <td>doubleValue(), floatValue(), longValue(), intValue(),shortValue(), 
+            byteValue()</td>
+          <td>M&eacute;todos para obtener el valor del tipo primitivo</td>
+        </tr>
+        <tr>
+          <td>String toString(), Double valueOf(String)</td>
+          <td>Conversores con la clase String</td>
+        </tr>
+        <tr>
+          <td>isInfinite(), isNaN()</td>
+          <td>M&eacute;todos de chequear condiiciones</td>
+        </tr>
+        <tr>
+          <td>equals(Object)</td>
+          <td>Compara con otro objeto</td>
+        </tr>
+        <tr>
+          <td>MAX_DOUBLE, MIN_DOUBLE,<br> POSITIVE_INFINITY,<br>NEGATIVE_INFINITY, NaN, 
+            TYPE</td>
+          <td>Constantes predefinidas. TYPE es el objeto Class representando esta 
+            clase</td>
+        </tr>
+      </table>
+      <h3>Clase Integer</h3>
+      <p>La clase java.lang.Integer tiene como variable miembro un valor de tipo 
+        int. Sus m&eacute;todos son:</p>
+      <table width="517" border="1">
+        <tr> 
+          <td >M&eacute;todos</td>
+          <td>Funci&oacute;n que desempe&ntilde;an</td>
+        </tr>
+        <tr> 
+          <td>Integer(int) y Integer(String)</td>
+          <td>Constructores de la clase</td>
+        </tr>
+        <tr> 
+          <td>doubleValue(), floatValue(), longValue(), intValue(),shortValue(), 
+            byteValue()</td>
+          <td>Conversores con otros tipos primitivos</td>
+        </tr>
+        <tr> 
+          <td>Integer decode(String), Integer parseInt(String),String toString(), 
+            Integer valueOf(String)</td>
+          <td>Conversores con String</td>
+        </tr>
+        <tr> 
+          <td>String toBinaryString(int), String toHexString(int),String toOctalString(int)</td>
+          <td>Conversores a cadenas representando enteros en otros</td>
+        </tr>
+        <tr> 
+          <td>Integer getInteger(String)</td>
+          <td>Determina el valor de una propiedad del sistema a partir<br>
+            del nombre de dicha propiedad</td>
+        </tr>
+        <tr> 
+          <td>MAX_VALUE, MIN_VALUE, TYPE</td>
+          <td>Constantes predefinidas</td>
+        </tr>
+      </table>
+      <p>Los Wrappers Byte, Short y Long son similares a Integer.<br>
+        Los Wrappers son utilizados para convertir cadenas de caracteres (texto) 
+        en n&uacute;meros. Esto es &uacute;til cuando se leen valores desde el 
+        teclado, desde un fichero de texto, etc. Los ejemplos siguientes muestran 
+        algunas conversiones:<br>
+        String numDecimalString = &quot;8.978&quot;;<br>
+        float numFloat=Float.valueOf(numDecimalString).floatValue(); // numFloat 
+        = 8,979<br>
+        double numDouble=Double.valueOf(numDecimalString).doubleValue();// numDouble 
+        = 8,979<br>
+        String numIntString = &quot;1001&quot;;<br>
+        int numInt=Integer.valueOf(numIntString).intValue(); // numInt = 1001<br>
+        En el caso de que el texto no se pueda convertir directamente al tipo 
+        especificado se lanza una excepci&oacute;n de tipo NumberFormatException, 
+        por ejemplo si se intenta convertir directamente el texto &#8220;4.897&#8221; 
+        a un n&uacute;mero entero. El proceso que habr&aacute; que seguir ser&aacute; 
+        convertirlo en primer lugar a un n&uacute;mero float y posteriormente 
+        a n&uacute;mero entero.</p>
+      <h3>CLASE MATH</h3>
+      <p>La clase java.lang.Math deriva de Object. La clase Math proporciona m&eacute;todos 
+        static para realizar las operaciones matem&aacute;ticas m&aacute;s habituales. 
+        Proporciona adem&aacute;s las constantes E y PI, cuyo significado no requiere 
+        muchas explicaciones.</p>
+      <table width="532" border="1">
+        <tr> 
+          <td>M&eacute;todos</td>
+          <td>Significado</td>
+          <td>M&eacute;todos</td>
+          <td>Significado</td>
+        </tr>
+        <tr> 
+          <td>abs()</td>
+          <td>Valor absoluto</td>
+          <td>sin(double)</td>
+          <td>Calcula el seno</td>
+        </tr>
+        <tr> 
+          <td>acos()</td>
+          <td>Arcocoseno</td>
+          <td>tan(double)</td>
+          <td>Calcula la tangente</td>
+        </tr>
+        <tr> 
+          <td>asin()</td>
+          <td>Arcoseno</td>
+          <td>exp()</td>
+          <td>Calcula la funci&oacute;n exponencial</td>
+        </tr>
+        <tr> 
+          <td>atan()</td>
+          <td>Arcotangente entre -PI/2 y PI/2</td>
+          <td>log()</td>
+          <td>Calcula el logaritmo natural (base<br>
+            e)</td>
+        </tr>
+        <tr> 
+          <td>atan2( , )</td>
+          <td>Arcotangente entre -PI y PI</td>
+          <td>max( , )</td>
+          <td>M&aacute;ximo de dos argumentos</td>
+        </tr>
+        <tr> 
+          <td>ceil()</td>
+          <td>Entero m&aacute;s cercano en direcci&oacute;na infinito</td>
+          <td>min(,)</td>
+          <td>M&iacute;nimo de dos argumentos</td>
+        </tr>
+        <tr> 
+          <td>floor()</td>
+          <td>Entero m&aacute;s cercano en direcci&oacute;n a -infinito</td>
+          <td>random()</td>
+          <td>N&uacute;mero aleatorio entre 0.0 y 1.0</td>
+        </tr>
+        <tr> 
+          <td>round()</td>
+          <td>Entero m&aacute;s cercano al argumento</td>
+          <td>power( , )</td>
+          <td>Devuelve el primer argumentoelevado al segundo</td>
+        </tr>
+        <tr> 
+          <td>rint(double)</td>
+          <td>Devuelve el entero m&aacute;s pr&oacute;ximo</td>
+          <td>sqrt()</td>
+          <td>Devuelve la ra&iacute;z cuadrada</td>
+        </tr>
+        <tr> 
+          <td>IEEEremainder<br>(double, double)</td>
+          <td>Calcula el resto de la divisi&oacute;n</td>
+          <td>toDegrees(double)</td>
+          <td>Pasa de radianes a grados (Java 2)</td>
+        </tr>
+        <tr>
+          <td>cos(double)</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>Pasa de grados a radianes (Java 2)</td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

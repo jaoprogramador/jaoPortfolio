@@ -1,0 +1,237 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Ejercicios MySQL</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="MySQL, sql, pl/sql, programacion MySQL, ejercicios MySQL, ejemplos MySQL, select">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2>C O N S U L T A S  C O M U N E S</h2></td>
+  </tr>
+  <tr> 
+    <td><h3>Trabajar con valores NULL</h3>
+      <p>Aqu&iacute; tiene ejemplos de como resolver algunos problemas comunes mediante 
+        MySQL.<br>
+        Algunos de los ejemplos emplean la tabla shop para contener el precio 
+        de cada art&iacute;culo (n&uacute;mero de item) para ciertos distribuidores<br>
+        (dealers). Suponiendo que cada distribuidor tiene un &uacute;nico precio 
+        fijo por cada art&iacute;culo, entonces (article, dealer) es una<br>
+        clave primaria para los registros.<br>
+        Inicie la utilidad de l&iacute;nea de comandos mysql y seleccione una 
+        base de datos:<br>
+        shell&gt; mysql base-de-datos<br>
+        (En la mayor&iacute;a de las instalaciones de MySQL, podr&aacute; emplear 
+        la base de datos test).<br>
+        Puede crear e ingresar datos a la tabla del ejemplo utilizando estas sentencias:<br>
+        mysql&gt; CREATE TABLE shop (<br>
+        -&gt; article INT(4) UNSIGNED ZEROFILL DEFAULT '0000' NOT NULL,<br>
+        -&gt; dealer CHAR(20) DEFAULT '' NOT NULL,<br>
+        -&gt; price DOUBLE(16,2) DEFAULT '0.00' NOT NULL,<br>
+        -&gt; PRIMARY KEY(article, dealer));<br>
+        mysql&gt; INSERT INTO shop VALUES<br>
+        -&gt; (1,'A',3.45),(1,'B',3.99),(2,'A',10.99),(3,'B',1.45),<br>
+        -&gt; (3,'C',1.69),(3,'D',1.25),(4,'D',19.95);<br>
+        Luego de ejecutar estas sentencias, la tabla deber&iacute;a tener el siguiente 
+        contenido:<br>
+        mysql&gt; SELECT * FROM shop;<br>
+        +---------+--------+-------+<br>
+        | article | dealer | price |<br>
+        +---------+--------+-------+<br>
+        | 0001 | A | 3.45 |<br>
+        | 0001 | B | 3.99 |<br>
+        | 0002 | A | 10.99 |<br>
+        | 0003 | B | 1.45 |<br>
+        | 0003 | C | 1.69 |<br>
+        | 0003 | D | 1.25 |<br>
+        | 0004 | D | 19.95 |<br>
+        +---------+--------+-------+<br>
+        <h3> El valor m&aacute;ximo de una columna</h3><br>
+        &#8220;&iquest;Cu&aacute;l es el n&uacute;mero de &iacute;tem m&aacute;s 
+        alto?&#8221;<br>
+        SELECT MAX(article) AS article FROM shop;<br>
+        +---------+<br>
+        | article |<br>
+        +---------+<br>
+        | 4 |<br>
+        +---------+<br>
+        3.6.2. El registro que tiene el valor m&aacute;ximo de determinada columna<br>
+        Tarea: Encontrar el n&uacute;mero, distribuidor y precio del art&iacute;culo 
+        m&aacute;s costoso.<br>
+        En MySQL 5.0 (y en SQL est&aacute;ndar), esto se hace f&aacute;cilmente 
+        con una subconsulta:<br>
+        SELECT article, dealer, price<br>
+        FROM shop<br>
+        WHERE price=(SELECT MAX(price) FROM shop);<br>
+        Otra soluci&oacute;n es ordenar las columnas por precio, en forma descendente, 
+        y obtener solamente el primer registro utilizando la cl&aacute;usula<br>
+        LIMIT, espec&iacute;fica de MySQL:<br>
+        SELECT article, dealer, price<br>
+        FROM shop<br>
+        ORDER BY price DESC<br>
+        LIMIT 1;<br>
+        Nota: Si hubiera varios art&iacute;culos que presenten el precio m&aacute;s 
+        alto, cada uno a 19.95, la soluci&oacute;n LIMIT s&oacute;lo mostrar&iacute;a 
+        el primero<br>
+        de ellos.<br>
+        3.6.3. M&aacute;ximo de columna por grupo<br>
+        Tarea: Encontrar el precio m&aacute;s alto por art&iacute;culo.<br>
+        SELECT article, MAX(price) AS price<br>
+        FROM shop<br>
+        GROUP BY article<br>
+        +---------+-------+<br>
+        | article | price |<br>
+        +---------+-------+<br>
+        | 0001 | 3.99 |<br>
+        | 0002 | 10.99 |<br>
+        | 0003 | 1.69 |<br>
+        | 0004 | 19.95 |<br>
+        +---------+-------+<br>
+        3.6.4. Los registros de un grupo que tienen el m&aacute;ximo valor en 
+        alguna columna<br>
+        Tarea: Para cada art&iacute;culo, encontrar el o los distribuidores con 
+        el precio m&aacute;s alto.<br>
+        En MySQL 5.0 (y en SQL est&aacute;ndar), este problema puede resolverse 
+        con una subconsulta como esta:<br>
+        SELECT article, dealer, price<br>
+        FROM shop s1<br>
+        WHERE price=(SELECT MAX(s2.price)<br>
+        FROM shop s2<br>
+        WHERE s1.article = s2.article);<br>
+        3.6.5. Utilizaci&oacute;n de variables de usuario<br>
+        Se pueden emplear variables de usuario de MySQL para retener resultados 
+        sin necesidad de almacenarlos en variables del lado del<br>
+        cliente. (Consulte Secci&oacute;n 9.3, &#8220;Variables de usuario&#8221;.)<br>
+        Por ejemplo, para encontrar los art&iacute;culos con el precio m&aacute;s 
+        alto y m&aacute;s bajo se puede hacer lo siguiente:<br>
+        mysql&gt; SELECT @min_price:=MIN(price),@max_price:=MAX(price) FROM shop;<br>
+        mysql&gt; SELECT * FROM shop WHERE price=@min_price OR price=@max_price;<br>
+        +---------+--------+-------+<br>
+        | article | dealer | price |<br>
+        +---------+--------+-------+<br>
+        | 0003 | D | 1.25 |<br>
+        | 0004 | D | 19.95 |<br>
+        +---------+--------+-------+<br>
+        3.6.6. Usar claves for&aacute;neas (foreign keys)<br>
+        En MySQL, las tablas InnoDB soportan restricciones de claves for&aacute;neas. 
+        Consulte Cap&iacute;tulo 15, El motor de almacenamiento InnoDB.<br>
+        Consulte tambi&eacute;n Secci&oacute;n 1.7.5.5, &#8220;Claves for&aacute;neas 
+        (foreign keys)&#8221;.<br>
+        No se requiere una restricci&oacute;n de clave for&aacute;nea para simplemente 
+        unir dos tablas. Para otros tipos de tabla que no sean InnoDB, es<br>
+        posible, al momento de definir una columna, utilizar una cl&aacute;usula 
+        REFERENCEStbl_name (col_name), la cual no tiene efecto<br>
+        real y funciona solamente como un recordatorio o comentario de que la 
+        columna que se est&aacute; definiendo est&aacute; dirigida a hacer referencia<br>
+        a una columna en otra tabla. Al emplear esta sintaxis es muy importante 
+        comprender que:<br>
+        &#8226; MySQL no efect&uacute;a ning&uacute;n tipo de CHECK o comprobaci&oacute;n 
+        para asegurarse de que col_name realmente existe en tbl_name<br>
+        (o incluso que tbl_name existe).<br>
+        &#8226; MySQL no realiza ning&uacute;n tipo de acci&oacute;n sobre tbl_name 
+        tal como borrar filas en respuesta a acciones ejecutadas sobre filas<br>
+        en la tabla que se est&aacute; definiendo; en otras palabras, esta sintaxis 
+        no produce por s&iacute; misma un comportamiento ON DELETE u<br>
+        ON UPDATE. (Inclusive cuando se puede escribir una cl&aacute;usula ON 
+        DELETE u ON UPDATE como parte de la cl&aacute;usula REFERENCES,<br>
+        estas son tambi&eacute;n ignoradas).<br>
+        &#8226; Esta sintaxis crea una columna; no crea ninguna clase de &iacute;ndice 
+        o campo clave.<br>
+        &#8226; Esta sintaxis causar&aacute; un error si se la emplea durante 
+        la definici&oacute;n de una tabla InnoDB.<br>
+        Una columna creada de esta forma se puede utilizar como columna de uni&oacute;n, 
+        como se muestra aqu&iacute;:<br>
+        CREATE TABLE person (<br>
+        id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,<br>
+        name CHAR(60) NOT NULL,<br>
+        PRIMARY KEY (id)<br>
+        );<br>
+        CREATE TABLE shirt (<br>
+        id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,<br>
+        style ENUM('t-shirt', 'polo', 'dress') NOT NULL,<br>
+        color ENUM('red', 'blue', 'orange', 'white', 'black') NOT NULL,<br>
+        owner SMALLINT UNSIGNED NOT NULL REFERENCES person(id),<br>
+        PRIMARY KEY (id)<br>
+        );<br>
+        INSERT INTO person VALUES (NULL, 'Antonio Paz');<br>
+        SELECT @last := LAST_INSERT_ID();<br>
+        INSERT INTO shirt VALUES<br>
+        (NULL, 'polo', 'blue', @last),<br>
+        (NULL, 'dress', 'white', @last),<br>
+        (NULL, 't-shirt', 'blue', @last);<br>
+        INSERT INTO person VALUES (NULL, 'Lilliana Angelovska');<br>
+        SELECT @last := LAST_INSERT_ID();<br>
+        INSERT INTO shirt VALUES<br>
+        (NULL, 'dress', 'orange', @last),<br>
+        (NULL, 'polo', 'red', @last),<br>
+        (NULL, 'dress', 'blue', @last),<br>
+        (NULL, 't-shirt', 'white', @last);<br>
+        SELECT * FROM person;<br>
+        +----+---------------------+<br>
+        | id | name |<br>
+        +----+---------------------+<br>
+        | 1 | Antonio Paz |<br>
+        | 2 | Lilliana Angelovska |<br>
+        +----+---------------------+<br>
+        SELECT * FROM shirt;<br>
+        +----+---------+--------+-------+<br>
+        | id | style | color | owner |<br>
+        +----+---------+--------+-------+<br>
+        | 1 | polo | blue | 1 |<br>
+        | 2 | dress | white | 1 |<br>
+        | 3 | t-shirt | blue | 1 |<br>
+        | 4 | dress | orange | 2 |<br>
+        | 5 | polo | red | 2 |<br>
+        | 6 | dress | blue | 2 |<br>
+        | 7 | t-shirt | white | 2 |<br>
+        +----+---------+--------+-------+<br>
+        SELECT s.* FROM person p, shirt s<br>
+        WHERE p.name LIKE 'Lilliana%'<br>
+        AND s.owner = p.id<br>
+        AND s.color &lt;&gt; 'white';<br>
+        +----+-------+--------+-------+<br>
+        | id | style | color | owner |<br>
+        +----+-------+--------+-------+<br>
+        | 4 | dress | orange | 2 |<br>
+        | 5 | polo | red | 2 |<br>
+        | 6 | dress | blue | 2 |<br>
+        +----+-------+--------+-------+<br>
+        Cuando se usa de esta manera, la cl&aacute;usula REFERENCES no es mostrada 
+        en la salida de SHOW CREATE TABLE o DESCRIBE:<br>
+        SHOW CREATE TABLE shirt\G<br>
+        *************************** 1. row ***************************<br>
+        Table: shirt<br>
+        Create Table: CREATE TABLE `shirt` (<br>
+        `id` smallint(5) unsigned NOT NULL auto_increment,<br>
+        `style` enum('t-shirt','polo','dress') NOT NULL,<br>
+        `color` enum('red','blue','orange','white','black') NOT NULL,<br>
+        `owner` smallint(5) unsigned NOT NULL,<br>
+        PRIMARY KEY (`id`)<br>
+        ) ENGINE=MyISAM DEFAULT CHARSET=latin1<br>
+        El uso de REFERENCES como comentario o &quot;recordatorio&quot; en la 
+        definici&oacute;n de una columna funciona en tablas MyISAM y BerkeleyDB. 
+      </p>
+        </td>
+    <td>&nbsp;</td>
+    <td><a href="http://www.euskalnet.net/juanarana/oraclezip/Ejer3.rar"><img src="../../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td>
+<div align="right"><a href="http://www.euskalnet.net/juanarana/index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a>
+      </div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Ejercicios MySQL</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="MySQL, sql, pl/sql, programacion MySQL, ejercicios MySQL, ejemplos MySQL, select">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2>C O U N T</h2></td>
+  </tr>
+  <tr> 
+    <td><h3>Contar registros</h3>
+      <p>Una pregunta frecuente que deben responder las bases de datos es: &#8220;&iquest;qu&eacute; 
+        tan a menudo aparece en la tabla un cierto tipo de dato?&#8221;<br>
+        Por ejemplo, se podr&iacute;a querer averiguar la cantidad de mascotas 
+        de que se dispone, o cuantas mascotas tiene cada propietario, o varios<br>
+        otros recuentos sobre los animales.<br>
+        Contar la cantidad total de animales es la misma pregunta que &#8220;&iquest;cu&aacute;ntos 
+        registros hay en la tabla pet?&#8221;, ya que hay un registro por<br>
+        mascota. COUNT(*) cuenta el n&uacute;mero de filas, por ello, la consulta 
+        para contar animales luce as&iacute;:<br>
+        mysql&gt; SELECT COUNT(*) FROM pet;<br>
+        +----------+<br>
+        | COUNT(*) |<br>
+        +----------+<br>
+        | 9 |<br>
+        +----------+<br>
+        Anteriormente se recuperaban los nombres de la gente que pose&iacute;a 
+        mascotas. Se puede usar COUNT() para hallar cuantas mascotas<br>
+        tiene cada propietario:<br>
+        mysql&gt; SELECT owner, COUNT(*) FROM pet GROUP BY owner;<br>
+        +--------+----------+<br>
+        | owner | COUNT(*) |<br>
+        +--------+----------+<br>
+        | Benny | 2 |<br>
+        | Diane | 2 |<br>
+        | Gwen | 3 |<br>
+        | Harold | 2 |<br>
+        +--------+----------+<br>
+        Observe el uso de GROUP BY para agrupar todos los registros de cada propietario. 
+        Sin dicha cl&aacute;usula, todo lo que se hubiera obtenido<br>
+        ser&iacute;a un mensaje de error:<br>
+        mysql&gt; SELECT owner, COUNT(*) FROM pet;<br>
+        ERROR 1140 (42000): Mixing of GROUP columns (MIN(),MAX(),COUNT(),...)<br>
+        with no GROUP columns is illegal if there is no GROUP BY clause<br>
+        COUNT() y GROUP BY son &uacute;tiles para presentar datos en varias formas. 
+        Los siguientes ejemplos muestran diferentes operaciones:<br>
+        Cantidad de animales por especies:<br>
+        mysql&gt; SELECT species, COUNT(*) FROM pet GROUP BY species;<br>
+        +---------+----------+<br>
+        | species | COUNT(*) |<br>
+        +---------+----------+<br>
+        | bird | 2 |<br>
+        | cat | 2 |<br>
+        | dog | 3 |<br>
+        | hamster | 1 |<br>
+        | snake | 1 |<br>
+        +---------+----------+<br>
+        Cantidad de animales por sexo:<br>
+        mysql&gt; SELECT sex, COUNT(*) FROM pet GROUP BY sex;<br>
+        +------+----------+<br>
+        | sex | COUNT(*) |<br>
+        +------+----------+<br>
+        | NULL | 1 |<br>
+        | f | 4 |<br>
+        | m | 4 |<br>
+        +------+----------+<br>
+        (En esta salida, NULL indica &quot;sexo desconocido&quot;)<br>
+        Cantidad de animales por combinaci&oacute;n de especies y sexo:<br>
+        mysql&gt; SELECT species, sex, COUNT(*) FROM pet GROUP BY species, sex;<br>
+        +---------+------+----------+<br>
+        | species | sex | COUNT(*) |<br>
+        +---------+------+----------+<br>
+        | bird | NULL | 1 |<br>
+        | bird | f | 1 |<br>
+        | cat | f | 1 |<br>
+        | cat | m | 1 |<br>
+        | dog | f | 1 |<br>
+        | dog | m | 2 |<br>
+        | hamster | f | 1 |<br>
+        | snake | m | 1 |<br>
+        +---------+------+----------+<br>
+        No es necesario examinar una tabla entera cuando se emplea COUNT(). Por 
+        ejemplo, la consulta anterior, se podria limitar a perrosy gatos de esta 
+        manera:<br>
+        mysql&gt; SELECT species, sex, COUNT(*) FROM pet<br>
+        -&gt; WHERE species = 'dog' OR species = 'cat'<br>
+        -&gt; GROUP BY species, sex;<br>
+        +---------+------+----------+<br>
+        | species | sex | COUNT(*) |<br>
+        +---------+------+----------+<br>
+        | cat | f | 1 |<br>
+        | cat | m | 1 |<br>
+        | dog | f | 1 |<br>
+        | dog | m | 2 |<br>
+        +---------+------+----------+<br>
+        O si desea la cantidad de animales de cada sexo contando solamente los 
+        que tienen sexo conocido:<br>
+        mysql&gt; SELECT species, sex, COUNT(*) FROM pet<br>
+        -&gt; WHERE sex IS NOT NULL<br>
+        -&gt; GROUP BY species, sex;<br>
+        +---------+------+----------+<br>
+        | species | sex | COUNT(*) |<br>
+        +---------+------+----------+<br>
+        | bird | f | 1 |<br>
+        | cat | f | 1 |<br>
+        | cat | m | 1 |<br>
+        | dog | f | 1 |<br>
+        | dog | m | 2 |<br>
+        | hamster | f | 1 |<br>
+        | snake | m | 1 |<br>
+        +---------+------+----------+ </p>
+        </td>
+    <td>&nbsp;</td>
+    <td><a href="http://www.euskalnet.net/juanarana/oraclezip/Ejer3.rar"><img src="../../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td>
+<div align="right"><a href="http://www.euskalnet.net/juanarana/index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a>
+      </div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

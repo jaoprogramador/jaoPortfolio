@@ -1,0 +1,286 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>C&oacute;mo hacer una p&aacute;gina AJAX</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta name="keywords" content="Primera página AJAX, Como hacer una pagina AJAX, Manual AJAX, tutorial AJAX, Ejemplos AJAX, ejercicios AJAX">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2>Utilidades y objetos para AJAX</h2></td>
+  </tr>
+  <tr> 
+    <td height="394" colspan="3"><h3>Utilidades</h3>
+      <p>Una de las operaciones m&aacute;s habituales en las aplicaciones AJAX 
+        es la de obtener el contenido de un archivo o recurso del servidor. Por 
+        tanto, se va a construir un objeto que permita realizar la carga de datos 
+        del servidor simplemente indicando el recurso solicitado y la funci&oacute;n 
+        encargada de procesar la respuesta:<br>
+        var cargador = new net.CargadorContenidos(&quot;pagina.html&quot;, procesaRespuesta);<br>
+        La l&oacute;gica com&uacute;n de AJAX se encapsula en un objeto de forma 
+        que sea f&aacute;cilmente reutilizable.<br>
+        Aplicando los conceptos de objetos de Javacript, funciones constructoras 
+        y el uso de prototype, es posible realizar de forma sencilla el objeto 
+        cargador de contenidos.<br>
+        El siguiente c&oacute;digo ha sido adaptado del excelente libro &quot;Ajax 
+        in Action&quot;, escrito por Dave Crane, Eric Pascarello y Darren James 
+        y publicado por la editorial Manning.<br>
+        var net = new Object();<br>
+        net.READY_STATE_UNINITIALIZED=0;<br>
+        net.READY_STATE_LOADING=1;<br>
+        net.READY_STATE_LOADED=2;<br>
+        net.READY_STATE_INTERACTIVE=3;<br>
+        net.READY_STATE_COMPLETE=4;<br>
+        // Constructor<br>
+        net.CargadorContenidos = function(url, funcion, funcionError) {<br>
+        this.url = url;<br>
+        this.req = null;<br>
+        this.onload = funcion;<br>
+        this.onerror = (funcionError) ? funcionError : this.defaultError;<br>
+        this.cargaContenidoXML(url);<br>
+        }<br>
+        net.CargadorContenidos.prototype = {<br>
+        cargaContenidoXML: function(url) {<br>
+        if(window.XMLHttpRequest) {<br>
+        this.req = new XMLHttpRequest();<br>
+        }<br>
+        else if(window.ActiveXObject) {<br>
+        this.req = new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);<br>
+        }<br>
+        if(this.req) {<br>
+        try {<br>
+        var loader = this;<br>
+        this.req.onreadystatechange = function() {<br>
+        loader.onReadyState.call(loader);<br>
+        }<br>
+        this.req.open('GET', url, true);<br>
+        this.req.send(null);<br>
+        } catch(err) {<br>
+        this.onerror.call(this);<br>
+        }<br>
+        }<br>
+        },<br>
+        onReadyState: function() {<br>
+        var req = this.req;<br>
+        var ready = req.readyState;<br>
+        if(ready == net.READY_STATE_COMPLETE) {<br>
+        var httpStatus = req.status;<br>
+        if(httpStatus == 200 || httpStatus == 0) {<br>
+        this.onload.call(this);<br>
+        }<br>
+        else {<br>
+        this.onerror.call(this);<br>
+        }<br>
+        }<br>
+        },<br>
+        defaultError: function() {<br>
+        alert(&quot;Se ha producido un error al obtener los datos&quot;<br>
+        + &quot;\n\nreadyState:&quot; + this.req.readyState<br>
+        + &quot;\nstatus: &quot; + this.req.status<br>
+        + &quot;\nheaders: &quot; + this.req.getAllResponseHeaders());<br>
+        }<br>
+        }<br>
+        Una vez definido el objeto net con su m&eacute;todo CargadorContenidos(), 
+        ya es posible utilizarlo en las funciones que se encargan de mostrar el 
+        contenido del archivo del servidor:<br>
+        function muestraContenido() {<br>
+        alert(this.req.responseText);<br>
+        }<br>
+        function cargaContenidos() {<br>
+        var cargador = new net.CargadorContenidos(&quot;http://localhost/holamundo.txt&quot;,<br>
+        muestraContenido);<br>
+        }window.onload = cargaContenidos;<br>
+        En el ejemplo anterior, la aplicaci&oacute;n muestra un mensaje con los 
+        contenidos de la URL indicada:<br>
+        Mensaje mostrado cuando el resultado es exitoso<br>
+        Por otra parte, si la URL que se quiere cargar no es v&aacute;lida o el 
+        servidor no responde, la aplicaci&oacute;n<br>
+        muestra el siguiente mensaje de error:<br>
+        Mensaje mostrado cuando el resultado es err&oacute;neo<br>
+        El c&oacute;digo del cargador de contenidos hace un uso intensivo de objetos, 
+        JSON, funciones an&oacute;nimas<br>
+        y uso del objeto this. Seguidamente, se detalla el funcionamiento de cada 
+        una de sus partes.<br>
+        El primer elemento importante del c&oacute;digo fuente es la definici&oacute;n 
+        del objeto net.<br>
+        var net = new Object();<br>
+        Se trata de una variable global que encapsula todas las propiedades y 
+        m&eacute;todos relativos a las operaciones relacionadas con las comunicaciones 
+        por red. De cierto modo, esta variable global simula el funcionamiento 
+        de los namespaces ya que evita la colisi&oacute;n entre nombres de propiedades 
+        y m&eacute;todos diferentes.<br>
+        Despu&eacute;s de definir las constantes empleadas por el objeto XMLHttpRequest, 
+        se define el constructor del objeto CargadorContenidos:<br>
+        net.CargadorContenidos = function(url, funcion, funcionError) {<br>
+        this.url = url;<br>
+        this.req = null;<br>
+        this.onload = funcion;<br>
+        this.onerror = (funcionError) ? funcionError : this.defaultError;<br>
+        this.cargaContenidoXML(url);<br>
+        }Aunque el constructor define tres par&aacute;metros diferentes, en realidad 
+        solamente los dos primeros son obligatorios. De esta forma, se inicializa 
+        el valor de algunas variables del objeto, se comprueba si se ha definido 
+        la funci&oacute;n que se emplea en caso de error (si no se ha definido, 
+        se emplea una funci&oacute;n gen&eacute;rica definida m&aacute;s adelante) 
+        y se invoca el m&eacute;todo responsable de cargar el recurso solicitado 
+        (cargaContenidoXML).<br>
+        net.CargadorContenidos.prototype = {<br>
+        cargaContenidoXML:function(url) {<br>
+        ...<br>
+        },<br>
+        onReadyState:function() {<br>
+        ...<br>
+        },<br>
+        defaultError:function() {<br>
+        ...<br>
+        }<br>
+        }<br>
+        Los m&eacute;todos empleados por el objeto net.cargaContenidos se definen 
+        mediante su prototipo.<br>
+        En este caso, se definen tres m&eacute;todos diferentes: cargaContenidoXML() 
+        para cargar recursos de servidor, onReadyState() que es la funci&oacute;n 
+        que se invoca cuando se recibe la respuesta del servidor y defaultError() 
+        que es la funci&oacute;n que se emplea cuando no se ha definido de forma 
+        expl&iacute;cita una funci&oacute;n responsable de manejar los posibles 
+        errores que se produzcan en la petici&oacute;n HTTP.<br>
+        La funci&oacute;n defaultError() muestra un mensaje de aviso del error 
+        producido y adem&aacute;s muestra el valor de algunas de las propiedades 
+        de la petici&oacute;n HTTP:<br>
+        defaultError:function() {<br>
+        alert(&quot;Se ha producido un error al obtener los datos&quot;<br>
+        + &quot;\n\nreadyState:&quot; + this.req.readyState<br>
+        + &quot;\nstatus: &quot; + this.req.status<br>
+        + &quot;\nheaders: &quot; + this.req.getAllResponseHeaders());<br>
+        }<br>
+        En este caso, el objeto this se resuelve al objeto net.cargaContenidos, 
+        ya que es el objeto que contiene la funci&oacute;n an&oacute;nima que 
+        se est&aacute; ejecutando.<br>
+        Por otra parte, la funci&oacute;n onReadyState es la encargada de gestionar 
+        la respuesta del servidor:<br>
+        onReadyState: function() {<br>
+        var req = this.req;<br>
+        var ready = req.readyState;<br>
+        if(ready == net.READY_STATE_COMPLETE) {<br>
+        var httpStatus = req.status;<br>
+        if(httpStatus == 200 || httpStatus == 0) {<br>
+        this.onload.call(this);<br>
+        } else {<br>
+        this.onerror.call(this);<br>
+        }<br>
+        }<br>
+        }Tras comprobar que la respuesta del servidor est&aacute; disponible y 
+        es correcta, se realiza la llamada a la funci&oacute;n que realmente procesa 
+        la respuesta del servidor de acuerdo a las necesidades de la aplicaci&oacute;n.<br>
+        this.onload.call(this);<br>
+        El objeto this se resuelve como net.CargadorContenidos, ya que es el objeto 
+        que contiene la funci&oacute;n que se est&aacute; ejecutando. Por tanto, 
+        this.onload es la referencia a la funci&oacute;n que se ha definido como 
+        responsable de procesar la respuesta del servidor (se trata de una referencia 
+        a una funci&oacute;n externa).<br>
+        Normalmente, la funci&oacute;n externa encargada de procesar la respuesta 
+        del servidor, requerir&aacute; acceder al objeto XMLHttpRequest que almacena 
+        la petici&oacute;n realizada al servidor. En otro caso, la funci&oacute;n 
+        externa no ser&aacute; capaz de acceder al contenido devuelto por el servidor.<br>
+        Como ya se vio en los cap&iacute;tulos anteriores, el m&eacute;todo call() 
+        es uno de los m&eacute;todos definidos para el objeto Function(), y por 
+        tanto disponible para todas las funciones de JavaScript.<br>
+        Empleando el m&eacute;todo call() es posible obligar a una funci&oacute;n 
+        a ejecutarse sobre un objeto concreto. En otras palabras, empleando el 
+        m&eacute;todo call() sobre una funci&oacute;n, es posible que dentro de 
+        esa funci&oacute;n el objeto this se resuelva como el objeto pasado como 
+        par&aacute;metro en el m&eacute;todo call().<br>
+        As&iacute;, la instrucci&oacute;n this.onload.call(this); se interpreta 
+        de la siguiente forma:<br>
+        El objeto this que se pasa como par&aacute;metro de call() se resuelve 
+        como el objeto<br>
+        net.CargadorContenidos.<br>
+        El objeto this.onload almacena una referencia a la funci&oacute;n externa 
+        que se va a emplear para procesar la respuesta.<br>
+        El m&eacute;todo this.onload.call() ejecuta la funci&oacute;n cuya referencia 
+        se almacena en<br>
+        this.onload.<br>
+        La instrucci&oacute;n this.onload.call(this); permite ejecutar la funci&oacute;n 
+        externa con el objeto net.CargadorContenidos accesible en el interior 
+        de la funci&oacute;n mediante el objeto this.<br>
+        Por &uacute;ltimo, el m&eacute;todo cargaContenidoXML se encarga de enviar 
+        la petici&oacute;n HTTP y realizar la llamada a la funci&oacute;n que 
+        procesa la respuesta:<br>
+        cargaContenidoXML:function(url) {<br>
+        if(window.XMLHttpRequest) {<br>
+        this.req = new XMLHttpRequest();<br>
+        }<br>
+        else if(window.ActiveXObject) {<br>
+        this.req = new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);<br>
+        }<br>
+        if(this.req) {<br>
+        try {<br>
+        var loader=this;<br>
+        this.req.onreadystatechange = function() {<br>
+        loader.onReadyState.call(loader);<br>
+        }this.req.open('GET', url, true);<br>
+        this.req.send(null);<br>
+        } catch(err) {<br>
+        this.onerror.call(this);<br>
+        }<br>
+        }<br>
+        }<br>
+        En primer lugar, se obtiene una instancia del objeto XMLHttpRequest en 
+        funci&oacute;n del tipo de navegador. Si se ha obtenido correctamente 
+        la instancia, se ejecutan las instrucciones m&aacute;s importantes del 
+        m&eacute;todo cargaContenidoXML:<br>
+        var loader = this;<br>
+        this.req.onreadystatechange = function() {<br>
+        loader.onReadyState.call(loader);<br>
+        }<br>
+        this.req.open('GET', url, true);<br>
+        this.req.send(null);<br>
+        A continuaci&oacute;n, se almacena la instancia del objeto actual (this) 
+        en la nueva variable loader.<br>
+        Una vez almacenada la instancia del objeto net.cargadorContenidos, se 
+        define la funci&oacute;n encargada de procesar la respuesta del servidor. 
+        En la siguiente funci&oacute;n an&oacute;nima:<br>
+        this.req.onreadystatechange = function() { ... }<br>
+        En el interior de esa funci&oacute;n, el objeto this no se resuelve en 
+        el objeto net.CargadorContenidos, por lo que no se puede emplear la siguiente 
+        instrucci&oacute;n:<br>
+        this.req.onreadystatechange = function() {<br>
+        this.onReadyState.call(loader);<br>
+        }<br>
+        Sin embargo, desde el interior de esa funci&oacute;n an&oacute;nima si 
+        es posible acceder a las variables definidas en la funci&oacute;n exterior 
+        que la engloba. As&iacute;, desde el interior de la funci&oacute;n an&oacute;nima 
+        s&iacute; que es posible acceder a la instancia del objeto net.CargadorContenidos 
+        que se almacen&oacute; anteriormente.<br>
+        En el c&oacute;digo anterior, no es obligatorio emplear la llamada al 
+        m&eacute;todo call(). Se podr&iacute;a haber definido de la siguiente 
+        forma:<br>
+        var loader=this;<br>
+        this.req.onreadystatechange = function() {<br>
+        // loader.onReadyState.call(loader);<br>
+        loader.onReadyState();<br>
+        }<br>
+        En el interior de la funci&oacute;n onReadyState, el objeto this se resuelve 
+        como net.ContentLoader, ya que se trata de un m&eacute;todo definido en 
+        el prototipo del propio objeto.</p>
+      
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

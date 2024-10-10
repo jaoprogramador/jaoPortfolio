@@ -1,0 +1,335 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Operadores Java</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación en Java,Programas Java,Aplicaciones en Java,Ejercicios en Java, Ejemplos de Java,Tutorial de Java,Manual Java" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Java, Manual Java, tutorial Java, Ejemplos Java, ejercicios Java">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> Operadores Java</h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <p>Java es un lenguaje rico en operadores, que 
+        son casi id&eacute;nticos a los de C/C++. Estos operadores se<br>
+        describen brevemente en los apartados siguientes.</p>
+      <h3>Operadores aritm&eacute;ticos</h3>
+      <p>Son operadores binarios (requieren siempre dos operandos) que realizan 
+        las operaciones aritm&eacute;ticas habituales: suma (+), resta (-), multiplicaci&oacute;n 
+        (*), divisi&oacute;n (/) y resto de la divisi&oacute;n (%).</p>
+      <h3>Operadores de asignaci&oacute;n</h3>
+      <p>Los operadores de asignaci&oacute;n permiten asignar un valor a una variable. 
+        El operador de asignaci&oacute;n por excelencia es el operador igual (=). 
+        La forma general de las sentencias de asignaci&oacute;n con este operador 
+        es:<br>
+        variable = expression; </p>
+      <p>Java dispone de otros operadores de asignaci&oacute;n. Se trata de versiones 
+        abreviadas del operador (=) que realizan operaciones &#8220;acumulativas&#8221; 
+        sobre una variable. La Tabla muestra estos operadores y su equivalencia 
+        con el uso del operador igual (=).<br>
+        Operador Utilizaci&oacute;n Expresi&oacute;n equivalente</p>
+      <table width="474" border="1">
+        <tr>
+          <td><div align="center">Operador</div></td>
+          <td><div align="center">Utilizaci&oacute;n</div></td>
+          <td><div align="center">Expresi&oacute;n equivalente</div></td>
+        </tr>
+        <tr>
+          <td>+=</td>
+          <td>op1 += op2</td>
+          <td>op1 = op1 + op2</td>
+        </tr>
+        <tr>
+          <td>-=</td>
+          <td>op1 -= op2</td>
+          <td>op1 = op1 - op2</td>
+        </tr>
+        <tr>
+          <td>*=</td>
+          <td>op1 *= op2</td>
+          <td>op1 = op1 * op2</td>
+        </tr>
+        <tr>
+          <td>/=</td>
+          <td>op1 /= op2</td>
+          <td>op1 = op1 / op2</td>
+        </tr>
+        <tr>
+          <td>%=</td>
+          <td>op1 %= op2</td>
+          <td>op1 = op1 % op2</td>
+        </tr>
+      </table>
+      <h3>Operadores unarios</h3>
+      <p>Los operadores m&aacute;s (+) y menos (-) unarios sirven para mantener 
+        o cambiar el signo de una variable, constante o expresi&oacute;n num&eacute;rica. 
+        Su uso en Java es el est&aacute;ndar de estos operadores.</p>
+      <h3>Operador instanceof</h3>
+      <p>El operador instanceof permite saber si un objeto pertenece o no a una 
+        determinada clase. Es un<br>
+        operador binario cuya forma general es,<br>
+        objectName instanceof ClassName<br>
+        y que devuelve true o false seg&uacute;n el objeto pertenezca o no a la 
+        clase.</p>
+      <h3>Operador condicional ?: </h3>
+      <p>Este operador, tomado de C/C++, permite realizar bifurcaciones condicionales 
+        sencillas. Su forma general es la siguiente:<br>
+        booleanExpression ? res1 : res2<br>
+        donde se eval&uacute;a booleanExpression y se devuelve res1 si el resultado 
+        es true y res2 si el resultado es false. Es el &uacute;nico operador ternario 
+        (tres argumentos) de Java. Como todo operador que devuelve un valor puede 
+        ser utilizado en una expresi&oacute;n. Por ejemplo las sentencias:<br>
+        x=1 ; y=10; z = (x&lt;y)?x+3:y+8;<br>
+        asignar&iacute;an a z el valor 4, es decir x+3.</p>
+      <h3>Operadores incrementales</h3>
+      <p>Java dispone del operador incremento (++) y decremento (--). El operador 
+        (++) incrementa en una unidad la variable a la que se aplica, mientras 
+        que (--) la reduce en una unidad. Estos operadores se pueden utilizar 
+        de dos formas:</p>
+      <p>1. Precediendo a la variable (por ejemplo: ++i). En este caso primero 
+        se incrementa la variable y luego se utiliza (ya incrementada) en la expresi&oacute;n 
+        en la que aparece.<br>
+        2. Siguiendo a la variable (por ejemplo: i++). En este caso primero se 
+        utiliza la variable en la expresi&oacute;n (con el valor anterior) y luego 
+        se incrementa.<br>
+        En muchas ocasiones estos operadores se utilizan para incrementar una 
+        variable fuera de una<br>
+        expresi&oacute;n. En este caso ambos operadores son equivalente. Si se 
+        utilizan en una expresi&oacute;n m&aacute;s complicada, el resultado de 
+        utilizar estos operadores en una u otra de sus formas ser&aacute; diferente. 
+        La actualizaci&oacute;n de contadores en bucles for es una de las aplicaciones 
+        m&aacute;s frecuentes de estos operadores.</p>
+      <h3>Operadores relacionales</h3>
+      <p>Los operadores relacionales sirven para realizar comparaciones de igualdad, 
+        desigualdad y relaci&oacute;n de menor o mayor.<br>
+        El resultado de estos operadores es siempre un valor boolean (true o false) 
+        seg&uacute;n se cumpla o no la relaci&oacute;n considerada. La Tabla muestra 
+        los operadores relacionales de Java.<br>
+      </p>
+      <table width="474" border="1">
+        <tr> 
+          <td><div align="center">Operador</div></td>
+          <td><div align="center">Utilizaci&oacute;n</div></td>
+          <td><div align="center">Expresi&oacute;n equivalente</div></td>
+        </tr>
+        <tr> 
+          <td>&gt;</td>
+          <td>op1 &gt; op2</td>
+          <td>si op1 es mayor que op2</td>
+        </tr>
+        <tr> 
+          <td>&gt;=</td>
+          <td>op1 &gt;= op2</td>
+          <td>si op1 es mayor o igual que op2</td>
+        </tr>
+        <tr> 
+          <td>&lt;</td>
+          <td>op1 &lt; op2</td>
+          <td>si op1 es menor que op2</td>
+        </tr>
+        <tr> 
+          <td>&lt;=</td>
+          <td>op1 &lt;= op2</td>
+          <td>si op1 es menor o igual que op2</td>
+        </tr>
+        <tr> 
+          <td>==</td>
+          <td>op1 == op2</td>
+          <td>si op1 y op2 son iguales</td>
+        </tr>
+        <tr>
+          <td>!=</td>
+          <td>op1 != op2</td>
+          <td>si op1 y op2 son diferentes</td>
+        </tr>
+      </table>
+      <p>Estos operadores se utilizan con mucha frecuencia en las bifurcaciones 
+        y en los bucles, que se ver&aacute;n en pr&oacute;ximos apartados de este 
+        cap&iacute;tulo.</p>
+      <h3>Operadores l&oacute;gicos</h3>
+      <p>Los operadores l&oacute;gicos se utilizan para construir expresiones 
+        l&oacute;gicas, combinando valores l&oacute;gicos (true y/o false) o los 
+        resultados de los operadores relacionales. La Tabla muestra los operadores 
+        l&oacute;gicos de Java. Debe notarse que en ciertos casos el segundo operando 
+        no se eval&uacute;a porque ya no es necesario (si ambos tienen que ser 
+        true y el primero es false, ya se sabe que la condici&oacute;n de que 
+        ambos sean true no se va a cumplir). Esto puede traer resultados no deseados 
+        y por eso se han<br>
+        a&ntilde;adido los operadores (&amp;) y (|) que garantizan que los dos 
+        operandos se eval&uacute;an siempre.</p>
+      <table width="515" border="1">
+        <tr> 
+          <td width="69"><div align="center">Operador</div></td>
+          <td width="70"><div align="center">Nombre</div></td>
+          <td width="96"><div align="center">Utilizaci&oacute;n</div></td>
+          <td width="252">Resultado</td>
+        </tr>
+        <tr> 
+          <td>&amp;&amp;</td>
+          <td>AND</td>
+          <td>op1 &amp;&amp; op2</td>
+          <td>true si op1 y op2 son true. Si op1 es false ya no se eval&uacute;a 
+            op2</td>
+        </tr>
+        <tr> 
+          <td>||</td>
+          <td>OR</td>
+          <td>op1 || op2</td>
+          <td>true si op1 u op2 son true. Si op1 es true ya no se eval&uacute;a 
+            op2</td>
+        </tr>
+        <tr> 
+          <td>!</td>
+          <td>negaci&oacute;n</td>
+          <td>! op</td>
+          <td>true si op es false y false si op es true</td>
+        </tr>
+        <tr> 
+          <td>&amp;</td>
+          <td>AND</td>
+          <td>op1 &amp; op2</td>
+          <td>true si op1 y op2 son true. Siempre se eval&uacute;a op2</td>
+        </tr>
+        <tr> 
+          <td>|</td>
+          <td>OR</td>
+          <td>op1 | op2</td>
+          <td>true si op1 u op2 son true. Siempre se eval&uacute;a op2</td>
+        </tr>
+      </table>
+      <p>&nbsp;</p>
+      <h3>Operador de concatenaci&oacute;n de cadenas de caracteres (+) </h3>
+      <p>El operador m&aacute;s (+) se utiliza tambi&eacute;n para concatenar 
+        cadenas de caracteres. Por ejemplo, para escribir una cantidad con un 
+        r&oacute;tulo y unas unidades puede utilizarse la sentencia:<br>
+        System.out.println(&quot;El total asciende a &quot; + result + &quot; 
+        unidades&quot;);<br>
+        donde el operador de concatenaci&oacute;n se utiliza dos veces para construir 
+        la cadena de caracteres que se desea imprimir por medio del m&eacute;todo 
+        println(). La variable num&eacute;rica result es convertida autom&aacute;ticamente 
+        por Java en cadena de caracteres para poderla concatenar. En otras ocasiones 
+        se deber&aacute; llamar expl&iacute;citamente a un m&eacute;todo para 
+        que realice esta conversi&oacute;n.</p>
+      <h3>Operadores que act&uacute;an a nivel de bits</h3>
+      <p>Java dispone tambi&eacute;n de un conjunto de operadores que act&uacute;an 
+        a nivel de bits. Las operaciones de bits se utilizan con frecuencia para 
+        definir se&ntilde;ales o flags, esto es, variables de tipo entero en las 
+        que cada uno de sus bits indican si una opci&oacute;n est&aacute; activada 
+        o no. La Tabla 2.5 muestra los operadores de Java que act&uacute;an a 
+        nivel de bits.</p>
+      <table width="507" border="1">
+        <tr> 
+          <td width="69"><div align="center">Operador</div></td>
+          <td width="108"><div align="center">Utilizaci&oacute;n</div></td>
+          <td width="308"><div align="center">Resultado</div></td>
+        </tr>
+        <tr> 
+          <td>&gt;&gt;</td>
+          <td>op1 &gt;&gt; op2</td>
+          <td>Desplaza los bits de op1 a la derecha una distancia op2</td>
+        </tr>
+        <tr> 
+          <td>&lt;&lt;</td>
+          <td>op1 &lt;&lt; op2</td>
+          <td>Desplaza los bits de op1 a la izquierda una distancia op2</td>
+        </tr>
+        <tr> 
+          <td>&gt;&gt;&gt;</td>
+          <td>op1 &gt;&gt;&gt; op2</td>
+          <td>Desplaza los bits de op1 a la derecha una distancia op2 (positiva)</td>
+        </tr>
+        <tr> 
+          <td>&amp;</td>
+          <td>op1 &amp; op2</td>
+          <td>Operador AND a nivel de bits</td>
+        </tr>
+        <tr> 
+          <td>|</td>
+          <td>op1 | op2</td>
+          <td>Operador OR a nivel de bits</td>
+        </tr>
+        <tr> 
+          <td>^</td>
+          <td>op1 ^ op2</td>
+          <td>Operador XOR a nivel de bits (1 si s&oacute;lo uno de los operandos 
+            es 1)</td>
+        </tr>
+        <tr>
+          <td>~</td>
+          <td>~op2</td>
+          <td>Operador complemento (invierte el valor de cada bit)</td>
+        </tr>
+      </table>
+      <p>En binario, las potencias de dos se representan con un &uacute;nico bit 
+        activado. Por ejemplo, los n&uacute;meros (1, 2, 4, 8, 16, 32, 64, 128) 
+        se representan espectivamente de modo binario en la forma (00000001, 00000010, 
+        00000100, 00001000, 00010000, 00100000, 01000000, 10000000), utilizando 
+        s&oacute;lo 8 bits. La suma de estos n&uacute;meros permite construir 
+        una variable flags con los bits activados que se deseen. Por ejemplo, 
+        para construir una variable flags que sea 00010010 bastar&iacute;a<br>
+        hacer flags=2+16. Para saber si el segundo bit por la derecha est&aacute; 
+        o no activado bastar&iacute;a utilizar la sentencia,</p>
+      <p>if (flags &amp; 2 == 2) {...}<br>
+        La Tabla muestra los operadores de asignaci&oacute;n a nivel de bits.</p>
+      <table width="507" border="1">
+        <tr> 
+          <td width="67"><div align="center">Operador</div></td>
+          <td width="170"><div align="center">Utilizaci&oacute;n</div></td>
+          <td width="248"><div align="center">Equivalente a</div></td>
+        </tr>
+        <tr> 
+          <td>&amp;=</td>
+          <td>op1 &amp;= op2</td>
+          <td>op1 = op1 &amp; op2</td>
+        </tr>
+        <tr> 
+          <td>|=</td>
+          <td>op1 |= op2</td>
+          <td>op1 = op1 | op2</td>
+        </tr>
+        <tr> 
+          <td>^=</td>
+          <td>op1 ^= op2</td>
+          <td>op1 = op1 ^ op2</td>
+        </tr>
+        <tr> 
+          <td>&lt;&lt;=</td>
+          <td>op1 &lt;&lt;= op2</td>
+          <td>op1 = op1 &lt;&lt; op2</td>
+        </tr>
+        <tr> 
+          <td>&gt;&gt;=</td>
+          <td>op1 &gt;&gt;= op2</td>
+          <td>op1 = op1 &gt;&gt; op2</td>
+        </tr>
+        <tr> 
+          <td>&gt;&gt;&gt;=</td>
+          <td>op1 &gt;&gt;&gt;= op2</td>
+          <td>op1 = op1 &gt;&gt;&gt; op2</td>
+        </tr>
+      </table>
+      <p></p>
+      <p></p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

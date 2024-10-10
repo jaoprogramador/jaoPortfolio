@@ -1,0 +1,64 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>M&eacute;todos para dibujar el applet</title>
+<META http-equiv=Content-Language content=es>
+<META content="Manual Applets, ejemplos Applets, codigos Applets" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Manual Applets, ejemplos Applets, codigos Applets">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> M&eacute;todos para dibujar el applet</h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <p>Las applets son aplicaciones gr&aacute;ficas 
+        que aparecen en una zona de la ventana del browser. Por ello
+        deben redefinir los m&eacute;todos gr&aacute;ficos paint() y update(). 
+        El m&eacute;todo paint() se declara en la forma:
+        public void paint(Graphics g)
+        El objeto gr&aacute;fico g pertenece a la clase java.awt.Graphics, que 
+        siempre debe ser importada
+        por el applet. Este objeto define un contexto o estado gr&aacute;fico 
+        para dibujar (m&eacute;todos gr&aacute;ficos,
+        colores, fonts, etc.) y es creado por el browser.</p>
+      <p>Todo el trabajo gr&aacute;fico del applet (dibujo de l&iacute;neas, formas 
+        gr&aacute;ficas, texto, etc.) se debe incluir en el m&eacute;todo paint(), 
+        porque este m&eacute;todo es llamado cuando el applet se dibuja por primera 
+        vez y tambi&eacute;n de forma autom&aacute;tica cada vez que el applet 
+        se debe redibujar. </p>
+      <p>En general, el programador crea el m&eacute;todo paint() pero no lo suele 
+        llamar. Para pedir expl&iacute;citamente al sistema que vuelva a dibujar 
+        el applet (por ejemplo, por haber realizado alg&uacute;n cambio) se utiliza 
+        el m&eacute;todo repaint(), que es m&aacute;s f&aacute;cil de usar, pues 
+        no requiere argumentos. </p>
+      <p>El m&eacute;todo repaint() se encarga de llamar a paint() a trav&eacute;s 
+        de update(). </p>
+      <p>El m&eacute;todo repaint() llama a update(), que borra todo pintando 
+        de nuevo con el color de fondo y luego llama a paint(). A veces esto produce 
+        parpadeo de pantalla o flickering. Existen dos formas de evitar el flickering: 
+      </p>
+      <p>1. Redefinir update() de forma que no borre toda la ventana sino s&oacute;lo 
+        lo necesario. </p>
+      <p>2. Redefinir paint() y update() para utilizar doble buffer. </p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

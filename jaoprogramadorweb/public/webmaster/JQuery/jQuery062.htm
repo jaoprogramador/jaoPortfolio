@@ -1,0 +1,61 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Introducci&oacute;n a JQuery</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta name="keywords" content="Introduccion a JQuery, Manual JQuery, tutorial JQuery, Ejemplos JQuery, ejercicios JQuery">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos"><tr> 
+    <td height="39" colspan="3"> <h2>Modificar varios valores de atributos a la vez</h2></td>
+  </tr>
+  <tr> 
+    <td height="268" colspan="3"> 
+      <h3>Introducci&oacute;n</h3>
+      <p>Tambi&eacute;n podemos utilizar el m&eacute;todo attr() pasando un objeto 
+        con pares atributo/valor. Esto<br>
+        sirve para modificar de una sola vez varios atributos sobre los elementos 
+        que haya en un<br>
+        objeto jQuery y si esos atributos no exist&iacute;an, simplemente los 
+        crea con los valores enviados en<br>
+        el objeto.<br>
+        A estas alturas ya debemos saber crear variables con notaci&oacute;n objeto, 
+        pero voy a dejar un<br>
+        ejemplo para que se pueda ver perfectamente este uso del m&eacute;todo.<br>
+        Imaginar que tenemos varios enlaces en la p&aacute;gina, y que queremos 
+        modificar sus atributos,<br>
+        para todos los enlaces a la vez.<br>
+        $('a').attr({<br>
+        'title': 'Title modificado por jQuery',<br>
+        'href': 'http://www.euskalnet.net/jaoprogramador',<br>
+        'style': 'color: #f80'<br>
+        });<br>
+        A partir de la ejecuci&oacute;n de la sentencia anterior todos los title 
+        de los enlaces tendr&aacute;n el valor<br>
+        &quot;Title modificado por jQuery&quot;. </p>
+      <p>En el siguiente art&iacute;culo veremos un ejemplo m&aacute;s elaborado 
+        sobre la modificaci&oacute;n de atributos<br>
+        de elementos a trav&eacute;s de la funci&oacute;n attr(), en el que para 
+        obtener el valor del atributo a<br>
+        modificar utilizamos una funci&oacute;n que pasamos tambi&eacute;n como 
+        par&aacute;metro a attr().</p></td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

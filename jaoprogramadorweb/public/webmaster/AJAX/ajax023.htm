@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>C&oacute;mo hacer una p&aacute;gina AJAX</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta name="keywords" content="Primera página AJAX, Como hacer una pagina AJAX, Manual AJAX, tutorial AJAX, Ejemplos AJAX, ejercicios AJAX">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2>Funciones para formularios</h2></td>
+  </tr>
+  <tr> 
+    <td height="394" colspan="3"> <p>Prototype incluye muchas utilidades relacionadas 
+        con los formularios y sus elementos. A continuaci&oacute;n se muestran 
+        las m&aacute;s &uacute;tiles para los campos de un formulario:<br>
+        Field.clear(): borra el valor de cada campo que se le pasa (admite uno 
+        o m&aacute;s par&aacute;metros)<br>
+        Field.present(): devuelve true si los campos que se le indican han sido 
+        rellenados por parte del usuario, es decir, si contienen valores no vac&iacute;os 
+        (admite uno o m&aacute;s par&aacute;metros)<br>
+        Field.focus(): establece el foco del formulario en el campo que se le 
+        indica<br>
+        Field.select(): selecciona el valor del campo (solo para los campos en 
+        los que se pueda seleccionar su texto)<br>
+        Field.activate(): combina en una &uacute;nica funci&oacute;n los m&eacute;todos 
+        focus() y select()<br>
+        A las funciones anteriores se les debe pasar como par&aacute;metro una 
+        cadena de texto con el identificador del elemento o el propio elemento 
+        (obtenido por ejemplo con $()). Las funciones mostradas se pueden invocar 
+        de tres formas diferentes:<br>
+        // Las 3 instrucciones son equivalentes<br>
+        Form.Element.focus('id_elemento');<br>
+        Field.focus('id_elemento')<br>
+        $('id_elemento').focus()<br>
+        Adem&aacute;s de las funciones espec&iacute;ficas para los campos de los 
+        formularios, Prototype tambi&eacute;n define utilidades para los propios 
+        formularios completos. Todas las funciones requieren un solo par&aacute;metro: 
+        el identificador o el objeto del formulario.<br>
+        Form.serialize(): devuelve una cadena de texto de tipo &quot;query string&quot; 
+        con el valor de todos los campos del formulario &quot;campo1=valor1&amp;campo2=valor2&amp;campo3=valor3&quot;)<br>
+        Form.findFirstElement(): devuelve el primer campo activo del formulario<br>
+        Form.getElements(): devuelve un array con todos los campos del formulario 
+        (incluyendo los elementos ocultos)<br>
+        Form.getInputs(): devuelve un array con todos los elementos de tipo &lt;input&gt; 
+        del formulario.<br>
+        Admite otros dos par&aacute;metros para filtrar los resultados. El segundo 
+        par&aacute;metro indica el tipo de<br>
+        &lt;input&gt; que se quiere obtener y el tercer par&aacute;metro indica 
+        el nombre del elemento &lt;input&gt;.<br>
+        Form.disable(): deshabilita todo el formulario deshabilitando todos sus 
+        campos<br>
+        Form.enable(): habilita el formulario completo habilitando todos sus campos<br>
+        Form.focusFirstElement(): pone el foco del formulario en el primer campo 
+        que sea visible y est&eacute; habilitado<br>
+        Form.reset(): resetea el formulario completo, ya que es equivalente al 
+        m&eacute;todo reset() de JavaScript</p></td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

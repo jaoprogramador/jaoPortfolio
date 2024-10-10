@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Niveles de aislamiento de transacciones</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación en JDBC,Programas JDBC,Aplicaciones en JDBC,Ejercicios en JDBC, Ejemplos de JDBC,Tutoriales de JDBC,Manuales JDBC" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="JDBC, Manual JDBC, tutorial JDBC, Ejemplos JDBC, ejercicios JDBC">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> Niveles de aislamiento de transacciones</h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <p>Si un DBMS soporta el proceso de transacciones, 
+        tendr&aacute; que manejar de alguna forma los potenciales conflictos que 
+        puedan surgir cuando dos transacciones est&aacute;n operando sobre una 
+        base de datos concurrentemente. El usuario puede especificar un nivel 
+        de aislamiento para indicar que nivel de precauci&oacute;n deber&iacute;a 
+        ejercitar el DBMS para la resoluci&oacute;n de estos conflictos. Por ejemplo, 
+        &iquest;que ocurrir&aacute; cuando una transacci&oacute;n cambia un valor 
+        y una segunda transacci&oacute;n lee el valor antes de que el cambio haya 
+        sido &#8216;commitado&#8217; o descartado?. &iquest;Deber&iacute;a permitirse, 
+        dado que el valor cambiado le&iacute;do por la segunda transacci&oacute;n 
+        ser&aacute; invalido si la primera transacci&oacute;n ha hecho rollback?. 
+        Un usuario JDBC puede instruir a la DBMS para que un valor que ha sido 
+        le&iacute;do antes del &#8216;commit&#8217; (&#8220;dirty reads&#8221;) 
+        con el siguiente c&oacute;digo donde con es el objeto de la actual conexi&oacute;n:</p>
+      <p>con.setTransactionIsolation(TRANSACTION_READ_UNCOMMITTED);</p>
+      <p>El nivel de aislamiento m&aacute;s alto, el que m&aacute;s cuidado toma 
+        para evitar conflictos. La interfase Connection define cinco niveles de 
+        aislamiento con el nivel m&aacute;s bajo que especifica que no soporte 
+        transacciones hasta el m&aacute;s alto que especifica que mientras una 
+        transacci&oacute;n est&eacute; abierta ninguna otra transacci&oacute;n 
+        puede realizar cambios en los datos le&iacute;dos por esa transacci&oacute;n. 
+        Normalmente, el nivel de transacci&oacute;n m&aacute;s alto es el m&aacute;s 
+        lento en la ejecuci&oacute;n de la aplicaci&oacute;n.(debido a que se 
+        incrementan los bloqueos y se disminuye la concurrencia de los usuarios). 
+        El desarrollador debe balancear la necesidad de rendimiento con la necesidad 
+        de la consistencia de los datos al tomar la decisi&oacute;n del nivel 
+        de aislamiento a usar. Por supuesto, el nivel de aislamiento que pueda 
+        soportarse depende de las posibilidades de la base de datos subyacente.</p>
+      <p>Cuando se crea un nuevo objeto Connection, su nivel de aislamiento depende 
+        del driver, pero normalmente por defecto es el de la DBMS subyacente. 
+        Un usuario puede llamar al m&eacute;todo setIsolationLevel para cambiar 
+        el nivel de aislamiento de la transacci&oacute;n, y este nuevo nivel estar&aacute; 
+        efectivo durante la sesi&oacute;n de conexi&oacute;n. Para cambiar el 
+        nivel de aislamiento solo para una transacci&oacute;n, es necesario fijar 
+        este antes de la transacci&oacute;n comience y volverlo a situar en su 
+        valor anterior una vez que la transacci&oacute;n haya terminado. No se 
+        recomienda cambiar el nivel de aislamiento de transacci&oacute;n en medio 
+        de una puesto que lanzar&aacute; una llamada inmediata al m&eacute;todo 
+        commit, provocando que los cambios hasta ese punto se hagan permanentes 
+        en la base de datos.<br>
+      </p>
+      <p><br>
+      </p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

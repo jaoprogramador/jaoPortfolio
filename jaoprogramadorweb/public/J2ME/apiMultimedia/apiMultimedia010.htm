@@ -1,0 +1,756 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Indice J2ME</title>
+<META http-equiv=Content-Language content=es>
+<META content="Manual J2ME, ejemplos J2ME, codigos J2ME" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Manual J2ME, ejemplos J2ME, codigos J2ME">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2>Ejemplo multimedia</h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"><p>La suite ofrecida en este ejemplo constar&aacute; 
+        de tres MIDlets, uno por familia de elemento<br>
+        multimedia a reproducir. Comprobamos que la pantalla donde se nos ofrece 
+        la elecci&oacute;n del<br>
+        MIDlet a ejecutar queda en manos del dispositivo, present&aacute;ndosenos 
+        en el caso del WTK 2.2<br>
+        de la siguiente forma:</p>
+      <p>Para concretar un poco la acci&oacute;n de cada MIDlet en esa lista, 
+        hemos usado nombres largos<br>
+        asociados al nombre de la clase de cada MIDlet, como puede observarse 
+        en el contenido del<br>
+        JAD que describe a la suite:<br>
+        MIDlet-1: Reproducci&oacute;n de TONOS (c&oacute;digo), , MEDIAEjemploMIDlet1<br>
+        MIDlet-2: Reproducci&oacute;n de AUDIO (v&iacute;a HTTP), , MEDIAEjemploMIDlet2<br>
+        MIDlet-3: Reproducci&oacute;n de V&Iacute;DEO (v&iacute;a res del JAR), 
+        , MEDIAEjemploMIDlet3<br>
+        MIDlet-Jar-Size: 100<br>
+        MIDlet-Jar-URL: ejemploMEDIA.jar<br>
+        MIDlet-Name: ejemploMEDIA<br>
+        MIDlet-Vendor: Unknown<br>
+        MIDlet-Version: 1.0<br>
+        MicroEdition-Configuration: CLDC-1.1<br>
+        MicroEdition-Profile: MIDP-2.0</p>
+      <p>Seguidamente, presentamos ya el c&oacute;digo, como siempre profusamente 
+        comentado para<br>
+        facilitar su completo entendimiento, de cada MIDlet de la suite:<br>
+        MEDIAEjemploMIDlet1.java<br>
+        import javax.microedition.lcdui.*;<br>
+        import javax.microedition.midlet.*;<br>
+        import javax.microedition.media.*;<br>
+        import javax.microedition.media.control.*;<br>
+        import java.io.IOException;<br>
+        import java.util.*;<br>
+        //Clase del primer MIDlet, el cual reproducir&aacute; una secuencia de 
+        tonos definida<br>
+        //en el propio c&oacute;digo de la clase. Usaremos un<br>
+        createPlayer(Manager.TONE_DEVICE_LOCATOR )<br>
+        public class MEDIAEjemploMIDlet1 extends MIDlet implements CommandListener 
+        {<br>
+        // Definimos Pantalla y Formulario<br>
+        private Display display;<br>
+        private Form form;<br>
+        // Definimos comandos de acci&oacute;n para el MIDlet: Salida a lista 
+        de la suite y Reproducci&oacute;n<br>
+        private Command volver;<br>
+        private Command reproducir;<br>
+        // Definimos el reproductor y un controlador de tonos para &eacute;l<br>
+        private Player player;<br>
+        private ToneControl tc;<br>
+        //-----------------------------------------------------------------------------------------------------<br>
+        --------------------------------------------------<br>
+        // Constructor del MIDlet. En &eacute;l hacemos las inicializaciones previas 
+        al arranque del MIDlet<br>
+        public MEDIAEjemploMIDlet1() {<br>
+        // Creamos el formulario<br>
+        form = new Form(&quot;Secuencia de TONOS&quot;);<br>
+        // Iniciamos los comandos de la interface<br>
+        volver = new Command(&quot;Volver&quot;, Command.EXIT, 1);<br>
+        reproducir = new Command(&quot;Reproducir&quot;, Command.SCREEN, 2);<br>
+        System.out.println(&quot;MIDlet TONOS CONSTRUIDO&quot;);}<br>
+        //---------------------------------------------------------------------------------------------------<br>
+        ----------------------------------------------------<br>
+        //Ciclo de vida del MIDlet<br>
+        //Al comenzar, presentamos un mensaje al usuario y esperamos un evento 
+        de comando<br>
+        public void startApp() {<br>
+        System.out.println(&quot;COMIENZO DEL MIDLET TONOS POR startup()&quot;);<br>
+        try{<br>
+        // Capturamos el control de la pantalla<br>
+        display = Display.getDisplay(this);<br>
+        //Mostramos un mensaje informativo en la interface<br>
+        form.append(&quot;Reproducci&oacute;n de TONOS: Conecte el Audio del dispositivo 
+        y &quot; +<br>
+        &quot;pulse 'Reproducir'. Cada pulsaci&oacute;n reiniciar&aacute; la secuencia&quot;);<br>
+        //Asociamos comandos y un escuchador para ellos al formulario actual<br>
+        form.addCommand(volver);<br>
+        form.addCommand(reproducir);<br>
+        form.setCommandListener(this);<br>
+        //Presentamos en la pantalla el formulario<br>
+        display.setCurrent(form);<br>
+        //Emitimos una nota simple de aviso de inicio de la app (DO central)<br>
+        Manager.playTone(ToneControl.C4, 500, 100);<br>
+        }<br>
+        catch(Exception e){<br>
+        System.out.println(&quot;EXCEPCI&Oacute;N EN startApp():&quot; + e.toString());<br>
+        }<br>
+        }<br>
+        // Los otros dos m&eacute;todos del ciclo de vida, vac&iacute;os----------------------------------------------<br>
+        -----------------------------------------<br>
+        public void pauseApp() {}<br>
+        public void destroyApp( boolean flag ) {<br>
+        System.out.println(&quot;SALIDA DEL MIDLET TONOS POR destroyApp()&quot;);<br>
+        }<br>
+        //-------------------------------------------------------------------------------------------------------------------------------------------------------<br>
+        // Manejador de eventos relacionados con la interface<br>
+        public void commandAction(Command c, Displayable d) {<br>
+        try{<br>
+        //Se ha pulsado Volver<br>
+        if(c == volver){<br>
+        // Cerramos Reproductor y su Control de Tonos asociado<br>
+        if(player != null) { player.close(); player = null; }<br>
+        if(tc!= null) tc = null;<br>
+        //Destruimos el MIDlet y lo notificamos al dispositivo para salir de &eacute;l<br>
+        destroyApp(true);<br>
+        notifyDestroyed();<br>
+        }<br>
+        //Se ha pulsado Reproducir<br>
+        else if(c == reproducir) {<br>
+        //Si se pulsa mientras est&aacute; reproduciendo, posicionamos la reproducci&oacute;n 
+        al<br>
+        principio<br>
+        if(player!=null &amp;&amp; player.getState()==Player.STARTED)<br>
+        player.setMediaTime(0);<br>
+        //Si a&uacute;n no est&aacute; reproduciendo, iniciamos el Player<br>
+        else<br>
+        this.reproducirTonos();<br>
+        }<br>
+        }<br>
+        catch(Exception e){<br>
+        System.out.println(&quot;EXCEPCI&Oacute;N EN commandAction():&quot; + 
+        e.toString());<br>
+        }<br>
+        }<br>
+        //---------------------------------------------------------------------------------------------------<br>
+        ----------------------------------------------------<br>
+        // M&eacute;todo encargado de crear la secuencia de tonos y darla al Player 
+        para que la<br>
+        reproduzca<br>
+        public void reproducirTonos()<br>
+        {<br>
+        byte dur = 8;<br>
+        byte[] secuenciaAReproducir = {<br>
+        ToneControl.VERSION,1,ToneControl.TEMPO,20,<br>
+        ToneControl.RESOLUTION, 50,<br>
+        ToneControl.BLOCK_START,0,<br>
+        90,dur, 92,dur, 94,dur, 95,dur, ToneControl.REPEAT, 5,<br>
+        96,dur, ToneControl.SET_VOLUME,50, 97,dur, 98,dur, 96,dur,<br>
+        ToneControl.C4,dur, ToneControl.SILENCE,dur,<br>
+        ToneControl.BLOCK_END,0,<br>
+        ToneControl.BLOCK_START,1,<br>
+        60,dur, 62,dur, 64,dur, 65,dur,ToneControl.REPEAT, 5,<br>
+        66,dur, ToneControl.SET_VOLUME, 100, 67,dur, 68,dur, 66,dur,<br>
+        ToneControl.C4,dur, ToneControl.SILENCE,dur,<br>
+        ToneControl.BLOCK_END,1,<br>
+        ToneControl.PLAY_BLOCK,0,<br>
+        ToneControl.PLAY_BLOCK,1,<br>
+        ToneControl.SET_VOLUME,100,ToneControl.PLAY_BLOCK,0,<br>
+        };<br>
+        try {<br>
+        // Creamos el reproductor<br>
+        player = Manager.createPlayer(Manager.TONE_DEVICE_LOCATOR);<br>
+        System.out.println(&quot;RECI&Eacute;N CREADO, EL PLAYER EST&Aacute; EN 
+        ESTADO:&quot; +<br>
+        player.getState());<br>
+        // Iniciamos y acaparamos recursos<br>
+        player.realize();<br>
+        // Obtenemos el control de tonos asociado al Player<br>
+        tc = (ToneControl)player.getControl(&quot;ToneControl&quot;);<br>
+        // Asignamos la secuencia a reproducir<br>
+        tc.setSequence(secuenciaAReproducir);<br>
+        //Reproducimos dos veces<br>
+        player.setLoopCount(2);<br>
+        System.out.println(&quot;JUSTO ANTES DE START, EL PLAYER EST&Aacute; EN 
+        ESTADO:&quot; +<br>
+        player.getState());<br>
+        //Mediante la siguiente orden comenzar&aacute; la reproducci&oacute;n 
+        de la secuencia<br>
+        player.start();<br>
+        }<br>
+        catch( Exception e ) {System.out.println(&quot;EXCEPCI&Oacute;N EN reproducirTonos():&quot; 
+        + e.toString());<br>
+        }<br>
+        }<br>
+        }//f&iacute;n clase MEDIAEjemploMIDlet1.java</p>
+      <p>import javax.microedition.lcdui.*;<br>
+        import javax.microedition.midlet.*;<br>
+        import javax.microedition.media.*;<br>
+        import javax.microedition.media.control.*;<br>
+        import java.io.IOException;<br>
+        import java.util.*;<br>
+        //Clase del segundo MIDlet, el cual reproducir&aacute; archivos WAV / 
+        MIDI a alcanzar v&iacute;a HTTP<br>
+        //del directorio Tomcat dado en /escuchadorDeJ2ME/media/. Usaremos un<br>
+        createPlayer(String locator), el cual se //ocupar&aacute; de la comunicaci&oacute;n 
+        HTTP de forma<br>
+        invisible a nosotros.<br>
+        public class MEDIAEjemploMIDlet2 extends MIDlet implements Runnable, CommandListener,<br>
+        PlayerListener {<br>
+        // URLs de los media de audio a reproducir:<br>
+        static final String URL1 =<br>
+        &quot;http://localhost:8080/escuchadorDeJ2ME/media/ejemplo21.wav&quot;;<br>
+        static final String URL2 =<br>
+        &quot;http://localhost:8080/escuchadorDeJ2ME/media/ejemplo22.mid&quot;;</p>
+      <p>// Pantalla del dispositivo, lista y Formulario<br>
+        private Display display;<br>
+        private List itemList;<br>
+        private Form form;<br>
+        // Definimos la tarea encargada de la reproducci&oacute;n. Al buscar el 
+        media via HTTP, es<br>
+        obligatorio el<br>
+        //uso de un hilo separado que se encargue de la comunicaci&oacute;n en 
+        red.<br>
+        private Thread t;<br>
+        //Comandos disponibles en la interface. Asociaremos a la pantalla con 
+        la Lista el<br>
+        Reproducir<br>
+        //y el Volver, y una vez dentro de la reproducci&oacute;n asociaremos 
+        a la pantalla con el Form<br>
+        //de la reproducci&oacute;n los comandos Reproducir y el Pausar/Reproducir.<br>
+        private Command volver;<br>
+        private Command pausar;<br>
+        private Command reproducir;<br>
+        //TAD para elementos de la lista<br>
+        private Hashtable items;<br>
+        //Reproductor<br>
+        private Player player;<br>
+        //---------------------------------------------------------------------------------------------------<br>
+        ----------------------------------------------------<br>
+        //Constructor del MIDlet. En &eacute;l hacemos las inicializaciones previas 
+        al arranque del MIDlet<br>
+        //mediante el startup() posterior.<br>
+        public MEDIAEjemploMIDlet2()<br>
+        {<br>
+        //Damos cuerpo a los comandos de la interface<br>
+        volver = new Command(&quot;Volver&quot;, Command.STOP, 1);<br>
+        pausar = new Command(&quot;Pausar&quot;, Command.ITEM, 1);<br>
+        reproducir = new Command(&quot;Reproducir&quot;, Command.ITEM, 1);<br>
+        //Damos cuerpo al formulario donde presentaremos una imagen mientras se 
+        reproduce el<br>
+        media<br>
+        form = new Form(&quot;Reproduciendo archivo de AUDIO&quot;);<br>
+        //Damos cuerpo a la lista donde presentaremos los elementos de AUDIO a 
+        seleccionar</p>
+      <p>itemList = new List(&quot;Selecci&oacute;n de archivo de AUDIO&quot;, 
+        List.IMPLICIT);<br>
+        //Cargamos un conjunto con el que acceder mediante el nombre seleccionado 
+        en la lista<br>
+        //a las URL a reproducir<br>
+        items = new Hashtable();<br>
+        System.out.println(&quot;MIDlet AUDIO CONSTRUIDO&quot;);<br>
+        }<br>
+        //---------------------------------------------------------------------------------------------------<br>
+        ----------------------------------------------------<br>
+        //Ciclo de vida del MIDlet<br>
+        //Al comenzar, presentamos la lista de selecci&oacute;n de AUDIO y esperamos 
+        un evento de<br>
+        comando<br>
+        public void startApp()<br>
+        {<br>
+        System.out.println(&quot;COMIENZO DEL MIDLET AUDIO POR startup()&quot;);<br>
+        //Capturamos la pantalla del dispositivo<br>
+        display = Display.getDisplay(this);<br>
+        //Asociamos al formulario los comandos activos mientras &eacute;l est&eacute; 
+        en pantalla<br>
+        form.addCommand(volver);<br>
+        form.addCommand(pausar);<br>
+        form.setCommandListener(this);<br>
+        //Asociamos a la lista los comandos activos mientras ella est&eacute; 
+        en pantalla<br>
+        itemList.addCommand(volver);<br>
+        itemList.addCommand(reproducir);<br>
+        itemList.setCommandListener(this);<br>
+        //Cargamos el conjunto de las URL<br>
+        items.put(&quot;Ejemplo WAV por HTTP&quot;, URL1);<br>
+        items.put(&quot;Ejemplo MIDI por HTTP&quot;, URL2);<br>
+        //Cargamos la lista con el conjunto anterior y la presentamos en pantalla. 
+        As&iacute;<br>
+        comenzamos a<br>
+        //interactuar con el usuario<br>
+        for(Enumeration en = items.keys(); en.hasMoreElements();)<br>
+        itemList.append((String)en.nextElement(), null);</p>
+      <p>display.setCurrent(itemList);<br>
+        }<br>
+        //Si pausa externa (ej: llamada), paramos la reproducci&oacute;n del Player<br>
+        public void pauseApp()<br>
+        {<br>
+        try {<br>
+        if(player != null)<br>
+        player.stop();<br>
+        }<br>
+        catch(MediaException e) {<br>
+        System.out.println(&quot;EXCEPCI&Oacute;N EN pauseApp():&quot; + e.toString());<br>
+        }<br>
+        }<br>
+        //Al salir del MIDlet cerramos el Player<br>
+        public void destroyApp(boolean unconditional)<br>
+        {<br>
+        System.out.println(&quot;SALIDA DEL MIDLET AUDIO POR destroyApp()&quot;);<br>
+        if(player != null)<br>
+        player.close();<br>
+        }<br>
+        //---------------------------------------------------------------------------------------------------<br>
+        ----------------------------------------------------<br>
+        // Manejador de eventos relacionados con la interface. Seg&uacute;n la 
+        pantalla en la que<br>
+        estemos (la<br>
+        //de la lista o la del formulario) actuaremos de una u otra forma<br>
+        public void commandAction(Command c, Displayable d)<br>
+        {<br>
+        try{<br>
+        //PANTALLA INICIAL: LISTA<br>
+        if(d == itemList) {<br>
+        //Se ha pulsado Volver<br>
+        if(c == volver) {<br>
+        // Cerramos Reproductor<br>
+        if( player != null ) { player.close(); player = null; }<br>
+        //Destruimos el MIDlet y notificamos al dispositivo su destrucci&oacute;n, 
+        para que nos<br>
+        vuelva a//presentar la lista con los elementos de la suite (esa pantalla 
+        inicial queda en<br>
+        manos del dispositivo)<br>
+        destroyApp( true );<br>
+        notifyDestroyed();<br>
+        }<br>
+        //Se ha pulsado Reproducir<br>
+        else if(c == reproducir) {<br>
+        // Lanzamos la tarea que establece la conexi&oacute;n y reproduce el media 
+        obtenido<br>
+        t = new Thread( this );<br>
+        t.start();<br>
+        //Cambiamos el comando de Reproducir por el de Pausar<br>
+        form.removeCommand(reproducir);<br>
+        form.addCommand(pausar);<br>
+        }<br>
+        }<br>
+        //SEGUNDA PANTALLA: REPRODUCCI&Oacute;N<br>
+        else if(d == form) {<br>
+        //Se ha pulsado Volver mientras se est&aacute; en la pantalla de Reproducci&oacute;n<br>
+        if(c == volver) {<br>
+        //Cerramos el Player y volvemos a presentar la pantalla inicial. Reponemos<br>
+        comandos<br>
+        player.close();<br>
+        display.setCurrent(itemList);<br>
+        form.removeCommand(reproducir);<br>
+        form.addCommand(pausar);<br>
+        }<br>
+        //Se ha pulsado Reproducir. Vendremos de un Pause previo<br>
+        else if(c == reproducir) {<br>
+        // Volvemos a reproducir el media desde el momento en el que se qued&oacute;,<br>
+        reponemos comandos<br>
+        player.start();<br>
+        form.removeCommand(reproducir);<br>
+        form.addCommand(pausar);<br>
+        }<br>
+        //Se ha pulsado Pausar<br>
+        else if(c == pausar) {<br>
+        //Paramos el Player. Supondr&aacute; una pausa en la reproducci&oacute;n, 
+        no un cierre.Reponemos comandos<br>
+        player.stop();<br>
+        form.removeCommand(pausar);<br>
+        form.addCommand(reproducir);<br>
+        }<br>
+        }<br>
+        }<br>
+        catch(Exception e) {<br>
+        System.out.println(&quot;EXCEPCI&Oacute;N EN commandAction():&quot; + 
+        e);<br>
+        }<br>
+        }<br>
+        //---------------------------------------------------------------------------------------------------<br>
+        ----------------------------------------------------<br>
+        //M&eacute;todo run del hilo abierto para la comunicaci&oacute;n HTTP 
+        que obtiene el media<br>
+        public void run()<br>
+        {<br>
+        try{<br>
+        //Presentamos una espera mientras se obtiene el elemento a reproducir<br>
+        Alert alert = new Alert(&quot;Cargando media. Espere, por favor...&quot;);<br>
+        alert.setTimeout(Alert.FOREVER);<br>
+        display.setCurrent(alert);<br>
+        //Obtenemos del conjunto la URL a conectar, sabido el elemento seleccionado 
+        en la lista<br>
+        String urlSelec = (String)items.get(itemList.getString(itemList.getSelectedIndex()));<br>
+        System.out.println(&quot;URL A REPRODUCIR:&quot; + urlSelec);<br>
+        player = Manager.createPlayer(urlSelec);<br>
+        //A&ntilde;adimos un escuchador para recoger cuando empieza, se pausa 
+        o se cierra la<br>
+        reproducci&oacute;n<br>
+        player.addPlayerListener(this);<br>
+        //Separamos el ciclo de vida del Player:<br>
+        System.out.println(&quot;ESTADO UNREALIZED&quot;);<br>
+        player.realize();<br>
+        System.out.println(&quot;ESTADO REALIZED&quot;);<br>
+        player.prefetch();<br>
+        System.out.println(&quot;ESTADO PREFETCHED&quot;);<br>
+        player.start();System.out.println(&quot;ESTADO STARTED&quot;);<br>
+        }<br>
+        catch (Exception e){<br>
+        System.out.println(&quot;EXCEPCI&Oacute;N EN run():&quot; + e);<br>
+        }<br>
+        }<br>
+        //---------------------------------------------------------------------------------------------------<br>
+        ----------------------------------------------------<br>
+        // Manejador de eventos relacionados con el reproductor<br>
+        public void playerUpdate(Player player, String event, Object eventData)<br>
+        {<br>
+        try{<br>
+        //Si el Player ha comenzado su reproducci&oacute;n (inicial o tras pausa), 
+        mostramos una<br>
+        nota negra<br>
+        if( event.equals(PlayerListener.STARTED) ) {<br>
+        //Limpiamos el formulario<br>
+        form.deleteAll();<br>
+        //Creamos una imagen de nota negra (activa) y la mostramos en el formulario<br>
+        Image imagen =<br>
+        Image.createImage(getClass().getResourceAsStream(&quot;nota.png&quot;));<br>
+        ImageItem imagenNota = new ImageItem(&quot;REPRODUCIENDO...&quot;, imagen,<br>
+        ImageItem.LAYOUT_CENTER,&quot;Audio&quot;, Item.PLAIN);<br>
+        form.append(imagenNota);<br>
+        display.setCurrent(form);<br>
+        }<br>
+        //Si el Player se ha pausado, mostramos una nota gris<br>
+        else if(event.equals(PlayerListener.STOPPED)) {<br>
+        //Limpiamos el formulario<br>
+        form.deleteAll();<br>
+        //Creamos una imagen de nota gris (desactiva) y la mostramos en el formulario<br>
+        Image imagen =<br>
+        Image.createImage(getClass().getResourceAsStream(&quot;notaGris.png&quot;));<br>
+        ImageItem imagenNota = new ImageItem(&quot;PAUSA...&quot;, imagen,<br>
+        ImageItem.LAYOUT_CENTER,&quot;Audio&quot;, Item.PLAIN);<br>
+        form.append(imagenNota);<br>
+        display.setCurrent(form);}<br>
+        //Si el Player se cierra, limpiamos el formulario<br>
+        else if(event.equals(PlayerListener.CLOSED)) {<br>
+        form.deleteAll();<br>
+        }<br>
+        }<br>
+        catch(Exception e){<br>
+        System.out.println(&quot;EXCEPCI&Oacute;N en playerUpdate()&quot; + e.toString());<br>
+        }<br>
+        }<br>
+        }//f&iacute;n clase MEDIAEjemploMIDlet2.java</p>
+      <p>MEDIAEjemploMIDlet3.java<br>
+        import javax.microedition.lcdui.*;<br>
+        import javax.microedition.media.*;<br>
+        import javax.microedition.media.control.*;<br>
+        import javax.microedition.midlet.*;<br>
+        import java.io.IOException;<br>
+        import java.util.*;<br>
+        //Clase del tercer MIDlet, el cual reproducir&aacute; v&iacute;deo, existentes 
+        en el directorio RES del JAR.<br>
+        //Formatos soportados por el WTK 2.2, MPEG y GIF animado.<br>
+        //Usaremos un createPlayer(InputStream stream, String type)<br>
+        public class MEDIAEjemploMIDlet3 extends MIDlet implements<br>
+        CommandListener,PlayerListener {<br>
+        // Pantalla del dispositivo, lista y Formulario<br>
+        private Display display;<br>
+        private List itemList;<br>
+        private Form form;<br>
+        //Comandos disponibles en la interface. Asociaremos a la pantalla con 
+        la Lista el<br>
+        Reproducir<br>
+        //y el Volver, y una vez dentro de la reproducci&oacute;n asociaremos 
+        a la pantalla con el Form<br>
+        //de la reproducci&oacute;n los comandos Reproducir y el Pausar/Reproducir.<br>
+        private Command volver;<br>
+        private Command pausar;<br>
+        private Command reproducir;<br>
+        //TADs para elementos de la lista<br>
+        private Hashtable items;<br>
+        private Hashtable itemsInfo;<br>
+        //Reproductor<br>
+        private Player player;<br>
+        //Controlador de V&iacute;deo asociado al player. Propio de MMA<br>
+        private VideoControl vc;</p>
+      <p>//---------------------------------------------------------------------------------------------------<br>
+        ----------------------------------------------------<br>
+        //Constructor del MIDlet. En &eacute;l hacemos las inicializaciones previas 
+        al arranque del MIDlet<br>
+        //mediante el startup() posterior.<br>
+        public MEDIAEjemploMIDlet3()<br>
+        {<br>
+        //Damos cuerpo a los comandos de la interface<br>
+        volver = new Command(&quot;Volver&quot;, Command.STOP, 1);<br>
+        pausar = new Command(&quot;Pausar&quot;, Command.ITEM, 1);<br>
+        reproducir = new Command(&quot;Reproducir&quot;, Command.ITEM, 1);<br>
+        //Damos cuerpo al formulario donde presentaremos una imagen mientras se 
+        reproduce el<br>
+        media<br>
+        form = new Form(&quot;Reproduciendo archivo de V&Iacute;DEO&quot;);<br>
+        //Damos cuerpo a la lista donde presentaremos los elementos de V&Iacute;DEO 
+        a seleccionar<br>
+        itemList = new List(&quot;Selecci&oacute;n de archivo de V&Iacute;DEO&quot;, 
+        List.IMPLICIT);<br>
+        //Cargamos un conjunto con el que acceder mediante el nombre seleccionado 
+        en la lista<br>
+        //a los ficheros a reproducir y a sus tipos MIME<br>
+        items = new Hashtable();<br>
+        itemsInfo = new Hashtable();<br>
+        System.out.println(&quot;MIDlet V&Iacute;DEO CONSTRUIDO&quot;);<br>
+        }<br>
+        //---------------------------------------------------------------------------------------------------<br>
+        ----------------------------------------------------<br>
+        //Ciclo de vida del MIDlet<br>
+        //Al comenzar, presentamos la lista de selecci&oacute;n de V&Iacute;DEO 
+        y esperamos un evento de<br>
+        comando<br>
+        public void startApp() {<br>
+        System.out.println(&quot;COMIENZO DEL MIDLET V&Iacute;DEO POR startup()&quot;);<br>
+        //Capturamos la pantalla del dispositivo<br>
+        display = Display.getDisplay(this);<br>
+        //Asociamos al formulario los comandos activos mientras &eacute;l est&eacute; 
+        en pantalla<br>
+        form.addCommand(volver);<br>
+        form.addCommand(pausar);<br>
+        form.setCommandListener(this);<br>
+        //Asociamos a la lista los comandos activos mientras ella est&eacute; 
+        en pantalla</p>
+      <p>itemList.addCommand(volver);<br>
+        itemList.addCommand(reproducir);<br>
+        itemList.setCommandListener(this);<br>
+        //Cargamos el conjunto del nombre de los archivos y sus tipos MIME. En 
+        esta ocasi&oacute;n, los<br>
+        //buscaremos en el directorio de recursos (res) del propio JAR de la suite<br>
+        items.put(&quot;Ejemplo GIF ANIMADO v&iacute;a JAR&quot;, &quot;file://ejemplo31.gif&quot;);<br>
+        itemsInfo.put(&quot;Ejemplo GIF ANIMADO v&iacute;a JAR&quot;, &quot;image/gif&quot;);<br>
+        items.put(&quot;Ejemplo MPEG v&iacute;a JAR&quot;, &quot;file://ejemplo32.mpeg&quot;);<br>
+        itemsInfo.put(&quot;Ejemplo MPEG v&iacute;a JAR&quot;, &quot;video/mpeg&quot;);<br>
+        //Cargamos la lista con el conjunto de nombres y la presentamos en pantalla. 
+        As&iacute;<br>
+        comenzamos a<br>
+        //interactuar con el usuario<br>
+        for(Enumeration en = items.keys(); en.hasMoreElements();)<br>
+        itemList.append((String)en.nextElement(), null);<br>
+        display.setCurrent(itemList);<br>
+        }<br>
+        //Si pausa externa (ej: llamada), paramos la reproducci&oacute;n del Player<br>
+        public void pauseApp() {<br>
+        try {<br>
+        if(player != null)<br>
+        player.stop();<br>
+        }<br>
+        catch(MediaException e) {<br>
+        System.out.println(&quot;EXCEPCI&Oacute;N EN pauseApp():&quot; + e.toString());<br>
+        }<br>
+        }<br>
+        //Al salir del MIDlet cerramos el Player<br>
+        public void destroyApp(boolean unconditional) {<br>
+        System.out.println(&quot;SALIDA DEL MIDLET V&Iacute;DEO POR destroyApp()&quot;);<br>
+        if(player != null)<br>
+        player.close();<br>
+        }<br>
+        //---------------------------------------------------------------------------------------------------<br>
+        ----------------------------------------------------</p>
+      <p>//Con este m&eacute;todo accedemos al fichero seleccionado y lo reproducimos<br>
+        private void reproducirVideo(String locator, String key) throws Exception 
+        {<br>
+        try{<br>
+        //Presentamos una espera mientras se obtiene el elemento a reproducir<br>
+        Alert alert = new Alert(&quot;Cargando media. Espere, por favor...&quot;);<br>
+        alert.setTimeout(Alert.FOREVER);<br>
+        display.setCurrent(alert);<br>
+        //Extraemos el nombre del fichero a reproducir<br>
+        String fich = locator.substring(locator.indexOf(&quot;file://&quot;) + 
+        6, locator.length());<br>
+        System.out.println(&quot;FICHERO A REPRODUCIR:&quot; + fich);<br>
+        //Creamos el Player con ese nombre y el tipo MIME que extraemos del conjunto<br>
+        itemsInfo<br>
+        player = Manager.createPlayer(getClass().getResourceAsStream(fich),<br>
+        (String)itemsInfo.get(key));<br>
+        //A&ntilde;adimos un escuchador para recoger cuando empieza, se pausa 
+        o se cierra la<br>
+        reproducci&oacute;n<br>
+        player.addPlayerListener(this);<br>
+        //Fijamos la reproducci&oacute;n a bucle infinito<br>
+        player.setLoopCount(-1);<br>
+        //Separamos el ciclo de vida del Player:<br>
+        System.out.println(&quot;ESTADO UNREALIZED&quot;);<br>
+        player.realize();<br>
+        System.out.println(&quot;ESTADO REALIZED&quot;);<br>
+        player.prefetch();<br>
+        System.out.println(&quot;ESTADO PREFETCHED&quot;);<br>
+        player.start();<br>
+        System.out.println(&quot;ESTADO STARTED&quot;);<br>
+        }<br>
+        catch (Exception e) {<br>
+        System.out.println(&quot;EXCEPCI&Oacute;N EN reproducirVideo():&quot; 
+        + e);<br>
+        }<br>
+        }<br>
+        //---------------------------------------------------------------------------------------------------<br>
+        ----------------------------------------------------</p>
+      <p>112<br>
+        // Manejador de eventos relacionados con la interface. Seg&uacute;n la 
+        pantalla en la que<br>
+        estemos (la<br>
+        //de la lista o la del formulario) actuaremos de una u otra forma<br>
+        public void commandAction(Command c, Displayable d) {<br>
+        try{<br>
+        //PANTALLA INICIAL: LISTA<br>
+        if(d == itemList) {<br>
+        //Se ha pulsado Volver<br>
+        if(c == volver) {<br>
+        // Cerramos Reproductor<br>
+        if( player != null ) { player.close(); player = null; }<br>
+        //Destruimos el MIDlet y notificamos al dispositivo su destrucci&oacute;n, 
+        para que nos<br>
+        vuelva a<br>
+        //presentar la lista con los elementos de la suite (esa pantalla inicial 
+        queda en<br>
+        manos del dispositivo)<br>
+        destroyApp( true );<br>
+        notifyDestroyed();<br>
+        }<br>
+        //Se ha pulsado Reproducir<br>
+        else if(c == reproducir) {<br>
+        //Lanzamos la reproducci&oacute;n del v&iacute;deo seleccionado<br>
+        String key = ((List)d).getString(((List)d).getSelectedIndex());<br>
+        reproducirVideo((String)items.get(key), key);<br>
+        //Cambiamos el comando de Reproducir por el de Pausar<br>
+        form.removeCommand(reproducir);<br>
+        form.addCommand(pausar);<br>
+        }<br>
+        }<br>
+        //SEGUNDA PANTALLA: REPRODUCCI&Oacute;N<br>
+        else if(d == form) {<br>
+        //Se ha pulsado Volver mientras se est&aacute; en la pantalla de Reproducci&oacute;n<br>
+        if(c == volver) {<br>
+        //Cerramos el Player y volvemos a presentar la pantalla inicial. Reponemos<br>
+        comandos<br>
+        player.close();<br>
+        display.setCurrent(itemList);<br>
+        form.removeCommand(reproducir);<br>
+        form.addCommand(pausar);</p>
+      <p>}<br>
+        //Se ha pulsado Reproducir. Vendremos de un Pause previo<br>
+        else if(c == reproducir) {<br>
+        // Volvemos a reproducir el media desde el momento en el que se qued&oacute;,<br>
+        reponemos comandos<br>
+        player.start();<br>
+        form.removeCommand(reproducir);<br>
+        form.addCommand(pausar);<br>
+        }<br>
+        //Se ha pulsado Pausar<br>
+        else if(c == pausar) {<br>
+        //Paramos el Player. Supondr&aacute; una pausa en la reproducci&oacute;n, 
+        no un cierre.<br>
+        Reponemos comandos<br>
+        player.stop();<br>
+        form.removeCommand(pausar);<br>
+        form.addCommand(reproducir);<br>
+        }<br>
+        }<br>
+        }<br>
+        catch(Exception e) {<br>
+        System.out.println(&quot;EXCEPCI&Oacute;N EN commandAction():&quot; + 
+        e);<br>
+        }<br>
+        }<br>
+        //---------------------------------------------------------------------------------------------------<br>
+        -----------------------------------------------------<br>
+        // Manejador de eventos relacionados con el reproductor<br>
+        public void playerUpdate(Player player, String event, Object eventData) 
+        {<br>
+        try {<br>
+        //S&oacute;lo si es la primera vez que llega el evento STARTED ejecutamos 
+        lo siguiente.<br>
+        Esto<br>
+        //lo tenemos gracias a eventData, el cual si el evento es STARTED nos 
+        proporciona<br>
+        //el media-time en el cual se encontraba el Player al lanzarse el evento 
+        STARTED<br>
+        Long inicioMedia = new Long(0);<br>
+        if(event.equals(PlayerListener.STARTED) &amp;&amp; inicioMedia.equals((Long)eventData))<br>
+        {<br>
+        //Vemos si nuestro Player es capaz de asociar un control de v&iacute;deo, 
+        lo cual<br>
+        ocurrir&aacute; si<br>
+        //el media a reproducir necesita este control (si es un v&iacute;deo)<br>
+        vc = (VideoControl)player.getControl(&quot;VideoControl&quot;);if(vc != 
+        null) {<br>
+        //Si entramos, instanciamos un elemento imagen para el formulario y lo<br>
+        presentamos en &eacute;l<br>
+        Item eltoVideo = (Item)vc.initDisplayMode(vc.USE_GUI_PRIMITIVE, null);<br>
+        form.append(eltoVideo);<br>
+        }<br>
+        display.setCurrent(form);<br>
+        }<br>
+        //Si se cierra el Player, cerramos su control asociado y limpiamos formulario<br>
+        else if(event.equals(PlayerListener.CLOSED)) {<br>
+        vc = null;<br>
+        form.deleteAll();<br>
+        }<br>
+        }<br>
+        catch(Exception e) {<br>
+        System.out.println(&quot;EXCEPCI&Oacute;N en playerUpdate()&quot; + e.toString());<br>
+        }<br>
+        }<br>
+        }//f&iacute;n clase MEDIAEjemploMIDlet3.java</p>
+      <p>- El API Multimedia nos permitir&aacute; introducir elementos multimedia 
+        en nuestras<br>
+        aplicaciones J2ME. En MIDP 2.0 se introducen, para ello, los elementos<br>
+        pertenecientes a los paquetes javax.microedition.media y<br>
+        javax.microedition.media.control.<br>
+        - Para apoyar el API ofrecido por MIDP 2.0 aparece un paquete opcional 
+        MMA<br>
+        especificado en la JSR 135, el cual ampliar&aacute; los dos paquetes media 
+        de MIDP<br>
+        y a&ntilde;adir&aacute; uno nuevo (javax.microedition.media.protocol), 
+        para permitir<br>
+        al programador dar cabida a tipos de formatos y protocolos no soportados.<br>
+        - El contenido multimedia a reproducir se recoger&aacute; localmente (del 
+        RMS o del<br>
+        directorio de recursos del propio JAR) o por conexi&oacute;n en red con 
+        otra<br>
+        m&aacute;quina que lo ofrezca. Con &eacute;l se dar&aacute; cuerpo a un 
+        Player, instanciado por<br>
+        medio de la clase Manager, el cual se controlar&aacute; por medio de elementos<br>
+        Control.<br>
+        - Un Player representa un reproductor con el que presentar el contenido<br>
+        multimedia al usuario. Este ente siempre se encontrar&aacute; en uno de 
+        los<br>
+        siguientes estados: UNREALIZED, REALIZED, PREFETCHED, STARTED o<br>
+        CLOSED. Estos estados marcan el ciclo de vida del reproductor.<br>
+        - La especificaci&oacute;n MMA 1.1 aporta a MIDP2.0 las principales mejoras:<br>
+        &#8226; Controles para v&iacute;deo y gr&aacute;ficos.<br>
+        &#8226; Almacenar elementos multimedia del ambiente.<br>
+        &#8226; Reproducci&oacute;n simult&aacute;nea de varios Players.<br>
+        &#8226; Definici&oacute;n &quot;a medida&quot; de protocolos y formatos<br>
+        javax.microedition.media.protocol.<br>
+        &#8226; Ampliaci&oacute;n de Manager y paquete javax.microedition.media.control.</p></td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

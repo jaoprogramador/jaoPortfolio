@@ -1,0 +1,106 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Controller</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación en Struts,Programas Struts,Aplicaciones en Struts,Ejercicios en Struts, Ejemplos de Struts,Tutoriales de Struts,Manuales Struts" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Struts, Manual Struts, tutorial Struts, Ejemplos Struts, ejercicios Struts">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2> <strong>Controller</strong></h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <h3>Introducci&oacute;n</h3>
+	<p>El Controller comprende la funcionalidad 
+        involucrada desde que un usuario genera un est&iacute;mulo (click en un 
+        link, env&iacute;o de un formulario, etc.) hasta que se genera la interfaz 
+        de respuesta. Entre medio, llamar&aacute; a los objetos de negocio del 
+        Model para que resuelvan funcionalidad propia de la l&oacute;gica de negocio 
+        y seg&uacute;n el resultado de la misma ejecutar&aacute; la JSP que deba 
+        generar la interfaz resultante.</p>
+      <p>Struts incluye un servlet que a partir de la configuraci&oacute;n de 
+        struts-config.xml recibe las solicitudes del usuario, llama al Action 
+        Bean que corresponda y, seg&uacute;n lo que &eacute;ste retorne, ejecuta 
+        una JSP. Por consiguiente, las tareas que se deben realizar son:</p>
+      <p> 1. Escribir una clase Action que extienda de org.apache.action.Action. 
+        Ver secci&oacute;n &quot;Controller Action Bean&quot;.<br>
+        2. Configurar el struts-config.xml para que incluya el nuevo action mapping 
+        y sus posibles forwards de salida. Por ejemplo:</p>
+      <p> &lt;struts-config&gt;<br>
+        ...<br>
+        &lt;action-mappings&gt;<br>
+        ...<br>
+        &lt;action path=&quot;/logoff&quot; type=&quot;com.empresa.aplicacion.LogoffAction&quot;&gt;<br>
+        &lt;forward name=&quot;success&quot; path=&quot;/index.jsp&quot;/&gt;<br>
+        &lt;/action&gt;<br>
+        ...<br>
+        &lt;/action-mappings&gt;<br>
+        ...<br>
+        &lt;/struts-config&gt;</p>
+      <p> En este caso, cuando la solicitud sea &quot;/logoff&quot; el Controller 
+        llamar&aacute; a LogoffAction y si esta retorna un ActionForward con valor 
+        success entonces ejecutar&aacute; /index.jsp. Pero... &iquest;qu&eacute; 
+        pasa si es una acci&oacute;n asociada a un formulario? La respuesta es 
+        un poco m&aacute;s compleja: se debe definir un Form Bean, un Action Mapping 
+        con el Form Bean asociado y el o los forwards necesarios. Por ejemplo:</p>
+      <p> &lt;struts-config&gt;<br>
+        ...<br>
+        &lt;form-beans&gt;<br>
+        ...<br>
+        &lt;form-bean name=&quot;logonForm&quot; type=&quot;com.empresa.aplicacion.LogonForm&quot;/&gt;<br>
+        ...<br>
+        &lt;/form-beans&gt;<br>
+        ...<br>
+        &lt;global-forwards&gt;<br>
+        ...<br>
+        &lt;forward name=&quot;success&quot; path=&quot;/mainMenu.do&quot;/&gt;<br>
+        ...<br>
+        &lt;/global-forwards&gt;<br>
+        ...<br>
+        &lt;action-mappings&gt;<br>
+        ...<br>
+        &lt;action path=&quot;/logon&quot; type=&quot;com.empresa.aplicacion.LogonAction&quot; 
+        <br>
+        name=&quot;logonForm&quot; scope=&quot;request&quot; input=&quot;/logon.jsp&quot;&gt; 
+        &lt;/action&gt;<br>
+        ...<br>
+        &lt;/action-mappings&gt;<br>
+        ...<br>
+        &lt;/struts-config&gt;</p>
+      <p> En este caso se ha definido un global-forward que, como su nombre lo 
+        indica, viene a ser un forward que se aplica a todos los action-mappings 
+        (excepto que se re-defina para alguno en particular).<br>
+        3. Incluir los links (preferentemente utilizando &lt;html:link&gt;) o 
+        forms (necesariamente utilizando &lt;html:form&gt;) necesarios en las 
+        JSPs correspondientes.</p>
+      <h3>ActionForm Beans</h3>
+
+      <p>Los ActionForm Beans son clases que extienden ActionForm y que implementan 
+        m&eacute;todos get y set para cada una de los inputs de un form de una 
+        p&aacute;gina, y los m&eacute;todos validate y reset.</p>
+      <p><br>
+      </p>
+      <p><br>
+      </p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

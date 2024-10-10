@@ -1,0 +1,294 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Separadores de bloques de texto</title>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Separadores de bloques de texto, Html, Lenguaje Html, Manual Html, Tutorial, ejercicios Html">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+ 
+  <link href="../../styles/estilos.css" rel="stylesheet" type="text/css"></head>
+  
+<body>
+<table class="tablaContenidos">  <tr> 
+    <td height="31" colspan="2"> 
+      <h2>  Separadores 
+        de bloques de texto  </h2></td>
+  </tr>
+  <tr> 
+    <td height="4000" colspan="2"> 
+      <table width="62%" border="0"  >
+        <tr> 
+          <td width="28%"  ><h3>Contenido:</h3></td>
+          <td width="72%">&nbsp;</td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="htm03.htm#intro">- Introducci&oacute;n</a></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="htm03.htm#p">- Marca &lt;P&gt;</a></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="htm03.htm#br">- Marca &lt;BR&gt;</a></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="htm03.htm#block">- Marca &lt;BLOCKQUOTE&gt;</a></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="htm03.htm#hr">- Marca &lt;HR&gt;</a></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="htm03.htm#div">- Marca &lt;DIV&gt;</a></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="htm03.htm#pre">- Marca &lt;PRE&gt;</a></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="htm03.htm#adress">- Marca &lt;ADDRESS&gt;</a></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="htm03.htm#center">- Marca &lt;CENTER&gt;</a></td>
+        </tr>
+      </table>
+       <h3>Introducci&oacute;n  <a name="intro"></a></h3>
+       <p>Para definir y separar bloques de texto se emplean 
+        una serie de marcas que definen p&aacute;rrafos, texto preformateado o 
+        bloques con significado especial como direcciones o citas.</p>
+       <p>Marcas de bloques:</p>
+      <BLOCKQUOTE> 
+         <p>- P&aacute;rrafos.&lt;P&gt;</p>
+         <p>- Saltos de l&iacute;nea. &lt;BR&gt;</p>
+         <p>- Bloques tabulados &lt;BLOCKQUOTE&gt;</p>
+         <p>- L&iacute;nea horizontal. &lt;HR&gt;</p>
+         <p>- Divisiones &lt;DIV&gt;</p>
+         <p>- Texto preformateado. &lt;PRE&gt;</p>
+         <p>- Direcciones. &lt;ADDRESS&gt;</p>
+         <p>- Centrado de bloques. &lt;CENTER&gt;</p>
+      </BLOCKQUOTE>
+       <h3>  P<a name="P"></a>  </h3>
+       <p>&lt;P&gt; se utiliza para separar p&aacute;rrafos. 
+        Dado que para el HTML todo el texto es continuo, necesitamos alg&uacute;n 
+        mecanismo para indicar el principio y el fin de un p&aacute;rrafo. Las 
+        marcas inicial y final son&lt;P&gt; y &lt;/P&gt;.</p>
+       <p>Ejemplo:</p>
+      <p>   &lt;P&gt;  </p>
+       <p>Este texto est&aacute; contenido dentro del primer 
+        p&aacute;rrafo, as&iacute; que lo denominaremos: p&aacute;rrafo 1,p&aacute;rrafo 
+        1,p&aacute;rrafo 1,p&aacute;rrafo 1,p&aacute;rrafo 1,p&aacute;rrafo 1,p&aacute;rrafo 
+        1,p&aacute;rrafo 1.&lt;/p&gt;</p>
+       <p>&lt;p&gt;</p>
+       <p>&Eacute;ste otro texto est&aacute; contenido en el 
+        p&aacute;rrafo 2, p&aacute;rrafo 2, p&aacute;rrafo 2, p&aacute;rrafo 2, 
+        p&aacute;rrafo 2, p&aacute;rrafo 2, p&aacute;rrafo 2, p&aacute;rrafo 2.</p>
+       <p>&lt;/p&gt;</p>
+       <p>Esto dar&aacute; como resultado:</p>
+       <p>Este texto est&aacute; contenido dentro del primer 
+        p&aacute;rrafo, as&iacute; que lo denominaremos: p&aacute;rrafo 1,p&aacute;rrafo 
+        1,p&aacute;rrafo 1,p&aacute;rrafo 1,p&aacute;rrafo 1,p&aacute;rrafo 1,p&aacute;rrafo 
+        1,p&aacute;rrafo </p>
+       <p>&Eacute;ste otro texto est&aacute; contenido en el 
+        p&aacute;rrafo 2, p&aacute;rrafo 2, p&aacute;rrafo 2, p&aacute;rrafo 2, 
+        p&aacute;rrafo 2, p&aacute;rrafo 2, p&aacute;rrafo 2, p&aacute;rrafo 2.</p>
+       <p>Normalmente no suele utilizarse la marca de fin de 
+        p&aacute;rrafo, &lt;/P&gt; continuar&aacute; hasta que encuentre otro 
+        comienzo de p&aacute;rrafo &lt;P&gt;.</p>
+       <p>Este elemento admite el atributo ALIGN, que puede 
+        tomar uno de los siguientes valores:</p>
+      <BLOCKQUOTE> 
+         <p>LEFT: Justifica el texto a la izquierda. (es el 
+          valor por defecto)</p>
+         <p>RIGHT: Justifica el texto a la derecha.</p>
+         <p>CENTER: El texto aparece centrado.</p>
+      </BLOCKQUOTE>
+       <p>Ejemplo: </p>
+       <p>&nbsp;&lt;P ALIGN=LEFT&gt;</p>
+       <p>Texto justificado a la izquierda, texto justificado 
+        a la izquierda,</p>
+       <p>texto justificado a la izquierda,texto justificado 
+        a la izquierda,</p>
+       <p>texto justificado a la izquierda.</p>
+       <p>&lt;/P&gt;</p>
+       <p>&lt;P ALIGN=RIGHT&gt;</p>
+       <p>Texto justificado a la derecha, texto justificado 
+        a la derecha,</p>
+       <p>texto justificado a la derecha,texto justificado 
+        a la derecha,</p>
+      <p align="right"  >texto justificado a la derecha.</p>
+       <p>&lt;/P&gt;</p>
+       <p>&lt;P ALIGN=CENTER&gt;</p>
+       <p>Texto centrado, texto centrado, texto centrado, texto 
+        centrado,</p>
+       <p> texto centrado, texto centrado.</p>
+       <p>&lt;/P&gt;</p>
+       <p>Esto dar&aacute; como resultado:</p>
+       <p>Texto justificado a la izquierda, texto justificado 
+        a la izquierda,</p>
+       <p>texto justificado a la izquierda,texto justificado 
+        a la izquierda,</p>
+       <p>texto justificado a la izquierda.</p>
+      <p align="right"  >Texto justificado a la derecha, texto 
+        justificado a la derecha,</p>
+      <p align="right"  >texto justificado a la derecha,texto 
+        justificado a la derecha,</p>
+      <p align="right">&nbsp;</p>
+       <p>Texto centrado, texto centrado, texto centrado, texto 
+        centrado,</p>
+       <p> texto centrado, texto centrado.</p>
+      <p>&nbsp;</p>
+       <h3>  BR<a name="br"></a>  </h3>
+       <p>El elemento &lt;BR&gt; es vac&iacute;o por lo que 
+        solo tiene marca inicial. Indica un salto de l&iacute;nea.</p>
+       <p>Ejemplo:</p>
+       <p>Texto1, texto1, texto1, texto1, texto1, texto1, texto1, 
+        texto1, texto1, texto1, texto1, texto1&lt;BR&gt; Texto 2, texto 2, texto 
+        2, texto 2, texto 2, texto2.</p>
+       <p>Con esto obtendremos el siguiente resultado:</p>
+       <p>Texto1, texto1, texto1, texto1, texto1, texto1, texto1, 
+        texto1, texto1, texto1, texto1, texto1
+        Texto 2, texto 2, texto 2, texto 2, texto 2, texto2. </p>
+      <p></p>
+       <h3>  BLOCKQUOTE<a name="block"></a>  </h3>
+       <p>El elemento BLOCKQUOTE sirve para representar p&aacute;rrafos 
+        tabulados, por la izquierda y la derecha.</p>
+       <p>Ejemplo:</p>
+       <p>Texto1, texto 1, texto 1, texto 1, texto 1.</p>
+       <p>&lt;/BLOCKQUOTE&gt;Texto1, texto 1, texto 1, texto 
+        1, texto 1, Texto1, texto 1, texto 1, texto 1, texto 1, Texto1, texto 
+        1, texto 1, texto 1, texto 1.&lt;BLOCKQUOTE&gt;</p>
+       <p>El resultado ser&aacute;:</p>
+      <p> 
+      <BLOCKQUOTE  >Texto1, texto 1, texto 1, texto 1, texto 
+        1, Texto1, texto 1, texto 1, texto 1, texto 1, Texto1, texto 1, texto 
+        1, texto 1, texto 1.</BLOCKQUOTE>
+      <p></p>
+      <p>&nbsp;</p>
+       <h3>  HR <a name="hr"></a>  </h3>
+       <p>&lt;HR&gt; es un elemento vac&iacute;o por lo que 
+        solo tiene marca inicial, se emplea para separar bloques de texto representando 
+        una l&iacute;nea horizontal.</p>
+       <p>Se puede cambiar la apariencia de dicha l&iacute;nea 
+        mediante los siguientes atributos:</p>
+      <p> 
+      <blockquote> 
+         <p>- NOSHADE: Elimina el efecto de sombra de la línea.</p>
+         <p>- WIDTH: Permite definir ela longitud de la línea.</p>
+         <p>- SIZE: Permite definir el grosor de la línea.</p>
+      </blockquote>
+      <p></p>
+       <p>Ejemplos:</p>
+       <p>&lt;HR NOSHADE&gt; </p>
+       <p>&lt;HR WIDTH=250 SIZE=3&gt;</p>
+       <p>&lt;HR WIDTH=250 SIZE=6&gt;</p>
+       <p>&lt;HR NOSHADE WIDTH=400 SIZE=4&gt;</p>
+       <h3>  DIV<a name="div"></a>  </h3>
+       <p>Este elemento se comporta de forma muy parecida al 
+        salto de l&iacute;nea, &lt;BR&gt;, y a sus vez admite los mismos atributos 
+        que &lt;P&gt;: ALIGN (LEFT, RIGTH, CENTER), es decir permite definir un 
+        bloque con los atributos de &lt;P&gt;, pero dejando tan solo un salto 
+        de l&iacute;nea entre un bloque y otro.</p>
+       <p>Ejemplo:</p>
+       <p>&lt;DIV ALIGN=LEFT&gt;</p>
+       <p>Texto justificado a la izquierda, texto justificado 
+        a la izquierda, texto justificado a la izquierda, texto justificado a 
+        la izquierda.&lt;/DIV&gt;</p>
+       <p>&lt;DIV ALIGN=RIGHT&gt;</p>
+       <p>Texto justificado a la derecha, texto justificado 
+        a la derecha, texto justificado a la derecha, texto justificado a la derecha.&lt;/DIV&gt;</p>
+       <p>Esto dar&aacute; como resultado:</p>
+      <DIV ALIGN=LEFT  >Texto justificado a la izquierda, texto 
+        justificado a la izquierda, texto justificado a la izquierda, texto justificado 
+        a la izquierda. </DIV>
+      <DIV ALIGN=RIGHT> 
+         <p>Texto justificado a la derecha, texto justificado 
+          a la derecha, texto justificado a la derecha, texto justificado a la 
+          derecha.</p>
+      </DIV>
+      <p>
+        <h3>  PRE<a name="pre"></a>    </h3>
+       <p>El texto insertado entre marcas &lt;PRE&gt; y &lt;/PRE&gt; 
+        ser&aacute; visualizado por el browser, respetando el formateo tal como 
+        haya sido entrado en el fichero fuente HTML, es decir, respetando los 
+        espaciosa y los saltos de carro (salto de l&iacute;nea).</p>
+       <p>Ejemplo:</p>
+      <pre  >&lt;PRE&gt; 
+Esto es un texto preformateado por lo tanto se respetan los espacios            y
+ los saltos de l&iacute;nea,
+como podr&aacute;n observar. 
+&lt;/PRE&gt;
+
+</pre>
+       <p>El resultado ser&aacute;:</p>
+      <pre  >Esto es un texto preformateado por lo tanto 
+	  se respetan los espacios            
+	  y los saltos de l&iacute;nea,
+como podr&aacute;n observar. </pre>
+       <h3>  ADDRESS<a name="adress"></a>  </h3>
+       <p>El elemento &lt;ADDRESS&gt; se emplea para indicar 
+        que un texto representa una direcci&oacute;n o una firma mostr&aacute;ndolo, 
+        generalmente, en letra cursiva. Es muy utilizado para indicar toda la 
+        informaci&oacute;n respecto al autor del documento (direcci&oacute;n, 
+        tel&eacute;fono, e-mail...). Puede insertarse en cualquier lugar del documeto; 
+        lo habitual en WWW es incluir esta zona de direcci&oacute;n al final del 
+        documento.</p>
+       <p>Ejemplo:</p>
+       <p>&lt;p&gt;&lt;ADDRESS&gt;
+        Tekin Tontu&lt;br&gt;77A Wellington Rd &lt;br&gt;Auburn 2144, NSW &lt;br&gt;Australia&lt;br&gt;e-mail 
+        tekin@cis.com&lt;br&gt;&amp;nbsp;&lt;/ADDRESS&gt;&lt;/p&gt;</p>
+       <p>Esto dar&aacute; como resultado:</p>
+      <p> 
+      <ADDRESS>
+         Tekin Tontu
+      77A Wellington Rd 
+      Auburn 2144, NSW 
+      Australia
+      e-mail tekin@cis.com    
+      </ADDRESS>
+      
+        <h3>  CENTER<a name="center" id="center"></a>    </h3>
+       <p>El elemento &lt;CENTER&gt; no es del HTML 2, sino 
+        del Netscape. Centra los elementos situados entre sus marcas de apertura 
+        y cierre. Dichos elementos podr&aacute;n ser: bloques de texto, tablas, 
+        enlaces, enlaces, im&aacute;genes, formularios,...</p>
+       <p>Ejemplos:</p>
+      <pre  >&lt;CENTER&gt;
+ &lt;TABLE BORDER&gt;
+	&lt;CAPTION ALIGN=BOTTON&gt;Tabla centrada&lt;/CAPTION&gt;
+	&lt;TR&gt;&lt;TD&gt;Celda 1&lt;TD&gt;Celda 2&lt;/TR&gt;
+	&lt;TR&gt;&lt;TD&gt;Celda 3&lt;TD&gt;Celda 4&lt;/TR&gt;
+ &lt;/TABLE&gt;
+&lt;/CENTER&gt;</pre>
+      <div align="center"> 
+        <table border>
+          <tr> 
+            <td  >Celda1</td>
+            <td  >Celda 2</td>
+          </tr>
+          <tr> 
+            <td  >Celda 3</td>
+            <td  >Celda 4</td>
+          </tr>
+        </table>
+      </div></td>
+  </tr>
+  <tr> 
+    <td width="70" height="21">&nbsp;</td>
+    <td height="21"> <div align="right">  <a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

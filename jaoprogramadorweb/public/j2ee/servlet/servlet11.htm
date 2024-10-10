@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Inicializar un Servlet</title>
+<META http-equiv=Content-Language content=es>
+<META content="Manual Servlet, ejemplos Servlet, codigos Servlet" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Manual Servlet, ejemplos Servlet, codigos Servlet">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2> Inicializar un Servlet</h2></td>
+  </tr>
+  <tr> 
+    <td colspan="3"> <p>El m&eacute;todo init proporcionado por la 
+        clase HttpServlet inicializa el servlet y graba la inicializaci&oacute;n.<br>
+        Para hacer una inicializaci&oacute;n espec&iacute;fica de nuestro servlet, 
+        debemos sobreescribir el m&eacute;todo init
+        siguiendo estas reglas.
+        Si ocurre un error que haga que el servlet no pueda manejar peticiones 
+        de cliente, lanzar una
+        UnavailableException.
+        Un jemplo de este tipo de error es la imposibilidad de establecer una 
+        conexi&oacute;n requerida.<br>
+         <br>
+        No llamar al m&eacute;todo System.exit. 
+        Guardar el par&aacute;metro ServletConfig para que el m&eacute;todo getServletConfig 
+        pueda devolver su valor.<br>
+        La forma m&aacute;s sencilla de hacer esto es hacer que el nuevo m&eacute;todo 
+        init llame a super.init. Si
+        grabamos el objeto nosotros mismos, debemos sobreescribir el m&eacute;todo 
+        getServletConfig
+        para devolver el objeto desde su nueva posici&oacute;n.<br>
+         <br>
+        Aqu&iacute; hay un ejemplo del m&eacute;todo init.<br>
+        public class BookDBServlet ... {<br>
+        private BookstoreDB books;<br>
+        public void init(ServletConfig config) throws ServletException {<br>
+        // Store the ServletConfig object and log the initialization<br>
+        super.init(config);<br>
+        // Load the database to prepare for requests<br>
+        books = new BookstoreDB();<br>
+        }<br>
+        ...<br>
+        }<br>
+        El m&eacute;todo init es bastante sencillo: llama al m&eacute;todo super.init 
+        para manejar el objeto<br>
+        ServletConfig y grabar la inicializaci&oacute;n, y seleccionar un campo 
+        privado.<br>
+        Si el BookDBServlet utilizar&aacute; una base de datos real, en vez de 
+        similarla con un objeto, el m&eacute;todo<br>
+        init ser&iacute;a m&aacute;s complejo. Aqu&iacute; puedes ver el pseudo-c&oacute;digo 
+        de como podr&iacute;a ser ese m&eacute;todo init.<br>
+        public class BookDBServlet ... {<br>
+        public void init(ServletConfig config) throws ServletException {<br>
+        // Store the ServletConfig object and log the initialization<br>
+        super.init(config);<br>
+        // Open a database connection to prepare for requests<br>
+        try {<br>
+        databaseUrl = getInitParameter(&quot;databaseUrl&quot;);<br>
+        ... // get user and password parameters the same way<br>
+        connection = DriverManager.getConnection(databaseUrl,<br>
+        user, password);<br>
+        } catch(Exception e) {<br>
+        throw new UnavailableException (this,<br>
+        &quot;Could not open a connection to the database&quot;);<br>
+        }<br>
+        }<br>
+        ...<br>
+        }<br>
+        <p>Par&aacute;metros de Inicializaci&oacute;n</p>
+        Le segunda versi&oacute;n del m&eacute;todo init llama al m&eacute;todo 
+        getInitParameter. Este m&eacute;todo toma el
+        nombre del par&aacute;metro como argumento y devuelve un String que representa 
+        su valor.
+        (La especificaci&oacute;n de par&aacute;metros de inicializaci&oacute;n 
+        es espec&iacute;fica del servidor. Por ejemplo, los
+        par&aacute;metros son espec&iacute;ficados como una propiedad cuando un 
+        servlet se ejecuta con el
+        ServletRunner. La p&aacute;gina La Utilidad servletrunner contiene una 
+        explicaci&oacute;n general de las
+        propiedades y c&oacute;mo crearlas).
+        Si por alguna raz&oacute;n, necesitamos obtener los nombres de los par&aacute;metros, 
+        podemos utilizar el
+        m&eacute;todo getParameterNames. </p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

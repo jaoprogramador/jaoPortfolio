@@ -1,0 +1,247 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>C&oacute;mo hacer una p&aacute;gina AJAX</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta name="keywords" content="Primera página AJAX, Como hacer una pagina AJAX, Manual AJAX, tutorial AJAX, Ejemplos AJAX, ejercicios AJAX">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<table width="555" height="2741" align="left" background="../../imagenes/fondologo.jpg">
+  <tr> 
+    <td height="39" colspan="3"> <h2>Detener las peticiones HTTP erróneas</h2></td>
+  </tr>
+  <tr> 
+    <td height="2671" colspan="3"> 
+      <p>La creaci&oacute;n de aplicaciones AJAX implica 
+        la aparici&oacute;n de nuevos tipos de errores y excepciones.<br>
+        Probablemente, el problema m&aacute;s importante sea el de realizar una 
+        petici&oacute;n al servidor y que este no responda en un periodo de tiempo 
+        razonable.<br>
+        Aunque las peticiones se realizan de forma as&iacute;ncrona y el usuario 
+        puede continuar utilizando la aplicaci&oacute;n mientras se realiza la 
+        petici&oacute;n al servidor en un segundo plano, normalmente es necesario 
+        disponer de una respuesta r&aacute;pida del servidor.<br>
+        La funci&oacute;n setTimeout() se puede emplear para establecer una cuenta 
+        atr&aacute;s al iniciar una nueva petici&oacute;n. Si el servidor responde 
+        antes de que expire la cuenta atr&aacute;s, se elimina esa cuenta atr&aacute;s 
+        y se contin&uacute;a con la ejecuci&oacute;n normal de la aplicaci&oacute;n. 
+        Si el servidor no responde y la cuenta atr&aacute;s finaliza, se ejecuta 
+        una funci&oacute;n encargada de detener la petici&oacute;n, reintentarla, 
+        mostrar un<br>
+        mensaje al usuario, etc.<br>
+        // Variable global que almacena el identificador de la cuenta atr&aacute;s<br>
+        var cuentaAtras = null;<br>
+        var tiempoMaximo = 5000; // 5000 = 5 segundos<br>
+        function cargaContenido(url, metodo, funcion) {<br>
+        peticion_http = inicializa_xhr();<br>
+        if(peticion_http) {<br>
+        // Establecer la cuenta atr&aacute;s al realizar la petici&oacute;n HTTP<br>
+        cuentraAtras = setTimeout(expirada, tiempoMaximo);<br>
+        peticion_http.onreadystatechange = funcion;<br>
+        peticion_http.open(metodo, url, true);<br>
+        peticion_http.send(null);<br>
+        }<br>
+        }<br>
+        function muestraMensaje() {<br>
+        ...<br>
+        if(peticion_http.readyState == READY_STATE_COMPLETE) {<br>
+        if(peticion_http.status == 200) {<br>
+        // Si se ha recibido la respuesta del servidor, eliminar la cuenta atr&aacute;s<br>
+        clearTimeout(cuentaAtras);<br>
+        ...<br>
+        }<br>
+        }<br>
+        }<br>
+        function expirada() {<br>
+        // La cuentra atr&aacute;s se ha cumplido, detener la petici&oacute;n 
+        HTTP pendiente<br>
+        peticion_http.abort();<br>
+        alert(&quot;Se ha producido un error en la comunicaci&oacute;n con el 
+        servidor. Int&eacute;ntalo un poco<br>
+        m&aacute;s adelante.&quot;);<br>
+        }Adem&aacute;s de la falta de respuesta del servidor, las aplicaciones 
+        AJAX deben estar preparadas para otros tipos de respuestas que pueden 
+        generar los servidores. El tipo de respuesta se comprueba mediante el 
+        valor del atributo status del objeto XMLHTTPRequest.<br>
+        A continuaci&oacute;n se muestran las tablas de los c&oacute;digos de 
+        estado m&aacute;s comunes que pueden devolver los servidores:<br>
+        C&oacute;digos de informaci&oacute;n status statusText Explicaci&oacute;n 
+        100 Continue<br>
+        Una parte de la petici&oacute;n (normalmente la primera) se ha recibido 
+        sin problemas y se puede enviar el resto de la petici&oacute;n<br>
+        101<br>
+        Switching<br>
+        protocols<br>
+        El servidor va a cambiar el protocolo con el que se env&iacute;a la informaci&oacute;n 
+        de la respuesta.<br>
+        En la cabecera Upgrade indica el nuevo protocolo C&oacute;digos de petici&oacute;n 
+        y respuesta correctas status statusText Explicaci&oacute;n<br>
+        200 OK<br>
+        La petici&oacute;n se ha recibido correctamente y se est&aacute; enviando 
+        la respuesta. Este<br>
+        c&oacute;digo es con mucha diferencia el que mas devuelven los servidores<br>
+        201 Created Se ha creado un nuevo recurso (por ejemplo una p&aacute;gina 
+        web o un archivo) como parte de la respuesta 202 Accepted<br>
+        La petici&oacute;n se ha recibido correctamente y se va a responder, pero 
+        no de forma<br>
+        inmediata 203<br>
+        Non-Authoritative Information La respuesta que se env&iacute;a la ha generado 
+        un servidor externo. A efectos pr&aacute;cticos, es muy parecido al c&oacute;digo 
+        200<br>
+        204 No Content La petici&oacute;n se ha recibido de forma correcta pero 
+        no es necesaria una respuesta 205 Reset Content<br>
+        El servidor solicita al navegador que inicialice el documento desde el 
+        que se<br>
+        realiz&oacute; la petici&oacute;n, como por ejemplo un formulario 206 
+        Partial Content<br>
+        La respuesta contiene s&oacute;lo la parte concreta del documento que 
+        se ha solicitado<br>
+        en la petici&oacute;n C&oacute;digos de redirecci&oacute;n status statusText 
+        Explicaci&oacute;n<br>
+        300 Multiple Choices<br>
+        El contenido original ha cambiado de sitio y se devuelve una lista con 
+        varias direcciones alternativas en las que se puede encontrar el contenido 
+        301<br>
+        Moved Permanently El contenido original ha cambiado de sitio y el servidor 
+        devuelve la nueva URL del contenido. La pr&oacute;xima vez que solicite 
+        el contenido, el navegador utiliza la nueva URL 302 Found<br>
+        El contenido original ha cambiado de sitio de forma temporal. El servidor 
+        devuelve la nueva URL, pero el navegador debe seguir utilizando la URL 
+        original en las pr&oacute;ximas peticiones 303 See Other El contenido 
+        solicitado se puede obtener en la URL alternativa devuelta por el servidor.<br>
+        Este c&oacute;digo no implica que el contenido original ha cambiado de 
+        sitio304 Not Modified<br>
+        Normalmente, el navegador guarda en su cach&eacute; los contenidos accedidos<br>
+        frecuentemente. Cuando el navegador solicita esos contenidos, incluye 
+        la condici&oacute;n de que no hayan cambiado desde la &uacute;ltima vez 
+        que los recibi&oacute;. Si el contenido no ha cambiado, el servidor devuelve 
+        este c&oacute;digo para indicar que la respuesta ser&iacute;a la misma 
+        que la &uacute;ltima vez 305 Use Proxy<br>
+        El recurso solicitado s&oacute;lo se puede obtener a trav&eacute;s de 
+        un proxy, cuyos datos se<br>
+        incluyen en la respuesta 307 Temporary Redirect<br>
+        Se trata de un c&oacute;digo muy similar al 302, ya que indica que el 
+        recurso solicitado se<br>
+        encuentra de forma temporal en otra URL C&oacute;digos de error del navegador 
+        status statusText Explicaci&oacute;n 400 Bad Request El servidor no entiende 
+        la petici&oacute;n porque no ha sido creada de forma correcta 401 Unauthorized 
+        El recurso solicitado requiere autorizaci&oacute;n previa 402 Payment 
+        Required C&oacute;digo reservado para su uso futuro 403 Forbidden</p>
+      <p> No se puede acceder al recurso solicitado por falta de permisos o porque 
+        el usuario y contrase&ntilde;a indicados no son correctos 404 Not Found 
+        El recurso solicitado no se encuentra en la URL indicada. Se trata de 
+        uno de los<br>
+        c&oacute;digos m&aacute;s utilizados y responsable de los t&iacute;picos 
+        errores de P&aacute;gina no encontrada 405 Method Not Allowed</p>
+      <p><br>
+        El servidor no permite el uso del m&eacute;todo utilizado por la petici&oacute;n, 
+        por ejemplo por<br>
+        utilizar el m&eacute;todo GET cuando el servidor s&oacute;lo permite el 
+        m&eacute;todo POST 406 Not Acceptable El tipo de contenido solicitado 
+        por el navegador no se encuentra entre la lista de tipos de contenidos 
+        que admite, por lo que no se env&iacute;a en la respuesta<br>
+        407 Proxy Authentication Required<br>
+        Similar al c&oacute;digo 401, indica que el navegador debe obtener autorizaci&oacute;n 
+        del proxy antes de que se le pueda enviar el contenido solicitado 408 
+        Request<br>
+        Timeout<br>
+        El navegador ha tardado demasiado tiempo en realizar la petici&oacute;n, 
+        por lo que el<br>
+        servidor la descarta 409 Conflict<br>
+        El navegador no puede procesar la petici&oacute;n, ya que implica realizar 
+        una operaci&oacute;n no permitida (como por ejemplo crear, modificar o 
+        borrar un archivo)<br>
+        410 Gone Similar al c&oacute;digo 404. Indica que el recurso solicitado 
+        ha cambiado para siempre su localizaci&oacute;n, pero no se proporciona 
+        su nueva URL<br>
+        411 Length Required<br>
+        El servidor no procesa la petici&oacute;n porque no se ha indicado de 
+        forma expl&iacute;cita el<br>
+        tama&ntilde;o del contenido de la petici&oacute;n 412 Precondition Failed 
+        No se cumple una de las condiciones bajo las que se realiz&oacute; la 
+        petici&oacute;n<br>
+        413<br>
+        Request Entity<br>
+        Too Large<br>
+        La petici&oacute;n incluye m&aacute;s datos de los que el servidor es 
+        capaz de procesar.<br>
+        Normalmente este error se produce cuando se adjunta en la petici&oacute;n 
+        un archivo con<br>
+        un tama&ntilde;o demasiado grande<br>
+        414<br>
+        Request-URI<br>
+        Too Long<br>
+        La URL de la petici&oacute;n es demasiado grande, como cuando se incluyen 
+        m&aacute;s de 512<br>
+        bytes en una petici&oacute;n realizada con el m&eacute;todo GET415<br>
+        Unsupported<br>
+        Media Type<br>
+        Al menos una parte de la petici&oacute;n incluye un formato que el servidor 
+        no es capaz<br>
+        procesar<br>
+        416<br>
+        Requested<br>
+        Range Not<br>
+        Suitable<br>
+        El trozo de documento solicitado no est&aacute; disponible, como por ejemplo 
+        cuando se<br>
+        solicitan bytes que est&aacute;n por encima del tama&ntilde;o total del 
+        contenido<br>
+        417<br>
+        Expectation<br>
+        Failed<br>
+        El servidor no puede procesar la petici&oacute;n porque al menos uno de 
+        los valores<br>
+        incluidos en la cabecera Expect no se pueden cumplir<br>
+        C&oacute;digos de error del servidor<br>
+        status statusText Explicaci&oacute;n<br>
+        500<br>
+        Internal Server<br>
+        Error<br>
+        Se ha producido alg&uacute;n error en el servidor que impide procesar 
+        la petici&oacute;n<br>
+        501<br>
+        Not<br>
+        Implemented<br>
+        Procesar la respuesta requiere ciertas caracter&iacute;sticas no soportadas 
+        por el servidor<br>
+        502 Bad Gateway<br>
+        El servidor est&aacute; actuando de proxy entre el navegador y un servidor 
+        externo del<br>
+        que ha obtenido una respuesta no v&aacute;lida<br>
+        503<br>
+        Service<br>
+        Unavailable<br>
+        El servidor est&aacute; sobrecargado de peticiones y no puede procesar 
+        la petici&oacute;n<br>
+        realizada<br>
+        504<br>
+        Gateway<br>
+        Timeout<br>
+        El servidor est&aacute; actuando de proxy entre el navegador y un servidor 
+        externo que ha tardado demasiado tiempo en responder<br>
+        505<br>
+        HTTP Version<br>
+        Not Supported<br>
+        El servidor no es capaz de procesar la versi&oacute;n HTTP utilizada en 
+        la petici&oacute;n. La<br>
+        respuesta indica las versiones de HTTP que soporta el servidor</p></td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

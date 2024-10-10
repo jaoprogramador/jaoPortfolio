@@ -1,0 +1,162 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="Mayores.xsl"?>
+<personal>
+	<enlaces>
+		<descripcion enlace="todos.xml">Todos</descripcion>
+		<descripcion enlace="Mayores.xml">Mayores de 30</descripcion>
+		<descripcion enlace="Alta.xml">Alta</descripcion>
+		<descripcion enlace="Baja.xml">Baja</descripcion>
+	</enlaces>
+	<trabajadores>
+		<trabajador estado="Trabajando" sexo="Hombre">
+			<nombre>Enrique Garcia Rodriguez</nombre>
+			<direccion>Novia Salcedo N1</direccion>
+			<poblacion>Bilbao</poblacion>
+			<edad>25</edad>
+			<trabajo cualificacion="Alta">
+				<descripcion>Programador</descripcion>
+				<especialidad>Visual Basic.Net</especialidad>
+			 </trabajo>
+		</trabajador>
+		<trabajador estado="Trabajando" sexo="Hombre">
+			<nombre>Marcos Arana Ayestaran</nombre>
+			<direccion>Autonomia N3</direccion>
+			<poblacion>Bilbao</poblacion>
+			<edad>21</edad>
+			<trabajo cualificacion="Media">
+				<descripcion>Programador</descripcion>
+				<especialidad>Visual Basic.Net</especialidad>
+			</trabajo>
+		</trabajador>
+		<trabajador estado="Baja" sexo="Mujer">
+			<nombre>Elena Martin Gonzalez</nombre>
+			<direccion>Estafina de Arbolada N4</direccion>
+			<poblacion>Barakaldo</poblacion>
+			<edad>23</edad>
+			<trabajo cualificacion="Alta">
+				<descripcion>Programador</descripcion>
+				<especialidad>C++</especialidad>
+			</trabajo>
+		</trabajador>
+			<trabajador estado="Trabajando" sexo="Mujer">
+			<nombre>Marta Alvarez Mediavilla</nombre>					
+			<direccion>Somera N21</direccion>
+			<poblacion>Bilbao</poblacion>
+			<edad>33</edad>
+			<trabajo cualificacion="Media">
+				<descripcion>Secretaria</descripcion>
+				<especialidad></especialidad>
+			</trabajo>
+		</trabajador>
+			<trabajador estado="Trabajando" sexo="Hombre">
+			<nombre>Aitor Garmendia Sainz</nombre>
+			<direccion>Iturribide N3</direccion>
+			<poblacion>Bilbao</poblacion>
+			<edad>39</edad>
+			<trabajo cualificacion="Alta">
+				<descripcion>Analista</descripcion>
+				<especialidad>Java</especialidad>
+			</trabajo>
+		</trabajador>
+			<trabajador estado="Trabajando" sexo="Hombre">
+			<nombre>Antonio Grasas Morelle</nombre>
+			<direccion>El Jardin N23</direccion>
+			<poblacion>Barakaldo</poblacion>
+			<edad>19</edad>
+			<trabajo cualificacion="Baja">
+				<descripcion>Administrador Sistemas</descripcion>
+				<especialidad>Sistemas Operativos</especialidad>
+			</trabajo>
+		</trabajador>
+		<trabajador estado="Trabajando" sexo="Hombre">
+			<nombre>Marcos Lopez Lopez</nombre>
+			<direccion>Echandia N3</direccion>
+			<poblacion>Barakaldo</poblacion>
+			<edad>22</edad>
+			<trabajo cualificacion="Media">
+				<descripcion>Programador</descripcion>
+				<especialidad>Java</especialidad>
+			</trabajo>
+		</trabajador>
+		<trabajador estado="Baja" sexo="Hombre">
+			<nombre>Alvaro Rodriguez Campo</nombre>
+			<direccion>Masustegui N5</direccion>
+			<poblacion>Bilbao</poblacion>
+			<edad>32</edad>
+			<trabajo cualificacion="Media">
+				<descripcion>Programador</descripcion>
+				<especialidad>Java</especialidad>
+			</trabajo>
+		</trabajador>
+		<trabajador estado="Trabajando" sexo="Hombre">
+			<nombre>Ibon Gutierrez Sanchez</nombre>
+			<direccion>Tellagorri N1</direccion>
+			<poblacion>Bilbao</poblacion>
+			<edad>34</edad>
+			<trabajo cualificacion="Media">
+				<descripcion>Programador</descripcion>
+				<especialidad>C/C++</especialidad>
+			</trabajo>
+		</trabajador>
+		<trabajador estado="Trabajando" sexo="Mujer">
+			<nombre>Marina Herrero Benito</nombre>
+			<direccion>Licenciado Pozas N3</direccion>
+			<poblacion>Bilbao</poblacion>
+			<edad>22</edad>
+			<trabajo cualificacion="Media">
+				<descripcion>Programador</descripcion>
+				<especialidad>Java</especialidad>
+			</trabajo>
+		</trabajador>
+		<trabajador estado="Baja" sexo="Hombre">
+			<nombre>Asier Fernandez Garcia</nombre>
+			<direccion>Camino de la Estacion N25</direccion>
+			<poblacion>Bilbao</poblacion>
+			<edad>21</edad>
+			<trabajo cualificacion="Baja">
+				<descripcion>Programador</descripcion>
+				<especialidad>Visual Basic .Net</especialidad>
+			</trabajo>
+		</trabajador>
+		<trabajador estado="Trabajando" sexo="Mujer">
+			<nombre>Beatriz Roca Solana</nombre>
+			<direccion>Perez Galdos N11</direccion>
+			<poblacion>Bilbao</poblacion>
+			<edad>45</edad>
+			<trabajo cualificacion="Alta">
+				<descripcion>Consultora</descripcion>
+				<especialidad></especialidad>
+			</trabajo>
+		</trabajador>
+		<trabajador estado="Trabajando" sexo="Hombre">
+			<nombre>Francisco Torren Lopez</nombre>
+			<direccion>Markina 4</direccion>
+			<poblacion>Leioa</poblacion>
+			<edad>45</edad>
+			<trabajo cualificacion="alta">
+				<descripcion>Analista Programador</descripcion>
+				<especialidad>C/C++</especialidad>
+			</trabajo>
+		</trabajador>
+		<trabajador estado="Trabajando" sexo="Mujer">
+			<nombre>Lorena Sainz Cazador</nombre>
+			<direccion>El Jardin N23</direccion>
+			<poblacion>Barakaldo</poblacion>
+			<edad>19</edad>
+			<trabajo cualificacion="alta">
+				<descripcion>Programador</descripcion>
+				<especialidad>Visual Basic 6</especialidad>
+			</trabajo>
+		</trabajador>
+		<trabajador estado="Trabajando" sexo="Hombre">
+			<nombre>Juan Gutierrez Lasa</nombre>
+			<direccion>Eliodoro de la Trorre N3</direccion>
+			<poblacion>Mundaka</poblacion>
+			<edad>23</edad>
+			<trabajo cualificacion="Media">
+				<descripcion>Administrador Sistemas</descripcion>
+				<especialidad>Redes</especialidad>
+			</trabajo>
+		</trabajador>
+	</trabajadores>		
+</personal>

@@ -1,0 +1,170 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Cajas de di&aacute;logo</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Cajas de dialogo, Manual Visual Basic,Tutorial Visual Basic, Ejemplos Visual Basic">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="2"> <h2>Cajas 
+        de Di&aacute;logo</h2></td>
+  </tr>
+  <tr> 
+    <td height="144" colspan="2">
+<table width="75%" >
+        <tr> 
+          <td><h3>Contenido</h3></td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="vb13.htm#intro">- Introducci&oacute;n</a></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="vb13.htm#cajas">- Cajas de di&aacute;logo predefinidas</a></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="vb13.htm#visualizar">- Visualizar datos</a></td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td><a href="vb13.htm#comunes">- Cajas de di&aacute;logo comunes</a></td>
+        </tr>
+      </table>
+
+      <h3>Introducci&oacute;n<a name="intro"></a></h3>
+      
+      <p>
+      Cuando una aplicaci&oacute;n Windows en un instante determinado de su ejecuci&oacute;n 
+      necesita aceptar nuevos datos o bien visualizarlos para poder continuar 
+      lo que podemos hacer es utilizar un nuevo formulario con los controles que 
+      permitan esas operaciones. En estos casos, los formularios reciben el nombre 
+      de cajas de dialogo . Hay tres formas de a&ntilde;adir cajas de di&aacute;logo 
+      a una aplicaci&oacute;n:</p>
+      <p>
+      - Cajas de di&aacute;logo personalizadas. Son cajas de di&aacute;logo hechas 
+      a medida , bien a&ntilde;adiendo controles a un formulario o bien modificando 
+      cajas de di&aacute;logo existentes.</p>
+      <p>
+      - Cajas de di&aacute;logo predefinidas. Son cajas de di&aacute;logo creadas 
+      por medio de las funciones InputBox y MsgBox. Las primeras ya las hemos 
+      visto; las segundas las veremos ahora.</p>
+      <p>
+      - Cajas de di&aacute;logo comunes. Son cajas de di&aacute;logo muy comunes 
+      en Windows; por ejemplo, la caja de di&aacute;logo Abrir o Imprimir.</p>
+      <p>
+      Visual Basic tiene una serie de controles para ser utilizados en las cajas 
+      de di&aacute;logo como mecanismos de de entrada/salida (E/S). Algunos, como 
+      las cajas de texto o los botones de pulsaci&oacute;n, ya los hemos venido 
+      utilizando. Otros, como las casillas de verificaci&oacute;n, botones de 
+      opciones, listas desplegables...</p>
+      
+      
+      <h3>Cajas de di&aacute;logo predefinidas<a name="cajas"></a></h3>
+      
+      <p>
+      La formas m&aacute;s f&aacute;cil de solicitar un dato del usuario o de 
+      visualizar un resultado o un mensaje, es utilizando las cajas de di&aacute;logo 
+      que Visual Basic provee para estos prop&oacute;sitos y que se visualizan 
+      utilizando InputBox y MsgBox, respectivamente. Por ejemplo, si desea que 
+      un usuario introduzca una palabra de paso (una clave) cuando intente ejecutarla 
+      una determinada aplicaci&oacute;n, utilice una caja de di&aacute;logo que 
+      solicite del usuario esta informaci&oacute;n. En el supuesto que el usuario 
+      introduzca una palabra de paso incorrecta, utilice una caja de di&aacute;logo 
+      para notificarle con un mensaje que la palabra de paso no es correcta.</p>
+      
+      
+      <h3>Visualizar datos<a name="visualizar"></a></h3>
+      <p>
+      La sentencia o la funci&oacute;n MsgBox visualizan un mensaje en una caja 
+      de di&aacute;logo semejante a la de la figura siguiente. Su sintaxis es:
+      </p><p>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MsgBox mensaje[,Botones][titulo]<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ValorRetornado = MsgBox(mensaje[,botones][,titulo])<br>
+      
+      Por ejemplo la sentencia:<br>
+      <br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MsgBox &quot;La palabra de paso no es la correcta&quot;, 
+      vbCritical, &quot;Palabra de paso&quot;</p>
+      
+	  <p>
+      El valor retornado por la funci&oacute;n MsgBox indica que bot&oacute;n 
+      se ha pulsado (1 = Aceptar, 2 = Cancelar, 3 = Anular, 4 = Reintentar, 5 
+      = Ignorar, 6 = S&iacute; y 7 = No).</p>
+      
+      <h3>Cajas de di&aacute;logo Comunes<a name="comunes"></a></h3>
+      <p>
+      El control Microsoft Common Dialog (di&aacute;logo com&uacute;n) permite 
+      visualizar las cajas de di&aacute;logo m&aacute;s com&uacute;nmente empleadas 
+      en el dise&ntilde;o de aplicaciones, tales como Abrir, Guardar como, Imprimir, 
+      Fuente y Color.</p>
+      <p>
+      Para utilizar estas cajas de di&aacute;logo:</p>
+      <p>
+      1.- Selecciona el control di&aacute;logo com&uacute;n (Commond Dialog)de 
+      la caja de herramientas y dib&uacute;jelo sobre el formulario. Si este control 
+      no se encuentra en la caja de herramientas, entoces hay que a&ntilde;adirlo: 
+      Menu--&gt; Proyecto --&gt; Componentes --&gt; Microsoft Commond Dialog Control 
+      6.0
+      <br>
+      2.- Para visualizar algunas de las de las cajas de di&aacute;logo mencionadas, 
+      invoque durante la ejecuci&oacute;n de la aplicaci&oacute;n a alguno de 
+      los m&eacute;todos siguientes :</p>
+      
+      <table width="60%" border="0" align="center" >
+        <tr> 
+          <td>M&eacute;todo</td>
+          <td>Caja de di&aacute;logo</td>
+        </tr>
+        <tr>
+          <td>ShowOpen</td>
+          <td>Abrir</td>
+        </tr>
+        <tr>
+          <td>ShowSave</td>
+          <td>Guardar como</td>
+        </tr>
+        <tr>
+          <td>ShowColor</td>
+          <td>Color</td>
+        </tr>
+        <tr>
+          <td>ShowFont</td>
+          <td>Fuente</td>
+        </tr>
+        <tr>
+          <td>ShowPrinter</td>
+          <td>Imprimir</td>
+        </tr>
+        <tr>
+          <td>ShowHelp</td>
+          <td>Invoca al motor de ayuda de Windows</td>
+        </tr>
+      </table> 
+      <br>
+      <br>
+    </td>
+  </tr>
+  <tr> 
+    <td></td>
+    <td> <div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

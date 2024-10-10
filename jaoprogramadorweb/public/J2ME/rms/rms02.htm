@@ -1,0 +1,123 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Indice J2ME</title>
+<META http-equiv=Content-Language content=es>
+<META content="Manual J2ME, ejemplos J2ME, codigos J2ME" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Manual J2ME, ejemplos J2ME, codigos J2ME">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> Aplicaciones J2ME. </h2></td>
+  </tr>
+  <tr> 
+    <td colspan="3"><h3>MIDlets</h3>
+      <p>Una aplicaci&oacute;n JAVA que cumpla las especificaciones CLDC y MIDP 
+        ser&aacute; denominada MIDlet,<br>
+        y a varias de ellas empaquetadas en un mismo elemento (JAR) se le denominar&aacute; 
+        SUITE. El<br>
+        dispositivo nos permitir&aacute; seleccionar una u otra aplicaci&oacute;n 
+        de la suite como &eacute;l considere<br>
+        apropiado (tel&eacute;fonos m&oacute;viles por medio de una lista, usualmente 
+        PDAs por medio de iconos).<br>
+        Los MIDlets siempre tendr&aacute;n tres m&eacute;todos b&aacute;sicos 
+        que marcan los estados de su ciclo de<br>
+        vida:<br>
+        - Pausado. Estado &quot;en espera&quot; en el que el MIDlet mantiene los 
+        m&iacute;nimos recursos<br>
+        posibles, entrando en &eacute;l al crearse, antes de ejecutarse su m&eacute;todo 
+        startApp() o tras<br>
+        llamarse a su m&eacute;todo pauseApp(). La plataforma puede pasar el MIDlet 
+        a este estado<br>
+        si as&iacute; lo estima oportuno (por ejemplo, ante una llamada telef&oacute;nica).<br>
+        - Activado. Estado de ejecuci&oacute;n del MIDlet al que pasa tras ejecutar 
+        su m&eacute;todo<br>
+        startApp(), tanto inicialmente, como ante la recuperaci&oacute;n de una 
+        pausa o ante casos<br>
+        especiales que ya estudiaremos en el siguiente cap&iacute;tulo. Desde 
+        este &uacute;ltimo podr&aacute;<br>
+        pasarse al anterior y viceversa.<br>
+        - Destruido. Los dos estados anteriores pueden pasar a &eacute;ste y de 
+        &eacute;l ya no se podr&aacute;<br>
+        salir. Es el estado donde el MIDlet concluye su actividad, pasando a &eacute;l 
+        por medio de la<br>
+        invocaci&oacute;n de su m&eacute;todo destroyApp() o, por ejemplo, ante 
+        excepci&oacute;n en el<br>
+        constructor del MIDlet.<br>
+        Por otra parte, para producir un MIDlet pasaremos por las siguientes fases:<br>
+        - Desarrollo. Crear el c&oacute;digo fuente, para lo cual tendremos la 
+        parte de J2SE disponible<br>
+        en J2ME (parte de los paquetes java.util, java.lang y java.io) la cual 
+        se hereda en las<br>
+        especificaciones CLDC y MIDP. Por otro lado, estas dos ofrecer&aacute;n 
+        sus propios paquetes<br>
+        (java.microedition.io, java.microedition.lcdui, java.microedition.midlet,<br>
+        java.microedition.rms, etc.).<br>
+        - Compilaci&oacute;n. En esta fase pasamos nuestro c&oacute;digo fuente 
+        a bytecode interpretable<br>
+        por la m&aacute;quina virtual. Para esta fase y las siguientes usaremos 
+        en este curso la<br>
+        herramienta de SUN J2ME Wireless Toolkit (no ofrece editor), aunque existir&aacute;n<br>
+        m&uacute;ltiples opciones con editores propios (NetBeans Mobility Pack, 
+        EclipseME, etc.) m&aacute;s<br>
+        c&oacute;modas.<br>
+        - Preverificaci&oacute;n. De ella se encargan las m&aacute;quinas virtuales 
+        preparadas para J2SE, no<br>
+        obstante, dada la escasa capacidad de la KVM, ser&aacute; necesario realizarla 
+        antes de que<br>
+        nuestros bytecodes pasen a ser interpretados por esta reducida m&aacute;quina 
+        virtual. En<br>
+        esta fase se realizan comprobaciones sobre los bytecode en tiempo de compilaci&oacute;n,<br>
+        verificando que son correctos a este tiempo (sobrecarga de la pila, uso 
+        de variables sin<br>
+        inicializar, etc.).<br>
+        - Empaquetado. Con &eacute;l se genera el JAR que acoge a la suite que 
+        creemos (tenga uno<br>
+        o m&aacute;s de un MIDlet) y el JAD descriptor de la suite. En el JAR 
+        se aglutinan las clases<br>
+        de los MIDlets, clases auxiliares que hayamos necesitado, recursos a utilizar 
+        por ellas<br>
+        (im&aacute;genes, sonidos, etc.) y el fichero de manifiesto. De esta forma, 
+        se hace muy<br>
+        sencilla la distribuci&oacute;n y descarga de la suite.<br>
+        - Ejecuci&oacute;n y pruebas: Las pruebas de ejecuci&oacute;n de nuestras 
+        aplicaciones las<br>
+        realizaremos inicialmente sobre un simulador, ya sea gen&eacute;rico (J2ME 
+        Wireless Toolkit)<br>
+        o espec&iacute;fico de alg&uacute;n fabricante (Motorola, Nokia, etc.).<br>
+        Una vez probado en el emulador, si deseamos llevarlo a un dispositivo 
+        real, seguiremos<br>
+        varios pasos: la localizaci&oacute;n del MIDlet, su descarga y almacenamiento 
+        en el<br>
+        dispositivo y, una vez all&iacute;, gestionarlo hasta permitirnos interactuar 
+        con &eacute;l. Para llevar<br>
+        a cabo esto, todo dispositivo debe contar con un gestor de aplicaciones 
+        (Application<br>
+        Management Software o AMS) residente en memoria, el cual controlar&aacute; 
+        este proceso,<br>
+        la actualizaci&oacute;n de MIDlets ya existentes, su eliminaci&oacute;n 
+        definitiva del dispositivo y, en<br>
+        general, toda la funcionalidad relacionada con la gesti&oacute;n de las 
+        aplicaciones a ofrecer.</p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

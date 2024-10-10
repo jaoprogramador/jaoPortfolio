@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>M&eacute;todos que controlan la ejecuci&oacute;n de un applet</title>
+<META http-equiv=Content-Language content=es>
+<META content="Manual Applets, ejemplos Applets, codigos Applets" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Manual Applets, ejemplos Applets, codigos Applets">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> M&eacute;todos que controlan la ejecuci&oacute;n 
+        de un applet</h2></td>
+  </tr>
+  <tr> 
+    <td colspan="3"> <p>Los m&eacute;todos que se estudian en este 
+        Apartado controlan la ejecuci&oacute;n de las applets. De ordinario el 
+        programador tiene que redefinir uno o m&aacute;s de estos m&eacute;todos, 
+        pero no tiene que preocuparse de llamarlos: el browser se encarga de hacerlo. 
+      </p>
+      <p>&#8226; M&eacute;todo init() Se llama autom&aacute;ticamente al m&eacute;todo 
+        init() en cuanto el browser o visualizador carga el applet. Este m&eacute;todo 
+        se ocupa de todas las tareas de inicializaci&oacute;n, realizando las 
+        funciones del constructor (al que el browser no llama). En Netscape Navigator 
+        se puede reinicializar un applet con Shift+Reload. &#8226; M&eacute;todo 
+        start() El m&eacute;todo start() se llama autom&aacute;ticamente en cuanto 
+        el applet se hace visible, despu&eacute;s de haber sido inicializada. 
+        Se llama tambi&eacute;n cada vez que el applet se hace de nuevo visible 
+        despu&eacute;s de haber estado oculta (por dejar de estar activa esa p&aacute;gina 
+        del browser, al cambiar el tama&ntilde;o de la ventana del browser, al 
+        hacer reload, etc.). Es habitual crear threads en este m&eacute;todo para 
+        aquellas tareas que, por el tiempo que requieren, dejar&iacute;an sin 
+        recursos al applet o incluso al browser. Las animaciones y ciertas tareas 
+        a trav&eacute;s de Internet son ejemplos de este tipo de tareas. </p>
+      <p>&#8226; M&eacute;todo stop() El m&eacute;todo stop() se llama de forma 
+        autom&aacute;tica al ocultar el applet (por haber haber dejado de estar 
+        activa la p&aacute;gina del browser, por hacer reload o resize, etc.). 
+        Con objeto de no consumir recursos in&uacute;tilmente, en este m&eacute;todo 
+        se suelen parar las threads que est&eacute;n corriendo en el applet, por 
+        ejemplo para mostrar animaciones. </p>
+      <p>&#8226; M&eacute;todo destroy() Se llama a este m&eacute;todo cuando 
+        el applet va a ser descargada para liberar los recursos que tenga reservados 
+        (excepto la memoria). De ordinario no es necesario redefinir este m&eacute;todo, 
+        pues el que se hereda cumple bien con esta misi&oacute;n.</p>
+      <p>&nbsp; </p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

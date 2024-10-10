@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Entitys</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación en Entitys,Programas Entitys,Aplicaciones en Entitys,Ejercicios en Entitys, Ejemplos de Entitys,Tutorial de Entitys,Manual Entitys" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="EJB 3.0 Entitys, Manual EJB 3.0 Entitys, tutorial EJB 3.0 Entitys, Ejemplos EJB 3.0 Entitys, ejercicios EJB 3.0 Entitys">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> Entitys</h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <p>Son objetos Java usados por el JPA que se 
+        almacenan en la base de datos. El JPA (Java Persistance API) es una especificaci&oacute;n 
+        para un ORM en Java que incluye una API est&aacute;ndar y un lenguaje 
+        (JSQL) propio para definir las relaciones. </p>
+      <p>Al ser una especificaci&oacute;n ORM existentes como Hibernate pueden 
+        usarse como contenedores JPA (siempre que sigan la especificaci&oacute;n, 
+        como el propio Hibernate). Las entidades tienen dos componentes: los metadatos 
+        de persistencia que indican como se mapean en la base de datos y el EntityManager, 
+        un servicio ORM que se encarga de realizar la persistencia en si, junto 
+        a otros servicios como caching, transacciones, etc. Ejemplo:</p>
+      <p>package com.prueba;<br>
+        import java.io.Serializable;<br>
+        import javax.persistence.Entity;<br>
+        import javax.persistence.GeneratedValue;<br>
+        import javax.persistence.GenerationType;<br>
+        import javax.persistence.Id;<br>
+        @Entity<br>
+        public class DiscosEntity implements Serializable{<br>
+        private static final long serialVersionUID = 1L;<br>
+        @Id<br>
+        @GeneratedValue(strategy = GenerationType.AUTO)<br>
+        private Long id;<br>
+        private String album;<br>
+        private String interprete;</p>
+      <p> public DiscosEntity() {<br>
+        }<br>
+        public DiscosEntity(Long id, String album, String interprete) {<br>
+        super();<br>
+        this.id = id;<br>
+        this.album = album;<br>
+        this.interprete = interprete;<br>
+        }<br>
+        public void setId(Long id) {<br>
+        this.id = id;<br>
+        }<br>
+        public Long getId() {<br>
+        return id;<br>
+        }<br>
+        public void setAlbum(String album) {<br>
+        this.album = album;<br>
+        }<br>
+        public String getAlbum() {<br>
+        return album;<br>
+        }<br>
+        public void setInterprete(String interprete) {<br>
+        this.interprete = interprete;<br>
+        }<br>
+        public String getInterprete() {<br>
+        return interprete;<br>
+        }</p>
+      <p>}<br>
+      </p></td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

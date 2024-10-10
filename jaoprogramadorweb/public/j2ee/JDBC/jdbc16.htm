@@ -1,0 +1,131 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>La clase DriverManager</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación en JDBC,Programas JDBC,Aplicaciones en JDBC,Ejercicios en JDBC, Ejemplos de JDBC,Tutoriales de JDBC,Manuales JDBC" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="JDBC, Manual JDBC, tutorial JDBC, Ejemplos JDBC, ejercicios JDBC">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> La clase DriverManager</h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> 
+      <p>La clase DriverManager implementa la capa de gesti&oacute;n de JDBC, 
+        y trabaja como intermediaria entre el usuario y los drivers. Guarda la 
+        lista de los drivers que est&aacute;n disponibles y establece la conexi&oacute;n 
+        entre la base de datos y el driver apropiado. Adem&aacute;s la clase DriverManager 
+        se ocupa de cosas c&oacute;mo gestionar los l&iacute;mites de tiempo de 
+        &#8216;login&#8217; en el driver y de la salida de los mensajes de traza 
+        y log.</p>
+      <p>Para aplicaciones simples, el &uacute;nico m&eacute;todo en esta clase 
+        que necesita un programador general para su uso directamente es DriverManager.getConnection. 
+        Como su nombre indica, este m&eacute;todo establece una conexi&oacute;n 
+        con la base de datos. JDBC permite al usuario llamar a los m&eacute;todos 
+        de DriverManager getDriver, getDrivers y registerDriver as&iacute; como 
+        al m&eacute;todo de Driver connect, pero en la mayor&iacute;a de los casos 
+        es preferible dejar que la clase DriverManager gestione los detalles al 
+        establecer la conexi&oacute;n.</p>
+      <p> Mantenimiento de la lista de drivers disponibles.</p>
+      <p>La clase DriverManager mantiene una lista de clases disponibles que han 
+        sido registrados mediante el m&eacute;todo DriverManager.registerDriver. 
+        Todas las clases Driver deben escribirse con una secci&oacute;n est&aacute;tica 
+        que cree una instancia de la clase y luego la registre en la clase DriverManager 
+        cuando se cargue. Adem&aacute;s el usuario normalmente no deber&iacute;a 
+        llamar a DriverManager.registerDriver directamente; deber&iacute;a llamarse 
+        autom&aacute;ticamente por el driver cuando est&eacute; se carga,. Una 
+        clase Driver se carga, y por tanto se registra, de dos formas diferentes:</p>
+      <p>1 Mediante una llamada al m&eacute;todo Class.forName. Este carga expl&iacute;citamente 
+        la clase driver. Dado que no depende de ning&uacute;n &#8216;setup&#8217; 
+        externo, esta forma de cargar drivers es la recomendada. El siguiente 
+        c&oacute;digo carga la clase acme.db.Driver:</p>
+      <p>Class.forName(&quot;acme.db.Driver&quot;);</p>
+      <p>Si acme.db.Driver se ha escrito para que al cargar produzca una instancia 
+        y llame al m&eacute;todo DriverManager.registerDriver con esta instancia 
+        como argumento (es lo que deber&iacute;a hacer), entonces este estar&aacute; 
+        en la lista de drivers disponibles para efectuar la conexi&oacute;n.<br>
+      </p>
+      <p>2 Mediante la adici&oacute;n del driver a la propiedad jdbc.drivers de 
+        java.lang.System- Esta es una lista de nombres de clases de drivers, separadas 
+        por dos puntos, que es la que carga la clase DriverManager. Cuando la 
+        clase DriverManager se inicializa, mira en la propiedad jdbc.drivers, 
+        y si el usuario ha introducido uno o m&aacute;s drivers, la clase DriverManager 
+        intenta cargarlos. El siguiente c&oacute;digo ilutsra como un programador 
+        deber&iacute;a introducir estas tres clases en ~/.hotjava/properties</p>
+      <p>jdbc.drivers=foo.bah.Driver:wombat.sql.Driver:bad.test.ourDriver;</p>
+      <p>La primera llamada a el m&eacute;todo DriverManager har&aacute; que estos 
+        drivers se carguen autom&aacute;ticamente.</p>
+      <p>Notese que en esta segunda manera de cargar los drivers es necesario 
+        una preparaci&oacute;n del entorno que es persistente. Si existe alguna 
+        duda sobre esto es preferible y m&aacute;s seguro llamar al m&eacute;todo 
+        Class.forName para cargar explicitamente cada driver. Este es tambi&eacute;n 
+        el m&eacute;todo que se usa para traer un driver particular puesto que 
+        una vez que la clase DriverManager ha sido inicializada no chequear&aacute; 
+        la lista de propiedades jdbc.drivers.</p>
+      <p>En ambos casos, es responsabilidad de la clase Driver reci&eacute;n cargada 
+        registrarse a si misma mediante una llamada a DriverManager.registerDriver. 
+        Como se ha mencionado anteriormente, esto deber&iacute;a hacerse autom&aacute;ticamente 
+        al cargar la clase.</p>
+      <p>Por razones de seguridad, la capa de gesti&oacute;n de JDBC guardar&aacute; 
+        traza de que clases de cargadores provee cada driver. Entonces cuando 
+        la clase DriverManager abre una conexi&oacute;n solo usar&aacute; los 
+        drivers que vienen desde el sistema de ficheros local o desde las mismas 
+        clases cargadoras como el c&oacute;digo que solicita la conexi&oacute;n.</p>
+      <p> Establecer una conexi&oacute;n</p>
+      <p>Una vez que la clase Driver ha sido cargada y registrada con la clase 
+        DriverManager, se est&aacute; en condiciones de establecer la conexi&oacute;n 
+        con la base de datos. La solicitud de la conexi&oacute;n se realiza mediante 
+        una llamada al m&eacute;todo DriverManager.getConnection, y DriverManager 
+        testea los drivers regsitrados para ver si puede establecer la conexi&oacute;n.</p>
+      <p>A veces puede darse el caso de que m&aacute;s de un driver JDBC pueda 
+        establecer la conexi&oacute;n para una URL dada. Por ejemplo, cuando conectamos 
+        con una base de datos remota, podr&iacute;a ser posible usar un driver 
+        puente JDBC-ODBC, o un driver JDBC de protocolo gen&eacute;rico de red, 
+        o un driver suministrado por el vendedor. <br>
+        <br>
+        En tales casos, el orden en que los driver son testeados es significante 
+        porque DriverManager usar&aacute; el primer driver que encuentre que pueda 
+        conectar con &eacute;xito a la base de datos.</p>
+      <p>Primero DriverManager intenta usar cada driver en el orden en que ha 
+        sido registrado ( los drivers listados en la propiedad jdbc.drivers son 
+        siempre los registrados primero). Saltar&aacute; cualquier driver con 
+        c&oacute;digo &#8216;untrusted&#8217;, a menos que se cargue desde el 
+        mismo c&oacute;digo fuente que el c&oacute;digo que intenta abrir la conexi&oacute;n.</p>
+      <p>Testea los drivers mediante la llamada al m&eacute;todo Driver.connect 
+        cada uno por turno, pas&aacute;ndole como argumento la URL que el usuario 
+        ha pasado originalmente al m&eacute;todo DriverManager.getConnection. 
+        El primer driver que reconozca la URL realiza la conexi&oacute;n.</p>
+      <p>Una primera ojeda puede parecer insuficiente, pero son necesarias solo 
+        unas pocas llamadas a procedimientos y comparaciones de cadena por conexi&oacute;n 
+        puesto que no es probable que haya docenas de drivers se carguen concurrentemente.</p>
+      <p>El siguiente c&oacute;digo es un ejemplo de todo lo necesario normalmente 
+        para establecer una conexi&oacute;n con un driver puente JDBC-ODBC:</p>
+      <p>Class.forName(&quot;sun.jdbc.odbc.JdbcOdbcDriver&quot;); //loads the 
+        driver<br>
+        String url = &quot;jdbc:odbc:fred&quot;;<br>
+        DriverManager.getConnection(url, &quot;userID&quot;, &quot;passwd&quot;);<br>
+      </p>
+      <p>&nbsp; </p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

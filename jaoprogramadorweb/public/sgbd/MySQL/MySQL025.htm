@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Ejercicios MySQL</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="MySQL, sql, pl/sql, programacion MySQL, ejercicios MySQL, ejemplos MySQL, select">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2>N O M B R E S </h2></td>
+  </tr>
+  <tr> 
+    <td><h3>Nombres de bases de datos, tablas, índices, columnas y alias</h3>
+      <p>Los nombres de bases de datos, tablas, &iacute;ndices, columnas y alias 
+        son identificadores. Esta secci&oacute;n describe la sintaxis permitida 
+        para<br>
+        los identificadores de MySQL.<br>
+        La siguiente tabla describe la longitud m&aacute;xima y los caracteres 
+        permitidos para cada tipo de identificador.<br>
+        Identificador Longitud m&aacute;xima<br>
+        (en bytes)<br>
+        Caracteres permitidos<br>
+        Base de datos 64 Cualquier car&aacute;cter permitido en un nombre de directorio, 
+        excepto '/', '\', o '.'<br>
+        Tabla 64 Cualquier car&aacute;cter permitido en un nombre de fichero, 
+        excepto '/', '\', o '.'<br>
+        Columna 64 Todos los caracteres<br>
+        &Iacute;ndice 64 Todos los caracteres<br>
+        Alias 255 Todos los caracteres<br>
+        Adicionalmente a las restricciones detalladas en la tabla, ning&uacute;n 
+        identificador puede contener un car&aacute;cter ASCII 0 o un byte con 
+        un<br>
+        valor de 255. Los nombres de bases de datos, tablas y columnas no deber&iacute;an 
+        terminar con caracteres de espacio. MySQL 5.0 permite<br>
+        el uso de comillas en identificadores, aunque es mejor evitarlos tanto 
+        como sea posible.<br>
+        En MySQL 5.0, los identificadores se almacenan empleando Unicode (UTF8). 
+        Esto se aplica a identificadores en las definiciones<br>
+        de tabla que se almacenan en ficheros .frm y a identificadores almacenados 
+        en las tablas de permisos en la base de datos mysql.<br>
+        El tama&ntilde;o de las columnas de tipo cadena en las tablas de permisos 
+        (y en cualquier otra tabla) de MySQL 5.0 equivale al n&uacute;mero<br>
+        de caracteres, esto significa que (al contrario que en algunas versiones 
+        anteriores de MySQL) se pueden utilizar caracteres multibyte<br>
+        sin reducir el n&uacute;mero de caracteres permitidos para los valores 
+        almacenados en estas columnas.<br>
+        Un identificador puede estar encerrado entre comillas o no. Si un identificador 
+        es una palabra reservada o contiene caracteres especiales,<br>
+        se debe encerrar entre comillas cada vez que se haga referencia a &eacute;l. 
+        Para una lista de palabras reservadas, consulte Secci&oacute;n<br>
+        9.6, &#8220;Tratamiento de palabras reservadas en MySQL&#8221;. Los caracteres 
+        especiales son aquellos que est&aacute;n fuera del grupo de caracteres<br>
+        alfanum&eacute;ricos del conjunto de caracteres en uso, de '_', y de '$'.<br>
+        El car&aacute;cter de encomillado de identificador es el acento grave: 
+        ('`'):<br>
+        mysql&gt; SELECT * FROM `select` WHERE `select`.id &gt; 100;<br>
+        Si el modo de servidor SQL incluye la opci&oacute;n ANSI_QUOTES, tambi&eacute;n 
+        est&aacute; permitido delimitar los identificadores con comillas<br>
+        dobles:<br>
+        mysql&gt; CREATE TABLE &quot;test&quot; (col INT);<br>
+        ERROR 1064: You have an error in your SQL syntax. (...)<br>
+        mysql&gt; SET sql_mode='ANSI_QUOTES';<br>
+        mysql&gt; CREATE TABLE &quot;test&quot; (col INT);<br>
+        Query OK, 0 rows affected (0.00 sec)<br>
+        Consulte Secci&oacute;n 5.3.2, &#8220;El modo SQL del servidor&#8221;.<br>
+        En MySQL 5.0, los caracteres delimitadores de identificador pueden inclu&iacute;rse 
+        dentro del identificador si se delimita el<br>
+        identificador. Si el car&aacute;cter que se incluir&aacute; dentro del 
+        identificador es el mismo que se utiliza para delimitarlo, habr&aacute; 
+        que colocarlo<br>
+        en forma doble. Las siguientes sentencias crean una tabla llamada a`b 
+        que contiene una columna llamada c&quot;d:<br>
+        mysql&gt; CREATE TABLE `a``b` (`c&quot;d` INT);<br>
+        Se recomienda que no se utilicen nombres con el esquema XeX, tal como 
+        1e o 2e2, porque una expresi&oacute;n como 1e+1 es ambigua.<br>
+        Podr&iacute;a interpretarse como la expresi&oacute;n 1e + 1 o como el 
+        n&uacute;mero 1e+1, dependiendo del contexto.<br>
+        Hay que ser cuidadoso al utilizar MD5 para producir nombres de tablas, 
+        porque puede producir nombres ilegales como los listados<br>
+        anteriormente. </p>
+        </td>
+    <td>&nbsp;</td>
+    <td><a href="http://www.euskalnet.net/juanarana/oraclezip/Ejer3.rar"><img src="../../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td>
+<div align="right"><a href="http://www.euskalnet.net/juanarana/index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a>
+      </div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

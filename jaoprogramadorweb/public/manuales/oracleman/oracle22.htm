@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Asignaci&amp;oacute;n de valores Oracle</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta name="keywords" content="Manual Oracle, Tutorial Oracle, Manual SQL, Tutorial SQL, Ejercicios Oracle">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="38" colspan="2"> <h2>Asignaci&oacute;n 
+        de valores</h2></td>
+  </tr>
+  <tr> 
+    <td height="197" colspan="2"><p>Las dos formas que existen para asignar valores 
+        a variables de memoria, son:</p>
+      <p>- Con el operador de asignaci&oacute;n :=, como cuando calculamos el 
+        promedio de las ventas asign&aacute;ndole valor a la variable XPROM con 
+        la siguiente sentencia:</p>
+      <p>xprom:=xtotal/xcant;</p>
+      <p>- Con la sentencia SELECT que contiene la orden INTO, como se muestra, 
+        es la asignaci&oacute;n de valores a las variables xtotal y xcant con 
+        el siguiente c&oacute;digo:</p>
+      <p>SELECT SUM(valor), 
+        INTO xtotal, xcant 
+        FROM ventas 
+        WHERE fecha=sysdate;</p>
+      <p>Veamos a continuaci&oacute;n, con la creaci&oacute;n del procedimiento 
+        FECHALTA, la asignaci&oacute;n de valores a una variable de registro llamada 
+        Client_Rec, que va a tener la estructura de una fila de la tabla clientes 
+        y que estar&aacute; formada por todos los campos correspondientes a la 
+        tabla. Para esto usaremos el atributo de variable %ROWTYPE que declara 
+        una variable de registro que contiene la estructura de la tabla, y despu&eacute;s, 
+        con el uso de la sentencia SELECT * INTO, se asigna a la variable de registro 
+        los valores de la fila. La referencia a un dato contenido en la variable 
+        de registro se hace de la forma variable_registro.campo, como por ejemplo 
+        cliente_rec.fecha hace referencia la fecha del alta del cliente.</p>
+      <p>Pasemos a mostrar lo anteriormente expuesto a trav&eacute;s del c&oacute;digo 
+        siguiente:</p>
+      <pre>PROCEDURE FECHAALTA IS
+
+    BEGIN
+
+         DECLARE
+
+               cliente_rec  clientes%ROWTYPE;
+
+         BEGIN
+
+               SELECT * INTO cliente_rec
+
+                     FROM clientes
+
+                     WHERE codigo=5;
+
+               IF cliente_rec.fecha&gt;sysdate-10
+			   THEN
+			       message(cliente_rec.nombre||
+				   'Dado de alta en los ultimos 10 dias');
+				   pause;
+				ELSE
+				    message(cliente_rec.nombre||
+					'Dado de alta hace mas de 10 dias');
+			        pause;
+				END IF;
+			END;
+	END;</pre></td>
+  </tr>
+  <tr> 
+    <td width="70" height="18"></td>
+    <td height="18"> <div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Introducci&oacute;n a JQuery</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta name="keywords" content="Introduccion a JQuery, Manual JQuery, tutorial JQuery, Ejemplos JQuery, ejercicios JQuery">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos"><tr> 
+    <td height="39" colspan="3"> <h2>Método data()</h2></td>
+  </tr>
+  <tr> 
+    <td height="268" colspan="3"> <p>Este m&eacute;todo del objeto jQuery sirve 
+        tanto para guardar un dato en un elemento como para<br>
+        consultarlo. Seg&uacute;n el n&uacute;mero de par&aacute;metros que reciba, 
+        realiza una u otra acci&oacute;n.<br>
+        &#8226; Si recibe un par&aacute;metro data(nombre): devuelve el valor 
+        que haya en el dato cuyo<br>
+        nombre se pasa por par&aacute;metro.<br>
+        &#8226; Si recibe dos par&aacute;metros data(nombre, valor): almacena 
+        un dato, cuyo nombre recibe<br>
+        en el primer par&aacute;metro, con el valor que recibe en el segundo par&aacute;metro.<br>
+        Como data() es un m&eacute;todo que pertenece al objeto jQuery, podemos 
+        almacenar estos pares<br>
+        (dato, valor) en cualquiera de los elementos que seleccionemos con la 
+        funci&oacute;n jQuery().<br>
+        Veamos un caso de uso simple. Por ejemplo tenemos un elemento de la p&aacute;gina 
+        como este:<br>
+        &lt;div id=&quot;capa&quot;&gt;<br>
+        En esta divisi&oacute;n (elemento id=&quot;capa&quot;) voy a guardar y 
+        leer datos sobre este elemento.<br>
+        &lt;/div&gt;<br>
+        Ahora podr&iacute;amos usar le m&eacute;todo data() de la siguiente manera:<br>
+        $(&quot;#capa&quot;).data(&quot;midato&quot;,&quot;mivalor&quot;);<br>
+        Con esta l&iacute;nea hemos guardado un dato llamado &quot;midato&quot; 
+        con el valor &quot;mivalor&quot;, en el<br>
+        elemento con identificador (atributo id) &quot;capa&quot;.<br>
+        Ahora podr&iacute;amos leer ese dato en cualquier momento para acceder 
+        a su valor, de la siguiente<br>
+        manera:<br>
+        alert($(&quot;#capa&quot;).data(&quot;midato&quot;));<br>
+        En esta l&iacute;nea de c&oacute;digo extraemos el dato &quot;midato&quot; 
+        del elemento con identificador &quot;capa&quot; y lo<br>
+        mostramos en una caja de alerta. 
+      <h3>Método removeData()</h3>
+
+
+</p>
+      Este m&eacute;todo sirve para eliminar un dato de un elemento y su funcionamiento 
+      es tan simple<br>
+      como enviar por par&aacute;metro el dato que se quiere eliminar del elemento.<br>
+      $(&quot;#capa&quot;).removeData(&quot;midato&quot;)<br>
+      Con esta l&iacute;nea habr&iacute;amos eliminado el dato llamado &quot;midato&quot; 
+      del elemento con identificador<br>
+      &quot;capa&quot;.
+<p></p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

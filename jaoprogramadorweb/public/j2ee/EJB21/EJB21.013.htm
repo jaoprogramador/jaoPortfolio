@@ -1,0 +1,45 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>LIntroducci&amp;oacute;n a EJB 2.1</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación en EJB 2.1,Programas EJB 2.1,Aplicaciones en EJB 2.1,Ejercicios en EJB 2.1, Ejemplos de EJB 2.1,Tutorial de EJB 2.1,Manual EJB 2.1" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="EJB 2.1, Manual EJB 2.1, tutorial EJB 2.1, Ejemplos EJB 2.1, ejercicios EJB 2.1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> <strong>El contenedor se interpone</strong></h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <p>
+Se puede observar que ejbCreate() es invocado por el servidor EJB cuando precisa la creación efectiva de un nuevo objeto. No se debe dar por supuesto que un create() en el interfaz local genere de forma automática un ejbCreate() en el Bean, es decir, no ocurre siempre que la orden create() que da el cliente genera necesariamente un objeto en el contenedor. Expliquemos esto: 
+•	Cuando nos encontramos ante beans con estado cada create() del cliente implicará un ejbCreate() del servidor EJB. Este es el comportamiento que parece más intuitivo a primera vista. 
+•	Cuando es un bean de sesión sin estado el create() que hace el cliente sólo implica ejbCreate() cuando no haya objetos disponibles en la reserva del servidor EJB. Es una decisión del contenedor EJB, que se basa en un mecanismo de optimización semejante al que encontramos en en un pool de conexiones a base de datos: si no es necesario (porque ya tengo un objeto disponible), entonces no es necesario crear el objeto (del mismo modo que en un pool no se crea una conexión si ya tengo una disponible). Por ello, decimos que el contenedor se interpone.
+Diferencias:
+•	create() es una invocación del cliente para crear una referencia de objeto.
+•	ejbCreate() es invocado por el servidor EJB cuando precisa crear un objeto y no hay ninguno disponible en su reserva o pool de objetos.
+Sobre remove(): la instancia se devuelve al pool de bean de sesión QUE GESTIONA EL SERVIDOR EJB. IMPORTANTE: la persistencia del objeto en memoria viene determinada por el servidor EJB. Por ello, la llamada a remove() no implica de forma inmediata un ejbRemove() (el borrado efectivo del objeto), ya que este borrado depende del contenedor EJB. Algo parecigo pasa con el Garbagge Collection: es la JVM la que determina cuando y como se libera la memoria del objeto, no el programador.
+
+      </p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

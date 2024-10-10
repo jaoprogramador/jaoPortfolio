@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>JavaServer Faces</title>
+<META http-equiv=Content-Language content=es>
+<META content="Manual JSP, ejemplos JSP, codigos JSP" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Manual JSP, ejemplos JSP, codigos JSP">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2> Desarrollo</h2></td>
+  </tr>
+    
+  <tr> 
+    <td height="39" colspan="3">
+<p>Vamos a comenzar con la construcci&oacute;n del sistema que hemos descrito 
+        en el apartado anterior. Para ello, tendremos que realizar una serie de 
+        pasos previos para preparar el entorno de desarrollo.<br>
+        <h3>JDeveloper</h3>
+        Durante el curso utilizaremos el IDE de desarrollo para aplicaciones J2EE 
+      de Oracle, que como se ha descrito en la Introducci&oacute;n, es un framework 
+      para el desarrollo de aplicaciones Java que aumenta notablemente el nivel 
+      de productividad y ofrece un elevado n&uacute;mero de componentes UI.<br>
+        <h3>Incluir la librer&iacute;a de conexi&oacute;n con MySql en JDeveloper</h3>
+        
+      <p>Para poder conectarnos con una base de datos MySql necesitaremos dar 
+        de alta la librer&iacute;a de conexi&oacute;n en el IDE de desarrollo. 
+        Estos son los pasos que debemos seguir:<br>
+        1. Primero guardamos el archivo .jar con la librer&iacute;a que contiene 
+        el driver de conexi&oacute;n en la carpeta de la instalaci&oacute;n de 
+        JDeveloper &#8220;j22e\home\applib&#8221;. Todas las librer&iacute;as 
+        almacenadas en esta carpeta podr&aacute;n ser utilizadas por cualquier 
+        aplicaci&oacute;n que desarrollemos con JDeveloper.<br>
+        2. Iniciamos JDeveloper <br>
+        3. A continuaci&oacute;n, damos de alta la librer&iacute;a en JDeveloper. 
+        Para ello, seleccionamos en el<br>
+        men&uacute; Tools, Manage Libraries. Se abre la siguiente ventana: <br>
+        4. Pulsamos el bot&oacute;n New, y en la ventana que se abre introducimos 
+        el nombre de la<br>
+        librer&iacute;a &#8220;mysql-connector-java-3.1.7-bin&#8221;.<br>
+        5. Pulsamos Add Entry y en la ventana de explorador que se abre seleccionamos 
+        el<br>
+        archivo jar de la librer&iacute;a.<br>
+        6. Para finalizar, pulsamos Aceptar para completar la operaci&oacute;n.</p>
+      <h3>Creaci&oacute;n de la conexi&oacute;n con la base de datos Test de Mysql</h3>
+      <p>Vamos a dar de alta una conexi&oacute;n con la base de datos Test de 
+        Mysql que ser&aacute; la que<br>
+        utilicemos para crear nuestro esquema de tablas para la Aplicaci&oacute;n 
+        Web de Agenda.<br>
+        1. Pulsamos sobre la pesta&ntilde;a Connections, marcamos Database, y 
+        pulsamos sobre el<br>
+        bot&oacute;n derecho del rat&oacute;n, en el men&uacute; que aparece seleccionamos 
+        New Database<br>
+        Connection.<br>
+        2. Pulsamos Siguiente, indicamos el nombre de la conexi&oacute;n &#8220;Test&#8221; 
+        y seleccionamos<br>
+        como tipo de conexi&oacute;n Controlador JDBC de Terceros.<br>
+        3. Pulsamos Siguiente e introducimos el nombre del usuario y la contrase&ntilde;a 
+        de la base<br>
+        de datos MySql. El usuario por defecto usado es &#8220;root&#8221; y la 
+        contrase&ntilde;a la que<br>
+        hayamos establecido en la instalaci&oacute;n de MySql.<br>
+        4. Pulsamos Siguiente. A continuación pulsamos New, e introducimos la 
+        clase del driver “com.mysql.jdbc.Driver”.<br>
+        5. Pulsamos Browse y seleccionamos la librer&iacute;a de usuario mysql-connector-java-<br>
+        3.1.7-bin. <br>
+        6. Una vez seleccionados la clase del driver de conexi&oacute;n y la librer&iacute;a 
+        indicamos la cadena<br>
+        de conexi&oacute;n &#8220;jdbc:mysql://localhost:3306/test&#8221;.<br>
+        7. Para finalizar, podemos realizar un test a la conexi&oacute;n que acabamos 
+        de dar de alta<br>
+        pulsando Siguiente, Test Connection. Si la prueba de conexi&oacute;n es 
+        satisfactoria,<br>
+        pulsamos Terminar para almacenar los datos de la conexi&oacute;n.</p></td>
+
+  </tr>
+  <tr> 
+    <td width="341"></td>
+    <td width="74">&nbsp;</td>
+    <td width="124"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+</body>
+</html>

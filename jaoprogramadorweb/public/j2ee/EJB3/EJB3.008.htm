@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Transaccionabilidad</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación en EJB 3.0 Transaccionabilidad,Programas EJB 3.0 Transaccionabilidad,Aplicaciones en EJB 3.0 Transaccionabilidad,Ejercicios en EJB 3.0 Transaccionabilidad, Ejemplos de EJB 3.0 Transaccionabilidad,Tutorial de EJB 3.0 Transaccionabilidad,Manual EJB 3.0 Transaccionabilidad" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="EJB 3.0 Transaccionabilidad, Manual EJB 3.0 Transaccionabilidad, tutorial EJB 3.0 Transaccionabilidad, Ejemplos EJB 3.0 Transaccionabilidad, ejercicios EJB 3.0 Transaccionabilidad">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> Transaccionalidad</h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <p>Con el uso de las transacciones se asegura 
+        que una funci&oacute;n compleja se ejecuta o no. Esto por ejemplo significa 
+        que los datos<br>
+        en la base de datos s&oacute;lo se modificar&aacute;n cuando se ejecute 
+        la transacci&oacute;n de forma completa. La protecci&oacute;n en la transacci&oacute;n 
+        se<br>
+        refiere siempre al estado de los datos en base de datos y no a los valores 
+        que pueda tener el bean.</p>
+      <p><br>
+        Container Managed Transaction (CMT)<br>
+        El servidor de aplicaciones se ocupa del control completo de la transacci&oacute;n 
+        seg&uacute;n las prescripciones que le indiquemos.<br>
+        @TransactionAttribute<br>
+        Cada m&eacute;todo p&uacute;blico de un session bean o message-driven 
+        bean puede dotarse de dicha anotaci&oacute;n, de este modo se controla<br>
+        el comportamiento de las transacciones en dicho bean.<br>
+        La anotaci&oacute;n suele realizarse a nivel de clase o de m&eacute;todo, 
+        normalmente se encuentra en estos &uacute;ltimos.</p>
+      <p><br>
+        Tipos de Transacciones:<br>
+        NOT_SUPPORTED<br>
+        SUPPORT<br>
+        REQUIRED<br>
+        REQUIRES NEW<br>
+        MANDATORY<br>
+        NEVER</p>
+      <p>@Stateful<br>
+        public class CounterTestBean implements counterTestRemote{<br>
+        @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)<br>
+        public void primerMetodo(){<br>
+        // Si un cliente llama este m&eacute;todo se inicia una nueva transaccion<br>
+        otroMetodo();<br>
+        }<br>
+        @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)<br>
+        public void otroMetodo(){<br>
+        // Si este metodo es llamado por primerMetodo()<br>
+        // no se crea ninguna transaccion nueva. Se utilizara<br>
+        // la transaccion del primer metodo<br>
+        // Si es el cliente el que llama directamente a este metodo<br>
+        // se iniciara una nueva transaccion<br>
+        }<br>
+        }<br>
+      </p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

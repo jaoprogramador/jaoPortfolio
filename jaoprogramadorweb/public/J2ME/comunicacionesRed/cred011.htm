@@ -1,0 +1,250 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Indice J2ME</title>
+<META http-equiv=Content-Language content=es>
+<META content="Manual J2ME, ejemplos J2ME, codigos J2ME" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Manual J2ME, ejemplos J2ME, codigos J2ME">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> Interfaces</h2></td>
+  </tr>
+  <tr> 
+    <td colspan="3"><p>Adem&aacute;s de todas las ya estudiadas, aparecen las 
+        siguientes interfaces, extendiendo el<br>
+        Generic Connection Framework de la CLDC visto.<br>
+        Nota: s&oacute;lo describiremos detalladamente la HttpConnection, en la 
+        cual est&aacute; centrado este<br>
+        cap&iacute;tulo.<br>
+        - UPDDatagramConnection extends DatagramConnection. Representa una conexi&oacute;n 
+        basada en datagramas donde la direcci&oacute;n a conectar es conocida. 
+        La conexi&oacute;n se abrir&aacute; como siempre, usando un Connector 
+        donde a su m&eacute;todo open() le pasamos una URL de formato:</p>
+      <p> datagram://&lt;host&gt;:&lt;port&gt;</p>
+      <p><br>
+        Donde el &lt;host&gt; ser&aacute; la direcci&oacute;n de la m&aacute;quina 
+        a conectar y &lt;port&gt; el puerto por el que escucha. Por &uacute;ltimo, 
+        en el punto donde se reciben los datos, deber&aacute; ser abierto a su 
+        vez un datagrama en el que se omite el host.<br>
+        Adem&aacute;s de los m&eacute;todos heredados de su padre, tendremos dos 
+        m&eacute;todos para conocer la direcci&oacute;n y puerto local de la conexi&oacute;n: 
+        String getLocalAddress() e int getLocalPort().<br>
+        - ServerSocketConnection extends StreamConnectionNotifier. Con esta interface 
+        definimos un socket servidor que quedar&aacute; a la espera de conexi&oacute;n 
+        de posibles sockets clientes. Para obtener una instancia suya usaremos 
+        el m&eacute;todo open() con su par&aacute;metro name de la forma:</p>
+      <p>socket://:&lt;port&gt;</p>
+      <p>Como podemos apreciar, el host es omitido. Por ejemplo, Connector.open(&quot;socket://:79&quot;); 
+        crear&iacute;a un socket servidor de entrada que escuchar&aacute; peticiones 
+        de sockets cliente por el puerto 79. Una vez establecida la conexi&oacute;n 
+        con el cliente por medio del m&eacute;todo acceptAndOpen() heredado de 
+        StreamConnectionNotifier, &eacute;l nos devolver&aacute; un SocketConnection 
+        con el cual leer<br>
+        y escribir la informaci&oacute;n a comunicar entre ambos sockets conectados.<br>
+        Un extracto b&aacute;sico de c&oacute;digo donde podemos ver el comportamiento 
+        descrito es el siguiente:</p>
+      <p>...<br>
+        //Creaci&oacute;n del socket servidor que quedar&aacute; en espera:<br>
+        ServerSocketConnection servCon = (ServerSocketConnection)Connector.open(url);<br>
+        //Esperar&iacute;amos conexiones de cliente en un bucle infinito (se cortar&aacute; 
+        al cerrar la<br>
+        aplicaci&oacute;n servidora):<br>
+        while(true){<br>
+        //Esperamos a un Cliente. Una vez aceptada comunicaci&oacute;n de alguno, 
+        se devuelve<br>
+        una conexi&oacute;n con &eacute;l:<br>
+        SocketConnection con = (SocketConnection) servCon.acceptAndOpen();<br>
+        ...</p>
+      <p>De no existir esta interface, ambos sockets al conectarse deber&iacute;an 
+        establecer comunicaci&oacute;n de forma simult&aacute;nea, produciendo 
+        un error en caso contrario. Este elemento pues nos facilita enormemente 
+        la labor de conectar dos sockets.</p>
+      <p> - HttpConnection. A continuaci&oacute;n, consideraremos la interface 
+        que nos proporciona una conexi&oacute;n http., en la cual est&aacute; 
+        centrado el cap&iacute;tulo presente. HTTP es un protocolo de petici&oacute;n 
+        - respuesta en el que los par&aacute;metros de la petici&oacute;n deben 
+        ser fijados antes de que &eacute;sta sea enviada. Esta conexi&oacute;n 
+        estar&aacute; en todo momento en alguna de las tres fases siguientes:<br>
+        1. Establecimiento. En esta fase los par&aacute;metros necesarios son 
+        establecidos. 2. Conectado. La conexi&oacute;n ya est&aacute; preparada 
+        y se comienza la conversaci&oacute;n.3. Cierre, estado final. Se da por 
+        concluida la comunicaci&oacute;n. La forma general para la URL a dar en 
+        el m&eacute;todo Connector.open() ser&aacute; la siguiente en HttpConnection 
+        (m&aacute;s adelante, estudiaremos la forma de trabajar con HTTP detenidamente): 
+        http://&lt;host&gt;:&lt;port&gt;/ruta/recurso?Query#Ref Las constantes 
+        que ofrece la interface son: &#8226; static String GET. Indicador de tipo 
+        de petici&oacute;n GET. En estas peticiones los datos se enviar&aacute;n 
+        como parte de la URL demandada. &#8226; static String HEAD. Indicador 
+        de tipo de petici&oacute;n HEAD. Similar a GET, aunque el servidor s&oacute;lo 
+        responde la l&iacute;nea de estado y cabeceras HTTP, sin el cuerpo de 
+        la respuesta. &#8226; static String POST. Indicador de tipo de petici&oacute;n 
+        POST. Aqu&iacute;, el cuerpo de la petici&oacute;n se env&iacute;a como 
+        un bloque separado. &#8226; static int HTTP_ACCEPTED ... static int HTTP_VERSION. 
+        Se tendr&aacute;n 38 constantes identificando los posibles c&oacute;digos 
+        de estado que pueden aparecer en toda respuesta HTTP del servidor: desde 
+        el 202 de HTTP_ACCEPTED informando de que la petici&oacute;n ha sido aceptada 
+        pero a&uacute;n no procesada, hasta el 505 de HTTP_VERSION que indica 
+        que la versi&oacute;n del protocolo HTTP usado en la petici&oacute;n no 
+        est&aacute; soportado por el servidor. En general, estos c&oacute;digos 
+        se agrupan en 5 tipos:<br>
+        o 1xx: C&oacute;digo de informaci&oacute;n.<br>
+        o 2xx: C&oacute;digo de &eacute;xito.<br>
+        o 3xx: C&oacute;digo de redirecci&oacute;n.<br>
+        o 4xx: C&oacute;digo de error de Cliente.<br>
+        o 5xx: C&oacute;digo de error de Servidor.<br>
+        Nota: recomendamos la consulta a la especificaci&oacute;n MIDP 2.0 (ver 
+        Bibliograf&iacute;a) para ver todos estos c&oacute;digos en detalle. Tras 
+        las constantes, los 21 m&eacute;todos que incorpora esta interface son:o 
+        long getDate(). Valor del campo de cabecera date, fecha de la respuesta. 
+        Todas las fechas se dan como el n&uacute;mero de milisegundos transcurridos 
+        desde el 01/01/1970 hasta el momento a indicar. o long getExpiration(). 
+        Valor del campo de cabecera expires (fecha de caducidad del recurso requerido). 
+        Devuelve 0 si no es conocido. o String getFile(). Devuelve la porci&oacute;n 
+        de URL que lleva la ruta y el recurso solicitado. Si no existe, devuelve 
+        null. o String getHeaderField(int n). Devuelve el valor del n-&eacute;simo 
+        campo de los que forman la cabecera de la respuesta HTTP. Da null si el 
+        &iacute;ndice est&aacute; fuera de rango. o String getHeaderField(String 
+        name). Da el valor del campo de cabecera cuyo nombre indicamos, o null 
+        si &eacute;ste no se encuentra. o long getHeaderFieldDate(String name, 
+        long def). Da el valor del campo de cabecera indicado por su nombre, parseado 
+        como una fecha. Si no se encuentra, se da el valor por defecto indicado 
+        en def. o int getHeaderFieldInt(String name, int def). Da el valor del 
+        campo de cabecera indicado por su nombre, parseado como un entero. Si 
+        no se encuentra, se da el valor por defecto indicado en def. o String 
+        getHeaderFieldKey(int n). Devuelve el nombre del campo de cabecera que 
+        ocupa el lugar n pasado, o null si el &iacute;ndice est&aacute; fuera 
+        de rango. o String getHost(). Devuelve el identificador del host a alcanzar 
+        con la conexi&oacute;n; un nombre de dominio o una direcci&oacute;n IP. 
+        o long getLastModified(). Valor del campo de cabecera last-modified (fecha 
+        de la &uacute;ltima modificaci&oacute;n del recurso requerido).<br>
+        o int getPort(). Devuelve el puerto solicitado en la URL. Si no se ha 
+        indicado se devuelve 80, que es el puerto por defecto para la comunicaci&oacute;n 
+        HTTP. o String getProtocol(). Nombre del protocolo usado en la conexi&oacute;n, 
+        por ejemplo, HTTP o HTTPS.o String getQuery(). Devuelve la porci&oacute;n 
+        de URL a conectar que lleva la Query, defini&eacute;ndose &eacute;sta 
+        como la porci&oacute;n de cadena tras el primer interrogante (?). En ella 
+        ir&aacute; el cuerpo de la petici&oacute;n en el caso de GET, d&aacute;ndose 
+        en forma de pares par&aacute;metro=valor separados por ampersand (&amp;). 
+        Si no existe, devuelve null. o String getRef(). Devuelve la porci&oacute;n 
+        de URL a conectar que lleva el Ref, defini&eacute;ndose &eacute;ste como 
+        la porci&oacute;n de cadena tras la primera almohadilla (#). Si no existe, 
+        devuelve null. o String getRequestMethod(). Devuelve el tipo de la petici&oacute;n 
+        a realizar, sea GET, HEAD o POST. o String getRequestProperty(String key). 
+        Da el valor de un campo de cabecera de la petici&oacute;n, cuyo nombre 
+        pasamos como par&aacute;metro (por ejemplo Accept, User-Agent, Referer, 
+        etc.). Devuelve null si no es conocido. o int getResponseCode(). Informa 
+        del c&oacute;digo de la l&iacute;nea de estado de la respuesta, o null 
+        si &eacute;ste no se puede distinguir. Por ejemplo, dada la l&iacute;nea 
+        HTTP/1.0 200 OK, se devolver&iacute;a 200.<br>
+        o String getResponseMessage(). Informa de la descripci&oacute;n en la 
+        l&iacute;nea de estado de la respuesta, o null si &eacute;sta no se puede 
+        distinguir. Por ejemplo, dada la l&iacute;nea HTTP/1.0 200 OK, se devolver&iacute;a 
+        OK.<br>
+        o String getURL(). Cadena con la URL completa que se ha intentado alcanzar 
+        con esta conexi&oacute;n.<br>
+        o void setRequestMethod(String method). Establece el tipo de la petici&oacute;n 
+        a realizar, sea GET,HEAD o POST. Por defecto el tipo es GET. o void setRequestProperty(String 
+        key, String value). Inserta (o modifica si ya existe) el valor de un campo 
+        de la cabecera de petici&oacute;n, cuyo nombre pasamos como par&aacute;metro 
+        (por ejemplo Accept, User-Agent, Referer, etc.), con el valor tambi&eacute;n 
+        pasado como par&aacute;metro.<br>
+        - CommConnection extends StreamConnection. Con esta interface obtendremos<br>
+        una conexi&oacute;n a puerto serie l&oacute;gico, no teniendo &eacute;ste 
+        que corresponder necesariamente<br>
+        a un RS-232 f&iacute;sico. Por ejemplo, los puertos IrDA IRCOMM pueden 
+        ser configurados como puertos serie l&oacute;gicos dentro del sistema 
+        operativo y as&iacute; actuar como tales.La cadena que pasamos al m&eacute;todo 
+        open() tiene el formato: comm:&lt;port identifier&gt;[&lt;optional parameters&gt;] 
+        Donde el identificador del puerto ser&aacute; (convencionalmente) COM# 
+        para los puertos RS- 232 o IR# para los puertos IrDA IRCOMM, siendo # 
+        el n&uacute;mero asignado al puerto. Los par&aacute;metros opcionales 
+        ser&aacute;n pares par&aacute;metro-valor separados por punto y coma (;). 
+        Por ejemplo, Connector.open(&quot;comm:com0;baudrate=19200&quot;); abrir&iacute;a 
+        una conexi&oacute;n con el puerto serie &quot;com0&quot; de velocidad 
+        de transferencia de bits 19200 baudios. Si esta velocidad no es soportada 
+        por la plataforma se usar&aacute; un valor alternativo, el cual podremos 
+        consultar posteriormente con el m&eacute;todo int getBaudRate(). &Eacute;ste, 
+        junto con void setBaudRate(int) son los dos &uacute;nicos m&eacute;todos 
+        nuevos que aporta la interface.<br>
+        - SocketConnection extends StreamConnection. Esta interface nos ofrece 
+        una conexi&oacute;n basada en sockets. Con ella, podremos comenzar una 
+        conexi&oacute;n desde un socket cliente o, una vez establecida una ServerSocketConnection 
+        en un socket servidor tras petici&oacute;n de un socket cliente, recoger 
+        en una instancia de SocketConnection la conexi&oacute;n que devuelve el 
+        m&eacute;todo acceptAndOpen() de aquella interface. Para intentar una 
+        conexi&oacute;n v&iacute;a socket desde nuestro MIDlet usaremos el<br>
+        Connector.open() con una cadena de formato:<br>
+        socket://&lt;host&gt;:&lt;port&gt;<br>
+        Donde host es la m&aacute;quina en el que espera el socket servidor y 
+        port el puerto por el que escucha. Heredando de StreamConnection, ser&aacute; 
+        una conexi&oacute;n tanto de entrada como de salida, donde si se cierra 
+        un canal, el otro podr&aacute; seguir us&aacute;ndose.<br>
+        La comunicaci&oacute;n por medio de sockets podr&aacute; ser tratada como 
+        un flujo tanto de entrada como de salida donde, una vez establecida la 
+        conexi&oacute;n, se podr&aacute; leer del flujo que representa usando 
+        InputStream y escribir en &eacute;l por medio de OutputStream.<br>
+        Ser&aacute;n necesarios en aplicaciones donde la p&eacute;rdida de paquetes 
+        que sufr&iacute;an los datagramas no sea permisible. Frente a esta seguridad, 
+        perderemos ancho de banda en la comunicaci&oacute;n debido al tama&ntilde;o 
+        de las cabeceras TCP.</p>
+      <p>Los sockets s&oacute;lo definen el transporte de datos a bajo nivel. 
+        Esto hace que exista la necesidad de definir un protocolo para comunicar 
+        ambos sistemas, dejando en manos del desarrollador la definici&oacute;n 
+        del formato (en ambos puntos de la conexi&oacute;n) que deber&aacute; 
+        cumplir la informaci&oacute;n que se intercambia. En aquellos casos en 
+        los que la comunicaci&oacute;n necesite cumplir ciertos est&aacute;ndares 
+        o no haya control sobre alguno de los dos sistemas a conectar, el uso 
+        de HTTP es recomendado. Por supuesto, este protocolo ser&aacute; mucho 
+        m&aacute;s lento que sockets o datagramas, pero es algo universal.<br>
+        - HttpsConnection extends HttpConnection. Versi&oacute;n segura de la 
+        conexi&oacute;n HTTP, donde existir&aacute; un proceso de autenticaci&oacute;n 
+        entre cliente y servidor previo al intercambio de informaci&oacute;n objeto 
+        de la comunicaci&oacute;n. Estas conexiones se deben implementar bajo 
+        una especificaci&oacute;n como TLS, WTLS, etc., siendo la m&aacute;s usual 
+        la SSL. La URL del m&eacute;todo Connector.open() se utilizar&aacute; 
+        en HttpsConnection, as&iacute;:<br>
+        https://&lt;host&gt;:&lt;port&gt;/ruta/recurso?Query#Ref<br>
+        Incorporan dos nuevos m&eacute;todos adem&aacute;s de los heredados de 
+        HttpConnection: el m&eacute;todo int getPort(), que nos permitir&aacute; 
+        conocer el puerto por el que se nos ha atendido, y el SecurityInfo getSecurityInfo(), 
+        que nos dar&aacute; informaci&oacute;n asociada con la comunicaci&oacute;n 
+        HTTPS una vez establecida &eacute;sta correctamente.<br>
+        - SecureConnection extends SocketConnection. Versi&oacute;n segura de 
+        la conexi&oacute;n por sockets que est&aacute; implementada usualmente 
+        con el protocolo SSL (Secure Socket Layer). Dicho protocolo encripta los 
+        datos transportados en la comunicaci&oacute;n, proporcionando autenticaci&oacute;n 
+        tanto a un lado como a otro de &eacute;sta. Para abrirla se usar&aacute; 
+        una cadena de la forma:<br>
+        ssl://&lt;host&gt;:&lt;port&gt;<br>
+        Como en el caso anterior, un m&eacute;todo SecurityInfo getSecurityInfo() 
+        nos da informaci&oacute;n sobre la comunicaci&oacute;n establecida.<br>
+        - SecurityInfo. Interface que permite acceder a la informaci&oacute;n 
+        que marca la conexi&oacute;n segura, tanto para HttpsConnection como para 
+        SecureConnection donde se ofrece, por ejemplo, el protocolo utilizado, 
+        el certificado que autentica la comunicaci&oacute;n, etc.<br>
+        Los datos sobre el certificado se proporcionan en una instancia de la 
+        clase Certificate, &uacute;nica interface del paquete javax.microedition.pki.</p>
+      <p>&nbsp;</p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

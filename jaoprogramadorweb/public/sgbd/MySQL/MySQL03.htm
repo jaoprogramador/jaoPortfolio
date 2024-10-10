@@ -1,0 +1,345 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Ejercicios MySQL</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="MySQL, sql, pl/sql, programacion MySQL, ejercicios MySQL, ejemplos MySQL, select">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2>A R R A N C A R</h2></td>
+  </tr>
+  <tr> 
+    <td><h3>Arrancar el servidor la primera vez</h3>
+      <p>La informaci&oacute;n de esta secci&oacute;n se aplica principalmente si 
+        se est&aacute; instalando MySQL con la versi&oacute;n Noinstall, o si 
+        se desea<br>
+        configurar y probar MySQL manualmente en lugar de usar las herramientas 
+        con interfaz gr&aacute;fica.<br>
+        En Windows 95, 98, o Me, los clientes MySQL siempre se conectan al servidor 
+        utilizando TCP/IP. (Esto le permite a cualquier or-<br>
+        Instalar MySQL<br>
+        50<br>
+        denador de la red conectarse al servidor MySQL). Debido a esto, hay que 
+        asegurarse de que TCP/IP est&eacute; soportado en el ordenador<br>
+        antes de iniciar MySQL. El protocolo TCP/IP se encuentra en el CD-ROM 
+        de Windows.<br>
+        Es importante advertir de que si se est&aacute; utilizando una versi&oacute;n 
+        antigua de Windows 95 (por ejemplo, OSR2), es muy probable que<br>
+        se disponga de un paquete Winsock antiguo; MySQL necesita Winsock 2. Puede 
+        descargarse el &uacute;ltimo paquete Winsock desde<br>
+        http://www.microsoft.com/. Windows 98 ya tiene la nueva biblioteca Winsock 
+        2, de modo que no es necesario actualizarla.<br>
+        En sistemas basados en NT, como Windows NT, 2000, XP, o 2003, los clientes 
+        tienen dos opciones. Pueden utilizar TCP/IP, o utilizar<br>
+        conexiones con named pipe si est&aacute;n soportadas por el servidor. 
+        Para lograr que MySQL trabaje con TCP/IP cuando se usa<br>
+        Windows NT 4, debe instalarse el service pack 3 (o posterior).<br>
+        MySQL 5.0 para Windows tambi&eacute;n soporta conexiones de memoria compartida 
+        (shared-memory) si se lo inicia con la opci&oacute;n -<br>
+        -shared-memory. Los clientes pueden conectarse a trav&eacute;s de memoria 
+        compartida (shared memory) si usan la opci&oacute;n -<br>
+        -protocol=memory.<br>
+        Para m&aacute;s informaci&oacute;n sobre qu&eacute; servidor ejecutar, 
+        consulte Secci&oacute;n 2.3.9, &#8220;Seleccionar un tipo de servidor 
+        MySQL&#8221;.<br>
+        Esta secci&oacute;n brinda una visi&oacute;n de conjunto del arranque 
+        del servidor MySQL. Las siguientes secciones proporcionan informaci&oacute;n<br>
+        m&aacute;s espec&iacute;fica para ejecutar el servidor MySQL desde la 
+        l&iacute;nea de comandos o como un servicio de Windows.<br>
+        Los ejemplos de estas secciones asumen que MySQL est&aacute; instalado 
+        en la ubicaci&oacute;n por defecto: C:\Program Files\<br>
+        MySQL\MySQL Server 5.0. Las rutas de directorio mostradas en los ejemplos 
+        deben modificarse si MySQL est&aacute; instalado<br>
+        en una ubicaci&oacute;n diferente.<br>
+        Las pruebas se realizan mejor desde el indicador del sistema en una ventana 
+        de consola (o &#8220;ventana DOS&#8221;). De este modo, los mensajes<br>
+        mostrados por el servidor permanecen en la ventana, donde son m&aacute;s 
+        sencillos de leer. Si algo funciona mal en la configuraci&oacute;n,<br>
+        estos mensajes facilitan la identificaci&oacute;n y soluci&oacute;n de 
+        los problemas.<br>
+        Para iniciar el servidor, se emplea este comando:<br>
+        C:\&gt; C:\Program Files\MySQL\MySQL Server 5.0\bin\mysqld --console<br>
+        En servidores que incluyen soporte para InnoDB, se deber&iacute;an mostrar 
+        los siguientes mensajes a medida que el servidor se inicia:<br>
+        InnoDB: The first specified datafile c:\ibdata\ibdata1 did not exist:<br>
+        InnoDB: a new database to be created!<br>
+        InnoDB: Setting file c:\ibdata\ibdata1 size to 209715200<br>
+        InnoDB: Database physically writes the file full: wait...<br>
+        InnoDB: Log file c:\iblogs\ib_logfile0 did not exist: new to be created<br>
+        InnoDB: Setting log file c:\iblogs\ib_logfile0 size to 31457280<br>
+        InnoDB: Log file c:\iblogs\ib_logfile1 did not exist: new to be created<br>
+        InnoDB: Setting log file c:\iblogs\ib_logfile1 size to 31457280<br>
+        InnoDB: Log file c:\iblogs\ib_logfile2 did not exist: new to be created<br>
+        InnoDB: Setting log file c:\iblogs\ib_logfile2 size to 31457280<br>
+        InnoDB: Doublewrite buffer not found: creating new<br>
+        InnoDB: Doublewrite buffer created<br>
+        InnoDB: creating foreign key constraint system tables<br>
+        InnoDB: foreign key constraint system tables created<br>
+        011024 10:58:25 InnoDB: Started<br>
+        Cuando el servidor finaliza su secuencia de inicio, se deber&iacute;a 
+        ver un mensaje similar al siguiente, que indica que el servidor est&aacute; 
+        listo<br>
+        para dar servicio a conexiones de clientes:<br>
+        mysqld: ready for connections<br>
+        Version: '5.0.9-beta' socket: '' port: 3306<br>
+        El servidor contin&uacute;a con la emisi&oacute;n por pantalla de cualquier 
+        otro mensaje de diagn&oacute;stico que se genere. Puede abrirse una nueva<br>
+        ventana de consola en la cual ejecutar programas cliente.<br>
+        Si se omite la opci&oacute;n --console, el servidor dirige la informaci&oacute;n 
+        de diagn&oacute;stico hacia el registro de errores en el directorio de<br>
+        datos (por defecto, C:\Program Files\MySQL\MySQL Server 5.0\data). El 
+        registro de errores es el fichero con extensi&oacute;n<br>
+        .err.<br>
+        Nota: Las cuentas de usuario que aparecen inicialmente en las tablas de 
+        permisos de MySQL no est&aacute;n protegidas por contrase&ntilde;a.<br>
+        Despu&eacute;s de iniciar el servidor, se deber&iacute;an establecer las 
+        contrase&ntilde;as para estas cuentas empleando las instrucciones que 
+        se hallan<br>
+        en Secci&oacute;n 2.9, &#8220;Puesta en marcha y comprobaci&oacute;n despu&eacute;s 
+        de la instalaci&oacute;n&#8221;.<br>
+        <h3>Arrancar MySQL desde la l&iacute;nea de comandos de Windows<br>
+        </h3><br>
+        El servidor MySQL puede ser iniciado manualmente desde la l&iacute;nea 
+        de comandos. Esto es v&aacute;lido en cualquier versi&oacute;n de Windows.<br>
+        Para iniciar el servidor mysqld desde la l&iacute;nea de comandos, se 
+        deber&iacute;a abrir una ventana de consola (o &#8220;ventana DOS &#8221;) 
+        e ingresar<br>
+        este comando:<br>
+        Instalar MySQL<br>
+        51<br>
+        C:\&gt; C:\Program Files\MySQL\MySQL Server 5.0\bin\mysqld<br>
+        La ruta empleada en el ejemplo anterior puede variar seg&uacute;n la ubicaci&oacute;n 
+        de la instalaci&oacute;n de MySQL en el sistema.<br>
+        En versiones no NT de Windows, esto ejecutar&aacute; mysqld en segundo 
+        plano. Esto significa que luego de que el servidor se inicia,<br>
+        puede verse otra ventana de comandos. Si se inicia el servidor de esta 
+        manera pero en Windows NT, 2000, XP o 2003, el mismo se<br>
+        ejecuta en segundo plano sin que aparezca ning&uacute;n indicador del 
+        sistema hasta que el servidor finaliza. Debido a esto, se deber&aacute;<br>
+        abrir otra ventana de consola para correr programas cliente mientras el 
+        servidor se ejecuta.<br>
+        El siguiente comando detendr&aacute; al servidor MySQL:<br>
+        C:\&gt; C:\Program Files\MySQL\MySQL Server 5.0\bin\mysqladmin -u root 
+        shutdown<br>
+        Esto invoca la utilidad administrativa de MySQL, mysqladmin, para conectarse 
+        al servidor y transmitirle la orden de finalizaci&oacute;n.<br>
+        El comando se conecta como el usuario root de MySQL, el cual es la cuenta 
+        administrativa por defecto en el sistema de permisos<br>
+        de MySQL. Debe advertirse que los usuarios en este sistema son enteramente 
+        independientes de cualquier usuario de inicio<br>
+        de sesi&oacute;n perteneciente a Windows.<br>
+        Si mysqld no se inicia, debe verificarse el registro de errores para ver 
+        si el servidor gener&oacute; cualquier mensaje que indique la causa<br>
+        del problema. El registro de errores se localiza en el directorio C:\Program 
+        Files\MySQL\MySQL Server 5.0\data.<br>
+        Es el fichero con extensi&oacute;n .err. Tambi&eacute;n puede intentarse 
+        iniciar el servidor con el comando mysqld --console; en este caso<br>
+        se podr&aacute; obtener alguna informaci&oacute;n en pantalla que permita 
+        resolver el problema.<br>
+        La &uacute;ltima opci&oacute;n es ejecutar mysqld con --standalone --debug. 
+        En este caso, mysqld guardar&aacute; un fichero de registro<br>
+        llamado C:\mysqld.trace el cual deber&iacute;a contener la raz&oacute;n 
+        por la cual mysqld no se inicia. Consulte Secci&oacute;n D.1.2, &#8220;Crear<br>
+        ficheros de traza&#8221;.<br>
+        El comando mysqld --verbose --help sirve para mostrar todas las opciones 
+        que mysqld es capaz de comprender.<br>
+        <br>
+        <h3>Arrancar MySQL como un servicio de Windows</h3><br>
+        En la familia NT (Windows NT, 2000, XP, 2003), la manera recomendada de 
+        ejecutar MySQL es instalarlo como un servicio del<br>
+        sistema operativo, de modo que se inicie y detenga autom&aacute;ticamente 
+        cuando Windows lo haga. Un servidor MySQL instalado como<br>
+        servicio tambi&eacute;n puede controlarse desde la l&iacute;nea de comandos 
+        empleando los comandos NET, o con la utilidad gr&aacute;fica Services.<br>
+        La utilidad Services (el Administrador de Servicios de Windows (Service 
+        Control Manager)) puede<br>
+        encontrarse en el Panel de Control (bajo Administrative Tools en Windows 
+        2000, XP, y Server 2003). Es aconsejable cerrar la utilidad<br>
+        Services mientras se lleven a cabo operaciones de instalaci&oacute;n o 
+        remoci&oacute;n del servidor desde la l&iacute;nea de comandos. Esto evita<br>
+        una cantidad de errores.<br>
+        Antes de instalar MySQL como un servicio Windows, se deber&iacute;a detener 
+        primero el servidor -si est&aacute; en ejecuci&oacute;n- mediante el siguiente<br>
+        comando:<br>
+        C:\&gt; C:\Program Files\MySQL\MySQL Server 5.0\bin\mysqladmin -u root 
+        shutdown<br>
+        Nota: si la cuenta de usuario MySQL root est&aacute; protegida por una 
+        contrase&ntilde;a, la forma de invocar este comando ser&aacute;<br>
+        C:\Program Files\MySQL\MySQL Server 5.0\bin\mysqladmin -u root -p shutdown 
+        y porporcionando la<br>
+        contrase&ntilde;a cuando sea solicitada.<br>
+        Esto invoca la utilidad administrativa de MySQL, mysqladmin, para conectarse 
+        al servidor y transmitirle la orden de finalizaci&oacute;n.<br>
+        El comando se conecta como el usuario root de MySQL, el cual es la cuenta 
+        administrativa por defecto en el sistema de permisos<br>
+        de MySQL. Debe advertirse que los usuarios en este sistema son enteramente 
+        independientes de cualquier usuario de inicio<br>
+        de sesi&oacute;n perteneciente a Windows.<br>
+        Este comando instalar&aacute; el servidor como un servicio:<br>
+        C:\&gt; mysqld --install<br>
+        Si se producen problemas al instalar mysqld como un servicio usando s&oacute;lo 
+        el nombre del servidor, debe intentarse indicando la<br>
+        ruta completa. Por ejemplo:<br>
+        C:\&gt; C:\Program Files\MySQL\MySQL Server 5.0\bin\mysqld --install<br>
+        La ruta al directorio bin de MySQL puede agregarse a la variable de entorno 
+        de Windows PATH:<br>
+        &#8226; En el Escritorio de Windows, hacer click derecho en el &iacute;cono 
+        Mi PC y seleccionar Propiedades<br>
+        Instalar MySQL<br>
+        52<br>
+        &#8226; A continuaci&oacute;n, seleccionar la pesta&ntilde;a Opciones 
+        Avanzadas de la ventana PROPIEDADES DEL SISTEMA, y hacer click en el bot&oacute;n<br>
+        VARIABLES DE ENTORNO.<br>
+        &#8226; Bajo VARIABLES DEL SISTEMA, seleccionar Path , y hacer click en 
+        el bot&oacute;n MODIFICAR. Aparecer&aacute; el cuadro de di&aacute;logo 
+        MODIFICAR<br>
+        VARIABLE DEL SISTEMA.<br>
+        &#8226; Debe colocarse el cursor al final del texto mostrado en el espacio 
+        denominado VALOR DE LA VARIABLE. (Presionando la tecla<br>
+        Fin (End) se puede tener seguridad que el cursor quede realmente al final 
+        del texto.) Luego debe ingresarse la ruta completa al<br>
+        directorio bin de MySQL (por ejemplo, C:\Program Files\MySQL\MySQL Server 
+        5.0\bin). Si hab&iacute;a un texto<br>
+        anterior, debe haber un punto y coma separando aquel y esta nueva ruta. 
+        Cerrar todos los cuadros de di&aacute;logo haciendo click en<br>
+        OK. Ahora deber&iacute;a poderse invocar cualquier programa ejecutable 
+        de MySQL simplemente tipeando su nombre en el indicador<br>
+        de sistema desde cualquier directorio, sin tener que indicar la ruta completa. 
+        Esto incluye a los servidores, el cliente mysql, y<br>
+        todas las utilidades de l&iacute;nea de comandos tal como mysqladmin y 
+        mysqldump.<br>
+        &#8226; No se deber&iacute;a agregar el directorio bin de MySQL al PATH 
+        de Windows si se est&aacute;n ejecutando m&uacute;ltiples servidores MySQL<br>
+        en el mismo ordenador.<br>
+        Advertencia: debe tenerse mucho cuidado al editar manualmente la variable 
+        de sistema PATH; el borrado o modificaci&oacute;n accidental<br>
+        de cualquier parte podr&iacute;a dejar al sistema funcionando mal o incluso 
+        inutilizable.<br>
+        El comando de instalaci&oacute;n como servicio no inicia el servidor. 
+        Las instrucciones para hacerlo se dan luego en esta secci&oacute;n.<br>
+        MySQL 5.0 soporta argumentos adicionales cuando se lo instala como servicio:<br>
+        &#8226; Puede indicarse un nombre para el servicio inmediatamente a continuaci&oacute;n 
+        de la opci&oacute;n --install. El nombre por defecto es<br>
+        MySQL.<br>
+        &#8226; Si se indica un nombre de servicio, solamente puede especificarse 
+        una opci&oacute;n a continuaci&oacute;n. Por convenci&oacute;n, esta deber&iacute;a 
+        ser<br>
+        --defaults-file=file_name para indicar el nombre de un fichero de opciones 
+        que el servidor deber&iacute;a leer cuando se<br>
+        inicia.<br>
+        Es posible emplear otra opci&oacute;n en vez de --defaults-file, pero 
+        no se recomienda. --defaults-file es m&aacute;s flexible<br>
+        porque posibilita especificar m&uacute;ltiples opciones de inicio para 
+        el servidor, coloc&aacute;ndolas en el fichero indicado. Adem&aacute;s, 
+        en<br>
+        MySQL 5.0, el uso de una opci&oacute;n diferente a --defaults-file no 
+        est&aacute; soportado hasta la versi&oacute;n 5.0.3.<br>
+        &#8226; A partir de la versi&oacute;n 5.0.1, puede especificarse la opci&oacute;n 
+        --local-service a continuaci&oacute;n del nombre del servicio. Esto<br>
+        provoca que el servidor se ejecute empleando la cuenta LocalService de 
+        Windows, que tiene privilegios de sistema limitados.<br>
+        Esta cuenta existe solamente en Windows XP y posteriores. Si ambas opciones 
+        --defaults-file y -<br>
+        -local-service son colocadas a continuaci&oacute;n del nombre del servicio, 
+        pueden estar en cualquier orden.<br>
+        Para un servidor MySQL que se instal&oacute; como un servicio de Windows, 
+        las siguientes reglas determinan el nombre de servicio y los<br>
+        ficheros de opciones que utilizar&aacute;:<br>
+        &#8226; Si el comando de instalaci&oacute;n como servicio no especific&oacute; 
+        un nombre de servicio o el nombre por defecto (MySQL) a continuaci&oacute;n<br>
+        de la opci&oacute;n --install, el servidor tomar&aacute; el nombre de 
+        servicio MySQL y leer&aacute; opciones desde el grupo [mysqld]<br>
+        en los ficheros de opciones est&aacute;ndar.<br>
+        &#8226; Si el comando de instalaci&oacute;n como servicio especifica un 
+        nombre de servicio distinto a MySQL luego de la opci&oacute;n<br>
+        --install, el servidor emplear&aacute; ese nombre de servicio. Leer&aacute; 
+        opciones en el grupo que tenga el mismo nombre que el servicio,<br>
+        en los ficheros de opciones est&aacute;ndar.<br>
+        El servidor tambi&eacute;n leer&aacute; opciones desde el grupo [mysqld] 
+        de los ficheros de opciones est&aacute;ndar. Esto permite usar el grupo<br>
+        [mysqld] para opciones que deban ser utilizadas por todos los servicios 
+        MySQL, y un grupo de opciones con el mismo nombre<br>
+        del servicio para ser usadas s&oacute;lo por aquel.<br>
+        &#8226; Si el comando de instalaci&oacute;n del servicio especifica una 
+        opci&oacute;n --defaults-file despu&eacute;s del nombre del servicio, 
+        el servidor<br>
+        leer&aacute; opciones solamente desde el grupo [mysqld] del fichero suministrado 
+        e ignorar&aacute; los ficheros de opciones est&aacute;ndar.<br>
+        A modo de un ejemplo m&aacute;s complejo, consid&eacute;rese el siguiente 
+        comando:<br>
+        C:\&gt; C:\Program Files\MySQL\MySQL Server 5.0\bin\mysqld --install MySQL 
+        --defaults-file=C:\my-opts.cnf<br>
+        Aqu&iacute;, el nombre de servicio por defecto (MySQL) se suministr&oacute; 
+        a continuaci&oacute;n de la opci&oacute;n --install. Si no se hubiera 
+        indicado<br>
+        la opci&oacute;n --defaults-file, este comando hubiese tenido como efecto 
+        que el servidor leyera el grupo [mysqld] de los ficheros<br>
+        de opciones est&aacute;ndar. No obstante, debido a que la opci&oacute;n 
+        --defaults-file se encuentra presente, el servidor leer&aacute; las<br>
+        opciones del grupo [mysqld], pero s&oacute;lo del fichero indicado.<br>
+        Instalar MySQL<br>
+        53<br>
+        Tambi&eacute;n es posible especificar opciones como Par&aacute;metros 
+        de Inicio (Start parameters) en la utilidad Services de Windows antes<br>
+        de iniciar el servicio MySQL.<br>
+        Una vez que el servidor MySQL ha sido instalado como servicio, ser&aacute; 
+        iniciado autom&aacute;ticamente luego del arranque de Windows.<br>
+        El servicio tambi&eacute;n puede iniciarse desde la utilidad Services, 
+        o empleando el comando NET START MySQL. El comando<br>
+        NET no es case sensitive.<br>
+        Cuando se ejecuta como servicio, mysqld no tiene acceso a una ventana 
+        de consola, por lo que no puede mostrar mensajes. Si<br>
+        mysqld no se inicia, debe consultarse el registro de errores para ver 
+        si el servidor ha dejado all&iacute; mensajes que indiquen la causa<br>
+        del problema. El registro de errores se encuentra en el directorio de 
+        datos de MySQL (por ejemplo, C:\Program Files\<br>
+        MySQL\MySQL Server 5.0\data). Es el fichero con extensi&oacute;n .err.<br>
+        Cuando un servidor MySQL se instala como servicio, se detendr&aacute; 
+        autom&aacute;ticamente si estaba en ejecuci&oacute;n al momento de cerrar<br>
+        Windows. Tambi&eacute;n puede detenerse manualmente, ya sea a trav&eacute;s 
+        de la utilidad Services, del comando NET STOP MySQL, o<br>
+        del comando mysqladmin shutdown.<br>
+        Tambi&eacute;n existe la opci&oacute;n de instalar el servidor como un 
+        servicio de inicio manual, si no se desea que el servicio se inicie en 
+        cada<br>
+        arranque de Windows. Para esto, debe emplearse la opci&oacute;n --install-manual 
+        en lugar de --install:<br>
+        C:\&gt; C:\Program Files\MySQL\MySQL Server 5.0\bin\mysqld --install-manual<br>
+        Para cancelar un servidor que fue instalado como servicio, primero se 
+        lo debe detener, si est&aacute; en ejecuci&oacute;n, por medio del comando<br>
+        NET STOP MYSQL. Luego de esto se usar&aacute; la opci&oacute;n --remove 
+        para cancelarlo:<br>
+        C:\&gt; C:\Program Files\MySQL\MySQL Server 5.0\bin\mysqld --remove<br>
+        Si mysqld no se est&aacute; ejecutando como un servicio, se lo puede iniciar 
+        desde la l&iacute;nea de comandos. Consulte Secci&oacute;n 2.3.11,<br>
+        &#8220;Arrancar MySQL desde la l&iacute;nea de comandos de Windows&#8221; 
+        para m&aacute;s instrucciones.<br>
+        Consulte Secci&oacute;n 2.3.14, &#8220;Resoluci&oacute;n de problemas 
+        en la instalaci&oacute;n de MySQL bajo Windows&#8221; si se producen problemas 
+        durante<br>
+        la instalaci&oacute;n.</p>
+        </td>
+    <td>&nbsp;</td>
+    <td><a href="http://www.euskalnet.net/juanarana/oraclezip/Ejer3.rar"><img src="../../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td>
+<div align="right"><a href="http://www.euskalnet.net/juanarana/index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a>
+      </div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

@@ -1,0 +1,362 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Introducci&oacute;n a DLL</title>
+<META http-equiv=Content-Language content=es>
+<META content="Conceptos redes,LAN" name=description>
+<meta name="keywords" content="Conceptos redes,LAN">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2>C O N C E P T O S</h2></td>
+  </tr>
+  <tr> 
+    <td height="197"> 
+      <h3>Los protocolos del nivel del enlace de datos</h3>
+      <p>1.-&iquest;Entre qu&eacute; tipo de nodos realiza el transporte de datos 
+        el nivel de enlace?<br>
+        Entre nodos adyacentes en la red.<br>
+        2.-&iquest;Cu&aacute;les son las cinco funciones del nivel de enlace?<br>
+        Control de errores<br>
+        Entramado<br>
+        Control de acceso al medio<br>
+        Control de flujo<br>
+        Gesti&oacute;n del enlace<br>
+        3.-&iquest;De qu&eacute; se ocupa la funci&oacute;n de la gesti&oacute;n 
+        del enlace?<br>
+        Se ocupa de establecer la comunicaci&oacute;n entre dos nodos de la red.<br>
+        4.-&iquest;Qu&eacute; nombre reciben las unidades de datos que se intercambian 
+        a nivel de enlace?<br>
+        Tramas.<br>
+        5.-&iquest;En qu&eacute; consiste la funci&oacute;n de entramado?<br>
+        Consiste en asociar bits para formar tramas que ser&aacute;n enviadas 
+        por la capa f&iacute;sica a trav&eacute;s del medio de transmisi&oacute;n 
+        adecuado.<br>
+        6.-&iquest;C&oacute;mo se clasifican los protocolos de nivel de enlace 
+        en funci&oacute;n de c&oacute;mo realizan el gobierno de la comunicaci&oacute;n 
+        y el entramado?<br>
+        Protocolos orientados a car&aacute;cter<br>
+        Mediante caracteres DEL, ETX, SOH...<br>
+        Protocolos de bloque<br>
+        Mediante caracteres indica c&uacute;antos caracteres componen la trama.<br>
+        Protocolos orientados a bit<br>
+        Banderas delimitadoras<br>
+        7.-&iquest;C&oacute;mo realizan el gobierno de la comunicaci&oacute;n 
+        los protocolos orientados a car&aacute;cter?<br>
+        Utilizan transmisiones de informaci&oacute;n codificadas normalmente ASCII 
+        que se reservan una serie de codigos especiales.<br>
+        8.-&iquest;Cu&aacute;ndo se dice que el protocolo es transparente al c&oacute;digo 
+        utilizado?<br>
+        Cuando el protocolo interpreta ciertos caracteres como instrucciones de 
+        control y ninguno de estos caracteres aparece como informaci&oacute;n.<br>
+        9.-&iquest;C&oacute;mo se consigue la transparencia en los protocolos 
+        orientados a car&aacute;cter?<br>
+        La transperencia se garantiza haciendo uso de reglas de interpretaci&oacute;n 
+        especiales cuando se reciben asociaciones de caracteres de control.</p>
+      <p></p>
+      <p></p>
+      <p>10.-&iquest;Qu&eacute; caracter&iacute;sticas (ventajas e inconvenientes 
+        presentan los protocolos orientados a car&aacute;cter?<br>
+        VENTAJAS<br>
+        - Forma de codificaci&oacute;n muy simple</p>
+      <p>INCONVENIENTES<br>
+        - Las tramas no tienen un formato &uacute;nico, son dependientes del contenido 
+        informativo de la trama.<br>
+        - Rendimiento bajo.</p>
+      <p>11.-Ejemplos de protocolos orientados a car&aacute;cter.<br>
+        BSC (Binary Synchronic Control) (IBM)<br>
+        XON/XOFF<br>
+        XMODEM<br>
+        YMODEM<br>
+        ZMODEM<br>
+        KERMIT<br>
+        12.-&iquest;C&oacute;mo consiguen la transparencia los protocolos de bloque?<br>
+        El receptor no investiga en el contenido de los datos de usuario en cada 
+        trama, porque sabe que el final de la trama no puede confundirse con los 
+        datos del usuario.</p>
+      <p>Codifica un campo en el que se especifican cu&aacute;ntos caracteres 
+        de usuario vienen con la trama. El car&aacute;cter siguiente al apuntado 
+        por este campo contador, ser&aacute; un car&aacute;cter de control del 
+        final de la trama. En medio quedar&aacute;n los datos de usuario.<br>
+        13.-&iquest;Cu&aacute;les son las caracter&iacute;sticas de los protocolos 
+        orientados a bit?<br>
+        - Son absolutamente independientes al c&oacute;digo utilizado<br>
+        - Codifican el control de las comunicaciones por la posici&oacute;n y 
+        el valor de los distintos bits que componen la trama<br>
+        - Eficiencia mayor al de orientados a car&aacute;cter<br>
+        - Transparentes<br>
+        - Menos sensibles al ruido<br>
+        - Tramas delimitadoras compuestas por campos se&ntilde;alizadores (flags 
+        o banderas)<br>
+        14.-&iquest;C&oacute;mo codifican el control de las comunicaciones?<br>
+        Codifican por la posici&oacute;n y el valor de los distintos bits que 
+        componen los campos de control de la trama.<br>
+        15.-&iquest;C&oacute;mo se consigue que los delimitadores de las tramas 
+        no aparezcan en el resto de los campos de una trama?<br>
+        Se impide que se transmitan m&aacute;s de cinco 1 seguidos. El sistema 
+        insertar&aacute; un 0 inmediatamente despu&eacute;s de la transmisi&oacute;n 
+        de cinco 1 consecutivos.</p>
+      <p>16.-&iquest;Qu&eacute; se entiende por campo en una tr1ama?<br>
+        Cada parte de la trama que debe cumplir una determinada funci&oacute;n.<br>
+        17.-&iquest;Cu&aacute;les son los principales protocolos orientados a 
+        bit?<br>
+        HDLC, LLc, LAPB, LAPX....<br>
+        18.-Nombra las principales fuentes causantes de errores.<br>
+        - Ruido t&eacute;rmico<br>
+        - Ruido producido por componentes electromec&aacute;nicos<br>
+        - Faltas de linealidad en los medios de transmisi&oacute;n a causa de 
+        que las frecuencias altas no se transmiten igual que las frecuencias bajas<br>
+        - Cruces entre l&iacute;neas<br>
+        - Falta de sincronismo<br>
+        - Eco<br>
+        - Atenuaci&oacute;n<br>
+        19.-&iquest;Qu&eacute; m&eacute;todos existen para evitar la autoinducci&oacute;n 
+        de dos l&iacute;neas de comunicaciones paralelas?<br>
+        Se pueden utilizar cables de pares trenzadios que lleven cruzadas la transmisi&oacute;n 
+        y la recepci&oacute;n, de modo que se anule el efecto de autoinducci&oacute;n.(Entrelazado).<br>
+        20.-&iquest;Cu&aacute;les son las dos partes que tiene que tener un sistema 
+        de tratamiento de errores?<br>
+        Detecci&oacute;n y correcci&oacute;n. <br>
+        21.-&iquest;Qu&eacute; nombre recibe y como funciona la t&eacute;cnica 
+        de detecci&oacute;n de errores m&aacute;s utilizada?<br>
+        C&Oacute;DIGOS DE REDUNDANCIA C&Iacute;CLICA<br>
+        Con la informaci&oacute;n se formar&aacute; un polinomio-mensaje. <br>
+        Emisor y receptor se pondr&aacute;n de acuerdo para dividirlo entre un 
+        polinomio-clave com&uacute;n en los dos, que llamaremos polinomio-divisor.<br>
+        El emisor divide el polinomio-mensaje entre el polinomio-divisor obteniendo 
+        un cociente y un polinomio-resto.<br>
+        Este polinomio-resto se enviar&aacute; junto con la informaci&oacute;n.<br>
+        El receptor realizar&aacute; la misma operaci&oacute;n y observar&aacute; 
+        si el polinomio-resto couincide con el enviado del emisor. Si es as&iacute; 
+        se supone que la informaci&oacute;n lleg&oacute; correctamente, si no 
+        es que fall&oacute;.</p>
+      <p>Grado m&aacute;ximo del polinomio-divisor=16<br>
+        Grado m&aacute;ximo del polinomio-resto=16<br>
+        22.-&iquest;Qu&eacute; se entiende por control de flujo?<br>
+        Se encarga de adecuar las velocidades de transferencia entre emisor y 
+        receptor.<br>
+        23.-&iquest;Qu&eacute; t&eacute;cnicas se utilizan para controlar el flujo 
+        de la transferencia de datos?<br>
+        - Env&iacute;o y espera<br>
+        - Ventana deslizante<br>
+        24.-&iquest;En qu&eacute; consiste la t&eacute;cnica de superposici&oacute;n 
+        o piggybacking?<br>
+        Consiste en utilizar las tramas de datos para enviar confirmaciones.<br>
+        25.-&iquest;Qu&eacute; sucede con la t&eacute;cnica de superposici&oacute;n 
+        cuando un terminal no tiene informaci&oacute;n que enviar?<br>
+        Pues que otro terminal quedar&aacute; a la espera de una confirmaci&oacute;n 
+        que no llegar&aacute;.<br>
+        Esto se puede corregir generando una trama especial de confirmaci&oacute;n 
+        sin contenido informativo.<br>
+        26.-&iquest;En qu&eacute; consisten los protocolos de ventana deslizante?<br>
+        En mostrar el n&uacute;mero m&aacute;ximo de tramas sin confirmar que 
+        puede emitir el emisor antes de cortar la comunicaci&oacute;n.<br>
+        27.-El protocolo de env&iacute;o y espera &iquest;es un protocolo de ventana 
+        deslizante? Explica.<br>
+        S&iacute;, porque el tama&ntilde;o de la ventana emisora y el de la receptora 
+        es uno.<br>
+        El emisor env&iacute;a la trama, el receptor recibe la trama y hasta que 
+        no le confirme la llegada al emisor, &eacute;ste no dar&aacute; paso a 
+        la siguiente.<br>
+        El receptor s&oacute;lo puede recibir tramas de una en una, y a su vez 
+        el emisor s&oacute;lo puede enviar tramas de una en una.<br>
+        28.-Cuando se detecta un error &iquest;de qu&eacute; dos tipos pueden 
+        ser las retransmisiones?<br>
+        Reenv&iacute;o selectivo, reenv&iacute;o no selectivo.<br>
+        29.-Explica el funcionamiento de dos protocolos que controlen las comunicaci&oacute;n 
+        mediante hardware.<br>
+        PROTOCOLO DTR/DSR<br>
+        Las l&iacute;neas de datos TD y DR s&oacute;lo se env&iacute;an informaci&oacute;n 
+        de usuario cuando el estado de los circuitos lo permite.<br>
+        La multiplexaci&oacute;n necesaria para distinguir las se&ntilde;ales 
+        de datos de las de control se consigue utilizando distintas l&iacute;neas 
+        para datos y para control.</p>
+      <p>PROTOCOLO XON/XOFF<br>
+        XON y XOFF son caracteres de control en c&oacute;digo ASCII.<br>
+        Es un protocolo no transparente que se utiliza para mensajes de texto 
+        ASCII.<br>
+        Dos l&iacute;neas ? TD y RD</p>
+      <p>Los caracteres son enviados por la l&iacute;nea serie secuancialmente 
+        y de modo as&iacute;ncrono, con o sin paridad.</p>
+      <p>Las tramas est&aacute;n constitu&iacute;das por cada car&aacute;cter 
+        transmitido.<br>
+        Cuando el receptor env&iacute;a un XON al emisor, libera el bloqueo y 
+        contin&uacute;a la transmisi&oacute;n. </p>
+      <p><br>
+        30.-&iquest;Cu&aacute;les son los principales m&eacute;todos de acceso 
+        al medio que se utilizan en las redes de &aacute;rea local?<br>
+        CON COLISI&Oacute;N<br>
+        Protocolo Aloha<br>
+        CSMA persistente<br>
+        CSMA no-persistente<br>
+        CSMA/CD<br>
+        SIN COLISI&Oacute;N<br>
+        Mapa de bits<br>
+        Paso de testigo<br>
+        CSMA/CA<br>
+        31.-Visiona el CD-ROM que propone el libro y explica &iquest;por qu&eacute; 
+        se produce la colisi&oacute;n?<br>
+        Porque en el momento que van a transmitir, dos terminales escuchan a la 
+        vez el canal, y viendo que est&aacute; libre transmiten los dos a la vez 
+        dando lugar a una colisi&oacute;n.<br>
+        32.-Operativa y trama del protocolo BSC<br>
+        Es utilizado para conectar equipos punto a punto o multipunto en canales 
+        conmutados o sin conmutaci&oacute;n.<br>
+        Es un protocolo para transmisiones semid&uacute;plex, sensible al c&oacute;digo 
+        y orientado a car&aacute;cter.<br>
+        Su formato es variablespuesto que NO es transparente<br>
+        Puede operar en 2 modos:<br>
+        - Modo control: Utilizado por una estaci&oacute;n primaria para efectuar 
+        operaciones de control del enlace.<br>
+        - Modo texto o mensaje: Transmisi&oacute;n de bloques de datos.<br>
+        Cuando una estaci&oacute;n desea transmitir recibe un STX o SOH como cabecera 
+        de trama. Se intercambian los datos hasta el EOT que produce el cambio 
+        a modo de control.</p>
+      <p>Para controlar la p&eacute;rdida de tramas, utiliza los caracteres ACK0 
+        y ACK1 uno para tramas pares y otro para las impares.</p>
+      <p></p>
+      <p></p>
+      <p>33.-Operativa y trama del protocolo Xmodem.<br>
+        Es un protocolo orientado a cr&aacute;cter (ARQ), dependiente del c&oacute;digo 
+        en que se expresen los datos, para entornos semid&uacute;plex y con un 
+        sistema de env&iacute;o y espera para la correcci&oacute;n de errores.<br>
+        Longitud de datos fija=128 bytes<br>
+        Los otros campos=1 byte<br>
+        Los campos del protocolo XMODEM son los siguientes:<br>
+        - Cabecera: Env&iacute;o de SOH<br>
+        - N&uacute;mero de secuencia de trama: Contador que lleva el valor 1 desde 
+        la primera trama y que todas las tramas se identifiquen hasta que se le 
+        de la vuelta al contador.<br>
+        - C1 de la secuencia de esa trama: Se calcula con el C1 del campo de la 
+        secuencia de trama.<br>
+        - Datos del usuario: 128 bytes de longitud.<br>
+        - Control de errores: Utiliza paridad de bloque o checksum.</p>
+      <p>Comienzo de la trama con un NACK.<br>
+        Cuando la trama llega correctamente, el receptor env&iacute;a una trama 
+        con un ACK.<br>
+        Para los errores el receptor recalcula el checksum de los datos del usuario 
+        y lo compara con el del emisor.</p>
+      <p></p>
+      <p></p>
+      <p><br>
+        34.-Operativa y trama del protocolo Kermit.<br>
+        Est&aacute; orientado a la transferencia de ficheros.<br>
+        En la cabecera se codifica el nombre del fichero que se empezar&aacute; 
+        a transmitir.<br>
+        Debe tener en cuenta el contenido de los datos de los usuarios para garantizar 
+        la transparencia. Por lo dem&aacute;s la op&egrave;rativa es semejante 
+        a la de XMODEM.<br>
+        El formato de la trama es la siguiente:<br>
+        - Cabecera: Car&aacute;cter SOH. IN dica comienzo de trama.<br>
+        - Longitud: Codifica el n&uacute;mero de bytes que restan en la trama.<br>
+        - N&uacute;mero de secuencia: Codifica de 0 a 63 la sucesi&oacute;n de 
+        tramas que el emisor env&iacute;a al receptor.<br>
+        - Tipo de trama: Se especifica la funci&oacute;n de trama (ACK, NACK, 
+        EOT, EOF, DATOS...).<br>
+        - Datos del usuario: Contiene los datos del usuario.<br>
+        - Control de errores: Utiliza Checksum &oacute; CRC.</p>
+      <p></p>
+      <p></p>
+      <p><br>
+        35.-&iquest;Qu&eacute; modos de funcionamiento tiene el protocolo DIC?<br>
+        MODO NRM (Modo de respuesta normal)<br>
+        La estaci&oacute;n secundaria debe recibir un permiso de la primaria para 
+        que pueda comenzar la transferencia.<br>
+        La comunicaci&oacute;n siempre se efect&uacute;a entre una estaci&oacute;n 
+        secundaria y una primaria, nunca entre dos secundarias.<br>
+        MODO ARM (Modo de respuesta as&iacute;ncrona)<br>
+        Permite a la estaci&oacute;n secundaria transmitir sin el permiso de la 
+        primaria.<br>
+        Pero la primaria tiene la responsabilidad del control, la correcci&oacute;n 
+        de errores y la conexi&oacute;n y desconexi&oacute;n del enlace.<br>
+        MODO ABM(Modo as&iacute;ncrono Balanceado)<br>
+        Utiliza dos estaciones equivalentes, propio de las comunicaciones de igual 
+        a igual. Es el m&aacute;s utilizado en redes de &aacute;rea local. <br>
+        36.-&iquest;A qu&eacute; se refiere la palabra as&iacute;ncrono cuando 
+        nos referimos al modo de transmisi&oacute;n de tramas?<br>
+        Al hecho de que la estaci&oacute;n transmisora no necesita permiso previo 
+        de otra estaci&oacute;n para iniciar la comunicaci&oacute;n.<br>
+        37.-&iquest;Cu&aacute;l es el formato de la trama HDLC? &iquest;Qu&eacute; 
+        campos tiene, de qu&eacute; tama&ntilde;o y con qu&eacute; funci&oacute;n?<br>
+        Todas las tramas deben comenzar y acabar con una bandera se&ntilde;alizadora 
+        de 8 bits &lt;&lt;01111110&gt;&gt;.<br>
+        DIRECCI&Oacute;N<br>
+        Codifica 1 byte o m&uacute;ltiplo de byte la direcci&oacute;n de la trama. 
+        Tambi&eacute;n define si es de una estaci&oacute;n primaria o de una secundaria. 
+        (8 bits) <br>
+        CONTROL<br>
+        Contiene los datos para el control. (8 bits)<br>
+        INFORMACI&Oacute;N<br>
+        Contiene los datos de usuario. No todas tienen este campo.<br>
+        FCS<br>
+        Campo de control de errores. Utiliza el CRC. (16 bits)<br>
+        38.-&iquest;C&oacute;mo se clasifican las tramas HDLC en funci&oacute;n 
+        del campo de control?<br>
+        Tramas no numeradas, tramas supervisoras y tramas de transferencia de 
+        informaci&oacute;n<br>
+        39-Explica la funci&oacute;n de los bits del campo de control de una trama 
+        de informaci&oacute;n.<br>
+        El campo comienza con un 0, despu&eacute;s se codifica el n&uacute;mero 
+        de la secuencia de la ventana del emisor (3 bits). Despu&eacute;s, el 
+        quinto bit es el de Poll &oacute; Final aunque a veces se utiliza P/F 
+        para forzar el env&iacute;o de una trama supervisora.</p>
+      <p></p>
+      <p>40.- Explica la funci&oacute;n de los bits del campo de control de una 
+        trama de supervisi&oacute;n.<br>
+        Un 1 y un 0 para el comienzo de la trama (2 bits). Despu&eacute;s va el 
+        c&oacute;digo de supervisi&oacute;n (2 bits), y final mente el P/F (1 
+        bit).<br>
+        41.-&iquest;Cu&aacute;ntas y cu&aacute;les son las tramas de supervisi&oacute;n?<br>
+        Son 4.<br>
+        Tipo 0, tipo 1, tipo 2 y tipo 3.<br>
+        42.-&iquest;Cu&aacute;ndo se utilizan las tramas de supervisi&oacute;n?<br>
+        Cuando se efect&uacute;an funciones de control tales como los bloqueos 
+        y desbloqueos de las transmisiones, la confirmaci&oacute;n de las tramas 
+        recibidas, las peticiones de retransmisi&oacute;n...etc.<br>
+        43.-Explica la funci&oacute;n de los bits del campo de control de una 
+        trama no numerada.<br>
+        2 bits para el c&oacute;digo de la trama y 3 bits para el modificador. 
+        Este campo puede tener 32 posibilidades. (2 elevado a 5)<br>
+        44.-&iquest;Cu&aacute;les son las fases de la comunicaci&oacute;n utilizando 
+        el protocolo HDLC?<br>
+        CONEXI&Oacute;N DEL CIRCUITO<br>
+        Establecimiento de la conexi&oacute;n entre emisor y receptor.<br>
+        TRANSPORTE DE DATOS<br>
+        Intercambio de datos entre emisor y receptor.<br>
+        DESCONEXI&Oacute;N DEL CIRCUITO<br>
+        Liberaci&oacute;n de los recursoso utilizados en la comunicaci&oacute;n.<br>
+        45.-&iquest;Qu&eacute; tramas se utilizan preferentemente en cada fase 
+        de la comunicaci&oacute;n con protocolo HDLC?<br>
+        CONEXI&Oacute;N DEL CIRCUITO: TRAMAS NO NUMERADAS<br>
+        TRANSPORTE DE DATOS: TRAMAS INFORMATIVAS Y DE SUPERVISI&Oacute;N<br>
+        DESCONEXI&Oacute;N DEL CIRCUITO: TRAMAS NO NUMERADAS</p>
+      <p>TRAMAS EN HDLC</p>
+      <p>DE INFORMACI&Oacute;N<br>
+        RR<br>
+        De supervisi&oacute;n REJ<br>
+        SREJ<br>
+        DE CONTROL RNR<br>
+        No numeradas </p>
+      <p> </p></td>
+    
+  </tr>
+ 
+  <tr> 
+    <td height="16"> 
+      <p align="right"><a href="http://www.euskalnet.net/juanarana/index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a> </p></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

@@ -1,0 +1,304 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Ejercicios MySQL</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="MySQL, sql, pl/sql, programacion MySQL, ejercicios MySQL, ejemplos MySQL, select">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2>T R A N S A C C I O N E S</h2></td>
+  </tr>
+  <tr> 
+    <td><h3>Sintaxis de START TRANSACTION, COMMIT y ROLLBACK</h3>
+    	
+      <p> Por defecto, MySQL se ejecuta con el modo autocommit activado. Esto 
+        significa que en cuanto ejecute un comando que actualice<br>
+        (modifique) una tabla, MySQL almacena la actualizaci&oacute;n en disco.<br>
+        Si usa tablas transaccionales (como InnoDB o BDB), puede desactivar el 
+        modo autocommit con el siguiente comando:<br>
+        SET AUTOCOMMIT=0;<br>
+        Tras deshabilitar el modo autocommit poniendo la variable AUTOCOMMIT a 
+        cero, debe usar COMMIT para almacenar los cambios<br>
+        en disco o ROLLBACK si quiere ignorar los cambios hechos desde el comienzo 
+        de la transacci&oacute;n.<br>
+        Si quiere deshabilitar el modo autocommit para una serie &uacute;nica 
+        de comandos, puede usar el comando START TRANSACTION:<br>
+        START TRANSACTION;<br>
+        SELECT @A:=SUM(salary) FROM table1 WHERE type=1;<br>
+        UPDATE table2 SET summary=@A WHERE type=1;<br>
+        COMMIT;<br>
+        Con START TRANSACTION, autocommit permanece deshabilitado hasta el final 
+        de la transacci&oacute;n con COMMIT o ROLLBACK. El<br>
+        modo autocommit vuelve a su estado pr&eacute;vio.<br>
+        BEGIN y BEGIN WORK se soportan como alias para START TRANSACTION para 
+        iniciar una transacci&oacute;n. START TRANSACTION<br>
+        es sintaxis SQL est&aacute;ndar y es la forma recomendada para iniciar 
+        una transacci&oacute;n ad-hoc . El comando BEGIN difiere del uso<br>
+        de la palabra clave BEGIN que comienza un comando compuesto BEGIN ... 
+        END. El &uacute;ltimo no comienza una transacci&oacute;n.<br>
+        Puede comenzar una transacci&oacute;n as&iacute;:<br>
+        START TRANSACTION WITH CONSISTENT SNAPSHOT;<br>
+        La cl&aacute;usula WITH CONSISTENT SNAPSHOT comienza una lectura consistente 
+        para motores de almacenamiento capaces de ello.<br>
+        Actualmente, esto se aplica s&oacute;lo a InnoDB. El efecto es el mismo 
+        que realizar un START TRANSACTION seguido por un SELECT<br>
+        desde cualquier tabla InnoDB . Consulte Secci&oacute;n 15.10.4, &#8220;Lecturas 
+        consistentes que no bloquean&#8221;.<br>
+        Comenzar una transacci&oacute;n provoca que se realice un UNLOCK TABLES 
+        impl&iacute;cito.<br>
+        Tenga en cuenta que si no usa tablas transaccionales, cualquier cambio 
+        se almacena de golpe, a pesar del estado del modo autocommit<br>
+        .<br>
+        Si realiza un comando ROLLBACK tras actualizar una tabla no transaccional 
+        dentro de una transacci&oacute;n, ocurre una advertencia<br>
+        ER_WARNING_NOT_COMPLETE_ROLLBACK. Los cambios en tablas transaccionales 
+        se deshacen, pero no los cambios en tablas<br>
+        no transaccionales.<br>
+        Cada transacci&oacute;n se almacena en el log binario en un trozo, hasta 
+        COMMIT. Las transacciones que se deshacen no se loguean. (Exceci&oacute;n:<br>
+        Las modificaciones a tablas no transaccionales no pueden deshacerse. Si 
+        una transacci&oacute;n que se deshace incluye modificaciones<br>
+        a tablas no transaccionales, la transacci&oacute;n entera se loguea con 
+        un comando ROLLBACK al final para asegurar que las modificaciones<br>
+        a estas tablas se replican.) Consulte Secci&oacute;n 5.10.3, &#8220;El 
+        registro binario (Binary Log)&#8221;.<br>
+        Puede cambiar el nivel de aislamiento para transacciones con SET TRANSACTION 
+        ISOLATION LEVEL. Consulte Secci&oacute;n<br>
+        13.4.6, &#8220;Sintaxis de SET TRANSACTION&#8221;.<br>
+        Deshacer puede ser una operaci&oacute;n lenta que puede ocurrir sin que 
+        el usuario lo haya pedido expl&iacute;citamente (por ejemplo, cuando<br>
+        ocurre un error). Debido a ello, SHOW PROCESSLIST en MySQL 5.0 muestra 
+        Rolling back en la columna Statepara la conexi&oacute;n<br>
+        durante rollbacks impl&iacute;citos y expl&iacute;citos (comando SQL ROLLBACK).<br>
+        <h3>Sintaxis de SAVEPOINT y ROLLBACK TO SAVEPOINT</h3><br>
+        SAVEPOINT identifier<br>
+        ROLLBACK TO SAVEPOINT identifier<br>
+        En MySQL 5.0, InnoDB soporta los comandos SQL SAVEPOINT y ROLLBACK TO 
+        SAVEPOINT.<br>
+        El comando SAVEPOINT crea un punto dentro de una transacci&oacute;n con 
+        un nombre identifier. Si la transacci&oacute;n actual tiene un<br>
+        punto con el mismo nombre, el antiguo se borra y se crea el nuevo.El comando 
+        ROLLBACK TO SAVEPOINT deshace una transacci&oacute;n hasta el punto nombrado. 
+        Las modificaciones que la transacci&oacute;n<br>
+        actual hace al registro tras el punto se deshacen en el rollback, pero 
+        InnoDB no libera los bloqueos de registro que se almacenaron<br>
+        en memoria tras el punto . (Tenga en cuenta que para un nuevo registro 
+        insertado, la informaci&oacute;n de bloqueo se realiza a partir<br>
+        del ID de transacci&oacute;n almacenado en el registro; el bloqueo no 
+        se almacena separadamente en memoria. En este caso, el bloqueo<br>
+        de registro se libera al deshacerse todo.) Los puntos creados tras el 
+        punto nombrado se borran.<br>
+        Si un comando retorna el siguiente error, significa que no existe ning&uacute;n 
+        punto con el nombre especificado:<br>
+        ERROR 1181: Got error 153 during ROLLBACK<br>
+        Todos los puntos de la transacci&oacute;n actual se borran si ejecuta 
+        un COMMIT, o un ROLLBACK que no nombre ning&uacute;n punto.<br>
+        <h3>Sintaxis de LOCK TABLES y UNLOCK TABLES</h3><br>
+        LOCK TABLES<br>
+        tbl_name [AS alias] {READ [LOCAL] | [LOW_PRIORITY] WRITE}<br>
+        [, tbl_name [AS alias] {READ [LOCAL] | [LOW_PRIORITY] WRITE}] ...<br>
+        UNLOCK TABLES<br>
+        LOCK TABLES bloquea tablas para el flujo actual. Si alguna de las tablas 
+        la bloquea otro flujo, bloquea hasta que pueden adquirirse<br>
+        todos los bloqueos. UNLOCK TABLES libera cualquier bloqueo realizado por 
+        el flujo actual. Todas las tablas bloqueadas por el<br>
+        flujo actual se liberan impl&iacute;citamente cuando el flujo reliza otro 
+        LOCK TABLES, o cuando la conexi&oacute;n con el servidor se cierra.<br>
+        Un bloqueo de tabla protege s&oacute;lo contra lecturas inapropiadas o 
+        escrituras de otros clientes. El cliente que tenga el bloqueo, incluso<br>
+        un bloqueo de lectura, puede realizar operaciones a nivel de tabla tales 
+        como DROP TABLE.<br>
+        Tenga en cuenta lo siguiente a pesar del uso de LOCK TABLES con tablas 
+        transaccionales:<br>
+        &#8226; LOCK TABLES no es una operaci&oacute;n transaccional y hace un 
+        commit impl&iacute;cito de cualquier transacci&oacute;n activa antes de 
+        tratar de<br>
+        bloquear las tablas. Tambi&eacute;n, comenzar una transacci&oacute;n (por 
+        ejemplo, con START TRANSACTION) realiza un UNLOCK TABLES<br>
+        impl&iacute;cito. (Consulte Secci&oacute;n 13.4.3, &#8220;Sentencias que 
+        causan una ejecuci&oacute;n (commit) impl&iacute;cita&#8221;.)<br>
+        &#8226; La forma correcta de usar LOCK TABLES con tablas transaccionales,como 
+        InnoDB, es poner AUTOCOMMIT = 0 y no llamar<br>
+        a UNLOCK TABLES hasta que hace un commit de la transacci&oacute;n expl&iacute;citamente. 
+        Cuando llama a LOCK TABLES, InnoDB<br>
+        internamente realiza su propio bloqueo de tabla, y MySQL realiza su propio 
+        bloqueo de tabla. InnoDB libera su bloqueo<br>
+        de tabla en el siguiente commit, pero para que MySQL libere su bloqueo 
+        de tabla, debe llamar a UNLOCK TABLES. No debe<br>
+        tener AUTOCOMMIT = 1, porque entonces InnoDB libera su bloqueo de tabla 
+        inmediatamente tras la llamada de LOCK TABLES,<br>
+        y los deadlocks pueden ocurrir f&aacute;cilmente. (Tenga en cuenta que 
+        en MySQL 5.0, no adquirimos el bloqueo de tabla InnoDB<br>
+        en absoluto si AUTOCOMMIT=1, para ayudar a aplicaciones antiguas a envitar 
+        deadlocks.)<br>
+        &#8226; ROLLBACK no libera bloqueos de tablas no transaccionales de MySQL.<br>
+        Para usar LOCK TABLES en MySQL 5.0, debe tener el permiso LOCK TABLES 
+        y el permiso SELECT para las tablas involucradas.<br>
+        La raz&oacute;n principal para usar LOCK TABLES es para emular transacciones 
+        o para obtener m&aacute;s velocidad al actualizar tablas. Esto se<br>
+        explica con m&aacute;s detalle posteriormente.<br>
+        Si un flujo obtiene un bloqueo READ en una tabla, ese flujo (y todos los 
+        otros) s&oacute;lo pueden leer de la tabla. Si un flujo obtiene un<br>
+        bloqueo WRITE en una tabla, s&oacute;lo el flujo con el bloqueo puede 
+        escribir a la tabla. El resto de flujos se bloquean hasta que se libera<br>
+        el bloqueo.<br>
+        La diferencia entre READ LOCAL y READ es que READ LOCAL permite comandos 
+        INSERT no conflictivos (inserciones concurrentes)<br>
+        se ejecuten mientras se mantiene el bloqueo. Sin embargo, esto no puede 
+        usarse si va a manipular los ficheros de base de<br>
+        datos fuera de MySQL mientras mantiene el bloqueo. Para tablas InnoDB 
+        , READ LOCAL esencialmente no hace nada: No bloquea<br>
+        la tabla. Para tablas InnoDB , el uso de READ LOCAL est&aacute; obsoleto 
+        ya que una SELECT consistente hace lo mismo, y no se<br>
+        necesitan bloqueos.<br>
+        Cuando usa LOCK TABLES, debe bloquear todas las tablas que va a usar en 
+        sus consultas. Mientras los bloqueos obtenidos con un<br>
+        comando LOCK TABLES est&aacute;n en efecto, no puede acceder a ninguna 
+        tabla que no estuviera bloqueada por el comando. Adem&aacute;s,<br>
+        no puede usar una tabla bloqueada varias veces en una consulta --- use 
+        alias para ello. Tenga en cuenta que en este caso, debe tener<br>
+        un bloqueo separado para cada alias.<br>
+        mysql&gt; LOCK TABLE t WRITE, t AS t1 WRITE;<br>
+        mysql&gt; INSERT INTO t SELECT * FROM t;<br>
+        ERROR 1100: Table 't' was not locked with LOCK TABLES<br>
+        mysql&gt; INSERT INTO t SELECT * FROM t AS t1;<br>
+        bla sin especificar el alias:<br>
+        mysql&gt; LOCK TABLE t READ;<br>
+        mysql&gt; SELECT * FROM t AS myalias;<br>
+        ERROR 1100: Table 'myalias' was not locked with LOCK TABLES<br>
+        Si bloquea una tabla usando un alias, debe referirse a ella en sus consultas 
+        usando este alias:<br>
+        mysql&gt; LOCK TABLE t AS myalias READ;<br>
+        mysql&gt; SELECT * FROM t;<br>
+        ERROR 1100: Table 't' was not locked with LOCK TABLES<br>
+        mysql&gt; SELECT * FROM t AS myalias;<br>
+        WRITE bloquea normalmente teniendo una prioridad superior que READ al 
+        bloquear para asegurar que las actualizaciones se procesan<br>
+        en cuanto se puede. Esto significa que si un flujo obtiene un bloqueo 
+        READ y luego otro flujo pide un bloqueo WRITE , las peticiones<br>
+        de bloqueo READ posteriores esperan hasta que el flujo WRITE quita el 
+        bloqueo. Puede usar bloqueos LOW_PRIORITY<br>
+        WRITE para permitir a otros flujos que obtengan bloqueos READ mientras 
+        el flujo est&aacute; en espera para el bloqueo WRITE. Debe<br>
+        usar bloqueos LOW_PRIORITY WRITE s&oacute;lo si est&aacute; seguro que 
+        habr&aacute; un momento sin flujos con bloqueos READ .<br>
+        LOCK TABLES funciona como sigue:<br>
+        1. Ordena todas las tablas a ser bloqueadas en un orden definido internamente. 
+        Desde el punto de vista del usuario, este orden es<br>
+        indefinido.<br>
+        2. Si una tabla se bloquea con bloqueo de lectura y escritura, pone el 
+        bloqueo de escritura antes del de lectura.<br>
+        3. Bloquea una tabla a la vez hasta que la sesi&oacute;n obtiene todos 
+        los bloqueos.<br>
+        Esta pol&iacute;tica asegura un bloqueo de tablas libre de deadlocks. 
+        Sin embargo hay otros puntos que debe tener en cuenta respecto a esta<br>
+        pol&iacute;tica:<br>
+        Si est&aacute; usando un bloqueo LOW_PRIORITY WRITE para una tabla, s&oacute;lo 
+        significa que MySQL espera para este bloqueo hasta que<br>
+        no haya flujos que quieren un bloqueo READ . Cuando el flujo ha obtenido 
+        el bloqueo WRITE y est&aacute; esperando para obtener un bloqueo<br>
+        para la siguiente tabla en la lista, todos los otros flujos esperan hasta 
+        que el bloqueo WRITE se libera. Si esto es un problema<br>
+        con su aplicaci&oacute;n, debe considerar convertir algunas de sus tablas 
+        a transaccionales.<br>
+        Puede usar KILL para terminar un flujo que est&aacute; esperando para 
+        un bloqueo de tabla. Consulte Secci&oacute;n 13.5.5.3, &#8220;Sintaxis 
+        de<br>
+        KILL&#8221;.<br>
+        Tenga en cuenta que no debe bloquear ninguna tabla que est&eacute; usando 
+        con INSERT DELAYED ya que en tal caso el INSERT lo<br>
+        realiza un flujo separado.<br>
+        Normalmente, no tiene que bloquear tablas, ya que todos los comandos UPDATE 
+        son at&oacute;micos, ning&uacute;n otro flujo puede interferir<br>
+        con ning&uacute;n otro que est&aacute; ejecutando comandos SQL . Hay algunos 
+        casos en que no debe bloquear tablas de ning&uacute;n modo:<br>
+        &#8226; Si va a ejecutar varias operaciones en un conjunto de tablas MyISAM 
+        , es mucho m&aacute;s r&aacute;pido bloquear las tablas que va a usar.<br>
+        Bloquear tablas MyISAM acelera la inserci&oacute;n, las actualizaciones, 
+        y los borrados. Por contra, ning&uacute;n flujo puede actualizar una<br>
+        tabla con un bloqueo READ (incluyendo el que tiene el bloqueo) y ning&uacute;n 
+        flujo puede acceder a una tabla con un bloqueo WRITE<br>
+        distinto al que tiene el bloqueo.<br>
+        La raz&oacute;n que algunas operaciones MyISAM sean m&aacute;s r&aacute;pidas 
+        bajo LOCK TABLES es que MySQL no vuelca la cach&eacute; de claves<br>
+        para la tabla bloqueada hasta que se llama a UNLOCK TABLES. Normalmente, 
+        la cach&eacute; de claves se vuelca tras cada comando<br>
+        SQL.<br>
+        &#8226; Si usa un motor de almacenamiento en MySQL que no soporta transacciones, 
+        debe usar LOCK TABLES si quiere asegurarse<br>
+        que ning&uacute;n otro flujo se ejecute entre un SELECT y un UPDATE. El 
+        ejemplo mostrado necesita LOCK TABLES para ejecutarse<br>
+        sin problemas:<br>
+        mysql&gt; LOCK TABLES trans READ, customer WRITE;<br>
+        mysql&gt; SELECT SUM(value) FROM trans WHERE customer_id=some_id;<br>
+        mysql&gt; UPDATE customer<br>
+        -&gt; SET total_value=sum_from_previous_statement<br>
+        -&gt; WHERE customer_id=some_id;<br>
+        mysql&gt; UNLOCK TABLES;<br>
+        Sin LOCK TABLES, es posible que otro flujo pueda insertar un nuevo registro 
+        en la tabla trans entre la ejecuci&oacute;n del comando<br>
+        SELECT y UPDATE.<br>
+        Puede evitar usar LOCK TABLES en varios casos usando actualizaciones relativas 
+        (UPDATE customer SET<br>
+        +new_value) o la funci&oacute;n LAST_INSERT_ID() , Consulte Secci&oacute;n 
+        1.7.5.3, &#8220;Transacciones y operaciones at&oacute;micas&#8221;.<br>
+        Puede evitar bloquear tablas en algunos casos usando las funciones de 
+        bloqueo de nivel de usuario GET_LOCK() y RELEASE_<br>
+        LOCK(). Estos bloqueos se guardan en una tabla hash en el servidor e implementa 
+        pthread_mutex_lock() y pthread_<br>
+        mutex_unlock() para alta velocidad. Consulte Secci&oacute;n 12.9.4, &#8220;Funciones 
+        varias&#8221;.<br>
+        Consulte Secci&oacute;n 7.3.1, &#8220;M&eacute;todos de bloqueo&#8221;, 
+        para m&aacute;s informaci&oacute;n acerca de la pol&iacute;tica de bloqueo.<br>
+        Puede bloquear todas las tablas en todas las bases de datos con bloqueos 
+        de lectura con el comando FLUSH TABLES WITH<br>
+        READ LOCK . Consulte Secci&oacute;n 13.5.5.2, &#8220;Sintaxis de FLUSH&#8221;. 
+        Esta es una forma muy conveniente para obtener copias de seguridad<br>
+        si tiene un sistema de ficheros como Veritas que puede obtener el estado 
+        en un punto temporal.<br>
+        <h3>Sintaxis de SET TRANSACTION</h3><br>
+        SET [GLOBAL | SESSION] TRANSACTION ISOLATION LEVEL<br>
+        { READ UNCOMMITTED | READ COMMITTED | REPEATABLE READ | SERIALIZABLE }<br>
+        Este comando prepara el nivel de aislamiento de transacci&oacute;n para 
+        la siguiente transacci&oacute;n, globalmente, o para la sesi&oacute;n 
+        actual.<br>
+        El comportamiento por defecto de SET TRANSACTION es poner el nivel de 
+        aislammiento para la siguiente transacci&oacute;n (que no ha<br>
+        empezado todav&iacute;a). Si usa lka palabra clave GLOBAL el comando pone 
+        el nivel de aislamiento de transacci&oacute;n por defecto globalmente<br>
+        para todas las transacciones creadas desde ese momento. Las conexiones 
+        existentes no se ven afectadas. Necesita el permiso<br>
+        SUPER para hacerlo. Usar la palabra clave SESSION determina el nivel de 
+        transacci&oacute;n para todas las transacciones futuras realizadas<br>
+        en la conexi&oacute;n actual.<br>
+        Para descripciones del nivel de aislamiento de cada transacci&oacute;n 
+        InnoDB, consulte Secci&oacute;n 15.10.3, &#8220;InnoDB y TRANSACTION<br>
+        ISOLATION LEVEL&#8221;. InnoDB soporta cada uno de estos niveles en MySQL 
+        5.0. El nivel por defecto es REPEATABLE READ.<br>
+        Puede inicializar el nivel de aislamiento global por defecto para mysqld 
+        con la opci&oacute;n --transaction-isolation. </p>
+        </td>
+    <td>&nbsp;</td>
+    <td><a href="http://www.euskalnet.net/juanarana/oraclezip/Ejer3.rar"><img src="../../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td>
+<div align="right"><a href="http://www.euskalnet.net/juanarana/index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a>
+      </div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Hiperenlaces</title>
+<META http-equiv=Content-Language content=es><META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="keywords" content="Hiperenlaces, links, Html, Lenguaje Html, Manual Html, Tutorial, ejercicios Html">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+  <link href="../../styles/estilos.css" rel="stylesheet" type="text/css"></head>
+  
+<body>
+<table class="tablaContenidos">  <tr> 
+    <td height="38" colspan="2"> <h2>Hiperenlaces</h2></td>
+  </tr>
+  <tr> 
+    <td height="960" colspan="2"><table width="62%" border="0"  >
+        <tr> 
+          <td width="28%"  ><h3>Contenido:</h3></td>
+          <td width="72%">&nbsp;</td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="htm06.htm#intro">- Introducci&oacute;n</a></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="htm06.htm#a">- Marca &lt;A&gt;</a></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="htm06.htm#name">- El atributo NAME</a></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="htm06.htm#href">- El atributo HREF</a></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="htm06.htm#target">- El atributo TARGET</a></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="htm06.htm#enlaces">- Enlaces a puntos internos a un documento</a></td>
+        </tr>
+      </table>
+       <p>&nbsp;</p>
+       <h3>  Introducci&oacute;n  <a name="intro"></a></h3>
+       <p>El siguiente elemento es uno de los mas importantes 
+        del lenguaje HTML, ya que el que realmente permite &quot;navegar&quot; 
+        por uno o varios documentos, que pueden residir en cualquier parte, dando 
+        sin embargo, la sensaci&oacute;n de que se trata de un solo documento.</p>
+       <p>Esto se consigue definiendo enlaces hipertextuales 
+        del Web mediante el elemento &lt;A&gt; y sus atributos: NAME, HREF Y TARGET. 
+        El lector podr&aacute; por tanto explorar el documento picando con el 
+        rat&oacute;n sobre las zonas activas definidas, denominadas hipertexto. 
+        Estas zonas activas pueden corresponder a un grupo de caracteres, una 
+        imagen o bien una porci&oacute;n de ella. En cualquier caso el principio 
+        es el mismo: asociar a la zona activa la direcci&oacute;n URL del documento 
+        que sustituir&aacute; al visualizado cuando se pulse con el rat&oacute;n 
+        sobre esa zona.</p>
+       <p>Un puntero puede colocarse en cualquier lugar del 
+        texto. Puede ser un elemento de una vista, o texto normal; puede estar 
+        enriquecido con atributos de estilo f&iacute;sico, l&oacute;gico o de 
+        p&aacute;rrafo. Sin embargo no es necesario darle un atributo para hacerle 
+        reconocible como tal; los enlaces activables se destacan autom&aacute;ticamente 
+        (color y subrayado), siempre y cuando el usuario no relalice una parametrizaci&oacute;n 
+        especial del browser.</p>
+       <p>La definici&oacute;n por defecto del color de os 
+        enlaces de un documento puede ser modificada por el elemento &lt;BODY&gt; 
+        y los atributos LINK, ALINK y VLINK.Para especificar la partida y la llegada 
+        de un enlace hipertexto se define:</p>
+      <p> 
+      <blockquote  >- Ancla de partida: es la zona activa sobre 
+        la que el lector pulsar&aacute; con el rat&oacute;n para llamar a una 
+        nueva p&aacute;gina. Este ancla se define mediante el atributo HREF.
+        - Ancla de llegada: es una zona inactiva que especifica el punto de llegada 
+        de un enlace hipertexto. Esta es pues una direcci&oacute;n. Este ancla 
+        se define mediante el atributo NAME.
+      </blockquote>
+         Al final de este documento se ofrecen también 
+      los siguientes apartados:
+         <blockquote  >Enlaces a puntos intermedios a un 
+        documento
+        Aplicación a notas al pie de página
+        Servicios a internet(otros URL).</blockquote>
+      <p></p>
+       <h3>  A  <a name="a"></a></h3>
+       <p>El elemento &lt;A&gt; se utiliza para definir losa 
+        enlaces hipertexto de los documento HTML. Este elemento no se utiliza 
+        solo, por tanto siempre vendr&aacute; acompa&ntilde;ado por, al menos, 
+        uno de sus dos atributos principales:
+      <blockquote  >- El atributo HREF que define un ancla de 
+        partida.
+        - El atributo NAME que define un ancla de llegada.
+        - El atributo TARGET para ordenar la apertura de una nueva ventana del 
+        browser con la página indicada por HREF.</blockquote>
+      <p></p>
+       <p>A continuaci&oacute;n se detallan cada uno de los 
+        atributos:</p>
+       <h3>  El atributo NAME  <a name="name"></a></h3>
+       <p>Este atributo define un punto de llegada en el documento 
+        destino asign&aacute;ndole un nombre o etiqueta:
+        &lt;A NAME =&quot;etiqueta&quot;&gt;Zona no activable&lt;/A&gt;
+        Luego mediante el atributo HREF desde el fichero de partida se indicará 
+        el documento y la posición dentro de dicho documento a la quiere acceder:
+        &lt;A HREF=&quot;Documento#etiqueta&quot;&gt; Zona activable&lt;/A&gt;
+        Hay que tener en cuenta que que la etiqueta debe estar compuesta por un 
+        texto sin espacios en blanco, caracteres especiales, ni caracteres codificados. 
+        Dicha etiqueta no deberá estar repetida dentro del mismo documento destino.</p>
+       <h3>  El atributo HREF   <a name="href"></a></h3>
+      <p>  Este atributo define un ancla de partida hacia 
+        un enlace externo o interno, es decir, crea un enlace hacia un nuevo documento 
+        propuesto por dicho servidor o hacia un punto determinado en el texto 
+        actual. La sint&aacute;xis t&iacute;pica es:
+        &lt;A HREF=&quot;http:///www.google.com&quot;&gt; Buscador t&iacute;pico 
+        de internet &lt;/A&gt;  
+        <a href="http://www.google.com">Buscador t&iacute;pico de internet</a></p>
+       <h3>  El atributo TARGET  <a name="target"></a></h3>
+      <p>  Este atributo ordena la apertura de una nueva 
+        ventana con el documento indicado por el atributo HREF.
+        Ejemplo:
+        &lt;a href=&quot;htm07.htm&quot;target=&quot;mainFrame&quot; &gt;Siguiente&lt;/a&gt;  
+        <a href ="htm07.htm "target"mainframe">Siguiente</a> 
+          Si pulsas con el ratón sobre el enlaza se visualizara 
+        una página de &quot;TABLAS&quot; en el mismo navegador.  </p>
+       <h3>  Enlaces a puntos internos a un documento  <a name="enlaces"></a></h3>
+       <p>Para acceder a un punto determinado de un documento 
+        se debe definir el ancla de llegada en el documento destino mediante el 
+        atributo NAME, como se vio anteriormente. Luego se debe indicar la direcci&oacute;n 
+        del documento destino y del punto de comienzo. En el documento de partida, 
+        mediante el atributo HREF. La sint&aacute;xis es:
+        En el punto adecuado del documento destino:
+        &lt;A NAME=&quot;etiqueta&quot;&gt; &lt;/A&gt;</p>
+       <p>En el documento de partida:
+        &lt;A HREF=&quot;#etiqueta&quot;&gt; Zona activable &lt;/A&gt;</p>
+       <p>Todo esto es muy &uacute;til cuando se trabaja con 
+        documentos grandes llenos de secciones. 
+        Ejemplos:
+        &lt;A HREF=&quot;#Inicio&quot;&gt;Inicio del documento&lt;/A&gt;
+        <a href="htm06.htm#Inicio" target="_self">Inicio del documento</a></p>
+       <p>Pulsando sobre el enlace &quot;Inicio del documento 
+        nos situar&aacute; en el comienzo del documento actual.&quot;</p></td>
+  </tr>
+  <tr> 
+    <td width="70" height="21"> </td>
+    <td height="21"> 
+      <div align="right">  <a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

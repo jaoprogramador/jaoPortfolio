@@ -1,0 +1,431 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Introducci&oacute;n a DLL</title>
+<META http-equiv=Content-Language content=es>
+<META content="Conceptos redes,LAN" name=description>
+<meta name="keywords" content="Conceptos redes,LAN">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2>C O N C E P T O S</h2></td>
+  </tr>
+  <tr> 
+    <td height="197"> 
+      <h3>Redes de área local LAN</h3>
+      <p>1.- Razones para instalar una LAN.<br>
+        - Razones econ&oacute;micas<br>
+        - Compartici&oacute;n de datos<br>
+        - Creaci&oacute;n de sistemas de informaci&oacute;n distribu&iacute;da<br>
+        - Evitar redundancias in&uacute;tiles de la informaci&oacute;n<br>
+        - Proceso distribu&iacute;do<br>
+        - Compartici&oacute;n de recursos<br>
+        - Simplificaci&oacute;n de la gesti&oacute;n de los sistemas<br>
+        - Trabajo corporativo<br>
+        2.- Caracter&iacute;sticas de una LAN.<br>
+        - &Aacute;mbito reducido<br>
+        - Velocidad mayor<br>
+        - Seguridad<br>
+        - Medio f&iacute;sico compartido<br>
+        - Conexiones multipunto<br>
+        - Pueden utilizar cualquier topolog&iacute;a<br>
+        3.- &iquest;Qu&eacute; es topolog&iacute;a de una red?<br>
+        Es la estructura del cableado que la forma de red.<br>
+        4.- Principales topolog&iacute;as en una LAN.<br>
+        - Topolog&iacute;a en anillo<br>
+        - Topolog&iacute;a en estrella<br>
+        - Topolog&iacute;a en bus<br>
+        - Topolog&iacute;a en &aacute;rbol<br>
+        - Topolog&iacute;a en malla<br>
+        5.- Caracter&iacute;sticas de la topolog&iacute;a en bus.<br>
+        - Establece una contienda para determinar qui&eacute;n tiene derechos 
+        de acceso a los recursos de comunicaci&oacute;n en cada instante. La contienda 
+        utilizada es el CSMA/CD o el paso de testigo.<br>
+        - El cableado utilizado es el cable coaxial fini (RG-58) &oacute; el cable 
+        coaxial grueso (RG-59).<br>
+        - La ruptura del bus impide la comunicaci&oacute;n.<br>
+        - Es un medio pasivo</p>
+      <p></p>
+      <p></p>
+      <p><br>
+        6.- Caracter&iacute;sticas de la topolog&iacute;a en anillo.<br>
+        - Utiliza el m&eacute;todo de &#8220;paso de testigo&#8221;.<br>
+        - Utiliza elementos pasivos.<br>
+        - La red m&aacute;s utilizada es la Token Ring (IBM)<br>
+        - El anillo central se llama MAU y se encarga de:<br>
+        a) Generar el testigo<br>
+        b) Retardos<br>
+        c) Incorporaci&oacute;n y desconexi&oacute;n de las terminales<br>
+        - El cableado t&iacute;pico para una red Token Ring es el STP.<br>
+        7.- Caracter&iacute;sticas de la topolog&iacute;a en estrella.<br>
+        - Las estaciones se conectan entre s&iacute; me diante un concentrador 
+        o hub.<br>
+        - Es la topolog&iacute;a utilizada en el est&aacute;ndar 803.3 Ethernet.<br>
+        - El cableado t&iacute;pico es el cable de pares (UTP-5) (RJ-45)<br>
+        - Coste alto del cableado (Mucho cable)<br>
+        8.- Enumera los componentes f&iacute;sicos pasivos que pueden formar parte 
+        de una red.<br>
+        Cables, conectores, balumns, transceptores, rack, latiguillos, canaleta, 
+        placa de conectores y rosetas.<br>
+        9.- Nombra los nombres t&eacute;cnicos de los tipos de cables que pueden 
+        formar parte de una red.<br>
+        UTP, UTP-mejorado, STP,coaxial fino (RG-58), coaxial grueso (RG-59) y 
+        fibra &oacute;ptica.<br>
+        10.- Nombra los nombres t&eacute;cnicos de los tipos de conectores que 
+        pueden formar parte de una red.<br>
+        RJ-11, RJ-12, RJ-45, DB15, BNC, T coaxial, DB25, y DB9.<br>
+        11.- &iquest;Qu&eacute; tenemos que tener en cuenta a la hora de realizar 
+        el cableado de una red?<br>
+        - El elevado coste de una instalaci&oacute;n completa<br>
+        - Cambios de los puestos de trabajo en la red<br>
+        - La distribuci&oacute;n de los ordenadores<br>
+        - Si los oredenadores tienen que trabajar en tiempo real o no<br>
+        12.- Subsistemas de un cableado estructurado.<br>
+        Localizaci&oacute;n de cada puesto de trabajo (Cableado)<br>
+        Subsistema horizontal o de planta (Canaleta, concentradores)<br>
+        Subsistema distribuidor o administrador (Rack)<br>
+        Subsistema vertical o backbone (Concentradores especiales)<br>
+        Subsistema de campus (Topolog&iacute;a doble anillo)<br>
+        13.- &iquest;Qu&eacute; es un bakbone?<br>
+        Es un subsistema encargado de comunicar todos los subsistemas horizontales.<br>
+        14.- &iquest;Qu&eacute; normatizan el estandar IEEE 802?<br>
+        Las normas relativas en las redes de &aacute;rea local.<br>
+        15.- &iquest;Qu&eacute; ventaja tiene el que la componente continua de 
+        una se&ntilde;al se nula? &iquest;Cu&aacute;ndo sucede eso?<br>
+        Sea cual sea la secuencia binaria a transmitir, las corrientes el&eacute;ctricas 
+        son iguales en un sentido o en el otro, es decir, el valor medio de la 
+        se&ntilde;al en cada bit es cero.</p>
+      <p>Cuando se utiliza codificaci&oacute;n Manchester diferencial.<br>
+        16.- &iquest;Cu&aacute;les son las restricciones de longitud y de repetidores 
+        que tienen las redes 802.3?<br>
+        - Longitud: 500 m.<br>
+        - Repetidores: Entre dos transceptores no puede haber m&aacute;s de 4<br>
+        17.- &iquest;Cu&aacute;l es la longitud m&aacute;xima para una red 802.3? 
+        &iquest;C&oacute;mo se puede<br>
+        conseguir esa longitud?<br>
+        - Longitud: 2500 m.<br>
+        - Poniendo entre los dos transceptores 4 repetidores que reiten la se&ntilde;al.<br>
+        18.- &iquest;Cu&aacute;les son los subest&aacute;ndares de la red 802.3? 
+        &iquest;Cu&aacute;l de ellos es el que<br>
+        tenemos en clase?<br>
+        10Base5: Coaxial grueso, banda base<br>
+        10Base2: Coaxial fino (RG-58), 10Mbps<br>
+        10Broad36: Coaxial, banada ancha (POCO UTILIZADO)<br>
+        10BaseT: Par trenzado (UTP), 10 Mbps, topolog&iacute;a en estrella<br>
+        100BaseT: Par trenzado (UTP-5), 100 Mbps, topolog&iacute;a en estrella<br>
+        1000BaseT: Par trenzado (UTP-mejorado), 1000 Mbps</p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p>19.- &iquest;Cu&aacute;les son los campos de la trama 802.3 y qu&eacute; 
+        funci&oacute;n tiene cada<br>
+        campo?<br>
+        PRE&Aacute;MBULO: Extensi&oacute;n= 7 bytes<br>
+        Sigue la secuencia &lt;&lt;101010..&gt;&gt; donde va a empezar la se&ntilde;al<br>
+        INICIO: Extensi&oacute;n= 1 byte<br>
+        Sigue la secuencia &lt;&lt;10101011&gt;&gt; que indica el comienzo de 
+        la trama<br>
+        DIRECCI&Oacute;N DE DESTINO: Extensi&oacute;n= 2 &oacute; 6 bytes<br>
+        En la red de 10 Mbps utiliza 6 bytes<br>
+        Puede ser local o global (bit 46)<br>
+        El bit de mayor orden (bit 47) codifica si la direcci&oacute;n de destino 
+        es para un &uacute;nico destinatario (bit 0) o si es para un grupo (bit 
+        1)<br>
+        DIRECCI&Oacute;N DE ORIGEN: Semejante al anterior, pero codifica la direcci&oacute;n 
+        MAC de la tarjeta que origin&oacute; la trama<br>
+        LONGITUD: Extensi&oacute;n= 2 bytes<br>
+        Longitud del campo de datos <br>
+        DATOS: Informaci&oacute;n del usuario<br>
+        RELLENO: La IEEE 802.3 especifica que una trama no puede tener un tama&ntilde;o 
+        inferior a 64 bytes. <br>
+        Campo que rellena la trama hasta 64 bytes<br>
+        CRC: Extensi&oacute;n= 4 bytes<br>
+        Control de errores mediante redundancia c&iacute;clica<br>
+        20.- &iquest;C&oacute;mo se resuelven las colisiones en una red 802.3?<br>
+        Cuando se produce una colisi&oacute;n, las estaciones interrumpen sus 
+        retransmisiones, generan una se&ntilde;al de ruido para alertar al resto 
+        de las estaciones y esperan un tiempo aleatorio.<br>
+        El sistema de asignaci&oacute;n de tiempos de espera consiste en dividir 
+        el tiempo en ranuras temporales.<br>
+        Las estaciones generan un n&uacute;mero aleatorio que se resuelve como 
+        0 o 1 (1: Espera 0: Retransmite).<br>
+        Si las dos estaciones escogen el mismo n&uacute;mero se repetir&aacute; 
+        el proceso generando el doble de posibilidades que las anteriores.<br>
+        21.- &iquest;Cu&aacute;les son las operaciones de la subcapa MAC?<br>
+        Control de errores y control de acceso al medio.<br>
+        22.- &iquest;De qu&eacute; depende el rendimiento de una red 802.3?<br>
+        Depende de la longitud de la trama y del n&uacute;mero de estaciones que 
+        transmiten</p>
+      <p></p>
+      <p><br>
+        23.- Diferencias y semejanzas entre las redes 802.3 y 802.4<br>
+        SEMEJANZAS<br>
+        Misma topolog&iacute;a de bus<br>
+        DIFERENCIAS<br>
+        Diferente cableado<br>
+        Distinta codificaci&oacute;n de las se&ntilde;ales<br>
+        24.- Cuales son las caracter&iacute;sticas de la red token bus.<br>
+        - El m&eacute;todo de acceso al medio es el paso de testigo.El testigo 
+        es una trama de control<br>
+        - Cada estaci&oacute;n en la red tiene un n&uacute;mero asociado por el 
+        que es identificada<br>
+        - El testigo es generado por la estaci&oacute;n con el n&uacute;mero mayor. 
+        Despu&eacute;s pasa a la estaci&oacute;n siguiente en orden de numeraci&oacute;n 
+        descendiente. Se trata de un sistema de multiplexaci&oacute;n en el tiempo<br>
+        - Utiliza cable coaxial RG-59 de 75 ohmios<br>
+        - Red en banda ancha<br>
+        - Las velocidades est&aacute;n comprendidas entre 1,5 y 10 Mbps.<br>
+        25.- &iquest;En qu&eacute; casos es m&aacute;s recomendable la red 802.3 
+        que la red 802.4?<br>
+        - Cuando son muchas las estaciones que transmiten puesto que las colisiones 
+        pueden provocar retardos importantes<br>
+        - Cuando se necesita controlar un proceso en tiempo real<br>
+        26.- &iquest;Cu&aacute;les son los campos y funci&oacute;n de las tramas 
+        de la red 802.4?<br>
+        PRE&Aacute;MBULO: Emite la secuencia binaria &lt;&lt;10101010&gt;&gt;<br>
+        DELIMITADOR DE COMIENZO: Emite una se&ntilde;al distinta de 0 &oacute; 
+        1, una secuencia prohibida en el c&oacute;digo binario.<br>
+        CONTROL DE LA TRAMA: Codifica en 1 byte el tipo de trama que se trata.<br>
+        DIRECCI&Oacute;N DE DESTINO: Se codifica con 2 &oacute; 6 bytes la direcci&oacute;n 
+        de la estaci&oacute;n destinataria dependiendo de si es una direcci&oacute;n 
+        local (2 bytes) &oacute; global (6 bytes).<br>
+        DIRECCI&Oacute;N DE ORIGEN: Se codifica la direcci&oacute;n de la estaci&oacute;n 
+        que genera la trama.<br>
+        CAMPO DE DATOS: Se codifica la informaci&oacute;n del usuario.<br>
+        CRC: Se encarga del control de errores por el m&eacute;todo de redundancia 
+        c&iacute;clica.<br>
+        DELIMITADOR DE FIN DE TRAMA: Se&ntilde;aliza el final de la trama.</p>
+      <p></p>
+      <p></p>
+      <p><br>
+        27.- &iquest;Cu&aacute;les son los principales problemas que ha de resolver 
+        la red Token<br>
+        bus para mantener el anillo l&oacute;gico?<br>
+        - Tomar la decisi&oacute;n de qu&eacute; estaci&oacute;n debe generar 
+        un testigo en el caso de que se haya perdido o deteriorado.<br>
+        - Resolver los conflictos provocados por la existencia de m&aacute;s de 
+        un testigo.<br>
+        - Determinar qui&eacute;n es la estaci&oacute;n predecesora y sucesora.<br>
+        - Dar de baja en el anillo una estaci&oacute;n que desea ser desconectada.<br>
+        - Dar de alta una estaci&oacute;n que solicita entrar en la red.<br>
+        - Controlar la emisi&oacute;n de tramas solicitando el testigo tras inactividad 
+        en la red.<br>
+        28.- &iquest;A qu&eacute; llamamos longitud de un bit?<br>
+        Al espacio que ocupa 1 bit dentro del anillo.<br>
+        L= 3*108m s-1/ 10 Mbps ? Longitud de 1 bit<br>
+        Bits que caben en un anillo= Tama&ntilde;o del anillo/ Longitud de 1 bit<br>
+        29.- &iquest;C&oacute;mo se confirma la recepci&oacute;n correcta de las 
+        tramas en la red Token Ring?<br>
+        La trama tiene un bit que el receptor pone a 1 cuando ha recibido correctamente 
+        la trama.<br>
+        30.- &iquest;C&oacute;mo se resuelve el problema de la ruptura del anillo?<br>
+        El anillo se regenera sobre una conmutaci&oacute;n de rel&eacute;s o dispositivos 
+        de conmutaci&oacute;n sobre segmentos estrellados. Cuando un segmento 
+        estrellado se rompe, se dispara un conmutador que anula el segmento y 
+        vuelve a cerrar el anillo.<br>
+        31.- &iquest;Cu&aacute;les son los campos y la funci&oacute;n de la trama 
+        Token Ring?<br>
+        DELIMITADOR DE COMIENZO DE TRAMA (DC): Bandera se&ntilde;alizadora.<br>
+        CONTROL DE ACCESO(CA): Contiene el bit de testigo, el bit de monitor, 
+        los bits de prioridad y los bits de reserva.<br>
+        CONTROL DE TRAMA: Distingue las tramas de datos de las de control.<br>
+        DIRECCI&Oacute;N DE DESTINO: Direcci&oacute;n de la estaci&oacute;n destinataria.<br>
+        DIRECCI&Oacute;N DE ORIGEN: Direcci&oacute;n de la estaci&oacute;n que 
+        genera la trama.<br>
+        CAMPO DE DATOS: Datos del usuario.<br>
+        CRC: Control de errores por redundancia c&iacute;clica.<br>
+        DELIMITADOR DE FIN DE TRAMA (DF): Posee bits codificadores de errores 
+        detectados por los interfaces.<br>
+        ESTADO DE LA TRAMA: Este capo posee 2 bits:<br>
+        A=Destinatario C=Trama<br>
+        <br>
+        A<br>
+        C <br>
+        0 0 Destinatario no encontrado<br>
+        0 1 NO SE PUEDE DAR ESTE CASO<br>
+        1 0 Destinatario presente pero trama no aceptada<br>
+        1 1 Destinatario presente y trama aceptada</p>
+      <p>El tama&ntilde;o del testigo es de 3 bytes y posee los capos DC, CA y 
+        DF.<br>
+        32.-&iquest;Qu&eacute; es una direcci&oacute;n MAC o Ethernet?<br>
+        Es una direcci&oacute;n global y tiene 6 bytes.<br>
+        33.-&iquest;Qu&eacute; es una direcci&oacute;n global y una local?<br>
+        Tanto la direcci&oacute;n global como la local son direcciones de destino.<br>
+        Es local cuando la direcci&oacute;n s&oacute;lo tiene sentido dentro de 
+        la propia red y suele ser asignada por el administrador de red.</p>
+      <p> Una direcci&oacute;n global es una direcci&oacute;n MAC o Ethernet y 
+        es &uacute;nica para cada tarjeta de red, normalmente codifica la compa&ntilde;&iacute;a 
+        constructora de la tarjeta y un n&ordm; de serie.<br>
+        34.-&iquest;Qu&eacute; es una difusi&oacute;n?<br>
+        Es cuando todos los bits est&aacute;n a 1 y se codifica una trama para 
+        todas las estaciones de la red.</p>
+      <p>Ejemplo: Cuando se env&iacute;a un mensaje a todos los ordenadores de 
+        la red.<br>
+        35.-&iquest;Sobre qu&eacute; campos se aplica el CRC en una trama HDLC?<br>
+        Sobre el campo de direcci&oacute;n, el campo de control y el campo de 
+        informaci&oacute;n.<br>
+        36.-&iquest;Qu&eacute; trama se&ntilde;alan los bits N(R) en el rechazo 
+        selectivo y no selectivo de una trama de supervisi&oacute;n?<br>
+        La &uacute;ltima trama recibida que hay que volver a recibir.<br>
+        37.-&iquest;Qu&eacute; es el transceptor?<br>
+        Es un tipo de conector que puede llegar a tener una tarjeta de red y que 
+        tiene por misi&oacute;n la detecci&oacute;n de la portadora y el gobierno 
+        de la colisi&oacute;n.</p>
+      <p>38.-&iquest;Qu&eacute; es el controlador de la tarjeta de red?<br>
+        Es el encargado de verificar las tramas que le llegan desde el canal, 
+        as&iacute; como de ensamblar los datos de informaci&oacute;n d&aacute;ndoles 
+        la forma de la trama.<br>
+        39.-&iquest;Cu&aacute;ntos bits tiene el anillo en la red 802.5 Token 
+        Ring si el anillo es de 1 Km. y se transmita a 16Mbps ?<br>
+        Problema<br>
+        40.-&iquest;C&oacute;mo se confirman las tramas en la red Token Ring?<br>
+        La trama tiene 1 bit que el receptor pone a 1 cuando ha recibido correctamente 
+        la trama.<br>
+        El receptor sabr&aacute; si le ha llegado la trama anterior si ve que 
+        aparece ese 1 en la trama.<br>
+        41.-&iquest;Qu&eacute; codificaci&oacute;n utiliza para la se&ntilde;al 
+        la red Token Ring?<br>
+        La codificaci&oacute;n es Manchester diferencial cogiendo 3v por alto 
+        y &#8211;4,5v por bajo.<br>
+        42.-&iquest;Qu&eacute; tipo de cable utiliza la red Token Ring?<br>
+        Cables de pares trenazados STP.<br>
+        43.-&iquest;Qu&eacute; est&aacute;ndar IEEE hace referencia a las redes 
+        inal&aacute;mbricas?<br>
+        La IEEE 802.11b<br>
+        44.-&iquest;Qu&eacute; tecnolog&iacute;as de redes inal&aacute;mbricas 
+        conoces?<br>
+        IEEE 802.11b, tecnolog&iacute;a BLUETOOTH y tecnolog&iacute;a HOME RF.<br>
+        45.-&iquest;Cu&aacute;les son las caracter&iacute;sticas de las redes 
+        IEEE 802.11b<br>
+        - Tienen una topolg&iacute;a desorganizada en las que existen uno o m&aacute;s 
+        n&uacute;cleos emisores/receptores de se&ntilde;al que se conectan a la 
+        red central.<br>
+        - Utiliza enlaces de 2,4 Ghz.<br>
+        - Velocidad de transmisi&oacute;n de 11 Mbps.<br>
+        - Distancia de 100 m.<br>
+        46.-&iquest;Cu&aacute;l es la aplicaci&oacute;n principal de las redes 
+        de tecnolog&iacute;a Bluetooth.<br>
+        Conectar dispositivos a las redes de grandes corporaciones de servicios.<br>
+        47.-&iquest;Qu&eacute; canales proporciona la tecnolog&iacute;a HomeRF?<br>
+        Cuatro canales de transmisi&oacute;n de voz de alta calidad adem&aacute;s 
+        de un canal de datos entre 1 y 5 Mbps.<br>
+        48.-Consulta las direcciones de internet que propone el libro para cada 
+        una de las tecnolog&iacute;as de redes inal&aacute;mbricas y escribe lo 
+        m&aacute;s relevante de cada una que encuentres.<br>
+        49.-Indica las funciones y/o el tipo de redes que normalizan el resto 
+        de los est&aacute;ndares IEEE que no han aparecido hasta el momento.<br>
+        IEEE 802.6 para redes metropolitanas<br>
+        IEEE 802.7 para redes de banda ancha<br>
+        IEEE 802.8 para redes de fibra &oacute;ptica<br>
+        IEEE 802.12 para Ethernet de alta velocidad<br>
+        50.-Nombra los est&aacute;ndares de fibra &oacute;ptica que conozcas.<br>
+        FDDI, Fibernet, Fasnet y Rede H&iacute;bridas Fibra-Coaxial o HFC.<br>
+        51.-&iquest;Cu&aacute;l es el m&eacute;todo de acceso al medio que utiliza 
+        la red 802.11b?<br>
+        El m&eacute;todo de acceso al medio es el CSMA/CA.<br>
+        52.-&iquest;Cu&aacute;les son los est&aacute;ndares de fibra &oacute;ptica 
+        que presenta el libro?<br>
+        FDDI, Fibernet, Fasnet y Rede H&iacute;bridas Fibra-Coaxial o HFC.<br>
+        53.-&iquest;Qu&eacute; m&eacute;todos de acceso al medio utilizan las 
+        redes de fibra &oacute;ptica estudiadas?<br>
+        FDDI<br>
+        Token Ring<br>
+        FIBERNET<br>
+        CSMA/CD<br>
+        FASNET<br>
+        Ranuras temporales<br>
+        56.-&iquest;Cu&aacute;les son las principales caracter&iacute;sticas del 
+        est&aacute;ndar FDDI?<br>
+        - Se asemeja a la red Token Ring<br>
+        - Los medios &oacute;pticos de transmisi&oacute;n se configuran como un 
+        doble anillo de fibra<br>
+        - Existen 2 tipos de estaciones: Estaci&oacute;n A y Estaci&oacute;n B<br>
+        - Su funci&oacute;n es unir todas las redes de &aacute;rea local de un 
+        edificio<br>
+        - Utiliza la modulaci&oacute;n MIC<br>
+        57.-&iquest;Frente a qu&eacute; redes han cedido lugar las redes de fibra 
+        &oacute;ptica?<br>
+        Frente a las redes ATM<br>
+        58.-&iquest;Cu&aacute;les son las principales caracter&iacute;sticas de 
+        las redes FDI?<br>
+        - Se asemeja a la red Token Ring<br>
+        - Los medios &oacute;pticos de transmisi&oacute;n se configuran como un 
+        doble anillo de fibra<br>
+        - Existen 2 tipos de estaciones: Estaci&oacute;n A y Estaci&oacute;n B<br>
+        - Su funci&oacute;n es unir todas las redes de &aacute;rea local de un 
+        edificio<br>
+        - Utiliza la modulaci&oacute;n MIC<br>
+        59.-Visiona el documento CSMA-CA.pdf del disco del libro.<br>
+        60.-Visiona el videoclip explicativo del modo de acceso a una red FDDI 
+        del disco.<br>
+        61.- &iquest;Cu&aacute;les son los principales incovenientes de la red 
+        Fibernet?<br>
+        - Su dif&iacute;cil construcci&oacute;n<br>
+        - Complejidad en lo que se refiere a detecci&oacute;n de colisiones</p>
+      <p></p>
+      <p><br>
+        62.-<br>
+        BUS &Aacute;RBOL ESTRELLA ANILLO<br>
+        Coaxial banda base S&Iacute; (+) S&Iacute; S&Iacute; S&Iacute;<br>
+        Coaxial banda ancha S&Iacute; S&Iacute; (+) NO NO<br>
+        Par trenzado S&Iacute; NO S&Iacute; (+) S&Iacute; (+)<br>
+        Fibra &oacute;ptica S&Iacute; NO S&Iacute; (+) S&Iacute; (+)<br>
+        Inal&aacute;mbrico NO NO S&Iacute; (+) SI</p>
+      <p>63.-<br>
+        LLC 802<br>
+        IEEE 802.3 IEEE 802.4 IEEE 802.5 Fast Ethernet 100VG-AnyLA FDDI IEEE 802.6	
+        IEEE 802.12<br>
+        MAC CSMA/CD Token Bus Token Ring CSMA/CD Prioridad de demanda Testigo	
+        DQDB CSMA/CA<br>
+        F&Iacute;SICA Coax.banda base (10Mbps)</p>
+      <p>Par trenzado (1-10 Mbps)</p>
+      <p>C. Banda ancha (10 Mbps) Coax. Banda ancha 1,5-(10 Mbps)</p>
+      <p>C. Banda portadora (1,5-10 Mbps)</p>
+      <p>Fibra &oacute;ptica (5-10-20 Mbps) Par trenzado (4-16 Mbps)</p>
+      <p> Par trenzado (100 Mbps)</p>
+      <p>Fibra &oacute;ptica (100 Mbps) Par trenzado (100 Mbps)</p>
+      <p>Fibra &oacute;ptica (100 Mbps)</p>
+      <p> Fibra &oacute;ptica (100 Mbps) Fibra &oacute;ptica (100 Mbps) Radio 
+        frecuencia</p>
+      <p>Infrarojos</p>
+      <p>64.-<br>
+        CARACTER&Iacute;STICAS 802.3 802.4 802.5<br>
+        Rendimiento tr&aacute;fico bajo BUENO MALO MALO<br>
+        Rendimiento tr&aacute;fico alto MALO BUENO BUENO<br>
+        Velocidad de transmisi&oacute;n 1-100 Mbps 1-10 (20) Mbps 1-16 Mbps<br>
+        Instalaci&oacute;n BAJO ELEVADO BAJO<br>
+        Determinista NO S&Iacute; S&Iacute;<br>
+        Mecanismo de propiedades NO S&Iacute; S&Iacute;<br>
+        Aplicaciones en tiempo real NO ADECUADO ADECUADO<br>
+        Mantenimiento l&oacute;gico NO NECESITA DESCENTRALIZADO CENTRALIZADO</p>
+      <p><br>
+        65.- Diferencias entre las tarjetas Fast Ethernet y la 10BaseT.<br>
+        Fast Ethernet = 8 cables<br>
+        10BaseT = 4 cables</p>
+      <p> </p></td>
+    
+  </tr>
+ 
+  <tr> 
+    <td height="16"> 
+      <p align="right"><a href="http://www.euskalnet.net/juanarana/index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a> </p></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

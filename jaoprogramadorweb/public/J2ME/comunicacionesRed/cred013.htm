@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Indice J2ME</title>
+<META http-equiv=Content-Language content=es>
+<META content="Manual J2ME, ejemplos J2ME, codigos J2ME" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Manual J2ME, ejemplos J2ME, codigos J2ME">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> Comunicaci&oacute;n HTTP</h2></td>
+  </tr>
+  <tr> 
+    <td colspan="3"><p>En este apartado, estudiaremos en profundidad la capacidad 
+        de comunicaci&oacute;n HTTP de 
+        nuestro dispositivo MIDP.</p>
+      <p> 
+        El protocolo HTTP 1.1 se basa en el paradigma cliente-servidor, donde 
+        un cliente establece 
+        una conexi&oacute;n con un servidor y le env&iacute;a una petici&oacute;n 
+        formada por: una l&iacute;nea inicial donde 
+        ir&aacute; el tipo de petici&oacute;n (GET, HEAD o POST), la URL del recurso 
+        a obtener y la versi&oacute;n del 
+        protocolo (HTTP/1.1), seguida de sucesivas l&iacute;neas con los campos 
+        de cabecera de petici&oacute;n 
+        que se consideren necesarios (Accept: text/plain; Accept: tetx/html; User-Agent: 
+        &lt;versi&oacute;nNavegador&gt;; etc.) y, tras ellos, el posible cuerpo 
+        del mensaje de petici&oacute;n (en el 
+        caso de GET ir&aacute; en la propia URL).</p>
+      <p> 
+        Por su parte, el servidor responde con un mensaje formado por una l&iacute;nea 
+        de estado 
+        (versi&oacute;n del protocolo, c&oacute;digo de respuesta y descripci&oacute;n 
+        de &eacute;ste, por ejemplo HTTP/1.0 200 
+        OK), seguida de los campos de cabecera de respuesta necesarios (Date: 
+        Monday, 6-Feb- 
+        06 17:00:00; Content-type: text/xml; Content-length: 245, etc.) y, tras 
+        ellos, el cuerpo del 
+        mensaje de respuesta. Despu&eacute;s de esto, el servidor queda a la espera 
+        de una nueva 
+        petici&oacute;n de este o cualquier otro cliente.</p>
+      <p> 
+        Todos estos elementos se enviar&aacute;n en forma de texto plano de un 
+        lado a otro de la 
+        comunicaci&oacute;n, necesitando por debajo un protocolo de bajo nivel 
+        para su transporte, como 
+        es el TCP.</p>
+      <p> 
+        Veamos en el siguiente apartado c&oacute;mo llevamos a cabo esta comunicaci&oacute;n 
+        en J2ME, donde la 
+        mayor&iacute;a de los detalles de implementaci&oacute;n de este protocolo 
+        quedar&aacute;n ocultos a los ojos del 
+        programador, haciendo de nuestro objetivo de conectividad HTTP una sencilla 
+        tarea.</p>
+      <p>&nbsp;</p></td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

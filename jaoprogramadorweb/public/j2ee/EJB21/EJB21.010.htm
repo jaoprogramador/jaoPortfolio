@@ -1,0 +1,188 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>LIntroducci&amp;oacute;n a EJB 2.1</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación en EJB 2.1,Programas EJB 2.1,Aplicaciones en EJB 2.1,Ejercicios en EJB 2.1, Ejemplos de EJB 2.1,Tutorial de EJB 2.1,Manual EJB 2.1" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="EJB 2.1, Manual EJB 2.1, tutorial EJB 2.1, Ejemplos EJB 2.1, ejercicios EJB 2.1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> <strong>Ejemplo basico paso a paso</strong></h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <p>Los EJBs requieren un contenedor específico. 
+    	Hay un capítulo para informarse de la instalación y configuración de un 
+    	contenedor EJB como JBoss.
+A continuación se puede ver la estructura del proyecto:
+<img src="../../imagenes/ejb21/ide.gif"/>
+Crear el Bean
+Vamos a empezar pensando en la implementación del bean, que debe usar (implements) el interfaz javax.ejb.SessionBean. Los primeros cuatro métodos son específicos a la implementación "de negocio". Los siguientes métodos no son necesarios, pero se sobreescriben con la finalidad de observar las salidas que va a producir el servidor:
+
+package orderMgmt;
+
+import javax.ejb.SessionContext;
+import java.util.Date;
+
+/**********************************************************************************
+ * EJB de sesión sin estado.
+ * Debe definir un ejbCreate() coincidente (en args) por cada create() del interfaz
+ EJBHome
+ *********************************************************************************/
+public class OrderManagementBean implements javax.ejb.SessionBean {
+
+  public void placeOrder(String custName, String prodName, int quantity) {
+    System.out.println("Pedido de  " + quantity + " copias de " + 
+                       prodName + " para el cliente " + custName);
+  }
+  
+  public String getOrderDate() {
+	  return (new Date()).toString();
+  }
+
+  public void cancelOrder(String custName, String prodName) {
+    System.out.println("Orden cancelada");
+  }
+
+  public boolean isShipped(String custName, String prodName) {
+    System.out.println("Pedido en transito");
+    return true;
+  }
+
+  public void ejbCreate() {
+    System.out.println("--->Llamada a ejbCreate()");
+  }
+
+  public void ejbRemove() {
+    System.out.println("--->Llamada a ejbRemove()");
+  }
+
+  public void ejbActivate() {
+    System.out.println("--->Llamada a ejbActivate()");
+  }
+
+  public void ejbPassivate() {
+    System.out.println("--->Llamada a ejbPassivate()");
+  }
+
+  public void setSessionContext(SessionContext ctx){
+    System.out.println("--->Llamada a setSessionContext()");
+  }
+}
+	
+El método ejbCreate() del bean se corresponde con el método create() del interfaz local o básica. 
+
+Crear el interfaz local
+A continuación se puede ver el interfaz EJBHome (interfaz local o básica), que tiene sólo la referencia o firma del método create(). Es importante porque se usa para crear el objeto bean y devuelve una referencia del tipo interfaz remoto, de esta forma el cliente puede acceder al bean remoto:
+
+package orderMgmt;
+
+/*********************************************************************************
+ * Interfaz EJBHome
+ * El interfaz local se utiliza para crear y conseguir acceso al interface remoto,
+ * por medio del método create() que devuelve una referecia del tipo interfaz remota.
+ * Debe definir al menos un create() sin parámetros.
+ *********************************************************************************/
+public interface OrderManagementHome extends javax.ejb.EJBHome {
+	OrderManagement create() throws java.rmi.RemoteException, javax.ejb.CreateException;
+}
+	
+
+Crear el interfaz remoto
+El interfaz remoto hereda de javax.ejb.EJBObject y debe tener las referencias o firmas de los métodos que son accesibles de forma remota. La interfaz remota es implementada por el contenedor EJB. Se recomienda al programador que no implemente esta interfaz para evitar accesos directos a los objetos remotos, ya que los accesos deben realizarse a través del proxy generado por el servidor EJB:
+
+package orderMgmt;
+
+/**********************************************************************************
+ * Interfaz remota
+ *********************************************************************************/
+public interface OrderManagement extends javax.ejb.EJBObject {
+  void placeOrder(String custName, String prodName, int quantity) throws java.rmi.RemoteException;
+  String getOrderDate() throws java.rmi.RemoteException; 
+  void cancelOrder(String custName, String prodName) throws java.rmi.RemoteException;
+  boolean isShipped(String custName, String prodName) throws java.rmi.RemoteException;
+}
+	
+Un bean de sesión sin estado, como en este ejemplo, debe definir un método create() sin argumentos. Un bean de sesión con estado tendrá uno o más métodos create().
+
+Archivos de despliegue
+La especificación EJB exige la existencia de un descriptor de despliegue, que se llamará ejb-jar.xml y se sitúa en el directorio META-INF. La estructura del proyecto dentro de nuestro IDE es:
+•	META-INF
+ejb-jar.xml
+•	orderMgmt
+Archivos class de bean, interfaz remota e interfaz EJBHome.
+•	cliente
+Todavía vacio.
+Como se puede ver el descriptor sirve para señalar los tres archivos class que componen el EJB y caracterizar al bean, entre otras cosas como un componente sin estado (Stateless):
+
+<!DOCTYPE ejb-jar PUBLIC '-//Sun Microsystems, Inc.//DTD Enterprise JavaBeans 2.0//EN' 'http://java.sun.com/j2ee/dtds/ejb-jar_2_0.dtd'>
+
+&ltejb-jar>
+ &ltenterprise-beans>
+   &ltsession>
+      &ltejb-name>OrderManagement</ejb-name>
+      &lthome>orderMgmt.OrderManagementHome</home>
+      &ltremote>orderMgmt.OrderManagement</remote>
+      &ltejb-class>orderMgmt.OrderManagementBean</ejb-class>
+      &ltsession-type>Stateless</session-type>
+      &lttransaction-type>Container</transaction-type>
+   </session>
+ </enterprise-beans>
+
+ &ltassembly-descriptor>
+   &ltcontainer-transaction>
+     &ltmethod>
+        &ltejb-name>OrderManagement</ejb-name>
+        &ltmethod-name>*</method-name>
+     </method>
+     &lttrans-attribute>Required</trans-attribute>
+   </container-transaction>
+ </assembly-descriptor>
+</ejb-jar>
+	
+Además casi todos los servidores de contenedores EJB precisan un descriptor de recursos. En nuestro caso se llama jboss.xml y lo dejamos en META-INF. Se puede observar que asigna al bean una referencia JNDI:
+
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE jboss PUBLIC "-//JBoss//DTD JBOSS//EN"
+	"http://www.jboss.org/j2ee/dtd/jboss.dtd">
+&ltjboss>
+	&ltenterprise-beans>
+		&ltsession>
+			&ltejb-name>OrderManagement</ejb-name>
+			&ltjndi-name>ejb/OrderManagement</jndi-name>
+		</session>
+	</enterprise-beans>
+</jboss>
+	
+Con ello la estructura de archivos hasta ahora es la siguiente (derivados de bin):
+•	META-INF
+ejb-jar.xml
+jboss.xml
+•	orderMgmt
+Archivos class de bean, interfaz remota e interfaz EJBHome.
+•	cliente
+Todavía vacio.
+
+      </p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

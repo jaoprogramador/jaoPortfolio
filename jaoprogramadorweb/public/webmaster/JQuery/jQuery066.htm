@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Introducci&oacute;n a JQuery</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta name="keywords" content="Introduccion a JQuery, Manual JQuery, tutorial JQuery, Ejemplos JQuery, ejercicios JQuery">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos"><tr> 
+    <td height="39" colspan="3"> <h2>Funciones CSS de jQuery para conocer el tamaño y posición
+de elementos</h2></td>
+  </tr>
+  <tr> 
+    <td height="268" colspan="3"> 
+      <h3>Introducci&oacute;n</h3>
+      <p>Entre las clasificaciones de funciones jQuery que existen diversas que 
+        sirven para controlar los<br>
+        atributos de CSS de los elementos de la p&aacute;gina, ya sea para acceder 
+        a los valores actuales de<br>
+        los atributos CSS o para alterarlos. En art&iacute;culos anteriores del 
+        Manual de jQuery pudimos<br>
+        conocer varias de estas funciones, por ejemplo en el art&iacute;culo de 
+        A&ntilde;adir y quitar clases CSS<br>
+        sobre elementos.<br>
+        En este art&iacute;culo vamos a ver otras de las funciones que pone a 
+        nuestra disposici&oacute;n jQuery para<br>
+        acceder a la posici&oacute;n de los elementos en la p&aacute;gina y a 
+        sus dimensiones. Estas funciones,<br>
+        aunque estar&iacute;a mejor llamarles m&eacute;todos (ya que pertenecen 
+        al objeto jQuery), son meramente<br>
+        informativas, para saber d&oacute;nde est&aacute;n posicionados los elementos 
+        dentro del documento y sus<br>
+        medidas internas y externas. Lo veremos con detalle en breve, pero antes 
+        quiero se&ntilde;alar para<br>
+        los despistados que si queremos alterar las propiedades CSS de un elemento 
+        de la p&aacute;gina con<br>
+        jQuery recordemos que est&aacute; disponible el m&eacute;todo css(), que 
+        hemos visto anteriormente en<br>
+        repetidas ocasiones a lo largo de este manual, envi&aacute;ndole como 
+        primer par&aacute;metro el nombre<br>
+        del atributo CSS a alterar y como segundo par&aacute;metro el valor del 
+        mismo.<br>
+        Ahora voy a dar un listado de los m&eacute;todos nuevos que vamos a ver 
+        en este art&iacute;culo,<br>
+        comenzando por los que sirven para conocer las dimensiones de un elemento.<br>
+        M&eacute;todos innerWidth() e innerHeight():<br>
+        Reciben un objeto jQuery y devuelven las dimensiones internas del primer 
+        elemento que haya<br>
+        en dicho objeto jQuery, esto es, la anchura y altura respectivamente del 
+        elemento contando el<br>
+        padding del elemento pero no el borde.<br>
+        M&eacute;todos outerWidth() e outerHeight():<br>
+        Reciben un objeto jQuery y devuelven las dimensiones externas del primer 
+        elemento de dicho<br>
+        objeto jQuery recibido por par&aacute;metro, esto es, la anchura y altura 
+        respectivamente del<br>
+        elemento contando el padding del elemento y su borde.<br>
+        Nota: Como podremos imaginarnos, si un elemento no tiene borde los valores 
+        de innerWidth e outerWidth<br>
+        ser&aacute;n exactamente los mismos, as&iacute; como los valores de innerHeight 
+        y outerHeight.<br>
+        M&eacute;todos offset() y position():<br>
+        Ambos m&eacute;todos devuelven la posici&oacute;n de un elemento en la 
+        p&aacute;gina. Reciben un objeto jQuery<br>
+        y devuelven la localizaci&oacute;n del primer elemento que haya en ese 
+        objeto jQuery. La posici&oacute;n<br>
+        siempre se indica como valor de retorno del m&eacute;todo por medio de 
+        un objeto que tiene dos<br>
+        atributos, &quot;top&quot; y &quot;left&quot;, indicando los p&iacute;xeles 
+        que est&aacute; separado de la esquina superior<br>
+        izquerda del documento. La diferencia entre estos dos m&eacute;todos es 
+        que offset() indica la<br>
+        posici&oacute;n del elemento real, teniendo en cuenta los m&aacute;rgenes 
+        del elemento, lo que suele ser<br>
+        m&aacute;s &uacute;til. Por su parte, position() indica la posici&oacute;n 
+        donde habr&iacute;a sido posicionado el elemento<br>
+        si no tuviera m&aacute;rgenes, lo que a menudo no es la posici&oacute;n 
+        real.</p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Servicios</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación en EJB 3.0 Servicios,Programas EJB 3.0 Servicios,Aplicaciones en EJB 3.0 Servicios,Ejercicios en EJB 3.0 Servicios, Ejemplos de EJB 3.0 Servicios,Tutorial de EJB 3.0 Servicios,Manual EJB 3.0 Servicios" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="EJB 3.0 Servicios, Manual EJB 3.0 Servicios, tutorial EJB 3.0 Servicios, Ejemplos EJB 3.0 Servicios, ejercicios EJB 3.0 Servicios">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> Servicios</h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <p>Como he comentado antes, una de las ventajas 
+        de EJB es que integra servicios comunes que el programador puede usar 
+        con una simple anotaci&oacute;n. Pero que servicios ofrece y para que 
+        beans estan disponibles?</p>
+      <p> * Integration (session beans y MDB): permite usar &#8220;dependency 
+        injection&#8221; y/o JDNI para relacionar EJB entre ellos<br>
+        * Pooling (stateless session beans, MDB): crea un pool de beans para ser 
+        usados, aumentado la velocidad de proceso y limitando los recursos consumidos<br>
+        * Thread safety (session beans y MDB): el contenedor se encarga de evitar 
+        problemas de concurrencia, con lo que el programador puede crear la aplicaci&oacute;n 
+        como si creara una aplicaci&oacute;n<br>
+        de escritorio de un s&oacute;lo thread<br>
+        * State management (stateful session beans): el contenedor gestiona las 
+        sesiones de forma transparente al programador<br>
+        * Messaging (MDB): se pueden crear objetos que responden a mensajes sin 
+        necesidad de conocer la API JMS<br>
+        * Transactions (session beans y MDB): el programador puede indicar m&eacute;todos 
+        que se han de ejecutar como transacciones<br>
+        * Security (session beans): EJb proporciona el servivio JAAS (Java Authentication 
+        and Authorization Service) que proporciona seguridad y control de acceso 
+        al sistema<br>
+        * Interceptors (session beans y MDB): EJB 3 introduce aspectos de la AOP 
+        (Aspect Oriented Programming) como los interceptores que permiten definir 
+        funciones inherentes como logging<br>
+        * Remote access (session beans): EJB 3 permite acceder a los benas de 
+        forma remota sin esfuerzo, ademas de permitir que se usen desde el cliente 
+        mediante &#8220;dependency injection&#8221; como si fueran objetos locales,<br>
+        * Web services (Stateless session beans): podemos transformar un bean 
+        sin estado en un webservice de forma casi transparente<br>
+        * Persistencia (Entities): proporciona un servicio ORM completamente configurable 
+        para las excepciones de cada RDBMS<br>
+        * Caching and performance (Entities): proporciona servicios de cache y 
+        optimizaci&oacute;n del rendimiento<br>
+      </p>
+      <p><br>
+      </p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

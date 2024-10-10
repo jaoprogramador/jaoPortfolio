@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Uso general de URL&#8217;s</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación en JDBC,Programas JDBC,Aplicaciones en JDBC,Ejercicios en JDBC, Ejemplos de JDBC,Tutoriales de JDBC,Manuales JDBC" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="JDBC, Manual JDBC, tutorial JDBC, Ejemplos JDBC, ejercicios JDBC">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> Uso general de URL&#8217;s</h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <p>Dado que URL&#8217;s causan a menudo cierta 
+        confusi&oacute;n, daremos primero una breve explicaci&oacute;n de URL 
+        en general y luego entraremos en una discusi&oacute;n sobre URL&#8217;s 
+        de JDBC.<br>
+        <br>
+        Una URL (Uniform Resource Locator) da informaci&oacute;n para localizar 
+        un recurso en Internet. Puede pensarse en ella como una direcci&oacute;n.<br>
+        La primera parte de una URL especifica el protocolo usado para acceder 
+        a la informaci&oacute;n y va siempre seguida por dos puntos. Algunos protocolos 
+        comunes son ftp, que especifica &#8220;file transfer protocol&#8221; y 
+        http que especifica &#8220;hypertext transfer protocol&#8221;. Si el protocolo 
+        es &#8220;file&#8221; indica que el recurso est&aacute; en un sistema 
+        de ficheros local mejor que en Internet : veamos unos ejemplos:</p>
+      <p> ftp://javasoft.com/docs/JDK-1_apidocs.zip<br>
+        http://java.sun.com/products/jdk/CurrentRelease<br>
+        file:/home/haroldw/docs/books/tutorial/summary.html</p>
+      <p>El resto de la URL, todo despu&eacute;s de los dos puntos, da informaci&oacute;n 
+        sobre donde se encuentra la fuente de los datos. Si el protocolo es file, 
+        el resto de la URL es el path al fichero. Para los protocolos ftp y http, 
+        el resto de la URL identifica el host y puede opcionalmente dar un path 
+        m&aacute;s espec&iacute;fico al sitio. Por ejemplo, el siguiente es la 
+        URL para la home page de JavaSoft. Esta URL identifica solo al host:</p>
+      <p> http://java.sun.com</p>
+      <p> JDBC y URL&#8217;s</p>
+      <p>Una URL JDBC suministra una forma de identificar una base de datos para 
+        que el driver apropiado pueda reconocerla y establecer la conexi&oacute;n 
+        con ella. Los desarrolladores de drivers son los que determinan actualmente 
+        que JDBC URL identifica su driver particular. Los usuarios no tienen por 
+        que preocuparse sobre como se forma una URL JDBC; ellos simplemente usan 
+        la URL suministrada con el driver que usan. El rol de JDBC es recomendar 
+        algunas convenciones a los fabricantes de drivers para su uso.</p>
+      <p>Dado que los JDBC URL se usan con varios tipos de drivers, las convenciones 
+        son necesariamente muy flexibles. Primero, permiten a diferentes drivers 
+        usar diferentes esquemas para nombrar las bases de datos. EL subprotocolo 
+        odbc, por ejemplo, permite que las URL contengan valores de atributos 
+        (pero no los requieren).</p>
+      <p>Segundo, las URL&#8217;s JDBC permiten a los desarrolladores de drivers 
+        codificar toda la informaci&oacute;n de la conexi&oacute;n dentro de ella. 
+        Esto hace posible, por ejemplo, para un applet que quiera hablar con una 
+        base de datos dada el abrir la conexi&oacute;n sin necesitar que el usuario 
+        realice ninguna tarea de administraci&oacute;n de sistemas.</p>
+      <p>Tercero, las URL&#8217;s JDBC permiten un nivel de indirecci&oacute;n. 
+        Esto quiere decir que la URL JDBC puede referirse a una base de datos 
+        l&oacute;gica o un host l&oacute;gico que se traduce din&aacute;micamente 
+        al nombre actual por el sistema de nombramiento de la red. <br>
+        <br>
+        Esto permite a los administradores de sistemas evitar dar especificaciones 
+        de sus hosts como parte del nombre JDBC. Hay una variedad de servicios 
+        de nomenclatura de red diferentes (tales como DNS, NIS y DCE), y no hay 
+        restricci&oacute;n acerca de cual usar.<br>
+        La sintaxis para las URL&#8217;s JDBC que se muestra a continuaci&oacute;n 
+        tiene tres partes separadas por dos puntos:</p>
+      <p>jdbc:&lt;subprotocol&gt;:&lt;subname&gt;</p>
+      <p>Las tres partes se descomponen como sigue:</p>
+      <p>1 jdbc &#8211; el protocolo. El protocolo en una URL JDBC es siempre 
+        jdbc</p>
+      <p>2 - &lt;subprotocol&gt; - el nombre del driver o el nombre del mecanismo 
+        de conectividad con la base de datos, que puede estar soportado por uno 
+        o m&aacute;s drivers. Un ejemplo sobresaliente de un subprotocolo es &#8220;odbc&#8221;, 
+        que ha sido reservado para URL&#8217;s que especifican nombres de fuentes 
+        de datos estilo ODBC. Por ejemplo para acceder a la base de datos a trav&eacute;s 
+        del puente JDBC-ODBC, la URL a usar podr&iacute;a ser algo as&iacute; 
+        como lo siguiente:</p>
+      <p> jdbc:odbc:fred</p>
+      <p>En este ejemplo, el subprotocolo es &#8220;odbc&#8221; y el subnombre 
+        &#8220;fred&#8221; es el nombre de la fuente de datos ODBC local.</p>
+      <p>Si se quiere usar un servicio de nombre de la red (ya que el nombre de 
+        la base de datos en la URL JDBC no tiene por que ser su nombre act&uacute;al), 
+        el servicio de nombre puede ser el subprotocolo. Por tanto, para el ejemplo, 
+        podr&iacute;a tener una URL como :</p>
+      <p>jdbc:dcenaming:accounts-payable</p>
+      <p>En este ejemplo, la URL especifica que el servicio local DCE resolver&aacute; 
+        el nombre de la base de datos &#8220;accounts-payable&#8221; para poder 
+        conectar con la base de datos real.</p>
+      <p>3 &lt;subname&gt; - una forma de identificar la base de datos. El subnombre 
+        puede variar dependiendo del subprotocolo, y puede tener un subnombre 
+        con cualquier sintaxis interna que el fabricante del driver haya escogido. 
+        El punto de un subnombre es para dar informaci&oacute;n suficiente para 
+        localizar la base de datos. En el ejemplo anterior &#8220;fred&#8221; 
+        es suficiente porque ODBC suministra la informaci&oacute;n restante. Una 
+        base de datos en un servidor remoto requiere m&aacute;s informaci&oacute;n. 
+        Si la base de datos va a ser accesible a trav&eacute;s de Internet, por 
+        ejemplo, la direcci&oacute;n de red deber&iacute;a incluirse en la URL 
+        JDBC como parte del<br>
+        <br>
+        subnombre y deber&iacute;a seguir a la convenci&oacute;n est&aacute;ndar 
+        de nomenclatura de URL.</p>
+      <p>//hostname:port/subsubname</p>
+      <p>Suponiendo que &#8220;dbnet&#8221; es un protocolo para conectar a un 
+        host, la URL JDBC deber&iacute;a parecerse a algo como:</p>
+      <p> jdbc:dbnet://wombat:356/fred<br>
+      </p>
+      <p>&nbsp; </p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

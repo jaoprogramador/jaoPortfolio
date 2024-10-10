@@ -1,0 +1,329 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Propiedades CSS</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación en CSS,Programas CSS,Aplicaciones en CSS,Ejercicios en CSS, Ejemplos de CSS,Tutoriales de CSS,Manuales CSS" name=description>
+<meta name="keywords" content="CSS, Manual CSS, tutorial CSS, Ejemplos CSS, ejercicios CSS, Cascading Style Sheet">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2>Propiedades</h2></td>
+  </tr>
+  <tr> 
+    <td height="2827" colspan="3"> 
+      <h3>Propiedades CSS</h3>
+      
+      <table width="75%" border="0">
+        <tr> 
+          <td width="19%">Contenido:</td>
+          <td width="81%">&nbsp;</td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="css05.htm#par">- P&aacute;rrafos</a></td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td><a href="css05.htm#car">- Caracteres</a></td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td><a href="css05.htm#lis">- Listas</a></td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td><a href="css05.htm#ima">- Im&aacute;genes</a></td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td><a href="css05.htm#vin">- V&iacute;nculos</a></td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td><a href="css05.htm#pos">- Posicionamiento</a></td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td><a href="css05.htm#divspa">- Div</a></td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td><a href="css05.htm#divspa">- Span</a></td>
+        </tr>
+      </table>
+      <h3>P&aacute;rrafos<a name="par"></a></h3>
+      <p>Mediante las hojas de estilos podemos modificar el margen, el borde, 
+        fondo, sangr&iacute;a e interlineado de los p&aacute;rrafos. Las propiedades 
+        que nos permiten modificar<br>
+        tales caracter&iacute;sticas son:</p>
+      <table>
+        <tr> 
+          <td width="142">margin-top <br>
+            margin-right <br>
+            margin-bottom <br>
+            margin-left&nbsp;</td>
+          <td width="393">Definen respectivamente el margen superior, derecho, 
+            inferior, e izquierdo del p&aacute;rrafo en p&iacute;xeles o en porcentaje 
+            de pantalla.</td>
+        </tr>
+        <tr> 
+          <td>margin</td>
+          <td>Define el margen superior, derecho, inferior e izquierdo del p&aacute;rrafo. 
+            Si s&oacute;lo se escribe un valor el margen se aplica por igual a 
+            las cuatro m&aacute;rgenes. si se esriben dos , el primer valor se 
+            aplica a los m&aacute;rgenes superiore inferior, y el segundo a los 
+            m&aacute;rgenes izq y derech. Por &uacute;ltimo si se escriben tres 
+            valores, el primero se aplica al margen superior, el segundo al izq 
+            y derecho y el tercero al margen inferior.</td>
+        </tr>
+        <tr> 
+          <td>padding-top<br>
+            padding-right<br>
+            padding-bottom<br>
+            padding-left</td>
+          <td>En caso del que el parrafo tenga borde, dfinen el espacio en tre 
+            el contenido y los bordes superior e inferior en pixeles o porcentaje.</td>
+        </tr>
+        <tr> 
+          <td>padding</td>
+          <td>Define el espacio que hay entre el contenido del parrafo y los bordes 
+            superior, dereho e inferior e izquierdo del parrafo en porcentaje 
+            o en pixeles. La aplicaci&oacute;n de solo un valor, dos o tres valores 
+            , sigue las mismas reglas que la propiedad margin</td>
+        </tr>
+        <tr> 
+          <td>border-top<br>
+            border-right<br>
+            border-bottom<br>
+            border-left</td>
+          <td>Definen respectivamente, el estilo, color , ancho del borde superior, 
+            derecho, inferior, e izquierdo del p&aacute;rrafo. Los valores posibles 
+            para el estilo son none, solid, y double. El color se dar&aacute; 
+            en notaci&oacute;n hexadecimal o mediante su nombre en ingles. Y el 
+            grosor se proporcionar&aacute; en pixels.</td>
+        </tr>
+        <tr> 
+          <td>border</td>
+          <td>Define el estilo, color, ancho del borde superior, derecho, inferior 
+            e izquierdo del p&aacute;rrafo.La aplicaci&oacute;n de un solo valor, 
+            dos o tres, valores, sigue las mismas reglas que las de las propiedades 
+            margin y padding.</td>
+        </tr>
+        <tr> 
+          <td>background-color</td>
+          <td>Define el color de fondo del p&aacute;rrafo</td>
+        </tr>
+        <tr> 
+          <td>background-image</td>
+          <td>Define la imagen de fondo de p&aacute;rrafo. El valor se debe proporcionar 
+            con el siguiente formato URL(imagen).</td>
+        </tr>
+        <tr> 
+          <td>background-attachment</td>
+          <td>Define si el fondo permanecer&aacute; fijo (fixed), o no (scroll), 
+            respecto del texto. No funciona con los p&aacute;rrafos.</td>
+        </tr>
+        <tr> 
+          <td>background-repeat</td>
+          <td>Define si la imagen se repite, repeat; se repite solamente horizontal, 
+            repeat=x; verticalmente, repeat=y; o simplemente no se repite, no=repeat.</td>
+        </tr>
+        <tr> 
+          <td>background-position</td>
+          <td>Define la posici&oacute;n superior e izquierda de la imagen en pixels 
+            o porcentajes.</td>
+        </tr>
+        <tr> 
+          <td>background</td>
+          <td>Define el color, la imagen, repetici&oacute;n, fijaci&oacute;n o 
+            no del fondo y posici&oacute;n de la imagen.</td>
+        </tr>
+        <tr> 
+          <td>text-indent</td>
+          <td>Define la sangr&iacute;a de primera l&iacute;nea del p&aacute;rrafo 
+            en pixels.</td>
+        </tr>
+        <tr> 
+          <td>text-transform</td>
+          <td>Define los efectos sobre el p&aacute;rrafo . Los valores posibles: 
+            capitalize, uppercase, lowercase y none.</td>
+        </tr>
+        <tr> 
+          <td>text-align</td>
+          <td>Define la alineaci&oacute;n del p&aacute;rrafo. Los valores posibles 
+            son: left, center, right y justify.</td>
+        </tr>
+        
+      </table>
+      <h3>Caracteres<a name="car"></a></h3>
+      <p>Veamos ahora cuales son las propiedades que nos permiten modificar el 
+        estilo de los caracteres:</p>
+      <table width="99%" border="0">
+        <tr> 
+          <td width="19%">font-style: </td>
+          <td width="81%">Permite mostrar el texto en cursiva mediante el valor 
+            italic. Su valor por defecto es normal.</td>
+        </tr>
+        <tr> 
+          <td>font-variant: </td>
+          <td>Permite mostrar el texto en formato de versales mediante el valor 
+            smallcaps. Su valor por defecto es normal.</td>
+        </tr>
+        <tr> 
+          <td>font-weight: </td>
+          <td>Permite mostrar el texto en negrita mediante el valor bold. Su valor 
+            por defecto es normal.</td>
+        </tr>
+        <tr> 
+          <td>font-size: </td>
+          <td>Define el tama&ntilde;o del tipo de letra en pixels o porcentaje 
+            (teniendo en cuenta el tama&ntilde;o de la fuente actual).</td>
+        </tr>
+        <tr> 
+          <td>line-height: </td>
+          <td>Define el espacio de interlineado del parrafo en picas. He incluido 
+            el interlineadoen esta secci&oacute;n debido a que forma parte de 
+            uno de los valores de la propiedad font expuesta mas abajo. Pero en 
+            realidad se trata de una propiedad para p&aacute;rrafos.</td>
+        </tr>
+        <tr> 
+          <td>font-family:</td>
+          <td>Define el tipo de letra. Si el nombre de la fuente contiene espacios 
+            es conveniente entrecomillado. Si se trata de un estilo insertado 
+            utiliza las comillas simples para no confundirlas con las dobles.</td>
+        </tr>
+        <tr> 
+          <td>font: </td>
+          <td>Define los formatos de cursiva, versales y negrita; el tama&ntilde;o 
+            de la fuente, el interlineado, del p&aacute;rrafo; y finalmente el 
+            tipo de letra.</td>
+        </tr>
+        <tr> 
+          <td>color: </td>
+          <td>Define el color de la fuente.</td>
+        </tr>
+        <tr> 
+          <td>Vertical-align: </td>
+          <td>Define los formatos de subindice y superindice del texto.</td>
+        </tr>
+        <tr> 
+          <td>letter-spacing: </td>
+          <td>Define el espaciado entre caracteres en pixels.</td>
+        </tr>
+      </table>
+      <h3>Listas<a name="lis"></a></h3>
+      <p>Gracias a los estilos podemos definir el tipo, imagen y posici&oacute;n 
+        de las listas.</p>
+      <table width="98%" border="0">
+        <tr> 
+          <td width="24%">list-style-type: </td>
+          <td width="76%">Define el tipo de lista. Los valores disponibles son: 
+            disc, circle, squaredecimal, lower-roman, upper-roman, lower-alpha, 
+            upper-alpha y none.</td>
+        </tr>
+        <tr> 
+          <td>list-style-image: </td>
+          <td>Define una imagen para los elementos de la lista. El valor se debe 
+            proporcinar con el siguiente formato: url(imagen)</td>
+        </tr>
+        <tr> 
+          <td>list-style-position: </td>
+          <td>Define si la lista tiene sangr&iacute;a francesa, outside, o no, 
+            inside.</td>
+        </tr>
+        <tr> 
+          <td>list-style: </td>
+          <td>Define el tipo, la imagen de los elementos y la sangr&iacute;a de 
+            la lista.</td>
+        </tr>
+      </table>
+      <h3>Im&aacute;genes:<a name="ima"></a></h3>
+      <p>Podemos modificar el margen y el borde de las im&aacute;genes mediante 
+        las propiedades que vimos anteriormente en la secci&oacute;n de p&aacute;rrafos. 
+        Tambi&eacute;n pueden resultar de utilidad las siguientes propiedades:</p>
+      <table width="99%" border="0">
+        <tr>
+          <td width="18%">float: </td>
+          <td width="82%">Cuando le asignamos el valor left o right al atributo align e la 
+            etiqueta img, el texto el texto se situa a la izq o derch del texto. 
+            Pues bien, asignar el valor left o right a la propiedad float consigue 
+            el mismo efecto.</td>
+        </tr>
+        <tr>
+          <td>vertical-align </td>
+          <td>Los valores top, middle y bottomde esta propiedad son equivalentes 
+            a los mismos valores que el atributo align de las im&aacute;genes.</td>
+        </tr>
+      </table>
+      <h3>V&iacute;nculos:<a name="vin"></a></h3>
+      <p>Ya hemos visto como definir estilos para las diferentes pseudoclases 
+        de los v&iacute;nculos. Dos propiedades que te pueden ayudar a modificar 
+        a&uacute;n mas tales elementos son:</p>
+      <p>text-decoration: Define los formatos de estilo subrayado, underline; 
+        sobre-rayado, overline; tachadura, line-through; y ninguno, none.</p>
+      <h3>Cursor: <a name="pos"></a></h3>
+      <p>Define diferentes tipos de punteros para el rat&oacute;n entre los que 
+        se encuentran: crosshair, default, hand, move, text, wait y help.</p>
+      <p>Mediante el valor none de la propiedad text-decoration puedes evitar 
+        el subrayado de los vinculos:</p>
+      <p>A:link, A:visited, A:active{text-decoration:none}</p>
+      <h3>CSS-P(POSICIONAMIENTO)</h3>
+      <p>Estas propiedades tienen que ver con el posicionamisnto de los elementos 
+        de la p&aacute;gina. Estas propiedades se utilizan generalmente para crear 
+        animaciones mediante scripts:</p>
+      <table width="99%" border="0">
+        <tr>
+          <td>position: </td>
+          <td>Define la posicion de un elemento el documento como absolute, relative 
+            o static.</td>
+        </tr>
+        <tr>
+          <td>left, top, width y height:</td>
+          <td>Define la posicion del elemento mediante la especificaci&oacute;n 
+            de su esquina superior izquierda, su anchura y su altura.</td>
+        </tr>
+        <tr>
+          <td>z-index: </td>
+          <td>Define la posici&oacute;n del elemento con respecto al resto de 
+            elementos de la p&aacute;gina.</td>
+        </tr>
+      </table>
+      <h3>DIV Y SPAN<a name="divspa"></a></h3>
+      <p>Las etiquetas &lt;div&gt; y &lt;span&gt; permiten definir &aacute;mbitos 
+        definidos por el usuario. En el ejemplo siguiente vamos a utilizar un 
+        elemento div para definir un margen izquierdo de 50 pixels para un p&aacute;rrafo 
+        <br>
+        y una imagen contenidos en el. La etiqueta div es similar a las etiquetas 
+        de p&aacute;rrafo. Su contenido es tratado como un bloque , por lo cual 
+        insertar un punto y aparte automatico despues de su etiiqueta de cierre:</p>
+      <p>&lt;div style=&quot;margin-left:50&quot; class=&quot;ej&quot;&gt;<br>
+        &lt;p&gt;Este es un p&aacute;rrafo hijo de un elemento div que define 
+        un margen izquierdo de 50 pixeles. La imagen siguiente tambi&eacute;n 
+        pertenece al &aacute;mbito del elemento div. Y por ello comparte el mismo 
+        margen izquierdo que el parrafo.&lt;/p&gt;<br>
+        &lt;p&gt;&lt;img src=&quot;escudo.jpg&quot; width=&quot;56&quot; height=&quot;80&quot; 
+        alt=&quot;escudo del Athletic Club de Bilbao&quot;&gt;&lt;/p&gt;<br>
+        &lt;/div&gt;</p>
+      <p>Por otra parte la etiqueta span nos permite definir &aacute;mbitos insertados 
+        dentro de un bloque.</p></td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+
+</body>
+</html>

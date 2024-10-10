@@ -1,0 +1,79 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Introducci&oacute;n a JQuery</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta name="keywords" content="Introduccion a JQuery, Manual JQuery, tutorial JQuery, Ejemplos JQuery, ejercicios JQuery">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos"><tr> 
+    <td height="39" colspan="3"> <h2>Demo 2 de jQuery</h2></td>
+  </tr>
+  <tr> 
+    <td height="268" colspan="3"> <p>En este otro ejemplo vamos a ver algo un 
+        poquito m&aacute;s complejo. Bueno, realmente no tiene<br>
+        mucha mayor complejidad, pero estamos utilizando jQuery de una manera 
+        un poco distinta,<br>
+        que requiere algo m&aacute;s de c&oacute;digo por nuestra parte. Ahora 
+        vamos a tener dos capas en nuestra<br>
+        p&aacute;gina. Una capa estar&aacute; siempre visible y otra capa aparecer&aacute; 
+        inicialmente oculta y la vamos a<br>
+        mostrar u ocultar dependiendo de si el usuario coloca el rat&oacute;n 
+        encima de la capa que est&aacute;<br>
+        siempre visible.<br>
+        Para hacerse una idea exacta de nuestro ejemplo puedes verlo en una ventana 
+        aparte.<br>
+        En este segundo ejemplo tenemos este c&oacute;digo HTML, con las dos capas.<br>
+        &lt;div id=&quot;capa&quot; style=&quot;padding: 10px; background-color: 
+        #ff8800;&quot;&gt;Pon el rat&oacute;n encima de esta capa&lt;/div&gt;<br>
+        &lt;br&gt;<br>
+        &lt;div id=&quot;mensaje&quot; style=&quot;display: none;&quot;&gt;Has 
+        puesto el rat&oacute;n encima!! &lt;br&gt;(Ahora qu&iacute;talo de la 
+        capa)&lt;/div&gt;<br>
+        Ahora vamos a tener un c&oacute;digo Javascript con jQuery que defina 
+        los eventos del usuario, para<br>
+        cuando sit&uacute;a el rat&oacute;n dentro o fuera de la primera capa.<br>
+        $(&quot;#capa&quot;).mouseenter(function(evento){<br>
+        $(&quot;#mensaje&quot;).css(&quot;display&quot;, &quot;block&quot;);<br>
+        });<br>
+        $(&quot;#capa&quot;).mouseleave(function(evento){<br>
+        $(&quot;#mensaje&quot;).css(&quot;display&quot;, &quot;none&quot;);<br>
+        });<br>
+        De esta sencilla manera, hemos creado dos eventos en el DIV con id=&quot;capa&quot;. 
+        Adem&aacute;s, hemos<br>
+        definido el c&oacute;digo de los eventos por medio de funciones, que se 
+        encargar&aacute;n de mostrar o<br>
+        ocultar la segunda capa con id=&quot;mensaje&quot;.<br>
+        $(&quot;#mensaje&quot;).css(&quot;display&quot;, &quot;block&quot;);<br>
+        Esto nos selecciona la capa con id &quot;mensaje&quot; y con el m&eacute;todo 
+        css() indicamos que queremos<br>
+        cambiar el atributo &quot;display&quot; al valor &quot;block&quot; de 
+        ese elemento.<br>
+        $(&quot;#mensaje&quot;).css(&quot;display&quot;, &quot;none&quot;);<br>
+        Esta otra l&iacute;nea muy similar, simplemente cambia el &quot;display&quot; 
+        a &quot;none&quot; para ocultar el elemento.<br>
+        Esperamos que estos dos ejemplos te hayan servido para ver r&aacute;pidamente 
+        algunas cosas que<br>
+        se pueden hacer con jQuery con muy poco esfuerzo y que funcionan en todos 
+        los navegadores.</p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

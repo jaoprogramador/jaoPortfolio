@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>C&oacute;mo hacer una p&aacute;gina AJAX</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta name="keywords" content="Primera página AJAX, Como hacer una pagina AJAX, Manual AJAX, tutorial AJAX, Ejemplos AJAX, ejercicios AJAX">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<table width="555" height="1171" align="left" background="../../imagenes/fondologo.jpg">
+  <tr> 
+    <td height="39" colspan="3"> <h2>Funciones para nodos DOM</h2></td>
+  </tr>
+  <tr> 
+    <td height="1101" colspan="3"> 
+      <p>La funci&oacute;n $() permite seleccionar 
+        elementos (nodos DOM) de la p&aacute;gina de forma muy sencilla.<br>
+        jQuery permite, adem&aacute;s, seleccionar nodos relacionados con la selecci&oacute;n 
+        realizada. Para seleccionar nodos relacionados, se utilizan funciones 
+        de filtrado y funciones de b&uacute;squeda.<br>
+        Los filtros son funciones que modifican una selecci&oacute;n realizada 
+        con la funci&oacute;n $() y permiten limitar el n&uacute;mero de nodos 
+        devueltos.<br>
+        La funci&oacute;n contains() limita los elementos seleccionados a aquellos 
+        que contengan en su interior el texto indicado como par&aacute;metro:<br>
+        // S&oacute;lo obtiene los p&aacute;rrafos que contengan la palabra 'importante'<br>
+        $('p').contains('importante');<br>
+        La funci&oacute;n not() elimina de la selecci&oacute;n de elementos aquellos 
+        que cumplan con el selector indicado:<br>
+        // Selecciona todos los enlaces de la p&aacute;gina, salvo el que<br>
+        // tiene una 'class' igual a 'especial'<br>
+        $('a').not('.especial');<br>
+        // La siguiente instrucci&oacute;n es equivalente a la anterior<br>
+        $('a').not($('.especial'));<br>
+        La funci&oacute;n filter() es la inversa de not(), ya que elimina de la 
+        selecci&oacute;n de elementos aquellos que no cumplan con la expresi&oacute;n 
+        indicada. Adem&aacute;s de una expresi&oacute;n, tambi&eacute;n se puede 
+        indicar una funci&oacute;n para filtrar la selecci&oacute;n:<br>
+        // Selecciona todas las listas de elementos de la p&aacute;gina y quedate<br>
+        // s&oacute;lo con las que tengan una 'class' igual a 'menu'<br>
+        $('ul').filter('.menu');<br>
+        Una funci&oacute;n especial relacionada con los filtros y buscadores es 
+        end(), que permite volver a la selecci&oacute;n original de elementos 
+        despu&eacute;s de realizar un filtrado de elementos. La documentaci&oacute;n 
+        de jQuery incluye el siguiente ejemplo:<br>
+        $('a')<br>
+        .filter('.pinchame')<br>
+        .click(function(){<br>
+        alert('Est&aacute;s abandonando este sitio web');<br>
+        })<br>
+        .end()<br>
+        .filter('ocultame')<br>
+        .click(function(){<br>
+        $(this).hide();<br>
+        return false;<br>
+        })<br>
+        .end();<br>
+        El c&oacute;digo anterior obtiene todos los enlaces de la p&aacute;gina 
+        $('a') y aplica diferentes funciones manejadoras del evento click en funci&oacute;n 
+        del tipo de enlace. Aunque se podr&iacute;an incluir dosinstrucciones 
+        diferentes para realizar cada filtrado, la funci&oacute;n end() permite 
+        encadenar varias selecciones.<br>
+        El primer filtrado ($('a').filter('.pinchame'))) selecciona todos los 
+        elementos de la p&aacute;gina cuyo atributo class sea igual a pinchame. 
+        Despu&eacute;s, se asigna la funci&oacute;n manejadora para el evento 
+        de pinchar con el rat&oacute;n mediante la funci&oacute;n click().<br>
+        A continuaci&oacute;n, el c&oacute;digo anterior realiza otro filtrado 
+        a partir de la selecci&oacute;n original de enlaces. Para volver a la 
+        selecci&oacute;n original, se utiliza la funci&oacute;n end() antes de 
+        realizar un nuevo filtrado.<br>
+        De esta forma, la instrucci&oacute;n .end().filter('ocultame') es equivalente 
+        a realizar el filtrado directamente sobre la selecci&oacute;n original 
+        $('a').filter('.ocultame')).<br>
+        El segundo grupo de funciones para la manipulaci&oacute;n de nodos DOM 
+        est&aacute; formado por los buscadores, funciones que buscan/seleccionan 
+        nodos relacionados con la selecci&oacute;n realizada. De esta forma, jQuery 
+        define la funci&oacute;n children() para obtener todos los nodos hijo 
+        o descendientes del nodo actual, parent() para obtener el nodo padre o 
+        nodo ascendente del nodo actual (parents() obtiene todos los ascendentes 
+        del nodo hasta la ra&iacute;z del &aacute;rbol) y siblings() que obtiene 
+        todos los nodos hermano del nodo actual, es decir, todos los nodos que 
+        tienen el mismo nodo padre que el nodo actual.<br>
+        La navegaci&oacute;n entre nodos hermano se puede realizar con las funciones 
+        next() y pev() que avanzan o retroceden a trav&eacute;s de la lista de 
+        nodos hermano del nodo actual.<br>
+        Por &uacute;ltimo, jQuery tambi&eacute;n dispone de funciones para manipular 
+        f&aacute;cilmente el contenido de los nodos DOM (http://docs.jquery.com/Manipulation) 
+        . Las funciones append() y prepend()<br>
+        a&ntilde;aden el contenido indicado como par&aacute;metro al principio 
+        o al final respectivamente del contenido original del nodo.<br>
+        Las funciones after() y before() a&ntilde;aden el contenido indicado como 
+        par&aacute;metro antes de cada uno de los elementos seleccionados. La 
+        funci&oacute;n wrap() permite &quot;envolver&quot; un elemento con el 
+        contenido indicado (se a&ntilde;ade parte del contenido por delante y 
+        el resto por detr&aacute;s).<br>
+        La funci&oacute;n empty() vac&iacute;a de contenido a un elemento, remove() 
+        elimina los elementos seleccionados del &aacute;rbol DOM y clone() copia 
+        de forma exacta los nodos seleccionados.</p></td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

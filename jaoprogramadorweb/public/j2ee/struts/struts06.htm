@@ -1,0 +1,58 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Tags</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación en Struts,Programas Struts,Aplicaciones en Struts,Ejercicios en Struts, Ejemplos de Struts,Tutoriales de Struts,Manuales Struts" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Struts, Manual Struts, tutorial Struts, Ejemplos Struts, ejercicios Struts">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2> <strong>Tags</strong></h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <p>B&aacute;sicamente, un Tag de JSP consiste 
+        en un Tag con formato &lt;prefijoTagLib:nombreTag atributo=valor ... &gt; 
+        que cuando la JSP se compila es sustitu&iacute;do por una llamada a la 
+        clase TagHandler que se encarga de resolver su funcionalidad.</p>
+      <p>El TagHandler extiende BodyTagSupport o TagSupport (seg&uacute;n si es 
+        un tag que tiene body), que implementa su funcionalidad en los m&eacute;todos 
+        doStartTag(), doEndTag(),doInitBody(), doAfterBody() (los dos &uacute;ltimos 
+        s&oacute;lo en las que extienden BodyTagSupport), adem&aacute;s de los 
+        getters y setters correspondientes a sus atributos. Esta clase se define 
+        en un Tag Library Definition (archivo xml con extensi&oacute;n TLD donde 
+        se define el nombre del tag, la clase TagHandler que lo atiende, la definici&oacute;n 
+        de sus atributos, si tiene body, etc.) que a su vez se debe declarar en 
+        el web.xml (dentro de &lt;web-app&gt; se pone </p>
+      <p>&lt;taglib&gt; &lt;taglib-uri&gt; nombreTagLib&lt;/taglib-uri&gt; &lt;taglib-location&gt;/directorios/nombreArchivo.tld 
+        &lt;/taglib-location&gt; &lt;/taglib&gt;) y en la JSP donde se utilizar&aacute; 
+        (&lt;%@ taglib uri=&quot;nobreTagLib&quot; prefix=&quot;prefijoTagLib&quot; 
+        %&gt;). </p>
+      <p>Finalmente, el Tag que se usa en la JSP consiste en &lt;prefijoTagLib:nombreTag 
+        atributo=valor ... &gt;. Para m&aacute;s info, ver la p&aacute;gina oficial 
+        de Sun sobre TagLibraries en http://java.sun.com/products/jsp/taglibraries.html.</p>
+      <p><br>
+      </p>
+      <p><br>
+      </p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

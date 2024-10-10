@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Ejercicios MySQL</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="MySQL, sql, pl/sql, programacion MySQL, ejercicios MySQL, ejemplos MySQL, select">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2>D R O P</h2></td>
+  </tr>
+  <tr> 
+    <td><h3>Sintaxis de DROP DATABASE</h3>
+      <p>DROP {DATABASE | SCHEMA} [IF EXISTS] db_name<br>
+        DROP DATABASE borrar todas las tablas en la base de datos y borrar la 
+        base de datos. Sea muy cuidadoso con este comando! Para<br>
+        usarDROP DATABASE, necesita el permiso DROP en la base de datos.<br>
+        IF EXISTS se usa para evitar un error si la base de datos no existe.<br>
+        DROP SCHEMA puede usarse desde MySQL 5.0.2.<br>
+        Si usa DROP DATABASE en una base de datos enlazada simb&oacute;licamente, 
+        tanto el enlace como la base de datos se borran.<br>
+        DROP DATABASE retorna el n&uacute;mero de tablas que se eliminan. Se corresponde 
+        con el n&uacute;mero de ficheros .frm borrados.<br>
+        El comando DROP DATABASE borrar del directorio de base de datos los ficheros 
+        y directorios que MySQL puede crear durante<br>
+        operaciones normales:<br>
+        &#8226; Todos los ficheros con estas extensiones:<br>
+        .BAK .DAT .HSH<br>
+        .MRG .MYD .ISD<br>
+        .MYI .db .frm<br>
+        &#8226; Todos los subdirectorios con nombres que tienen dos d&iacute;gitos 
+        hexadecimales 00-ff. Son subdirectorios usados por tablas RAID<br>
+        . (Estos directorios no se borran desde MySQL 5.0, cuando se elimin&oacute; 
+        el soporte para tablas RAID . Debe convertir las tablas<br>
+        RAID y eliminar estos directorios manualmente antes de actualizar a MySQL 
+        5.0. Consulte Secci&oacute;n 2.10.1, &#8220;Aumentar la versi&oacute;n<br>
+        de 4.1 a 5.0&#8221;.)<br>
+        &#8226; El fichero db.opt , si existe.<br>
+        Si permanecen otros ficheros o directorios en el directorio de la base 
+        de datos tras que MySQL borre los ficheros listados, el directorio<br>
+        de base de datos no puede borrarse. En este caso, debe borrar cualquier 
+        fichero restante manualmente y realizar el comando<br>
+        DROP DATABASE de nuevo.<br>
+        Puede borrar bases de datos con mysqladmin.<br>
+        <h3>Sintaxis de DROP INDEX</h3><br>
+        DROP INDEX index_name ON tbl_name<br>
+        DROP INDEX borra el &iacute;ndice llamado index_name de la tabla tbl_name. 
+        En MySQL 5.0, DROP INDEX se mapea a coman-<br>
+        do ALTER TABLE para borrar el &iacute;ndice. Consulte Secci&oacute;n 13.1.2, 
+        &#8220;Sintaxis de ALTER TABLE&#8221;.<br>
+        <h3>Sintaxis de DROP TABLE</h3><br>
+        DROP [TEMPORARY] TABLE [IF EXISTS]<br>
+        tbl_name [, tbl_name] ...<br>
+        [RESTRICT | CASCADE]<br>
+        DROP TABLE borra una o m&aacute;s tablas. Debe tener el permiso DROP para 
+        cada tabla. Todos los datos de la definici&oacute;n de tabla son<br>
+        borrados, as&iacute; que tenga cuidado con este comando!<br>
+        Use IF EXISTS para evitar un error para tablas que no existan. Un NOTE 
+        se genera para cada tabla no existente cuando se usa IF<br>
+        EXISTS. Consulte Secci&oacute;n 13.5.4.22, &#8220;Sintaxis de SHOW WARNINGS&#8221;.<br>
+        RESTRICT y CASCADE se permiten para hacer la portabilidad m&aacute;s f&aacute;cil. 
+        De momento, no hacen nada.<br>
+        Nota: DROP TABLE hace un commit autom&aacute;ticamente con la transacci&oacute;n 
+        activa,a no ser que use la palabra TEMPORARY.<br>
+        La palabra TEMPORARY tiene el siguiente efecto:<br>
+        &#8226; El comando s&oacute;lo borra tablas TEMPORARY.<br>
+        &#8226; El comando no acaba una transacci&oacute;n en marcha.<br>
+        &#8226; No se chequean derechos de acceso. (Una tabla TEMPORARY es visible 
+        s&oacute;lo para el cliente que la ha creado, as&iacute; que no es necesario.)<br>
+        Usar TEMPORARY es una buena forma de asegurar que no borra accidentalmente 
+        una tabla no TEMPORARY.<br>
+        <h3> Sintaxis de RENAME TABLE</h3><br>
+        RENAME TABLE tbl_name TO new_tbl_name<br>
+        [, tbl_name2 TO new_tbl_name2] ...<br>
+        Este comando renombra una o m&aacute;s tablas.<br>
+        La operaci&oacute;n de renombrar se hace autom&aacute;ticamente, lo que 
+        significa que ning&uacute;n otro flujo puede acceder a ninguna de las 
+        tablas<br>
+        mientras se ejecuta el renombrado. Por ejemplo, si tiene una tabla existente 
+        old_table, puede crear otra tabla new_table con<br>
+        la misma estructura pero vac&iacute;a, y luego reemplazar la tabla existente 
+        con la vac&iacute;a como sigue:<br>
+        CREATE TABLE new_table (...);<br>
+        RENAME TABLE old_table TO backup_table, new_table TO old_table;<br>
+        Si el comando renombra m&aacute;s de una tabla, las operaciones de renombrado 
+        se realizan de izquierda a derecha. Si quiere intercambiar<br>
+        dos nombres de tablas, puede hacerlo as&iacute; (asumiendo que no existe 
+        ninguna tabla llamada tmp_table):<br>
+        RENAME TABLE old_table TO tmp_table,<br>
+        new_table TO old_table,<br>
+        tmp_table TO new_table;<br>
+        Mientras haya dos bases de datos en el mismo sistema de ficheros puede 
+        renombrar una tabla para moverla de una base de datos a<br>
+        otra:<br>
+        RENAME TABLE current_db.tbl_name TO other_db.tbl_name;<br>
+        Cuando ejecuta RENAME, no puede tener ninguna tabla bloqueada o transacciones 
+        activas. Debe tener los permisos ALTER y DROP<br>
+        en la tabla original, y los permisos CREATE y INSERT en la nueva tabla.<br>
+        Si MySQL encuentra cualquier error en un renombrado m&uacute;ltiple, hace 
+        un renombrado inverso para todas las tablas renombradas<br>
+        para devolver todo a su estado original. </p>
+        </td>
+    <td>&nbsp;</td>
+    <td><a href="http://www.euskalnet.net/juanarana/oraclezip/Ejer3.rar"><img src="../../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td>
+<div align="right"><a href="http://www.euskalnet.net/juanarana/index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a>
+      </div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

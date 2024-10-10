@@ -1,0 +1,284 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Indice J2ME</title>
+<META http-equiv=Content-Language content=es>
+<META content="Manual J2ME, ejemplos J2ME, codigos J2ME" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Manual J2ME, ejemplos J2ME, codigos J2ME">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2>Sprite extends Layer</h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <p>Con esta clase instanciamos un tipo de capa 
+        orientada al dibujo de los personajes del juego, al ser &eacute;stos los 
+        elementos de la gr&aacute;fica que van a necesitar de un control de movimiento 
+        y animaci&oacute;n m&aacute;s potente.<br>
+        Ser&aacute;n dibujados de forma animada gracias a la variaci&oacute;n 
+        de sucesivas im&aacute;genes que representen distintas formas de su apariencia 
+        (frames), las cuales adem&aacute;s podremos trasladar, rotar, reflejar 
+        y mostrar u ocultar a nuestro antojo.<br>
+        Los frames primitivos que tendremos disponibles son suministrados por 
+        medio de una &uacute;nica imagen a partir de la cual ser&aacute;n extra&iacute;dos 
+        dividiendo &eacute;sta en elementos de igual tama&ntilde;o, seg&uacute;n 
+        un ancho y alto determinado para ellos. Tras la divisi&oacute;n, los frames 
+        son insertados en una secuencia y numerados con un &iacute;ndice &uacute;nico, 
+        d&aacute;ndole valor 0 al que ocupa la esquina superior izquierda y siguiendo 
+        la numeraci&oacute;n contando frames hacia la derecha y hacia abajo, entrando 
+        en la secuencia en el mismo orden. As&iacute;, las tres im&aacute;genes 
+        originales que vemos en la figura producir&iacute;an la misma secuencia 
+        de frames primitivos. </p>
+      <p>&Eacute;sta ser&iacute;a la secuencia generada por defecto al dividir 
+        la imagen. Tras ello, podr&aacute; ser variada recolocando &iacute;ndices, 
+        repitiendo algunos o despreciando otros, hasta conseguir una secuencia 
+        de frames que animar&aacute; nuestro personaje de la forma que deseamos. 
+        As&iacute;, por un lado, tendremos una lista con los frames primitivos 
+        y, por otro, la secuencia de frames que componen la animaci&oacute;n del 
+        personaje, ambas coincidiendo siempre y cuando no se var&iacute;e la secuencia 
+        generada por defecto.<br>
+        Otro concepto interesante es el del p&iacute;xel de referencia. &Eacute;ste 
+        es definido como un punto del Sprite (aunque puede definirse fuera de 
+        los l&iacute;mites de &eacute;ste) antes de cualquier transformaci&oacute;n 
+        y su funci&oacute;n es proporcionarnos un punto de referencia a la hora 
+        de trasladar, rotar o reflejar el Sprite.<br>
+        Este p&iacute;xel se define (defineReferencePixel()) relativo al sistema 
+        de coordenadas local al Sprite, tras lo cual podr&aacute; servirnos para 
+        colocar la capa (al trasladar su p&iacute;xel de referencia, trasladamos 
+        toda ella) en un punto del sistema de coordenadas global usando setRefPixelPosition().<br>
+        En la figura de ejemplo vemos como el p&iacute;xel de referencia (punto 
+        rojo) es declarado en el punto (25, 3) local al Sprite y, tras ello, es 
+        posicionado en el punto (48, 22) del objeto Graphics dibujador (el sistema 
+        que llamamos global), provocando con ello el posicionamiento de la capa 
+        completa.</p>
+      <p>Las transformaciones que podamos hacerle a la capa se har&aacute;n tomando 
+        como centro este p&iacute;xel. Por este motivo, tras ellas, la posici&oacute;n 
+        de &eacute;ste no habr&aacute; variado. M&aacute;s adelante veremos todo 
+        esto con detalle.<br>
+        Las constantes que presenta esta clase son:</p>
+      <table border="1" align="center">
+        <tr> 
+          <td width="228"><div align="center">CONSTANTE</div></td>
+          <td width="408"><div align="center">INDICACI&Oacute;N</div></td>
+        </tr>
+        <tr> 
+          <td>static int TRANS_MIRROR</td>
+          <td>Reflejo o rotaci&oacute;n de espejo sobre el eje Y para el Sprite.</td>
+        </tr>
+        <tr> 
+          <td>static int<br>
+            TRANS_MIRROR_ROT180</td>
+          <td>Reflejo o rotaci&oacute;n de espejo sobre el eje Y, tras la cual 
+            se<br>
+            aplica una rotaci&oacute;n de 180&ordm; en el sentido de las agujas<br>
+            del reloj.</td>
+        </tr>
+        <tr> 
+          <td>static int<br>
+            TRANS_MIRROR_ROT270</td>
+          <td>Reflejo o rotaci&oacute;n de espejo sobre el eje Y, tras la cual 
+            se<br>
+            aplica una rotaci&oacute;n de 270&ordm; en el sentido de las agujas<br>
+            del reloj.</td>
+        </tr>
+        <tr> 
+          <td>static int<br>
+            TRANS_MIRROR_ROT90</td>
+          <td>Reflejo o rotaci&oacute;n de espejo sobre el eje Y, tras la cual 
+            se<br>
+            aplica una rotaci&oacute;n de 90&ordm; en el sentido de las agujas 
+            del<br>
+            reloj.</td>
+        </tr>
+        <tr> 
+          <td>static int TRANS_NONE</td>
+          <td>No se aplica transformaci&oacute;n alguna sobre el Sprite.</td>
+        </tr>
+        <tr> 
+          <td>static int TRANS_ROT180</td>
+          <td>Rotaci&oacute;n de 180&ordm; en el sentido de las agujas del reloj.</td>
+        </tr>
+        <tr> 
+          <td>static int TRANS_ROT270</td>
+          <td>Rotaci&oacute;n de 270&ordm; en el sentido de las agujas del reloj.</td>
+        </tr>
+        <tr> 
+          <td>static int TRANS_ROT90</td>
+          <td>Rotaci&oacute;n de 90&ordm; en el sentido de las agujas del reloj.</td>
+        </tr>
+      </table>
+      <p>&nbsp;</p>
+      <p>A continuaci&oacute;n, vemos sus m&eacute;todos, describiendo, primero, 
+        los tres constructores disponibles:<br>
+        - Sprite(Image image). Primer constructor de la clase Sprite, el cual 
+        crea un sprite a partir de la imagen par&aacute;metro, por defecto visible 
+        y colocada su esquina superiorizquierda en el (0,0). Ser&aacute; equivalente 
+        a usar Sprite(image, image.getWidth(), image.getHeight()). As&iacute;, 
+        en este caso, el Sprite estar&aacute; compuesto de un &uacute;nico frame, 
+        no dando opci&oacute;n a su animaci&oacute;n por secuencia.<br>
+        - Sprite(Image image, int frameWidth, int frameHeight). Segundo constructor, 
+        el cual crea un Sprite a partir de un conjunto de im&aacute;genes (frames) 
+        obtenidas del Image origen. &Eacute;ste lo dividimos gracias a los par&aacute;metros 
+        frameWidth y frameHeight, obteniendo de esta divisi&oacute;n las distintas 
+        subim&aacute;genes que dar&aacute;n cuerpo a cada frame, todas ellas de 
+        iguales dimensiones.<br>
+        En este caso pues, un Sprite estar&aacute; compuesto de m&uacute;ltiples 
+        elementos primitivos dando opci&oacute;n as&iacute; a animarlo utilizando 
+        una secuencia de frames; ya sea la dada por defecto o alguna definida 
+        posteriormente por medio del m&eacute;todo setFrameSequence(&lt;nuevaSecuencia&gt;). 
+        Por defecto, el Sprite se crea visible y colocada su esquina superior 
+        izquierda en el (0,0).<br>
+        Adem&aacute;s, el ancho del objeto Image debe ser m&uacute;ltiplo entero 
+        de frameWidth y el alto, m&uacute;ltiplo entero de frameHeight para que 
+        as&iacute; el n&uacute;mero de frames obtenido sea un entero correcto 
+        (si no, ser&aacute; elevada una IllegalArgumentException). Como ya adelantamos, 
+        la secuencia de frames coincide por defecto con la lista de los frames 
+        primitivos creada al efectuar la divisi&oacute;n de la imagen original.<br>
+        - Sprite(Sprite s). Tercer constructor de Sprite, constructor copia.<br>
+        - boolean collidesWith(Image image, int x, int y, boolean pixelLevel). 
+        Pregunta si el Sprite actual, siempre que &eacute;ste sea visible, colisiona 
+        (llega a una posici&oacute;n donde se superpone) con la imagen par&aacute;metro, 
+        colocada la esquina superior izquierda de &eacute;sta en las coordenadas 
+        dadas con el segundo y tercer par&aacute;metro.<br>
+        El cuarto par&aacute;metro pixelLevel indica si la colisi&oacute;n es 
+        calculada s&oacute;lo teniendo en cuenta p&iacute;xeles opacos no transparentes 
+        (pixelLevel a true), tanto en la imagen como en el sprite, comprob&aacute;ndose, 
+        no obstante, en cualquier caso, s&oacute;lo los p&iacute;xeles dentro 
+        del rect&aacute;ngulo de colisi&oacute;n del Sprite, dado con defineCollisionRectangle().<br>
+        Por &uacute;ltimo, decir que usar el c&aacute;lculo de colisiones p&iacute;xel 
+        a p&iacute;xel tendr&aacute; un coste mayor que simplemente calcularlas 
+        entre el rect&aacute;ngulo de colisi&oacute;n del sprite y los bordes 
+        de la imagen (pixelLevel a false).<br>
+        - boolean collidesWith(Sprite s, boolean pixelLevel). Pregunta si el Sprite 
+        actual colisiona con el Sprite par&aacute;metro, para lo cual ambos deben 
+        ser visibles. El par&aacute;metro pixelLevel funciona como ya explicamos 
+        en el m&eacute;todo anterior.<br>
+        - boolean collidesWith(TiledLayer t, boolean pixelLevel). Pregunta si 
+        el Sprite actual colisiona con el TiledLayer par&aacute;metro, para lo 
+        cual ambos deben ser visibles. El par&aacute;metro pixelLevel funciona 
+        como ya explicamos anteriormente.<br>
+        - void defineCollisionRectangle(int x, int y, int width, int height). 
+        Con este m&eacute;todo definimos para el Sprite un rect&aacute;ngulo que 
+        lo represente a la hora del c&aacute;lculo de colisiones, del cual habl&aacute;bamos 
+        en los m&eacute;todos anteriores.<br>
+        Ser&aacute; definido relativo a la esquina superior izquierda (antes de 
+        cualquier transformaci&oacute;n) del Sprite, localizado por defecto en 
+        el (0,0) y de iguales dimensiones al sprite. Este rect&aacute;ngulo puede 
+        ser mayor o menor que su sprite asociado; as&iacute;, si es mayor, los 
+        p&iacute;xeles fuera de los l&iacute;mites del sprite son considerados 
+        transparentes a la hora del c&aacute;lculo de colisiones con pixelLevel 
+        a true.<br>
+        - void defineReferencePixel(int x, int y). Define la posici&oacute;n dada 
+        del p&iacute;xel de referencia relativa al sistema de coordenadas local 
+        del Sprite.<br>
+        El p&iacute;xel puede ser definido fuera del sprite y ser&aacute; el punto 
+        base a la hora de calcular las transformaciones que vimos con las constantes 
+        iniciales. Por defecto, el p&iacute;xel de referencia es el (0,0): la 
+        esquina superior izquierda del Sprite.<br>
+        Por &uacute;ltimo, decir que la llamada a este m&eacute;todo no tiene 
+        efecto alguno sobre la posici&oacute;n del Sprite respecto al sistema 
+        de coordenadas global.<br>
+        - int getFrame(). Obtiene el &iacute;ndice del frame que actualmente da 
+        cuerpo al sprite, &iacute;ndice que lo identifica en la secuencia de frames 
+        asociada al Sprite.<br>
+        - int getFrameSequenceLength(). Alcanza el n&uacute;mero de frames existentes 
+        en la secuencia asociada al Sprite.<br>
+        - int getRawFrameCount(). Consigue el n&uacute;mero de frames primitivos. 
+        &Eacute;ste es el n&uacute;mero de elementos originales que forman el 
+        Sprite, no la longitud de la secuencia de frames en la cual pueden haber 
+        sido obviados algunos frames o repetidos otros. Estos dos valores s&oacute;lo 
+        coincidir&aacute;n si la secuencia actual es la asignada por defecto.<br>
+        - int getRefPixelX(). Obtiene el valor de X (en el sistema de coordenadas 
+        global) del p&iacute;xel de referencia actualmente definido.<br>
+        - int getRefPixelY(). Obtiene el valor de Y (en el sistema de coordenadas 
+        global) del p&iacute;xel de referencia actualmente definido.<br>
+        - void nextFrame(). Selecciona como activo el siguiente frame de la secuencia, 
+        sustituyendo al actual. La secuencia es considerada circular, es decir, 
+        la llamada a este m&eacute;todo cuando se est&aacute; en el &uacute;ltimo 
+        frame de la secuencia impondr&aacute; como activo al primero de &eacute;sta.<br>
+        - void paint(Graphics g). Dibuja el Sprite (si &eacute;ste es visible) 
+        utilizando para ello el Graphics par&aacute;metro. La esquina superior 
+        izquierda del Sprite es dibujada en la posici&oacute;n actual de &eacute;ste 
+        relativa al sistema de coordenadas global, la cual puede obtenerse con 
+        los m&eacute;todos Layer.getX() y Layer.getY().<br>
+        - void prevFrame(). Selecciona como activo el anterior frame de la secuencia, 
+        sustituyendo al actual. La secuencia es considerada circular.<br>
+        - void setFrame(int sequenceIndex). Selecciona como activo el frame de 
+        la secuencia se&ntilde;alado por el &iacute;ndice par&aacute;metro, sustituyendo 
+        al actual.<br>
+        - void setFrameSequence(int[] sequence). Fija una nueva secuencia para 
+        el Sprite, dada por un array que contiene los &iacute;ndices a utilizar 
+        en ella, dejando intacta la lista de frames primitivos del Sprite. Si 
+        se pasa un null se volver&aacute; a la secuencia por defecto, formada 
+        por los &iacute;ndices en la lista de frames primitivos. El &iacute;ndice 
+        del frame actual es reiniciado a 0 al llamar a este m&eacute;todo.<br>
+        - void setImage(Image img, int frameWidth, int frameHeight). Recibiendo 
+        los mismos par&aacute;metros que el segundo constructor estudiado, funciona 
+        de forma an&aacute;loga a aqu&eacute;l pero con el Sprite ya creado. Reemplazar&aacute; 
+        as&iacute; la lista de frames primitivos del sprite, debiendo tener en 
+        cuenta ante este acto que:<br>
+        &#8226; Si la nueva lista de frames primitivos es en n&uacute;mero mayor 
+        o igual a la anterior, el &iacute;ndice del frame actual no var&iacute;a; 
+        si es menor se reinicia a 0.<br>
+        &#8226; Si la nueva lista de frames primitivos es en n&uacute;mero mayor 
+        o igual a la anterior y en aqu&eacute;lla se hab&iacute;a variado la secuencia 
+        de frames por defecto, la secuencia no variar&aacute;. Si, por el contrario, 
+        la secuencia era a&uacute;n la dada por defecto, ser&aacute; reemplazada 
+        por la que marque la divisi&oacute;n de la nueva imagen. No obstante, 
+        si la<br>
+        nueva lista de frames primitivos es en n&uacute;mero menor que la anterior 
+        lista, cualquier secuencia ser&aacute; descartada y sustituida por la 
+        secuencia de frames por defecto que implicar&aacute; la nueva imagen.<br>
+        &#8226; Si el tama&ntilde;o constante de los nuevos frames ha cambiado, 
+        el rect&aacute;ngulo de colisi&oacute;n es recalculado a los nuevos valores 
+        por defecto que le correspondan.<br>
+        &#8226; La posici&oacute;n del p&iacute;xel de referencia asociado al 
+        Sprite no var&iacute;a ante la llamada a este m&eacute;todo.<br>
+        - void setRefPixelPosition(int x, int y). Al contrario que ocurr&iacute;a 
+        en el m&eacute;todo defineReferencePixel(), donde la posici&oacute;n respecto 
+        al sistema no variaba, este m&eacute;todo actualiza la posici&oacute;n 
+        del p&iacute;xel de referencia relativa al sistema de coordenadas global,<br>
+        trasladando con ello la capa Sprite. As&iacute;, en el primer caso, una 
+        llamada a Layer.getX() o Layer.getY() daba el mismo valor antes y despu&eacute;s 
+        de la llamada a defineReferencePixel(), sin embargo, aqu&iacute; s&iacute; 
+        podr&aacute; variar.<br>
+        - void setTransform(int transform). Aplica una transformaci&oacute;n al 
+        Sprite para cambiar su apariencia. Las transformaciones disponibles est&aacute;n 
+        dadas por medio de las constantes que vimos al principio (rotaciones y 
+        reflejos), siendo pasada una de ellas a este m&eacute;todo por medio del 
+        par&aacute;metro de entrada transform.<br>
+        Las transformaciones no son acumulativas; no podr&aacute;n ser combinadas. 
+        La transformaci&oacute;n aplicada por defecto al sprite es TRANS_NONE 
+        (muestra el Sprite con su apariencia original).<br>
+        Ante transformaciones de 90 &oacute; 270 grados, los valores dados por 
+        Layer.getWidth() y Layer.getHeight() se intercambiar&aacute;n. El rect&aacute;ngulo 
+        de colisi&oacute;n tambi&eacute;n se adecuar&aacute; a la transformaci&oacute;n, 
+        sin embargo, el p&iacute;xel de referencia permanece invariable respecto 
+        al sistema de coordenadas global, ya que se tomar&aacute; &eacute;ste 
+        como el centro de la transformaci&oacute;n (para ello es definido). Por 
+        lo tanto, los valores dados por getRefPixelX() y getRefPixelY() no var&iacute;an 
+        por transformaciones; los dados por Layer.getX() y Layer.getY() (posici&oacute;n 
+        de la capa) obviamente s&iacute; podr&aacute;n cambiar.</p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>C&oacute;mo hacer una p&aacute;gina AJAX</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta name="keywords" content="Primera página AJAX, Como hacer una pagina AJAX, Manual AJAX, tutorial AJAX, Ejemplos AJAX, ejercicios AJAX">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<table width="555" height="1107" align="left" background="../../imagenes/fondologo.jpg">
+  <tr> 
+    <td height="39" colspan="3"> <h2>Análisis detallado</h2></td>
+  </tr>
+  <tr> 
+    <td height="1037" colspan="3"> 
+      <h3>La primera aplicación</h3>
+      <p>La aplicaci&oacute;n AJAX del ejemplo anterior se compone de cuatro grandes 
+        bloques: instanciar el objeto XMLHttpRequest, preparar la funci&oacute;n 
+        de respuesta, realizar la petici&oacute;n al servidor y ejecutar la funci&oacute;n 
+        de respuesta.<br>
+        Todas las aplicaciones realizadas con t&eacute;cnicas de AJAX deben instanciar 
+        en primer lugar el objeto XMLHttpRequest, que es el objeto clave que permite 
+        realizar comunicaciones con el servidor en segundo plano, sin necesidad 
+        de recargar las p&aacute;ginas.<br>
+        La implementaci&oacute;n del objeto XMLHttpRequest depende de cada navegador, 
+        por lo que es necesario emplear una discriminaci&oacute;n sencilla en 
+        funci&oacute;n del navegador en el que se est&aacute; ejecutando el c&oacute;digo:<br>
+        if(window.XMLHttpRequest) { // Navegadores que siguen los est&aacute;ndares<br>
+        peticion_http = new XMLHttpRequest();<br>
+        }<br>
+        else if(window.ActiveXObject) { // Navegadores obsoletos<br>
+        peticion_http = new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);<br>
+        }<br>
+        Los navegadores que siguen los est&aacute;ndares (Firefox, Safari, Opera, 
+        Internet Explorer 7 y 8)<br>
+        implementan el objeto XMLHttpRequest de forma nativa, por lo que se puede 
+        obtener a trav&eacute;s del objeto window. Los navegadores obsoletos (Internet 
+        Explorer 6 y anteriores) implementan el objeto XMLHttpRequest como un 
+        objeto de tipo ActiveX.<br>
+        Una vez obtenida la instancia del objeto XMLHttpRequest, se prepara la 
+        funci&oacute;n que se encarga de procesar la respuesta del servidor. La 
+        propiedad onreadystatechange del objeto XMLHttpRequest permite indicar 
+        esta funci&oacute;n directamente incluyendo su c&oacute;digo mediante 
+        una funci&oacute;n an&oacute;nima o indicando una referencia a una funci&oacute;n 
+        independiente. En el ejemplo anterior<br>
+        se indica directamente el nombre de la funci&oacute;n:<br>
+        peticion_http.onreadystatechange = muestraContenido;<br>
+        El c&oacute;digo anterior indica que cuando la aplicaci&oacute;n reciba 
+        la respuesta del servidor, se debe ejecutar la funci&oacute;n muestraContenido(). 
+        Como es habitual, la referencia a la funci&oacute;n se indica mediante 
+        su nombre sin par&eacute;ntesis, ya que de otro modo se estar&iacute;a 
+        ejecutando la funci&oacute;n y almacenando el valor devuelto en la propiedad 
+        onreadystatechange.<br>
+        Despu&eacute;s de preparar la aplicaci&oacute;n para la respuesta del 
+        servidor, se realiza la petici&oacute;n HTTP al<br>
+        servidor:<br>
+        peticion_http.open('GET', 'http://localhost/prueba.txt', true);<br>
+        peticion_http.send(null);<br>
+        Las instrucciones anteriores realizan el tipo de petici&oacute;n m&aacute;s 
+        sencillo que se puede enviar al<br>
+        servidor. En concreto, se trata de una petici&oacute;n de tipo GET simple 
+        que no env&iacute;a ning&uacute;n par&aacute;metro al servidor. La petici&oacute;n 
+        HTTP se crea mediante el m&eacute;todo open(), en el que se incluye el 
+        tipo de petici&oacute;n (GET), la URL solicitada (http://localhost/prueba.txt) 
+        y un tercer par&aacute;metro que<br>
+        vale true.<br>
+        Una vez creada la petici&oacute;n HTTP, se env&iacute;a al servidor mediante 
+        el m&eacute;todo send(). Este m&eacute;todo incluye un par&aacute;metro 
+        que en el ejemplo anterior vale null. M&aacute;s adelante se ven en detalle 
+        todos los m&eacute;todos y propiedades que permiten hacer las peticiones 
+        al servidor.<br>
+        Por &uacute;ltimo, cuando se recibe la respuesta del servidor, la aplicaci&oacute;n 
+        ejecuta de forma autom&aacute;tica la funci&oacute;n establecida anteriormente.<br>
+        function muestraContenido() {<br>
+        if(peticion_http.readyState == 4) {<br>
+        if(peticion_http.status == 200) {<br>
+        alert(peticion_http.responseText);<br>
+        }<br>
+        }<br>
+        }<br>
+        La funci&oacute;n muestraContenido() comprueba en primer lugar que se 
+        ha recibido la respuesta del servidor (mediante el valor de la propiedad 
+        readyState). Si se ha recibido alguna respuesta, se comprueba que sea 
+        v&aacute;lida y correcta (comprobando si el c&oacute;digo de estado HTTP 
+        devuelto es igual a 200). Una vez realizadas las comprobaciones, simplemente 
+        se muestra por pantalla el<br>
+        contenido de la respuesta del servidor (en este caso, el contenido del 
+        archivo solicitado) mediante la propiedad responseText.</p>
+      
+      <p>
+</p></td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

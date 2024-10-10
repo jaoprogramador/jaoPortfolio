@@ -1,0 +1,54 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>&iquest;A&ntilde;adir o Modificar?</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación en hibernate,Programas hibernate,Aplicaciones en hibernate,Ejercicios en hibernate, Ejemplos de hibernate,Tutoriales de hibernate,Manuales hibernate" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="hibernate, Manual hibernate, tutorial hibernate, Ejemplos hibernate, ejercicios hibernate">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2>&iquest;A&ntilde;adir o Modificar?</h2>
+      </td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <p>M&aacute;s arriba, hemos visto que el elemento 
+        &lt;id&gt; del archivo de emparejamientos<br>
+        (Categoria.hbm.xml) tiene un atributo que permite que Hibernate pueda 
+        decidir si hay que<br>
+        guardar un objeto o modificarlo: unsaved-value.<br>
+        En nuestro ejemplo, hemos especificado que si la propiedad id de Categoria 
+        vale -1, hay que<br>
+        a&ntilde;adir el objeto y si no, hay que modificarlo en la base de datos.<br>
+        public void anadirOCambiar(Categoria unaCategoria) {<br>
+        [...]<br>
+        Transaction tx = session.beginTransaction();<br>
+        // Lo modificamos o lo a&ntilde;adimos a la base de datos dependiendo 
+        del<br>
+        // valor de la propiedad &#8220;id&#8221;<br>
+        session.saveOrUpdate(unaCategoria);<br>
+        tx.commit();<br>
+        [...]<br>
+        }</p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

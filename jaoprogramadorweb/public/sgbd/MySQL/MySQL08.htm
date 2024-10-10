@@ -1,0 +1,222 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Ejercicios MySQL</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="MySQL, sql, pl/sql, programacion MySQL, ejercicios MySQL, ejemplos MySQL, select">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2>C O N S U L T A S</h2></td>
+  </tr>
+  <tr> 
+    <td><h3>Introducción</h3>
+      <p>Cerci&oacute;rese de haberse conectado al servidor, tal como se describe 
+        en la secci&oacute;n anterior. Esto en s&iacute; mismo no selecciona ninguna<br>
+        base de datos para trabajar. En este punto es m&aacute;s importante aprender 
+        un poco m&aacute;s acerca de c&oacute;mo realizar consultas que ir directamente<br>
+        a crear tablas, cargar datos, y recuperarlos. Esta secci&oacute;n describe 
+        los principios b&aacute;sicos del ingreso de comandos, empleando<br>
+        varias consultas que puede realizar para familiarizarse con la forma en 
+        que funciona mysql.<br>
+        Aqu&iacute; tiene un comando simple que ordena al servidor que muestre 
+        su n&uacute;mero de versi&oacute;n y la fecha actual. Ingr&eacute;selo 
+        a continuaci&oacute;n<br>
+        del prompt mysql&gt; y presione Enter:<br>
+        mysql&gt; SELECT VERSION(), CURRENT_DATE;<br>
+        +----------------+--------------+<br>
+        | VERSION() | CURRENT_DATE |<br>
+        +----------------+--------------+<br>
+        | 5.0.7-beta-Max | 2005-07-11 |<br>
+        +----------------+--------------+<br>
+        1 row in set (0.01 sec)<br>
+        mysql&gt;<br>
+        Esta consulta le muestra varias cosas acerca de mysql:<br>
+        &#8226; Un comando normalmente consiste en una sentencia SQL seguida de 
+        punto y coma. (Hay excepciones donde el punto y coma<br>
+        puede omitirse. QUIT, mencionado anteriormente, es una de ellas. Luego 
+        conocer&aacute; otras.)<br>
+        &#8226; Cuando ingresa un comando, mysql lo env&iacute;a al servidor para 
+        ser ejecutado e imprime los resultados. A continuaci&oacute;n muestra<br>
+        de nuevo el prompt mysql&gt; para informarle que est&aacute; listo para 
+        otro comando.<br>
+        &#8226; mysql imprime los resultados de la consulta en forma tabulada 
+        (filas y columnas). La primera fila contiene etiquetas para las<br>
+        columnas. Las filas siguientes son los resultados de la consulta. Generalmente, 
+        el nombre de cada columna es el nombre del<br>
+        campo que trae desde la base de datos. Si est&aacute; trayendo el valor 
+        de una expresi&oacute;n, en lugar del contenido de un campo o columna<br>
+        de una tabla (como en el ejemplo anterior), mysql etiqueta la columna 
+        usando el texto de la expresi&oacute;n.<br>
+        &#8226; mysql informa cu&aacute;ntas filas fueron devueltas y cu&aacute;nto 
+        tiempo le tom&oacute; ejecutarse a la consulta, lo cual da una idea aproximada<br>
+        del rendimiento del servidor. Estos valores son imprecisos porque representan 
+        tiempo de reloj corriente (no tiempo de CPU), y<br>
+        adem&aacute;s porque est&aacute;n afectados por factores como la carga 
+        del servidor o la latencia de red. (Para simplificar los ejemplos de este<br>
+        capitulo, a partir de ahora no se mostrar&aacute; la l&iacute;nea &#8220;rows 
+        in set&#8221;.)<br>
+        Las palabras clave pueden ingresarse en cualquier combinaci&oacute;n de 
+        min&uacute;sculas y may&uacute;sculas. Las siguientes consultas son equivalentes:<br>
+        mysql&gt; SELECT VERSION(), CURRENT_DATE;<br>
+        mysql&gt; select version(), current_date;<br>
+        mysql&gt; SeLeCt vErSiOn(), current_DATE;<br>
+        Aqui tiene otra consulta que demuestra que mysql puede usarse como calculadora:<br>
+        mysql&gt; SELECT SIN(PI()/4), (4+1)*5;<br>
+        +------------------+---------+<br>
+        | SIN(PI()/4) | (4+1)*5 |<br>
+        +------------------+---------+<br>
+        | 0.70710678118655 | 25 |<br>
+        +------------------+---------+<br>
+        1 row in set (0.02 sec)<br>
+        Las consultas mostradas hasta ahora han sido relativamente cortas, sentencias 
+        de una sola l&iacute;nea. Se puede inclusive ingresar m&uacute;ltiples<br>
+        sentencias en una misma l&iacute;nea. Solamente deben separarse con punto 
+        y coma:<br>
+        mysql&gt; SELECT VERSION(); SELECT NOW();<br>
+        +----------------+<br>
+        | VERSION() |<br>
+        +----------------+<br>
+        | 5.0.7-beta-Max |<br>
+        +----------------+<br>
+        1 row in set (0.00 sec)<br>
+        +---------------------+<br>
+        | NOW() |<br>
+        +---------------------+<br>
+        | 2005-07-11 17:59:36 |<br>
+        +---------------------+<br>
+        1 row in set (0.00 sec)<br>
+        No es necesario que un comando sea ingresado en una sola l&iacute;nea, 
+        de ese modo, comandos extensos que requieren varias lineas no<br>
+        son un problema. mysql determina cuando una sentencia ha llegado a l final 
+        observando si termina en un punto y coma, no si se<br>
+        lleg&oacute; al final de la l&iacute;nea f&iacute;sica. (En otras palabras, 
+        mysql acepta un formato libre para las entradas: recolecta lineas pero 
+        no las ejecuta<br>
+        hasta que encuentra el punto y coma.)<br>
+        Aqui tiene una sentencia de m&uacute;ltiples l&iacute;neas:<br>
+        mysql&gt; SELECT</p>
+      <p>-&gt; USER()<br>
+        -&gt; ,<br>
+        -&gt; CURRENT_DATE;<br>
+        +---------------+--------------+<br>
+        | USER() | CURRENT_DATE |<br>
+        +---------------+--------------+<br>
+        | jon@localhost | 2005-07-11 |<br>
+        +---------------+--------------+<br>
+        1 row in set (0.00 sec)<br>
+        Observe en este ejemplo que el prompt cambia de mysql&gt; a -&gt; despu&eacute;s 
+        que se ha ingresado la primera l&iacute;nea de una consulta de<br>
+        m&uacute;ltiples l&iacute;neas. Esta es la forma en que mysql advierte 
+        que no se ha completado la sentencia y a&uacute;n espera por el resto. 
+        El prompt<br>
+        es un aliado, puesto que suministra informaci&oacute;n valiosa. Si se 
+        emplea, siempre se sabr&aacute; lo que mysql est&aacute; esperando.<br>
+        Si durante el ingreso de un comando decide que no quiere ejecutarlo, canc&eacute;lelo 
+        tipeando \c:<br>
+        mysql&gt; SELECT<br>
+        -&gt; USER()<br>
+        -&gt; \c<br>
+        mysql&gt;<br>
+        Una vez m&aacute;s observe el prompt. Cambia a mysql&gt; despu&eacute;s 
+        de que ingresa \c, inform&aacute;ndole que mysql est&aacute; listo para 
+        un nuevo<br>
+        comando.<br>
+        La siguiente tabla muestra cada uno de los indicadores que podr&aacute; 
+        ver y sintetiza lo que dicen acerca del estado en que se encuentra<br>
+        mysql:<br>
+        Prompt Significado<br>
+        mysql&gt; Listo para un nuevo comando.<br>
+        -&gt; Esperando la siguiente l&iacute;nea en un comando de m&uacute;ltiples 
+        l&iacute;neas.<br>
+        '&gt; Esperando la siguiente l&iacute;nea, se encuentra abierta una cadena 
+        que comienza con apostrofo (''').<br>
+        &quot;&gt; Esperando la siguiente l&iacute;nea, se encuentra abierta una 
+        cadena que comienza con comillas dobles ('&quot;').<br>
+        `&gt; Esperando la siguiente l&iacute;nea, se encuentra abierta una cadena 
+        que comienza con tilde ('`').<br>
+        /*&gt; Esperando la siguiente l&iacute;nea, se encuentra abierto un comentario 
+        que comienza con /*.<br>
+        El prompt /*&gt; fue introducido en la serie 5.0 a partir de MySQL 5.0.6.<br>
+        Es frecuente que se origine una sentencia de m&uacute;ltiples lineas cuando 
+        accidentalmente le da entrada a un comando de una sola l&iacute;nea<br>
+        pero olvida terminarlo con punto y coma. En ese caso, mysql aguarda por 
+        m&aacute;s caracteres:<br>
+        mysql&gt; SELECT USER()<br>
+        -&gt;<br>
+        Si esto le ocurre (considera que ha ingresado una sentencia completa pero 
+        solamente obtiene un prompt -&gt;), la mayor&iacute;a de las veces<br>
+        es porque mysql est&aacute; esperando por el punto y coma. Si no advierte 
+        lo que el indicador trata de decirle, podr&iacute;a demorar un<br>
+        buen tiempo en hacer lo que necesita. Ingrese un punto y coma para completar 
+        la sentencia, y mysql la ejecutar&aacute;:<br>
+        mysql&gt; SELECT USER()<br>
+        -&gt; ;<br>
+        +--------------------+<br>
+        | USER() |<br>
+        +--------------------+<br>
+        | joesmith@localhost |<br>
+        +--------------------+<br>
+        Los prompts '&gt; y &quot;&gt; aparecen durante el ingreso de cadenas. 
+        Puede escribir cadenas delimitadas por ''' o '&quot;' (por ejemplo, 'hola'<br>
+        o &quot;adios&quot;), y mysql le permite ingresar cadenas divididas en 
+        m&uacute;ltiples l&iacute;neas. Cuando ve un prompt '&gt; o &quot;&gt; 
+        significa que<br>
+        ha comenzado a ingresar una cadena comenzando con ''' o '&quot;' pero 
+        no ha ingresado el correspondiente caracter de terminaci&oacute;n. A<br>
+        menudo esto significa que inadvertidamente omiti&oacute; este car&aacute;cter. 
+        Por ejemplo:<br>
+        mysql&gt; SELECT * FROM my_table WHERE name = 'Smith AND age &lt; 30;<br>
+        '&gt;<br>
+        Si ingresa esta sentencia SELECT, presiona ENTER y espera por el resultado, 
+        nada ocurrir&aacute;. En lugar de asombrarse por el tiempo<br>
+        que consume la consulta, note lo que el prompt '&gt; le est&aacute; diciendo. 
+        Indica que mysql espera por el final de una cadena inconclusa.<br>
+        (&iquest;Ve el error en la sentencia? La cadena 'Smith no tiene el ap&oacute;strofo 
+        de cierre.)<br>
+        &iquest;Qu&eacute; hacer llegado a este punto? Lo m&aacute;s simple es 
+        cancelar el comando. No obstante, no puede simplemente tipear \c en este 
+        caso,<br>
+        &iexcl;porque mysql interpretar&aacute; que es parte de la cadena que 
+        est&aacute; ingresando!. En lugar de eso, tipee el caracter de cierre 
+        que falta<br>
+        Curso (tutorial) de MySQL</p>
+      <p>y entonces ingrese \c.&gt;:<br>
+        mysql&gt; SELECT * FROM my_table WHERE name = 'Smith AND age &lt; 30;<br>
+        '&gt; '\c<br>
+        mysql&gt;<br>
+        El prompt cambia de nuevo a mysql&gt;, informando que mysql est&aacute; 
+        listo para un nuevo comando.<br>
+        El prompt `&gt; es similar a '&gt; y &quot;&gt; , pero informa que est&aacute; 
+        pendiente de completar un identificador delimitado por tildes.<br>
+        Es importante conocer el significado de estos indicadores, ya que si por 
+        error se ingresa una cadena incompleta, todo lo que se ingrese<br>
+        posteriormente ser&aacute; aparentemente ignorado por mysql &#8212; incluyendo 
+        el comando QUIT. Esto puede ser sumamente desconcertante,<br>
+        en particular si no se conoce lo que debe hacer para terminar la l&iacute;nea 
+        y cancelar el comando.</p>
+
+        </td>
+    <td>&nbsp;</td>
+    <td><a href="http://www.euskalnet.net/juanarana/oraclezip/Ejer3.rar"><img src="../../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td>
+<div align="right"><a href="http://www.euskalnet.net/juanarana/index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a>
+      </div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

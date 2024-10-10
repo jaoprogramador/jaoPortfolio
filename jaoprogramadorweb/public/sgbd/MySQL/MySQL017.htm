@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Ejercicios MySQL</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="MySQL, sql, pl/sql, programacion MySQL, ejercicios MySQL, ejemplos MySQL, select">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2>T A B L A S</h2></td>
+  </tr>
+  <tr> 
+    <td><h3>Utilizar más de una tabla</h3>
+      <p>La tabla pet mantiene el registro de las mascotas que se poseen. Si quisiera 
+        registrar otros datos acerca de ellas, como eventos de<br>
+        su vida tales como visitas al veterinario o nacimiento de cr&iacute;as, 
+        necesitar&iacute;a otra tabla. &iquest;C&oacute;mo deber&iacute;a ser 
+        esta tabla? Se necesita:<br>
+        &#8226; Un campo con el nombre de la mascota para saber a quien pertenece 
+        cada evento registrado.<br>
+        &#8226; La fecha en que ocurri&oacute; el evento.<br>
+        &#8226; Un campo con la descripci&oacute;n del evento.<br>
+        &#8226; Un campo con el tipo de evento, a fin de poder clasificarlo.<br>
+        Teniendo en cuenta estas consideraciones, la sentencia CREATE TABLE para 
+        la tabla event (&quot;eventos&quot;, en ingl&eacute;s) podr&iacute;a ser 
+        as&iacute;:<br>
+        mysql&gt; CREATE TABLE event (name VARCHAR(20), date DATE,<br>
+        -&gt; type VARCHAR(15), remark VARCHAR(255));<br>
+        Como se hizo con la tabla pet, es m&aacute;s f&aacute;cil realizar la 
+        carga inicial de datos si se crea un archivo de texto delimitado con tabulaciones<br>
+        que contenga la informaci&oacute;n a agregar:<br>
+        name date type remark<br>
+        Fluffy 1995-05-15 litter 4 kittens, 3 female, 1 male<br>
+        Buffy 1993-06-23 litter 5 puppies, 2 female, 3 male<br>
+        Buffy 1994-06-19 litter 3 puppies, 3 female<br>
+        Chirpy 1999-03-21 vet needed beak straightened<br>
+        Slim 1997-08-03 vet broken rib<br>
+        Bowser 1991-10-12 kennel<br>
+        Fang 1991-10-12 kennel<br>
+        Fang 1998-08-28 birthday Gave him a new chew toy<br>
+        Claws 1998-03-17 birthday Gave him a new flea collar<br>
+        Whistler 1998-12-09 birthday First birthday<br>
+        Los registros se cargan as&iacute;:<br>
+        mysql&gt; LOAD DATA LOCAL INFILE 'event.txt' INTO TABLE event;<br>
+        Con base en lo que se ha aprendido a partir de las consultas efectuadas 
+        sobre la tabla pet, se deber&iacute;a poder recuperar registros de<br>
+        la tabla event; los principios son los mismos. Pero en un momento dado 
+        la tabla event por s&iacute; sola es insuficiente para responder<br>
+        las preguntas que pueden formularse.<br>
+        Suponga que se desea saber a qu&eacute; edad tuvo sus cr&iacute;as cada 
+        mascota. Anteriormente se aprendi&oacute; a calcular edades a partir de 
+        dos fechas.<br>
+        La fecha en que la mascota tuvo sus crias est&aacute; en la tabla event, 
+        pero para calcular su edad, se necesita su fecha de nacimiento,<br>
+        la cual est&aacute; localizada en la tabla pet. Esto significa que la 
+        consulta requiere ambas tablas:<br>
+        mysql&gt; SELECT pet.name,<br>
+        -&gt; (YEAR(date)-YEAR(birth)) - (RIGHT(date,5)&lt;RIGHT(birth,5)) AS 
+        age,<br>
+        -&gt; remark<br>
+        -&gt; FROM pet, event<br>
+        -&gt; WHERE pet.name = event.name AND event.type = 'litter';<br>
+        +--------+------+-----------------------------+<br>
+        | name | age | remark |<br>
+        +--------+------+-----------------------------+<br>
+        | Fluffy | 2 | 4 kittens, 3 female, 1 male |<br>
+        | Buffy | 4 | 5 puppies, 2 female, 3 male |<br>
+        | Buffy | 5 | 3 puppies, 3 female |<br>
+        +--------+------+-----------------------------+<br>
+        Hay varias cosas para observar en esta consulta:<br>
+        &#8226; La cl&aacute;usula FROM menciona dos tablas porque la consulta 
+        necesita traer datos de ambas<br>
+        &#8226; Cuando se combina (tambi&eacute;n se denomina join -uni&oacute;n, 
+        en ingl&eacute;s-) informaci&oacute;n desde m&uacute;ltiples tablas, se 
+        necesita indicar qu&eacute;<br>
+        registro de una tabla se combinar&aacute; con qu&eacute; registro de la 
+        otra. Esto es sencillo porque ambas tablas tienen una columna name.<br>
+        La consulta emplea la cl&aacute;usula WHERE para hacer coincidir registros 
+        de las dos tablas bas&aacute;ndose en el valor de name.<br>
+        &#8226; Dado que la columna name aparece en ambas tablas, se debe especificar 
+        a cu&aacute;l tabla pertenece la columna al hacer referencia a<br>
+        ella. Esto se hace anteponiendo el nombre de la tabla al nombre de la 
+        columna.<br>
+        No es necesario tener dos tablas diferentes para establecer una uni&oacute;n. 
+        A veces es &uacute;til combinar una tabla consigo misma, si se desea<br>
+        comparar entre s&iacute; registros de una misma tabla. Por ejemplo, para 
+        formar parejas de mascotas para reproducci&oacute;n, podr&iacute;a unir 
+        la tabla<br>
+        pet consigo misma para generar pares de animales macho y hembra de la 
+        misma especie:<br>
+        mysql&gt; SELECT p1.name, p1.sex, p2.name, p2.sex, p1.species<br>
+        -&gt; FROM pet AS p1, pet AS p2<br>
+        -&gt; WHERE p1.species = p2.species AND p1.sex = 'f' AND p2.sex = 'm';<br>
+        +--------+------+--------+------+---------+<br>
+        | name | sex | name | sex | species |<br>
+        +--------+------+--------+------+---------+<br>
+        | Fluffy | f | Claws | m | cat |<br>
+        | Buffy | f | Fang | m | dog |<br>
+        | Buffy | f | Bowser | m | dog |<br>
+        +--------+------+--------+------+---------+<br>
+        En la consulta anterior se especificaron alias para la tabla con el fin 
+        de indicar a qu&eacute; instancia de la tabla pertenece cada columna<br>
+        referenciada. </p>
+        </td>
+    <td>&nbsp;</td>
+    <td><a href="http://www.euskalnet.net/juanarana/oraclezip/Ejer3.rar"><img src="../../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td>
+<div align="right"><a href="http://www.euskalnet.net/juanarana/index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a>
+      </div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

@@ -1,0 +1,243 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Creaci&amp;oacute;n de tablas Oracle</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Manual Oracle, Tutorial Oracle, Manual SQL, Tutorial SQL, Ejercicios Oracle">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="2"> <h2>Creaci&oacute;n 
+        de tablas</h2></td>
+  </tr>
+  <tr> 
+    <td height="2430" colspan="2"> 
+      <p>En Oracle cada estructura de informaci&oacute;n se 
+        denomina TABLA, las cuales junto a los &iacute;ndices y al diccionario 
+        de datos del sistema, componen la base de datos. Por lo tanto, la creaci&oacute;n 
+        de las tablas en el proceso de programaci&oacute;n en Oracle juegan un 
+        papel muy importante. En el momento de crear las tablas se definen caracter&iacute;sticas 
+        a dos niveles: Tabla y Columna, como se muestra a continuaci&oacute;n:</p>
+      <p>A nivel de tabla</p>
+      <table width="91%" border="0">
+        <tr> 
+          <td>Nombre:</td>
+          <td>Nombre de la tabla puede ser de 1 a 30 caracteres.</td>
+        </tr>
+        <tr> 
+          <td>Propietario:</td>
+          <td>La tabla tiene como propietario al usuario que las crea.</td>
+        </tr>
+        <tr> 
+          <td>Cantidad de columnas:</td>
+          <td>Una tabla puede tener un m&aacute;ximo de 254 columnas.</td>
+        </tr>
+      </table>
+      <p>&nbsp;</p>
+      <p>A nivel de columna</p>
+      <table width="91%" border="0">
+        <tr> 
+          <td>Nombre:</td>
+          <td>Puede tener de 1 a 30 caracteres.</td>
+        </tr>
+        <tr> 
+          <td>Tipo de dato y su ancho</td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr> 
+          <td colspan="2"><table width="96%" border="0" align="center">
+              <tr> 
+                <td>CHAR</td>
+                <td>M&aacute;ximo de 255 caracteres</td>
+              </tr>
+              <tr> 
+                <td>NUMBER</td>
+                <td>M&aacute;ximo de 105 d&iacute;gitos</td>
+              </tr>
+              <tr> 
+                <td>INTEGER</td>
+                <td>N&ordm; sin decimal</td>
+              </tr>
+              <tr> 
+                <td> DATE</td>
+                <td>hasta 31/12/4712</td>
+              </tr>
+              <tr> 
+                <td>LONG </td>
+                <td>Tipo car&aacute;cter con tama&ntilde;o variable hasta 65535 
+                  bytes</td>
+              </tr>
+              <tr> 
+                <td> RAW</td>
+                <td>Dato en binario puro (im&aacute;genes y sonido)</td>
+              </tr>
+              <tr> 
+                <td> LONGRAW</td>
+                <td>Igual que long pero para almacenar datos en binario puro</td>
+              </tr>
+            </table></td>
+        </tr>
+        <tr> 
+          <td height="21" colspan="2">Restricciones: Su funci&oacute;n es definir 
+            reglas de validaci&oacute;n de la columna.</td>
+        </tr>
+        <tr> 
+          <td height="39" colspan="2">Para facilitar la continuidad del an&aacute;lisis, 
+            usaremos las tablas definidas como : Clientes y Ventas.</td>
+        </tr>
+        <tr> 
+          <td height="63" colspan="2">La definici&oacute;n de restricciones al 
+            crear las tablas permite establecer de validaci&oacute;n de datos, 
+            as&iacute; como los controles necesarios para mantener la integridad 
+            referencial entre tablas a trav&eacute;s de las columnas claves. Las 
+            restricciones que se pueden definir son:</td>
+        </tr>
+        <tr> 
+          <td height="66">Valor obligatorio:</td>
+          <td>En oracle existe el concepto de valor nulo (NULL) como un valor 
+            indefinido o ausencia del valor, y la inversa no nulo (NOT NULL) que 
+            es obligatorio de introducir.</td>
+        </tr>
+        <tr> 
+          <td height="53">Rango de valores:</td>
+          <td> Sirven para chequear que el valor sea mayor a un valor determinado 
+            o para que se encuentre entre dos valores.</td>
+        </tr>
+        <tr> 
+          <td height="38">Clave primaria:</td>
+          <td>Columnas que identifican de forma &uacute;nica al registro, es un 
+            valor &uacute;nico y no nulo.</td>
+        </tr>
+        <tr> 
+          <td height="48">Clave externa:</td>
+          <td>Columna de la tabla que hace referencia a un valor que tiene que 
+            estar registrado en otra tabla</td>
+        </tr>
+      </table>
+      <p>Destacadas estas cuestiones veamos, entonces c&oacute;mo 
+        se procede para crear las tablas Clientes y Ventas:</p>
+      <p>Tabla Clientes</p>
+      <table width="99%" border="0">
+        <tr> 
+          <td width="25%">Objetivo:</td>
+          <td width="75%">Ficha con datos para identificar al cliente. Consta 
+            del c&oacute;digo del cliente (n&ordm; secuencial), fecha de alta 
+            al sistema, nombre, tel&eacute;fono, direcci&oacute;n y alguna anotaci&oacute;n.</td>
+        </tr>
+        <tr> 
+          <td>Requisitos</td>
+          <td>Se debe identificar a cada cliente con un c&oacute;digo &uacute;nico 
+            (clave primaria), registrando su nombre tel&eacute;fono y fecha de 
+            registro (estos datos son obligatorios). La direcci&oacute;n y anotaciones 
+            son campos opcionales.</td>
+        </tr>
+      </table>
+      <p><em>Creaci&oacute;n de la tabla: </em></p>
+      <p> 
+      <pre>CREATE TABLE clientes(       codigo   integer NOT NULL PRIMARY KEY,
+       fecha  date  NOT NULL,
+       nombre   char(30) NOT NULL,
+       telefono   char(20) NOT NULL,
+       direccion  char(100),
+       anotaci&oacute;n  long   
+);</pre>
+      <p>Tabla Ventas</p>
+      <table width="99%" border="0">
+        <tr> 
+          <td width="25%">Objetivo:</td>
+          <td width="75%">Registrar las ventas con la siguiente informaci&oacute;n: 
+            C&oacute;digo del cliente, fecha de la venta art&iacute;culo y valor 
+            de la venta.</td>
+        </tr>
+        <tr> 
+          <td>Requisitos</td>
+          <td>El n&uacute;mero del cliente es una clave externa que hace referencia 
+            a la columna c&oacute;digo en la tabla clientes. En este caso todos 
+            los datos son obligatorios. Se controla que la columna valor sea mayor 
+            a cero.</td>
+        </tr>
+      </table>
+      <p>&nbsp;</p>
+      <p><em>Creaci&oacute;n de la tabla: </em></p>
+      <p> 
+      <pre>CREATE TABLE ventas(       codigo   integer NOT NULL REFERENCES clientes(codigo),
+       fecha  date  NOT NULL,
+       articulo   char(20) NOT NULL,
+       valor   number(10,2) NOT NULL check (valor&gt;0)
+);
+</pre>
+      <>Las restricciones de las claves primarias y clave 
+      externa se definieron a nivel de columna, pero se pueden definir a nivel 
+      de tabla, al final de la misma, como se muestra a continuaci&oacute;n: 
+      <pre>CREATE TABLE clientes(       codigo   integer NOT NULL ,
+       fecha  date  NOT NULL,
+       nombre   char(30) NOT NULL,
+       telefono   char(20) NOT NULL,
+       direccion  char(100),
+       anotaci&oacute;n  long,
+       PRIMARY KEY(codigo)   
+);
+CREATE TABLE ventas(       codigo   integer NOT NULL ,
+       fecha  date  NOT NULL,
+       articulo   char(20),
+       valor   number(6,2) NOT NULL check (valor&gt;0),
+       FOREIGN KEY (codigo) REFERENCES clientes(codigo)
+);
+</pre>
+      <p>La definici&oacute;n a nivel de tabla es necesaria 
+        cuando la misma est&aacute; formada por m&aacute;s de un columna.</p>
+      <p> Unicidad de la clave con &iacute;ndices</p>
+      <p>Para garantizar la unicidad de los valores de la 
+        clave primaria de la tabla Clientes (en la versi&oacute;n 6 donde esta 
+        restricci&oacute;n solo y no est&aacute; activa), se debe crear un &iacute;ndice 
+        que garantice la unicidad de la clave principal. Un requisito importante 
+        para la unicidad de la clave principal es que las columnas de la clave 
+        se definen como NOT NULL.</p>
+      <p>A continuaci&oacute;n mostraremos como crear un &iacute;ndice 
+        cliente_codigo para garantizar la unicidad de la clave primaria:</p>
+      <p>CREATE UNIQUE INDEX cliente_codigo ON clientes(codigo);</p>
+      <p>Secuencias: codificaci&oacute;n num&eacute;rica</p>
+      <p>La codificaci&oacute;n num&eacute;rica del cliente 
+        se puede realizar con una secuencia que autom&aacute;ticamente genera 
+        los n&uacute;meros enteros en orden ascendente , no siendo necesario recordar 
+        cual fue el &uacute;ltimo n&uacute;mero asignado, con el uso del siguiente 
+        comando:</p>
+      <p>CREATE SEQUENCE codigo_cliente INCREMENT BY 1 START 
+        WITH 1;</p>
+      <p>Para registrar un nuevo c&oacute;digo con la secuencia 
+        definida anteriormente se usa el pseudo-columna codigo_cliente.NEXTVAL, 
+        la cual nos dar&aacute; el siguiente valor que le corresponde a la secuencia, 
+        la forma en que esto se realiza se explica m&aacute;s adelante cuando 
+        analicemos el ingreso de datos.</p>
+      <p>Para conocer el valor actual de la secuencia, es 
+        decir, el &uacute;ltimo c&oacute;digo asignado, se usa la pseudo-columna 
+        codigo_cliente.CURRVAL, desde la tabla DUAL del sistema , cuyo fin es 
+        poder consultar pseudo-columnas (como se muestra a continuaci&oacute;n):</p>
+      <p>SELECT user, sysdate,codigo_cliente.currval FROM 
+        DUAL;</p>
+      <p>donde:</p>
+      <p>1.- user es el nombre del usuario
+        2.- sysdate es la fecha del sistema
+        3.- codigo_cliente.currval es el &uacute;ltimo valor asignado a la secuencia</p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="70" height="21"></td>
+    <td height="21"> <div align="right"></div>
+      <div align="right"><a href="indice.htm"></a><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

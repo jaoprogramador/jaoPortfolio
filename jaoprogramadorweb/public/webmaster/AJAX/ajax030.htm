@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>C&oacute;mo hacer una p&aacute;gina AJAX</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta name="keywords" content="Primera página AJAX, Como hacer una pagina AJAX, Manual AJAX, tutorial AJAX, Ejemplos AJAX, ejercicios AJAX">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2>Rehaciendo ejemplos con Prototype</h2></td>
+  </tr>
+  <tr> 
+    <td height="394" colspan="3"> <p>Las aplicaciones realizadas con el framework 
+        Prototype suelen ser muy concisas en comparaci&oacute;n con las aplicaciones 
+        JavaScript tradicionales, pero siguen manteniendo una gran facilidad para 
+        leer su c&oacute;digo y entenderlo.<br>
+        Por ejemplo, el ejercicio que mostraba y ocultaba diferentes secciones 
+        de contenidos se realiz&oacute; de la siguiente manera:<br>
+        function muestraOculta() {<br>
+        // Obtener el ID del elemento<br>
+        var id = this.id;<br>
+        id = id.split('_');<br>
+        id = id[1];<br>
+        var elemento = document.getElementById('contenidos_'+id);<br>
+        var enlace = document.getElementById('enlace_'+id);if(elemento.style.display 
+        == &quot;&quot; || elemento.style.display == &quot;block&quot;) {<br>
+        elemento.style.display = &quot;none&quot;;<br>
+        enlace.innerHTML = 'Mostrar contenidos';<br>
+        }<br>
+        else {<br>
+        elemento.style.display = &quot;block&quot;;<br>
+        enlace.innerHTML = 'Ocultar contenidos';<br>
+        }<br>
+        }<br>
+        window.onload = function() {<br>
+        document.getElementById('enlace_1').onclick = muestraOculta;<br>
+        document.getElementById('enlace_2').onclick = muestraOculta;<br>
+        document.getElementById('enlace_3').onclick = muestraOculta;<br>
+        }<br>
+        Con Prototype, su c&oacute;digo se puede reducir a las siguientes instrucciones:<br>
+        function muestraOculta() {<br>
+        var id = (this.id).split('_')[1];<br>
+        $('contenidos_'+id).toggle();<br>
+        $('enlace_'+id).innerHTML = (!$('contenidos_'+id).visible()) ? 'Ocultar 
+        contenidos' :<br>
+        'Mostrar contenidos';<br>
+        }<br>
+        window.onload = function() {<br>
+        $R(1, 3).each(function(n) {<br>
+        Event.observe('enlace_'+n, 'click', muestraOculta);<br>
+        });<br>
+        }<br>
+        Los m&eacute;todos $R(), toggle() y visible() permiten simplificar el 
+        c&oacute;digo original a una m&iacute;nima parte de su longitud, pero 
+        conservando el mismo funcionamiento, adem&aacute;s de ser un c&oacute;digo 
+        sencillo de entender.<br>
+        Otro de los ejercicios anteriores realizaba peticiones AJAX al servidor 
+        para comprobar si un determinado nombre de usuario estaba libre. El c&oacute;digo 
+        original de JavaScript era:<br>
+        var READY_STATE_COMPLETE = 4;<br>
+        var peticion_http = null;<br>
+        function inicializa_xhr() {<br>
+        if(window.XMLHttpRequest) {<br>
+        return new XMLHttpRequest();<br>
+        }<br>
+        else if(window.ActiveXObject) {<br>
+        return new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);<br>
+        }<br>
+        }<br>
+        function comprobar() {<br>
+        var login = document.getElementById(&quot;login&quot;).value;<br>
+        peticion_http = inicializa_xhr();<br>
+        if(peticion_http) {<br>
+        peticion_http.onreadystatechange = procesaRespuesta;<br>
+        peticion_http.open(&quot;POST&quot;, &quot;http://localhost/compruebaDisponibilidad.php&quot;, 
+        true);<br>
+        peticion_http.setRequestHeader(&quot;Content-Type&quot;, &quot;application/x-www-form-urlencoded&quot;);<br>
+        peticion_http.send(&quot;login=&quot;+login+&quot;&amp;nocache=&quot;+Math.random());<br>
+        }<br>
+        }<br>
+        function procesaRespuesta() {<br>
+        if(peticion_http.readyState == READY_STATE_COMPLETE) {<br>
+        if(peticion_http.status == 200) {<br>
+        var login = document.getElementById(&quot;login&quot;).value;<br>
+        if(peticion_http.responseText == &quot;si&quot;) {<br>
+        document.getElementById(&quot;disponibilidad&quot;).innerHTML = &quot;El 
+        nombre elegido<br>
+        [&quot;+login+&quot;] est&aacute; disponible&quot;;<br>
+        }<br>
+        else {<br>
+        document.getElementById(&quot;disponibilidad&quot;).innerHTML = &quot;NO 
+        est&aacute; disponible el<br>
+        nombre elegido [&quot;+login+&quot;]&quot;;<br>
+        }<br>
+        }<br>
+        }<br>
+        }<br>
+        window.onload = function() {<br>
+        document.getElementById(&quot;comprobar&quot;).onclick = comprobar;<br>
+        }<br>
+        Con Prototype se puede conseguir el mismo comportamiento con tres veces 
+        menos de l&iacute;neas de<br>
+        c&oacute;digo:<br>
+        function comprobar() {<br>
+        var login = $F('login');<br>
+        var url = 'http://localhost/compruebaDisponibilidad.php?nocache=' + Math.random();<br>
+        var peticion = new Ajax.Request(url, {<br>
+        method: 'post',<br>
+        postBody: 'login='+login,<br>
+        onSuccess: function(respuesta) {<br>
+        $('disponibilidad').innerHTML = (respuesta.responseText == 'si') ?<br>
+        'El nombre elegido ['+login+'] est&aacute; disponible' : 'NO est&aacute; 
+        disponible el nombre<br>
+        elegido ['+login+']';<br>
+        },<br>
+        onFailure: function() { alert('Se ha producido un error'); }<br>
+        });<br>
+        }<br>
+        window.onload = function() {<br>
+        Event.observe('comprobar', 'click', comprobar);<br>
+        }</p></td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Ejercicios MySQL</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="MySQL, sql, pl/sql, programacion MySQL, ejercicios MySQL, ejemplos MySQL, select">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2>N U M E R O S</h2></td>
+  </tr>
+  <tr> 
+    <td><h3>Números</h3>
+      <p>Los enteros se representan como secuencias de d&iacute;gitos. Los flotantes 
+        utilizan '.' como separador decimal. Cada tipo de n&uacute;mero<br>
+        puede estar precedido con '-' para indicar un valor negativo.<br>
+        Ejemplos de enteros v&aacute;lidos:<br>
+        1221<br>
+        0<br>
+        -32<br>
+        Ejemplos de n&uacute;meros de punto flotante v&aacute;lidos:<br>
+        294.42<br>
+        -32032.6809e+10<br>
+        148.00<br>
+        Un entero puede usarse en un contexto de punto flotante; se intepretar&aacute; 
+        como el n&uacute;mero de punto flotante equivalente.<br>
+        Valores hexadecimales<br>
+        MySQL soporta valores hexadecimales. En contextos num&eacute;ricos, &eacute;stos 
+        actuar&aacute;n como enteros (con precisi&oacute;n de 64 bits). En contextos<br>
+        de cadena, actuar&aacute;n como cadenas binarias, donde cada par de d&iacute;gitos 
+        hexadecimales es convertido a un car&aacute;cter:<br>
+        mysql&gt; SELECT x'4D7953514C';<br>
+        -&gt; 'MySQL'<br>
+        mysql&gt; SELECT 0xa+0;<br>
+        -&gt; 10<br>
+        mysql&gt; SELECT 0x5061756c;<br>
+        -&gt; 'Paul'<br>
+        En MySQL 5.0, el tipo predeterminado para un valor hexadecimal es una 
+        cadena. Si se desea estar seguro de que el valor se tratar&aacute;<br>
+        como un n&uacute;mero, puede emplearse CAST(... AS UNSIGNED):<br>
+        mysql&gt; SELECT 0x41, CAST(0x41 AS UNSIGNED);<br>
+        -&gt; 'A', 65<br>
+        La sintaxis 0x se basa en ODBC. Las cadenas hexadecimales son utilizadas 
+        a menudo por ODBC para proveer valores para columnas<br>
+        BLOB. La sintaxis x'hexstring' se basa en SQL standard.<br>
+        Se puede convertir una cadena o un n&uacute;mero en una cadena en formato 
+        hexadecimal con la funci&oacute;n HEX():<br>
+        mysql&gt; SELECT HEX('cat');<br>
+        -&gt; '636174'<br>
+        mysql&gt; SELECT 0x636174;<br>
+        -&gt; 'cat'<br>
+        9.1.4. Valores booleanos<br>
+        En MySQL 5.0, la constante TRUE se eval&uacute;a como 1 y la constante 
+        FALSE, como 0. Los nombres de constantes pueden escribirse<br>
+        en cualquier combinaci&oacute;n de may&uacute;sculas y min&uacute;sculas.<br>
+        mysql&gt; SELECT TRUE, true, FALSE, false;<br>
+        -&gt; 1, 1, 0, 0<br>
+        9.1.5. Valores de bits<br>
+        A partir de MySQL 5.0.3, los valores de bits pueden escribirse utilizando 
+        la notaci&oacute;n b'valor'. value es un valor binario escrito<br>
+        empleando ceros y unos.<br>
+        La notaci&oacute;n de bits es conveniente para especificar valores que 
+        se asignar&aacute;n a columnas BIT:<br>
+        mysql&gt; CREATE TABLE t (b BIT(8));<br>
+        mysql&gt; INSERT INTO t SET b = b'11111111';<br>
+        mysql&gt; INSERT INTO t SET b = b'1010';<br>
+        +------+----------+----------+----------+<br>
+        | b+0 | BIN(b+0) | OCT(b+0) | HEX(b+0) |<br>
+        +------+----------+----------+----------+<br>
+        | 255 | 11111111 | 377 | FF |<br>
+        | 10 | 1010 | 12 | A |<br>
+        +------+----------+----------+----------+<br>
+        9.1.6. Valores NULL<br>
+        El valor NULL significa &#8220;no hay dato.&#8221; NULL puede escribirse 
+        en cualquier combinaci&oacute;n de may&uacute;sculas y min&uacute;sculas.<br>
+        Debe tenerse en cuenta que el valor NULL no es lo mismo que 0 para tipos 
+        num&eacute;ricos o la cadena vac&iacute;a para tipos de cadena. Con-<br>
+        sulte Secci&oacute;n A.5.3, &#8220;Problemas con valores NULL&#8221;.<br>
+        Para operaciones de exportaci&oacute;n o importaci&oacute;n de texto utilizando 
+        LOAD DATA INFILE o SELECT ... INTO OUTFILE,<br>
+        NULL se representa con la secuencia \N. Consulte Secci&oacute;n 13.2.5, 
+        &#8220;Sintaxis de LOAD DATA INFILE&#8221;. </p>
+        </td>
+    <td>&nbsp;</td>
+    <td><a href="http://www.euskalnet.net/juanarana/oraclezip/Ejer3.rar"><img src="../../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td>
+<div align="right"><a href="http://www.euskalnet.net/juanarana/index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a>
+      </div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

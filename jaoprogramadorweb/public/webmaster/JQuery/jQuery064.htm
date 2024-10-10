@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Introducci&oacute;n a JQuery</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta name="keywords" content="Introduccion a JQuery, Manual JQuery, tutorial JQuery, Ejemplos JQuery, ejercicios JQuery">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos"><tr> 
+    <td height="39" colspan="3"> <h2>Asignar un valor de atributo procesado por una función</h2></td>
+  </tr>
+  <tr> 
+    <td height="268" colspan="3"> 
+      <h3>Introducci&oacute;n</h3>
+      <p>Podemos tambi&eacute;n enviar una funci&oacute;n para procesar el valor 
+        que queremos asignar a un<br>
+        atributo. Para ello enviamos a attr() dos par&aacute;metros, el primero 
+        con el nombre del atributo y el<br>
+        segundo con la funci&oacute;n que debe devolver el valor a asignar a dicho 
+        atributo.<br>
+        Para ilustrar este uso de attr() mostraremos un ejemplo en el que desde 
+        jQuery accedemos a<br>
+        los elementos INPUT de la p&aacute;gina que tienen la clase CSS &quot;fecha&quot; 
+        y le insertamos como texto a<br>
+        mostrar la fecha de hoy. Para obtener el d&iacute;a actual necesitamos 
+        procesar cierto c&oacute;digo<br>
+        Javascript y para ello crearemos una funci&oacute;n que devuelve la cadena 
+        de texto con la fecha.<br>
+        $('input.fecha').attr(&quot;value&quot;, function(indiceArray){<br>
+        //indiceArray tiene el &iacute;ndice de este elemento en el objeto jQuery<br>
+        var f = new Date();<br>
+        return f.getDate() + &quot;/&quot; + (f.getMonth() +1) + &quot;/&quot; 
+        + f.getFullYear();<br>
+        });<br>
+        Para que se asimile mejor el uso de jQuery en una p&aacute;gina, mostramos 
+        el c&oacute;digo completo de<br>
+        este ejemplo.<br>
+        &lt;html&gt;<br>
+        &lt;head&gt;<br>
+        &lt;title&gt;m&eacute;todo attr&lt;/title&gt;<br>
+        &lt;script src=&quot;../jquery-1.3.2.min.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;<br>
+        &lt;script&gt;<br>
+        $(document).ready(function(){<br>
+        $('input.fecha').attr(&quot;value&quot;, function(indiceArray){<br>
+        //indiceArray tiene el &iacute;ndice de este elemento en el objeto jQuery<br>
+        var f = new Date();<br>
+        return f.getDate() + &quot;/&quot; + (f.getMonth() +1) + &quot;/&quot; 
+        + f.getFullYear();<br>
+        });<br>
+        });<br>
+        &lt;/script&gt;<br>
+        &lt;/head&gt;<br>
+        &lt;body&gt;<br>
+        &lt;form&gt;<br>
+        &lt;input type=&quot;text&quot; class=&quot;fecha&quot;&gt;<br>
+        &lt;input type=&quot;text&quot; class=&quot;nofecha&quot;&gt;<br>
+        &lt;input type=&quot;text&quot; class=&quot;fecha&quot;&gt;<br>
+        &lt;/form&gt;<br>
+        &lt;/body&gt;<br>
+        &lt;/html&gt;</p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

@@ -1,0 +1,299 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Variables Java</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación en Java,Programas Java,Aplicaciones en Java,Ejercicios en Java, Ejemplos de Java,Tutorial de Java,Manual Java" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Java, Manual Java, tutorial Java, Ejemplos Java, ejercicios Java">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> <strong>Variables Java</strong></h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <p>Una variable es un nombre que contiene un 
+        valor que puede cambiar a lo largo del programa. De acuerdo con el tipo 
+        de informaci&oacute;n que contienen, en Java hay dos tipos principales 
+        de variables:<br>
+        1. Variables de tipos primitivos. Est&aacute;n definidas mediante un valor 
+        &uacute;nico que puede ser entero, de punto flotante, car&aacute;cter 
+        o booleano. Java permite distinta precici&oacute;n y distintos rangos 
+        de valores para estos tipos de variables (char, byte, short, int, long, 
+        float, double, boolean). Ejemplos de variables de tipos primitivos podr&iacute;an 
+        ser: 123, 3456754, 3.1415, 12e-09, 'A', True, etc.<br>
+        2. Variables referencia. Las variables referencia son referencias o nombres 
+        de una<br>
+        informaci&oacute;n m&aacute;s compleja: arrays u objetos de una determinada 
+        clase.<br>
+        Desde el punto de vista del papel o misi&oacute;n en el programa, las 
+        variables pueden ser:<br>
+        1. Variables miembro de una clase: Se definen en una clase, fuera de cualquier 
+        m&eacute;todo; pueden ser tipos primitivos o referencias.<br>
+        2. Variables locales: Se definen dentro de un m&eacute;todo o m&aacute;s 
+        en general dentro de cualquier bloque entre llaves {}. Se crean en el 
+        interior del bloque y se destruyen al finalizar dicho bloque. Pueden ser 
+        tambi&eacute;n tipos primitivos o referencias.</p>
+      <h3>Nombres de Variables</h3>
+      <p>Los nombres de variables en Java se pueden crear con mucha libertad. 
+        Pueden ser cualquier conjunto de caracteres num&eacute;ricos y alfanum&eacute;ricos, 
+        sin algunos caracteres especiales utilizados por Java como operadores 
+        o separadores ( ,.+-*/ etc.).<br>
+        Existe una serie de palabras reservadas las cuales tienen un significado 
+        especial para Java y por lo tanto no se pueden utilizar como nombres de 
+        variables. Dichas palabras son:<br>
+      </p>
+      <table width="526" border="1">
+        <tr>
+          <td>abstract&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp; 
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; break &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;byte&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; case&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            catch<br>
+            char&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;class&nbsp; 
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            const*&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;continue&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            default&nbsp; &nbsp;&nbsp; do<br>
+            double &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else&nbsp; 
+            &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;extends 
+            &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;final &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;finally&nbsp; 
+            &nbsp;&nbsp;&nbsp;&nbsp; float<br>
+            for&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            goto* &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if 
+            &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;implements 
+            import &nbsp; &nbsp;&nbsp;&nbsp;instanceof<br>
+            int&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            &nbsp;&nbsp; interface&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;long 
+            &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;native&nbsp; 
+            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;new &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;null<br>
+            package&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;private &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;protected 
+            &nbsp; &nbsp;public &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp; 
+            &nbsp;&nbsp;&nbsp;&nbsp; short<br>
+            static&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            super &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            &nbsp;&nbsp;switch &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;synchronized 
+            &nbsp;this&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; throw<br>
+            throws&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;transient&nbsp; 
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; try&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            void &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;volatile&nbsp; 
+            &nbsp;&nbsp; while</td>
+        </tr>
+      </table>
+      <p> <br>
+        (*) son palabras reservadas, pero no se utilizan en la actual implementaci&oacute;n 
+        del lenguaje Java.</p>
+		<h3>Tipos Primitivos de Variables</h3>
+      <p>Se llaman tipos primitivos de variables de Java a aquellas variables 
+        sencillas que contienen los tipos de informaci&oacute;n m&aacute;s habituales: 
+        valores boolean, caracteres y valores num&eacute;ricos enteros o de punto 
+        flotante.<br>
+        Java dispone de ocho tipos primitivos de variables: un tipo para almacenar 
+        valores true y false (boolean); un tipo para almacenar caracteres (char), 
+        y 6 tipos para guardar valores num&eacute;ricos, cuatro tipos para enteros 
+        (byte, short, int y long) y dos para valores reales de punto flotante 
+        (float y double).</p>
+      <table width="514" border="1">
+        <tr>
+          <td><div align="center"><strong>Tipo de variable</strong></div></td>
+          <td><div align="center"><strong>Descripci&oacute;n</strong></div></td>
+        </tr>
+        <tr>
+          <td>Boolean</td>
+          <td>1 byte. Valores true y false</td>
+        </tr>
+        <tr>
+          <td>Char</td>
+          <td>2 bytes. Unicode. Comprende el c&oacute;digo ASCII</td>
+        </tr>
+        <tr>
+          <td>Byte</td>
+          <td>1 byte. Valor entero entre -128 y 127</td>
+        </tr>
+        <tr>
+          <td>Short</td>
+          <td>2 bytes. Valor entero entre -32768 y 32767</td>
+        </tr>
+        <tr>
+          <td>Int</td>
+          <td>4 bytes. Valor entero entre -2.147.483.648 y 2.147.483.647</td>
+        </tr>
+        <tr>
+          <td>Long</td>
+          <td>8 bytes. Valor entre -9.223.372.036.854.775.808 y 9.223.372.036.854.775.807</td>
+        </tr>
+        <tr>
+          <td>Float</td>
+          <td>4 bytes (entre 6 y 7 cifras decimales equivalentes). De -3.402823E38 
+            a -1.401298E-45 y de<br>
+            1.401298E-45 a 3.402823E38</td>
+        </tr>
+        <tr>
+          <td>Double</td>
+          <td>8 bytes (unas 15 cifras decimales equivalentes). De -1.79769313486232E308 
+            a<br>
+            -4.94065645841247E-324 y de 4.94065645841247E-324 a 1.79769313486232E308</td>
+        </tr>
+      </table>
+      <p>&nbsp;</p>
+      <p>Los tipos primitivos de Java tienen algunas caracter&iacute;sticas importantes 
+        que se resumen a continuaci&oacute;n:<br>
+        1. El tipo boolean no es un valor num&eacute;rico: s&oacute;lo admite 
+        los valores true o false. El tipo boolean no se identifica con el igual 
+        o distinto de cero, como en C/C++. El resultado de la expresi&oacute;n 
+        l&oacute;gica que aparece como condici&oacute;n en un bucle o en una bifurcaci&oacute;n 
+        debe ser boolean.<br>
+        2. El tipo char contiene caracteres en c&oacute;digo UNICODE (que incluye 
+        el c&oacute;digo ASCII), y ocupan 16 bits por car&aacute;cter. Comprende 
+        los caracteres de pr&aacute;cticamente todos los idiomas.<br>
+        3. Los tipos byte, short, int y long son n&uacute;meros enteros que pueden 
+        ser positivos o negativos, con distintos valores m&aacute;ximos y m&iacute;nimos. 
+        A diferencia de C/C++, en Java no hay enteros unsigned.<br>
+        4. Los tipos float y double son valores de punto flotante (n&uacute;meros 
+        reales) con 6-7 y 15 cifras decimales equivalentes, respectivamente.<br>
+        5. Se utiliza la palabra void para indicar la ausencia de un tipo de variable 
+        determinado.<br>
+        6. A diferencia de C/C++, los tipos de variables en Java est&aacute;n 
+        perfectamente definidos en todas y cada una de las posibles plataformas. 
+        Por ejemplo, un int ocupa siempre la misma memoria y tiene el mismo rango 
+        de valores, en cualquier tipo de ordenador.<br>
+        7. Existen extensiones de Java 1.2 para aprovechar la arquitectura de 
+        los procesadores Intel, que permiten realizar operaciones de punto flotente 
+        con una precisi&oacute;n extendida de 80 bits.</p>
+		<h3>C&oacute;mo se definen e inicializan las variables</h3>
+      <p>Una variable se define especificando el tipo y el nombre de dicha variable. 
+        Estas variables pueden ser tanto de tipos primitivos como referencias 
+        a objetos de alguna clase perteneciente al API de Java o generada por 
+        el usuario. Si no se especifica un valor en su declaraci&oacute;n, las 
+        variable primitivas se inicializan a cero (salvo boolean y char, que se 
+        inicializan a false y '\0').<br>
+        An&aacute;logamente las variables de tipo referencia son inicializadas 
+        por defecto a un valor especial:<br>
+        null.<br>
+        Es importante distinguir entre la referencia a un objeto y el objeto mismo. 
+        Una referencia es una variable que indica d&oacute;nde est&aacute; guardado 
+        un objeto en la memoria del ordenador (a diferencia de C/C++, Java no 
+        permite acceder al valor de la direcci&oacute;n, pues en este lenguaje 
+        se han eliminado los punteros). Al declarar una referencia todav&iacute;a 
+        no se encuentra &#8220;apuntando&#8221; a ning&uacute;n objeto en<br>
+        particular (salvo que se cree expl&iacute;citamente un nuevo objeto en 
+        la declaraci&oacute;n), y por eso se le asigna el valor null. Si se desea 
+        que esta referencia apunte a un nuevo objeto es necesario crear el objeto 
+        utilizando el operador new. Este operador reserva en la memoria del ordenador 
+        espacio para ese objeto (variables y funciones). Tambi&eacute;n es posible 
+        igualar la referencia declarada a otra referencia a un objeto existente 
+        previamente.</p>
+      <p><br>
+        Un tipo particular de referencias son los arrays o vectores, sean &eacute;stos 
+        de variables primitivas (por ejemplo, un vector de enteros) o de objetos. 
+        En la declaraci&oacute;n de una referencia de tipo array hay que incluir 
+        los corchetes []. En los siguientes ejemplos aparece c&oacute;mo crear 
+        un vector de 10 n&uacute;meros enteros y c&oacute;mo crear un vector de 
+        elementos MyClass. Java garantiza que los elementos del vector son inicializados 
+        a null o a cero (seg&uacute;n el tipo de dato) en caso de no indicar otro 
+        valor.</p>
+      <p><br>
+        Ejemplos de declaraci&oacute;n e inicializaci&oacute;n de variables:<br>
+        int x; // Declaraci&oacute;n de la variable primitiva x. Se inicializa 
+        a 0<br>
+        int y = 5; // Declaraci&oacute;n de la variable primitiva y. Se inicializa 
+        a 5<br>
+        MyClass unaRef; // Declaraci&oacute;n de una referencia a un objeto MyClass.<br>
+        // Se inicializa a null<br>
+        unaRef = new MyClass(); // La referencia &#8220;apunta&#8221; al nuevo 
+        objeto creado<br>
+        // Se ha utilizado el constructor por defecto<br>
+        MyClass segundaRef = unaRef; // Declaraci&oacute;n de una referencia a 
+        un objeto MyClass.<br>
+        // Se inicializa al mismo valor que unaRef<br>
+        int [] vector; // Declaraci&oacute;n de un array. Se inicializa a null<br>
+        vector = new int[10]; // Vector de 10 enteros, inicializados a 0<br>
+        double [] v = {1.0, 2.65, 3.1};// Declaraci&oacute;n e inicializaci&oacute;n 
+        de un vector de 3<br>
+        // elementos con los valores entre llaves<br>
+        MyClass [] lista=new MyClass[5];// Se crea un vector de 5 referencias 
+        a objetos<br>
+        // Las 5 referencias son inicializadas a null<br>
+        lista[0] = unaRef; // Se asigna a lista[0] el mismo valor que unaRef<br>
+        lista[1] = new MyClass(); // Se asigna a lista[1] la referencia al nuevo 
+        objeto<br>
+        // El resto (lista[2]&#8230;lista[4] siguen con valor null<br>
+        En el ejemplo mostrado las referencias unaRef, segundaRef y lista[0] actuar&aacute;n 
+        sobre el mismo objeto. Es equivalente utilizar cualquiera de las referencias 
+        ya que el objeto al que se refieren es el mismo.</p>
+		<h3>Visibilidad y vida de las variables</h3>
+      <p>Se entiende por visibilidad, &aacute;mbito o scope de una variable, la 
+        parte de la aplicaci&oacute;n donde dicha variable es accesible y por 
+        lo tanto puede ser utilizada en una expresi&oacute;n. En Java todas las 
+        variables deben estar incluidas en una clase. En general las variables 
+        declaradas dentro de unas llaves {}, es decir dentro de un bloque, son 
+        visibles y existen dentro de estas llaves. Por ejemplo las variables<br>
+        declaradas al principio de una funci&oacute;n existen mientras se ejecute 
+        la funci&oacute;n; las variables declaradas dentro de un bloque if no 
+        ser&aacute;n v&aacute;lidas al finalizar las sentencias correspondientes 
+        a dicho if y las variables miembro de una clase (es decir declaradas entre 
+        las llaves {} de la clase pero fuera de cualquier m&eacute;todo) son v&aacute;lidas 
+        mientras existe el objeto de la clase. Las variables miembro de una clase 
+        declaradas como public son accesibles a trav&eacute;s de una referencia 
+        a un objeto de dicha clase utilizando el operador punto (.). Las variables 
+        miembro declaradas como private no son accesibles directamente desde otras 
+        clases. Las funciones miembro de una clase tienen acceso directo a todas 
+        las variables miembro de la clase sin necesidad de anteponer el nombre 
+        de un objeto de la clase. Sin embargo las funciones miembro de una clase 
+        B derivada de otra A, tienen acceso a todas las variables miembro de A 
+        declaradas como public o protected, pero no a las declaradas como private. 
+        Una clase derivada s&oacute;lo puede acceder directamente a las variables 
+        y funciones miembro de su clase base declaradas como public o protected. 
+        Otra caracter&iacute;stica del lenguaje es que es posible declarar una 
+        variable dentro de un bloque con el mismo nombre que una variable miembro, 
+        pero no con el nombre de otra variable local que ya existiera. La variable 
+        declarada dentro del bloque oculta a la variable miembro en ese bloque. 
+        Para acceder a la variable miembro oculta ser&aacute; preciso utilizar 
+        el operador this, en la forma this.varname.</p>
+      <p><br>
+        Uno de los aspectos m&aacute;s importantes en la programaci&oacute;n orientada 
+        a objetos (OOP) es la forma en la cual son creados y eliminados los objetos. 
+        En Java la forma de crear nuevos objetos es utilizando el operador new. 
+        Cuando se utiliza el operador new, la variable de tipo referencia guarda 
+        la posici&oacute;n de memoria donde est&aacute; almacenado este nuevo 
+        objeto. Para cada objeto se lleva cuenta<br>
+        de por cu&aacute;ntas variables de tipo referencia es apuntado. La eliminaci&oacute;n 
+        de los objetos la realiza el programa denominado garbage collector, quien 
+        autom&aacute;ticamente libera o borra la memoria ocupada por un objeto 
+        cuando no existe ninguna referencia apuntando a ese objeto. Lo anterior 
+        significa que<br>
+        aunque una variable de tipo referencia deje de existir, el objeto al cual 
+        apunta no es eliminado si hay otras referencias apuntando a ese mismo 
+        objeto.</p>
+		<h3>Casos especiales: Clases BigInteger y BigDecimal</h3>
+      <p>Java 1.1 incorpor&oacute; dos nuevas clases destinadas a operaciones 
+        aritm&eacute;ticas que requieran gran precisi&oacute;n: BigInteger y BigDecimal. 
+        La forma de operar con objetos de estas clases difiere de las operaciones 
+        con variables primitivas. En este caso hay que realizar las operaciones 
+        utilizando m&eacute;todos propios de estas clases (add() para la suma, 
+        subtract() para la resta, divide() para la divisi&oacute;n, etc.). Se 
+        puede consultar la ayuda sobre el package java.math, donde aparecen ambas
+		        clases con todos sus m&eacute;todos. Los objetos de tipo BigInteger son 
+        capaces de almacenar cualquier n&uacute;mero entero sin perder informaci&oacute;n 
+        durante las operaciones. An&aacute;logamente los objetos de tipo BigDecimal 
+        permiten trabajar con el n&uacute;mero de decimales deseado.</p>
+		
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

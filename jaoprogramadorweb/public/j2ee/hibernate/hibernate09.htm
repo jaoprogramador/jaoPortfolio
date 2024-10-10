@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Altas</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación en hibernate,Programas hibernate,Aplicaciones en hibernate,Ejercicios en hibernate, Ejemplos de hibernate,Tutoriales de hibernate,Manuales hibernate" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="hibernate, Manual hibernate, tutorial hibernate, Ejemplos hibernate, ejercicios hibernate">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2>Altas</h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <p>A&ntilde;adir una nueva Categoria a la base 
+        de datos es sencillo:<br>
+        public void anadir(String categ) {<br>
+        // [1] Construimos una nueva Categoria<br>
+        Categoria categoria = new Categoria();<br>
+        categoria.setCategoria(categ);<br>
+        // [2] Creamos una Session<br>
+        Session session = getSession();<br>
+        if (session == null) {<br>
+        System.out.println(&#8220;Error abriendo sesi&oacute;n.&#8221;);<br>
+        return;<br>
+        }<br>
+        Transaction tx = null;<br>
+        try {<br>
+        // [3] Iniciamos una unidad de trabajo<br>
+        tx = session.beginTransaction();<br>
+        // [4] Guardamos la nueva Categoria en la base de datos<br>
+        session.save(categoria);<br>
+        // [5] Confirmamos la transacci&oacute;n<br>
+        tx.commit();<br>
+        } catch (HibernateException e) {<br>
+        if (tx != null) {<br>
+        try {<br>
+        [6] Tiramos para atr&aacute;s la transacci&oacute;n<br>
+        tx.rollback();<br>
+        } catch (HibernateException e) {<br>
+        }<br>
+        }<br>
+        }<br>
+        finally {<br>
+        try {<br>
+        [7] Cerramos la sesi&oacute;n<br>
+        session.close();<br>
+        } catch (HibernateException e) {<br>
+        }<br>
+        }<br>
+        } // anadir()<br>
+        [1] Para a&ntilde;adir una nueva Categoria, primero hay que crearla. En 
+        nuestro ejemplo, la creamos a<br>
+        partir del par&aacute;metro categ del m&eacute;todo.<br>
+        [2] Hemos visto que la Session es el puente entre nuestra aplicaci&oacute;n 
+        e Hibernate. Usamos el<br>
+        m&eacute;todo getSession(), descrito m&aacute;s arriba, para obtener una 
+        Session.<br>
+        [3] Iniciamos una unidad de trabajo antes de a&ntilde;adir la Categoria:8<br>
+        Transaction tx = getSession().beginTransaction();<br>
+        [4] Guardamos categoria en la base de datos.<br>
+        session.save(categoria);<br>
+        Observamos que no hay ninguna instrucci&oacute;n SQL. Simplemente, estamos 
+        persistiendo un objeto.[5] Si no ha habido ning&uacute;n problema, confirma 
+        la transacci&oacute;n a la base de datos, haciendo un<br>
+        commit() y cierra la unidad de trabajo. En definitiva, hace un SQL COMMIT 
+        pero adem&aacute;s,<br>
+        sincroniza la sesi&oacute;n con la base de datos ejecutando impl&iacute;citamente 
+        el m&eacute;todo flush() de la clase<br>
+        Session.<br>
+        [6] Si ha habido alg&uacute;n problema, tira para atr&aacute;s la transacci&oacute;n 
+        y cierra la unidad de trabajo. En<br>
+        definitiva, hace un ROLLBACK.<br>
+        [7] Para acabar, pase lo que pase, cerramos la sesi&oacute;n.</p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Altas, Bajas, Modificaciones y Consultas</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación en hibernate,Programas hibernate,Aplicaciones en hibernate,Ejercicios en hibernate, Ejemplos de hibernate,Tutoriales de hibernate,Manuales hibernate" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="hibernate, Manual hibernate, tutorial hibernate, Ejemplos hibernate, ejercicios hibernate">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2>Altas, Bajas, Modificaciones y Consultas</h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <p>En cualquier aplicaci&oacute;n que use Hibernate 
+        aparecen cuatro objetos b&aacute;sicos:</p>
+      <p>1. Configuration: es el objeto que contiene la informaci&oacute;n necesaria 
+        para conectarse a la base de datos. Es el encargado de leerse el archivo 
+        Hibernate.properties.<br>
+        Tambi&eacute;n es el encargado de procesar la informaci&oacute;n correspondiente 
+        a los aparejamientos. Es el encargado de leerse y verificar los archivos 
+        de emparejamiento nombreDeClasse.hbm.xml.<br>
+        Configuration conf = new Configuration();<br>
+        conf.addClass(escuela.beans.Categoria.class);<br>
+        2. SessionFactory: es una f&aacute;brica de Sessions. Un objeto Configuration 
+        es capaz de crear una SessionFactory ya que tiene toda la informaci&oacute;n 
+        necesaria. Normalmente, una aplicaci&oacute;n s&oacute;lo tiene una SessionFactory.<br>
+        SessionFactory sessionFactory = conf.buildSessionFactory();<br>
+        3. Session: La principal interficie entre la aplicaci&oacute;n Java e 
+        Hibernate. Es la que mantiene las conversaciones entre la aplicaci&oacute;n 
+        y la base de datos. Permite a&ntilde;adir, modificar y borrar objetos 
+        en la base de datos.<br>
+        Session session = sessionFactory.openSession();<br>
+        4. Transaction: Como su nombre indica, se encarga de la transaccionalidad. 
+        Permite definir unidades de trabajo.<br>
+        Transaction tx = session.beginTransaction();<br>
+        [...]session.save(unaCategoria);<br>
+        tx.commit();<br>
+        [...]<br>
+        tx.rollback();</p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

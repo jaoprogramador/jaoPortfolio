@@ -1,0 +1,142 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Introducci&oacute;n a JQuery</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta name="keywords" content="Introduccion a JQuery, Manual JQuery, tutorial JQuery, Ejemplos JQuery, ejercicios JQuery">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos"><tr> 
+    <td height="39" colspan="3"> <h2>Función jQuery enviando un selector y un contexto</h2></td>
+  </tr>
+  <tr> 
+    <td height="268" colspan="3"> <p> Este uso de la funci&oacute;n sirve para 
+        seleccionar elementos de la p&aacute;gina. Recibe una expresi&oacute;n 
+        y<br>
+        se encarga de seleccionar todos los elementos de la p&aacute;gina que 
+        corresponden con ella,<br>
+        devolviendo un objeto jQuery donde se encuentran todos los elementos de 
+        la p&aacute;gina<br>
+        seleccionados y extendidos con las funcionalidades del framework. Adicionalmente, 
+        podemos<br>
+        pasarle un contexto de manera opcional. Si no se le env&iacute;a un contexto, 
+        selecciona elementos<br>
+        del documento completo, si indicamos un contexto conseguiremos seleccionar 
+        elementos s&oacute;lo<br>
+        dentro de ese contexto.<br>
+        La expresi&oacute;n que debemos enviar obligatoriamente como primer par&aacute;metro 
+        sirve de selector.<br>
+        En ese par&aacute;metro tenemos que utilizar una una notaci&oacute;n especial 
+        para poder seleccionar<br>
+        elementos de diversas maneras y la verdad es que las posibilidades de 
+        selecci&oacute;n con jQuery<br>
+        son muy grandes, como veremos en el tema de &quot;Selectores&quot;.<br>
+        Este paso de selecci&oacute;n de elementos es b&aacute;sico en cualquier 
+        script jQuery, para poder actuar en<br>
+        cualquier lugar de la p&aacute;gina y hacer nuestros efectos y utilidades 
+        Javascript sobre el lugar que<br>
+        deseemos.<br>
+        Veamos un uso de esta funci&oacute;n:<br>
+        var elem1 = $(&quot;#elem1&quot;);<br>
+        Con esta l&iacute;nea de c&oacute;digo habremos seleccionado un elemento 
+        de la p&aacute;gina que tiene el<br>
+        identificador (atributo id del elemento HTML) &quot;elem1&quot; y lo hemos 
+        guardado en una nueva<br>
+        variable llamada elem1. La variable elem1 guardar&aacute; entonces lo 
+        que se llama el objeto jQuery<br>
+        con el cual podremos trabajar, solicitando m&eacute;todos o funciones 
+        de dicho objeto, para trabajar<br>
+        con el elemento seleccionado.<br>
+        Luego, podr&iacute;amos hacer cualquier cosa con ese elemento seleccionado, 
+        como lo siguiente:<br>
+        elem1.css(&quot;background-color&quot;, &quot;#ff9999&quot;);<br>
+        Este m&eacute;todo css() no forma parte del core, pero sirve para cambiar 
+        atributos CSS de un<br>
+        elemento, entre otras cosas. As&iacute; pues, con esa l&iacute;nea cambiar&iacute;amos 
+        el color de fondo del<br>
+        elemento seleccionado anteriormente, que hab&iacute;amos guardado en la 
+        variable elem1.<br>
+        Ahora veamos otro ejemplo de la selecci&oacute;n de elementos con la funci&oacute;n 
+        d&oacute;lar.<br>
+        var divs = $(&quot;div&quot;);<br>
+        divs.css(&quot;font-size&quot;, &quot;32pt&quot;);<br>
+        Aqu&iacute; seleccionamos todas las etiquetas DIV de la p&aacute;gina, 
+        y les colocamos un tama&ntilde;o de letra<br>
+        de 32pt.<br>
+        Podemos ver en una p&aacute;gina aparte este peque&ntilde;o script en 
+        uso.<br>
+        El c&oacute;digo de esta p&aacute;gina es el siguiente:<br>
+        &lt;html&gt;<br>
+        &lt;head&gt;<br>
+        &lt;title&gt;funci&oacute;n jquery&lt;/title&gt;<br>
+        &lt;script src=&quot;../jquery-1.3.2.min.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;<br>
+        &lt;script&gt;<br>
+        $(document).ready(function(){<br>
+        var elem1 = $(&quot;#elem1&quot;);<br>
+        //podr&iacute;amos haber escrito: var elem1 = jQuery(&quot;#elem1&quot;);<br>
+        elem1.css(&quot;background-color&quot;, &quot;#ff9999&quot;);<br>
+        var divs = $(&quot;div&quot;);<br>
+        //podr&iacute;amos haber escrito: var elem1 = jQuery(&quot;#elem1&quot;);<br>
+        divs.css(&quot;font-size&quot;, &quot;32pt&quot;);<br>
+        });<br>
+        &lt;/script&gt;<br>
+        &lt;/head&gt;<br>
+        &lt;body&gt;<br>
+        &lt;div id=&quot;elem1&quot;&gt;Este elemento se llama elem1&lt;/div&gt;<br>
+        &lt;div id=&quot;elem2&quot;&gt;Este otro elemento se llama elem2&lt;/div&gt;<br>
+        &lt;/body&gt;<br>
+        &lt;/html&gt;<br>
+        Si queremos, podemos utilizar el segundo par&aacute;metro opcional, que 
+        es el contexto. Con &eacute;l<br>
+        podr&iacute;amos conseguir seleccionar elementos que pertenecen a una 
+        zona concreta de nuestro<br>
+        documento. Por defecto el contexto es la p&aacute;gina entera, pero lo 
+        podemos restringir de esta<br>
+        manera:<br>
+        var inputs = $(&quot;input&quot;,document.forms[0]);<br>
+        inputs.css(&quot;color&quot;, &quot;red&quot;);<br>
+        Con la primera l&iacute;nea conseguimos seleccionar todos los elementos 
+        INPUT que pertenecen al<br>
+        primer formulario de la p&aacute;gina. Se devolver&aacute; un objeto jQuery 
+        que contiene todos los input<br>
+        seleccionados. Con la segunda l&iacute;nea, invocando el m&eacute;todo 
+        css() sobre el objeto jQuery<br>
+        recibido, estar&iacute;amos cambiando el color del texto de esos elementos. 
+        Esto no seleccionar&iacute;a los<br>
+        INPUT de otros formularios, como se puede ver en esta p&aacute;gina de 
+        ejemplo.<br>
+        Ahora por completar un poco m&aacute;s estas notas, veamos otro ejemplo 
+        en el que seleccionamos<br>
+        todos los p&aacute;rrafos (etiqueta P), pero restringimos el contexto 
+        &uacute;nicamente los que est&aacute;n en un<br>
+        DIV con id=&quot;div1&quot;.<br>
+        var parrafos_div1 = $(&quot;p&quot;,&quot;#div1&quot;);<br>
+        parrafos_div1.hide()<br>
+        En la segunda l&iacute;nea lanzamos el m&eacute;todo hide() sobre el objeto 
+        jQuery que contiene los<br>
+        p&aacute;rrafos seleccionados, con lo que conseguimos que se oculten. 
+        Podemos ver una p&aacute;gina que<br>
+        con este ejemplo en marcha.<br>
+        En el siguiente art&iacute;culo veremos otros usos de la funci&oacute;n 
+        jQuery() / funci&oacute;n d&oacute;lar $(). </p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

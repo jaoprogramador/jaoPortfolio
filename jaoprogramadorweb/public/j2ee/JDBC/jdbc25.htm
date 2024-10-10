@@ -1,0 +1,175 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>La clase CallableStatement</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación en JDBC,Programas JDBC,Aplicaciones en JDBC,Ejercicios en JDBC, Ejemplos de JDBC,Tutoriales de JDBC,Manuales JDBC" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="JDBC, Manual JDBC, tutorial JDBC, Ejemplos JDBC, ejercicios JDBC">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> La clase CallableStatement</h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <p>Un objeto CallableStatement provee de una 
+        forma est&aacute;ndar de llamar a procedimientos almacenados de la base 
+        de datos. Un procedimiento almacenado se encuentra en la base de datos. 
+        La llamada al procedimiento es lo que contiene el objeto CallableStatement. 
+        Esta llamada se escribe en una sintaxis de escape que puede tomar una 
+        de dos formas: una formato con un par&aacute;metro resultado y el otro 
+        sin el. (Ver la secci&oacute;n 4 para mas informaci&oacute;n sobre la 
+        sintaxis de escape). Un par&aacute;metro resultado, un tipo de par&aacute;metro 
+        OUT, es el valor devuelto por el procedimiento almacenado. Ambos formatos 
+        pueden tener un n&uacute;mero variable de par&aacute;metros de entrada 
+        (par&aacute;metros IN), de salida (par&aacute;metros OUT) o &aacute;mbos 
+        (par&aacute;metros INOUT). Un interrogante sirve como &#8216;anclaje&#8217; 
+        para cada par&aacute;metro.</p>
+      <p>La sintaxis para invocar un procedimiento almacenado en JDBC se muestra 
+        a continuaci&oacute;n: Notar que los corchetes indican que lo que se encuenta 
+        contenido en ellos es opcional, no ofroma parte de la sintaxis.</p>
+      <p>{call procedure_name[(?, ?, ...)]}</p>
+      <p>La sintaxis para un procedimiento que devuelve un resultado es:</p>
+      <p> {? = call procedure_name[(?, ?, ...)]}</p>
+      <p>La sintaxis para un procedimiento almacenado sin par&aacute;metros se 
+        parece a algo como:</p>
+      <p> {call procedure_name}</p>
+      <p>Normalmente, alquien que crea un objeto CallableStatement deber&iacute;a 
+        saber ya si la DBMS que est&aacute; usando soporta o no procedimientos 
+        almacenados y que son estos. Si alguien necesita chequearlo de cualquier 
+        modo, existen varios m&eacute;todos de DatabaseMetaData que suministran 
+        tal informaci&oacute;n. Por ejemplo, el m&eacute;todo supportsStoredProcedures 
+        devolver&aacute; true si la DBMS soporta llamadas a<br>
+        <br>
+        procedimientos almacenados y el m&eacute;todo getProcedures devolver&aacute; 
+        una descripci&oacute;n de los procedimientos almacenados disponibles.</p>
+      <p>CallableStatement hereda los m&eacute;todos de Statement, los cuales 
+        tratan sentencias SQL en general, y tambi&eacute;n hereda los m&eacute;todos 
+        de PreparedStatement, que tratan los par&aacute;metros IN. Todos los m&eacute;todos 
+        definidos para CallableStatement tratan los par&aacute;metros OUT o los 
+        aspectos de salida de los par&aacute;metros INOUT: registro de los tipos 
+        JDBC (tipos gen&eacute;ricos SQL) de los par&aacute;metros OUT, recuperaci&oacute;n 
+        de valores desde ellos o chequear si el valor devuelto es un JDBC NULL.</p>
+      <p> Crear objetos CallableStatement</p>
+      <p>Los objetos CallableStatement se crean con el m&eacute;todo prepareCall 
+        de Connection. El siguiente ejemplo crea una instancia de CallableStatement 
+        que contiene una llamada al procedimiento almacenado getTestData, con 
+        dos argumentos y no devuelve resultados.</p>
+      <p> CallableStatement cstmt = con.prepareCall(<br>
+        &quot;{call getTestData(?, ?)}&quot;);</p>
+      <p>donde los encajes &#8216;?&#8217; son par&aacute;metros IN, OUT &oacute; 
+        INOUT dependiendo del procedimiento getTestData.</p>
+      <p> Par&aacute;metros IN y OUT</p>
+      <p>El paso de valor para cualquier par&aacute;metro IN de un objeto CallableStatement 
+        se realiza mediante los m&eacute;todos setXXX heredados de PreparedStatement. 
+        El tipo de el valor a pasar se determina por el m&eacute;todo setXXX a 
+        usar (setFloat para pasar un valor float, y as&iacute;).</p>
+      <p>Si el procedimiento almacenado devuelve par&aacute;metros OUT, el tipo 
+        JDBC de cada par&aacute;metro OUT debe ser registrado antes de que el 
+        objeto CallableStatement sea ejecutado (Esto es necesario porque algunas 
+        DBMS necesitan el tipo JDBC). El registro del tipo JDBC se realiza mediante 
+        el m&eacute;todo registerOutParameters. Despu&eacute;s que la sentencia 
+        ha sido ejecutada, los m&eacute;todos getXXX de CallableStatement recuperan 
+        los valores de los par&aacute;metros. El m&eacute;todo correcto getXXX 
+        a usar es el tipo Java que corresponde al tipo JDBC registrado para el 
+        par&aacute;metro. (El mapeo est&aacute;ndar para los tipos JDBC a tipos 
+        Java se muestra en la tabla de la secci&oacute;n 8.6.1). En otras palabras 
+        registerOutParameter usa un tipo<br>
+        <br>
+        JDBC (por tanto coincide con el tipo con el tipo JDBC que la base de datos 
+        devolver&aacute;) y getXXX &#8216;casts&#8217; este a un tipo Java.</p>
+      <p>Para ilustrar esto, el siguiente ejemplo registra los par&aacute;metros 
+        OUT, ejecuta el procedimiento almacenado llamado por cstmt y recupera 
+        los valores devueltos en los par&aacute;metros OUT. El m&eacute;todo getByte 
+        recupera un byte Java de el primer par&aacute;metro, y getBigDecimal recupera 
+        un objeto BigDecimal (con tres d&iacute;gitos despu&eacute;s del punto 
+        decimal) del segundo par&aacute;metro OUT:</p>
+      <p> CallableStatement cstmt = con.prepareCall(<br>
+        &quot;{call getTestData(?, ?)}&quot;);<br>
+        cstmt.registerOutParameter(1, java.sql.Types.TINYINT);<br>
+        cstmt.registerOutParameter(2, java.sql.Types.DECIMAL, 3);<br>
+        cstmt.executeQuery();<br>
+        byte x = cstmt.getByte(1);<br>
+        java.math.BigDecimal n = cstmt.getBigDecimal(2, 3);</p>
+      <p>De modo distinto a ResultSet, CallableStatement no tiene un mecanismo 
+        especial para recuperar grandes valores OUT incrementalmente.</p>
+      <p> Par&aacute;metros INOUT</p>
+      <p>Son par&aacute;metros que suminstran entradas as&iacute; como aceptan 
+        salidas. Estos requieren llamar a los m&eacute;todos apropiados setXXX 
+        (heredados de PreparedStatement) adem&aacute;s de llamar al m&eacute;todo 
+        registerOutParameter. Los m&eacute;todos setXXX fijan los valores como 
+        par&aacute;metros de entrada y registerOutParameter registra sus tipos 
+        JDBC como par&aacute;metros de salida. El m&eacute;todo setXXX suminstra 
+        un valor Java que el driver convierte en un valor JDBC antes de enviarlo 
+        a la base de datos.</p>
+      <p>El tipo JDBC del valor IN y el tipo JDBC para suminstrado al m&eacute;todo 
+        registerOutParameter debe ser el mismo. Luego, para recuperar el valor 
+        de salida, se usa el m&eacute;todo apropiado getXXX. Por ejemplo, un par&aacute;metro 
+        cuyo tipo Java es byte deber&iacute;a usar el m&eacute;todo setByte para 
+        asignar el valor de entrada, deber&iacute;a suplir un TINYINT como tipo 
+        JDBC para registerOutParameter, y deber&iacute;a usar getByte para recuperar 
+        el valor de salida (Seccion 8, da m&aacute;s informaci&ograve;n y contiene 
+        tablas de tipos mapeados).</p>
+      <p>El siguiente ejemplo asume que existe un procedimiento almacenado reviseTotal 
+        con un &uacute;nico par&aacute;metro INOUT. El m&eacute;todo setByte fija 
+        el valor del par&aacute;metro a 25 que es el que el driver enviar&aacute; 
+        a la base de datos como un JDBC TINYINT. Despu&eacute;s registerOutParameter 
+        registrar&aacute; el par&aacute;metro como un JDBC TINYINT. Luego que 
+        el procedimiento sea ejecutado se devolver&aacute; un nuevo JDBC TINYINT 
+        y el m&eacute;todo getByte lo recuperar&aacute; como un nuevo valor byte 
+        Java.<br>
+      </p>
+      <p> CallableStatement cstmt = con.prepareCall(<br>
+        &quot;{call reviseTotal(?)}&quot;);<br>
+        cstmt.setByte(1, 25);<br>
+        cstmt.registerOutParameter(1, java.sql.Types.TINYINT);<br>
+        cstmt.executeUpdate();<br>
+        byte x = cstmt.getByte(1);</p>
+      <p> Recuperar par&aacute;metros OUT despu&eacute;s de resultados</p>
+      <p>Dadas las limitaciones impuestas pro algunas DBMS, se recomienda en aras 
+        de la m&aacute;xima portabilidad, que todos los resultados generados por 
+        la ejecuci&oacute;n de un objeto CallableStatement deber&iacute;an recuperarse 
+        antes que los par&aacute;metros OUT usando los m&eacute;todos CallableStatement.getXXX. 
+      </p>
+      <p>Si un objeto CallableStatement devuelve m&uacute;ltiples objetos ResultSet 
+        (mediante una llamada al m&eacute;todo execute), todos los resultados 
+        deben recuperarse antes que los par&aacute;metros OUT. En este caso, debe 
+        asegurarse de que todos los resultados han sido accedidos, los m&eacute;todos 
+        de Statement getResultSet, getUpdateCount y getMoreResults necesitan ser 
+        llamados hasta que no haya m&aacute;s resultados.</p>
+      <p>Despu&eacute;s de hecho esto, los valores de los par&aacute;metros OUT 
+        pueden ser recuperados mediante los m&eacute;todos CallableStatement.getXXX.</p>
+      <p> Recuperar valores NULL en par&aacute;metros OUT</p>
+      <p>El valor devuelto en un par&aacute;metro OUT puede ser JDBC NULL. Cuando 
+        esto ocurre, le valor JDBC NULL se convertir&aacute; de forma que el valor 
+        devuelto por el m&eacute;todo getXXX sea null, 0 o false dependiendo del 
+        tipo del m&eacute;todo getXXX usado.Como con los objetos ResultSet, la 
+        &uacute;nica manera de saber si un valor de 0 o false fue originalmente 
+        NULL JDBC es testear el m&eacute;todo wasNull, que devuelve true si el 
+        &uacute;ltimo valor le&iacute;do por un m&eacute;todo getXXX fue JDBC 
+        NULL y false en caso contrario. La secci&oacute;n 5 contiene m&aacute;s 
+        informaci&oacute;n al respecto.</p>
+      <p></p>
+      <p>&nbsp; </p>
+      <p>&nbsp; </p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Ejercicios MySQL</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="MySQL, sql, pl/sql, programacion MySQL, ejercicios MySQL, ejemplos MySQL, select">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2>L I N U X</h2></td>
+  </tr>
+  <tr> 
+    <td><h3>Instalar MySQL en Linux</h3>
+      <p>La manera recomendada de instalar MySQL en Linux es utilizando paquetes 
+        RPM. Los RPMs de MySQL est&aacute;n generados en SuSE<br>
+        Linux 7.3, pero deber&iacute;an funcionar con cualquier versi&oacute;n 
+        de Linux que soporte rpm y el uso de glibc. Para obtener los paquetes<br>
+        RPM, consulte Secci&oacute;n 2.1.3, &#8220;C&oacute;mo obtener MySQL&#8221;.<br>
+        MySQL AB proporciona RPMs espec&iacute;ficos para algunas plataformas; 
+        la diferencia entre un RPM espec&iacute;fico para una plataforma y<br>
+        uno gen&eacute;rico es que el primero es generado sobre la misma plataforma 
+        a donde est&aacute; destinado, y emplea enlazado din&aacute;mico, en tanto<br>
+        que el RPM gen&eacute;rico est&aacute; enlazado est&aacute;ticamente con 
+        LinuxThreads.<br>
+        Nota: las distribuciones RPM de MySQL a menudo estan proporcionadas por 
+        otros proveedores. Hay que tener en cuenta que pueden<br>
+        diferir, en caracter&iacute;sticas y prestaciones, de aquellas generadas 
+        por MySQL AB, y que las instrucciones de instalaci&oacute;n en este<br>
+        manual no se les aplican necesariamente. Se deber&iacute;an consultar 
+        las instrucciones del proveedor.<br>
+        Si ocurren problemas con un fichero RPM (por ejemplo, si se recibe el 
+        error &#8220;Sorry, the host 'xxxx' could not be<br>
+        looked up&#8221;), consulte Secci&oacute;n 2.12.1.2, &#8220;Notas sobre 
+        la distribuci&oacute;n binaria de Linux&#8221;.<br>
+        En la mayor&iacute;a de los casos, s&oacute;lo ser&aacute; necesario instalar 
+        los paquetes MySQL-server y MySQL-client para conseguir una instalaci&oacute;n<br>
+        de MySQL en funcionamiento. Los otros paquetes no se necesitan para una 
+        instalaci&oacute;n est&aacute;ndar. Si se deseara ejecutar un<br>
+        servidor MySQL-Max, el cual posee capacidades adicionales, se deber&iacute;a 
+        instalar tambi&eacute;n el RPM MySQL-Max. No obstante, ello<br>
+        deber&iacute;a hacerse solamente despu&eacute;s de instalar el RPM de 
+        MySQL-server. Consulte Secci&oacute;n 5.1.2, &#8220;El servidor extendido 
+        de<br>
+        MySQL mysqld-max&#8221;.<br>
+        Si se obtiene un mensaje de error de dependencias cuando se intentan instalar 
+        los paquetes MySQL (por ejemplo, &#8220;error: removing<br>
+        these packages would break dependencies: libmysqlclient.so.10 is needed 
+        by ...&#8221;),<br>
+        se deber&aacute; instalar tambi&eacute;n el paquete MySQL-shared-compat, 
+        el cual incluye las bibliotecas para compatibilidad hacia atr&aacute;s<br>
+        (libmysqlclient.so.12 para MySQL 4.0 y libmysqlclient.so.10 para MySQL 
+        3.23).<br>
+        Muchas distribuciones Linux a&uacute;n incluyen MySQL 3.23 y usualmente 
+        enlazan las aplicaciones din&aacute;micamente para economizar espacio<br>
+        de disco. Si estas bibliotecas compartidas est&aacute;n en un paquete 
+        separado (por ejemplo, MySQL-shared), es suficiente con<br>
+        dejar ese paquete instalado y solamente actualizar el servidor MySQL y 
+        los paquetes cliente (los cuales est&aacute;n enlazados est&aacute;tica-<br>
+        mente y no dependen de bibliotecas compartidas). Para aquellas distribuciones 
+        que incluyen las bibliotecas compartidas en el mismo<br>
+        paquete que el servidor MySQL (por ejemplo, Red Hat Linux), se puede instalar 
+        el RPM MySQL-shared 3.23 o utilizar en su<br>
+        lugar el paquete MySQL-shared-compat.<br>
+        Est&aacute;n disponibles los siguientes paquetes RPM:<br>
+        &#8226; MySQL-server-VERSION.i386.rpm<br>
+        El servidor MySQL. Ser&aacute; necesario, a menos que solamente se desee 
+        conectar a un servidor MySQL ejecutado en otro ordenador.<br>
+        Nota: los ficheros RPM del servidor se denominaban MySQL-VERSION.i386.rpm 
+        antes de la versi&oacute;n 4.0.10. Es decir,<br>
+        no inclu&iacute;an -server en su nombre.<br>
+        &#8226; MySQL-Max-VERSION.i386.rpm<br>
+        El servidor MySQL-Max. Este servidor tiene capacidades adicionales que 
+        no posee el provisto en el RPM MySQL-server.<br>
+        Igualmente, debe instalarse primero el RPM MySQL-server, porque el RPM 
+        MySQL-Max depende de &eacute;l.<br>
+        &#8226; MySQL-client-VERSION.i386.rpm<br>
+        Los programas cliente MySQL est&aacute;ndar. Es probable que siempre se 
+        instale este paquete.<br>
+        &#8226; MySQL-bench-VERSION.i386.rpm<br>
+        Pruebas al programa y pruebas de rendimiento. Requieren Perl y el m&oacute;dulo 
+        DBD::mysql.<br>
+        &#8226; MySQL-devel-VERSION.i386.rpm<br>
+        Las bibliotecas y ficheros de cabecera que se necesitan para compilar 
+        otros clientes MySQL, como los m&oacute;dulos Perl.<br>
+        &#8226; MySQL-shared-VERSION.i386.rpm<br>
+        Este paquete contiene las bibliotecas compartidas (libmysqlclient.so*) 
+        que ciertos lenguajes y aplicaciones necesitan<br>
+        para enlazar din&aacute;micamente y usar MySQL.<br>
+        &#8226; MySQL-shared-compat-VERSION.i386.rpm<br>
+        Este paquete incluye las bibliotecas compartidas para MySQL 3.23 y MySQL 
+        4.0. Debe instalarse en lugar de MySQL-shared<br>
+        si hay instaladas aplicaciones enlazadas din&aacute;micamente con MySQL 
+        3.23 y se desea actualizar a MySQL 4.0 sin afectar<br>
+        las dependencias de bibliotecas. Este paquete se encuentra disponible 
+        desde MySQL 4.0.13.<br>
+        &#8226; MySQL-embedded-VERSION.i386.rpm<br>
+        La biblioteca del servidor MySQL incrustado (desde MySQL 4.0)<br>
+        &#8226; MySQL-VERSION.src.rpm<br>
+        Contiene el c&oacute;digo fuente de todos los paquetes anteriores. Puede 
+        usarse para regenerar los RPMs bajo otras arquitecturas (por<br>
+        ejemplo, Alpha o SPARC).<br>
+        Para ver todos los ficheros contenidos en un paquete RPM (por ejemplo, 
+        un RPM MySQL-server), se debe ejecutar:<br>
+        shell&gt; rpm -qpl MySQL-server-VERSION.i386.rpm<br>
+        Para llevar a cabo una instalaci&oacute;n est&aacute;ndar m&iacute;nima, 
+        debe ejecutarse:<br>
+        shell&gt; rpm -i MySQL-server-VERSION.i386.rpm<br>
+        shell&gt; rpm -i MySQL-client-VERSION.i386.rpm<br>
+        Para instalar solamente el paquete cliente, debe ejecutarse:<br>
+        shell&gt; rpm -i MySQL-client-VERSION.i386.rpm<br>
+        RPM ofrece una caracter&iacute;stica para verificar la integridad y autenticidad 
+        de los paquetes antes de instalarlos. Para m&aacute;s informaci&oacute;n<br>
+        consulte Secci&oacute;n 2.1.4, &#8220;Comprobar la integridad de paquetes 
+        con sumas de verificaci&oacute;n MD5 o GnuPG&#8221;.<br>
+        El servidor RPM ubica los datos bajo el directorio /var/lib/mysql. Tambi&eacute;n 
+        crea una cuenta de acceso para el usuario mysql<br>
+        (si no existe anteriormente) a fin de ejecutar el servidor MySQL, y crea 
+        las correspondientes entradas en /etc/init.d/ para iniciar<br>
+        el servidor autom&aacute;ticamente al arrancar el sistema. (Esto significa 
+        que si se hab&iacute;a realizado una instalaci&oacute;n previa y se hicieron<br>
+        cambios al script de inicio, posiblemente se desee hacer una copia de 
+        ese script para no perder los cambios al instalar un nuevo<br>
+        RPM). Consulte Secci&oacute;n 2.9.2.2, &#8220;Arrancar y parar MySQL autom&aacute;ticamente&#8221; 
+        para m&aacute;s informaci&oacute;n sobre como MySQL puede<br>
+        iniciarse autom&aacute;ticamente junto con el sistema.<br>
+        Si se va a instalar el RPM MySQL en una distribuci&oacute;n antigua de 
+        Linux la cual no soporta scripts de inicio en /etc/init.d<br>
+        (directamente o por medio de un symlink), deber&aacute; crearse un v&iacute;nculo 
+        simb&oacute;lico que apunte a la ubicaci&oacute;n donde realmente est&aacute; 
+        instalado<br>
+        el script de inicializaci&oacute;n. Por ejemplo, si la ubicaci&oacute;n 
+        es /etc/rc.d/init.d, se deber&aacute;n ejecutar los siguientes comandos<br>
+        antes de instalar el RPM para crear /etc/init.d como un v&iacute;nculo 
+        simb&oacute;lico que apunte all&iacute;:<br>
+        shell&gt; cd /etc<br>
+        shell&gt; ln -s rc.d/init.d .<br>
+        Sin embargo, todas las principales distribuciones Linux de la actualidad 
+        soportan la nueva disposici&oacute;n de directorios que utiliza /<br>
+        etc/init.d, porque es un requisito para cumplir con el LSB (Linux Standard 
+        Base, Base Est&aacute;ndar para Linux).<br>
+        Si entre los ficheros RPM instalados se encuentra MySQL-server, el servidor 
+        mysqld deber&iacute;a estar ejecut&aacute;ndose luego de la<br>
+        instalaci&oacute;n, y se deber&iacute;a estar en condiciones de comenzar 
+        a utilizar MySQL.<br>
+        Si algo no va bien, se puede hallar m&aacute;s informaci&oacute;n en la 
+        secci&oacute;n dedicada a la instalaci&oacute;n binaria. Consulte Secci&oacute;n 
+        2.7,<br>
+        &#8220;Instalaci&oacute;n de MySQL en otros sistemas similares a Unix&#8221;.<br>
+        Nota: Las cuentas que se hallan en las tablas de permisos de MySQL, en 
+        principio no est&aacute;n protegidas con contrase&ntilde;as. Despu&eacute;s 
+        de<br>
+        iniciar el servidor se deben establecer contrase&ntilde;as para esas cuentas 
+        siguiendo las instrucciones en Secci&oacute;n 2.9, &#8220;Puesta en marcha<br>
+        y comprobaci&oacute;n despu&eacute;s de la instalaci&oacute;n&#8221;.</p>
+        
+        </td>
+    <td>&nbsp;</td>
+    <td><a href="http://www.euskalnet.net/juanarana/oraclezip/Ejer3.rar"><img src="../../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td>
+<div align="right"><a href="http://www.euskalnet.net/juanarana/index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a>
+      </div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

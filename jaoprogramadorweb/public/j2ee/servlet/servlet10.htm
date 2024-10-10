@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>El Ciclo de Vida de un Servlet</title>
+<META http-equiv=Content-Language content=es>
+<META content="Manual Servlet, ejemplos Servlet, codigos Servlet" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Manual Servlet, ejemplos Servlet, codigos Servlet">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2> El Ciclo de Vida de un Servlet</h2></td>
+  </tr>
+  <tr> 
+    <td colspan="3"> <table width="472" border="0" >
+        <tr> 
+          <td width="21%"><h3>Contenido:</h3></td>
+          <td width="79%"></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="struts09.htm#Ciclo">- El Ciclo de Vida de un Servlet:</a></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="struts09.htm#Ini">- Inicializar un Servlet</a></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="struts09.htm#Inter">- Interactuar con Clientes </a></td>
+        </tr>
+		<tr> 
+          <td>&nbsp;</td>
+          <td><a href="struts09.htm#Des">- Destruir un Servlet</a></td>
+        </tr>
+      </table>
+      <p>&nbsp;</p>
+      <h3>El Ciclo de Vida de un Servlet:<a name="Ciclo"></a></h3>
+      <p>Cada servlet tiene el mismo ciclo de vida.
+        Un servidor carga e inicializa el servlet. <br>
+        - El servlet maneja cero o m&aacute;s peticiones de cliente. <br>
+        - El servidor elimina el servlet. (Algunos servidores s&oacute;lo cumplen 
+        este paso cuando se desconectan). </p>
+      <p>&nbsp;</p>
+      <h3>Inicializar un Servlet:<a name="Ini"></a></h3>
+      <p>Cuando un servidor carga un servlet, ejecuta el m&eacute;todo init del 
+        servlet. La inicializaci&oacute;n se completa
+        antes de manejar peticiones de clientes y antes de que el servlet sea 
+        destruido.
+        Aunque muchos servlets se ejecutan en servidores multi-thread, los servlets 
+        no tienen problemas de
+        concurrencia durante su inicializaci&oacute;n. El servidor llama s&oacute;lo 
+        una vez al m&eacute;todo init, cuando carga el
+        servlet, y no lo llamar&aacute; de nuevo a menos que vuelva a recargar 
+        el servlet. El servidor no puede
+        recargar un servlet sin primero haber destruido el servlet llamando al 
+        m&eacute;todo destroy.</p>
+	  <p>&nbsp;</p>
+      <h3>Interactuar con Clientes: <a name="Inter"></a></h3>
+      <p>Despu&eacute;s de la inicializaci&oacute;n, el servlet puede manejar 
+        peticiones de clientes. Esta parte del ciclo de
+        vida de un servlet se pudo ver en la secci&oacute;n anterior.</p>
+	  <p>&nbsp;</p>
+      <h3>Destruir un Servlet:<a name="Des"></a></h3>
+      <p>Los servlets se ejecutan hasta que el servidor los destruye, por ejemplo, 
+        a petici&oacute;n del
+        administrador del sistema. Cuando un servidor destruye un servlet, ejecuta 
+        el m&eacute;todo destroy del
+        propio servlet. Este m&eacute;todo s&oacute;lo se ejecuta una vez. El 
+        servidor no ejecutar&aacute; de nuevo el servlet,
+        hasta haberlo cargado e inicializado de nuevo.
+        Mientras se ejecuta el m&eacute;todo destroy, otro thread podr&iacute;a 
+        est&aacute;r ejecutando una petici&oacute;n de
+        servicio. La p&aacute;gina Manejar Threads de Servicio a la Terminaci&oacute;n 
+        de un Thread muestra como
+        proporcionar limpieza cuando threads de larga ejecuci&oacute;n podr&iacute;an 
+        estar ejecutando peticiones de
+        servicio.</p>
+      <p>&nbsp; </p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

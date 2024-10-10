@@ -1,0 +1,488 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Herencias</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación en Java,Programas Java,Aplicaciones en Java,Ejercicios en Java, Ejemplos de Java,Tutorial de Java,Manual Java" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Java, Manual Java, tutorial Java, Ejemplos Java, ejercicios Java">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> Clases internas</h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <h3>Introducci&oacute;n</h3>
+      <p> Una clase interna es una clase definida dentro de otra clase, llamada 
+        clase contenedora, en alguna<br>
+        variante de la siguiente forma general:<br>
+        class ClaseContenedora {<br>
+        ...<br>
+        class ClaseInterna {<br>
+        ...<br>
+        }<br>
+        ...<br>
+        }<br>
+        Las clases internas fueron introducidas en la versi&oacute;n Java 1.1. 
+        Adem&aacute;s de su utilidad en s&iacute;,<br>
+        las clases internas se utilizan mucho en el nuevo modelo de eventos que 
+        se introdujo en dicha<br>
+        versi&oacute;n de Java.<br>
+        Hay cuatro tipos de clases internas:<br>
+        1. Clases internas static.<br>
+        2. Clases internas miembro.<br>
+        3. Clases internas locales.<br>
+        4. Clases an&oacute;nimas.<br>
+        En lo sucesivo se utilizar&aacute; la terminolog&iacute;a clase contenedora 
+        o clase global para hacer<br>
+        referencia a la clase que contiene a la clase interna.<br>
+        Hay que se&ntilde;alar que la JVM (Java Virtual Machine) no sabe nada 
+        de la existencia de clases<br>
+        internas. Por ello, el compilador convierte estas clases en clases globales, 
+        contenidas en ficheros<br>
+        *.class cuyo nombre es ClaseContenedora$ClaseInterna.class. Esta conversi&oacute;n 
+        inserta variables<br>
+        ocultas, m&eacute;todos y argumentos en los constructores. De todas formas, 
+        lo que m&aacute;s afecta al<br>
+        programador de todo esto es lo referente al nombre de los ficheros que 
+        aparecen en el directorio<br>
+        donde se realiza la compilaci&oacute;n, que pueden resultar sorprendentes 
+        si no se conoce su origen.</p>
+      <h3>Clases e interfaces internas static</h3>
+      <p>Se conocen tambi&eacute;n con el nombre de clases anidadas (nested classes). 
+        Las clases e interfaces<br>
+        internas static s&oacute;lo pueden ser creadas dentro de otra clase al 
+        m&aacute;ximo nivel, es decir directamente<br>
+        en el bloque de definici&oacute;n de la clase contenedora y no en un bloque 
+        m&aacute;s interno. Es posible definir<br>
+        clases e interfaces internas static dentro de una interface contenedora. 
+        Este tipo de clases internas<br>
+        se definen utilizando la palabra static. Todas las interfaces internas 
+        son impl&iacute;citamente static.<br>
+        En cierta forma, las clases internas static se comportan como clases normales 
+        en un package.<br>
+        Para utilizar su nombre desde fuera de la clase contenedora hay que precederlo 
+        por el nombre de la<br>
+        clase contenedora y el operador punto (.) Este tipo de relaci&oacute;n 
+        entre clases se puede utilizar para<br>
+        agrupar varias clases dentro de una clase m&aacute;s general. Lo mismo 
+        puede decirse de las interfaces<br>
+        internas.Las clases internas static pueden ver y utilizar los miembros 
+        static de la clase contenedora.<br>
+        No se necesitan objetos de la clase contenedora para crear objetos de 
+        la clase interna static. Los<br>
+        m&eacute;todos de la clase interna static no pueden acceder directamente 
+        a los objetos de la clase<br>
+        contenedora, caso de que los haya: deben disponer de una referencia a 
+        dichos objetos, como<br>
+        cualquier otra clase.<br>
+        La sentencia import puede utilizarse para importar una clase interna static, 
+        en la misma<br>
+        forma que si se tratara de importar una clase de un package (con el punto 
+        (.)). Por ejemplo, si la<br>
+        interface Linkable es interna a la clase List, para implementar dicha 
+        interface hay que escribir,<br>
+        ... implements List.Linkable<br>
+        y para importarla hay que usar,<br>
+        import List.*; // o bien<br>
+        import List.Linkable;<br>
+        Otras caracter&iacute;sticas importantes son las siguientes:<br>
+        1. Pueden definirse clases e interfaces internas dentro de interface y 
+        clases contenedoras,<br>
+        con las cuatro combinaciones posibles.<br>
+        2. Puede haber varios niveles, esto es una clase interna static puede 
+        ser clase contenedora<br>
+        de otra clase interna static, y as&iacute; sucesivamente.<br>
+        3. Las clases e interfaces internas static pertenecen al package de la 
+        clase contenedora.<br>
+        4. Pueden utilizarse los calificadores final, public, private y protected. 
+        &Eacute;sta es una forma<br>
+        m&aacute;s de controlar el acceso a ciertas clases.<br>
+        A continuaci&oacute;n se presenta un ejemplo de clase interna static:<br>
+        // fichero ClasesIntStatic.java<br>
+        class A {<br>
+        int i=1; // variable miembro de objeto<br>
+        static int is=-1; // variable miembro de clase<br>
+        public A(int i) {this.i=i;} // constructor<br>
+        // a los m&eacute;todos de la clase contenedora hay que pasarles referencias<br>
+        // a los objetos de la clase interna static<br>
+        public void printA(Bs unBs) {<br>
+        System.out.println(&quot;i=&quot;+i+&quot; unBs.j=&quot;+unBs.j);<br>
+        }<br>
+        // definici&oacute;n de una clase interna static<br>
+        static class Bs {<br>
+        int j=2;<br>
+        public Bs(int j) {this.j=j;} // constructor<br>
+        // los m&eacute;todos de la clase interna static no pueden acceder a la 
+        i<br>
+        // pues es una variable de objeto. S&iacute; pueden acceder a is<br>
+        public void printBs() {<br>
+        System.out.println(&quot; j=&quot; + j + &quot; is=&quot; + is);<br>
+        }<br>
+        } // fin clase Bs<br>
+        } // fin clase contenedora Aclass ClasesIntStatic {<br>
+        public static void main(String [] arg) {<br>
+        A a1 = new A(11), a2 = new A(12);<br>
+        println(&quot;a1.i=&quot; + a1.i + &quot; a2.i=&quot; + a2.i);<br>
+        // dos formas de crear objetos de la clase interna static<br>
+        A.Bs b1 = new A.Bs(-10); // necesario poner A.Bs<br>
+        A.Bs b2 = a1.new Bs(-11); // b2 es independiente de a1<br>
+        // referencia directa a los objetos b1 y b2<br>
+        println(&quot;b1.j=&quot; + b1.j + &quot; b2.j=&quot; + b2.j);// los m&eacute;todos 
+        de la clase interna acceden directamente a las variables<br>
+        // de la clase contenedora s&oacute;lo si son static<br>
+        b1.printBs(); // escribe: j=-10 is=-1<br>
+        b2.printBs(); // escribe: j=-20 is=-1<br>
+        // a los m&eacute;todos de la clase contenedora hay que pasarles referencias<br>
+        // a los objetos de la clase interna, pera que puedan identificarlos<br>
+        a1.printA(b1); // escribe: i=11 unBs.j=-10<br>
+        a1.printA(b2); // escribe: i=11 unBs.j=-11<br>
+        } // fin de main()<br>
+        public static void println(String str) {System.out.println(str);}<br>
+        } // fin clase ClasesIntStatic</p>
+      <h3>Clases internas miembro (no static)</h3>
+      <p>Las clases internas miembro o simplemente clases internas, son clases 
+        definidas al m&aacute;ximo nivel<br>
+        de la clase contenedora (directamente en el bloque de diminuci&oacute;n 
+        de dicha clase), sin la palabra<br>
+        static. Se suelen llamar clases internas miembro o simplemente clases 
+        internas. No existen<br>
+        interfaces internas de este tipo.<br>
+        Las clases internas no pueden tener variables miembro static. Tienen una 
+        nueva sintaxis para<br>
+        las palabras this, new y super, que se ver&aacute; un poco m&aacute;s 
+        adelante.<br>
+        La caracter&iacute;stica principal de estas clases internas e que cada 
+        objeto de la clase interna existe<br>
+        siempre dentro de un y s&oacute;lo un objeto de la clase contenedora. 
+        Un objeto de la clase contenedora<br>
+        puede estar relacionado con uno o m&aacute;s objetos de la clase interna. 
+        Tener esto presente es muy<br>
+        importante para entender las caracter&iacute;sticas que se explican a 
+        continuaci&oacute;n.<br>
+        Relaci&oacute;n entre las clases interna y contenedora respecto al acceso 
+        a las variables miembro:<br>
+        1. Debido a la relaci&oacute;n uno a uno, los m&eacute;todos de la clase 
+        interna ven directamente las<br>
+        variables miembro del objeto de la clase contenedora, sin necesidad de 
+        cualificarlos.<br>
+        2. Sin embargo, los m&eacute;todos de la clase contenedora no ven directamente 
+        las variables<br>
+        miembro de los objetos de la clase interna: necesitan cualificarlos con 
+        una referencia a los<br>
+        correspondientes objetos. Esto es consecuencia de la relaci&oacute;n uno 
+        a varios que existe<br>
+        entre los objetos de la clase contenedora y los de la clase interna.<br>
+        3. Otras clases diferentes de las clases contenedora e interna pueden 
+        utilizar directamente<br>
+        los objetos de la clase interna, sin cualificarlos con el objeto o el 
+        nombre de la clase<br>
+        contenedora. De hecho, se puede seguir accediendo a los objetos de la 
+        clase interna<br>
+        aunque se pierda la referencia al objeto de la clase contenedora con el 
+        que est&aacute;n asociados.<br>
+        Respecto a los permisos de acceso:<br>
+        1. Las clases internas pueden tambi&eacute;n ser private y protected (las 
+        clases normales s&oacute;lo<br>
+        pueden ser public y package). Esto permite nuevas posibilidades de encapsulaci&oacute;n.<br>
+        2. Los m&eacute;todos de las clases internas acceden directamente a todos 
+        los miembros, incluso<br>
+        private, de la clase contenedora.<br>
+        3. Tambi&eacute;n la clase contenedora puede acceder &#8211;si dispone 
+        de una referencia- a todas las<br>
+        variables miembro (incluso private) de sus clases internas.<br>
+        4. Una clase interna puede acceder tambi&eacute;n a los miembros (incluso 
+        private) de otras clases<br>
+        internas definidas en la misma clase contenedora.Otras caracter&iacute;sticas 
+        de las clases internas son las siguientes:<br>
+        1. Una clase interna miembro puede contener otra clase interna miembro, 
+        hasta el nivel que<br>
+        se desee (aunque no se considera buena t&eacute;cnica de programaci&oacute;n 
+        utilizar muchos niveles).<br>
+        2. En la clase interna, la palabra this se refiere al objeto de la propia 
+        clase interna. Para<br>
+        acceder al objeto de la clase contenedora se utiliza ClaseContenedora.this.<br>
+        3. Para crear un nuevo objeto de la clase interna se puede utilizar new, 
+        precedido por la referencia<br>
+        al objeto de la clase contenedora que contendr&aacute; el nuevo objeto: 
+        unObjCC.new().<br>
+        El tipo del objeto es el nombre de la clase contenedora seguido del nombre 
+        de la clase<br>
+        interna, como por ejemplo:<br>
+        ClaseCont.ClaseInt unObjClInt = unObjClaCont.new ClaseInt(...);<br>
+        4. Sup&oacute;ngase como ejemplo adicional que B es una clase interna 
+        de A y que C es una clase<br>
+        interna de B. La creaci&oacute;n de objetos de las tres clases se puede 
+        hacer del siguiente modo:<br>
+        A a = new A(); // se crea un objeto de la clase A<br>
+        A.B b = a.new B(); // b es un objeto de la clase interna B dentro de a<br>
+        A.B.C c = b.new C(); // c es un objeto de la clase interna C dentro de 
+        b<br>
+        5. Nunca se puede crear un objeto de la clase interna sin una referencia 
+        a un objeto de la<br>
+        clase contenedora. Los constructores de la clase interna tienen como argumento 
+        oculto<br>
+        una referencia al objeto de la clase contenedora.<br>
+        6. El nuevo significado de la palabra super es un poco complicado: Si 
+        una clase deriva de<br>
+        una clase interna, su constructor no puede llamar a super() directamente. 
+        Ello hace que el<br>
+        compilador no pueda crear un constructor por defecto. Al constructor hay 
+        que pasarle una<br>
+        referencia a la clase contenedora de la clase interna super-clase, y con 
+        esa referencia ref<br>
+        llamar a ref.super().<br>
+        Las clases internas pueden derivar de otras clases diferentes de la clase 
+        contenedora. En este<br>
+        caso, conviene tener en cuenta las siguientes reglas:<br>
+        1. Las clases internas constituyen como una segunda jerarqu&iacute;a de 
+        clases en Java: por una<br>
+        parte est&aacute;n en la clases contenedora y ven sus variables; por otra 
+        parte pueden derivar de<br>
+        otra clase que no tenga nada que ver con la clase contenedora. Es muy 
+        importante evitar<br>
+        conflictos con los nombres. En caso de conflicto entre un nombre heredado 
+        y un nombre<br>
+        en la clase contenedora, el nombre heredado debe tener prioridad.<br>
+        2. En caso de conflicto de nombres, Java obliga a utilizar la referencia 
+        this con un nuevo<br>
+        significado: para referirse a la variable o m&eacute;todo miembro heredado 
+        se utiliza this.name,<br>
+        mientras que se utiliza NombreClaseCont.this.name para el miembro de la 
+        clase<br>
+        contenedora..<br>
+        3. Si una clase contenedora deriva de una super-clase que tiene una clase 
+        interna, la clase<br>
+        interna de la sub-clase puede a su vez derivar de la clase interna de 
+        la super-clase y<br>
+        redefinir todos los m&eacute;todos que necesite. La casu&iacute;stica 
+        se puede complicar todo lo que se<br>
+        desee, pero siempre hay que recomendar hacer las cosas lo m&aacute;s sencillas 
+        que sea posible.<br>
+        El uso de las clases internas miembro tiene las siguientes restricciones:<br>
+        1. Las clases internas no pueden tener el mismo nombre que la clase contenedora 
+        o<br>
+        package.<br>
+        2. Tampoco pueden tener miembros static: variables, m&eacute;todos o clases.<br>
+        A continuaci&oacute;n se presenta un ejemplo completo de utilizaci&oacute;n 
+        de clases internas miembro:</p>
+      <p>// fichero ClasesInternas.java<br>
+        // clase contenedora<br>
+        class A {<br>
+        int i=1; // variable miembro<br>
+        public A(int i) {this.i=i;} // constructor<br>
+        // los m&eacute;toodos de la clase contenedora necesitan una<br>
+        // referencia a los objetos de la clase interna<br>
+        public void printA(B unB) {<br>
+        System.out.println(&quot;i=&quot;+i+&quot; unB.j=&quot;+unB.j); // s&iacute; 
+        acepta unB.j<br>
+        }<br>
+        // la clase interna puede tener cualquier visibilidad. Con private da 
+        error<br>
+        // porque main() no puede acceder a la clase interna<br>
+        protected class B {<br>
+        int j=2;<br>
+        public B(int j) {this.j=j;} // constructor<br>
+        public void printB() {<br>
+        System.out.println(&quot;i=&quot; + i + &quot; j=&quot; + j); // s&iacute; 
+        sabe qu&eacute; es j<br>
+        }<br>
+        } // fin clase B<br>
+        } // fin clase contenedora A<br>
+        class ClasesInternas {<br>
+        public static void main(String [] arg) {<br>
+        A a1 = new A(11); A a2 = new A(12);<br>
+        println(&quot;a1.i=&quot; + a1.i + &quot; a2.i=&quot; + a2.i);<br>
+        // forma de crear objetos de la clase interna<br>
+        // asociados a un objeto de la clase contenedora<br>
+        A.B b1 = a1.new B(-10), b2 = a1.new B(-20);<br>
+        // referencia directa a los objetos b1 y b2 (sin cualificar).<br>
+        println(&quot;b1.j=&quot; + b1.j + &quot; b2.j=&quot; + b2.j);<br>
+        // los m&eacute;todos de la clase interna pueden acceder directamente 
+        a<br>
+        // las variables miembro del objeto de la clase contenedora<br>
+        b1.printB(); // escribe: i=11 j=-10<br>
+        b2.printB(); // escribe: i=11 j=-20<br>
+        // los m&eacute;todos de la clase contenedora deben recibir referencias<br>
+        // a los objetos de la clase interna, pera que puedan identificarlos<br>
+        a1.printA(b1); a1.printA(b2);<br>
+        A a3 = new A(13);<br>
+        A.B b3 = a3.new B(-30);<br>
+        println(&quot;b3.j=&quot; + b3.j);<br>
+        a3 = null; // se destruye la referencia al objeto de la clase contenedora<br>
+        b3.printB(); // escribe: i=13 j=-30<br>
+        a3 = new A(14); // se crea un nuevo objeto asociado a la referencia a3<br>
+        // b3 sigue asociado an anterior objeto de la clase contenedora<br>
+        b3.printB(); // escribe: i=13 j=-30<br>
+        } // fin de main()<br>
+        public static void println(String str) {System.out.println(str);}<br>
+        } // fin clase ClasesInternas</p>
+      <h3>Clases internas locales</h3>
+      <p>Las clases internas locales o simplemente clases locales no se declaran 
+        dentro de otra clase al<br>
+        m&aacute;ximo nivel, sino dentro de un bloque de c&oacute;digo, normalmente 
+        en un m&eacute;todo, aunque tambi&eacute;n se<br>
+        pueden crear en un inicializador static o de objeto.<br>
+        Las principales caracter&iacute;sticas de las clases locales so las siguientes:<br>
+        1. Como las variables locales, las clases locales s&oacute;lo son visibles 
+        y utilizables en el bloque<br>
+        de c&oacute;digo en el que est&aacute;n definidas. Los objetos de la clase 
+        local deben ser creados en el<br>
+        mismo bloque en que dicha clase ha sido definida. De esta forma se puede 
+        acercar la<br>
+        definici&oacute;n al uso de la clase.2. Las clases internas locales tienen 
+        acceso a todas las variables miembro y m&eacute;todos de la<br>
+        clase contenedora. Pueden ver tambi&eacute;n los miembros heredados, tanto 
+        por la clase<br>
+        interna local como por la clase contenedora.<br>
+        3. Las clases locales pueden utilizar las variables locales y argumentos 
+        de m&eacute;todos visibles<br>
+        en ese bloque de c&oacute;digo, pero s&oacute;lo si son final5 (en realidad 
+        la clase local trabaja con sus<br>
+        copias de las variables locales y por eso se exige que sean final y no 
+        puedan cambiar).<br>
+        4. Un objeto de una clase interna local s&oacute;lo puede existir en relaci&oacute;n 
+        con un objeto de la<br>
+        clase contenedora, que debe existir previamente.<br>
+        5. La palabra this se puede utilizar en la misma forma que en las clases 
+        internas miembro,<br>
+        pero no las palabras new y super.<br>
+        Restricciones en el uso de las clases internas locales:<br>
+        1. No pueden tener el mismo nombre que ninguna de sus clases contenedoras.<br>
+        2. No pueden definir variables, m&eacute;todos y clases static.<br>
+        3. No pueden ser declaradas public, protected, private o package, pues 
+        su visibilidad es<br>
+        siempre la de las variables locales, es decir, la del bloque en que han 
+        sido definidas.<br>
+        Las clases internas locales se utilizan para definir clases Adapter en 
+        el AWT. A continuaci&oacute;n<br>
+        se presenta un ejemplo de definici&oacute;n de clases internas locales:<br>
+        // fichero ClasesIntLocales.java<br>
+        // Este fichero demuestra c&oacute;mo se crean clases locales<br>
+        class A {<br>
+        int i=-1; // variable miembro<br>
+        // constructor<br>
+        public A(int i) {this.i=i;}<br>
+        // definici&oacute;n de un m&eacute;todo de la clase A<br>
+        public void getAi(final long k) { // argumento final<br>
+        final double f=3.14; // variable local final<br>
+        // definici&oacute;n de una clase interna local<br>
+        class BL {<br>
+        int j=2;<br>
+        public BL(int j) {this.j=j;} // constructor<br>
+        public void printBL() {<br>
+        System.out.println(&quot; j=&quot;+j+&quot; i=&quot;+i+&quot; f=&quot;+f+&quot; 
+        k=&quot;+k);<br>
+        }<br>
+        } // fin clase BL<br>
+        // se crea un objeto de BL<br>
+        BL bl = new BL(2*i);<br>
+        // se imprimen los datos de ese objeto<br>
+        bl.printBL();<br>
+        } // fin getAi<br>
+        } // fin clase contenedora A<br>
+        class ClasesIntLocales {<br>
+        public static void main(String [] arg) {<br>
+        // se crea dos objetos de la clase contenedora<br>
+        A a1 = new A(-10);<br>
+        A a2 = new A(-11);a1.getAi(1000); // se crea y accede a un objeto de la 
+        clase local<br>
+        a2.getAi(2000);<br>
+        } // fin de main()<br>
+        public static void println(String str) {System.out.println(str);}<br>
+        } // fin clase ClasesIntLocales</p>
+      <h3>Clases an&oacute;nimas</h3>
+      <p>Las clases an&oacute;nimas son muy similares a las clases internas locales, 
+        pero sin nombre. En las<br>
+        clases internas locales primero se define la clase y luego se crean uno 
+        o m&aacute;s objetos. En las clases<br>
+        an&oacute;nimas se unen estos dos pasos: Como la clase no tiene nombre 
+        s&oacute;lo se puede crear un &uacute;nico<br>
+        objeto, ya que las clases an&oacute;nimas no pueden definir constructores. 
+        Las clases an&oacute;nimas se utilizan<br>
+        con mucha frecuencia en el AWT para definir clases y objetos que gestionen 
+        los eventos de los<br>
+        distintos componentes de la interface de usuario. No hay interfaces an&oacute;nimas.<br>
+        Formas de definir una clase an&oacute;nima:<br>
+        1. Las clases an&oacute;nimas requieren una extensi&oacute;n de la palabra 
+        clave new. Se definen en una<br>
+        expresi&oacute;n de Java, incluida en una asignaci&oacute;n o en la llamada 
+        a un m&eacute;todo. Se incluye la<br>
+        palabra new seguida de la definici&oacute;n de la clase an&oacute;nima, 
+        entre llaves {&#8230;}.<br>
+        2. Otra forma de definirlas es mediante la palabra new seguida del nombre 
+        de la clase de la<br>
+        que hereda (sin extends) y la definici&oacute;n de la clase an&oacute;nima 
+        entre llaves {&#8230;}. El nombre<br>
+        de la super-clase puede ir seguido de argumentos para su constructor (entre 
+        par&eacute;ntesis,<br>
+        que con mucha frecuencia estar&aacute;n vac&iacute;os pues se utilizar&aacute; 
+        un constructor por defecto).<br>
+        3. Una tercera forma de definirlas es con la palabra new seguida del nombre 
+        de la interface<br>
+        que implementa (sin implements) y la definici&oacute;n de la clase an&oacute;nima 
+        entre llaves {&#8230;}.<br>
+        En este caso la clase an&oacute;nima deriva de Object. El nombre de la 
+        interface va seguido por<br>
+        par&eacute;ntesis vac&iacute;os, pues el constructor de Object no tiene 
+        argumentos.<br>
+        Para las clases an&oacute;nimas compiladas el compilador produce ficheros 
+        con un nombre del tipo<br>
+        ClaseContenedora$1.class, asignando un n&uacute;mero correlativo a cada 
+        una de las clases an&oacute;nimas.<br>
+        Conviene ser muy cuidadoso respecto a los aspectos tipogr&aacute;ficos 
+        de la definici&oacute;n de clases<br>
+        an&oacute;nimas, pues al no tener nombre dichas clases suelen resultar 
+        dif&iacute;ciles de leer e interpretar. Se<br>
+        aconseja utilizar las siguientes normas tipogr&aacute;ficas:<br>
+        1. Se aconseja que la palabra new est&eacute; en la misma l&iacute;nea 
+        que el resto de la expresi&oacute;n.<br>
+        2. Las llaves se abren en la misma l&iacute;nea que new, despu&eacute;s 
+        del cierre del par&eacute;ntesis de los<br>
+        argumentos del constructor.<br>
+        3. El cuerpo de la clase an&oacute;nima se debe sangrar o indentar respecto 
+        a las l&iacute;neas anteriores<br>
+        de c&oacute;digo para que resulte claramente distinguible.<br>
+        4. El cierre de las llaves va seguido por el resto de la expresi&oacute;n 
+        en la que se ha definido la<br>
+        clase an&oacute;nima. Esto puede servir como indicaci&oacute;n tipogr&aacute;fica 
+        del cierre. Puede ser algo<br>
+        as&iacute; como }; o });<br>
+        A continuaci&oacute;n se presenta un ejemplo de definici&oacute;n de clase 
+        an&oacute;nima en relaci&oacute;n con el<br>
+        AWT:unObjeto.addActionListener( new ActionListener() {<br>
+        public void actionPerformed(ActionEvent e) {<br>
+        ...<br>
+        }<br>
+        });<br>
+        donde en negrita se se&ntilde;ala la clase an&oacute;nima, que deriva 
+        de Object e implementa la interface<br>
+        ActionListener.<br>
+        Las clases an&oacute;nimas se utilizan en lugar de clases locales para 
+        clases con muy poco c&oacute;digo,<br>
+        de las que s&oacute;lo hace falta un objeto. No pueden tener constructores, 
+        pero s&iacute; inicializadores static o<br>
+        de objeto. Adem&aacute;s de las restricciones citadas, tienen restricciones 
+        similares a las clases locales.</p>
+      <h3>&nbsp;</h3>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

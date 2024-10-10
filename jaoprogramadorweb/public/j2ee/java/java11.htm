@@ -1,0 +1,261 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Clases en Java</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación en Java,Programas Java,Aplicaciones en Java,Ejercicios en Java, Ejemplos de Java,Tutorial de Java,Manual Java" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Java, Manual Java, tutorial Java, Ejemplos Java, ejercicios Java">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> Clases en Java</h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <p>Las clases son el centro de la Programaci&oacute;n 
+        Orientada a Objetos (OOP - Object Oriented<br>
+        Programming). Algunos de los conceptos m&aacute;s importantes de la POO 
+        son los siguientes:<br>
+        1. Encapsulaci&oacute;n. Las clases pueden ser declaradas como p&uacute;blicas 
+        (public) y como package<br>
+        (accesibles s&oacute;lo para otras clases del package). Las variables 
+        miembro y los m&eacute;todos<br>
+        pueden ser public, private, protected y package. De esta forma se puede 
+        controlar el<br>
+        acceso y evitar un uso inadecuado.<br>
+        2. Herencia. Una clase puede derivar de otra (extends), y en ese caso 
+        hereda todas sus<br>
+        variables y m&eacute;todos. Una clase derivada puede a&ntilde;adir nuevas 
+        variables y m&eacute;todos y/o<br>
+        redefinir las variables y m&eacute;todos heredados.<br>
+        3. Polimorfismo. Los objetos de distintas clases pertenecientes a una 
+        misma jerarqu&iacute;a o que<br>
+        implementan una misma interface pueden tratarse de una forma general e 
+        individualizada,<br>
+        al mismo tiempo. Esto, como se ha visto en el ejemplo del Cap&iacute;tulo 
+        1, facilita la<br>
+        programaci&oacute;n y el mantenimiento del c&oacute;digo.<br>
+        En este Cap&iacute;tulo se presentan las clases y las interfaces tal como 
+        est&aacute;n implementadas en el<br>
+        lenguaje Java.</p>
+      <h3>Concepto de Clase</h3>
+      <p>Una clase es una agrupaci&oacute;n de datos (variables o campos) y de 
+        funciones (m&eacute;todos) que operan<br>
+        sobre esos datos. La definici&oacute;n de una clase se realiza en la siguiente 
+        forma:<br>
+        [public] class Classname {<br>
+        // definici&oacute;n de variables y m&eacute;todos<br>
+        ...<br>
+        }<br>
+        donde la palabra public es opcional: si no se pone, la clase tiene la 
+        visibilidad por defecto, esto es,<br>
+        s&oacute;lo es visible para las dem&aacute;s clases del package. Todos 
+        los m&eacute;todos y variables deben ser definidos<br>
+        dentro del bloque {...} de la clase.<br>
+        Un objeto (en ingl&eacute;s, instance) es un ejemplar concreto de una 
+        clase. Las clases son como<br>
+        tipos de variables, mientras que los objetos son como variables concretas 
+        de un tipo determinado.<br>
+        Classname unObjeto;<br>
+        Classname otroObjeto;<br>
+        A continuaci&oacute;n se enumeran algunas caracter&iacute;sticas importantes 
+        de las clases:<br>
+        1. Todas las variables y funciones de Java deben pertenecer a una clase. 
+        No hay variables y<br>
+        funciones globales.<br>
+        2. Si una clase deriva de otra (extends), hereda todas sus variables y 
+        m&eacute;todos.<br>
+        3. Java tiene una jerarqu&iacute;a de clases est&aacute;ndar de la que 
+        pueden derivar las clases que crean<br>
+        los usuarios.<br>
+        4. Una clase s&oacute;lo puede heredar de una &uacute;nica clase (en Java 
+        no hay herencia m&uacute;ltiple). Si al<br>
+        definir una clase no se especifica de qu&eacute; clase deriva, por defecto 
+        la clase deriva de<br>
+        Object. La clase Object es la base de toda la jerarqu&iacute;a de clases 
+        de Java.<br>5. En un fichero se pueden definir varias clases, pero en un fichero 
+        no puede haber m&aacute;s que<br>
+        una clase public. Este fichero se debe llamar como la clase public que 
+        contiene con<br>
+        extensi&oacute;n *.java. Con algunas excepciones, lo habitual es escribir 
+        una sola clase por<br>
+        fichero.<br>
+        6. Si una clase contenida en un fichero no es public, no es necesario 
+        que el fichero se llame<br>
+        como la clase.<br>
+        7. Los m&eacute;todos de una clase pueden referirse de modo global al 
+        objeto de esa clase al que se<br>
+        aplican por medio de la referencia this.<br>
+        8. Las clases se pueden agrupar en packages, introduciendo una l&iacute;nea 
+        al comienzo del<br>
+        fichero (package packageName;). Esta agrupaci&oacute;n en packages est&aacute; 
+        relacionada con la<br>
+        jerarqu&iacute;a de directorios y ficheros en la que se guardan las clases.</p>
+      <h3>Concepto de Interface</h3>
+      <p>Una interface es un conjunto de declaraciones de funciones. Si una clase 
+        implementa (implements)<br>
+        una interface, debe definir todas las funciones especificadas por la interface. 
+        Las interfaces pueden<br>
+        definir tambi&eacute;n variables finales (constantes). Una clase puede 
+        implementar m&aacute;s de una interface,<br>
+        representando una alternativa a la herencia m&uacute;ltiple.<br>
+        En algunos aspectos los nombres de las interfaces pueden utilizarse en 
+        lugar de las clases. Por<br>
+        ejemplo, las interfaces sirven para definir referencias a cualquier objeto 
+        de cualquiera de las clases<br>
+        que implementan esa interface. Con ese nombre o referencia, sin embargo, 
+        s&oacute;lo se pueden utilizar<br>
+        los m&eacute;todos de la interface. &Eacute;ste es un aspecto importante 
+        del polimorfismo.<br>
+        Una interface puede derivar de otra o incluso de varias interfaces, en 
+        cuyo caso incorpora las<br>
+        declaraciones de todos los m&eacute;todos de las interfaces de las que 
+        deriva (a diferencia de las clases, las<br>
+        interfaces de Java s&iacute; tienen herencia m&uacute;ltiple).</p>
+      <h3>Variables de miembro</h3>
+      <p>A diferencia de la programaci&oacute;n algor&iacute;tmica cl&aacute;sica, 
+        que estaba centrada en las funciones, la<br>
+        programaci&oacute;n orientada a objetos est&aacute; centrada en los datos. 
+        Una clase est&aacute; constituida por unos<br>
+        datos y unos m&eacute;todos que operan sobre esos datos.</p>
+      <h3>Variables miembro de objeto</h3>
+      <p>Cada objeto, es decir cada ejemplar concreto de la clase, tiene su propia 
+        copia de las variables<br>
+        miembro. Las variables miembro de una clase (tambi&eacute;n llamadas campos) 
+        pueden ser de tipos<br>
+        primitivos (boolean, int, long, double, &#8230;) o referencias a objetos 
+        de otra clase (composici&oacute;n).<br>
+        Un aspecto muy importante del correcto funcionamiento de los programas 
+        es que no haya<br>
+        datos sin inicializar. Por eso las variables miembro de tipos primitivos 
+        se inicializan siempre de<br>
+        modo autom&aacute;tico, incluso antes de llamar al constructor (false 
+        para boolean, el car&aacute;cter nulo para<br>
+        char y cero para los tipos num&eacute;ricos). De todas formas, lo m&aacute;s 
+        adecuado es inicializarlas tambi&eacute;n<br>
+        en el constructor.<br>
+        Las variables miembro pueden tambi&eacute;n inicializarse expl&iacute;citamente 
+        en la declaraci&oacute;n, como<br>
+        las variables locales, por medio de constantes o llamadas a m&eacute;todos 
+        (esta inicializaci&oacute;n no est&aacute;<br>
+        permitida en C++). Por ejemplo,<br>
+        long nDatos = 100;<br>
+        Las variables miembro se inicializan en el mismo orden en que aparecen 
+        en el c&oacute;digo de la<br>
+        clase. Esto es importante porque unas variables pueden apoyarse en otras 
+        previamente definidas.<br>
+        Cada objeto que se crea de una clase tiene su propia copia de las variables 
+        miembro. Por<br>
+        ejemplo, cada objeto de la clase Circulo tiene sus propias coordenadas 
+        del centro x e y, y su propio<br>
+        valor del radio r.<br>
+        Los m&eacute;todos de objeto se aplican a un objeto concreto poniendo 
+        el nombre del objeto y luego<br>
+        el nombre del m&eacute;todo, separados por un punto. A este objeto se 
+        le llama argumento impl&iacute;cito. Por<br>
+        ejemplo, para calcular el &aacute;rea de un objeto de la clase Circulo 
+        llamado c1 se escribir&aacute;: c1.area();.<br>
+        Las variables miembro del argumento impl&iacute;cito se acceden directamente 
+        o precedidas por la palabra<br>
+        this y el operador punto.<br>
+        Las variables miembro pueden ir precedidas en su declaraci&oacute;n por 
+        uno de los modificadores<br>
+        de acceso: public, private, protected y package (que es el valor por defecto 
+        y puede omitirse). Junto<br>
+        con los modificadores de acceso de la clase (public y package), determinan 
+        qu&eacute; clases y m&eacute;todos<br>
+        van a tener permiso para utilizar la clase y sus m&eacute;todos y variables 
+        miembro. En el Apartado 3.11,<br>
+        en la p&aacute;gina 57, se especifican con detalle las consecuencias de 
+        estos modificadores de acceso.Existen otros dos modificadores (no de acceso) 
+        para las variables miembro:<br>
+        1. transient: indica que esta variable miembro no forma parte de la persistencia 
+        (capacidad<br>
+        de los objetos de mantener su valor cuando termina la ejecuci&oacute;n 
+        de un programa) de un<br>
+        objeto y por tanto no debe ser serializada (convertida en flujo de caracteres 
+        para poder ser<br>
+        almacenada en disco o en una base de datos) con el resto del objeto.<br>
+        2. volatile: indica que esta variable puede ser utilizada por distintas 
+        threads sincronizadas<br>
+        (ver Apartado 6.3, en la p&aacute;gina 121) y que el compilador no debe 
+        realizar optimizaciones<br>
+        con esta variable.<br>
+        Al nivel de estos apuntes, los modificadores transient y volatile no ser&aacute;n 
+        utilizados.</p>
+      <h3>Variables miembro de clase (static)</h3>
+      <p>Una clase puede tener variables propias de la clase y no de cada objeto. 
+        A estas variables se les<br>
+        llama variables de clase o variables static. Las variables static se suelen 
+        utilizar para definir<br>
+        constantes comunes para todos los objetos de la clase (por ejemplo PI 
+        en la clase Circulo) o<br>
+        variables que s&oacute;lo tienen sentido para toda la clase (por ejemplo, 
+        un contador de objetos creados<br>
+        como numCirculos en la clase Circulo).<br>
+        Las variables de clase son lo m&aacute;s parecido que Java tiene a las 
+        variables globales de C/C++.<br>
+        Las variables de clase se crean anteponiendo la palabra static a su declaraci&oacute;n. 
+        Para llamarlas<br>
+        se suele utilizar el nombre de la clase (no es imprescindible, pues se 
+        puede utilizar tambi&eacute;n el<br>
+        nombre de cualquier objeto), porque de esta forma su sentido queda m&aacute;s 
+        claro. Por ejemplo,<br>
+        Circulo.numCirculos es una variable de clase que cuenta el n&uacute;mero 
+        de c&iacute;rculos creados.<br>
+        Si no se les da valor en la declaraci&oacute;n, las variables miembro 
+        static se inicializan con los<br>
+        valores por defecto para los tipos primitivos (false para boolean, el 
+        car&aacute;cter nulo para char y cero<br>
+        para los tipos num&eacute;ricos), y con null si es una referencia.<br>
+        Las variables miembro static se crean en el momento en que pueden ser 
+        necesarias: cuando se<br>
+        va a crear el primer objeto de la clase, en cuanto se llama a un m&eacute;todo 
+        static o en cuanto se utiliza<br>
+        una variable static de dicha clase. Lo importante es que las variables 
+        miembro static se inicializan<br>
+        siempre antes que cualquier objeto de la clase.</p>
+		
+      <h3>Variables Finales</h3>
+      <p>Una variable de un tipo primitivo declarada como final no puede cambiar 
+        su valor a lo largo de la<br>
+        ejecuci&oacute;n del programa. Puede ser considerada como una constante, 
+        y equivale a la palabra const de<br>
+        C/C++.<br>
+        Java permite separar la definici&oacute;n de la inicializaci&oacute;n 
+        de una variable final. La inicializaci&oacute;n<br>
+        puede hacerse m&aacute;s tarde, en tiempo de ejecuci&oacute;n, llamando 
+        a m&eacute;todos o en funci&oacute;n de otros datos.<br>
+        La variable final as&iacute; definida es constante (no puede cambiar), 
+        pero no tiene por qu&eacute; tener el mismo<br>
+        valor en todas las ejecuciones del programa, pues depende de c&oacute;mo 
+        haya sido inicializada.<br>
+        Adem&aacute;s de las variables miembro, tambi&eacute;n las variables locales 
+        y los propios argumentos de<br>
+        un m&eacute;todo pueden ser declarados final.<br>
+        Declarar como final un objeto miembro de una clase hace constante la referencia, 
+        pero no el<br>
+        propio objeto, que puede ser modificado a trav&eacute;s de otra referencia. 
+        En Java no es posible hacer que<br>
+        un objeto sea constante.</p>
+		</td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

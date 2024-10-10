@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Ejercicios MySQL</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="MySQL, sql, pl/sql, programacion MySQL, ejercicios MySQL, ejemplos MySQL, select">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2>U P D A T E</h2></td>
+  </tr>
+  <tr> 
+  <td><h3>Sintaxis de UPDATE</h3>
+      <p>Sintaxis para una tabla:<br>
+        UPDATE [LOW_PRIORITY] [IGNORE] tbl_name<br>
+        SET col_name1=expr1 [, col_name2=expr2 ...]<br>
+        [WHERE where_definition]<br>
+        [ORDER BY ...]<br>
+        [LIMIT row_count]<br>
+        Sintaxis para m&uacute;ltiples tablas:<br>
+        UPDATE [LOW_PRIORITY] [IGNORE] table_references<br>
+        SET col_name1=expr1 [, col_name2=expr2 ...]<br>
+        [WHERE where_definition]<br>
+        El comando UPDATE actualiza columnas en registros de tabla existentes 
+        con nuevos valores. La cl&aacute;usula SET indica qu&eacute; columna<br>
+        modificar y los valores que puede recibir. La cl&aacute;usula WHERE , 
+        si se da, especifica qu&eacute; registros deben actualizarse. De otro 
+        modo,<br>
+        se actualizan todos los registros. Si la cl&aacute;usula ORDER BY se especifica, 
+        los registros se actualizan en el orden que se especifica.<br>
+        La cl&aacute;usula LIMIT es el l&iacute;mite de registros a actualizar.<br>
+        El comando UPDATE soporta los siguientes modificadores:<br>
+        &#8226; Si usa la palabra clave LOW_PRIORITY , la ejecuci&oacute;n de 
+        UPDATE se retrasa hasta que no haya otros clientes leyendo de la tabla.<br>
+        &#8226; Si usa la palabra clave IGNORE, el comando de actualizaci&oacute;n 
+        no aborta incluso si ocurren errores durante la actualizaci&oacute;n. 
+        Los<br>
+        registros que presenten conflictos de clave duplicada no se actualizan. 
+        Los registros cuyas columnas se actualizan a valores que<br>
+        provocar&iacute;an errores de conversi&oacute;n de datos se actualizan 
+        al valor v&aacute;lido m&aacute;s pr&oacute;ximo.<br>
+        Si accede a una columna de tbl_name en una expresi&oacute;n, UPDATE usa 
+        el valora ctual de la columna. Por ejemplo, el siguiente comando<br>
+        pone la columna age a uno m&aacute;s que su valor actual:<br>
+        mysql&gt; UPDATE persondata SET age=age+1;<br>
+        Sintaxis de UPDATE<br>
+        Sintaxis para una tabla:<br>
+        UPDATE [LOW_PRIORITY] [IGNORE] tbl_name<br>
+        SET col_name1=expr1 [, col_name2=expr2 ...]<br>
+        [WHERE where_definition]<br>
+        [ORDER BY ...]<br>
+        [LIMIT row_count]<br>
+        Sintaxis para m&uacute;ltiples tablas:<br>
+        UPDATE [LOW_PRIORITY] [IGNORE] table_references<br>
+        SET col_name1=expr1 [, col_name2=expr2 ...]<br>
+        [WHERE where_definition]<br>
+        El comando UPDATE actualiza columnas en registros de tabla existentes 
+        con nuevos valores. La cl&aacute;usula SET indica qu&eacute; columna<br>
+        modificar y los valores que puede recibir. La cl&aacute;usula WHERE , 
+        si se da, especifica qu&eacute; registros deben actualizarse. De otro 
+        modo,<br>
+        se actualizan todos los registros. Si la cl&aacute;usula ORDER BY se especifica, 
+        los registros se actualizan en el orden que se especifica.<br>
+        La cl&aacute;usula LIMIT es el l&iacute;mite de registros a actualizar.<br>
+        El comando UPDATE soporta los siguientes modificadores:<br>
+        &#8226; Si usa la palabra clave LOW_PRIORITY , la ejecuci&oacute;n de 
+        UPDATE se retrasa hasta que no haya otros clientes leyendo de la tabla.<br>
+        &#8226; Si usa la palabra clave IGNORE, el comando de actualizaci&oacute;n 
+        no aborta incluso si ocurren errores durante la actualizaci&oacute;n. 
+        Los<br>
+        registros que presenten conflictos de clave duplicada no se actualizan. 
+        Los registros cuyas columnas se actualizan a valores que<br>
+        provocar&iacute;an errores de conversi&oacute;n de datos se actualizan 
+        al valor v&aacute;lido m&aacute;s pr&oacute;ximo.<br>
+        Si accede a una columna de tbl_name en una expresi&oacute;n, UPDATE usa 
+        el valora ctual de la columna. Por ejemplo, el siguiente comando<br>
+        pone la columna age a uno m&aacute;s que su valor actual:<br>
+        mysql&gt; UPDATE persondata SET age=age+1;</p>
+      <p>
+</p>
+        </td>
+    <td>&nbsp;</td>
+    <td><a href="http://www.euskalnet.net/juanarana/oraclezip/Ejer3.rar"><img src="../../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td>
+<div align="right"><a href="http://www.euskalnet.net/juanarana/index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a>
+      </div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

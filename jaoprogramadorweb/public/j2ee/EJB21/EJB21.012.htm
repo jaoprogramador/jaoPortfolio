@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>LIntroducci&amp;oacute;n a EJB 2.1</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación en EJB 2.1,Programas EJB 2.1,Aplicaciones en EJB 2.1,Ejercicios en EJB 2.1, Ejemplos de EJB 2.1,Tutorial de EJB 2.1,Manual EJB 2.1" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="EJB 2.1, Manual EJB 2.1, tutorial EJB 2.1, Ejemplos EJB 2.1, ejercicios EJB 2.1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> <strong>El cliente</strong></h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <p>No olvidar que cada cliente debe tener en el CLASSPATH la librería jbossall-client.jar del directorio JBOSS_HOME/client.
+Hay que usar JNDI, por ello no debe sorprender que sea necesario conseguir un contexto. Las propiedades del contexto son dependientes del fabricante del servidor EJB. En nuestro caso:
+
+    	Properties props = new Properties();
+        props.put(Context.INITIAL_CONTEXT_FACTORY,"org.jnp.interfaces.NamingContextFactory");
+        props.put(Context.PROVIDER_URL, "jnp://localhost:1099");
+        Context ctx = new InitialContext(props);
+	
+Evidentemente el componente "org.jnp.interfaces.NamingContextFactory", debe estar en el CLASSPATH (en nuestro caso es así, ya que se encuentra en jbossall-client.jar. El puerto (1099) depende de la configuración de servidor. A continuación obtenemos una referencia del tipo interfaz EJBHome al bean (el nombre "ejb/OrderManagement" es un típico nombre JNDI, definido en jboss.xml):
+
+        Object objRef = ctx.lookup("ejb/OrderManagement");
+        OrderManagementHome home = (OrderManagementHome)javax.rmi.PortableRemoteObject.narrow(
+                		  objRef, OrderManagementHome.class);
+	
+Con esta referencia local (tipo interfaz EJBHome) se consigue la referencia remota (interfaz remoto OrderManagement) que nos va a permitir llamar al objeto remoto, recordar que desde al cliente se accede al objeto remoto sólo por medio de su interfaz remoto (como en RMI):
+
+        OrderManagement orderManagement = home.create();
+        orderManagement.placeOrder("Juan","J2EE Server Programming", 1000);
+        System.out.println( "Fecha del pedido: " + orderManagement.getOrderDate() );
+	
+Al final invocamos al método remove() del interfaz
+El código fuente completo del cliente es:
+
+package cliente;
+
+import orderMgmt.*;
+import java.util.Properties;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+/**************************************************************************************
+ * Este cliente EJB requiere (si usa JBOSS): jbossall-client.jar 
+ *************************************************************************************/
+public class Client {
+  public static void main(String[] args) {
+    try {
+    	
+    	Properties props = new Properties();
+        props.put(Context.INITIAL_CONTEXT_FACTORY,"org.jnp.interfaces.NamingContextFactory");
+        props.put(Context.PROVIDER_URL, "jnp://localhost:1099");
+
+        Context ctx = new InitialContext(props);
+        Object objRef = ctx.lookup("ejb/OrderManagement");
+        
+        OrderManagementHome home = (OrderManagementHome)javax.rmi.PortableRemoteObject.narrow(
+                		  objRef, OrderManagementHome.class);
+
+        OrderManagement orderManagement = home.create();
+        orderManagement.placeOrder("Juan","J2EE Server Programming", 1000);
+        System.out.println( "Fecha del pedido: " + orderManagement.getOrderDate() );
+        orderManagement.remove();
+        ctx.close();
+    } catch (Exception e){
+      e.printStackTrace();
+    }
+  }
+}
+	
+La ejecución produce dos resultados. Primero aparece en la consola del servidor el siguiente mensaje (del método placeOrder()):
+
+10:55:43,614 INFO  [STDOUT] --->Llamada a setSessionContext()
+10:55:43,614 INFO  [STDOUT] --->Llamada a ejbCreate()
+10:55:43,614 INFO  [STDOUT] Pedido de  1000 copias de J2EE Server Programming para el cliente Juan
+	
+A continuación se ejecuta getOrderDate() en la consola del cliente:
+
+Fecha del pedido: Mon Feb 13 10:55:43 CET
+
+      </p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

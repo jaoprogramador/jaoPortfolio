@@ -1,0 +1,69 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Indice J2ME</title>
+<META http-equiv=Content-Language content=es>
+<META content="Manual J2ME, ejemplos J2ME, codigos J2ME" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Manual J2ME, ejemplos J2ME, codigos J2ME">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> B&uacute;squeda y ordenaci&oacute;n de registros</h2></td>
+  </tr>
+  <tr> 
+    <td colspan="3">
+<p>En el ejemplo anterior hemos visto c&oacute;mo podemos recorrer los elementos 
+        del almac&eacute;n por<br>
+        medio de la interface RecordEnumeration. Las otras tres interfaces del 
+        paquete rms nos<br>
+        capacitar&aacute;n para buscar un registro, ordenar los existentes en 
+        el almac&eacute;n y definir un<br>
+        listener para el almac&eacute;n. En esto &uacute;ltimo no nos detendremos, 
+        RecordListener ser&aacute; un<br>
+        escuchador como otro cualquiera: la clase que lo implemente dar&aacute; 
+        cuerpo a sus tres m&eacute;todos<br>
+        vistos, los cuales ser&aacute;n llamados al ocurrir el evento adecuado. 
+        Un RecordStore podr&aacute; tener<br>
+        tantos escuchadores registrados como desee.</p>
+      <h3>B&uacute;squeda</h3>
+      <p>Para la b&uacute;squeda de un registro o grupo de ellos, de entre todos 
+        los del RecordStore se<br>
+        utilizar&aacute; la interface RecordFilter, en combinaci&oacute;n con 
+        la RecordEnumeration ya vista.<br>
+        Dando un filtro como par&aacute;metro de un enumerador que instanciemos 
+        para el RecordStore,<br>
+        conseguiremos una &quot;vista&quot; de los datos totales formada s&oacute;lo 
+        por los elementos que<br>
+        deseemos, quedando &eacute;sta almacenada en el enumerador para utilizarla 
+        como deseemos.<br>
+        Daremos cuerpo al &uacute;nico m&eacute;todo de la interface, matches(), 
+        en el cual definimos qu&eacute; debe<br>
+        cumplir un registro para formar parte de la vista. Con el siguiente ejemplo, 
+        en el que<br>
+        implementamos una clase que nos ayudar&aacute; a buscar las pel&iacute;culas 
+        del ejemplo anterior que<br>
+        tengan m&aacute;s de una palabra en su nombre (buscaremos cadenas formadas 
+        por un espacio),<br>
+        se observar&aacute; perfectamente lo explicado:</p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

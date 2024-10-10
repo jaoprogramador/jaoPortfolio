@@ -1,0 +1,367 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Indice J2ME</title>
+<META http-equiv=Content-Language content=es>
+<META content="Manual J2ME, ejemplos J2ME, codigos J2ME" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Manual J2ME, ejemplos J2ME, codigos J2ME">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> Conversaci&oacute;n MIDLET - SERVLET</h2></td>
+  </tr>
+  <tr> 
+    <td colspan="3"> <p>Todo lo explicado hasta ahora y algunas cosas m&aacute;s 
+        las pondremos en pr&aacute;ctica ahora en el siguiente ejemplo. En &eacute;l 
+        codificamos una breve pero intensa conversaci&oacute;n entre un MIDlet 
+        J2ME y un servlet J2EE, los cuales se comunicar&aacute;n v&iacute;a HTTP. 
+        El c&oacute;digo est&aacute; profusamente comentado para que su compresi&oacute;n 
+        sea completa.</p>
+      <p>HTTPEjemploMIDlet.java<br>
+        import javax.microedition.midlet.*;<br>
+        import javax.microedition.lcdui.*;<br>
+        import javax.microedition.io.*;<br>
+        import java.io.*;<br>
+        //Clase del MIDlet: Implementamos CommandListener al definir un escuchador 
+        de comandos<br>
+        //los cuales permitir&aacute;n al usuario decidir cu&aacute;ndo preguntar 
+        al servidor y cu&aacute;ndo<br>
+        salir+++++++++++++++++++++++++<br>
+        public class HTTPEjemploMIDlet extends MIDlet implements CommandListener{<br>
+        private Display pantalla;<br>
+        private Command cerrar;<br>
+        private Command preguntar;<br>
+        private Form formulario;<br>
+        private String respuesta;<br>
+        private StringItem campoPregunta;<br>
+        private StringItem campoRespuesta;<br>
+        private Comunicador com;<br>
+        private String[] preguntas = {&quot;HolaServlet!&quot;,&quot;pepe&quot;, 
+        &quot;QueHacesHoy?&quot;, &quot;AdiosServlet,Encantado&quot;};private 
+        int numPregunta;//Constructor del<br>
+        MIDlet+++++++++++++++++++++++++++++++++++++++++++++++++++++<br>
+        ++++++++++++++++<br>
+        public HTTPEjemploMIDlet()<br>
+        {<br>
+        //Capturamos el Display de pantalla asociado al MIDlet<br>
+        pantalla = Display.getDisplay(this);<br>
+        //Instanciamos nuestro objeto Comunicador, el cual se encargar&aacute; 
+        de conectarnos con el<br>
+        servlet<br>
+        com = new Comunicador(this);<br>
+        //Creamos un formulario y un componente de texto de alto nivel, donde 
+        mostrar las<br>
+        respuestas del servlet<br>
+        formulario = new Form(&quot;Servlet&quot;);<br>
+        campoPregunta = new StringItem(&quot;PREGUNTA: &quot;,&quot;&quot;);<br>
+        campoRespuesta = new StringItem(&quot;RESPUESTA: &quot;,&quot;&quot;);<br>
+        //Creamos los comandos de la aplicaci&oacute;n y los asociamos al formulario 
+        de alto nivel<br>
+        cerrar = new Command(&quot;Cerrar&quot;,Command.EXIT, 1);<br>
+        preguntar = new Command(&quot;Preguntar&quot;,Command.OK, 1);<br>
+        formulario.addCommand(cerrar);<br>
+        formulario.addCommand(preguntar);<br>
+        formulario.setCommandListener(this);<br>
+        //Cadena donde mostramos el cuerpo de la respuesta del servidor, vac&iacute;a 
+        inicialmente<br>
+        respuesta = &quot;&quot;;<br>
+        numPregunta = 0;<br>
+        }<br>
+        //M&eacute;todos del ciclo de vida del<br>
+        MIDlet++++++++++++++++++++++++++++++++++++++++++++++++++<br>
+        public void startApp(){<br>
+        pantalla.setCurrent(formulario);<br>
+        }<br>
+        public void pauseApp(){<br>
+        }<br>
+        public void destroyApp(boolean unconditional){<br>
+        notifyDestroyed();<br>
+        }<br>
+        //Manejador de<br>
+        eventos++++++++++++++++++++++++++++++++++++++++++++++++++++<br>
+        +++++++++++++++++<br>
+        public void commandAction(Command c, Displayable d){<br>
+        //Si el comando seleccionado por el usuario fue cerrar, salimos de la 
+        aplicaci&oacute;n<br>
+        if (c == cerrar){<br>
+        destroyApp(false);<br>
+        }<br>
+        //Si el comando seleccionado por el usuario fue &quot;Preguntar&quot;, 
+        llamamos al m&eacute;todo de<br>
+        Comunicador encargado.<br>
+        //Cada vez que pulsamos pues conectamos con el servidor: UNA PREGUNTA 
+        =&gt; UNA<br>
+        CONEXI&Oacute;N<br>
+        else{<br>
+        com.preguntar(preguntas[numPregunta]);<br>
+        //Preparamos la siguiente pregunta para la siguiente pulsaci&oacute;n 
+        sobre el comando<br>
+        Preguntar.<br>
+        //Si ya hemos hecho todas las preguntas, volvemos a hacer la primera:<br>
+        if(numPregunta == preguntas.length - 1)<br>
+        numPregunta = 0;<br>
+        else<br>
+        numPregunta++;<br>
+        }<br>
+        }<br>
+        //Presenta en pantalla la pregunta emitida y la respuesta devuelta por 
+        el<br>
+        servidor++++++++++++++++++++++++++<br>
+        public void setRespuesta(String respuesta){<br>
+        //Coloco los textos en sus campos. El de la respuesta llega desde la invocaci&oacute;n 
+        en<br>
+        //Comunicador.procesarRespuesta(); el de la pregunta lo tengo en el propio 
+        MIDlet, pero<br>
+        cuidando que<br>
+        //numPregunta ya lo hemos avanzado para esperar la siguiente pulsaci&oacute;n 
+        sobre<br>
+        &quot;Preguntar&quot;<br>
+        if(numPregunta == 0)<br>
+        campoPregunta.setText(preguntas[preguntas.length - 1]);<br>
+        elsecampoPregunta.setText(preguntas[numPregunta-1]);<br>
+        campoRespuesta.setText(respuesta);<br>
+        //Limpiamos el formulario<br>
+        formulario.deleteAll();<br>
+        //A&ntilde;adimos los elementos de texto deseados<br>
+        formulario.append(campoPregunta);<br>
+        formulario.append(campoRespuesta);<br>
+        }<br>
+        }//fin del MIDletComunicador.java<br>
+        import java.io.*;<br>
+        import javax.microedition.io.*;<br>
+        //Clase que llevar&aacute; toda la carga de la conexi&oacute;n con el<br>
+        servlet+++++++++++++++++++++++++++++++++++++++++<br>
+        public class Comunicador implements Runnable{<br>
+        private Thread t;<br>
+        private String respuesta;<br>
+        private String pregunta;<br>
+        private HttpConnection con;<br>
+        private HTTPEjemploMIDlet midlet;<br>
+        private String urlBase;<br>
+        //Constructor de la<br>
+        clase++++++++++++++++++++++++++++++++++++++++++++++++++++++<br>
+        ++++++++++++++<br>
+        public Comunicador(HTTPEjemploMIDlet m) {<br>
+        respuesta = null;<br>
+        midlet = m;<br>
+        //En las sucesivas conexiones con el servidor (una por pregunta) usamos 
+        siempre la<br>
+        //misma url; variaremos s&oacute;lo su componente Query (par&aacute;metros 
+        tras '?': USAMOS GET)<br>
+        urlBase = &quot;http://127.0.0.1:8080/escuchadorDeJ2ME/HTTPEjemploServlet&quot;;<br>
+        }//Creamos la<br>
+        conexi&oacute;n++++++++++++++++++++++++++++++++++++++++++++++++++++<br>
+        +++++++++++++++++<br>
+        public void preguntar(String pregunta){<br>
+        //Modificamos el atributo pregunta que usar&aacute; run():<br>
+        this.pregunta = pregunta;<br>
+        //MIDP 2.0 exige llevar la comunicaci&oacute;n en red en un hilo diferente 
+        al de la ejecuci&oacute;n<br>
+        normal de la aplicaci&oacute;n. Con<br>
+        //&eacute;l conectamos al servidor, ya que este proceso puede ser costoso. 
+        Si no se hace as&iacute;, se<br>
+        puede provocar un<br>
+        //bloqueo en la pantalla del dispositivo mientras se consigue la respuesta 
+        del servlet.<br>
+        t = new Thread(this);<br>
+        //Comenzamos la ejecuci&oacute;n del hilo; start() llamar&aacute; al run() 
+        definido abajo<br>
+        t.start();<br>
+        }<br>
+        //M&eacute;todo de ejecuci&oacute;n del hilo dedicado a la<br>
+        conexi&oacute;n++++++++++++++++++++++++++++++++++++++++++++++<br>
+        public void run(){<br>
+        try{<br>
+        //Definimos la conexi&oacute;n a establecer<br>
+        con = (HttpConnection)Connector.open(this.urlBase + &quot;?frase=&quot; 
+        + this.pregunta);<br>
+        //Preparamos la petici&oacute;n para al servidor, estableciendo m&eacute;todo 
+        y cabeceras<br>
+        con.setRequestMethod(HttpConnection.GET);<br>
+        con.setRequestProperty(&quot;Content-Language&quot;,&quot;es-ES&quot;);<br>
+        con.setRequestProperty(&quot;User-Agent&quot;,&quot;Profile/MIDP-2.0 Configuration/CLDC-1.0&quot;);<br>
+        con.setRequestProperty(&quot;Connection&quot;,&quot;close&quot;);<br>
+        //Preparamos la petici&oacute;n para al servidor, estableciendo m&eacute;todo 
+        y cabeceras<br>
+        con.setRequestMethod(HttpConnection.GET);<br>
+        con.setRequestProperty(&quot;Content-Language&quot;,&quot;es-ES&quot;);<br>
+        con.setRequestProperty(&quot;User-Agent&quot;,&quot;Profile/MIDP-2.0 Configuration/CLDC-1.0&quot;);<br>
+        con.setRequestProperty(&quot;Connection&quot;,&quot;close&quot;);<br>
+        for(int i = 0; i &lt; 100; i++) System.out.println(&quot;+++++ ESTADO 
+        ESTABLECIMIENTO<br>
+        +++++&quot;);//El siguiente m&eacute;todo provoca el paso del estado de 
+        ESTABLECIMIENTO al estado<br>
+        CONECTADO.<br>
+        //Con el bucle anterior forzamos una breve pausa mientras la cual podemos<br>
+        comprobar en la consola de<br>
+        //Tomcat como a&uacute;n no ha llegado petici&oacute;n alguna al servlet. 
+        Una vez que se salga del<br>
+        bucle y se ejecute la<br>
+        //siguiente sentencia, comprobaremos en la consola de Tomcat c&oacute;mo 
+        le llega la<br>
+        petici&oacute;n y lo que responde<br>
+        //ante ella.<br>
+        InputStream flujoRespuesta = con.openInputStream();<br>
+        System.out.println(&quot;+++++ ESTADO CONECTADO +++++&quot;);<br>
+        //Una vez conectados, recibimos la respuesta a leer del flujo de entrada 
+        que hemos<br>
+        obtenido<br>
+        leerRespuesta(flujoRespuesta);<br>
+        //Cerramos el flujo de entrada abierto y la conexi&oacute;n, dando paso 
+        al estado de<br>
+        CIERRE<br>
+        flujoRespuesta.close(); con.close();<br>
+        System.out.println(&quot;+++++ ESTADO CIERRE +++++&quot;);<br>
+        }<br>
+        catch (Exception e){<br>
+        System.out.println(&quot;EXCEPCI&Oacute;N EN EL MIDLET: &quot; + e.toString());<br>
+        }<br>
+        }<br>
+        //M&eacute;todo para leer por medio de un flujo de entrada el cuerpo de 
+        la<br>
+        respuesta++++++++++++++++++++++++++++<br>
+        public void leerRespuesta(InputStream flujoRespuesta) throws IOException 
+        {<br>
+        if (con.getResponseCode() == HttpConnection.HTTP_OK){<br>
+        System.out.println(&quot;OK! Respuesta del servidor en procesarRespuesta(): 
+        &quot; +<br>
+        con.getResponseMessage());<br>
+        //Heredado de ContentConnection, getLength nos da el valor de la cabecera 
+        contentlength,<br>
+        //la cual hemos a&ntilde;adido con el servlet convenientemente.<br>
+        int lon = (int) con.getLength();//Si se ha leido la cabecera correctamente, 
+        podemos instanciar un array de bytes para<br>
+        guardar lo le&iacute;do (&oacute;ptimo)<br>
+        if (lon != -1){<br>
+        byte datos[] = new byte[lon];<br>
+        flujoRespuesta.read(datos,0,datos.length);<br>
+        respuesta = new String(datos);<br>
+        }<br>
+        //Si la longitud no es conocida, debemos usar un flujo de escritura donde 
+        guardar lo<br>
+        leido<br>
+        else{<br>
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();<br>
+        int ch;<br>
+        while ((ch = flujoRespuesta.read()) != -1) baos.write(ch);<br>
+        respuesta = new String(baos.toByteArray());<br>
+        baos.close();<br>
+        }<br>
+        //Llamamos al m&eacute;todo del MIDlet que se encargar&aacute; de presentar 
+        la respuesta en la<br>
+        interface<br>
+        midlet.setRespuesta(respuesta);<br>
+        }<br>
+        else{<br>
+        System.out.println(&quot;NO OK! Respuesta del servidor en procesarRespuesta(): 
+        &quot; +<br>
+        con.getResponseMessage());<br>
+        }<br>
+        }<br>
+        }//fin de la clase ComunicadorHTTPEjemploServlet.java<br>
+        package servlets;<br>
+        import java.io.*;<br>
+        import javax.servlet.http.*;<br>
+        //Servlet que esperar&aacute; peticiones del<br>
+        MIDlet+++++++++++++++++++++++++++++++++++++++++++++++++++++<br>
+        +<br>
+        //Este servlet se ofrece desde una aplicaci&oacute;n web de nombre escuchadorDeJ2ME 
+        desplegada<br>
+        en un servidor //Tomcat y mapeada en el web.xml como /HTTPEjemploServlet<br>
+        public class HTTPEjemploServlet extends HttpServlet{<br>
+        //Tanto el doGet como el doPost son derivados a este<br>
+        m&eacute;todo++++++++++++++++++++++++++++++++++++++++<br>
+        public void processRequest(HttpServletRequest req, HttpServletResponse 
+        res){<br>
+        String[] respuestas = {&quot;Hola MIDlet, c&oacute;mo te va?&quot;,<br>
+        &quot;Aqu&iacute;, respondiendo al que quiera preguntar&quot;,<br>
+        &quot;Adios querido MIDlet.&quot;,<br>
+        &quot;No te entiendo, pregunta otra cosa&quot;};<br>
+        try{<br>
+        res.setContentType(&quot;text/plain&quot;);<br>
+        //Recogemos el cuerpo de la petici&oacute;n del MIDlet<br>
+        String fraseMIDlet = req.getParameter(&quot;frase&quot;);<br>
+        //La preparamos para comparar con los datos de que dispone el servlet. 
+        En ejemplos<br>
+        //m&aacute;s complejos, podr&iacute;an venir estos de una BD en vez del 
+        array anterior<br>
+        if(fraseMIDlet==null) fraseMIDlet = &quot;&quot;;<br>
+        else fraseMIDlet = fraseMIDlet.trim().toUpperCase();<br>
+        System.out.println(&quot;LLEGA AL SERVLET LA PETICION: &quot; + fraseMIDlet);<br>
+        //Preparamos un flujo de salida en el que escribir y por &eacute;l enviar 
+        la respuesta<br>
+        PrintWriter out = res.getWriter();<br>
+        int indiceRespuestas;<br>
+        if (fraseMIDlet.indexOf(&quot;HOLA&quot;) != -1)<br>
+        indiceRespuestas = 0;<br>
+        else if(fraseMIDlet.indexOf(&quot;HACES&quot;) != -1)indiceRespuestas 
+        = 1;<br>
+        else if(fraseMIDlet.indexOf(&quot;ADIOS&quot;) != -1)<br>
+        indiceRespuestas = 2;<br>
+        else<br>
+        indiceRespuestas = 3;<br>
+        System.out.println(&quot;ENVIA EL SERVLET LA RESPUESTA: &quot; +<br>
+        respuestas[indiceRespuestas]);<br>
+        //Asignamos la cabecera content-length para que el MIDlet haga uso de 
+        ella<br>
+        res.setContentLength(respuestas[indiceRespuestas].length());<br>
+        //Escribimos en el flujo de salida y lo enviamos al MIDlet<br>
+        out.println(respuestas[indiceRespuestas]);<br>
+        out.close();<br>
+        }<br>
+        catch (Exception e)<br>
+        {<br>
+        System.out.println(&quot;EXCEPCION EN EL SERVLET:&quot; + e.toString());<br>
+        }<br>
+        }<br>
+        //Peticiones por GET y POST al servlet, le llegan por estos<br>
+        m&eacute;todos++++++++++++++++++++++++++++++++++++<br>
+        public void doGet(HttpServletRequest req, HttpServletResponse res) {<br>
+        processRequest(req,res);<br>
+        }<br>
+        public void doPost(HttpServletRequest req, HttpServletResponse res) {<br>
+        processRequest(req,res);<br>
+        }<br>
+        }//fin servletComo cliente de la comunicaci&oacute;n hemos probado el 
+        MIDlet con el J2ME Wireless Toolkit y<br>
+        hemos ofrecido el servlet por medio de un servidor Tomcat. Las l&iacute;neas 
+        relativas a este<br>
+        servlet que aparecer&aacute;n en el fichero de configuraci&oacute;n web.xml 
+        de la aplicaci&oacute;n J2EE<br>
+        escuchadorDeJ2ME ser&iacute;an:<br>
+        &lt;!--Asociamos un nombre al servlet y declaramos la clase JAVA donde 
+        se encuentra<br>
+        codificado--&gt;&lt;servlet&gt;<br>
+        &lt;servlet-name&gt;HTTPEjemploJ2ME&lt;/servlet-name&gt;<br>
+        &lt;servlet-class&gt;servlets.HTTPEjemploServlet&lt;/servlet-class&gt;<br>
+        &lt;/servlet&gt;<br>
+        &lt;!--Por medio del nombre asociado damos un mapeo l&oacute;gico para 
+        llegar al servlet. Con esa<br>
+        url-pattern se pedir&aacute;--&gt;<br>
+        &lt;servlet-mapping&gt;<br>
+        &lt;servlet-name&gt;HTTPEjemploJ2ME&lt;/servlet-name&gt;<br>
+        &lt;url-pattern&gt;/HTTPEjemploServlet&lt;/url-pattern&gt;<br>
+        &lt;/servlet-mapping&gt;</p>
+      <p>&nbsp;</p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

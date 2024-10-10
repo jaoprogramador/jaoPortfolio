@@ -1,0 +1,538 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Ejercicios MySQL</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="MySQL, sql, pl/sql, programacion MySQL, ejercicios MySQL, ejemplos MySQL, select">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2>A D M I N I S T R A C I O N</h2></td>
+  </tr>
+  <tr> 
+    <td><h3>Sentencias de administración de base de datos:Sintaxis de CREATE USER</h3>
+      <p> CREATE USER user [IDENTIFIED BY [PASSWORD] 'password']<br>
+        [, user [IDENTIFIED BY [PASSWORD] 'password']] ...<br>
+        El comando CREATE USER se a&ntilde;adi&oacute; en MySQL 5.0.2. Este comando 
+        crea nuevas cuentas MySQL. Para usarlas, debe tener el<br>
+        permiso global CREATE USER o el permiso INSERT para la base de datos mysql 
+        . Para cada cuenta, CREATE USER crea un<br>
+        nuevo registro en la tabla mysql.user que no tiene permisos. Un error 
+        ocurre si la cuenta ya existe.<br>
+        La cuenta puede tener una contrase&ntilde;a con la cl&aacute;usula opcional 
+        IDENTIFIED BY. El valor user y la contrase&ntilde;a se dan del mismo<br>
+        modo que para el comando GRANT. En particular, para especificar la contrase&ntilde;a 
+        en texto plano, omita la palabra clave PASSWORD.<br>
+        Para especificar la contrase&ntilde;a como el valor hasheado retornado 
+        por la funci&oacute;n PASSWORD() , incluya la palabra clave PASSWORD.<br>
+        Consulte Secci&oacute;n 13.5.1.3, &#8220;Sintaxis de GRANT y REVOKE&#8221;.<br>
+        <h3>Sintaxis de DROP USER</h3><br>
+        DROP USER user [, user] ...<br>
+        El comando DROP USER borra una o m&aacute;s cuentas MySQL . Para usarlo, 
+        debe tener el permiso global CREATE USER o el permiso<br>
+        DELETE para la base de datos mysql . Cada cuenta se nombra usando el mismo 
+        formato que para GRANT o REVOKE; por<br>
+        ejemplo, 'jeffrey'@'localhost'. Las partes de usuario y equipo del nombre 
+        de cuenta se corresponden a las columnas<br>
+        User y Host del registro de la tabla user para la cuenta.<br>
+        DROP USER como est&aacute; en MySQL 5.0.0 borra s&oacute;lo cuentas que 
+        no tienen permisos. En MySQL 5.0.2, se modific&oacute; para eliminar<br>
+        permisos de cuenta tambi&eacute;n. Esto significa que el procedimiento 
+        para borrar una cuenta depende en su versi&oacute;n de MySQL.<br>
+        Desde MySQL 5.0.2, puede borrar una cuenta y sus permisos como sigue:<br>
+        DROP USER user;<br>
+        El comando borra registros de permisos para la cuenta de todas las tablas 
+        de permisos.<br>
+        En MySQL 5.0.0 y 5.0.1, DROP USER borra s&oacute;lo cuentas MySQL que 
+        no tienen permisos. En estas versiones MySQL s&oacute;lo sirve<br>
+        para borrar cada registro de cuenta de la tabla user . Para borrar una 
+        cuenta MySQL completamente (incluyendo todos sus permisos),<br>
+        debe usar el siguiente procedimiento, realizando estos pasos en el orden 
+        mostrado:<br>
+        1. Use SHOW GRANTS para determinar los permisos que tiene la cuenta. Consulte 
+        Secci&oacute;n 13.5.4.10, &#8220;Sintaxis de SHOW<br>
+        GRANTS&#8221;.<br>
+        2. Use REVOKE para revocar los permisos mostrados por SHOW GRANTS. Esto 
+        borra registros para la cuenta de todas las tablas<br>
+        de permisos excepto la tabla user , y revoca cualquier permiso global 
+        listado en la tabla user . Consulte Secci&oacute;n 13.5.1.3,<br>
+        &#8220;Sintaxis de GRANT y REVOKE&#8221;.<br>
+        3. Borre la cuenta usando DROP USER para borrar el registro de la tabla 
+        user .<br>
+        DROP USER no cierra autom&aacute;ticamente ninguna sesi&oacute;n de usuario. 
+        En lugar de ello, en el evento que un usuario con una sesi&oacute;n<br>
+        abierta se elimina, el comando no tiene efecto hasta que se cierra la 
+        sesi&oacute;n de usuario. Una vez se ha cerrado, el usuario se borra, 
+        y<br>
+        el pr&oacute;ximo usuario de logueo del usuario fallar&aacute;. Esto es 
+        por dise&ntilde;o.<br>
+        <h3>Sintaxis de GRANT y REVOKE</h3><br>
+        GRANT priv_type [(column_list)] [, priv_type [(column_list)]] ...<br>
+        ON [object_type] {tbl_name | * | *.* | db_name.*}<br>
+        TO user [IDENTIFIED BY [PASSWORD] 'password']<br>
+        [, user [IDENTIFIED BY [PASSWORD] 'password']] ...<br>
+        [REQUIRE<br>
+        NONE |<br>
+        [{SSL| X509}]<br>
+        [CIPHER 'cipher' [AND]]<br>
+        [ISSUER 'issuer' [AND]]<br>
+        [SUBJECT 'subject']]<br>
+        [WITH with_option [with_option] ...]<br>
+        object_type =<br>
+        TABLE<br>
+        | FUNCTION<br>
+        | PROCEDURE<br>
+        with_option =<br>
+        GRANT OPTION<br>
+        | MAX_QUERIES_PER_HOUR count<br>
+        | MAX_UPDATES_PER_HOUR count<br>
+        | MAX_CONNECTIONS_PER_HOUR count<br>
+        | MAX_USER_CONNECTIONS count<br>
+        REVOKE priv_type [(column_list)] [, priv_type [(column_list)]] ...<br>
+        ON [object_type] {tbl_name | * | *.* | db_name.*}<br>
+        FROM user [, user] ...<br>
+        REVOKE ALL PRIVILEGES, GRANT OPTION FROM user [, user] ...<br>
+        Los comandos GRANT y REVOKE permiten a los adminitradores de sistemas 
+        crear cuentas de usuario MySQL y darles permisos y<br>
+        quitarlos de las cuentas.<br>
+        La informaci&oacute;n de cuenta de MySQL se almacena en las tablas de 
+        la base de datos mysql . Esta base de datos y el sistema de control<br>
+        de acceso se discuten extensivamente en Cap&iacute;tulo 5, Administraci&oacute;n 
+        de bases de datos, que puede consultar para m&aacute;s detalles.<br>
+        Si las tablas de permisos tienen registros de permisos que contienen nombres 
+        de tablas o bases de datos con may&uacute;sculas y min&uacute;sculas<br>
+        y la variable de sistema lower_case_table_names est&aacute; activa, REVOKE 
+        no puede usarse para quitar los permisos. Es necesario<br>
+        manipular las tablas de permisos directamente. (GRANT no crear&aacute; 
+        estos registros cuando est&aacute; activo lower_<br>
+        case_table_names , pero tales registros pueden haberse creado pr&eacute;viamente 
+        a activar la variable.)<br>
+        Los permisos pueden darse en varios niveles:<br>
+        &#8226; Nivel global<br>
+        Los permisos globales se aplican a todas las bases de datos de un servidor 
+        dado. Estos permisos se almacenan en la tabla<br>
+        mysql.user. GRANT ALL ON *.* y REVOKE ALL ON *.* otorgan y quitan s&oacute;lo 
+        permisos globales.<br>
+        &#8226; Nivel de base de datos<br>
+        Los permisos de base de datos se aplican a todos los objetos en una base 
+        de datos dada. Estos permisos se almacenan en las tablas<br>
+        mysql.db y mysql.host . GRANT ALL ON db_name.* y REVOKE ALL ON db_name.* 
+        otorgan y quitan s&oacute;lo<br>
+        permisos de bases de datos.<br>
+        &#8226; Nivel de tabla<br>
+        Los permisos de tabla se aplican a todas las columnas en una tabla dada. 
+        Estos permisos se almacenan en la tabla<br>
+        mysql.tables_priv . GRANT ALL ON db_name.tbl_name y REVOKE ALL ON db_name.tbl_name 
+        otorgan<br>
+        y quian permisos s&oacute;lo de tabla.<br>
+        &#8226; Nivel de columna<br>
+        Los permisos de columna se aplican a columnas en una tabla dada. Estos 
+        permisos se almacenan en la tabla<br>
+        mysql.columns_priv . Usando REVOKE, debe especificar las mismas columnas 
+        que se otorgaron los permisos.<br>
+        &#8226; Nivel de rutina<br>
+        Los permisos CREATE ROUTINE, ALTER ROUTINE, EXECUTE, y GRANT se aplican 
+        a rutinas almacenadas. Pueden darse a<br>
+        niveles global y de base de datos. Adem&aacute;s, excepto para CREATE 
+        ROUTINE, estos permisos pueden darse en nivel de rutinas<br>
+        para rutinas individuales y se almacenan en la tabla mysql.procs_priv 
+        .<br>
+        La cl&aacute;usula object_type se a&ntilde;adi&oacute; en MySQL 5.0.6. 
+        Debe especificarse como TABLE, FUNCTION, o PROCEDURE cuando el<br>
+        siguiente objeto es una tabla, una funci&oacute;n almacenada, o un procedimiento 
+        almacenado. Para usar esta cl&aacute;usula cuando actualice de<br>
+        una versi&oacute;n anterior de MySQL a la 5.0.6, debe actualizar las tablas 
+        de permisos. Consulte Secci&oacute;n 2.10.2, &#8220;Aumentar la versi&oacute;n 
+        de<br>
+        las tablas de privilegios&#8221;.<br>
+        Para usar GRANT o REVOKE, debe tener el permiso GRANT OPTION , y debe 
+        tener los permisos que est&aacute; dando o quitando.<br>
+        Para hacer f&aacute;cil de quitar todos los permisos, MySQL 5.0 tiene 
+        la siguiente sintaxis, que borra todos los permisos globales, de nivel<br>
+        de base de datos y de nivel de tabla para los usuarios nombrados:<br>
+        REVOKE ALL PRIVILEGES, GRANT OPTION FROM user [, user] ...<br>
+        Para usar esta sintaxis REVOKE , debe tener el permiso CREATE USER global 
+        o el permiso UPDATE para la base de datos mysql<br>
+        .<br>
+        Para los comandos GRANT y REVOKE , priv_type pueden especificarse como 
+        cualquiera de los siguientes:<br>
+        Permiso Significado<br>
+        ALL [PRIVILEGES] Da todos los permisos simples excepto GRANT OPTION<br>
+        ALTER Permite el uso de ALTER TABLE<br>
+        ALTER ROUTINE Modifica o borra rutinas almacenadas<br>
+        CREATE Permite el uso de CREATE TABLE<br>
+        CREATE ROUTINE Crea rutinas almacenadas<br>
+        CREATE TEMPORARY TABLES Permite el uso de CREATE TEMPORARY TABLE<br>
+        CREATE USER Permite el uso de CREATE USER, DROP USER, RENAME USER, y REVOKE 
+        ALL<br>
+        PRIVILEGES.<br>
+        CREATE VIEW Permite el uso de CREATE VIEW<br>
+        DELETE Permite el uso de DELETE<br>
+        DROP Permite el uso de DROP TABLE<br>
+        EXECUTE Permite al usuario ejecutar rutinas almacenadas<br>
+        FILE Permite el uso de SELECT ... INTO OUTFILE y LOAD DATA INFILE<br>
+        INDEX Permite el uso de CREATE INDEX y DROP INDEX<br>
+        INSERT Permite el uso de INSERT<br>
+        LOCK TABLES Permite el uso de LOCK TABLES en tablas para las que tenga 
+        el permiso SELECT<br>
+        PROCESS Permite el uso de SHOW FULL PROCESSLIST<br>
+        REFERENCES No implementado<br>
+        RELOAD Permite el uso de FLUSH<br>
+        REPLICATION CLIENT Permite al usuario preguntar d&oacute;nde est&aacute;n 
+        los servidores maestro o esclavo<br>
+        REPLICATION SLAVE Necesario para los esclavos de replicaci&oacute;n (para 
+        leer eventos del log binario desde el maestro)<br>
+        SELECT Permite el uso de SELECT<br>
+        SHOW DATABASES SHOW DATABASES muestra todas las bases de datos<br>
+        SHOW VIEW Permite el uso de SHOW CREATE VIEW<br>
+        SHUTDOWN Permite el uso de mysqladmin shutdown<br>
+        SUPER Permite el uso de comandos CHANGE MASTER, KILL, PURGE MASTER LOGS, 
+        and<br>
+        SET GLOBAL , el comando mysqladmin debug le permite conectar (una vez) 
+        incluso<br>
+        si se llega a max_connections<br>
+        UPDATE Permite el uso de UPDATE<br>
+        USAGE Sin&oacute;nimo de &#8220;no privileges&#8221;<br>
+        GRANT OPTION Permite dar permisos<br>
+        El permiso EXECUTE no es operacional hasta MySQL 5.0.3. CREATE VIEW y 
+        SHOW VIEW se a&ntilde;adieron en MySQL 5.0.1.<br>
+        CREATE USER, CREATE ROUTINE, y ALTER ROUTINE se a&ntilde;adieron en MySQL 
+        5.0.3.<br>
+        El permiso REFERENCES actualmente no se usa.<br>
+        USAGE puede especificarse cuando quiere crear un usuario sin permisos.<br>
+        Use SHOW GRANTS para determinar qu&eacute; permisos tiene la cuenta. Consulte 
+        Secci&oacute;n 13.5.4.10, &#8220;Sintaxis de SHOW GRANTS&#8221;.<br>
+        Puede asignar permisos globales usando sintaxis ON *.* o permisos a nivel 
+        de base de datos usando la sintaxis ON db_name.*.<br>
+        Si especifica ON * y tiene seleccionada una base de datos por defecto, 
+        los permisos se dan en esa base de datos. (Atenci&oacute;n: Si especifica<br>
+        ON * y no ha seleccionado una base de datos por defecto, los permisos 
+        dados son globales.)<br>
+        Los permisos FILE, PROCESS, RELOAD, REPLICATION CLIENT, REPLICATION SLAVE, 
+        SHOW DATABASES, SHUTDOWN,<br>
+        y SUPER son permisos administrativos que s&oacute;lo pueden darse globalmente 
+        (usando sintaxis ON *.* ).<br>
+        Otros permisos pueden darse globalmente o a niveles m&aacute;s espec&iacute;ficos.<br>
+        Los &uacute;nicos valores priv_type que puede especificar para una tabla 
+        son SELECT, INSERT, UPDATE, DELETE, CREATE,<br>
+        DROP, GRANT OPTION, INDEX, y ALTER.<br>
+        Los &uacute;nicos valores priv_type que puede especificar para una columna 
+        (cuando usa la cl&aacute;usula column_list ) son SELECT,<br>
+        INSERT, y UPDATE.<br>
+        Los &uacute;nicos valores priv_type que puede especificar a nivel de rutina 
+        son ALTER ROUTINE, EXECUTE, y GRANT OPTION.<br>
+        CREATE ROUTINE no es un permiso de nivel de rutina porque debe tener este 
+        permiso para ser capaz de crear una rutina en primer<br>
+        lugar.<br>
+        Para los niveles global, base de datos, tabla y rutina, GRANT ALL asigna 
+        s&oacute;lo los permisos que existen en el nivel que est&aacute; otorg&aacute;ndolos.<br>
+        Por ejemplo, si usa GRANT ALL ON db_name.*, este es un comando de nivel 
+        de base de datos, as&iacute; que ninguno de<br>
+        los permisos &uacute;nicamente globales tales como FILE se otorgan.<br>
+        MySQL le permite dar permisos incluso en objetos de bases de datos que 
+        no existen. En tales casos, los permisos a dar deben incluir<br>
+        el permiso CREATE . Este es el comportamiento dise&ntilde;ado, y se pretende 
+        permitir al administrador de la base de datos perparar<br>
+        cuentas de usuario y permisos para objetos de base de datos que se crear&aacute;n 
+        posteriormente.<br>
+        MySQL no elimina autom&aacute;ticamente nig&uacute;n permiso si borra 
+        una tabla o base de datos . Si borra un rutina, se quita cualquier permiso<br>
+        dado a nivel de rutina para la misma.<br>
+        Nota: los car&aacute;cters comod&iacute;n '_' y '%' se permiten al especificar 
+        nombres de base de datos en comandos GRANT que otorgan permisos<br>
+        a nivel global o de base de datos. Esto significa, por ejemplo, que si 
+        quiere usar un car&aacute;cter '_' como parte de un nombre de base<br>
+        de datos, debe especificarlo como '\_' en el comando GRANT , para evitar 
+        que el usuario sea capaz de acceder a bases de datos<br>
+        adicionales que coincidan con el patr&oacute;n de los comodines, por ejemplo 
+        GRANT ... ON `foo\_bar`.* TO ....<br>
+        Para acomodar los permisos a los usuarios de equipos arbitr&aacute;rios, 
+        MySQL soporta especificar el valor user con la forma<br>
+        user_name@host_name. Si un valor user_name o host_name es legal como identificador 
+        sin poner entre comillas, no necesita<br>
+        hacerlo. Sin embargo, las comillas son necesarias para especificar una 
+        cadena user_name conteniendo caracteres especiales<br>
+        (tales como '-'), o una cadena host_name conteniendo caracteres especiales 
+        o comod&iacute;n (tales como '%'); por ejemplo, 'testuser'@'<br>
+        test-hostname'. Entrecomille el nombre de usuario y de equipo separadamente.<br>
+        Puede especificar caracteres comod&iacute;n en el nombre de equipo. Por 
+        ejemplo, user_name@'%.loc.gov' se aplica a<br>
+        user_name para cualquier equipo en el dominio loc.gov , y user_name@'144.155.166.%' 
+        se aplica a user_name para<br>
+        cualquier equipo en la clase subred clase C 144.155.166 .<br>
+        La forma simple user_name es sin&oacute;nimo de user_name@'%'.<br>
+        MySQL no soporta comodines en el nombre de usuario. Los usuarios an&oacute;nimos 
+        se definien insertando entradas con User='' en la<br>
+        tabla mysql.user o creando un usuario con un nombre vac&iacute;o con el 
+        comando GRANT :<br>
+        mysql&gt; GRANT ALL ON test.* TO ''@'localhost' ...<br>
+        Al especificar valores delimitados, use comillas simples para delimitar 
+        los nombres de bases de datos, tabla, columna y de rutina<br>
+        ('`'). Para los nombres de equipo, nombres de usuario, y contrase&ntilde;as 
+        como cadenas, use ap&oacute;strofes (''').<br>
+        Advertencia: Si permite conectar con el servidor a usuarios an&oacute;nimos, 
+        debe dar permisos a todos los usuarios locales como<br>
+        user_name@localhost. De otro modo, la cuenta de usuario an&oacute;nimo 
+        para localhost en la tabla mysql.user (creada durante<br>
+        la instalaci&oacute;n de MySQL) se usa cuando los usuarioa con nombre 
+        intentan loguear con el servidor MySQL desde la m&aacute;quina<br>
+        local.<br>
+        Puede determinar si esto se aplica a su sistema ejecutando la siguiente 
+        consulta, que lista cualquier usuario an&oacute;nimo:<br>
+        mysql&gt; SELECT Host, User FROM mysql.user WHERE User='';<br>
+        Si quiere borrar la cuenta an&oacute;nima local para evitar el problema 
+        descrito, use estos comandos:<br>
+        mysql&gt; DELETE FROM mysql.user WHERE Host='localhost' AND User='';<br>
+        mysql&gt; FLUSH PRIVILEGES;<br>
+        GRANT soporta nombres de equipo de hasta 60 caracteres. Los nombres de 
+        bases de datos, tablas, columnas y rutinas pueden tener<br>
+        hasta 64 caracteres. Los nombres de usuario pueden tener hasta 16 caracteres. 
+        Los nombres de usuario pueden tener hasta 16 caracteres.<br>
+        Estos l&iacute;mites est&aacute;n harcodeados en el software MySQL y no 
+        pueden cambiarse alterando las tablas de permisos .<br>
+        Los permisos para una tabla o columna se forman de forma aditiva como 
+        una OR l&oacute;gica de los permisos en cada uno de los cuatro<br>
+        niveles de permisos. Por ejemplo, si la tabla mysql.user especifica que 
+        un usuario tiene un permiso SELECT global, el permiso<br>
+        no puede denegarse mediante una entrada en el nivel de base de datos, 
+        tabla o columna.<br>
+        Los permisos de una columna pueden calcularse como sigue:<br>
+        global privileges<br>
+        OR (database privileges AND host privileges)<br>
+        OR table privileges<br>
+        OR column privileges<br>
+        En la mayor&iacute;a de casos, puede dar derechoa a un usuario en s&oacute;lo 
+        uno de los niveles de permisos, as&iacute; que la vida normalmente no 
+        es<br>
+        tan complicada.<br>
+        Si otorga permisos para una combinaci&oacute;n usuario/equipo que no existe 
+        en la tabla mysql.user se a&ntilde;ade una entrada que permite<br>
+        all&iacute; hasta que se borra con un comando DELETE. En otras palabras, 
+        GRANT puede crear entradas user pero REVOKE no los borra;<br>
+        debe hacerlo expl&iacute;citamente usando DROP USER o DELETE.<br>
+        Si se crea un nuevo usuario o si tiene permisos globales para otorgar 
+        permisos, la contrase&ntilde;a de usuario se cambia con la contrase&ntilde;a<br>
+        especificada por la cl&aacute;usula IDENTIFIED BY , si se da una. Si el 
+        usuario ya tiene una contrase&ntilde;a, esta se reemplaza por la nueva.<br>
+        Atenci&oacute;n: Si crea un nuevo usuario pero no especifica una cl&aacute;usula 
+        IDENTIFIED BY, el usuario no tiene contrase&ntilde;a. Esto es<br>
+        muy poco seguro. Desde MySQL 5.0.2, puede activar el modo SQL NO_AUTO_CREATE_USER 
+        para evitar que GRANT cree un<br>
+        nuevo usuario si lo hiciese de otro modo, a no ser que IDENTIFIED BY se 
+        de para proporcionar la nueva contrase&ntilde;a de usuario.<br>
+        Las contrase&ntilde;as pueden ponerse con el comando SET PASSWORD . Consulte 
+        Secci&oacute;n 13.5.1.5, &#8220;Sintaxis de SET PASSWORD&#8221;.<br>
+        En la cl&aacute;usula IDENTIFIED BY , la contrase&ntilde;a debe darse 
+        como el valor de contrase&ntilde;a literal. No es necesario usar la funci&oacute;n<br>
+        PASSWORD() como lo es para el comando SET PASSWORD . Por ejemplo:<br>
+        GRANT ... IDENTIFIED BY 'mypass';<br>
+        Si no quiere enviar la contrase&ntilde;a en texto plano y conoce el valor 
+        haseado que PASSWORD() retornar&iacute;a para la contrase&ntilde;a, puede<br>
+        especificar el valor hasheado precedido por la palabra clave PASSWORD:<br>
+        GRANT ...<br>
+        IDENTIFIED BY PASSWORD '*6C8989366EAF75BB670AD8EA7A7FC1176A95CEF4';<br>
+        En un programa C , puede obtener el valor haseado usando la funci&oacute;n 
+        make_scrambled_password() de la API de C.<br>
+        Si da permisos para una base de datos, se crea una entrada en la tabla 
+        mysql.db si es necesario. Si todos los permisos para la base<br>
+        de datos se eliminan con REVOKE, esta entrada se borra.<br>
+        Si un usuario no tiene permisos para una tabla, el nombre de tabla no 
+        se muestra cuando el usuario pide una lista de talbas (por<br>
+        ejemplo, con el comando SHOW TABLES ).<br>
+        El permiso SHOW DATABASES le permite a la cuenta ver nombres de bases 
+        de datos realizando el comando SHOW DATABASE .<br>
+        Las cuentas que no tienen este permiso s&oacute;lo ven las bases de datos 
+        para las que tienen alg&uacute;n permiso, y no pueden usar el comando<br>
+        para nada si el servidor se arranca con la opci&oacute;n --skip-show-database.<br>
+        La cl&aacute;usula WITH GRANT OPTION le da al usuario la habilidad para 
+        dar a otros usuarios cualquier permiso que tenga el usuario<br>
+        en el nivel de permiso especificado. Debe tener cuidado de a qui&eacute;n 
+        da el permiso GRANT OPTION, ya que dos usuarios con permisos<br>
+        distintos pueden ser capaces de juntar permisos!<br>
+        No puede dar a otro usuario un permiso que no tenga usted mismo; el permiso 
+        GRANT OPTION le permite asignar s&oacute;lo los permisos<br>
+        que tenga usted.<br>
+        Tenga en cuenta que cuando le da a un usuario el permiso GRANT OPTION 
+        a un nivel de permisos particular, cualquier permiso<br>
+        que tenga el usuario (o que se de en el futuro!) a este nivel tambi&eacute;n 
+        son otorgables por este usuario. Suponga que le da a un usuario<br>
+        el permisos INSERT en una base de datos. Si otorga el permiso SELECT en 
+        la base de datos y especifica WITH GRANT OPTION,<br>
+        el usuario puede quitar no s&oacute;lo el permiso SELECT sino tambi&eacute;n 
+        INSERT. Si luego otorga el permiso UPDATE al usuario en la base<br>
+        de datos, el usuario puede quitar INSERT, SELECT, y UPDATE.<br>
+        No debe otorgar permisos ALTER a un usuario normal. Si lo hace, el usuario 
+        puede intentar enga&ntilde;ar al sistema de permisos renombrando<br>
+        tablas!<br>
+        Las opciones MAX_QUERIES_PER_HOUR count, MAX_UPDATES_PER_HOUR count, y<br>
+        MAX_CONNECTIONS_PER_HOUR count limitan el n&uacute;mero de consultas, 
+        actualizaciones, y logueos que puede realizar un usuario<br>
+        durante cualquier per&iacute;do de una hora. Si count es 0 (por defecto), 
+        esto significa que no hay limitaci&oacute;n para ese usuario.<br>
+        La MAX_USER_CONNECTIONS count opci&oacute;n, implementada en MySQL 5.0.3, 
+        limita el m&aacute;ximo n&uacute;mero de conexiones simult&aacute;neas<br>
+        que la cuenta puede hacer. Si count es 0 (por defecto), la max_user_connections 
+        variable de sistema determina el<br>
+        n&uacute;mero de conexiones simult&aacute;neas para la cuenta.<br>
+        Nota: para especificar cualquiera de estas opciones de limitaci&oacute;n 
+        de recursos para un usuario existente sin afectar a los permisos<br>
+        existentes, use GRANT USAGE ON *.* ... WITH MAX_....<br>
+        MySQL puede chequear atributos certificados X509 adem&aacute;s que la 
+        autenticaci&oacute;n usual que se basa en el nombre de usuario y contrase&ntilde;a.<br>
+        Para especificar opciones relacionadas con SSL para la cuenta MySQL, use 
+        la cl&aacute;usula REQUIRE del comando GRANT .<br>
+        (Para informaci&oacute;n de transfondo sobre el uso de SSL con MySQL, 
+        consulte Secci&oacute;n 5.7.7, &#8220;Usar conexiones seguras&#8221;.)<br>
+        Hay distintas posibilidades para limitar tipos de conexi&oacute;n para 
+        una cuenta:<br>
+        &#8226; Si una cuenta no tiene requerimientos de SSL o X509, se permiten 
+        conexiones sin encriptar si la contrase&ntilde;a y nombre de usuario<br>
+        son v&aacute;lidos. Sin embargo, las conexiones no encriptadas pueden 
+        usarse en las opciones de cliente, si el cliente tiene los ficheros<br>
+        clave y de certificado apropiados.<br>
+        &#8226; La opci&oacute;n REQUIRE SSL le dice al servidor que permita s&oacute;lo 
+        conexiones SSL encriptadas para la cuenta. Tenga en cuenta que<br>
+        esta opci&oacute;n puede omitirse si hay algunos registros de control 
+        de acceso que permitan conexiones no SSL.<br>
+        mysql&gt; GRANT ALL PRIVILEGES ON test.* TO 'root'@'localhost'<br>
+        -&gt; IDENTIFIED BY 'goodsecret' REQUIRE SSL;<br>
+        &#8226; REQUIRE X509 significa que el cliente debe tener un certificado 
+        v&aacute;lido pero que el certificador exacto y el asunto no importan.<br>
+        El &uacute;nico requerimiento que debe ser posible de verificar es la 
+        firma con uno de las AC certificadas.<br>
+        mysql&gt; GRANT ALL PRIVILEGES ON test.* TO 'root'@'localhost'<br>
+        -&gt; IDENTIFIED BY 'goodsecret' REQUIRE X509;<br>
+        &#8226; REQUIRE ISSUER 'issuer' crea una restricci&oacute;n de intentos 
+        de conexi&oacute;n en que el cliente debe presentar un certificado<br>
+        X509 v&aacute;lido presentado por la AC issuer. Si el cliente presenta 
+        un certificado v&aacute;lido pero de otra AC, el servidor reh&uacute;sa 
+        la<br>
+        conexi&oacute;n. El uso de certificados X509 siempre implica encripci&oacute;n, 
+        por lo que la opci&oacute;n SSL no es necesaria.<br>
+        mysql&gt; GRANT ALL PRIVILEGES ON test.* TO 'root'@'localhost'<br>
+        -&gt; IDENTIFIED BY 'goodsecret'<br>
+        -&gt; REQUIRE ISSUER '/C=FI/ST=Some-State/L=Helsinki/<br>
+        O=MySQL Finland AB/CN=Tonu Samuel/Email=tonu@example.com';<br>
+        Tenga en cuenta que el valor ISSUER debe entrarse como una cadena &uacute;nica.<br>
+        &#8226; REQUIRE SUBJECT 'subject' crea la restricci&oacute;n en los intentos 
+        de conexi&oacute;n de que el cliente debe presentar un certifi-<br>
+        cado X509 v&aacute;lido con el asunto subject. Si el cliente presenta 
+        un certificado v&aacute;lido pero con un asunto distinto, el servidor<br>
+        reh&uacute;sa la conexi&oacute;n.<br>
+        mysql&gt; GRANT ALL PRIVILEGES ON test.* TO 'root'@'localhost'<br>
+        -&gt; IDENTIFIED BY 'goodsecret'<br>
+        -&gt; REQUIRE SUBJECT '/C=EE/ST=Some-State/L=Tallinn/<br>
+        O=MySQL demo client certificate/<br>
+        CN=Tonu Samuel/Email=tonu@example.com';<br>
+        Tenga en cuenta que el valor SUBJECT debe entrarse como una &uacute;nica 
+        cadena.<br>
+        &#8226; REQUIRE CIPHER 'cipher' se necesita para asegurar que se usan 
+        cifradores suficientemente fuertes y longitudes de claves<br>
+        acordes. SSL por s&iacute; mismo puede ser d&eacute;bil si se usan algoritmos 
+        antiguos con claves de encriptaci&oacute;n cortas. Con esta opci&oacute;n,<br>
+        puede especificar el m&eacute;todo de cifrado exacto para permitir una 
+        conexi&oacute;n.<br>
+        mysql&gt; GRANT ALL PRIVILEGES ON test.* TO 'root'@'localhost'<br>
+        -&gt; IDENTIFIED BY 'goodsecret'<br>
+        -&gt; REQUIRE CIPHER 'EDH-RSA-DES-CBC3-SHA';<br>
+        Las opciones SUBJECT, ISSUER, y CIPHER pueden combinarse en la cl&aacute;usula 
+        REQUIRE as&iacute;:<br>
+        mysql&gt; GRANT ALL PRIVILEGES ON test.* TO 'root'@'localhost'<br>
+        -&gt; IDENTIFIED BY 'goodsecret'<br>
+        -&gt; REQUIRE SUBJECT '/C=EE/ST=Some-State/L=Tallinn/<br>
+        O=MySQL demo client certificate/<br>
+        CN=Tonu Samuel/Email=tonu@example.com'<br>
+        -&gt; AND ISSUER '/C=FI/ST=Some-State/L=Helsinki/<br>
+        O=MySQL Finland AB/CN=Tonu Samuel/Email=tonu@example.com'<br>
+        -&gt; AND CIPHER 'EDH-RSA-DES-CBC3-SHA';<br>
+        Tenga en cuenta que los valores SUBJECT y ISSUER deben entrarse como una 
+        &uacute;nica cadena.<br>
+        En MySQL 5.0, la palabra clave AND es opcional entre las opciones REQUIRE 
+        .<br>
+        El orden de las opciones no importa, pero no puede especificarse ninguna 
+        opci&oacute;n dos veces.<br>
+        Cuando mysqld arranca, todos los permisos se leen en memoria.</p>
+      <p>&#8226; En SQL est&aacute;ndar, cuando borra una tabla, todos los permisos 
+        para la tabla se eliminan. Con SQL est&aacute;ndar, cuando quita un permiso,<br>
+        todos los permisos otorgados basados en ese permiso tambi&eacute;n se 
+        eliminaban. En MySQL, los permisos s&oacute;lo pueden borrarse<br>
+        con comandos REVOKE expl&iacute;citos o manipulando las tablas de permisos 
+        de MySQL.<br>
+        &#8226; En MySQL, es posible tener el permiso INSERT s&oacute;lo para 
+        algunas de las columnas en la tabla. En este caso, todav&iacute;a puede 
+        ejecutar<br>
+        comandos INSERT en la tabla mientras omita esas columnas para las que 
+        no tiene el permiso INSERT . Las columnas<br>
+        omitidas obtienen su valor por defecto impl&iacute;cito si no est&aacute; 
+        activado el modo SQL estricto. En modo estricto, el comando se<br>
+        reh&uacute;sa si algunas de las columnas omitidas no tienen valor por 
+        defecto. Secci&oacute;n 5.3.2, &#8220;El modo SQL del servidor&#8221; 
+        discute<br>
+        acerca del modo estricto.<br>
+        Las columnas para las que no tiene el permiso INSERT se ponen a su valor 
+        por defecto. SQL est&aacute;ndar requiere que tenga el<br>
+        permiso INSERT en todas las columnas.<br>
+        En MySQL, si tiene el permiso INSERT s&oacute;lo en alguna de las columnas 
+        de la tabla, puede ejecutar comandos INSERT &#8212;<br>
+        mientras omita las columnas para las que no tiene el permiso de su comando 
+        INSERT; tales columnas obtendr&aacute;n su valor por<br>
+        defecto. En modo estricto (cuando sql_mode=&quot;traditional&quot;), si 
+        alguna de las columnas omitidas no tiene valor por defecto, el<br>
+        comando INSERT se reh&uacute;sa.<br>
+        <h3>Sintaxis de RENAME USER</h3><br>
+        RENAME USER old_user TO new_user<br>
+        [, old_user TO new_user] ...<br>
+        El comando RENAME USER renombra cuentas de usuario MySQL existentes. Para 
+        usarlo, debe tener el permiso CREATE USER<br>
+        global o el permiso UPDATE para la base de datos mysql . Ocurre un error 
+        si cualquier de las antiguas cuentas no existe o cualquiera<br>
+        de las nuevas ya existe. Los valores old_user y new_user se dan igual 
+        que para el comando GRANT .<br>
+        El comando RENAME USER se a&ntilde;adi&oacute; en MySQL 5.0.2.<br>
+        <h3>Sintaxis de SET PASSWORD</h3><br>
+        SET PASSWORD = PASSWORD('some password')<br>
+        SET PASSWORD FOR user = PASSWORD('some password')<br>
+        El comando SET PASSWORD asigna una contrase&ntilde;a a una cuenta de usuario 
+        MySQL existente.<br>
+        La primera sintaxis asigna la contrase&ntilde;a para el usuario actual. 
+        Cualquier cliente que se conecte al servidor usando una cuenta no<br>
+        an&oacute;nima puede cambiar la contrase&ntilde;a para la misma.<br>
+        La segunda sintaxis asigna una contrase&ntilde;a para una cuenta espec&iacute;fica 
+        en el servidor actual. S&oacute;lo los clientes con el permiso UPDATE<br>
+        para la base de datos mysql pueden hacerlo. El valor user debe darse en 
+        formato user_name@host_name donde<br>
+        user_name y host_name son exactamente los mismos que cuando se listan 
+        en las columnas User y Host de la tabla<br>
+        mysql.user . Por ejemplo, si tiene una entrada en las columnas User y 
+        Host con los valores 'bob' y '%.loc.gov', escribir&iacute;a<br>
+        el comando as&iacute;:<br>
+        mysql&gt; SET PASSWORD FOR 'bob'@'%.loc.gov' = PASSWORD('newpass');<br>
+        Esto es equivalente al siguiente comando:<br>
+        mysql&gt; UPDATE mysql.user SET Password=PASSWORD('newpass')<br>
+        -&gt; WHERE User='bob' AND Host='%.loc.gov';<br>
+        mysql&gt; FLUSH PRIVILEGES;</p>
+      <p> </p>
+        </td>
+    <td>&nbsp;</td>
+    <td><a href="http://www.euskalnet.net/juanarana/oraclezip/Ejer3.rar"><img src="../../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td>
+<div align="right"><a href="http://www.euskalnet.net/juanarana/index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a>
+      </div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

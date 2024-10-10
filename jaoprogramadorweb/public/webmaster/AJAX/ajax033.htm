@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>C&oacute;mo hacer una p&aacute;gina AJAX</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta name="keywords" content="Primera página AJAX, Como hacer una pagina AJAX, Manual AJAX, tutorial AJAX, Ejemplos AJAX, ejercicios AJAX">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2>Funciones para eventos</h2></td>
+  </tr>
+  <tr> 
+    <td height="394" colspan="3"> <p>Una de las utilidades m&aacute;s interesantes 
+        de jQuery est&aacute; relacionada con el evento onload de la p&aacute;gina. 
+        Las aplicaciones web m&aacute;s complejas suelen utilizar un c&oacute;digo 
+        similar al siguiente para iniciar la aplicaci&oacute;n:<br>
+        window.onload = function() {<br>
+        ...<br>
+        };<br>
+        Hasta que no se carga la p&aacute;gina, el navegador no construye el &aacute;rbol 
+        DOM, lo que significa que no se pueden utilizar funciones que seleccionen 
+        elementos de la p&aacute;gina, ni se pueden a&ntilde;adir o eliminar elementos. 
+        El problema de window.onload es que el navegador espera a que la p&aacute;gina 
+        se cargue completamente, incluyendo todas las im&aacute;genes y archivos 
+        externos que se hayan enlazado.<br>
+        jQuery propone el siguiente c&oacute;digo para ejecutar las instrucciones 
+        una vez que se ha cargado la p&aacute;gina:<br>
+        $(document).ready(function() {<br>
+        ...<br>
+        });<br>
+        La gran ventaja del m&eacute;todo propuesto por jQuery es que la aplicaci&oacute;n 
+        no espera a que se carguen todos los elementos de la p&aacute;gina, sino 
+        que s&oacute;lo espera a que se haya descargado el contenido HTML de la 
+        p&aacute;gina, con lo que el &aacute;rbol DOM ya est&aacute; disponible 
+        para ser manipulado. De esta forma, las aplicaciones JavaScript desarrolladas 
+        con jQuery pueden iniciarse m&aacute;s r&aacute;pidamente que las aplicaciones 
+        JavaScript tradicionales.<br>
+        En realidad, ready() no es m&aacute;s que una de las muchas funciones 
+        que componen el m&oacute;dulo de los eventos. Todos los eventos comunes 
+        de JavaScript (click, mousemove, keypress, etc.) disponen de una funci&oacute;n 
+        con el mismo nombre que el evento. Si se utiliza la funci&oacute;n sin 
+        argumentos, se ejecuta el evento:<br>
+        // Ejecuta el evento 'onclick' en todos los p&aacute;rrafos de la p&aacute;gina<br>
+        $('p').click();<br>
+        // Ejecuta el evento 'mouseover' sobre un 'div' con id 'menu'<br>
+        $('div#menu').mouseover();<br>
+        No obstante, el uso m&aacute;s habitual de las funciones de cada evento 
+        es el de establecer la funci&oacute;n manejadora que se va a ejecutar 
+        cuando se produzca el evento:<br>
+        // Establece la funci&oacute;n manejadora del evento 'onclick'<br>
+        // a todos los p&aacute;rrafos de la p&aacute;gina<br>
+        $('p').click(function() {alert($(this).text());<br>
+        });<br>
+        // Establece la funci&oacute;n manejadora del evento 'onblur'<br>
+        // a los elementos de un formulario<br>
+        $('#elFormulario :input').blur(function() {<br>
+        valida($(this));<br>
+        });<br>
+        Entre las utilidades definidas por jQuery para los eventos se encuentra 
+        la funci&oacute;n toggle(), que permite ejecutar dos funciones de forma 
+        alterna cada vez que se pincha sobre un elemento:<br>
+        $(&quot;p&quot;).toggle(function(){<br>
+        alert(&quot;Me acabas de activar&quot;);<br>
+        },function(){<br>
+        alert(&quot;Me acabas de desactivar&quot;);<br>
+        });<br>
+        En el ejemplo anterior, la primera vez que se pincha sobre el elemento 
+        (y todas las veces impares), se ejecuta la primera funci&oacute;n y la 
+        segunda vez que se pincha el elemento (y todas las veces pares) se ejecuta 
+        la segunda funci&oacute;n.</p></td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

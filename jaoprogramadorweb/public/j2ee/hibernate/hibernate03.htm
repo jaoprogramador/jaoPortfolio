@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Requerimientos para relacionar objeto-tabla</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación en hibernate,Programas hibernate,Aplicaciones en hibernate,Ejercicios en hibernate, Ejemplos de hibernate,Tutoriales de hibernate,Manuales hibernate" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="hibernate, Manual hibernate, tutorial hibernate, Ejemplos hibernate, ejercicios hibernate">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> <strong>Requerimientos para relacionar objeto-tabla</strong></h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <p>Para hacer la relaci&oacute;n entre objetos 
+        y tablas se requiere:</p>
+      <p>a). Qui&eacute;n est&aacute; detr&aacute;s del modelo relacional:<br>
+        <br>
+        1. Qu&eacute; gestor de bases de datos est&aacute; detr&aacute;s<br>
+        2. A qu&eacute; base de datos me conecto<br>
+        3. C&oacute;mo me conecto<br>
+        4. Etc.<br>
+        <br>
+        b) . C&oacute;mo se emparejan propiedades y campos de tablas:<br>
+        <br>
+        1. Clave primaria:<br>
+        1. &iquest;Cu&aacute;l es la propiedad que se corresponde con la clave 
+        primaria de la tabla correspondiente?<br>
+        2. &iquest;Qu&eacute; m&eacute;todo deber&eacute; utilizar para generar 
+        un nuevo valor de la clave primaria?<br>
+        3. Etc.<br>
+        2. Otras propiedades:<br>
+        1. C&oacute;mo empareja una propiedad con un campo de una tabla de la 
+        base de datos<br>
+        1. &iquest;C&oacute;mo se llama la columna correspondiente?<br>
+        2. &iquest;Qu&eacute; tipo tiene?<br>
+        3. &iquest;Es obligatoria?<br>
+        4. Etc.<br>
+        <br>
+        c) . C&oacute;mo gestiona las relaciones entre tablas<br>
+        <br>
+        1. &iquest;Es una relaci&oacute;n &#8220;uno-a-uno&#8221;,<br>
+        2. &#8220;uno-a-muchos&#8221;,<br>
+        3. &#8220;muchos-a-muchos&#8221;?, etc. </p>
+      <p>Para responder a las dos grandes preguntas, se utilizan dos archivos 
+        distintos:<br>
+        1. El archivo de propiedades de Hibernate (Hibernate.properties) es el 
+        encargado de determinar los aspectos relacionados con el gestor de bases 
+        de datos y las conexiones con &eacute;l.<br>
+        2. Los archivos que que definen el emparejamiento (mapping) de propiedades 
+        con tablas y columnas (*.hbm.xml)</p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

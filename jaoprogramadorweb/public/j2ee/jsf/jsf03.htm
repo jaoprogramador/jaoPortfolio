@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>JavaServer Faces</title>
+<META http-equiv=Content-Language content=es>
+<META content="Manual JSP, ejemplos JSP, codigos JSP" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Manual JSP, ejemplos JSP, codigos JSP">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2> Implementaci&oacute;n de JSF</h2></td>
+  </tr>
+    
+  <tr> 
+    <td height="39" colspan="3"> <h3>ADF Faces</h3>
+      <p>Oracle ha realizado la implementaci&oacute;n de JSF a partir de directrices 
+        como el dise&ntilde;o de patrones e infraestructuras de aplicaciones en 
+        un framework al que ha denominado ADF (Application evelopment Framework). 
+        Una de las ventajas de ADF es que es una plataforma independiente que 
+        corre en cualquier servidor J2EE, proporcionando opciones para cada capa 
+        y desarrollando todas las fases del ciclo de vida sin obligarnos a usarlas 
+        todas.<br>
+        Por otra parte, ADF Faces es la implementaci&oacute;n que Oracle hace 
+        de JSF y se basa en el patr&oacute;n MVC. Nos centraremos en presentar 
+        la capa de la Vista que proporciona la interfaz de usuario de la aplicaci&oacute;n. 
+        Comprobaremos que la ventaja principal de ADF Faces es la gran cantidad 
+        de componentes que proporciona. La idea es no tener que escribir la funcionalidad 
+        de las Interfaces de Usuario (UI) cada vez que las necesitamos. As&iacute;, 
+        bastar&iacute;a con usar el componente adecuado, evitando de esta forma 
+        el desorden en el c&oacute;digo de los lenguajes de marcadores y abstray&eacute;ndonos 
+        del http.<br>
+        Escribir componentes JSF quiz&aacute;s no sea una tarea sencilla, pero 
+        usarlos es tan simple como una llamada a una etiqueta. &Eacute;sta es 
+        precisamente la fortaleza de ADF Faces. Imaginemos que existe una comunidad 
+        de personas que contribuyen a crear componentes y a&ntilde;adirles cualquier 
+        funcionalidad que sea posible. De esta forma, no tendr&iacute;amos que 
+        escribir m&aacute;s c&oacute;digo UI, simplemente usar&iacute;amos componentes 
+        ADF Faces.<br>
+        Los componentes ADF Faces tienen una arquitectura interesante que est&aacute; 
+        basada en una clara divisi&oacute;n de responsabilidades. De esta forma, 
+        el componente define su propio comportamiento o funcionalidad y el pintado 
+        que describe la presentaci&oacute;n. Por ejemplo, podemos tener un componente 
+        que define c&oacute;mo un usuario selecciona una<br>
+        &uacute;nica opci&oacute;n; y en el pintado, definir c&oacute;mo se hace 
+        por un bot&oacute;n de tipo radio o una lista desplegable.<br>
+        Asimismo, es posible agrupar distintas formas de pintado en un kit de 
+        pintado, lo que nos permite disponer de un kit para HTML y otro para WML 
+        (tel&eacute;fonos m&oacute;viles). De esta forma, la l&oacute;gica del 
+        componente queda separada e independiente del dispositivo en el que se 
+        muestra.<br>
+        ADF Faces incluye m&aacute;s de 100 componentes que nos proporcionan un 
+        gran potencial. Hay componentes del tipo selectores de color, listas de 
+        valores y calendarios que pueden utilizarse de formas distintas. Tambi&eacute;n 
+        proporciona componentes m&aacute;s complejos como tablas que permiten 
+        la ordenaci&oacute;n por columnas y la capacidad de mostrarlas u ocultarlas, 
+        o componentes de tipo &aacute;rbol que pueden mostrar datos de un modo 
+        jer&aacute;rquico.<br>
+        Por otro lado, no todos los componentes que proporciona ADF son gr&aacute;ficos, 
+        dispone de otros m&aacute;s orientados a realizar interacciones con el 
+        usuario, como el componente que permite la subida de ficheros. Tambi&eacute;n 
+        hay otro componente dise&ntilde;ado para establecer di&aacute;logos con 
+        usuarios y tener la capacidad de devolver el foco al punto donde se inici&oacute; 
+        el di&aacute;logo (algo no siempre sencillo de realizar).<br>
+        En la actualidad, todos estos componentes usan HTML y WML como lenguajes 
+        de marcadores, por lo que pueden usarse indistintamente en navegadores 
+        comunes, tel&eacute;fonos m&oacute;viles o PDA. Oracle est&aacute; modernizando 
+        el pintado de estos componentes a&ntilde;adiendo una combinaci&oacute;n 
+        de DHTML y JavaScript que proporcionar&aacute;n cada vez m&aacute;s experiencia 
+        en clientes ricos e incluyendo el pintado parcial de p&aacute;ginas. Este 
+        nuevo kit de pintado ser&aacute; m&aacute;s potente que cualquier implementaci&oacute;n 
+        Swing.<br>
+        Adem&aacute;s, y dado que un gran n&uacute;mero de f&aacute;bricas y almacenes 
+        utilizan dispositivos telnet, ADF proporciona un kit de pintado para este 
+        tipo de dispositivos.<br>
+        Como hemos podido ver, ADF Faces nos proporciona un interesante y completo 
+        conjunto de componentes para comenzar a desarrollar aplicando JSF.<br>
+        Adem&aacute;s de esta implementaci&oacute;n, existe una versi&oacute;n 
+        open source a partir de c&oacute;digo proporcionado por Oracle a Apache. 
+        El nombre inicial de este proyecto era ADF Faces, aunque ha pasado a denominarse 
+        Trinidad (seg&uacute;n ha determinado la comunidad de Apache MyFaces).El 
+        desarrollo de ADF Faces comenz&oacute; en 2001 y tuvo lugar fuera de la 
+        Apache Software Foundation.<br>
+        Los componentes actuales de Trinidad tienen licencia ASF y pueden usarse 
+        p&uacute;blicamente.</p>
+      </td>
+
+  </tr>
+  <tr> 
+    <td width="341"></td>
+    <td width="74">&nbsp;</td>
+    <td width="124"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+</body>
+</html>

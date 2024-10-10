@@ -1,0 +1,69 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>La protecci&oacute;n de su sitio web con una p&aacute;gina de acceso</title>
+<META http-equiv=Content-Language content=es>
+<META content="Manual JSP, ejemplos JSP, codigos JSP" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Manual JSP, ejemplos JSP, codigos JSP">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> La protecci&oacute;n de su sitio web con 
+        una p&aacute;gina de acceso</h2></td>
+  </tr>
+  <tr> 
+    <td colspan="3"> <p>Algunos sitios requieren que todos los usuarios registrarse 
+        con un nombre de usuario y contrase&ntilde;a, antes de poder visitar cualquier 
+        p&aacute;gina.</p>
+      <p>Esto puede hacerse a trav&eacute;s de sesiones JSP o servlets, y de hecho 
+        se trataba de una t&eacute;cnica com&uacute;n para un tiempo. Pero a partir 
+        de una nueva versi&oacute;n de las especificaciones de Servlets (2,2) 
+        de Sun, esta caracter&iacute;stica es ahora muy sencillo de implementar.</p>
+      <p>Ya no es necesario utilizar t&eacute;cnicas de JSP a proporcionar nombre 
+        de usuario / contrase&ntilde;a de protecci&oacute;n, pero todav&iacute;a 
+        es un requisito muy com&uacute;n de sitios web, por lo tanto una breve 
+        descripci&oacute;n se proporciona aqu&iacute;.</p>
+      <p>Para proteger mediante contrase&ntilde;a de su sitio, s&oacute;lo tiene 
+        que dise&ntilde;ar una p&aacute;gina de acceso. Esta p&aacute;gina puede 
+        ser tan simple o complicada que necesite que sea. Debe contener una etiqueta 
+        &lt;FORM&gt;, con el m&eacute;todo establecido para publicar y las actuaciones 
+        previstas a &quot;j_security_check&quot;.</p>
+      <p>&lt;FORM METHOD=POST ACTION=j_security_check&gt; </p>
+      <p>El j_security_check objetivo es proporcionada por el servidor de aplicaciones, 
+        y no deben ser codificadas.</p>
+      <p>El formulario debe contener dos campos &lt;INPUT&gt;, llamado j_username 
+        y j_password, respectivamente, para el nombre de usuario y contrase&ntilde;a. 
+        Normalmente, el campo nombre de usuario ser&aacute; un campo de texto, 
+        y el campo de la contrase&ntilde;a ser&aacute; un campo de contrase&ntilde;as.</p>
+      <p>Despu&eacute;s de esto, usted debe decirle a su servidor de aplicaciones 
+        para proteger con contrase&ntilde;a sus p&aacute;ginas mediante la p&aacute;gina 
+        de acceso que nos ha facilitado. Los detalles var&iacute;an de un servidor 
+        a otro, pero una buena aplicaci&oacute;n le proporcionar&aacute; los ganchos 
+        que se pueden utilizar, por ejemplo, para hacer coincidir los nombres 
+        de usuario y contrase&ntilde;as en contra de una base de datos. (Por ejemplo, 
+        en Blazix usted puede proporcionar una implementaci&oacute;n de la interfaz 
+        de desisoft.deploy.AuthCheck para comprobar los nombres de usuario y contrase&ntilde;as 
+        en contra de una base de datos u otras fuentes.) </p>
+      <p>&nbsp; </p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Ejercicios MySQL</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="MySQL, sql, pl/sql, programacion MySQL, ejercicios MySQL, ejemplos MySQL, select">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2>N U L L</h2></td>
+  </tr>
+  <tr> 
+    <td><h3>Trabajar con valores NULL</h3>
+      <p>&nbsp;</p>
+      <p>El valor NULL puede resultar un poco desconcertante hasta que se comienza 
+        a utilizar. Conceptualmente, NULL significa valor inexistente<br>
+        o desconocido, y es tratado de forma diferente a otros valores. Para verificar 
+        que un valor es NULL, no se pueden emplear<br>
+        operadores de comparaci&oacute;n aritm&eacute;tica como =, &lt;, o &lt;&gt;. 
+        Para comprobar esto, intente la siguiente consulta:<br>
+        mysql&gt; SELECT 1 = NULL, 1 &lt;&gt; NULL, 1 &lt; NULL, 1 &gt; NULL;<br>
+        +----------+-----------+----------+----------+<br>
+        | 1 = NULL | 1 &lt;&gt; NULL | 1 &lt; NULL | 1 &gt; NULL |<br>
+        +----------+-----------+----------+----------+<br>
+        | NULL | NULL | NULL | NULL |<br>
+        +----------+-----------+----------+----------+<br>
+        Claramente, no se obtienen valores significtivos a partir de estas comparaciones. 
+        Use en su lugar los operadores IS NULL y IS<br>
+        NOT NULL:<br>
+        mysql&gt; SELECT 1 IS NULL, 1 IS NOT NULL;<br>
+        +-----------+---------------+<br>
+        | 1 IS NULL | 1 IS NOT NULL |<br>
+        +-----------+---------------+<br>
+        | 0 | 1 |<br>
+        +-----------+---------------+<br>
+        Observe que en MySQL, 0 o NULL se intepretan como falso, y cualquier otro 
+        valor, como verdadero. El valor por defecto para una<br>
+        operaci&oacute;n booleana es 1.<br>
+        Este tratamiento especial de NULL es debido a que, en la secci&oacute;n 
+        anterior, fue necesario determinar qu&eacute; animales ya no estaban vivos<br>
+        utilizando death IS NOT NULL en lugar de death &lt;&gt; NULL.<br>
+        Dos valores NULL son considerados iguales por la cl&aacute;usula GROUP 
+        BY.<br>
+        Cuando se realiza un ORDER BY, los valores NULL se presentan en primer 
+        lugar si se emplea ORDER BY ... ASC, y al final si<br>
+        se ordena con ORDER BY ... DESC.<br>
+        Un error muy com&uacute;n cuando se trabaja con valores NULL es asumir 
+        que es imposible insertar un valor cero o una cadena vac&iacute;a en<br>
+        una columna definida como NOT NULL, pero no es as&iacute;. Los mencionados 
+        son efectivamente valores, mientras que NULL significa<br>
+        &quot;no hay un valor&quot;. Puede comprobar esto f&aacute;cilmente empleando 
+        IS [NOT] NULL como se muestra aqu&iacute;:<br>
+        mysql&gt; SELECT 0 IS NULL, 0 IS NOT NULL, '' IS NULL, '' IS NOT NULL;<br>
+        +-----------+---------------+------------+----------------+<br>
+        | 0 IS NULL | 0 IS NOT NULL | '' IS NULL | '' IS NOT NULL |<br>
+        +-----------+---------------+------------+----------------+<br>
+        | 0 | 1 | 0 | 1 |<br>
+        +-----------+---------------+------------+----------------+<br>
+        Por lo tanto, es totalmente posible insertar cadenas vacias o ceros en 
+        columnas marcadas como NOT NULL, ya que son valores<br>
+        NOT NULL. Consultar Secci&oacute;n A.5.3, &#8220;Problemas con valores 
+        NULL&#8221;. </p>
+        </td>
+    <td>&nbsp;</td>
+    <td><a href="http://www.euskalnet.net/juanarana/oraclezip/Ejer3.rar"><img src="../../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td>
+<div align="right"><a href="http://www.euskalnet.net/juanarana/index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a>
+      </div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

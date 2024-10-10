@@ -1,0 +1,179 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Ejercicios MySQL</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="MySQL, sql, pl/sql, programacion MySQL, ejercicios MySQL, ejemplos MySQL, select">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2>I D E N T I F I C A D O R E S</h2></td>
+  </tr>
+  <tr> 
+    <td><h3>Cualificadores de los identificadores</h3>
+      <p>MySQL acepta nombres que pueden consistir en un solo identificador o m&uacute;ltiples 
+        identificadores. Los componentes de un nombre<br>
+        m&uacute;ltiple deben separarse con un punto ('.'). Las partes iniciales 
+        de un identificador m&uacute;ltiple act&uacute;an como calificadores que 
+        afectan<br>
+        el contexto en el cual se interpreta la parte final.<br>
+        En MySQL es posible referirse a una columna empleando cualquiera de las 
+        siguientes formas:<br>
+        Referencia de columna Significado<br>
+        col_name La columna col_name de cualquier tabla empleada en la consulta 
+        que contenga una columna<br>
+        con ese nombre<br>
+        tbl_name.col_name La columna col_name de la tabla tbl_name en la base 
+        de datos predeterminada.<br>
+        db_name.tbl_name.col_name La columna col_name en la tabla tbl_name en 
+        la base de datos db_name.<br>
+        Si cualquier componente de un nombre m&uacute;ltiple requiere delimitarlo, 
+        hay que hacerlo individualmente en lugar de delimitar el<br>
+        nombre como un todo. Por ejemplo, `mi-tabla`.`mi-columna` es legal, pero 
+        `mi-tabla.mi-columna` no lo es.<br>
+        No es necesario especificar un prefijo de nombre_tabla o nombre_bd.nombre_tabla 
+        para referenciar una columna en una<br>
+        sentencia a menos que la referencia sea ambigua. Sup&oacute;ngase el caso 
+        de las tablas t1 y t2 cada una conteniendo una columna c,<br>
+        donde se recupera c en una sentencia SELECT que emplea ambas tablas t1 
+        y t2. En este caso, c es ambiguo porque no es &uacute;nico<br>
+        entre las tablas utilizadas en la sentencia. Se lo debe calificar con 
+        un nombre de tabla como t1.c o t2.c para indicar a cu&aacute;l tabla<br>
+        se refiere la consulta. Del mismo modo, para recuperar desde una tabla 
+        t en la base de datos db1 y desde la tabla t en la base de<br>
+        datos db2 en la misma sentencia, hay que referirse a las columnas en aquellas 
+        tablas como db1.t.col_name y<br>
+        db2.t.col_name.<br>
+        Una palabra a continuaci&oacute;n de un punto en un nombre calificado 
+        debe ser un identificador, por lo que no es necesario delimitarlo,<br>
+        aun si es una palabra reservada.<br>
+        La sintaxis .tbl_name hace referencia a la tabla tbl_name en la base de 
+        datos actual. Esta sintaxis se acepta por compatibilidad<br>
+        con ODBC, ya que algunos programas ODBC anteceden los nombres de tabla 
+        con un car&aacute;cter '.'.<br>
+        <h3>Sensibilidad a may&uacute;suclas y min&uacute;sculas de identificadores</h3><br>
+        En MySQL, las bases de datos se corresponden con directorios dentro del 
+        directorio de datos. Cada tabla dentro de una base de datos<br>
+        corresponde a por lo menos un fichero dentro del directorio de la base 
+        de datos (y posiblemente m&aacute;s, dependiendo del motor de<br>
+        almacenamiento). Por lo tanto, es la sensibilidad a may&uacute;sculas 
+        del sistema operativo subyacente la que determina la sensibilidad a<br>
+        may&uacute;sculas en los nombres de tablas y bases de datos. Esto significa 
+        que los nombres de las tablas y las bases de datos son sensibles<br>
+        a may&uacute;sculas en la mayor&iacute;a de las variedades de Unix, pero 
+        no lo son en Windows. Una notable excepci&oacute;n es Mac OS X, el<br>
+        cual se basa en Unix pero utiliza en forma predeterminada un sistema de 
+        ficheros (HFS+) que no es sensible a may&uacute;sculas. No obstante,<br>
+        Mac OS X tambi&eacute;n soporta vol&uacute;menes UFS, los cuales son sensibles 
+        a may&uacute;sculas tal como cualquier Unix. Consulte Secci&oacute;n<br>
+        1.7.4, &#8220;Extensiones MySQL al est&aacute;ndar SQL&#8221;.<br>
+        Nota: Si bien los nombres de bases de datos y tablas no son sensibles 
+        a may&uacute;sculas en algunas plataformas, no habr&iacute;a que referirse<br>
+        a una tabla o base de datos con diferentes combinaciones de may&uacute;sculas 
+        y min&uacute;sculas dentro de la misma consulta. La siguiente<br>
+        consulta podr&iacute;a fallar porque se refiere a una tabla como my_table 
+        y MY_TABLE:<br>
+        mysql&gt; SELECT * FROM my_table WHERE MY_TABLE.col=1;<br>
+        Los nombres de columnas, &iacute;ndices, procedimientos almacenados y 
+        triggers no son sensibles a may&uacute;sculas en ninguna plataforma,<br>
+        ni tampoco lo son los alias de columnas.<br>
+        En forma predeterminada, los alias de tabla en MySQL 5.0 son sensibles 
+        a may&uacute;sculas en Unix, pero no en Windows o Mac OS X.<br>
+        La siguiente consulta no funcionar&iacute;a en Unix, porque se refiere 
+        al alias en ambas formas a y A:<br>
+        mysql&gt; SELECT nombre_col FROM nombre_tabla AS a<br>
+        -&gt; WHERE a.nombre_col = 1 OR A.nombre_col = 2;<br>
+        Sin embargo, la misma consulta est&aacute; permitida en Windows. Para 
+        evitar estar pendiente de tales diferencias, lo mejor es adoptar<br>
+        una convenci&oacute;n consistente, como crear y referirse a bases de datos 
+        y tablas usando siempre min&uacute;sculas. Esto es lo recomendado<br>
+        para lograr m&aacute;xima portabilidad y facilidad de uso.<br>
+        La forma en que los nombres de tablas y bases de datos se almacenan en 
+        el disco y se usan en MySQL se define mediante la variable<br>
+        de sistema lower_case_table_names, a la cual se le puede establecer un 
+        valor al iniciar mysqld. lower_<br>
+        case_table_names puede tomar uno de los siguientes valores:<br>
+        Valor Significado<br>
+        0 Los nombres de tablas y bases de datos se almacenan en disco usando 
+        el esquema de may&uacute;sculas y min&uacute;sculas especificado<br>
+        en las sentencias CREATE TABLE o CREATE DATABASE. Las comparaciones de 
+        nombres son sensibles a<br>
+        may&uacute;sculas. Esto es lo predeterminado en sistemas Unix. N&oacute;tese 
+        que si se fuerza un valor 0 con -<br>
+        -lower-case-table-names=0 en un sistema de ficheros insensible a may&uacute;sculas 
+        y se accede a tablas MyISAM<br>
+        empleando distintos esquemas de may&uacute;sculas y min&uacute;sculas 
+        para el nombre, esto puede conducir a la corrupci&oacute;n<br>
+        de los &iacute;ndices.<br>
+        1 Los nombres de tablas se almacenan en min&uacute;sculas en el disco 
+        y las comparaciones de nombre no son sensibles a<br>
+        may&uacute;sculas. MySQL convierte todos los nombres de tablas a min&uacute;sculas 
+        para almacenamiento y b&uacute;squedas. En<br>
+        MySQL 5.0, este comportamiento tambi&eacute;n se aplica a nombres de bases 
+        de datos y alias de tablas. Este valor es el<br>
+        predeterminado en Windows y Mac OS X.<br>
+        2 Los nombres de tablas y bases de datos se almacenan en disco usando 
+        el esquema de may&uacute;sculas y min&uacute;sculas especificado<br>
+        en las sentencias CREATE TABLE o CREATE DATABASE, pero MySQL las convierte 
+        a min&uacute;sculas en<br>
+        b&uacute;squedas. Las comparaciones de nombres no son sensibles a may&uacute;sculas. 
+        Nota: Esto funciona solamente en sistemas<br>
+        de ficheros que no son sensibles a may&uacute;sculas. Los nombres de las 
+        tablas InnoDB se almacenan en min&uacute;sculas,<br>
+        como cuando lower_case_table_names vale 1.<br>
+        En MySQL 5.0 para Windows y Mac OS X, el valor predeterminado de lower_case_table_names 
+        es 1.<br>
+        Si se utiliza MySQL en una sola plataforma, normalmente no habr&aacute; 
+        que cambiar la variable lower_case_table_names. Sin<br>
+        embargo, se pueden encontrar dificultades si se desea transferir tablas 
+        entre plataformas cuyos sistemas de ficheros tengan diferente<br>
+        sensibilidad a may&uacute;sculas. Por ejemplo, en Unix, se pueden tener 
+        dos tablas diferentes llamadas mi_tabla y MI_TABLA, pero en<br>
+        Windows, estos dos nombres se consideran id&eacute;nticos. Para evitar 
+        problemas de transferencia de datos originados en la combinaci&oacute;n<br>
+        de may&uacute;sculas y min&uacute;sculas de los nombres de bases de datos 
+        y tablas, se tienen dos opciones:<br>
+        &#8226; Emplear lower_case_table_names=1 en todos los sistemas. La principal 
+        desventaja de esto es que al emplear SHOW<br>
+        TABLES o SHOW DATABASES no se ver&aacute;n los nombres en su combinaci&oacute;n 
+        original de min&uacute;sculas y may&uacute;sculas.<br>
+        &#8226; Emplear lower_case_table_names=0 en Unix y lower_case_table_names=2 
+        en Windows. Esto preserva la<br>
+        combinaci&oacute;n de may&uacute;sculas y min&uacute;sculas en los nombres 
+        de bases de datos y tablas. La desventaja es que hay que tener la precauci&oacute;n<br>
+        de que las consultas siempre se refieran a las bases de datos y tablas 
+        en Windows respetando la combinaci&oacute;n correcta<br>
+        de may&uacute;sculas y min&uacute;sculas. Si se transfirieran las consultas 
+        a Unix, donde las may&uacute;sculas y min&uacute;sculas son significativas, 
+        no<br>
+        funcionar&aacute;n si no se utiliza la combinaci&oacute;n correcta.<br>
+        Excepci&oacute;n: Si se utilizan tablas InnoDB, se deber&iacute;a establecer 
+        lower_case_table_names en 1 en todas las plataformas<br>
+        para forzar a que los nombres sean convertidos a min&uacute;sculas.<br>
+        Notar que antes de establecer lower_case_table_names en 1 en Unix, se 
+        deber&aacute;n convertir a min&uacute;sculas los nombres de bases<br>
+        de datos y tablas existentes antes de reiniciar mysqld. </p>
+        </td>
+    <td>&nbsp;</td>
+    <td><a href="http://www.euskalnet.net/juanarana/oraclezip/Ejer3.rar"><img src="../../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td>
+<div align="right"><a href="http://www.euskalnet.net/juanarana/index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a>
+      </div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Ejercicios Oracle</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Oracle, sql, pl/sql, programacion oracle, ejercicios, ejemplos, crear tablespaces">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2>E 
+        J E R C I C I O S</h2></td>
+  </tr>
+  <tr> 
+    <td><h3>CREATE 
+        TABLESPACE...</h3>    <p>
+        a) Ejemplos de creaci&oacute;n de tablespaces.</p>
+        <p>1&ordm;)Crear un tablespace de nombre COMPRAS asociandole un fchero en disco llamado <br>
+        CREATE TABLESPACE COMPRAS DATAFILE 'COMPRAS.ORA' SIZE 5M;</p>
+        <p>2&ordm;)Modificar el tableespace del ejercicio1 para que pueda autoextenderse <br>
+          automaticamente sin limite de espacio en el disco.<br>
+          ALTER TABLESPACE COMPRAS ADD DATAFILE 'COMPRAS1.ORA' SIZE 1M<br>
+          AUTOEXTEND ON NEXT 1M MAXSIZE UNLIMITED;</p></td>
+    <td>&nbsp;</td>
+    <td><a href="http://www.euskalnet.net/juanarana/oraclezip/Ejer29.rar"><img src="../../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>CREATE 
+      USER...</h3>
+    <p>
+      b) Ejemplos de creaci&oacute;n de usuarios.</p>
+    <p>3&ordm;) Crear un rol que tenga los siguientes privilegios, insert select <br>
+      en depart y emple, create session, create database link, create table<br>
+y create view.<br>
+CREATE ROLE UN_ROL;<br>
+GRANT INSERT, SELECT ON DEPART TO UN_ROL;<br>
+GRANT INSERT, SELECT ON EMPLE TO UN_ROL;<br>
+GRANT CREATE SESSION, CREATE DATABASE LINK,CREATE TABLE, CREATE VIEW TO UN_ROL;</p>
+    <p>4&ordm;)Crea un usuario llamado 'COMPRADOR'. El tableespace por defecto es 'COMPRAS'<br>
+      y se le asigna un mega en el tableespace COMPRAS y 0 de cuota en el tablespace SYSTEM.<br>
+      El tablespace temporl sera TEMPORARY_DATA. Se le asigna un rol anterior.<br>
+      CREATE USER COMPRADOR IDENTIFIED BY COMPRADOR<br>
+      DEFAULT TABLESPACE COMPRAS TEMPORARY TABLESPACE TEMPORARY_DATA<br>
+      QUOTA 1M ON COMPRAS QUOTA 0 ON SYSTEM;</p>
+    <p>GRANT UN_ROL TO COMPRADOR;</p></td>
+    <td>&nbsp;</td>
+    <td><a href="http://www.euskalnet.net/juanarana/oraclezip/Ejer30.rar"><img src="../../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>GRANT... CONNECT... CREATE 
+      ROLE...</h3>
+    <p> 
+      c) Ejemplos de usuarios con derechos de administraci&oacute;n, 
+      roles...</p>
+    <p>5&ordm;)Realiza la siguiente secuencia de instrucciones en el orden indicado: <br>
+      - Crear un usuario de la BD que tenga funciones de administrador<br>
+CREATE USER ADMINISTRADOR IDENTIFIED BY ADMINISTRADOR;<br>
+GRANT DBA TO ADMINISTRADOR;<br>
+- conectarse con el nombre del usuario creado<br>
+CONNECT ADMINISTRADOR@DAINT<br>
+- crear varias tablas en el propio esquema<br>
+CREATE TABLE TABLA1 (N NUMBER(10));<br>
+CREATE TABLE TABLA2 (N NUMBER(10));<br>
+CREATE TABLE TABLA3 (N NUMBER(10)); <br>
+- Crear 5 usuario s nuevos asignandoles un tablespace por defecto y cuota en (USU1,USU2, USU3...5).<br>
+CREATE USER USU1 IDENTIFIED BY USU1 DEFAULT TABLESPACE COMPRAS<br>
+QUOTA 2M ON COMPRAS;<br>
+<br>
+CREATE USER USU2 IDENTIFIED BY USU2 DEFAULT TABLESPACE COMPRAS<br>
+QUOTA 2M ON COMPRAS;<br>
+<br>
+CREATE USER USU3 IDENTIFIED BY USU3 DEFAULT TABLESPACE COMPRAS<br>
+QUOTA 2M ON COMPRAS;<br>
+<br>
+CREATE USER USU4 IDENTIFIED BY USU4 DEFAULT TABLESPACE COMPRAS<br>
+QUOTA 2M ON COMPRAS;<br>
+<br>
+CREATE USER USU5 IDENTIFIED BY USU5 DEFAULT TABLESPACE COMPRAS<br>
+QUOTA 2M ON COMPRAS; <br>
+- Dar permisos a uno de los usuarios usu1, para que solo pueda conectarse a la BD.<br>
+GRANT CREATE SESSION TO USU1; <br>
+- Dar permiso al usuario USU1 solo para q pueda conectarse a la BD.</p>
+    <p>- Crear un rol q permita conectarse a la bd y hacer SELECT sobre algunas tablas.<br>
+  CREATE ROLE ROL_USU;<br>
+  GRANT CREATE SESSION TO ROL_USU;<br>
+  GRANT SELECT ON TABLA1 TO ROL_USU;<br>
+  GRANT SELECT ON TABLA2 TO ROL_USU;<br>
+  GRANT SELECT ON TABLA3 TO ROL_USU;<br>
+  - Conceder al USU4 privilegios sobre qalgunas tablas con la opci&oacute;n de poder concederselos a otros usuarios.<br>
+  GRANT ROL_USU TO USU2, USU3;<br>
+  - Conceder al usuario USU5 cuatro privilegios del sistema, dos de ellos, con la opci&oacute;n de poder concederselos a otros usuarios.<br>
+  GRANT INSERT, DELETE ON TABLA1 TO USU4 WITH GRANT OPTION;<br>
+  GRANT INSERT, DELETE ON TABLA2 TO USU4 WITH GRANT OPTION; <br>
+  - Conceder a todos los usuarios de la BD privilegios para q puedan modificar ciertas columnas de algunas tablas.<br>
+  GRANT CREATE ANY TABLE,CREATE USER TO USU5 WITH ADMIN OPTION;<br>
+  GRANT ALTER TABLESPACE, CREATE TABLESPACE TO USU5;<br>
+  <br>
+  GRANT UPDATE(N) ON TABLA1 TO PUBLIC;<br>
+  GRANT UPDATE(N) ON TABLA2 TO PUBLIC; <br>
+  - Quitar a los usuarios USU3 y USU4 todos los privilegios q ten&iacute;an asignados.<br>
+  REVOKE ROL_USU FROM USU3;<br>
+  REVOKE ALL ON TABLA1 FROM USU4;<br>
+  REVOKE ALL ON TABLA2 FROM USU4; <br>
+  - Hacer q USU5 solo pueda conectarse en dos sesiones concurrentes a la vez.<br>
+  CREATE PROFILE LIM_SESION LIMIT SESSIONS_PER_USER 2;<br>
+  ALTER USER USU5 IDENTIFIED BY USU5 PROFILE LIM_SESION; <br>
+  - Limitar el tiempo de conexi&oacute;n a la BD a 5 minutos a los usuarios USU2 y USU3.<br>
+  CREATE PROFILE TIEMPOLIMITE LIMIT CONNECT_TIME 5;<br>
+  ALTER USER USU2 IDENTIFIED BY USU2 PROFILE TIEMPOLIMITE;<br>
+  ALTER USER USU3 IDENTIFIED BY USU3 PROFILE TIEMPOLIMITE;</p></td>
+    <td>&nbsp;</td>
+    <td><a href="http://www.euskalnet.net/juanarana/oraclezip/Ejer31.rar"><img src="../../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><div align="right"><a href="http://www.euskalnet.net/juanarana/index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a>
+      </div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

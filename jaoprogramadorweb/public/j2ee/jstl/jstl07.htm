@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Crear una p&aacute;gina JSP con JSTL</title>
+<META http-equiv=Content-Language content=es>
+<META content="Manual JSTL, ejemplos JSTL, codigos JSTL" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Manual JSTL, ejemplos JSTL, codigos JSTL">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2> Crear una p&aacute;gina JSP con JSTL</h2></td>
+  </tr>
+    <tr> 
+		
+    <td height="39" colspan="3"> <p>Siguiendo con la aplicaci&oacute;n Web de 
+        la secci&oacute;n anterior, vamos a crear una p&aacute;gina JSTL.<br>
+        En toda p&aacute;gina JSP hay que declarar la biblioteca a la que pertenece 
+        cada etiqueta que usemos. Puesto que son varias l&iacute;neas, lo m&aacute;s 
+        comodo es hacer las declaraciones en un fichero aparte, y luego incluir 
+        dicho fichero en nuestras p&aacute;ginas JSP. Este sistema evita repetir 
+        el mismo texto en todas las p&aacute;ginas, y si en el futuro a&ntilde;adimos 
+        m&aacute;s bibliotecas, solo tendremos que modificar un &uacute;nico fichero.<br>
+        &#8226; A&ntilde;ade una p&aacute;gina $CATALINA_HOME/webapps/miAplicacion/taglibs.jsp 
+        con las siguientes declaraciones: <br>
+        &#8226; &lt;%@ taglib prefix=&quot;c&quot; uri=&quot;http://java.sun.com/jstl/core&quot; 
+        %&gt;<br>
+        &#8226; &lt;%@ taglib prefix=&quot;fmt&quot; uri=&quot;http://java.sun.com/jstl/fmt&quot; 
+        %&gt;<br>
+        &#8226; &lt;%@ taglib prefix=&quot;x&quot; uri=&quot;http://java.sun.com/jstl/xml&quot; 
+        %&gt;<br>
+        &#8226; &lt;%@ taglib prefix=&quot;sql&quot; uri=&quot;http://java.sun.com/jstl/sql&quot; 
+        %&gt;<br>
+        &lt;%@ taglib prefix=&quot;fn&quot; uri=&quot;http://java.sun.com/jsp/jstl/functions&quot; 
+        %&gt;<br>
+        &#8226; A&ntilde;ade una p&aacute;gina $CATALINA_HOME/webapps/miAplicacion/index.jsp 
+        que importe la anterior usando una directiva include: <br>
+        &#8226; &lt;%@include file=&quot;taglibs.jsp&quot; %&gt;<br>
+        &#8226; &lt;html&gt;<br>
+        &#8226; &lt;body&gt;<br>
+        &#8226; &lt;c:out value=&quot;Hola mundo&quot;/&gt;<br>
+        &#8226; &lt;/body&gt;<br>
+        &lt;/html&gt;<br>
+        En este ejemplo hemos usado la etiqueta c:out de la librer&iacute;a core 
+        para mostrar un mensaje. <br>
+      </p>
+      </td>
+
+  </tr>
+  <tr> 
+    <td width="341"></td>
+    <td width="74">&nbsp;</td>
+    <td width="124"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+</body>
+</html>

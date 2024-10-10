@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Introducci&oacute;n a JQuery</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta name="keywords" content="Introduccion a JQuery, Manual JQuery, tutorial JQuery, Ejemplos JQuery, ejercicios JQuery">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos"><tr> 
+    <td height="39" colspan="3"> <h2>Cómo funciona each</h2></td>
+  </tr>
+  <tr> 
+    <td height="268" colspan="3"> <p>Each es un m&eacute;todo que se utiliza sobre 
+        un conjunto de elementos que hayamos seleccionado<br>
+        con la funci&oacute;n jQuery. Con each realizamos una iteraci&oacute;n 
+        por todos los elementos del DOM que<br>
+        se hayan seleccionado.<br>
+        El m&eacute;todo each recibe una funci&oacute;n que es la que se tiene 
+        que ejecutar para cada elemento y<br>
+        dentro de esa funci&oacute;n con la variable &quot;this&quot; tenemos 
+        una referencia a ese elemento del DOM.<br>
+        Adicionalmente, la funci&oacute;n que se env&iacute;a a each, puede recibir 
+        un par&aacute;metro que es el &iacute;ndice<br>
+        actual sobre el que se est&aacute; iterando.<br>
+        Quiero explicar las bondades de each() con un ejemplo. Por ejemplo, veamos 
+        esta l&iacute;nea de<br>
+        c&oacute;digo:<br>
+        $(&quot;p&quot;).css(&quot;background-color&quot;, &quot;#eee&quot;);<br>
+        Como ya sabemos, con $(&quot;p&quot;) seleccionamos todos los p&aacute;rrafos 
+        de la p&aacute;gina. Luego con el<br>
+        m&eacute;todo CSS asignamos un estilo, en este caso para cambiar el color 
+        del fondo. Esto en<br>
+        realidad jQuery lo hace con una iteraci&oacute;n con todos los p&aacute;rrafos 
+        de la p&aacute;gina, sin que<br>
+        tengamos que hacer nosotros nada m&aacute;s y es genial que se permita 
+        en el uso del framework.<br>
+        &iquest;Pero qu&eacute; pasa si queremos cambiar el fondo de los p&aacute;rrafos 
+        utilizando colores alternos?<br>
+        En este caso no podemos hacerlo en una sola l&iacute;nea de c&oacute;digo, 
+        pero each nos vendr&aacute; como<br>
+        anillo al dedo.<br>
+        Imaginemos que tenemos una serie de p&aacute;rrafos en la p&aacute;gina 
+        y queremos cambiar el color de<br>
+        fondo a los mismos, de manera que tengan colores alternos, para hacer 
+        din&aacute;micamente un<br>
+        t&iacute;pico dise&ntilde;o para los listados.<br>
+        Entonces podr&iacute;amos hacer lo siguiente:<br>
+        $(&quot;p&quot;).each(function(i){<br>
+        if(i%2==0){<br>
+        $(this).css(&quot;background-color&quot;, &quot;#eee&quot;);<br>
+        }else{<br>
+        $(this).css(&quot;background-color&quot;, &quot;#ccc&quot;);<br>
+        }<br>
+        });<br>
+        Con $(&quot;p&quot;) tengo todos los p&aacute;rrafos. Ahora con each puedo 
+        recorrerlos uno a uno. Para cada<br>
+        uno ejecutaremos la funci&oacute;n que enviamos como par&aacute;metro 
+        a each(). En esa funci&oacute;n recibo<br>
+        como par&aacute;metro una variable &quot;i&quot; que contiene el &iacute;ndice 
+        actual sobre el que estoy iterando.<br>
+        Con if(i%2==0) estoy viendo si el entero del &iacute;ndice &quot;i&quot; 
+        es par o impar. Siendo par coloco un<br>
+        color de fondo al elemento y siendo impar coloco otro color de fondo.<br>
+        Como se puede ver, con la variable &quot;this&quot; tenemos acceso al 
+        elemento actual. Pero OJO, que<br>
+        este elemento no es un objeto jQuery, as&iacute; que no podr&iacute;amos 
+        enviarle m&eacute;todos del framework<br>
+        jQuery hasta que no lo expandamos con la funci&oacute;n jQuery. As&iacute; 
+        pues, tenemos que hacer $<br>
+        (this) para poder invocar al m&eacute;todo css(). Por si no queda claro 
+        este punto mirar las<br>
+        diferencias entre estas dos l&iacute;neas de c&oacute;digo:<br>
+        this.css(&quot;background-color&quot;, &quot;#ccc&quot;);<br>
+        $(this).css(&quot;background-color&quot;, &quot;#ccc&quot;);<br>
+        En la primera l&iacute;nea no estar&iacute;amos extendiendo la variable 
+        this con las funcionalidades de<br>
+        jQuery, luego no funcionar&iacute;a.<br>
+        En la segunda l&iacute;nea, que es la que hab&iacute;amos utilizado en 
+        el script de ejemplo, s&iacute; estamos<br>
+        extendiendo la variable &quot;this&quot; con la funci&oacute;n jQuery. 
+        De ese modo, se puede invocar a<br>
+        cualquier m&eacute;todo de jQuery sobre los elementos.<br>
+        Podemos ver un ejemplo en marcha que hace uso de ese script.<br>
+        Este ser&iacute;a su c&oacute;digo fuente completo:<br>
+        &lt;html&gt;<br>
+        &lt;head&gt;<br>
+        &lt;title&gt;each del core de jQuery&lt;/title&gt;<br>
+        &lt;script src=&quot;../jquery-1.3.2.min.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;<br>
+        &lt;script&gt;<br>
+        $(document).ready(function(){<br>
+        $(&quot;p&quot;).each(function(i){<br>
+        if(i%2==0){<br>
+        $(this).css(&quot;background-color&quot;, &quot;#eee&quot;);<br>
+        }else{<br>
+        $(this).css(&quot;background-color&quot;, &quot;#ccc&quot;);<br>
+        }<br>
+        });<br>
+        });<br>
+        &lt;/script&gt;<br>
+        &lt;/head&gt;<br>
+        &lt;body&gt;<br>
+        &lt;p&gt;Primer p&aacute;rrafo&lt;/p&gt;<br>
+        &lt;p&gt;Otro p&aacute;rrafo&lt;/p&gt;<br>
+        &lt;p&gt;Tecer p&aacute;rrafo&lt;/p&gt;<br>
+        &lt;p&gt;Uno m&aacute;s&lt;/p&gt;<br>
+        &lt;p&gt;y acabo...&lt;/p&gt;<br>
+        &lt;/body&gt;<br>
+        &lt;/html&gt;</p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

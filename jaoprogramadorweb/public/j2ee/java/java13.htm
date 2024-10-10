@@ -1,0 +1,151 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Procesos de creaci&amp;oacute;n y destrucci&amp;oacute;n </title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación en Java,Programas Java,Aplicaciones en Java,Ejercicios en Java, Ejemplos de Java,Tutorial de Java,Manual Java" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Java, Manual Java, tutorial Java, Ejemplos Java, ejercicios Java">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> Procesos de creaci&oacute;n y destrucci&oacute;n 
+      de un objeto</h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <h3>Resumen del proceso de creaci&oacute;n de 
+        un objeto</h3> 
+      <p> El proceso de creaci&oacute;n de objetos de una clase es el siguiente:<br>
+        1. Al crear el primer objeto de la clase o al utilizar el primer m&eacute;todo 
+        o variable static se localiza la<br>
+        clase y se carga en memoria.<br>
+        2. Se ejecutan los inicializadores static (s&oacute;lo una vez).<br>
+        3. Cada vez que se quiere crear un nuevo objeto:<br>
+        &#8226; se comienza reservando la memoria necesaria<br>
+        &#8226; se da valor por defecto a las variables miembro de los tipos primitivos<br>
+        &#8226; se ejecutan los inicializadores de objeto<br>
+        &#8226; se ejecutan los constructores</p>
+      <h3>M&eacute;todos sobrecargados (overloaded)</h3>
+      <p>Al igual que C++, Java permite m&eacute;todos sobrecargados (overloaded), 
+        es decir, m&eacute;todos distintos<br>
+        que tienen el mismo nombre, pero que se diferencian por el n&uacute;mero 
+        y/o tipo de los argumentos. El<br>
+        ejemplo de la clase Circulo del Apartado 3.2 presenta dos casos de m&eacute;todos 
+        sobrecargados: los<br>
+        cuatro constructores y los dos m&eacute;todos llamados elMayor().<br>
+        A la hora de llamar a un m&eacute;todo sobrecargado, Java sigue unas reglas 
+        para determinar el<br>
+        m&eacute;todo concreto que debe llamar:<br>
+        1. Si existe el m&eacute;todo cuyos argumentos se ajustan exactamente 
+        al tipo de los argumentos de<br>
+        la llamada (argumentos actuales), se llama ese m&eacute;todo.<br>
+        2. Si no existe un m&eacute;todo que se ajuste exactamente, se intenta 
+        promover los argumentos<br>
+        actuales al tipo inmediatamente superior (por ejemplo char a int, int 
+        a long, float a double,<br>
+        etc.) y se llama el m&eacute;todo correspondiente.<br>
+        3. Si s&oacute;lo existen m&eacute;todos con argumentos de un tipo m&aacute;s 
+        restringido (por ejemplo, int en<br>
+        vez de long), el programador debe hacer un cast expl&iacute;cito en la 
+        llamada,<br>
+        responsabiliz&aacute;ndose de esta manera de lo que pueda ocurrir.<br>
+        4. El valor de retorno no influye en la elecci&oacute;n del m&eacute;todo 
+        sobrecargado. En realidad es<br>
+        imposible saber desde el propio m&eacute;todo lo que se va a hacer con 
+        &eacute;l. No es posible crear<br>
+        dos m&eacute;todos sobrecargados, es decir con el mismo nombre, que s&oacute;lo 
+        difieran en el valor<br>
+        de retorno.<br>
+        Diferente de la sobrecarga de m&eacute;todos es la redefinici&oacute;n. 
+        Una clase puede redefinir<br>
+        (override) un m&eacute;todo heredado de una superclase. Redefinir un m&eacute;todo 
+        es dar una nueva definici&oacute;n.<br>
+        En este caso el m&eacute;todo debe tener exactamente los mismos argumentos 
+        en tipo y n&uacute;mero que el<br>
+        m&eacute;todo redefinido. Este tema se ver&aacute; de nuevo al hablar 
+        de la herencia.</p>
+      <h3>Destrucci&oacute;n de objetos (liberaci&oacute;n de memoria)</h3>
+      <p>En Java no hay destructores como en C++. El sistema se ocupa autom&aacute;ticamente 
+        de liberar la<br>
+        memoria de los objetos que ya han perdido la referencia, esto es, objetos 
+        que ya no tienen ning&uacute;n<br>
+        nombre que permita acceder a ellos, por ejemplo por haber llegado al final 
+        del bloque en el que<br>
+        hab&iacute;an sido definidos, porque a la referencia se le ha asignado 
+        el valor null o porque a la referencia<br>
+        se le ha asignado la direcci&oacute;n de otro objeto. A esta caracter&iacute;stica 
+        de Java se le llama garbage<br>
+        collection (recogida de basura).<br>
+        En Java es normal que varias variables de tipo referencia apunten al mismo 
+        objeto. Java lleva<br>
+        internamente un contador de cu&aacute;ntas referencias hay sobre cada 
+        objeto. El objeto podr&aacute; ser borrado<br>
+        cuando el n&uacute;mero de referencias sea cero. Como ya se ha dicho, 
+        una forma de hacer que un objeto<br>
+        quede sin referencia es cambiar &eacute;sta a null, haciendo por ejemplo:<br>
+        ObjetoRef = null;<br>
+        En Java no se sabe exactamente cu&aacute;ndo se va a activar el garbage 
+        collector. Si no falta<br>
+        memoria es posible que no se llegue a activar en ning&uacute;n momento. 
+        No es pues conveniente confiar<br>
+        en &eacute;l para la realizaci&oacute;n de otras tareas m&aacute;s cr&iacute;ticas.<br>
+        Se puede llamar expl&iacute;citamente al garbage collector con el m&eacute;todo 
+        System.gc(), aunque esto<br>
+        es considerado por el sistema s&oacute;lo como una &#8220;sugerencia&#8221; 
+        a la JVM.</p>
+      <h3>Finalizadores</h3>
+      <p>Los finalizadores son m&eacute;todos que vienen a completar la labor 
+        del garbage collector. Un<br>
+        finalizador es un m&eacute;todo que se llama autom&aacute;ticamente cuando 
+        se va a destruir un objeto (antes de<br>
+        que la memoria sea liberada de modo autom&aacute;tico por el sistema). 
+        Se utilizan para ciertas<br>
+        operaciones de terminaci&oacute;n distintas de liberar memoria (por ejemplo: 
+        cerrar ficheros, cerrarconexiones de red, liberar memoria reservada por 
+        funciones nativas, etc.). Hay que tener en cuenta<br>
+        que el garbage collector s&oacute;lo libera la memoria reservada con new. 
+        Si por ejemplo se ha reservado<br>
+        memoria con funciones nativas en C (por ejemplo, utilizando la funci&oacute;n 
+        malloc()), esta memoria<br>
+        hay que liberarla expl&iacute;citamente utilizando el m&eacute;todo finalize().<br>
+        Un finalizador es un m&eacute;todo de objeto (no static), sin valor de 
+        retorno (void), sin argumentos<br>
+        y que siempre se llama finalize(). Los finalizadores se llaman de modo 
+        autom&aacute;tico siempre que<br>
+        hayan sido definidos por el programador de la clase. Para realizar su 
+        tarea correctamente, un<br>
+        finalizador deber&iacute;a terminar siempre llamando al finalizador de 
+        su super-clase.<br>
+        Tampoco se puede saber el momento preciso en que los finalizadores van 
+        a ser llamados. En<br>
+        muchas ocasiones ser&aacute; conveniente que el programador realice esas 
+        operaciones de finalizaci&oacute;n de<br>
+        modo expl&iacute;cito mediante otros m&eacute;todos que &eacute;l mismo 
+        llame.<br>
+        El m&eacute;todo System.runFinalization() &#8220;sugiere&#8221; a la JVM 
+        que ejecute los finalizadores de los<br>
+        objetos pendientes (que han perdido la referencia). Parece ser que para 
+        que este m&eacute;todo se ejecute,<br>
+        en Java 1.1 hay que llamar primero a gc() y luego a runFinalization().</p>
+      <h3>&nbsp;</h3>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

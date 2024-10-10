@@ -1,0 +1,135 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Elementos del archivo de propiedades</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación en hibernate,Programas hibernate,Aplicaciones en hibernate,Ejercicios en hibernate, Ejemplos de hibernate,Tutoriales de hibernate,Manuales hibernate" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="hibernate, Manual hibernate, tutorial hibernate, Ejemplos hibernate, ejercicios hibernate">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> Elementos del archivo de propiedades</h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <h3>Cabecera XML</h3>
+        <p>&Eacute;ste tiene una cabecera fija, t&iacute;pica de todos los documentos 
+        XML, que no describiremos.
+        <h3>El elemento &lt;hibernate-mapping&gt;</h3>
+      <p> Despu&eacute;s de la cabecera, entramos en la parte de descripci&oacute;n 
+        de los emparejamientos, delimitada por el :elemento &lt;hibernate-mapping&gt;.</p>
+      <p> Este elemento permite especificar, mediante atributos, diversas caracter&iacute;sticas 
+        como el esquema de la base de datos. No nos entretendremos en describirlo.<br>
+      </p>
+      <h3>El elemento &lt;class&gt;</h3>
+      <p> Como estamos emparejando una clase con una tabla, hemos de especificar 
+        cu&aacute;les son. Lo hacemos usando el elemento &lt;class&gt;:<br>
+        &lt;class name=&quot;escuela.beans.Categoria&quot; table=&quot;categorias&quot;&gt;<br>
+        Indicamos el nombre de la clase (name=escuela.beans.Categoria) y el nombre 
+        de la tabla con la que se empareja (table=&#8221;categorias&#8221;).<br>
+      </p>
+      <h3>El elemento &lt;id&gt;</h3>
+      <p> Una vez emparejados objeto y tabla, hay que emparejar las propiedades 
+        del objeto con las columnas de la tabla. En nuestro ejemplo, observamos 
+        que para describir este emparejamiento se utilizan dos elementos XML distintos: 
+        &lt;id&gt; y &lt;property&gt;. El primero, &lt;id&gt;, empareja una de 
+        las propiedades con la clave primaria de la tabla:<br>
+        &lt;id name=&quot;id&quot; type=&quot;integer&quot; column=&quot;ID&quot; 
+        unsaved-value=&quot;-1&quot;&gt;<br>
+        Identificamos la propiedad que se empareja con la clave primaria mediante 
+        el atributo XML name.<br>
+        En nuestro caso, la propiedad a relacionar con la clave primaria es id. 
+        Esta propiedad se empareja con la columna ID de la tabla: column=&#8221;ID&#8221;. 
+        Como el nombre de la propiedad y el de la columna coinciden, en este caso, 
+        nos podr&iacute;amos ahorrar el atributo column. Tambi&eacute;n, y opcionalmente, 
+        especificamos el tipo de datos con el que estamos trabajando. En este 
+        caso, con enteros. Como es un tipo b&aacute;sico, no necesitar&iacute;amos 
+        usar el atributo type. Hibernate sabe deducir el tipo de datos que estamos 
+        utilizando a partir de la introspecci&oacute;n. Hibernate analiza en<br>
+        tiempo de ejecuci&oacute;n las clases Java y obtiene la informaci&oacute;n 
+        que necesita. Aqu&iacute;, a guisa de ejemplo, especificamos el tipo de 
+        datos Hibernate: type=&#8221;integer&#8221;.4<br>
+        En nuestro ejemplo, hemos vuelto a utilizar un atributo opcional: unsaved-value. 
+        Este atributo permite especificar qu&eacute; valor tiene el campo clave 
+        cuando a&uacute;n no ha sido guardado en la base de datos. En nuestro 
+        caso, -1. As&iacute;, de entrada, parece un atributo poco &uacute;til, 
+        pero no es as&iacute;. La clase Session de Hibernate dispone de un m&eacute;todo 
+        muy pr&aacute;ctico: saveOrUpdate(Object). Este m&eacute;todo distingue 
+        si un objeto debe ser guardado por primera vez en la base de datos o bien 
+        modificado porque ya est&aacute; en ella, en funci&oacute;n de lo que 
+        especifiquemos en el atributo unsaved-value. En nuestro caso, la propiedad 
+        id de una Categoria que a&uacute;n no haya sido guardada en la base de 
+        datos tendr&aacute; un valor -1. Esto indicar&aacute; a Hibernate que 
+        hay que guardarla; y al hacerlo, la propiedad id de esta Categoria pasar&aacute; 
+        a tener un valor diferente de -1, por ejemplo, 25. Si recuperamos de la 
+        base de datos esta categor&iacute;a, tendremos un objeto Categoria con 
+        un id igual a 25. Si modificamos la propiedad categoria y despu&eacute;s 
+        utilizamos el m&eacute;todo saveOrUpdate(), Hibernate comprobar&aacute; 
+        que la propiedad id no vale -1 y deducir&aacute; que en vez de guardar, 
+        ha de modificar.<br>
+        El atributo unsaved-value puede tener los siguientes valores predefinidos: 
+        any, none y null.<br>
+        Por defecto, null.</p>
+      <h3>El subelemento &lt;generator&gt;</h3>
+      <p>Este elemento nos permite definir c&oacute;mo se generan los valores 
+        de las claves primarias. Hibernate nos ofrece diversos m&eacute;todos 
+        de generaci&oacute;n de valores para las claves primarias.<br>
+        &lt;generator class=&quot;identity&quot;/&gt;<br>
+        El m&eacute;todo se especifica mediante el atributo class. En nuestro 
+        ejemplo, usamos el m&eacute;todoidentity, ya que HSQLDB soporta claves 
+        primarias de tipo IDENTITY.5<br>
+        Hay m&aacute;s muchos m&eacute;todos predefinidos y, si fuera necesario, 
+        los podr&iacute;amos definir nosotros.<br>
+        Algunos, como identity, generan claves directamente y otros necesitan 
+        la ayuda de tablas auxiliares para generarlas. Ser&iacute;a demasiado 
+        largo comentarlos todos, as&iacute; que nos centraremos en un tres de 
+        ellos.6<br>
+        El m&eacute;todo native es bastante interesante. Deja que Hibernate escoja 
+        entre los m&eacute;todos identity, sequence o hilo,7 en funci&oacute;n 
+        de las caracter&iacute;sticas del gestor de bases de datos con el que 
+        trabajemos.<br>
+        El m&eacute;todo assigned deja que sea nuestra aplicaci&oacute;n la que 
+        asigne un identificador al objeto antes de guardarlo en la base de datos.<br>
+        El m&eacute;todo increment genera identificadores de tipo long, short 
+        o int que son &uacute;nicos s&oacute;lo cuando no hay otro proceso que 
+        est&eacute; insertando datos en la misma tabla. Por lo tanto, no es recomendable 
+        usarlo, por ejemplo, en un cluster.</p>
+      <h3>El elemento &lt;property&gt;</h3>
+      <p>Sirve para emparejar aquellas propiedades que no forman parte de la clave 
+        primaria con las correspondientes columnas de una (o m&aacute;s) tablas.<br>
+        Aqu&iacute; tenemos el emparejamiento propuesto para la propiedad categoria 
+        de nuestro ejemplo.<br>
+        &lt;property name=&quot;categoria&quot; column=&quot;CATEGORIA&quot;<br>
+        type=&quot;string&quot;<br>
+        unique=&#8221;true&#8221;<br>
+        not-null=&quot;true&quot;/&gt;<br>
+        Como en el caso del elemento id, el atributo name indica el nombre de 
+        la propiedad, el atributo column, el nombre de la columna de la tabla 
+        categorias y el atributo type nos indica el tipo de Hibernate.<br>
+        El atributo unique, opcional, nos permite especificar si se admiten valores 
+        duplicados o no. En nuestro caso, no.<br>
+        El atributo opcional not-null, nos permite especificar la obligaci&oacute;n 
+        de que la propiedad tenga un valor no nulo.</p>
+	  
+	  
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

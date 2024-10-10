@@ -1,0 +1,56 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>C&oacute;mo hacer una p&aacute;gina ASP</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta name="keywords" content="Funciones en ASP, Tipos de funciones en ASP, Manual ASP, tutorial ASP, Ejemplos ASP, ejercicios ASP">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2>Funciones en ASP</h2></td>
+  </tr>
+  <tr> 
+    <td height="394" colspan="3"> <h3>Tipos de funciones en ASP</h3>
+      
+      <p>Existen funciones que permiten cambiar el tipo de los datos, si quiero 
+        que ocupen menos en memoria.</p>
+      <p> Cbool (1 byte: 0/1)<br>
+        Cbyte (1 byte 0-255), recomendable para los contadores de bucle peque&ntilde;os<br>
+        Cint (2 byte -32768 a 32768)<br>
+        Clng (4 byte -2000 millones a 2000 millones)<br>
+        Csng (real simple precision)<br>
+        Cdbl (real doble precision )<br>
+        Ccur (calculos con moneda)<br>
+        Cdate (fecha)<br>
+        Cstr (cadena)</p>
+      <h3>Ejemplo </h3>
+      <p>Ahora veremos un ejemplo de la funci&oacute;n now() junto con par&aacute;metros 
+        para el formato:</p>
+      <p>&lt;%<br>
+        response.Write(formatdatetime(now(),vbgeneraldate)&amp;&quot;&lt;br&gt;&quot;)<br>
+        response.Write(formatdatetime(now(),vblongdate)&amp;&quot;&lt;br&gt;&quot;)<br>
+        response.Write(formatdatetime(now(),vbshortdate)&amp;&quot;&lt;br&gt;&quot;)<br>
+        response.Write(formatdatetime(now(),vblongtime)&amp;&quot;&lt;br&gt;&quot;)<br>
+        response.Write(formatdatetime(now(),vbshortdate)&amp;&quot;&lt;br&gt;&quot;)<br>
+        %&gt;</p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

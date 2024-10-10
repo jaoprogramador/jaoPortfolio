@@ -1,0 +1,135 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Indice J2ME</title>
+<META http-equiv=Content-Language content=es>
+<META content="Manual J2ME, ejemplos J2ME, codigos J2ME" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Manual J2ME, ejemplos J2ME, codigos J2ME">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2>Conceptos generales de programaci&oacute;n 
+        de juegos</h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <p>Respecto al componente gr&aacute;fico de 
+        un juego, la idea b&aacute;sica al montarlo es su separaci&oacute;n en 
+        capas. Esto nos ayudar&aacute; a separar los gr&aacute;ficos para as&iacute; 
+        delimitar bien qu&eacute; elementos y c&oacute;mo intervendr&aacute;n 
+        en la l&oacute;gica del juego, y c&oacute;mo se relacionar&aacute;n unos 
+        con otros. Estas capas estar&aacute;n superpuestas, siendo la de &iacute;ndice 
+        menor la m&aacute;s cercana a los ojos del usuario y dejando ver o no 
+        el contenido de las capas m&aacute;s profundas seg&uacute;n nos convenga. 
+        De cada tipo podr&aacute;n existir las que deseemos.</p>
+      <p>Una divisi&oacute;n en capas, por ejemplo, para un juego de perspectiva 
+        cenital (recordemos, por ejemplo, el juego &quot;1942&quot;, de este tipo 
+        de vista) es la siguiente:<br>
+        - Capa de Techos y Nubes. En ella colocaremos los elementos m&aacute;s 
+        cercanos a la vista del usuario, los cuales no ser&aacute;n ocultados 
+        jam&aacute;s por otras capas. Ser&aacute;n los componentes gr&aacute;ficos 
+        m&aacute;s externos de todo el conjunto de la gr&aacute;fica del juego; 
+        elementos como nubes, techos, p&aacute;jaros, copas de &aacute;rboles, 
+        etc.<br>
+        En la siguiente figura observamos los elementos de la capa externa utilizada 
+        en el ejemplo que aparece al final del cap&iacute;tulo. Por ahora nos 
+        basta con saber que todos los elementos individuales a mostrar en toda 
+        capa ser&aacute;n dados a la aplicaci&oacute;n en un &uacute;nico archivo 
+        de imagen, del cual extraeremos estos elementos dividiendo la imagen convenientemente. 
+        Exceptuando la capa de jugadores, todas las dem&aacute;s veremos que se 
+        implementan por medio de capas de tipo TyledLayer. M&aacute;s adelante, 
+        describiremos m&aacute;s detalladamente c&oacute;mo usar estas im&aacute;genes 
+        en J2ME.</p>
+      <p>- Capa de Jugadores. En ella colocaremos los elementos gr&aacute;ficos 
+        que representan a los jugadores o avatares del juego. Estas capas en J2ME 
+        se implementar&aacute;n por medio de capas especiales (Sprite) adecuadas 
+        a la fuerte respuesta ante acciones del usuario y la variabilidad de su 
+        apariencia que necesitar&aacute;n estos componentes gr&aacute;ficos. Tendremos 
+        una capa de este tipo por jugador que aparezca en la pantalla, ya sea 
+        &eacute;ste controlado por el usuario o por el sistema. Para cada una 
+        de ellas, daremos a la aplicaci&oacute;n un archivo de imagen distinto.</p>
+      <p>- Capa de Obst&aacute;culos. Colocaremos aqu&iacute; los elementos gr&aacute;ficos 
+        que aparecer&aacute;n alrededor del avatar, pudiendo colocarse por delante 
+        o por detr&aacute;s de cada jugador.<br>
+        Usaremos estas capas para plasmar piedras, paredes, objetos a recoger 
+        por el jugador, matorrales, etc., codificando qu&eacute; hacer cuando 
+        un avatar colisione con cada uno de estos elementos.</p>
+      <p>- Capa de Suelos y Fondos. Como capa m&aacute;s interna, la m&aacute;s 
+        alejada de los ojos del usuario, colocaremos los elementos gr&aacute;ficos 
+        que aparecer&aacute;n por debajo del avatar y los obst&aacute;culos, no 
+        colisionando jam&aacute;s con ellos y siempre colocados bajo ellos y la 
+        capa de techos y nubes. Aqu&iacute; representamos los suelos del juego, 
+        lagos, fondos, etc.Respecto a la programaci&oacute;n de un juego, un concepto 
+        com&uacute;n a todos ellos, sea bajo la tecnolog&iacute;a que sea, es 
+        el del BUCLE DE JUEGO (GameLoop). Desde que el usuario pulsa una tecla 
+        para realizar una acci&oacute;n hasta que observa su resultado en la pantalla, 
+        la aplicaci&oacute;n debe realizar distintas tareas. Todas ellas aparecen 
+        generalmente en un bucle que itera mientras el juego no termine, tan r&aacute;pido 
+        como el sistema lo permita, comprobando constantemente la pulsaci&oacute;n 
+        de las teclas del juego y efectuando una u otra acci&oacute;n dependiendo 
+        de ello.</p>
+      <p>Aqui vemos un ejemplo de bucle de juego. Aunque todos son similares, 
+        no tienen por qu&eacute; seguir exactamente esta estructura. En ella, 
+        comprobamos los siguientes pasos: </p>
+      <p>1. Lectura de la entrada. La primera acci&oacute;n del bucle ser&aacute; 
+        leer los eventos de entrada que pueden haberse producido desde la iteraci&oacute;n 
+        anterior, por medio de joystick, rat&oacute;n, teclado, etc.<br>
+        2. Proceso de la entrada. Tras lo anterior, si hay acci&oacute;n se procesa, 
+        realizando lo que tengamos dispuesto para ella: mover al avatar, realizar 
+        un disparo, etc.<br>
+        3. Respuesta a la entrada. Ahora se realiza todo lo que provoca la acci&oacute;n 
+        y que no queda bajo el control del usuario; movimientos o reacciones del 
+        entorno del avatar provocadas por la acci&oacute;n anterior: explosiones 
+        provocadas por el anterior disparo del avatar, comprobar colisiones ante 
+        movimientos del avatar, reacciones de los enemigos (movimientos, disparos, 
+        cambios de apariencia), etc.<br>
+        4. Otras tareas. Tras ello, se realizan tareas secundarias como son actualizar 
+        la apariencia de la capa de fondo, activar sonidos o vibraciones, realizar 
+        trabajos de sincronizaci&oacute;n, etc.<br>
+        5. Presentar resultado. Tras toda la l&oacute;gica anterior, queda por 
+        fin presentarle en pantalla al usuario el resultado de su interacci&oacute;n 
+        con el juego, volcando en pantalla toda la gr&aacute;fica generada con 
+        las acciones anteriores.</p>
+      <p>Al bucle entraremos tras inicializar los componentes necesarios para 
+        la ejecuci&oacute;n del juego y<br>
+        saldremos de &eacute;l cuando se considere la partida terminada. Ya veremos 
+        en el ejemplo final como codificamos este bucle en MIDP.<br>
+        Con respecto a la tecnolog&iacute;a que nos ocupa, J2ME, la creaci&oacute;n 
+        de juegos para dispositivos m&oacute;viles con ella se remonta a los inicios 
+        de la programaci&oacute;n MIDP, existiendo juegos para MIDP 1.0 muy conseguidos, 
+        realizada su gr&aacute;fica tan s&oacute;lo con las herramientas que ofrece 
+        la API de creaci&oacute;n de interfaces de bajo nivel. Quiz&aacute;s el 
+        juego que deseemos implementar podr&iacute;a hacerse bajo MIDP 1.0, pero 
+        es seguro que utilizando MIDP 2.0 su creaci&oacute;n ser&aacute; mucho 
+        m&aacute;s f&aacute;cil, r&aacute;pida y optimizada.<br>
+        Con esta idea como aportaci&oacute;n primordial, apareci&oacute; la especificaci&oacute;n 
+        MIDP 2.0, ofreciendo al<br>
+        desarrollador librer&iacute;as para crear de forma sencilla interfaces 
+        gr&aacute;ficas m&aacute;s r&aacute;pidas utilizando<br>
+        menos recursos y con un tama&ntilde;o menor del JAR a descargar. Adem&aacute;s 
+        de esta API de juegos,<br>
+        dispondremos de muchas otras herramientas que hemos ido estudiando en 
+        los cap&iacute;tulos anteriores y con las cuales dotaremos a nuestros 
+        juegos de capacidades impresionantes.</p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

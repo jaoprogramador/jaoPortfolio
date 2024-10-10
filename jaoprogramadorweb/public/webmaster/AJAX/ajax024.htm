@@ -1,0 +1,69 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>C&oacute;mo hacer una p&aacute;gina AJAX</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta name="keywords" content="Primera página AJAX, Como hacer una pagina AJAX, Manual AJAX, tutorial AJAX, Ejemplos AJAX, ejercicios AJAX">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2>Funciones para arrays</h2></td>
+  </tr>
+  <tr> 
+    <td height="394" colspan="3"> <p>Las utilidades a&ntilde;adidas a los arrays 
+        de JavaScript es otro de los puntos fuertes de Prototype:<br>
+        clear(): vac&iacute;a de contenidos el array y lo devuelve<br>
+        compact(): devuelve el array sin elementos null o undefined<br>
+        first(): devuelve el primer elemento del array<br>
+        flatten(): convierte cualquier array que se le pase en un array unidimensional. 
+        Se realiza un proceso recursivo que va &quot;aplanando&quot; el array:<br>
+        var array_original = [&quot;1&quot;, &quot;2&quot;, 3,<br>
+        [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;,<br>
+        [&quot;A&quot;, &quot;B&quot;, &quot;C&quot;]<br>
+        ]<br>
+        ];<br>
+        var array_plano = array_original.flatten();<br>
+        // array_plano = [&quot;1&quot;, &quot;2&quot;, 3, &quot;a&quot;, &quot;b&quot;, 
+        &quot;c&quot;, &quot;A&quot;, &quot;B&quot;, &quot;C&quot;]<br>
+        indexOf(value): devuelve el valor de la posici&oacute;n del elemento en 
+        el array o -1 si no lo encuentra<br>
+        var array = [&quot;1&quot;, &quot;2&quot;, 3, [&quot;a&quot;, &quot;b&quot;, 
+        &quot;c&quot;, [&quot;A&quot;, &quot;B&quot;, &quot;C&quot;] ] ];<br>
+        array.indexOf(3); // 2<br>
+        array.indexOf(&quot;C&quot;); // -1<br>
+        last(): devuelve el &uacute;ltimo elemento del array<br>
+        reverse(): devuelve el array original en sentido inverso:<br>
+        var array = [&quot;1&quot;, &quot;2&quot;, 3, [&quot;a&quot;, &quot;b&quot;, 
+        &quot;c&quot;, [&quot;A&quot;, &quot;B&quot;, &quot;C&quot;] ] ];<br>
+        array.reverse();<br>
+        // array = [[&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, [&quot;A&quot;, 
+        &quot;B&quot;, &quot;C&quot;]], 3, &quot;2&quot;, &quot;1&quot;]<br>
+        shift(): devuelve el primer elemento del array y lo extrae del array (el 
+        array se modifica y su<br>
+        longitud disminuye en 1 elemento)<br>
+        without(): devuelve el array del que se han eliminado todos los elementos 
+        que coinciden con los<br>
+        argumentos que se pasan a la funci&oacute;n. Permite filtrar los contenidos 
+        de un array<br>
+        var array = [12, 15, 16, 3, 40].without(16, 12)<br>
+        // array = [15, 3, 40]</p></td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

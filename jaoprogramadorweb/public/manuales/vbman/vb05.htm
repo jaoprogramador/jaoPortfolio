@@ -1,0 +1,199 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Estructuras Visual Basic</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta name="keywords" content="Estructuras, Manual Visual Basic,Tutorial Visual Basic, Ejemplos Visual Basic">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="38" colspan="2"> <h2>Estructuras</h2></td>
+  </tr>
+  <tr> 
+    <td height="144" colspan="2">Una estructura o registro es un nuevo tipo de 
+      datos definido por el usuario que puede ser manipulado de la misma forma 
+      que los tipos predefinidos. Una estructura puede definirse como una colecci&oacute;n 
+      de datos de diferentes tipos evidentemente relacionados.<br> <br>
+      Para crear una estructura hay que utilizar la sentencia Type ... End 
+      Type. Esta sentencia solamente puede aparecer en la secci&oacute;n 
+      de declaraciones de un m&oacute;dulo. Por ejemplo:<br> <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Private 
+      Type Ficha<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nombre As String * 
+      60<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Direcci&oacute;n As 
+      String * 40<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Telefono as Long<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dni as Long<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;End Type<br> <br>
+      Este ejemplo declara un tipo de datos denominado Ficha que consta 
+      de cuatro miembros o campos, denominados: Nombre, Direcci&oacute;n, 
+      Telefono, y Dni.<br> <br>
+      Una vez definido un tipo de datos, podemos declarar variables de ese tipo, 
+      globales, a nivel de un m&oacute;dulo, o bien locales. Por ejemplo, la siguiente 
+      sentencia declara la variable alum de tipo ficha. Esta variable estar&aacute; 
+      formada por los miembros Nombre, Direcci&oacute;n, Tel&eacute;fono y 
+      Dni.<br> <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dim Alum as ficha<br>
+      <br>
+      La siguiente tabla indica d&oacute;nde y con qu&eacute; &aacute;mbito se 
+      pueden declarar tipos definidos por el usuario, as&iacute; como variables 
+      de esos tipos.<br> <br> <table width="98%">
+        <tr> 
+          <td >Procedimiento/M&oacute;dulo</td>
+          <td>Puedo crear una estructura como...</td>
+          <td >Las variables de una estructura 
+            pueden ser...</td>
+        </tr>
+        <tr> 
+          <td>Procedimientos</td>
+          <td>No puede</td>
+          <td>S&oacute;lo locales</td>
+        </tr>
+        <tr> 
+          <td>M&oacute;dulos est&aacute;ndar</td>
+          <td>Private o Public</td>
+          <td>Private o Public</td>
+        </tr>
+        <tr> 
+          <td>Fromularios</td>
+          <td>S&oacute;lo Private</td>
+          <td>S&oacute;lo Private</td>
+        </tr>
+        <tr> 
+          <td>Modulos de clase</td>
+          <td>S&oacute;lo Private</td>
+          <td>S&oacute;lo Private</td>
+        </tr>
+      </table>
+      <p>Para referirse a un determinado miembro de una estructura se utiliza 
+        la notaci&oacute;n variable.miembro. Por ejemplo:<br>
+        &nbsp;&nbsp;&nbsp;Alum.Dni = 111333444<br>
+        <br>
+        A su vez, un miembro de una estructura puede ser otra estructura. Por 
+        ejemplo, observe a continuaci&oacute;n el miembro FechaContrato:<br>
+        &nbsp;&nbsp;&nbsp;Private Type Fecha<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dia As Integer<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mes As Integer<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&ntilde;o As Integer<br>
+        &nbsp;&nbsp;&nbsp;End Type<br>
+        &nbsp;&nbsp;&nbsp;Private Type Ficha<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FechaContrato As Fecha<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nombre As String * 60<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Direcci&oacute;n As String * 40<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Telefono As Long<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dni As Long<br>
+        &nbsp;&nbsp;&nbsp;End Type<br>
+        &nbsp;&nbsp; <br>
+        Puesto que el miembro FechaContrato es a su vez una estructura, 
+        para acceder a uno de sus miembros, por ejemplo a D&iacute;a, 
+        escribir&iacute;amos:<br>
+        <br>
+        Dim Alum1 As Ficha, Alum2 As Ficha<br>
+        &nbsp;&nbsp;&nbsp;...<br>
+        Alum2 = Alum1<br>
+        <br>
+        Un tipo definido por el usuario puede tambi&eacute;n contener miembros 
+        que sean matrices est&aacute;ticas (de longitud fija) y matrices din&aacute;micas.<br>
+        <br>
+        &nbsp;&nbsp;&nbsp;Private Type Ficha<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nombre As String * 60<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Direcci&oacute;n As String * 40<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Asignaturas() As String 'matriz din&aacute;mica<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AsigsOptativas(3) As String&nbsp;'matriz 
+        de longitud fija<br>
+        &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;Dni As Long<br>
+        &nbsp;&nbsp;&nbsp;End Type<br>
+        <br>
+        Para acceder a un elemento de un miembro que es una matriz, por ejemplo 
+        al elemento AsigsOptativas(0), escribir&iacute;amos:<br>
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;Dim Alum1 As Ficha<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;Alum1.AsigsOptativas(0) = &quot;Informatica I&quot;</p>
+      <p>Sentencia With ... End With</p>
+      <p>A menudo necesitar&aacute; realizar varias acciones diferentes sobre 
+        el mismo objeto. Por ejemplo, puede que necesite establecer varias propiedades 
+        de un mismo objeto. Una manera de hacerlo es as&iacute;:<br>
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;Private Sub Form_Load()<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MiBoton.Caption = &quot;Aceptar&quot;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MiBoton.Visible = True<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MiBoton.Top = 250<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MiBoton.Left =5500&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MiBoton.Enabled = True<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;End Sub<br>
+        <br>
+        Observe que todas estas sentencias utilizan la misma variable objeto, 
+        MiBot&oacute;n. Puede hacer que este c&oacute;digo resulte m&aacute;s 
+        f&aacute;cil de escribir, m&aacute;s legible y m&aacute;s eficiente si 
+        utiliza la sentencia With ... End With.<br>
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;Private Sub Form_Load()<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;With MiBoton<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.Caption 
+        = &quot;Aceptar&quot;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.Visible 
+        =True<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.Top 
+        = 250<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.Left 
+        =5500&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.Enabled 
+        = True <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; End Sub<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;End Sub <br>
+        <br>
+        La sentencia With puede aplicarla tambi&eacute;n sobre un objeto variable 
+        de un tipo definido por el usuario. Por ejemplo:<br>
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;Dim Alum1 As Ficha<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;With Alum1<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.Nombre = &quot;Juantxu&quot;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;. Dni = 111222333<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;End With<br>
+        <br>
+        Tambi&eacute;n puede anidar instrucciones With si coloca una sentencia 
+        With ... End With dentro de otra.</p>
+      <p>Matriz de estructuras</p>
+      <p>Tambi&eacute;n se posible declarar una matriz de estructura. Por ejemplo:<br>
+        <br>
+        &nbsp;&nbsp;&nbsp;Dim Alum(99) As Ficha<br>
+        <br>
+        Este ejemplo define una matriz de 100 elementos, Alum(0) Alum(99), cada 
+        uno de los cuales es una estructura de tipo Ficha. Para acceder a un miembro 
+        del elemento 1 de la matriz, por ejemplo a Nombre, escribir&iacute;amos:<br>
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Alum(1) .Nombre = &quot;Juantxu Arana&quot;<br>
+        <br>
+        Como ejemplo, vamos a crear una aplicaci&oacute;n que defina una matriz 
+        denominada alumno en la que cada elemento sea una estructura del tipo 
+        Ficha con los miembros indicados a continuaci&oacute;n:<br>
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Private Type Ficha<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nombre As String 
+        * 40<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nota As Single <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;End Type<br>
+      </p></td>
+  </tr>
+  <tr> 
+    <td></td>
+    <td> 
+      <div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

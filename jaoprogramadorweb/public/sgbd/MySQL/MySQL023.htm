@@ -1,0 +1,150 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Ejercicios MySQL</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="MySQL, sql, pl/sql, programacion MySQL, ejercicios MySQL, ejemplos MySQL, select">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2>C A D E N A S</h2></td>
+  </tr>
+  <tr> 
+    <td><h3>Cadenas de caracteres</h3>
+      <p>Una cadena (string) es una secuencia de caracteres, encerrada por comillas 
+        simples (''') o dobles ('&quot;'). Ejemplos:<br>
+        'una cadena'<br>
+        &quot;otra cadena&quot;<br>
+        Si el modo de servidor tiene habilitado ANSI_QUOTES, las cadenas solamente 
+        pueden delimitarse con comillas simples. Una cadena<br>
+        delimitada por comillas dobles ser&aacute; interpretada como un identificador.<br>
+        A partir de MySQL 4.1.1, las cadenas pueden tener una parte indicativa 
+        del conjunto de caracteres y una cl&aacute;usula COLLATE:<br>
+        [_conjunto_caracteres]'cadena' [COLLATE tipo_ordenaci&oacute;n]<br>
+        Ejemplos:<br>
+        SELECT _latin1'cadena';<br>
+        SELECT _latin1'cadena' COLLATE latin1_danish_ci;<br>
+        Para m&aacute;s informaci&oacute;n sobre esta sintaxis consulte Secci&oacute;n 
+        10.3.7, &#8220;Conjunto de caracteres y colaci&oacute;n de columnas &#8220;car&aacute;cter&#8221;&#8221;.<br>
+        Dentro de una cadena, ciertas secuencias de caracteres tienen un significado 
+        especial. Cada una de estas secuencias comienza con<br>
+        una barra diagonal invertida ('\'), conocida como caracter de escape. 
+        MySQL reconoce las siguientes secuencias de escape:<br>
+        \0 Un caracter ASCII 0 (NUL).<br>
+        \' Un caracter de comilla simple (''').<br>
+        \&quot; Un car&aacute;cter de comilla doble ('&quot;').<br>
+        \b Un car&aacute;cter de retroceso.<br>
+        \n Un car&aacute;cter de salto de l&iacute;nea.<br>
+        \r Un car&aacute;cter de retorno de carro.<br>
+        \t Un car&aacute;cter de tabulaci&oacute;n.<br>
+        \Z ASCII 26 (Control-Z). Este car&aacute;cter puede codificarse como '\Z' 
+        para solventar el problema de que el ASCII 26 se<br>
+        interpreta en Windows como fin de fichero. (El ASCII 26 causar&aacute; 
+        problemas si se intenta emplear mysql nombre_<br>
+        bd &lt; nombre_fichero.)<br>
+        \\ Un car&aacute;cter de barra invertida ('\').<br>
+        \% Un car&aacute;cter '%'. Consulte la nota a continuaci&oacute;n.<br>
+        \_ Un car&aacute;cter '_'. Consulte la nota a continuaci&oacute;n.<br>
+        Estas secuencias son sensibles a may&uacute;sculas. Por ejemplo, '\b' 
+        se interpreta como car&aacute;cter de retroceso, pero '\B' se interpreta 
+        co-<br>
+        mo 'B'.<br>
+        Las secuencias '\%' y '\_' se emplean para buscar apariciones literales 
+        de '%' y '_' en un contexto de b&uacute;squeda por patrones, donde<br>
+        en otro caso se debieran interpretar como caracteres comodines. Consulte 
+        Secci&oacute;n 12.3.1, &#8220;Funciones de comparaci&oacute;n de cadenas<br>
+        de caracteres&#8221;. Hay que advertir que si se emplean '\%' o '\_' en 
+        otra situaci&oacute;n, devolver&aacute;n las cadenas '\%' y '\_' y no 
+        '%' y '_'.<br>
+        En toda otra secuencia de escape, la barra invertida se ignora. Esto es, 
+        el car&aacute;cter al que se aplica se interpreta como si no tuviera<br>
+        delante un car&aacute;cter de escape.<br>
+        Hay varias formas de incluir comillas dentro de una cadena:<br>
+        &#8226; Un ''' dentro de una cadena que est&aacute; delimitada por ''' 
+        debe escribirse como ''''.<br>
+        &#8226; Un '&quot;' dentro de una cadena que est&aacute; delimitada por 
+        '&quot;' debe escribirse como '&quot;&quot;'.<br>
+        &#8226; Se puede preceder el car&aacute;cter de comillas con un car&aacute;cter 
+        de escape. ('\').<br>
+        &#8226; Un ''' dentro de una cadena delimitada con '&quot;' no necesita 
+        ning&uacute;n tratamiento especial, ni colocarla en forma doble ni precederla<br>
+        con un car&aacute;cter de escape. Lo mismo se cumple para una '&quot;' 
+        colocada en una cadena delimitada con '''.<br>
+        Las siguientes sentencias SELECT demuestran c&oacute;mo act&uacute;an 
+        las comillas y los caracteres de escape:<br>
+        mysql&gt; SELECT 'hola', '&quot;hola&quot;', '&quot;&quot;hola&quot;&quot;', 
+        'hol''a', '\'hola';<br>
+        +------+--------+----------+-------+-------+<br>
+        | hola | &quot;hola&quot; | &quot;&quot;hola&quot;&quot; | hol'a | 'hola 
+        |<br>
+        +------+--------+----------+-------+-------+<br>
+        mysql&gt; SELECT &quot;hola&quot;, &quot;'hola'&quot;, &quot;''hola''&quot;, 
+        &quot;hol&quot;&quot;a&quot;, &quot;\&quot;hola&quot;;<br>
+        +------+--------+----------+-------+-------+<br>
+        | hola | 'hola' | ''hola'' | hol&quot;a | &quot;hola |<br>
+        +------+--------+----------+-------+-------+<br>
+        mysql&gt; SELECT 'Estas\nSon\nCuatro\nL&iacute;neas';<br>
+        +--------------------+<br>
+        | Estas<br>
+        Son<br>
+        Cuatro<br>
+        L&iacute;neas |<br>
+        +--------------------+<br>
+        mysql&gt; SELECT 'barra\ desaparece';<br>
+        +------------------+<br>
+        | barra desaparece |<br>
+        +------------------+<br>
+        Si se pretende insertar datos binarios en una columna de tipo cadena (por 
+        ejemplo un BLOB), los siguientes caracteres deber&aacute;n representarse<br>
+        con secuencias de escape:<br>
+        NUL Byte NUL (ASCII 0). Este car&aacute;cter se representar&aacute; con 
+        '\0' (una barra invertida seguida de un car&aacute;cter ASCII '0').<br>
+        \ Barra invertida (ASCII 92). Este car&aacute;cter se representar&aacute; 
+        con '\\'.<br>
+        ' Comilla simple (ASCII 39). Este car&aacute;cter se representar&aacute; 
+        con '\''.<br>
+        &quot; Comilla doble (ASCII 34). Este car&aacute;cter se representar&aacute; 
+        con '\&quot;'.<br>
+        Al escribir programas de aplicaci&oacute;n, cualquier cadena que pudiese 
+        contener cualquiera de estos caracteres especiales deber&aacute; ser<br>
+        preparada antes de utilizarse como valor en una sentencia SQL que se enviar&aacute; 
+        al servidor MySQL. Esto puede hacerse de dos maneras:<br>
+        &#8226; Procesando la cadena con una funci&oacute;n que reemplace los 
+        caracteres especiales con una secuencia de escape. Por ejemplo, en un<br>
+        programa C, se puede emplear la funci&oacute;n de la API de C mysql_real_escape_string(). 
+        Consulte Secci&oacute;n 24.2.3.48,<br>
+        &#8220;mysql_real_escape_string()&#8221;. La interfaz DBI de Perl proporciona 
+        un m&eacute;todo quote para convertir caracteres especiales<br>
+        a las secuencias de escape equivalentes. Consulte Secci&oacute;n 24.4, 
+        &#8220;La API Perl de MySQL&#8221;.<br>
+        &#8226; Como alternativa al reemplazo expl&iacute;cito de caracteres especiales, 
+        varias APIs de MySQL proporcionan la parametrizaci&oacute;n de<br>
+        consultas, lo que permite insertar marcadores especiales en una consulta 
+        y luego asociarles valores al momento de emitirla. En<br>
+        este caso, la API toma a su cargo el reemplazo de caracteres especiales 
+        en los valores.</p>
+   
+        </td>
+    <td>&nbsp;</td>
+    <td><a href="http://www.euskalnet.net/juanarana/oraclezip/Ejer3.rar"><img src="../../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td>
+<div align="right"><a href="http://www.euskalnet.net/juanarana/index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a>
+      </div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

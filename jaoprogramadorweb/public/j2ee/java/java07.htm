@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Conceptos Java</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación en Java,Programas Java,Aplicaciones en Java,Ejercicios en Java, Ejemplos de Java,Tutorial de Java,Manual Java" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Java, Manual Java, tutorial Java, Ejemplos Java, ejercicios Java">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> <strong>Conceptos Java</strong></h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <h3>Clase</h3><p>Una clase es una agrupaci&oacute;n de datos 
+        (variables o campos) y de funciones (m&eacute;todos) que operan<br>
+        sobre esos datos. A estos datos y funciones pertenecientes a una clase 
+        se les denomina variables y<br>
+        m&eacute;todos o funciones miembro. La programaci&oacute;n orientada a 
+        objetos se basa en la programaci&oacute;n de<br>
+        clases. Un programa se construye a partir de un conjunto de clases.<br>
+        Una vez definida e implementada una clase, es posible declarar elementos 
+        de esta clase de<br>
+        modo similar a como se declaran las variables del lenguaje (de los tipos 
+        primitivos int, double,<br>
+        String, &#8230;). Los elementos declarados de una clase se denominan objetos 
+        de la clase. De una &uacute;nica<br>
+        clase se pueden declarar o crear numerosos objetos. La clase es lo gen&eacute;rico: 
+        es el patr&oacute;n o modelo<br>
+        para crear objetos. Cada objeto tiene sus propias copias de las variables 
+        miembro, con sus propios<br>
+        valores, en general distintos de los dem&aacute;s objetos de la clase. 
+        Las clases pueden tener variables<br>
+        static, que son propias de la clase y no de cada objeto.</p>
+		<h3>Herencia</h3>
+      <p>La herencia permite que se pueden definir nuevas clases basadas en clases 
+        existentes, lo cual facilita re-utilizar c&oacute;digo previamente desarrollado. 
+        Si una clase deriva de otra (extends) hereda todas sus variables y m&eacute;todos. 
+        La clase derivada puede a&ntilde;adir nuevas variables y m&eacute;todos 
+        y/o redefinir las variables y m&eacute;todos heredados.<br>
+        En Java, a diferencia de otros lenguajes orientados a objetos, una clase 
+        s&oacute;lo puede derivar de una &uacute;nica clase, con lo cual no es 
+        posible realizar herencia m&uacute;ltiple en base a clases. Sin embargo 
+        es posible &#8220;simular&#8221; la herencia m&uacute;ltiple en base a 
+        las interfaces.</p>
+		<h3>Interface</h3>
+      <p>Una interface es un conjunto de declaraciones de funciones. Si una clase 
+        implementa (implements) una interface, debe definir todas las funciones 
+        especificadas por la interface. Una clase puede implementar m&aacute;s 
+        de una interface, representando una forma alternativa de la herencia m&uacute;ltiple.<br>
+        A su vez, una interface puede derivar de otra o incluso de varias interfaces, 
+        en cuyo caso incorpora todos los m&eacute;todos de las interfaces de las 
+        que deriva.</p>
+		<h3>Package</h3>
+      <p>Un package es una agrupaci&oacute;n de clases. Existen una serie de packages 
+        incluidos en el lenguaje (ver jerarqu&iacute;a de clases que aparece en 
+        el API de Java).<br>
+        Adem&aacute;s el usuario puede crear sus propios packages. Lo habitual 
+        es juntar en packages las clases que est&eacute;n relacionadas. Todas 
+        las clases que formen parte de un package deben estar en el mismo directorio.</p>
+		<h3>La jerarquía de clases de Java (API)</h3>
+      <p>Durante la generaci&oacute;n de c&oacute;digo en Java, es recomendable 
+        y casi necesario tener siempre a la vista la documentaci&oacute;n on-line 
+        del API de Java 1.1 &oacute; Java 1.2. En dicha documentaci&oacute;n es 
+        posible ver tanto la jerarqu&iacute;a de clases, es decir la relaci&oacute;n 
+        de herencia entre clases, como la informaci&oacute;n de los distintos 
+        packages que componen las librer&iacute;as base de Java.<br>
+        Es importante distinguir entre lo que significa herencia y package. Un 
+        package es una agrupaci&oacute;n arbitraria de clases, una forma de organizar 
+        las clases. La herencia sin embargo consisteen crear nuevas clases en 
+        base a otras ya existentes. Las clases incluidas en un package no derivan 
+        por lo general de una &uacute;nica clase.<br>
+        En la documentaci&oacute;n on-line se presentan ambas visiones: &#8220;Package 
+        Index&#8221; y &#8220;Class Hierarchy&#8221;, tanto en Java 1.1 como en 
+        Java 1.2, con peque&ntilde;as variantes. La primera presenta la estructura 
+        del API de Java agrupada por packages, mientras que en la segunda aparece 
+        la jerarqu&iacute;a de clases. Hay que resaltar una vez m&aacute;s el 
+        hecho de que todas las clases en Java son derivadas de la clase java.lang.Object, 
+        por lo que heredan todos los m&eacute;todos y variables de &eacute;sta.<br>
+        Si se selecciona una clase en particular, la documentaci&oacute;n muestra 
+        una descripci&oacute;n detallada de todos los m&eacute;todos y variables 
+        de la clase. A su vez muestra su herencia completa (partiendo de la clase 
+        java.lang.Object).</p>
+		
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

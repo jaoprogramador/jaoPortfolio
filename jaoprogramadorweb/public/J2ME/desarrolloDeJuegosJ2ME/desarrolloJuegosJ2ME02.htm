@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Indice J2ME</title>
+<META http-equiv=Content-Language content=es>
+<META content="Manual J2ME, ejemplos J2ME, codigos J2ME" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Manual J2ME, ejemplos J2ME, codigos J2ME">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2>Caracter&iacute;sticas de un juego interactivo</h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3">Por juego interactivo se entiende toda aplicaci&oacute;n 
+      orientada al ocio, con una importante carga gr&aacute;fica y multimedia, 
+      y que responde activamente a la interacci&oacute;n del usuario. La creaci&oacute;n 
+      de estas aplicaciones estar&aacute;, por lo general, marcada por la plataforma 
+      a la que se orienta su uso, sea PC, consola o dispositivo m&oacute;vil. 
+      Dependiendo de la potencia tecnol&oacute;gica de cada plataforma, el juego 
+      podr&aacute; explotar unas caracter&iacute;sticas t&eacute;cnicas u otras.<br>
+      Existen distintas caracter&iacute;sticas a tener en cuenta a la hora de 
+      desarrollar un juego interactivo. Algunas de ellas son, por ejemplo:<br>
+      - Gr&aacute;ficos. Los gr&aacute;ficos nos ofrecen la forma de ver el juego 
+      y, con ello, la principal caracter&iacute;stica de su comunicaci&oacute;n 
+      con el usuario. La calidad visual con la que se aprecian los elementos en 
+      la pantalla es primordial para mantener la satisfacci&oacute;n con el producto 
+      que se est&aacute; utilizando.<br>
+      En los dispositivos m&oacute;viles esta calidad est&aacute; cada d&iacute;a 
+      m&aacute;s asegurada, aunque a&uacute;n no puede compararse con la dada 
+      por tarjetas gr&aacute;ficas de m&aacute;s capacidad, utilizadas en otros 
+      sistemas. Quiz&aacute;s intentando asumir esto y haciendo nuestros juegos 
+      m&aacute;s sencillos, sea suficiente para que la gr&aacute;fica a ofrecer 
+      sea inmejorable en ese juego concreto (caso de juegos tipo tetris, por ejemplo). 
+      En el apartado &quot;mercado&quot; valoraremos esto.<br>
+      Por otro lado, aunque ya existen dispositivos MIDP con capacidad de ofrecer 
+      juegos en 3D (potenciados con la JSR 184), a&uacute;n debemos limitarnos 
+      a la bidimensionalidad si deseamos llegar al m&aacute;ximo n&uacute;mero 
+      de usuarios.- Jugabilidad. La jugabilidad es el grado de adicci&oacute;n 
+      que somos capaces de provocar en el usuario por medio de nuestro juego. 
+      El control de la interface es una de las facetas m&aacute;s importantes 
+      para este concepto. La forma en que interactuamos con el juego debe ser 
+      f&aacute;cil e intuitiva para que el aprendizaje del uso de &eacute;ste 
+      no sea costoso y el juego consiga as&iacute; llegar al usuario r&aacute;pidamente. 
+      El teclado del dispositivo m&oacute;vil generalmente ser&aacute; la herramienta 
+      con la que contamos para esta interacci&oacute;n; estando las teclas v&aacute;lidas 
+      para acciones de juego, limitadas a las estrictamente necesarias.<br>
+      La jugabilidad tambi&eacute;n estar&aacute; fuertemente afectada por el 
+      grado de comprensi&oacute;n del usuario de la idea del juego. Hay que evitar 
+      que el usuario se pierda en detalles o en conceptos demasiado complejos 
+      que le impidan ver con claridad su rol, el objetivo que debe cumplir. Si 
+      el usuario tiene claro qu&eacute; debe hacer y qu&eacute; debe conseguir 
+      en el juego, le ser&aacute; mucho m&aacute;s f&aacute;cil su inmersi&oacute;n 
+      en &eacute;ste.<br>
+      Por &uacute;ltimo, tambi&eacute;n relacionada est&aacute; la capacidad de 
+      la l&oacute;gica de la aplicaci&oacute;n de &quot;presentarnos batalla&quot;, 
+      esto es, el nivel de dificultad que ofrecer&aacute; durante la ejecuci&oacute;n 
+      del juego. &Eacute;ste no debe ser ni muy bajo (el usuario puede sentirse 
+      aburrido, infravalorado) ni muy alto (que no sea capaz de resolver una situaci&oacute;n 
+      repetidamente y llegue a desechar el juego). Para capacitar a la aplicaci&oacute;n 
+      de estrategias con que<br>
+      ganarnos la partida, existen diversas tendencias en inteligencia artificial 
+      entre las cuales despuntan las redes neuronales, los algoritmos de b&uacute;squeda 
+      en grafos o &aacute;rboles de opciones posibles, y los sistemas basados 
+      en reglas y hechos.<br>
+      - Multimedia. En general, la calidad de sonido ha evolucionado paralelamente 
+      a los gr&aacute;ficos, siendo ambos aspectos los decisivos a la hora de 
+      crear el contexto del juego en s&iacute;. Como dec&iacute;amos en el cap&iacute;tulo 
+      anterior, los usuarios desean ver y tambi&eacute;n escuchar lo que est&aacute; 
+      ocurriendo en la pantalla del dispositivo debiendo, para obtener lo segundo, 
+      crear en el juego un contexto sonoro con el que facilitarle su inmersi&oacute;n 
+      en la aplicaci&oacute;n.<br>
+      En los juegos J2ME podremos utilizar una m&uacute;sica ambiental para mantener 
+      la tensi&oacute;n, provocar sensaciones en el jugador o simplemente marcar 
+      la diferencia entre una y otra situaci&oacute;n en su recorrido por el juego. 
+      Por otro lado, tambi&eacute;n podremos valernos de la emisi&oacute;n de 
+      ciertos sonidos puntuales y vibraciones del dispositivo con los que avisar 
+      al usuario de ciertos eventos o remarcar alguna acci&oacute;n importante 
+      que se haya producido.<br>
+      Asimismo, la emisi&oacute;n de un v&iacute;deo de presentaci&oacute;n para 
+      cada fase del juego, por ejemplo, tambi&eacute;n nos ser&aacute; de gran 
+      ayuda para introducir al usuario en el objetivo deljuego y marcarle el rol 
+      que representa dentro de &eacute;l. Aunque quiz&aacute;s todo esto no sea 
+      necesario en nuestro juego, tendremos capacidad para ello en MIDP 2.0.<br>
+      - Mercado. El mercado potencial de un juego para m&oacute;vil es mucho m&aacute;s 
+      general que el de juegos de PC o consola, ya que pr&aacute;cticamente todos 
+      tenemos ya un m&oacute;vil. &Eacute;ste es un p&uacute;blico amplio y diverso, 
+      el cual, aunque no est&eacute; acostumbrado a utilizar juegos en sistemas 
+      de sobremesa, quiz&aacute;s s&iacute; disponga de momentos de espera en 
+      su d&iacute;a en los cuales recurrir al ocio que puede proporcionarles el 
+      dispositivo m&oacute;vil que siempre lleva encima. Un juego como el famoso 
+      &quot;Tetris&quot; es un ejemplo perfecto de &eacute;xito en dispositivos 
+      m&oacute;viles. Cuatro simples teclas para controlarlo y un objetivo perfectamente 
+      definido, sencillo y con alta jugabilidad.<br>
+      Con esto en mente, deber&iacute;amos plantearnos el grado de sencillez (en 
+      t&eacute;rminos generales: gr&aacute;fica, control, objetivo, etc.) a aplicar 
+      hoy d&iacute;a a un juego MIDP, ya que si alguien realmente quiere jugar 
+      a un juego complejo y potente recurrir&aacute; a un PC, consola o sistemas 
+      de juego portables no MIDP (PSP, N-GAGE, etc.).<br>
+      Aunque todo es cuesti&oacute;n de gustos, la experiencia nos dice que bajo 
+      un dispositivo m&oacute;vil cuya finalidad es distinta a la del ocio y cuyas 
+      restricciones en gr&aacute;fica, control y sonido son patentes frente a 
+      una consola portable por ejemplo, si elaboramos algo complicado, debemos 
+      explicarlo muy bien y, por supuesto, tiene que manejarse de forma muy sencilla, 
+      ya que la mayor&iacute;a de usuarios de un m&oacute;vil no van a perder 
+      demasiado tiempo intentando comprender cu&aacute;l es el objetivo del juego 
+      o c&oacute;mo se controla &eacute;ste. En general, la imaginaci&oacute;n 
+      nos ser&aacute; mucho m&aacute;s &uacute;til que la t&eacute;cnica y en 
+      el caso del desarrollo J2ME, mucho m&aacute;s. 
+      <p>&nbsp;</p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

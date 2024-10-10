@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Sonidos en Applets</title>
+<META http-equiv=Content-Language content=es>
+<META content="Manual Applets, ejemplos Applets, codigos Applets" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Manual Applets, ejemplos Applets, codigos Applets">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> Sonidos en Applets</h2></td>
+  </tr>
+  <tr> 
+    <td  colspan="3"> <p>La clase Applet y la interface AudioClips permiten utilizar 
+        sonidos en applets. La Tabla muestra
+        algunos m&eacute;todos interesantes al respecto. 
+      <table width="470" border="1" align="center">
+        <tr>
+          <td>- M&eacute;todos de Applet</td>
+          <td>- Funci&oacute;n que realizan</td>
+        </tr>
+        <tr>
+          <td>public AudioClip getAudioClip(URL url)</td>
+          <td>Devuelve el objeto especificado por url, que implementa
+            la interface AudioClip</td>
+        </tr>
+        <tr>
+          <td>public AudioClip getAudioClip(URL url, String name)</td>
+          <td>Devuelve el objeto especificado por url (direcci&oacute;n base) 
+            y
+            name (direcci&oacute;n relativa)</td>
+        </tr>
+        <tr>
+          <td>play(URL url), play(URL url, String name)</td>
+          <td>Hace que suene el AudioClip correspondiente a la
+            direcci&oacute;n especificada</td>
+        </tr>
+        <tr>
+          <td>- M&eacute;todos de la interface AudioClip (en java.applet)</td>
+          <td>- Funci&oacute;n que realizan</td>
+        </tr>
+        <tr>
+          <td>void loop()</td>
+          <td>Ejecuta el sonido repetidamente</td>
+        </tr>
+        <tr>
+          <td>void play()</td>
+          <td>Ejecuta el sonido una sola vez</td>
+        </tr>
+        <tr>
+          <td>void stop()</td>
+          <td>Detiene el sonido</td>
+        </tr>
+      </table>
+      <p>Respecto a la carga de sonidos, por lo general es mejor cargar los sonidos 
+        en un thread distinto (creado en el m&eacute;todo init()) que en el propio 
+        m&eacute;todo init(), que tardar&iacute;a en devolver el control y permitir 
+        al usuario empezar a interaccionar con el applet. 
+      <p>Si el sonido no ha terminado de cargarse (en la thread especial para 
+        ello) y el usuario interacciona con el applet para ejecutarlo, el applet 
+        puede darle un aviso de que no se ha terminado de cargar.</td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

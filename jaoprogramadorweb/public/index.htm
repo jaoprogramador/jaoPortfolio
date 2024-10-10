@@ -1,16 +1,123 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title> J A O  P R O G R A M A D O R , Programación, Proyectos, Sistemas Gestores de bases de datos, Webmasters, COM, DCOM, HTML, ASP, PHP, VisualBasic, Oracle, SQL Server</title>
+<title>J A O P R O G R A M A D O R : Programaci&oacute;n, Proyectos, Sistemas Gestores de bases de datos, Webmasters, COM, DCOM, HTML, ASP, PHP, VisualBasic, Oracle, SQL Server</title>
 <META http-equiv=Content-Language content=es>
 <META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<meta name="keywords" content="JAOPROGRAMADOR,Programación, Proyectos, Sistemas Gestores de bases de datos, Webmasters, COM, DCOM, HTML, ASP, PHP, VisualBasic, Oracle, SQL Server">
+<meta name="keywords" content="Programación, Proyectos, Sistemas Gestores de bases de datos, Webmasters, COM, DCOM, HTML, ASP, PHP, VisualBasic, Oracle, SQL Server">
 <META content=euskalnet.net/jaoprogramador name=author>
 <META content="Copyright (c) 2005 jaoprogramador" name=copyright>
 <META scheme=RFC1766 content=español name=DC.Language>
 <META content=es,sp,spanish,español name=lang>
 <META content=all name=robots>
+<link href="styles/estilos.css" rel="stylesheet" type="text/css">
+<SCRIPT>
+ function GetCookie (name) { 
+ var arg = name + "="; 
+ var alen = arg.length; 
+ var clen = document.cookie.length; 
+ var i = 0; 
+ while (i < clen) {
+ var j = i + alen; 
+ if (document.cookie.substring(i, j) == arg) 
+ return getCookieVal (j); 
+ i = document.cookie.indexOf(" ", i) + 1; 
+ if (i == 0) break; 
+ } 
+ return null;
+ }
+ function SetCookie (name, value) { 
+ var argv = SetCookie.arguments; 
+ var argc = SetCookie.arguments.length; 
+ var expires = (argc > 2) ? argv[2] : null; 
+ var path = (argc > 3) ? argv[3] : null; 
+ var domain = (argc > 4) ? argv[4] : null; 
+ var secure = (argc > 5) ? argv[5] : false; 
+ document.cookie = name + "=" + escape (value) + 
+ ((expires == null) ? "" : ("; expires=" + expires.toGMTString())) + 
+ ((path == null) ? "" : ("; path=" + path)) + 
+ ((domain == null) ? "" : ("; domain=" + domain)) + 
+ ((secure == true) ? "; secure" : "");
+ }
+ function DeleteCookie (name) { 
+ var exp = new Date(); 
+ exp.setTime (exp.getTime() - 1); 
+ var cval = GetCookie (name); 
+ document.cookie = name + "=" + cval + "; expires=" + 
+exp.toGMTString();
+ }
+ var expDays = 30;
+ var exp = new Date(); 
+ exp.setTime(exp.getTime() + (expDays*24*60*60*1000));
+ function amt(){
+ var count = GetCookie('count')
+ if(count == null) {
+ SetCookie('count','1')
+ return 1
+ }
+ else {
+ var newcount = parseInt(count) + 1;
+ DeleteCookie('count')
+ SetCookie('count',newcount,exp)
+ return count
+ }
+ }
+ function getCookieVal(offset) {
+ var endstr = document.cookie.indexOf (";", offset);
+ if (endstr == -1)
+ endstr = document.cookie.length;
+ return unescape(document.cookie.substring(offset, endstr));
+ }
+ </SCRIPT>
+<script language="JavaScript">
+
+var speed = 100 
+var pause = 3000
+var timerID = null
+var bannerRunning = false
+var ar = new Array()
+ar[0] = ">>>> Bienvenido a:  <<<<"
+ar[1] = " JAO Programador, ..."
+ar[2] = " J2EE, Java, JDBC, Struts, EJB 3.0 ..."
+ar[3] = "..... Aplicaciones, proyectos, tutoriales ....."
+ar[4] = "..... C++, Visual Basic, Java, Oracle, SQL Server, HTML, PHP , ASP....."
+ar[5] = "..... Web diseñada por: "
+ar[6] = "..... Juantxu Arana Olalde ....."
+ar[7] = "..... jaoprogramador@gmail.com ....."
+var currentMessage = 0
+var offset = 0
+function stopBanner() {
+if (bannerRunning)
+clearTimeout(timerID)
+bannerRunning = false
+}
+function startBanner() {
+stopBanner()
+showBanner()
+}
+function showBanner() {
+var text = ar[currentMessage]
+if (offset < text.length) {
+if (text.charAt(offset) == " ")
+offset++ 
+var partialMessage = text.substring(0, offset + 1) 
+window.status = partialMessage
+offset++ // IE sometimes has trouble with "++offset"
+timerID = setTimeout("showBanner()", speed)
+bannerRunning = true
+} else {
+offset = 0
+currentMessage++
+if (currentMessage == ar.length)
+currentMessage = 0
+timerID = setTimeout("showBanner()", pause)
+bannerRunning = true
+}
+}
+startBanner();
+// -->
+</script>
 <script language="JavaScript" type="text/JavaScript">
 <!--
 function MM_reloadPage(init) {  //reloads the window if Nav4 resized
@@ -21,16 +128,78 @@ function MM_reloadPage(init) {  //reloads the window if Nav4 resized
 MM_reloadPage(true);
 //-->
 </script>
+
+
+
+<script language="JavaScript">
+<!--
+function preCarga() {
+  if (!document.images) return;
+  var ar = new Array();
+  var arguments = preCarga.arguments;
+  for (var i = 0; i < arguments.length; i++) {
+    ar[i] = new Image();
+    ar[i].src = arguments[i];
+  }
+}
+
+function MM_openBrWindow(theURL,winName,features) { //v2.0
+  window.open(theURL,winName,features);
+  return false;
+}
+//-->
+</script>
 </head>
 
-<frameset rows="88,*" cols="*" frameborder="NO" border="0" framespacing="0">
-  <frame src="marcosuperior.htm" name="topFrame" scrolling="NO" noresize >
-  <frameset rows="*" cols="125,*" framespacing="0" frameborder="NO" border="0">
-    <frame src="izqcapas.htm" name="leftFrame" scrolling="NO" noresize>
-    <frame src="intros/Proyectos.htm" name="mainFrame">
-  </frameset>
-</frameset>
-<noframes><body>
 
-</body></noframes>
+
+</script>
+<body  onLoad="preCarga('\imagenes\fondo_index.jpg', '\imagenes\index.swf')">
+
+<div id="Layer1" style="position:absolute; width:200px; height:115px; z-index:1; left: 0; top: 0;">
+  <table width="779" height="453" border="0" background="imagenes/fondo_index.jpg">
+    <tr>
+      <td>
+        <div id="Layer3" style="position:absolute; width:200px; height:115px; z-index:2; left: 157; top: 7;"> 
+          <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,29,0" width="580" height="377">
+            <param name="movie" value="imagenes/index.swf">
+            <param name="quality" value="high">
+            <param name="wmode" value="transparent">
+            <embed src="imagenes/index.swf" width="580" height="377" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" wmode="transparent"></embed></object>
+        </div>        
+		 
+        <div id="Layer4" style="position:absolute; width:200px; height:21px; z-index:3; left: 565px; top: 399px;">N&ordm; 
+          de visitas totales 
+         <script language=JavaScript src="http://server01.contadorwap.com/code.php?id=a4cd7aff2e7e390680b6eb976043ed2b&s=4&p=es"></script>
+<script language=JavaScript>
+  contadorwapstats("a4cd7aff2e7e390680b6eb976043ed2b",0,"grafico");
+</script>
+
+        </div>
+        <div id="Layer5" style="position:absolute; width:769px; height:22px; z-index:3; left: 8px; top: 424px;"> 
+          <table width="100%" border="0">
+            <tr>
+              <td><a href="j2ee/index.htm">J2EE</a> | 
+			  <a href="J2ME/index.htm">J2ME</a> | 
+			  <a href="proyectos/index.htm">Proyectos</a> 
+                | <a href="programacion/index.htm">Programaci&oacute;n</a> | <a href="sgbd/index.htm">SGBD</a> 
+                | <a href="webmaster/index.htm">WebMasters</a> | <a href="manuales/index.htm">Manuales</a> 
+                | <a href="COM/index.htm">COM/DCOM</a> | <a href="analisis/index.htm">Analisis</a> 
+                | <a href="redes/index.htm">Redes</a> 
+				| <a href="#" onClick="MM_openBrWindow('agradecurru/avisolegal.htm','AvisoLegal','width=555,height=291')">AvisoLegal</a> 
+                
+              </td>
+            </tr>
+          </table>
+        </div></td>
+    </tr>
+  </table>
+  
+</div>
+
+ 
+<div id="Layer2" style="position:absolute; width:200px; height:25px; z-index:2; left: 565; top: 371;"> 
+</div>
+</font>
+</body>
 </html>

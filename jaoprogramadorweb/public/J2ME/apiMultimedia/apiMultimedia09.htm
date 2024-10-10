@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Indice J2ME</title>
+<META http-equiv=Content-Language content=es>
+<META content="Manual J2ME, ejemplos J2ME, codigos J2ME" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Manual J2ME, ejemplos J2ME, codigos J2ME">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2>javax.microedition.media.control</h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <p>Aqu&iacute; aparece una gran aportaci&oacute;n 
+        de MMA al API Multimedia de MIDP 2.0. En total, se crean<br>
+        10 nuevos controles, dejando invariables los provenientes de MIDP 2.0 
+        VolumeControl y<br>
+        ToneControl. A continuaci&oacute;n, listamos (s&oacute;lo nos detendremos 
+        en VideoControl y su interface padre<br>
+        GUIControl) cu&aacute;les son estas novedades, en forma de interfaces 
+        hijas de Control.<h3>
+        INTERFACES:</h3>
+        
+      &#8226; FramePositioningControl extends Control. Esta interface nos proporciona 
+      control para posicionar la reproducci&oacute;n de un v&iacute;deo en un 
+      frame determinado. Cadaframe del v&iacute;deo vendr&aacute; determinado 
+      por su n&uacute;mero, siempre mayor o igual que 0, correspondiendo este 
+      &uacute;ltimo al media-time 0 inicial (inicio del media).<br>
+      &#8226; GUIControl extends Control. Control a utilizar con elementos multimedia 
+      susceptibles de ser presentados en la interface del usuario (GUI), dentro 
+      de un objeto de formulario (por ejemplo, v&iacute;deos). Ofrece dos elementos:<br>
+      o static int USE_GUI_PRIMITIVE. Define el modo en el que el media es reproducido, 
+      a usar con el m&eacute;todo initDisplayMode(). Con este modo, al llamar 
+      a initDisplayMode() ser&aacute; devuelto como salida directamente un objeto 
+      de la GUI, al cual se asocia el media a reproducir (v&iacute;deo usualmente).<br>
+      En este modo, el par&aacute;metro de entrada dado a este m&eacute;todo puede 
+      ser null o el nombre del objeto de la GUI al que se desea asociar.<br>
+      o Object initDisplayMode(int mode, Object arg). Este m&eacute;todo lo veremos 
+      en VideoControl. All&iacute; ser&aacute; heredado al extender VideoControl 
+      a GUIControl: Un v&iacute;deo necesitar&aacute; reproducirse en alg&uacute;n 
+      objeto de la interface de usuario (GUI).<br>
+        &#8226; MetaDataControl extends Control<br>
+      Esta interface es utilizada para recoger metainformaci&oacute;n (title, 
+      copyright, author, etc.) definida en el propio elemento multimedia.<br>
+        &#8226; MIDIControl extends Control<br>
+      Permite acceso al control de los sintetizadores software/hardware del dispositivo, 
+      encargados de la reproducci&oacute;n MIDI.<br>
+        &#8226; PitchControl extends Control<br>
+      Permite modificar el pitch (escala) actual del audio sin modificar la velocidad 
+      ni el volumen de la reproducci&oacute;n.<br>
+        &#8226; RateControl extends Control<br>
+      Modifica la frecuencia (rate) de la reproducci&oacute;n del Player, la cual 
+      impondr&aacute; la relaci&oacute;n entre el TimeBase asociado el Player 
+      y su media-time actual.<br>
+        <br>
+        &#8226; RecordControl extends Control<br>
+      Permite almacenar en el dispositivo el media que actualmente est&aacute; 
+      reproduciendo el Player al que este control est&eacute; asociado.<br>
+        &#8226; StopTimeControl extends Control<br>
+      Ya comentado anteriormente, nos permite predefinir un tiempo de parada (stopTime) 
+      para el Player asociado. Con esto, tenemos en MMA una nueva forma de detener 
+      la reproducci&oacute;n, adem&aacute;s del m&eacute;todo stop() o el llegar 
+      al fin del media que ten&iacute;amos en MIDP 2.0.<br>
+        &#8226; TempoControl extends RateControl<br>
+      Fijar&aacute; el tempo, en t&eacute;rminos musicales, de un audio MIDI. 
+      Heredar&aacute; de RateControl.<br>
+        &#8226; VideoControl extends GUIControl<br>
+      Controla la reproducci&oacute;n de v&iacute;deo por parte de un Player. 
+      Los elementos que nos ofrece son:<br>
+      o static int USE_DIRECT_VIDEO. Define el modo en el que el v&iacute;deo 
+      es reproducido, a usar con el m&eacute;todo initDisplayMode().<br>
+      Este modo s&oacute;lo puede ser usado en sistemas con soporte LCDUI, como 
+      es el caso de los dispositivos MIDP. Aqu&iacute; al llamar al m&eacute;todo 
+      initDisplayMode() ser&aacute; siempre devuelto null como par&aacute;metro 
+      de salida. No obstante, el par&aacute;metro de entrada dado a este m&eacute;todo 
+      ahora no podr&aacute; ser null (a diferencia de como<br>
+      ocurr&iacute;a en el modo USE_GUI_PRIMITIVE), ya que debe ser un objeto 
+      javax.microedition.lcdui.Canvas v&aacute;lido o una subclase suya.<br>
+      En este modo, el v&iacute;deo es directamente presentado en el Canvas de 
+      la pantalla, reproduci&eacute;ndose en la posici&oacute;n que indiquemos 
+      con setDisplayLocation().<br>
+      o int getDisplayHeight(). M&eacute;todo que obtiene la altura de la emisi&oacute;n 
+      del v&iacute;deo en p&iacute;xeles.<br>
+      o int getDisplayWidth(). Obtiene la anchura de la emisi&oacute;n del v&iacute;deo 
+      en p&iacute;xeles.o int getDisplayX(). Coordenada X de la posici&oacute;n 
+      del v&iacute;deo respecto a la esquina superior izquierda del objeto de 
+      la interface de usuario (GUI) que lo contiene.<br>
+      o int getDisplayY(). Coordenada Y de la posici&oacute;n del v&iacute;deo 
+      respecto a la esquina superior izquierda del objeto de la interface de usuario 
+      (GUI) que lo contiene.<br>
+      o byte[] getSnapshot(String imageType). Obtiene una captura del instante 
+      actual de la reproducci&oacute;n del v&iacute;deo. La imagen capturada se 
+      devuelve en forma de array de bytes, de formato el especificado con el par&aacute;metro 
+      imageType.<br>
+        o int getSourceHeight(). Alto del archivo de v&iacute;deo fuente.<br>
+        o int getSourceWidth(). Ancho del archivo de v&iacute;deo fuente.<br>
+      o Object initDisplayMode(int mode, Object arg). Fija el modo en el que el 
+      v&iacute;deo ser&aacute; emitido, debiendo ser invocado antes de que el 
+      v&iacute;deo pueda ser reproducido. Los dos posibles modos ya han sido estudiados 
+      (USE_GUI_PRIMITIVE heredado de la interface GUIControl y USE_DIRECT_VIDEO), 
+      y con ellos el significado de los dos elementos Object de entrada y de salida 
+      que observamos en el prototipo del m&eacute;todo.<br>
+      o void setDisplayFullScreen(boolean fullScreenMode). Presenta el v&iacute;deo 
+      a pantalla completa si el par&aacute;metro dado es true.<br>
+      o void setDisplayLocation(int x, int y). Coloca el v&iacute;deo en la posici&oacute;n 
+      dada respecto a la esquina superior izquierda del objeto de la interface 
+      de usuario (GUI) que lo contiene. Por defecto, el v&iacute;deo aparece en 
+      la posici&oacute;n (0,0). Este m&eacute;todo s&oacute;lo es v&aacute;lido 
+      en modo USE_DIRECT_VIDEO, siendo obviado en modo<br>
+        USE_GUI_PRIMITIVE.<br>
+      o void setDisplaySize(int width, int height). Dado un ancho y un alto, redimensiona 
+      el v&iacute;deo que se est&aacute; reproduciendo. Si estamos en modo<br>
+      USE_DIRECT_VIDEO, este redimensionamiento no afecta al objeto de la GUI 
+      que lo contiene, ocultando la parte del v&iacute;deo que sobresalga de ella, 
+      si esto ocurre. Si estamos en modo USE_GUI_PRIMITIVE el objeto de la GUI 
+      s&iacute; se ve redimensionado con el v&iacute;deo.o void setVisible(boolean 
+      visible). Modifica la visibilidad del v&iacute;deo. Por defecto, si estamos 
+      en modo USE_DIRECT_VIDEO, el v&iacute;deo no es visible. Ser&aacute; necesaria 
+      una llamada a setVisible(true) para poder visionarlo.</td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

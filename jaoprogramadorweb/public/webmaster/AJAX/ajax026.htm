@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>C&oacute;mo hacer una p&aacute;gina AJAX</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta name="keywords" content="Primera página AJAX, Como hacer una pagina AJAX, Manual AJAX, tutorial AJAX, Ejemplos AJAX, ejercicios AJAX">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2>Otras funciones útiles</h2></td>
+  </tr>
+  <tr> 
+    <td height="394" colspan="3"> <p>Try.these(): permite probar varias funciones 
+        de forma consecutiva hasta que una de ellas funcione. Es muy &uacute;til 
+        para las aplicaciones que deben funcionar correctamente en varios navegadores 
+        diferentes.<br>
+        El propio c&oacute;digo fuente de Prototype utiliza Try.these() para obtener 
+        el objeto encargado de realizar las peticiones AJAX:<br>
+        var Ajax = {<br>
+        getTransport: function() {<br>
+        return Try.these(<br>
+        function() {return new XMLHttpRequest()},<br>
+        function() {return new ActiveXObject('Msxml2.XMLHTTP')},<br>
+        function() {return new ActiveXObject('Microsoft.XMLHTTP')}<br>
+        ) || false;<br>
+        },<br>
+        activeRequestCount: 0<br>
+        }<br>
+        Class.create(): permite crear clases de una forma elegante y sencilla:<br>
+        MiClase = Class.create();<br>
+        MiClase.prototype = {<br>
+        initialize: function(a, b) {<br>
+        this.a = a;<br>
+        this.b = b;<br>
+        }<br>
+        }<br>
+        var miClase = new MiClase(&quot;primer_valor&quot;, &quot;segundo_valor&quot;);<br>
+        Object.extend(): se emplea para a&ntilde;adir o sobrescribir las propiedades 
+        de un objeto en otro objeto. Se puede considerar como una forma primitiva 
+        y muy b&aacute;sica de herencia entre clases. En la llamada a la funci&oacute;n, 
+        el primer objeto es el destino en el que se copian las propiedades del 
+        segundo objeto pasado como par&aacute;metro:<br>
+        Object.extend(objetoDestino, objetoOrigen);<br>
+        Esta funci&oacute;n es muy &uacute;til para que las aplicaciones definan 
+        una serie de opciones por defecto y puedan tener en cuenta las opciones 
+        establecidas por cada usuario:<br>
+        // El array &quot;opciones&quot; guarda las opciones por defecto de la 
+        aplicaci&oacute;n<br>
+        var opciones = {campo: &quot;usuario&quot;, orden: &quot;ASC&quot;};<br>
+        // El usuario establece sus propias opciones<br>
+        var opciones_usuario = {orden: &quot;DESC&quot;, tipoBusqueda: &quot;libre&quot;};<br>
+        // Se mezclan los dos arrays de opciones, dando prioridad<br>
+        // a las opciones establecidas por los usuariosObject.extend(opciones, 
+        opciones_usuario);<br>
+        // Ahora, opciones.orden = &quot;DESC&quot;<br>
+        El c&oacute;digo fuente de Prototype utiliza Object.extend() continuamente 
+        para a&ntilde;adir propiedades<br>
+        y m&eacute;todos &uacute;tiles a los objetos de JavaScript. El c&oacute;digo 
+        que se muestra a continuaci&oacute;n a&ntilde;ade cinco<br>
+        m&eacute;todos al objeto Number original de JavaScript:<br>
+        Object.extend(Number.prototype, {<br>
+        toColorPart: function() {<br>
+        return this.toPaddedString(2, 16);<br>
+        },<br>
+        succ: function() {<br>
+        return this + 1;<br>
+        },<br>
+        times: function(iterator) {<br>
+        $R(0, this, true).each(iterator);<br>
+        return this;<br>
+        },<br>
+        toPaddedString: function(length, radix) {<br>
+        var string = this.toString(radix || 10);<br>
+        return '0'.times(length - string.length) + string;<br>
+        },<br>
+        toJSON: function() {<br>
+        return isFinite(this) ? this.toString() : 'null';<br>
+        }<br>
+        });</p></td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

@@ -1,0 +1,555 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Introducci&oacute;n a DLL</title>
+<META http-equiv=Content-Language content=es>
+<META content="Conceptos redes,LAN" name=description>
+<meta name="keywords" content="Conceptos redes,LAN">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2>C O NC E P T O S</h2></td>
+  </tr>
+  <tr> 
+    <td height="197"> 
+      <h3>Aspectos físicos de las transmisiones</h3>
+      <p>1.- &iquest;Qu&eacute; relaci&oacute;n existe entre una se&ntilde;al 
+        el&eacute;ctrica cualquiera y las se&ntilde;ales sinusoidales?<br>
+        Que las se&ntilde;ales el&eacute;ctricas se pueden descomponer en se&ntilde;ales 
+        sinusoidales.<br>
+        2.- &iquest;Qu&eacute; tres par&aacute;metros permiten determinar una 
+        funci&oacute;n sinusoidal en el tiempo?<br>
+        Amplitud, frecuencia y fase.<br>
+        3.- &iquest;Qu&eacute; relaci&oacute;n existe entre el periodo T y la 
+        frecuencia F?<br>
+        El periodo y la frecuencia son inversamente proporcionales.<br>
+        4.- &iquest;Qu&eacute; relaci&oacute;n existe entre la longitud de onda 
+        y la frecuencia?<br>
+        Que igualmente son inversamente proporcionales.<br>
+        5.- &iquest;Qu&eacute; dice la ley de Ohm?<br>
+        Que la resistencia es igual al voltaje dividido entre la intensidad.<br>
+        6.- &iquest;Qu&eacute; es espectro y ancho de banda de una se&ntilde;al?<br>
+        El espectro de una se&ntilde;al es la gamma de frecuencias de esa se&ntilde;al. 
+        Una es la correspondencia frecuencia-amplitud, y la otra es la correspondencia 
+        frecuencia-fase. El ancho de banda de una se&ntilde;al es la diferencia 
+        entre el valor m&aacute;ximo y el valor m&iacute;nimo del espectro.<br>
+        7.- &iquest;Qu&eacute; es ancho de banda de un canal?<br>
+        Es la diferencia entre las frecuencias m&aacute;ximas y m&iacute;nimas 
+        que es capaz de transmitir el canal.<br>
+        8.-Nombra los factores adversos a la transmisi&oacute;n de una se&ntilde;al?<br>
+        Atenuaci&oacute;n, distorsi&oacute;n, interferencia, ruido y eco.<br>
+        9-&iquest;En qu&eacute; consiste la atenuaci&oacute;n? &iquest;Con qu&eacute; 
+        se corrige?<br>
+        Es un efecto producido por el debilitamiento de la se&ntilde;al, debido 
+        a la resistencia electr&oacute;nica que presentan tanto el canal, como 
+        los dem&aacute;s elementos que intervienen en la transmisi&oacute;n. La 
+        atenuaci&oacute;n se corrige con repetidores. <br>
+        10.- &iquest;Qu&eacute; es la distorsi&oacute;n? &iquest;Con qu&eacute; 
+        se corrige?<br>
+        Es la deformaci&oacute;n de la se&ntilde;al, producida porque el canal 
+        se comparta de modo distinto en cada frecuencia. La distorsi&oacute;n 
+        se corrige con un ecualizador.<br>
+        11.- &iquest;Qu&eacute; es una interferencia? &iquest;Con qu&eacute; se 
+        puede corregir a un cable de interferencias?<br>
+        Una interferencia es la adici&oacute;n de una se&ntilde;al conocida y 
+        no deseada a la se&ntilde;al que se transmite. Se corrige con el entrelazado 
+        o con el apantallamiento de los cables.</p>
+      <p><br>
+        12.-&iquest;Qu&eacute; es el ruido?&iquest;Qu&eacute; tipos de ruido conoces?<br>
+        Es la suma de m&uacute;ltiples interferencias, posiblemente de origen 
+        desconocido y de naturaleza aleatoria. Hay dos tipos de ruido: impulsivo 
+        y de fondo.<br>
+        13.-&iquest;Qu&eacute; es el eco?<br>
+        Es la repetici&oacute;n de una se&ntilde;al. La reflexi&oacute;n de una 
+        se&ntilde;al.<br>
+        14.-&iquest;Qu&eacute; le debe suceder a cualquier se&ntilde;al de naturaleza 
+        f&iacute;sica para que pueda transmitir informaci&oacute;n?<br>
+        Que la se&ntilde;al, al menos, debe tener dos estados diferentes.<br>
+        15.- &iquest;Mediante qu&eacute; procedimiento se puede hacer que una 
+        se&ntilde;al transmita informaci&oacute;n?<br>
+        Por codificaci&oacute;n. La se&ntilde;al debe codificarse, estructurarse 
+        de acuerdo con las reglas impuestas por un c&oacute;digo.<br>
+        16.-Nombra tres c&oacute;digos que conozcas <br>
+        C&oacute;digo ASCII, C. EBCDIC y C. Baudot.<br>
+        17.-&iquest;Qu&eacute; es la modulaci&oacute;n?<br>
+        Es el efecto de intentar conseguir la adecuaci&oacute;n entre se&ntilde;al 
+        y canal, de modo que en las transmisiones utilicemos las frecuencias en 
+        las que el canal proporciona la mejor respuesta.<br>
+        Es el efecto de transformar se&ntilde;ales anal&oacute;gicas en digitales 
+        y viceversa.<br>
+        18.-&iquest;Es el m&oacute;dem un transductor?&iquest;por qu&eacute;?<br>
+        No, porque el m&oacute;dem no cambia la naturaleza de una se&ntilde;al 
+        y el transductor si. <br>
+        19.-Razones para la modulaci&oacute;n.<br>
+        Facilidad de radiaci&oacute;n, reducci&oacute;n de ruido, y de las interferencias, 
+        asignaciones de frecuencia, multicanalizaci&oacute;n y salvamento de deficiencias 
+        en los equipos.<br>
+        Las se&ntilde;ales digitales poseen anchos de banda en las cuales no entran, 
+        y por ello hay que modular la se&ntilde;al.<br>
+        20.-Tipos de modulaci&oacute;n:<br>
+        Modulaci&oacute;n lineal o de onda continua (modulaci&oacute;n en amplitud, 
+        modulaci&oacute;n en frecuencia, modulaci&oacute;n en fase), modulaci&oacute;n 
+        por pulsos y modulaci&oacute;n codificada.<br>
+        21.- Tipos de se&ntilde;ales que intervienen en la modulaci&oacute;n. 
+        &iquest;qu&eacute; nombres tiene?<br>
+        Las se&ntilde;ales portadoras (Anal&oacute;gicas) y las se&ntilde;ales 
+        moduladoras (digitales).<br>
+        22.-&iquest;Qu&eacute; es el espectro electromagn&eacute;tico?<br>
+        Es el mapa de posibles frecuencias que disponemos para se&ntilde;ales 
+        electromagn&eacute;ticas.</p>
+      <p></p>
+      <p></p>
+      <p><br>
+        23.- &iquest;Qu&eacute; es la multiplexaci&oacute;n?<br>
+        Es una t&eacute;cnica por la que se hace convivir en un canal, se&ntilde;ales 
+        procedentes de emisores distintos y con destino en un conjunto de receptores 
+        tambi&eacute;n diferentes.<br>
+        24.- Diferencias entre multiplexaci&oacute;n y concentraci&oacute;n<br>
+        MULTIPLEXACI&Oacute;N<br>
+        Capacidad de transmisi&oacute;n &gt;= suma de las capacidades de transmisi&oacute;n 
+        de cada uno de los emisores.<br>
+        CONCENTRACI&Oacute;N<br>
+        Si los emisores quisieran transmitir simult&aacute;neamente, habr&iacute;a 
+        que organizar un sistema de espera.<br>
+        25.- &iquest;Qu&eacute; es multiplexaci&oacute;n en frecuencia?<br>
+        Es un tipo de multiplexaci&oacute;n en el que los canales l&oacute;gicos 
+        que comparten el &uacute;nico canal f&iacute;sico, se establecen por multicanalizaci&oacute;n.<br>
+        26.- &iquest;Qu&eacute; es multiplexaci&oacute;n en el tiempo?<br>
+        Es un tipo de multiplexaci&oacute;n en el que los canales l&oacute;gicos 
+        se asignan repartiendo el tiempo de uso del canal f&iacute;sico entre 
+        los distintos emisores, estableciendo ranuras temporales.<br>
+        27.-&iquest;Cu&aacute;les son los principales medios para transmisi&oacute;n 
+        de informaci&oacute;n?<br>
+        Sistemas de cableado, fibra &oacute;ptica y sistemas inal&aacute;mbricos.<br>
+        28.-&iquest;Qu&eacute; sistemas de cableado conoces para se&ntilde;ales 
+        el&eacute;ctricas?<br>
+        Cables de pares y cable coaxial.<br>
+        29.-&iquest;Qu&eacute; nombre reciben las interferencias ac&uacute;sticas?<br>
+        Diafon&iacute;as<br>
+        30.-&iquest;Qu&eacute; gama de velocidades se pueden alcanzar con el cable 
+        de par trenzado?<br>
+        2Mbps hasta 100Mbps<br>
+        31.-&iquest;Por qu&eacute; es importante tener en cuenta los n&uacute;meros 
+        de los cables en el cable UTP?<br>
+        Porque de lo contrario el efecto del trenzado no ser&aacute; eficaz, disminuyendo 
+        sensiblemente o incluso impidiendo la capacidad de transmisi&oacute;n.<br>
+        32.-&iquest;Seg&uacute;n que dos criterios se caracterizan los cables 
+        UTP y qu&eacute; caracter&iacute;sticas se contemplan en cada uno?<br>
+        LAS CATEGOR&Iacute;AS<br>
+        Atenuaci&oacute;n, capacidad de l&iacute;nea e impedancia.<br>
+        LAS CLASES<br>
+        Cada clase especifica las distancias permitidas. Existen clases de la 
+        A a la F.<br>
+        33.- Dibuja un cable coaxial y se&ntilde;ala sus partes.</p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p><br>
+        34.-&iquest;En qu&eacute; aventaja el cable coaxial al de pares?<br>
+        El cable coaxial permite un mayor ancho de banda que el cable de pares.<br>
+        35.-En redes &iquest;qu&eacute; tipos de cable coaxial se utilizan?<br>
+        Cable coaxial fino y cable coaxial grueso.<br>
+        36.- &iquest;Entre qu&eacute; anchos de banda se sit&uacute;an los cables 
+        coaxiales?<br>
+        Entre los 80 y 400 Mhz<br>
+        37.-&iquest;Qu&eacute; es un l&aacute;ser?<br>
+        Un haz luminoso de alta coherencia que produce luz de una &uacute;nica 
+        frecuencia y siendo toda la emisi&oacute;n en fase.<br>
+        38.-Dibuja la secci&oacute;n longitudinal y transversal de una fibra &oacute;ptica 
+        e indica sus partes.</p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p>39.-&iquest;Qu&eacute; tres tipos de fibras &oacute;pticas existen actualmente 
+        y qu&eacute; anchos de banda soportan?<br>
+        Fibra monomodo: 2Ghz<br>
+        Fibra multimodo de &iacute;ndice gradual: 500Mhz<br>
+        Fibra multimodo de &iacute;ndice escalonado: 35Mhz<br>
+        40.-&iquest;Cu&aacute;l es el principal inconveniente de la fibra &oacute;ptica?<br>
+        La dificultad de realizar una buena conexi&oacute;n de distintas fibras 
+        con el fin de evitar el eco.</p>
+      <p></p>
+      <p>41.-Ventajas e inconvenientes de los sistemas inal&aacute;mbricos.<br>
+        VENTAJAS INCONVENIENTES<br>
+        C&oacute;modo Baja velocidad<br>
+        Flexible Imposiciones en las frecuencias<br>
+        42.-&iquest;Qu&eacute; relaci&oacute;n existe entre la frecuencia de una 
+        se&ntilde;al radioterrestre y la distancia entre las antenas?<br>
+        A mayor frecuencia de la se&ntilde;al, menor distancia entre las antenas 
+        y viceversa.<br>
+        43.-&iquest;Qu&eacute; tipos de sistemas radioterrestres existen y qu&eacute; 
+        tipos de ondas emiten?<br>
+        Onda corta: Utilizan la ionosfera como espejo reflector entre el emisor 
+        y el receptor. Ancho de banda peque&ntilde;o y frecuencia baja.<br>
+        Microondas: La se&ntilde;al va de antena en antena. Ancho de banda elevado 
+        y frecuencia muy alta.<br>
+        44.-&iquest;Qu&eacute; tipo de sistemas inal&aacute;mbricos existen?<br>
+        Sistemas radioterrestres y sat&eacute;lites artificiales .<br>
+        45.-&iquest;Qu&eacute; ventajas e inconvenientes presentan los sat&eacute;lites 
+        artificiales frente a los sistemas terrestres?<br>
+        VENTAJAS INCONVENIENTES<br>
+        M&aacute;s fiabilidad Coste muy alto<br>
+        M&aacute;s velocidad Retardo en el env&iacute;o de la se&ntilde;al<br>
+        46.-&iquest;De qu&eacute; dos partes consta todo sistema de tratamiento 
+        de errores?<br>
+        Detecci&oacute;n correcci&oacute;n<br>
+        47.-Enumera los sistemas que conoces para detectar errores.<br>
+        Paridad simple, paridad de bloque y redundancia c&iacute;clica.<br>
+        48.-&iquest;En qu&eacute; consiste el sistema de paridad?&iquest;Cu&aacute;ntos 
+        sistemas de paridad conoces?<br>
+        Consiste en la transmisi&oacute;n junto con la informaci&oacute;n del 
+        usuario, unos bits que indican cualidades de esos datos.<br>
+        Paridad simple y paridad de bloque.<br>
+        49.-&iquest;En qu&eacute; consisten los sistemas de redundancia c&iacute;clica?&iquest;Cu&aacute;l 
+        es el m&aacute;s utilizado?<br>
+        Est&aacute;n basados en las propiedades matem&aacute;ticas de la divisi&oacute;n 
+        de polinomios.<br>
+        El emisor divide el polinomio-informaci&oacute;n entre el polinomio- clave 
+        obteniendo un cociente, que aqu&iacute; no interesa, y un polinomio-resto 
+        que se convertir&aacute; en la informaci&oacute;nredundante necesaria 
+        para la detecci&oacute;n, equivalente a la informaci&oacute;n de paridad.<br>
+        Se env&iacute;an los bits correspondientes al polinomio informativo seguido 
+        de los bits que forman los coeficientes del polinomio-resto.<br>
+        Cuando el receptor lee el mensaje, vuelve a repetir la operaci&oacute;n 
+        y comprueba que el resto obtenido es igual al que le han transmitido. 
+        Si no fuera igual, tendr&iacute;a la prueba de que la transmisi&oacute;n 
+        ha fallado.<br>
+        El CRC es el m&aacute;s utilizado.</p>
+      <p>50.-&iquest;Qu&eacute; m&eacute;todos existen para corregir los errores?<br>
+        Correcci&oacute;n hacia delante y correcci&oacute;n hacia atr&aacute;s.<br>
+        51.-&iquest;En qu&eacute; consisten los m&eacute;todos autocorrectores?&iquest;En 
+        qu&eacute; casos se utilizan?<br>
+        Consiste en el intercambio de los bits err&oacute;neos de la transmisi&oacute;n.<br>
+        Se utilizan en los sat&eacute;&ntilde;ites artificiales para corregir 
+        el retardo producido en las transmisiones de las se&ntilde;ales.<br>
+        52.-&iquest;En qu&eacute; consiste el m&eacute;todo de env&iacute;o y 
+        espera?<br>
+        El emisor env&iacute;a bloques de informaci&oacute;n al receptro seg&uacute;n 
+        algunas reglas:<br>
+        - El emisor env&iacute;a un bloque de datos y se queda con una copia.<br>
+        - Cuando el receptor recibe el bloque, genera una se&ntilde;al de confirmaci&oacute;n 
+        se&ntilde;alando al emisor si los datos llegan correctamente o no.<br>
+        - Si el emisor lo recibe, entiende que la informaci&oacute;n lleg&oacute; 
+        perfectamente a su destino.<br>
+        - Si no, el emisor reenviar&aacute; el bloque de datos de nuevo.<br>
+        53.-&iquest;En qu&eacute; consisten los m&eacute;todos de env&iacute;o 
+        continuo?<br>
+        - Se fracciona el mensaje en bloques que han de enumerarse.<br>
+        - El emisor env&iacute;a secuencialmente y de modo cont&iacute;nuo todos 
+        los bloques.<br>
+        - El receptor acepta cada uno de los bloques y comprueba si son err&oacute;neos 
+        o no.<br>
+        - Si el receptor recibe un bloque err&oacute;neo, genera un mensaje informando 
+        al emisor del n&uacute;mero de bloque del que lleg&oacute; el error.<br>
+        - El emisor puede retransmitir &uacute;nicamente el bloque err&oacute;neo 
+        o retransmitir todos los que siguen por suponer que el resto tambi&eacute;n 
+        est&aacute;n en mal estado.<br>
+        54.-&iquest;Qu&eacute; significado tiene la ventana en los m&eacute;todos 
+        de env&iacute;o continuo?<br>
+        El n&uacute;mero m&aacute;ximo de tramas sin confirmar que puede emitir 
+        el emisor antes de cortar la comunicaci&oacute;n.<br>
+        55.-&iquest;Qu&eacute; es un m&oacute;dem?<br>
+        MOdulador-DEModulador.<br>
+        Es un dispositivo que acepta datos digitales de una computadora y las 
+        convierte en anal&oacute;gicas y viceversa.<br>
+        56.-&iquest;Cu&aacute;les son los principales tipos de modulaci&oacute;n 
+        que conoces?<br>
+        Modulaci&oacute;n por amplitud, modulaci&oacute;n por frecuencia y modulaci&oacute;n 
+        por fase.</p>
+      <p>57.-&iquest;Qu&eacute; es la modulaci&oacute;n multibit?<br>
+        Es una modulaci&oacute;n que consiste en la emisi&oacute;n de mas de un 
+        bit en cada pulso digital.<br>
+        58.-&iquest;En qu&eacute; consiste la modulaci&oacute;n QAM?<br>
+        Consiste en la combinaci&oacute;n de la modulaci&oacute;n en amplitud 
+        y fase. <br>
+        59.-&iquest;Qu&eacute; es velocidad de transmisi&oacute;n?&iquest;En qu&eacute; 
+        unidades se mide?<br>
+        Numero de bits que se env&iacute;an en la unidad de tiempo. Se mide en 
+        bits por segundo.<br>
+        60.-&iquest;Qu&eacute; es velocidad de modulaci&oacute;n? &iquest;En qu&eacute; 
+        unidades se mide?<br>
+        Es la velocidad con la que cambia el estado de la se&ntilde;al. La velocidad 
+        de modulaci&oacute;n se mide en baudios.<br>
+        61.-&iquest;Cu&aacute;l es la relaci&oacute;n entre la velocidad de transmisi&oacute;n 
+        y la de modulaci&oacute;n?<br>
+        Que son directamente proporcionales. A mayor velocidad de transmisi&oacute;n, 
+        mayor velocidad de modulaci&oacute;n.<br>
+        Velocidad de transmisi&oacute;n= Velocidad de modulaci&oacute;n * n&ordm; 
+        de bits enviados con cada cambio de estado<br>
+        62.-&iquest;Qu&eacute; elementos componen un m&oacute;dem?<br>
+        Tres circuitos modulares: el circuito de recepci&oacute;n de datos digitales, 
+        el circuito de emisi&oacute;n de datos anal&oacute;gicos y una unidad 
+        de control de modems.<br>
+        63.-En lo que respecta a la colocaci&oacute;n &iquest;qu&eacute; tipos 
+        de m&oacute;dem existen?<br>
+        Modems internos y externos.<br>
+        64-&iquest;C&oacute;mo se conecta un m&oacute;dem externo al ordenador?<br>
+        El conectar mas utilizado es el RS-232-C, y por el puerto USB.<br>
+        65.-&iquest;Cu&aacute;les son los principales circuitos del interfaz RS-232-C?<br>
+        Son cinco circuitos de establecimiento de control, dos de salida y entrada 
+        de datos, dos de tierra para proteger y para tomarlo de referencia y dos 
+        transmisiones de sincronismo (s&iacute;ncrona y as&iacute;ncrona).<br>
+        66.-&iquest;Qu&eacute; normas y que organismo normaliza los modems?<br>
+        El organismo es el CCITT. Tenemos las normas V.<br>
+        67.-&iquest;Cu&aacute;les son las caracter&iacute;sticas de la norma V.34?<br>
+        Velocidad de transmisi&oacute;n de 28200/33600 bps en modo d&uacute;plex 
+        y cumple las recomendaciones V.24 y V.28. <br>
+        68.-&iquest;Cu&aacute;les son las caracter&iacute;sticas de la norma V.90?<br>
+        Velocidad de 56 kbps como m&aacute;ximo cuando el extremo de la operadora 
+        es digital. Si los dos extremos son modems V.90, se comporta como V.34.<br>
+        69.-&iquest;Qu&eacute; son los protocolos MNP?<br>
+        Es una familia de protocolos orientados a la detecci&oacute;n y correcci&oacute;n 
+        de errores en las transmisiones por modems y tambi&eacute;n para la compresi&oacute;n 
+        de datos.</p>
+      <p>70.-&iquest;Qu&eacute; son los comandos Hayes?<br>
+        Es un lenguaje de comunicaci&oacute;n terminal-m&oacute;dem basado en 
+        un sistema de comandos, que se ha extendido a casi todos los m&oacute;dems 
+        actuales.<br>
+        Tambi&eacute;n son llamados comandos AT.</p>
+      <p></p>
+      <p>71-Cuesti&oacute;n 1 del libro.<br>
+        ATENUACI&Oacute;N<br>
+        Falta de repetidores.En una tormenta cuando falla la se&ntilde;al.<br>
+        DISTORSI&Oacute;N</p>
+      <p>INTERFERENCIA<br>
+        Emisi&oacute;n radiof&oacute;nica cuando 2 estaciones emiten en la misma 
+        frecuencia.<br>
+        RUIDO<br>
+        Cualquier componente f&iacute;sico de cualquier canal o dispositivo lo 
+        genera.<br>
+        72-Cuesti&oacute;n 2 del libro.</p>
+      <p>Fuente Transductor de entrada Transmisor Canal <br>
+        <br>
+        Destino Transductor de salida Receptor</p>
+      <p>73-Cuesti&oacute;n 3 del libro.<br>
+        Mensaje alfanum&eacute;rico C&oacute;digo binario Hexadecimal<br>
+        ASCII A 01000001 41<br>
+        EBCDIC A 11000001 C1<br>
+        BAUDOT A 00011 3</p>
+      <p><br>
+        74-Cuesti&oacute;n 4 del libro.<br>
+        Tipos de modulaci&oacute;n lineal Consumo de ancho de banda S.Ruido<br>
+        Modulaci&oacute;n en amplitud Medio Media<br>
+        Modulaci&oacute;n en frecuencia Alto Baja<br>
+        Modulaci&oacute;n en fase - -</p>
+      <p>75-Cuesti&oacute;n 5 del libro.<br>
+        El dispositivo Splitter ser&iacute;a un ejemplo claro de dispositivo que 
+        trabaja por multiplexaci&oacute;n.<br>
+        Un Router, que es un dispositivo de red encargado de distribu&iacute;r 
+        los paquetes de datos por las rutas adecuadas para que alcancen eficazmente 
+        su destino, tiene en su interior un Splitter para poder realizar la multiplexaci&oacute;n.<br>
+        El Hub o concentrador ser&iacute;a el dispositivo que trabaja a trav&eacute;s 
+        de la concentraci&oacute;n. Se podr&iacute;a definir como el repetidor 
+        utilizado para la distribuci&oacute;n de la se&ntilde;al a trav&eacute;s 
+        de par trenzado, formando una red en estrella 10BaseT o 100BaseT.</p>
+      <p><br>
+        76-Cuesti&oacute;n 6 del libro.<br>
+        MULTIPLEXACI&Oacute;N EN EL TIEMPO<br>
+        Los canales l&oacute;gicos se asignan repartiendo el tiempo de uso del 
+        canal f&iacute;sico entre los distintos emisores, estableciendo slots 
+        o ranuras temporales. As&iacute;, cada uno utiliza el tiempo que tiene 
+        asignado, debiendo esperar a su siguiente ranura para volver a transmitir 
+        si tiene necesidad de ello. Estas ranuras se repiten peri&oacute;dicamente 
+        a lo largo del tiempo.<br>
+        MULTIPLEXACI&Oacute;N EN LA FRECUENCIA<br>
+        Los canales l&oacute;gicos que comparten el &uacute;nico canal f&iacute;sico, 
+        se establecen por multicanalizaci&oacute;n en la frecuencia, es decir, 
+        a cada canal l&oacute;gico se le asigna una banda de frecuencia centrada 
+        en una se&ntilde;al portadora sobre la que se modular&aacute; el mensaje 
+        que utilice ese canal.</p>
+      <p>77-Cuesti&oacute;n 7 del libro.<br>
+        MEDIO TIPO DE SISTEMA ANCHO DE BANDA VELOCIDAD<br>
+        Cable de pares Cableado 100Mhz 100Mbps<br>
+        Cable coaxial Cableado 400 Mhz -<br>
+        Fibra &oacute;ptica Fibra 2 Ghz 160 Gbps<br>
+        Onda corta Radioterrestre - -<br>
+        Microondas Radioterrestre - -<br>
+        Sat&eacute;lites Inal&aacute;mbricos 100 Ghz -</p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p>78-Cuesti&oacute;n 8 del libro.<br>
+        Estas normas V que fueron creadas por la CCITT son unas normas est&aacute;ndares 
+        para la comunicaci&oacute;n entre m&oacute;dems.</p>
+      <p>V.17 14.400 bps para transmisiones por fax sobre RTC (Red de Telef&oacute;nica 
+        Conmutada)<br>
+        V.21 300bps en modo d&uacute;plex, pr&aacute;cticamente ya no se usa.<br>
+        V.22 1.200/600 bps en modo d&uacute;plex. Ha sido superada por la norma 
+        V.22 bis<br>
+        V.22 bis 2.400/1.200/600 bps en modo d&uacute;plex. Ha sido muy utilizada 
+        por ajustarse a las necesidades requeridas por muchos servivios tele m&aacute;ticos 
+        que utilizan la RTC. Cumple las recomendaciones V.24 y V.28<br>
+        V.23 1.200/600/75 bps en modo d&uacute;plex. Es la norma utilizada en 
+        el servicio de videotexto. Cumple las recomenaciones V.24 y V.28<br>
+        V.26 2.400/1.200 bps. Ha sido un m&oacute;dem muy utilizado debido a que 
+        incluye a la norma V.22 bis. Cumple las recomendaciones V.24 y V.28<br>
+        V.27 4.800 bps. Cumple las recomendaciones V.24 y V.28<br>
+        V.27 bis 4.800/2.400 bps en semid&uacute;plex. Es utilizada como retorno 
+        de seguridad en la norma V.29. Existe la norma V.27 semejante a la V.27 
+        bis aunque para su utilizaci&oacute;n con l&iacute;neas RTC.<br>
+        V.29 9.600 bps en modo semid&uacute;plex. Se utiliza fundamentalmente 
+        en las comunicaciones por FAX. Ser&aacute; reemplazada por la norma V.17 
+        equivalente pero de 14.400 bps de velocidad. Cumple las recomendaciones 
+        V.24 y V.28<br>
+        V.32 9.600/7.200/4.800 bps en modo d&uacute;plex. Durante a&ntilde;os 
+        ha sido la norma m&aacute;s r&aacute;pida para la utilizaci&oacute;n de 
+        l&iacute;neas RTC. Cumple las recomendaciones V.24 y V.28<br>
+        V.32 bis 14.400 bps en modod d&uacute;plex. Cumple las recomendaciones 
+        V.24 y V.28<br>
+        V.Fast o V.FC 28.800 bps en modo d&uacute;plex. Es incompatible con la 
+        norma V.34<br>
+        V.34 28.200/33.600 bps en modo d&uacute;plex. Cumple las recomendaciones 
+        V.24 y V.28<br>
+        V.90 56 kbps como m&aacute;ximo cuando el extremo de la operadora es digital. 
+        Si los dos extremos son m&oacute;dems V.90, se comporta como V.34<br>
+        V.92 48.000 bps en modo d&uacute;plex.</p>
+      <p>Dentro de las normas de correcci&oacute;n de errores est&aacute;n:<br>
+        - Los protocolos MNP<br>
+        - Las normas v.42 y V.42 bis<br>
+        Y despu&eacute;s se encuentran las normas V.25 y V.25 bis y el sistema 
+        de comandos de Hayes.</p>
+      <p><br>
+        79-Cuesti&oacute;n 9 del libro.</p>
+      <p>Mensaje binario= 1100101 (0)<br>
+        Paridad simple par=1100101 (0) este &uacute;ltimo (0) es el bit de control 
+        de paridad.</p>
+      <p>Paridad de bloque par= 1 1 0 0 1 0 1 (0)<br>
+        0 0 1 0 1 1 0 (1)<br>
+        1 1 1 0 0 0 1 (0)<br>
+        0 0 1 0 1 0 1 (1)<br>
+        0 1 1 1 0 0 1 (0)<br>
+        1 0 1 1 0 1 1 (1)<br>
+        1 1 1 0 0 1 1 (1)<br>
+        (0)(0)(0)(0)(1)(1)(0)</p>
+      <p>80-Cuesti&oacute;n 10 del libro.<br>
+        DETECCI&Oacute;N DE ERRORES<br>
+        Paridad simple<br>
+        Se basan en la transmisi&oacute;n de una serie de bits que indican cualidades 
+        de esos datos.<br>
+        Hay 2 tipos de paridad simple: Par e Impar.<br>
+        El bit de paridad par de una secuencia se calcula contando el n&uacute;mero 
+        de unos: si este n&uacute;mero es par, el bit de paridad vale 0; pero 
+        si el n&uacute;mero es impar, el bit de paridad vale 1.<br>
+        Para la paridad impar es similar pero lo &uacute;nico que cambia es el 
+        valor del bit de paridad, que es complementario con respecto de la paridad 
+        par.</p>
+      <p>Paridad de bloque<br>
+        Es un caso especial de la paridad simple. Se trata de organizar la informaci&oacute;n 
+        por bloques. Se extraen los bits de paridad por filas y por columnas.</p>
+      <p>La redundancia c&iacute;clica<br>
+        Est&aacute;n basados en las propiedades matem&aacute;ticas de la divisi&oacute;n 
+        de polinomios.<br>
+        El emisor divide el polinomio-informaci&oacute;n entre el polinomio- clave 
+        obteniendo un cociente, que aqu&iacute; no interesa, y un polinomio-resto 
+        que se convertir&aacute; en la informaci&oacute;nredundante necesaria 
+        para la detecci&oacute;n, equivalente a la informaci&oacute;n de paridad.<br>
+        Se env&iacute;an los bits correspondientes al polinomio informativo seguido 
+        de los bits que forman los coeficientes del polinomio-resto.<br>
+        Cuando el receptor lee el mensaje, vuelve a repetir la operaci&oacute;n 
+        y comprueba que el resto obtenido es igual al que le han transmitido. 
+        Si no fuera igual, tendr&iacute;a la prueba de que la transmisi&oacute;n 
+        ha fallado.<br>
+        El CRC es el m&aacute;s utilizado.</p>
+      <p>CORRECCI&Oacute;N DE ERRORES<br>
+        En el destinatario<br>
+        El destinatario determina los bits err&oacute;neos. Una vez que se hayan 
+        detectado la correcci&oacute;n es inmediata: los bits equivocados se sustituyen 
+        por 0 o 1. Tambi&eacute;n es llamada correcci&oacute;n hacia adelante.<br>
+        Tambi&eacute;n se pueden detectar errores con CHECKSUM (paridad de bloque) 
+        o C&Oacute;DIGOS DE HAMMING.</p>
+      <p>Por retransmisi&oacute;n<br>
+        Se llama correcci&oacute;n de errores hacia atr&aacute;s.<br>
+        Env&iacute;o y espera<br>
+        El emisor env&iacute;a bloques de informaci&oacute;n al receptro seg&uacute;n 
+        algunas reglas:<br>
+        - El emisor env&iacute;a un bloque de datos y se queda con una copia.<br>
+        - Cuando el receptor recibe el bloque, genera una se&ntilde;al de confirmaci&oacute;n 
+        se&ntilde;alando al emisor si los datos llegan correctamente o no.<br>
+        - Si el emisor lo recibe, entiende que la informaci&oacute;n lleg&oacute; 
+        perfectamente a su destino.<br>
+        Si no, el emisor reenviar&aacute; el bloque de datos de nuevo.</p>
+      <p>Env&iacute;o cont&iacute;nuo<br>
+        - Se fracciona el mensaje en bloques que han de enumerarse.<br>
+        - El emisor env&iacute;a secuencialmente y de modo cont&iacute;nuo todos 
+        los bloques.<br>
+        - El receptor acepta cada uno de los bloques y comprueba si son err&oacute;neos 
+        o no.<br>
+        - Si el receptor recibe un bloque err&oacute;neo, genera un mensaje informando 
+        al emisor del n&uacute;mero de bloque del que lleg&oacute; el error.<br>
+        - El emisor puede retransmitir &uacute;nicamente el bloque err&oacute;neo 
+        o retransmitir todos los que siguen por suponer que el resto tambi&eacute;n 
+        est&aacute;n en mal estado.</p>
+      <p>Ventana deslizante</p>
+      <p><br>
+        81.- &iquest;Qu&eacute; es un protocolo?<br>
+        Son un conjunto de reglas por las que se ponen de acuerdo un emisor y 
+        un receptor para efectuar sus transmisiones.</p>
+      <p>82.- &iquest;En qu&eacute; consiste el conector USB?<br>
+        El puerto USB es un tipo de puerto mucho m&aacute;s r&aacute;pido que 
+        los puertos normales COM, LPT o PS2.<br>
+        Con una sola interrupci&oacute;n se pueden detectar todos los perif&eacute;ricos 
+        que tengan puerto USB.<br>
+        Hoy en d&iacute;a en una placa base ATX viene 2 puertos USB, aunque tambi&eacute;n 
+        existen en el mercado tarjetas de expansi&oacute;n con este tipo de puertos 
+        para conectar.</p>
+      <p>83.- &iquest;De qu&eacute; trata la norma V.42?<br>
+        Es una norma para la detecci&oacute;n y correcci&oacute;n de errores (esta 
+        norma es com patible con los protocolos MNP2 y MNP4).</p>
+      <p>84.- &iquest;De qu&eacute; trata la norma V.42 bis?<br>
+        Sirve para comprimir datos a razones de compresi&oacute;n de 4 a 1. La 
+        norma V.44 bis comprime a raz&oacute;n de 6 a 1.</p>
+      <p>85.- &iquest;En qu&eacute; consisten las tecnolog&iacute;as xDSL?<br>
+        Consisten en aprovechar el cable de pares para la transmisi&oacute;n de 
+        datos a Internet a alta velocidad, estableciendo dos canales de comunicaci&oacute;n 
+        sobre la misma l&iacute;nea f&iacute;sica.</p>
+      <p>86.- &iquest;Qu&eacute; requisitos se requieren para poder instalar ADSL?<br>
+        La distancia, la calidad de la l&iacute;nea telef&oacute;nica y que la 
+        centralita est&eacute; adaptada a ADSL.</p>
+      <p><br>
+        87.- Realiza un esquema de los equipos y redes implicadas en ADSL.</p>
+      <p>VOZ SPLITTER DSLAM RED TELEF&Oacute;NICA</p>
+      <p><br>
+        DATOS M&Oacute;DEM ADSL ATM<br>
+        CENTRAL</p>
+      <p><br>
+        88.- &iquest;Qu&eacute; tipo de modulaci&oacute;n utiliza ADSL?<br>
+        Modulaci&oacute;n QAM y modulaci&oacute;n DMT (Discrete Multitone)</p>
+      <p>89.- &iquest;En qu&eacute; consiste la modulaci&oacute;n MIC o PCM?</p>
+      <p>SE&Ntilde;AL ANAL&Oacute;GICA PAM QUANTIZATION</p>
+      <p><br>
+        DIGITAL/DIGITAL BINARY ENCODING<br>
+        ENCODING</p>
+      <p>La se&ntilde;al anal&oacute;gica pasa por una fase de muestreo de la 
+        se&ntilde;al que se realiza el doble de veces que la frecuencia de la 
+        se&ntilde;al anal&oacute;gica, despu&eacute;s pasa por una Cuantificaci&oacute;n 
+        y toma valores desde &#8211;127 a 127 (256 valores).<br>
+        Acto seguido se pasa a c&oacute;digo binario, y por &uacute;ltimo se transforma 
+        a se&ntilde;ales digitales (0 y 1).</p>
+      <p>90.- &iquest;Qu&eacute; tipos de compresi&oacute;n de datos existen?<br>
+        C&oacute;digo Huffmann, codificaci&oacute;n aritm&eacute;tica, m&eacute;todos 
+        de diccionario... etc.</p>
+</td>
+    
+  </tr>
+ 
+  <tr> 
+    <td height="16"> 
+      <p align="right"><a href="http://www.euskalnet.net/juanarana/index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a> </p></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

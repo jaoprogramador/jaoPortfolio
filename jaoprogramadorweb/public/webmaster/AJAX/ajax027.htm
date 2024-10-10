@@ -1,0 +1,176 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>C&oacute;mo hacer una p&aacute;gina AJAX</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta name="keywords" content="Primera página AJAX, Como hacer una pagina AJAX, Manual AJAX, tutorial AJAX, Ejemplos AJAX, ejercicios AJAX">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<table width="555" height="1981" align="left" background="../../imagenes/fondologo.jpg">
+  <tr> 
+    <td height="39" colspan="3"> <h2>Funciones para AJAX</h2></td>
+  </tr>
+  <tr> 
+    <td height="1911" colspan="3"> 
+      <p>Adem&aacute;s de todas las funciones y utilidades 
+        para la programaci&oacute;n tradicional de JavaScript, Prototype incluye 
+        numerosas funciones relacionadas con el desarrollo de aplicaciones AJAX. 
+        Los m&eacute;todos que componen este m&oacute;dulo son Ajax.Request(), 
+        Ajax.Updater(), Ajax.PeriodicalUpdater() y Ajax.Responders().<br>
+        Ajax.Request() es el m&eacute;todo principal de este m&oacute;dulo. Se 
+        utiliza para realizar peticiones AJAX y procesar sus resultados. Su sintaxis 
+        es:<br>
+        new Ajax.Request(url, opciones);<br>
+        El primer par&aacute;metro (url) es la URL que solicita la petici&oacute;n 
+        AJAX y el segundo par&aacute;metro (opciones) es opcional y se emplea 
+        para especificar valores diferentes a las opciones por defecto. Las opciones 
+        se indican en forma de array asociativo:<br>
+        new Ajax.Request('/ruta/hasta/pagina.php', {<br>
+        method: 'post',<br>
+        asynchronous: true,<br>
+        postBody: 'parametro1=valor1&amp;parametro2=valor2',<br>
+        onSuccess: procesaRespuesta,onFailure: muestraError<br>
+        });<br>
+        Como es habitual, para establecer la funci&oacute;n que procesa la respuesta 
+        del servidor, se indica el nombre de la funci&oacute;n sin par&eacute;ntesis. 
+        Las funciones externas asignadas para procesar la respuesta, reciben como 
+        primer par&aacute;metro el objeto que representa la respuesta del servidor.<br>
+        Haciendo uso de este objeto, las funciones pueden acceder a todas las 
+        propiedades habituales:<br>
+        function procesaRespuesta(respuesta) {<br>
+        alert(respuesta.responseText);<br>
+        }<br>
+        A continuaci&oacute;n se incluye una tabla con todas las opciones que 
+        se pueden definir para el m&eacute;todo<br>
+        Ajax.Request():<br>
+        Opci&oacute;n Descripci&oacute;n<br>
+        method El m&eacute;todo de la petici&oacute;n HTTP. Por defecto es POST<br>
+        parameters<br>
+        Lista de valores que se env&iacute;an junto con la petici&oacute;n. Deben 
+        estar formateados como una query string: parametro1=valor1&amp;parametro2=valor2<br>
+        encoding Indica la codificaci&oacute;n de los datos enviados en la petici&oacute;n. 
+        Su valor por defecto es UTF-8 asynchronous<br>
+        Controla el tipo de petici&oacute;n que se realiza. Por defecto es true, 
+        lo que indica que la<br>
+        petici&oacute;n realizada al servidor es as&iacute;ncrona, el tipo de 
+        petici&oacute;n habitual en las aplicaciones<br>
+        AJAX<br>
+        postBody Contenido que se env&iacute;a en el cuerpo de la petici&oacute;n 
+        de tipo POST<br>
+        contentType<br>
+        Indica el valor de la cabecera Content-Type utilizada para realizar la 
+        petici&oacute;n. Su valor por defecto es application/x-www-form-urlencoded<br>
+        requestHeaders Array con todas las cabeceras propias que se quieren enviar 
+        junto con la petici&oacute;n onComplete<br>
+        onLoaded<br>
+        on404<br>
+        on500<br>
+        Permiten asignar funciones para el manejo de las distintas fases de la 
+        petici&oacute;n. Se<br>
+        pueden indicar funciones para todos los c&oacute;digos de estado v&aacute;lidos 
+        de HTTP<br>
+        onSuccess<br>
+        Permite indicar la funci&oacute;n que se encarga de procesar las respuestas 
+        correctas de<br>
+        servidor<br>
+        onFailure Se emplea para indicar la funci&oacute;n que se ejecuta cuando 
+        la respuesta ha sido incorrecta<br>
+        onException<br>
+        Permite indicar la funci&oacute;n encargada de manejar las peticiones 
+        err&oacute;neas en las que la<br>
+        respuesta del servidor no es v&aacute;lida, los argumentos que se incluyen 
+        en la petici&oacute;n no son<br>
+        v&aacute;lidos, etc.<br>
+        La funci&oacute;n Ajax.Updater() es una versi&oacute;n especial de Ajax.Request() 
+        que se emplea para<br>
+        actualizar el contenido HTML de un elemento de la p&aacute;gina con la 
+        respuesta del servidor.<br>
+        &lt;div id=&quot;info&quot;&gt;&lt;/div&gt;<br>
+        new Ajax.Updater('info', '/ruta/hasta/pagina.php');<br>
+        Si la respuesta del servidor es&lt;ul&gt;<br>
+        &lt;li&gt;Lorem ipsum dolor sit amet&lt;/li&gt;<br>
+        &lt;li&gt;Consectetuer adipiscing elit&lt;/li&gt;<br>
+        &lt;li&gt;Curabitur risus magna, lobortis&lt;/li&gt;<br>
+        &lt;/ul&gt;<br>
+        Despu&eacute;s de realizar la petici&oacute;n de tipo Ajax.Updater(), 
+        el contenido HTML de la respuesta del servidor se muestra dentro del &lt;div&gt;:<br>
+        &lt;div id=&quot;info&quot;&gt;<br>
+        &lt;ul&gt;<br>
+        &lt;li&gt;Lorem ipsum dolor sit amet&lt;/li&gt;<br>
+        &lt;li&gt;Consectetuer adipiscing elit&lt;/li&gt;<br>
+        &lt;li&gt;Curabitur risus magna, lobortis&lt;/li&gt;<br>
+        &lt;/ul&gt;<br>
+        &lt;/div&gt;<br>
+        La sintaxis de Ajax.Updater() se muestra a continuaci&oacute;n:<br>
+        new Ajax.Updater(elemento, url, opciones);<br>
+        Adem&aacute;s de todas las opciones de Ajax.Request(), la funci&oacute;n 
+        Ajax.Updater() permite establecer las siguientes opciones:<br>
+        Opci&oacute;n Descripci&oacute;n<br>
+        insertion<br>
+        Indica c&oacute;mo se inserta el contenido HTML en el elemento indicado. 
+        Puede ser<br>
+        Insertion.Before, Insertion.Top, Insertion.Bottom o Insertion.After<br>
+        evalScripts<br>
+        Si la respuesta del servidor incluye scripts en su contenido, esta opci&oacute;n 
+        permite indicar si se ejecutan o no. Su valor por defecto es false, por 
+        lo que no se ejecuta ning&uacute;n script<br>
+        La funci&oacute;n Ajax.PeriodicalUpdater() es una versi&oacute;n especializada 
+        de Ajax.Updater(), que se emplea cuando se quiere ejecutar de forma repetitiva 
+        una llamada a Ajax.Updater(). Esta funci&oacute;n puede ser &uacute;til 
+        para ofercer informaci&oacute;n en tiempo real como noticias:<br>
+        &lt;div id=&quot;titulares&quot;&gt;&lt;/div&gt;<br>
+        new Ajax.PeriodicalUpdater('titulares', '/ruta/hasta/pagina.php', { frequency:30 
+        });<br>
+        El c&oacute;digo anterior actualiza, cada 30 segundos, el contenido del 
+        &lt;div&gt; con la respuesta recibida desde el servidor.<br>
+        Adem&aacute;s de todas las opciones anteriores, Ajax.PeriodicalUpdater() 
+        dispone de las siguientes opciones propias:<br>
+        Opci&oacute;n Descripci&oacute;n<br>
+        frequency N&uacute;mero de segundos que se espera entre las peticiones. 
+        El valor por defecto es de 2 segundos decay<br>
+        Indica el factor que se aplica a la frecuencia de actualizaci&oacute;n 
+        cuando la &uacute;ltima respuesta del<br>
+        servidor es igual que la anterior. Ejemplo: si la frecuencia es 10 segundos 
+        y el decay vale 3,<br>
+        cuando una respuesta del servidor sea igual a la anterior, la siguiente 
+        petici&oacute;n se har&aacute; 3 * 10<br>
+        = 30 segundos despu&eacute;s de la &uacute;ltima petici&oacute;nPor &uacute;ltimo, 
+        Ajax.Responders permite asignar de forma global las funciones que se encargan 
+        de<br>
+        responder a los eventos AJAX. Una de las principales utilidades de Ajax.Responders 
+        es la de indicar al usuario en todo momento si se est&aacute; realizando 
+        alguna petici&oacute;n AJAX.<br>
+        Los dos m&eacute;todos principales de Ajax.Responders son register() y 
+        unregister() a los que se pasa como argumento un objeto de tipo array 
+        asociativo que incluye las funciones que responden a cada evento:<br>
+        Ajax.Responders.register({<br>
+        onCreate: function() {<br>
+        if($('info') &amp;&amp; Ajax.activeRequestCount&gt; 0) {<br>
+        $('info').innerHTML = Ajax.activeRequestCount + &quot;peticiones pendientes&quot;;<br>
+        }<br>
+        },<br>
+        onComplete: function() {<br>
+        if($('info') &amp;&amp; Ajax.activeRequestCount&gt; 0) {<br>
+        $('info').innerHTML = Ajax.activeRequestCount + &quot;peticiones pendientes&quot;;<br>
+        }<br>
+        }<br>
+        });</p></td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

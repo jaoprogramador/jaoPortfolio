@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>El objeto Window</title><META http-equiv=Content-Language content=es><META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<META content="javascript, Lenguaje javascript, Manual javascript, Tutorial javascript, ejercicios javascript" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="javascript, Lenguaje javascript, Manual javascript, Tutorial javascript, ejercicios javascript">
+<meta name="description" content="javascript">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+ 
+  <link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+  
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="38" colspan="2"><h2>El objeto Window </h2> 
+      </div></td>
+  </tr>
+  <tr> 
+    <td height="176" colspan="2"><p>El objeto window posee una serie de propiedades que determinan caracter&iacute;sticas b&aacute;sicas de la ventana y sus componentes. A continuaci&oacute;n aparecen rese&ntilde;adas las propiedades mas elementales. </p>
+      <p>&#149;&nbsp; closed. Propiedad que determina si una ventana se ha cerrado </p>
+      <p>&#149;&nbsp; defaultStatus. Propiedad que contiene el mensaje estandar que aparece en la barra de estado de Windows </p>
+      <p>&#149;&nbsp; frames. Es una matriz que representa todos los frames de la ventana </p>
+      <p>&#149;&nbsp; length. Esta propiedad contiene el n&uacute;mero de frames de la ventana </p>
+      <p>&#149;&nbsp; contiene le nombre de la ventana </p>
+      <p>&#149;&nbsp; outerHeigth. Altura de la totalidad de la ventana </p>
+      <p>&#149;&nbsp; outerWith. La anchura de la totalidad de la ventana </p>
+      <p>&#149;&nbsp; parent. Hace referencia a la ventana con un c&oacute;digo &lt;frameset&gt; </p>
+      <p>&#149;&nbsp; self. Propiedad que hace referencia a la ventana activa </p>
+      <p>&#149;&nbsp; top. Hace referencia a la ventana superior del navegador </p>
+      <p>&#149;&nbsp; status. Determina el mensaje que aparece en la barra de estado del navegador </p>
+      <p>&#149;&nbsp; window. Al igual que selft, hace referencia a la ventana activa. </p>
+      <p>&nbsp; </p>
+      <p>El objeto window posee una serie de m&eacute;todos que permiten ejecutar funciones especificas con las ventanas como por ejemplo crear ventanas y cuadros de dialogo. Rese&ntilde;amos a continuaci&oacute;n algunos de ellos. </p>
+      <p>&#149;&nbsp; open() y close() m&eacute;todos que abren y cierran una ventana </p>
+      <p>&#149;&nbsp; black() retrocede a la p&aacute;gina anterior </p>
+      <p>&#149;&nbsp; blur() quita el foco de la ventana espec&iacute;fica </p>
+      <p>&#149;&nbsp; captureEvents() captura todos los eventos de un determinado tipo </p>
+      <p>&#149;&nbsp; clearInterval() cancela el tiempo de espera establecido por setInterval. </p>
+      <p>&#149;&nbsp; close() cierra la ventana </p>
+      <p>&#149;&nbsp; alert() m&eacute;todo que muestra una ventana de dialogo con un mensaje y el bot&oacute;n aceptar. </p>
+      <p>&#149;&nbsp; confirm() m&eacute;todo similar al anterior pero mostrando dos botones; aceptar y cancelar </p>
+      <p>&#149;&nbsp; find() abre una ventana de di&aacute;logo que permite efectuar b&uacute;squedas </p>
+      <p>&#149;&nbsp; prompt() m&eacute;todo que representa una ventana de di&aacute;logo con u mensaje y un campo de entrada </p>
+      <p>&#149;&nbsp; setTimeout() este m&eacute;todo retrasa la ejecuci&oacute;n de una instrucci&oacute;n </p>
+      <p>&#149;&nbsp; clearTimeout() m&eacute;todo que permite anular el timeout fijado con el m&eacute;todo anterior </p>
+      <p>&nbsp; </p>
+      <p>Tambi&eacute;n podemos determinar el aspecto que tendr&aacute; la nueva ventana del navegador mediante una serie de componentes que permiten configurar el men&uacute; , la barra de herramientas , la barra de estado, etc. las opciones son: </p>
+      <p>&#149;&nbsp; toolbar muestra la barra de herramientas </p>
+      <p>&#149;&nbsp; location muestra la barra de direcci&oacute;n </p>
+      <p>&#149;&nbsp; directories muestra los botones de directorio </p>
+      <p>&#149;&nbsp; status muestra la barra de estado. </p>
+      <p>&#149;&nbsp; Menubar muestra la barra de menus </p>
+      <p>&#149;&nbsp; Scrollbars muestra la barra de desplazamientos </p>
+      <p>&#149;&nbsp; Resizable permite ajustar el tama&ntilde;o de la ventana </p>
+      <p>&#149;&nbsp; Width ancho de la ventana en pixeles </p>
+      <p>&#149;&nbsp; Height altura de la ventana en pixeles </p>
+      <p>Para abrir una ventana con los metodos vistos anteriormente ser&iacute;a: variableVentana=nombreVentana.open("URL","nombreVentana","opcionesVentana") por ejemplo un script que abre una ventana ser&iacute;a: </p>
+      <p>&lt;HTML&gt; </p>
+      <p>&lt;SCRIPT LANGUAJE="Javascript"&gt; </p>
+      <p>function abrirVentana(){ </p>
+      <p>ventana=open("","nueva","toolbar=no,directoriesl=no,menubar=no,width=180,height=160"); </p>
+      <p>} </p>
+      <p>Ventana.document.write("&lt;head&gt;&lt;title&gt;ventana nueva&lt;/title&gt;&lt;/head&gt;&lt;body&gt;"); </p>
+      <p>Ventana.document.write("&lt;form&gt;&lt;input type"button" value ="cerrar" onClick= "self.close()" &gt;&lt;/form&gt;"); </p>
+      <p>&lt;/SCRIPT&gt; </p>
+      <p>&nbsp; </p>
+      <p>&lt;BODY onLoad=" abrirVentana();"&gt; </p>
+      <p>&nbsp; </p>
+      <p>&lt;/BODY&gt; </p>
+      <p>&lt;/HTML&gt; </p></td>
+  </tr>
+  <tr> 
+    <td width="70" height="21"> </td>
+    <td height="21"> <div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a> </div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

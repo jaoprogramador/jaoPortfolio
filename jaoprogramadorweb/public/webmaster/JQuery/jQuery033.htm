@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Introducci&oacute;n a JQuery</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta name="keywords" content="Introduccion a JQuery, Manual JQuery, tutorial JQuery, Ejemplos JQuery, ejercicios JQuery">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos"><tr> 
+    <td height="39" colspan="3"> <h2>Llamada a Ajax con jQuery y el mensaje de carga</h2></td>
+  </tr>
+  <tr> 
+    <td height="268" colspan="3"> 
+      <h3>Introducci&oacute;n</h3>
+      <p>En este punto vamos a describir c&oacute;mo se tendr&iacute;a que hacer 
+        la llamada al servidor con Ajax,<br>
+        pero lo cierto es que este proceso ya lo explicamos con detalle anteriormente, 
+        por lo que os<br>
+        refiero al art&iacute;culo Uso de Ajax muy sencillo con jQuery, donde 
+        encontrar&eacute;is unas explicaciones<br>
+        que voy a dar por sabidas en este caso. Lo que explicar&eacute; en este 
+        art&iacute;culo es c&oacute;mo se tiene que<br>
+        mostrar el mensaje de carga cuando se inicia la llamada y como eliminarlo 
+        una vez hemos<br>
+        recibido la respuesta por Ajax.<br>
+        Otra cosa que el lector deber&aacute; conocer para poder entender este 
+        ejemplo es Mostrar y ocultar<br>
+        elementos de la p&aacute;gina con jQuery.<br>
+        $(document).ready(function(){<br>
+        $(&quot;#enlaceajax&quot;).click(function(evento){<br>
+        evento.preventDefault();<br>
+        $(&quot;#cargando&quot;).css(&quot;display&quot;, &quot;inline&quot;);<br>
+        $(&quot;#destino&quot;).load(&quot;pagina-lenta.php&quot;, function(){<br>
+        $(&quot;#cargando&quot;).css(&quot;display&quot;, &quot;none&quot;);<br>
+        });<br>
+        });<br>
+        })<br>
+        Voy comentando l&iacute;nea a l&iacute;nea el c&oacute;digo anterior.<br>
+        En la primera l&iacute;nea se est&aacute; especificando un m&eacute;todo 
+        ready() sobre el objeto document, que<br>
+        sirve para generar un c&oacute;digo a ser ejecutado cuando la p&aacute;gina 
+        est&aacute; lista para recibir<br>
+        instrucciones Javascript que trabajen con el DOM.<br>
+        En la segunda l&iacute;nea se accede al elemento con identificador &quot;enlaceajax&quot; 
+        (es decir, el enlace<br>
+        que activar&aacute; el Ajax) para definir un evento &quot;click&quot;.<br>
+        En la siguiente l&iacute;nea se ejecuta el m&eacute;todo preventDefault() 
+        sobre el evento producido al hacer<br>
+        clic sobre el enlace. Esto se hace para anular el comportamiento t&iacute;pico 
+        del enlace.<br>
+        Ahora viene la parte en la que se mostrar&aacute; el mensaje de carga:<br>
+        $(&quot;#cargando&quot;).css(&quot;display&quot;, &quot;inline&quot;);<br>
+        Simplemente se muestra la capa con id=&quot;cargando&quot;, con un simple 
+        cambio en el atributo CSS<br>
+        display de la capa. Ese cambio de atributo lo hacemos con el m&eacute;todo 
+        css() sobre el elemento<br>
+        que queremos alterar, tal como se vio en el art&iacute;culo Mostrar y 
+        ocultar elementos de la p&aacute;gina<br>
+        con jQuery.<br>
+        Ahora, con la siguiente l&iacute;nea de c&oacute;digo:<br>
+        $(&quot;#destino&quot;).load(&quot;pagina-lenta.php&quot;, function(){<br>
+        Se hace la llamada Ajax, con el m&eacute;todo load() sobre la capa que 
+        queremos actualizar con el<br>
+        contenido tra&iacute;do por Ajax, que es la capa con id=&quot;destino&quot;. 
+        Este m&eacute;todo recibe la URL de la<br>
+        p&aacute;gina a cargar y una funci&oacute;n callback, que se ejecutar&aacute; 
+        despu&eacute;s que el m&eacute;todo load() se haya<br>
+        terminado de procesar, esto es, despu&eacute;s de que la solicitud Ajax 
+        se haya recibido y se haya<br>
+        mostrado su contenido en la capa que recibe el m&eacute;todo.<br>
+        Entonces, en esa funci&oacute;n callback, tenemos que ocultar la capa 
+        con el mensaje de carga,<br>
+        puesto que cuando se ejecute esta funci&oacute;n ya se habr&aacute; realizado 
+        todo el procesamiento Ajax.<br>
+        Eso lo conseguimos con el m&eacute;todo css(), alterando la propiedad 
+        display, de manera similar a<br>
+        como lo hab&iacute;amos realizado para mostrar la capa cargando.<br>
+        $(&quot;#cargando&quot;).css(&quot;display&quot;, &quot;none&quot;);<br>
+        Esto es todo. Realmente no tiene ninguna complicaci&oacute;n especial. 
+        Aunque, como dec&iacute;a, estas<br>
+        cosas se podr&aacute;n hacer de una manera m&aacute;s elegante cuando 
+        aprendamos un poquito m&aacute;s sobre<br>
+        jQuery.<br>
+        Por si sirve para aclarar las cosas, dejo a continuaci&oacute;n el c&oacute;digo 
+        completo de la p&aacute;gina que<br>
+        hace la solicitud con jQuery:<br>
+        &lt;html&gt;<br>
+        &lt;head&gt;<br>
+        &lt;title&gt;Ajax Simple&lt;/title&gt;<br>
+        &lt;script src=&quot;jquery-1.3.2.min.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;<br>
+        &lt;script&gt;<br>
+        $(document).ready(function(){<br>
+        $(&quot;#enlaceajax&quot;).click(function(evento){<br>
+        evento.preventDefault();<br>
+        $(&quot;#cargando&quot;).css(&quot;display&quot;, &quot;inline&quot;);<br>
+        $(&quot;#destino&quot;).load(&quot;pagina-lenta.php&quot;, function(){<br>
+        $(&quot;#cargando&quot;).css(&quot;display&quot;, &quot;none&quot;);<br>
+        });<br>
+        });<br>
+        })<br>
+        &lt;/script&gt;<br>
+        &lt;/head&gt;<br>
+        &lt;body&gt;<br>
+        Esto es un Ajax con un mensaje de cargando...<br>
+        &lt;br&gt;<br>
+        &lt;br&gt;<br>
+        &lt;a href=&quot;#&quot; id=&quot;enlaceajax&quot;&gt;Haz clic!&lt;/a&gt;<br>
+        &lt;div id=&quot;cargando&quot; style=&quot;display:none; color: green;&quot;&gt;Cargando...&lt;/div&gt;<br>
+        &lt;br&gt;<br>
+        &lt;div id=&quot;destino&quot;&gt;&lt;/div&gt;<br>
+        &lt;/body&gt;<br>
+        &lt;/html&gt; </p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

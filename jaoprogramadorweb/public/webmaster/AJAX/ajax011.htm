@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>C&oacute;mo hacer una p&aacute;gina AJAX</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta name="keywords" content="Primera página AJAX, Como hacer una pagina AJAX, Manual AJAX, tutorial AJAX, Ejemplos AJAX, ejercicios AJAX">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2>Parámetros y respuestas JSON</h2></td>
+  </tr>
+  <tr> 
+    <td height="394" colspan="3"> <p>Aunque el formato XML est&aacute; soportado 
+        por casi todos los lenguajes de programaci&oacute;n, por<br>
+        muchas aplicaciones y es una tecnolog&iacute;a madura y probada, en algunas 
+        ocasiones es m&aacute;s &uacute;til<br>
+        intercambiar informaci&oacute;n con el servidor en formato JSON.<br>
+        JSON es un formato mucho m&aacute;s compacto y ligero que XML. Adem&aacute;s, 
+        es mucho m&aacute;s f&aacute;cil de<br>
+        procesar en el navegador del usuario. Afortunadamente, cada vez existen 
+        m&aacute;s utilidades para<br>
+        procesar y generar el formato JSON en los diferentes lenguajes de programaci&oacute;n 
+        del servidor<br>
+        (PHP, Java, C#, etc.)<br>
+        El ejemplo mostrado anteriormente para procesar las respuestas XML del 
+        servidor se puede<br>
+        reescribir utilizando respuestas JSON. En este caso, la respuesta que 
+        genera el servidor es mucho<br>
+        m&aacute;s concisa:<br>
+        {<br>
+        mensaje: &quot;...&quot;,parametros: {telefono: &quot;...&quot;, codigo_postal: 
+        &quot;...&quot;, fecha_nacimiento: &quot;...&quot; }<br>
+        }<br>
+        Considerando el nuevo formato de la respuesta, es necesario modificar 
+        la funci&oacute;n que se encarga<br>
+        de procesar la respuesta del servidor:<br>
+        function procesaRespuesta() {<br>
+        if(http_request.readyState == READY_STATE_COMPLETE) {<br>
+        if(http_request.status == 200) {<br>
+        var respuesta_json = http_request.responseText;<br>
+        var objeto_json = eval(&quot;(&quot;+respuesta_json+&quot;)&quot;);<br>
+        var mensaje = objeto_json.mensaje;<br>
+        var telefono = objeto_json.parametros.telefono;<br>
+        var fecha_nacimiento = objeto_json.parametros.fecha_nacimiento;<br>
+        var codigo_postal = objeto_json.parametros.codigo_postal;<br>
+        document.getElementById(&quot;respuesta&quot;).innerHTML = mensaje + &quot;&lt;br&gt;&quot; 
+        + &quot;Fecha<br>
+        nacimiento = &quot; + fecha_nacimiento + &quot;&lt;br&gt;&quot; + &quot;Codigo 
+        postal = &quot; + codigo_postal +<br>
+        &quot;&lt;br&gt;&quot; + &quot;Telefono = &quot; + telefono;<br>
+        }<br>
+        }<br>
+        }<br>
+        La respuesta JSON del servidor se obtiene mediante la propiedad responseText:<br>
+        var respuesta_json = http_request.responseText;<br>
+        Sin embargo, esta propiedad solamente devuelve la respuesta del servidor 
+        en forma de cadena<br>
+        de texto. Para trabajar con el c&oacute;digo JSON devuelto, se debe transformar 
+        esa cadena de texto en<br>
+        un objeto JSON. La forma m&aacute;s sencilla de realizar esa conversi&oacute;n 
+        es mediante la funci&oacute;n eval(),<br>
+        en la que deben a&ntilde;adirse par&eacute;ntesis al principio y al final 
+        para realizar la evaluaci&oacute;n de forma<br>
+        correcta:<br>
+        var objeto_json = eval(&quot;(&quot;+respuesta_json+&quot;)&quot;);<br>
+        Una vez realizada la transformaci&oacute;n, el objeto JSON ya permite 
+        acceder a sus m&eacute;todos y<br>
+        propiedades mediante la notaci&oacute;n de puntos tradicional. Comparado 
+        con las respuestas XML,<br>
+        este procedimiento permite acceder a la informaci&oacute;n devuelta por 
+        el servidor de forma mucho<br>
+        m&aacute;s simple:<br>
+        // Con JSON<br>
+        var fecha_nacimiento = objeto_json.parametros.fecha_nacimiento;<br>
+        // Con XML<br>
+        var parametros = root.getElementsByTagName(&quot;parametros&quot;)[0];<br>
+        var fecha_nacimiento =<br>
+        parametros.getElementsByTagName(&quot;fecha_nacimiento&quot;)[0].firstChild.nodeValue;<br>
+        Tambi&eacute;n es posible el env&iacute;o de los par&aacute;metros en 
+        formato JSON. Sin embargo, no es una tarea<br>
+        tan sencilla como la creaci&oacute;n de un documento XML. As&iacute;, 
+        se han dise&ntilde;ado utilidades espec&iacute;ficas<br>
+        para la transformaci&oacute;n de objetos JavaScript a cadenas de texto 
+        que representan el objeto en<br>
+        formato JSON. Esta librer&iacute;a se puede descargar desde el sitio web 
+        www.json.org.<br>
+        Para emplearla, se a&ntilde;ade la referencia en el c&oacute;digo de la 
+        p&aacute;gina:<br>
+        &lt;script type=&quot;text/javascript&quot; src=&quot;json.js&quot;&gt;&lt;/script&gt;<br>
+        Una vez referenciada la librer&iacute;a, se emplea el m&eacute;todo stringify 
+        para realizar la transformaci&oacute;n:<br>
+        var objeto_json = JSON.stringify(objeto);<br>
+        Adem&aacute;s de las librer&iacute;as para JavaScript, est&aacute;n disponibles 
+        otras librer&iacute;as para muchos otros<br>
+        lenguajes de programaci&oacute;n habituales. Empleando la librer&iacute;a 
+        desarrollada para Java, es posible<br>
+        procesar la petici&oacute;n JSON realizada por un cliente:<br>
+        import org.json.JSONObject;<br>
+        ...<br>
+        String cadena_json = &quot;{propiedad: valor, codigo_postal: otro_valor}&quot;;<br>
+        JSONObject objeto_json = new JSONObject(cadena_json);<br>
+        String codigo_postal = objeto_json.getString(&quot;codigo_postal&quot;);</p></td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

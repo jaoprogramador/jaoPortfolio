@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Ejercicios MySQL</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="MySQL, sql, pl/sql, programacion MySQL, ejercicios MySQL, ejemplos MySQL, select">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2>C A R G A R  D A T O S</h2></td>
+  </tr>
+  <tr> 
+    <td><h3>Cargar datos en una tabla</h3>
+      <p>Luego de crear la tabla, necesitar&aacute; completarla con datos. Para 
+        esto, le ser&aacute;n de utilidad las sentencias LOAD DATA e INSERT.<br>
+        Suponga que los registros de mascotas fueran como los mostrados a continuaci&oacute;n. 
+        (Observe que MySQL espera que las fechas tengan<br>
+        el formato 'AAAA-MM-DD', esto puede ser diferente a lo que acostumbra 
+        utilizar).<br>
+        name owner species sex birth death<br>
+        Fluffy Harold cat f 1993-02-04<br>
+        Claws Gwen cat m 1994-03-17<br>
+        Buffy Harold dog f 1989-05-13<br>
+        Fang Benny dog m 1990-08-27<br>
+        Bowser Diane dog m 1979-08-31 1995-07-29<br>
+        Chirpy Gwen bird f 1998-09-11<br>
+        Whistler Gwen bird 1997-12-09<br>
+        Slim Benny snake m 1996-04-29<br>
+        Dado que est&aacute; comenzando con una tabla vac&iacute;a, una forma 
+        f&aacute;cil de completarla es creando un fichero de texto que contenga 
+        una l&iacute;nea<br>
+        por cada animal, y luego insertando el contenido del fichero en la tabla 
+        mediante una sola sentencia.<br>
+        Para esto, deber&iacute;a crear un fichero de texto llamado pet.txt, conteniendo 
+        un registro por linea, con cada valor separado por un<br>
+        car&aacute;cter de tabulaci&oacute;n, y dispuestos en el orden en el cual 
+        se especificaron las columnas en la sentencia CREATE TABLE. Para valores<br>
+        ausentes (como sexo desconocido o fechas de muerte de animales con vida), 
+        puede usar valores NULL. Para representar estos<br>
+        valores en el archivo de texto, utilice \N (barra diagonal y N may&uacute;scula). 
+        Por ejemplo, el registro de Whistler se ver&iacute;a del modo siguiente<br>
+        (el espacio en blanco entre cada valor es un solo car&aacute;cter de tabulaci&oacute;n):<br>
+        name owner species sex birth death<br>
+        Whistler Gwen bird \N 1997-12-09 \N<br>
+        Para cargar el fichero pet.txt dentro de la tabla pet, utilice este comando:<br>
+        mysql&gt; LOAD DATA LOCAL INFILE '/path/pet.txt' INTO TABLE pet;<br>
+        Si trabaja en Windows, con un editor que emplea \r\n (retorno de carro 
+        + nueva linea) como caracteres de fin de l&iacute;nea, deber&iacute;a<br>
+        usar:<br>
+        mysql&gt; LOAD DATA LOCAL INFILE '/path/pet.txt' INTO TABLE pet<br>
+        -&gt; LINES TERMINATED BY '\r\n';<br>
+        (En un ordenador Apple bajo OS X, probablemente quiera utilizar LINES 
+        TERMINATED BY '\r'.)<br>
+        Opcionalmente puede especificar en la sentencia LOAD DATA los caracteres 
+        que actuar&aacute;n como separador de campo y fin de l&iacute;nea,<br>
+        pero los valores por defecto son tabulaci&oacute;n y nueva l&iacute;nea. 
+        Estos son suficientes para que la sentencia lea correctamente el fichero<br>
+        pet.txt<br>
+        Si ocurre un error al ejecutar la sentencia, probablemente se deba a que 
+        su instalaci&oacute;n de MySQL no tiene habilitada por defecto la<br>
+        capacidad de manejar archivos locales. Consulte Secci&oacute;n 5.5.4, 
+        &#8220;Cuestiones relacionadas con la seguridad y LOAD DATA<br>
+        LOCAL&#8221; para obtener informaci&oacute;n sobre c&oacute;mo cambiar 
+        esto.<br>
+        Cuando lo que desea es agregar nuevos registros de a uno por vez, la sentencia 
+        INSERT resulta de utilidad. De esta sencilla manera,<br>
+        se suministran valores para cada columna, dispuestos en el orden en el 
+        cual se especificaron las columnas en la sentencia<br>
+        CREATE TABLE statement. Suponga que Diane obtiene un nuevo hamster llamado 
+        &quot;Puffball&quot;. Se podr&iacute;a agregar un nuevo registro,<br>
+        usando la sentencia INSERT de este modo:<br>
+        mysql&gt; INSERT INTO pet<br>
+        -&gt; VALUES ('Puffball','Diane','hamster','f','1999-03-30',NULL);<br>
+        Observe que las cadenas alfanum&eacute;ricas y las fechas son representados 
+        como cadenas delimitadas por ap&oacute;strofos. Tambi&eacute;n, con INSERT,<br>
+        se pueden insertar valores NULL directamente, para indicar un valor ausente. 
+        No se debe utilizar \N como se hace con<br>
+        LOAD DATA.<br>
+        A partir de este ejemplo queda demostrado que lleva mucho m&aacute;s trabajo 
+        realizar una carga inicial de registros empleando varias<br>
+        sentencias INSERT que si se hace mediante la sentencia LOAD DATA.</p>
+    <p>
+    	
+      </p>
+        </td>
+    <td>&nbsp;</td>
+    <td><a href="http://www.euskalnet.net/juanarana/oraclezip/Ejer3.rar"><img src="../../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td>
+<div align="right"><a href="http://www.euskalnet.net/juanarana/index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a>
+      </div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

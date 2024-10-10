@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Introducci&oacute;n a JQuery</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta name="keywords" content="Introduccion a JQuery, Manual JQuery, tutorial JQuery, Ejemplos JQuery, ejercicios JQuery">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos"><tr> 
+    <td height="39" colspan="3"> <h2>Selectores básicos en jQuery</h2></td>
+  </tr>
+  <tr> 
+    <td height="268" colspan="3"> 
+      <h3>Introducci&oacute;n</h3>
+      <p>Los selectores, al menos los m&aacute;s b&aacute;sicos, son parecidos, 
+        o iguales, a los que se utilizan en CSS<br>
+        para seleccionar los elementos a los que se desean aplicar ciertos estilos. 
+        Como entiendo que<br>
+        todas las personas que intenten profundizar en el framework jQuery deben 
+        haber conocido<br>
+        CSS anteriormente, no habr&aacute; ning&uacute;n problema con ellos.<br>
+        Selector de etiquetas:<br>
+        Simplemente indicamos la etiqueta a la que deseamos referirnos, es decir, 
+        la etiqueta que<br>
+        queremos seleccionar. Obtendremos con &eacute;l todas las etiquetas de 
+        la p&aacute;gina indicada en el<br>
+        selector.<br>
+        $(&quot;h1&quot;) //selecciona todos los encabezados de nivel 1<br>
+        Selector por identificador:<br>
+        Sirven para seleccionar los elementos que tengan un identificador dado, 
+        que se asigna a las<br>
+        etiquetas a trav&eacute;s del atributo id del HTML. Para utilizar este 
+        selector se indica primero el<br>
+        car&aacute;cter &quot;#&quot; y luego el identificador de cuyo elemento 
+        se desee seleccionar.<br>
+        $(&quot;#idelemento&quot;) //selecciona una etiqueta que tiene el atributo 
+        id=&quot;idelemento&quot;<br>
+        Selector por clase:<br>
+        Podemos indicar el nombre de una clase (class de CSS) y seleccionar todos 
+        los elementos a los<br>
+        que se ha aplicado esta clase. Para ello, como en CSS, comenzamos colocando 
+        el car&aacute;cter &quot;.&quot; y<br>
+        luego el nombre de la clase que deseamos seleccionar.<br>
+        $(&quot;.miclase&quot;) //selecciona todos los elementos que tienen el 
+        atributo class=&quot;miclase&quot;<br>
+        Selector por varias clases:<br>
+        Si lo deseamos, podemos indicar varias clases CSS, para obtener todos 
+        los elementos que<br>
+        tienen esas clases aplicadas: todas al mismo tiempo. Esto se consigue 
+        comenzando por un &quot;.&quot;,<br>
+        igual que los selectores de clases, y luego otro &quot;.&quot; para separar 
+        las distintas clases que<br>
+        queremos utilizar en el selector.<br>
+        $(&quot;.clase1.clase2&quot;) //selecciona los elementos que tienen class=&quot;clase1 
+        clase2&quot;<br>
+        Selector asterisco &quot;*&quot;:<br>
+        Nos sirve para seleccionar todos los elementos de la p&aacute;gina.<br>
+        $(&quot;*&quot;) //selecciona todos los elementos que tiene la p&aacute;gina<br>
+        Concatenar varios selectores distintos:<br>
+        Por &uacute;ltimo, podemos utilizar varios selectores, para obtener todas 
+        las etiquetas que cumplen<br>
+        uno de ellos. No hace falta que cumplan todos los selectores a la vez, 
+        sino con que uno de<br>
+        ellos concuerde es suficiente. Para ello colocamos todos los selectores 
+        que deseamos,<br>
+        separados por una coma &quot;,&quot;.<br>
+        $(&quot;div,p&quot;) //selecciona todos los elementos divisi&oacute;n 
+        y p&aacute;rrafo<br>
+        $(&quot;.clase1,.clase2&quot;) //selecciona los elementos que tienen la 
+        clase &quot;clase1&quot; o &quot;clase2&quot;<br>
+        $(&quot;#miid,.miclase,ul) //selecciona el elemento con id=&quot;miid&quot;, 
+        los elementos con<br>
+        class=&quot;miclase&quot; y todas las listas UL</p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Uso de Streams valores muy grandes de filas</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación en JDBC,Programas JDBC,Aplicaciones en JDBC,Ejercicios en JDBC, Ejemplos de JDBC,Tutoriales de JDBC,Manuales JDBC" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="JDBC, Manual JDBC, tutorial JDBC, Ejemplos JDBC, ejercicios JDBC">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> Uso de Streams valores muy grandes de filas.</h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <p>ResultSet hace posible el recuperar datos 
+        arbitrariamente grandes de tipo LONGVARBINARY o LONGVARCHAR. Los m&eacute;todos 
+        getBytes y getString devuelven valores grandes (hasta los l&iacute;mites 
+        impuestos por el valor devuelto por Statement.getMaxFieldSize). </p>
+      <p>De todos modos, puede ser conveniente recuperar datos muy grandes en 
+        &#8216;pedazos&#8217; de tama&ntilde;o fijo. Esto se hace mediante la 
+        clase ResultSet que devuelve &#8216;streams&#8217; java.io.Input desde 
+        los cuales los datos pueden ser leidos en &#8216;pedazos&#8217;. N&ograve;tese 
+        que estas corrientes deben ser accedidas inmediatamente porque se cierran 
+        autom&aacute;ticamente con la llamada al siguiente m&eacute;todo getXXX 
+        de ResultSet. (Este comportamiento est&aacute; impuesto por las restricciones 
+        de implementaci&oacute;n de acceso a grandes blob).</p>
+      <p>El API JDBC tiene tres m&eacute;todos diferentes para recuperar streams, 
+        cada uno con un valor diferente de retorno.</p>
+      <p>&#8226; getBinaryStream devuelve una corriente que simplemente suminiistra 
+        bytes en &#8216;bruto&#8217; desde la base de datos sin ninguna conversi&oacute;n.</p>
+      <p>&#8226; getAsciiStream devuelve una corriente con caracteres ASCII</p>
+      <p>&#8226; getUnicodeStream devuelve una corriente con caracteres Unicode 
+        de 2 bytes.</p>
+      <p>Notar que esto difiere de las corrientes Java que devuelven bytes sn 
+        tipo y pueden (por ejemplo) usarse para ambos caracteres ASCII y Unicode.</p>
+      <p>A continuaci&oacute;n veamos un ejemplo del uso de getAsciiStream:</p>
+      <p> java.sql.Statement stmt = con.createStatement();<br>
+        ResultSet r = stmt.executeQuery(&quot;SELECT x FROM Table2&quot;);<br>
+        // Now retrieve the column 1 results in 4 K chunks:<br>
+        byte buff = new byte[4096];<br>
+        while (r.next()) { <br>
+        Java.io.InputStream fin = r.getAsciiStream(1);<br>
+        for (;;) {<br>
+        int size = fin.read(buff);<br>
+        if (size == -1) { // at end of stream<br>
+        break;<br>
+        }<br>
+        // Send the newly-filled buffer to some ASCII output stream:<br>
+      </p>
+      <p> output.write(buff, 0, size);<br>
+        }<br>
+        }</p>
+      <p></p>
+      <p><br>
+      </p>
+      <p>&nbsp; </p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

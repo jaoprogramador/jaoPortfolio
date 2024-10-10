@@ -1,0 +1,180 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Las bibliotecas de etiquetas</title>
+<META http-equiv=Content-Language content=es>
+<META content="Manual JSP, ejemplos JSP, codigos JSP" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Manual JSP, ejemplos JSP, codigos JSP">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> Las bibliotecas de etiquetas</h2></td>
+  </tr>
+  <tr> 
+    <td colspan="3"> <p>JSP 1.1 introduce un m&eacute;todo de ampliar etiquetas 
+        JSP, denominado &quot;bibliotecas de etiquetas&quot;. Estas bibliotecas 
+        permiten la adici&oacute;n de etiquetas, similar a jsp: incluir o jsp: 
+        hacia delante, pero con diferentes prefijos que no sean jsp: y con caracter&iacute;sticas 
+        adicionales.</p>
+      <p>Para introducir etiquetar las bibliotecas, en este tutorial vamos a utilizar 
+        la biblioteca de etiquetas Blazix como un ejemplo. Esta biblioteca de 
+        etiquetas viene incluido con el servidor de Blazix. Si usted no est&aacute; 
+        utilizando el servidor de Blazix, puede ser que desee revisar el material 
+        para familiarizarse con la sintaxis, y continuar a la siguiente p&aacute;gina.</p>
+      <p>Cada etiqueta de biblioteca tendr&aacute; su propia etiqueta, documentaci&oacute;n 
+        de la biblioteca espec&iacute;fica. Con el fin de utilizar la biblioteca 
+        de etiquetas, se utiliza el &quot;taglib&quot; Directiva para especificar 
+        d&oacute;nde &quot;de su biblioteca de c&oacute;digos de descripci&oacute;n&quot; 
+        de residencia. Para la biblioteca de etiquetas Blazix, el (recomendado) 
+        Directiva es la siguiente</p>
+      <p> &lt;%@ taglib prefix=&quot;blx&quot; uri=&quot;/blx.tld&quot; %&gt; 
+      </p>
+      <p> El &quot;uri&quot; especifica d&oacute;nde encontrar la descripci&oacute;n 
+        de la biblioteca de etiquetas. El prefijo &quot;es &uacute;nico para la 
+        biblioteca de etiquetas. Esta directiva es decir que vamos a utilizar 
+        las etiquetas de esta biblioteca de partida con BLX:</p>
+      <p> La biblioteca ofrece una etiqueta Blazix BLX: tag getProperty. Esta 
+        etiqueta puede ser usada para permitir al usuario modificar los datos 
+        del formulario. En nuestro archivo GetName.jsp, ahora vamos a a&ntilde;adir 
+        una jsp: useBean lugar y la forma dentro de BLX: getProperty.</p>
+      <p>El GetName.jsp nuevo</p>
+      <p> &lt;%@ taglib prefix=&quot;blx&quot; uri=&quot;/blx.tld&quot; %&gt;<br>
+        &lt;jsp:useBean id=&quot;user&quot; class=&quot;user.UserData&quot; scope=&quot;session&quot;/&gt; 
+        <br>
+        &lt;HTML&gt; <br>
+        &lt;BODY&gt;<br>
+        &lt;blx:getProperty name=&quot;user&quot; property=&quot;*&quot;&gt; <br>
+        &lt;FORM METHOD=POST ACTION=&quot;SaveName.jsp&quot;&gt;<br>
+        &iquest;Cu&aacute;l es tu nombre? &lt;INPUT TYPE=TEXT NAME=username SIZE=20&gt;&lt;BR&gt; 
+        <br>
+        &iquest;Cu&aacute;l es tu direcci&oacute;n de e-mail? &lt;INPUT TYPE=TEXT 
+        NAME=email SIZE=20&gt;&lt;BR&gt; <br>
+        &iquest;Cu&aacute;l es tu edad? &lt;INPUT TYPE=TEXT NAME=age SIZE=4&gt; 
+        <br>
+        &lt;P&gt;&lt;INPUT TYPE=SUBMIT&gt; <br>
+        &lt;/FORM&gt; <br>
+        &lt;/blx:getProperty&gt; <br>
+        &lt;/BODY&gt; <br>
+        &lt;/HTML&gt; </p>
+      <p> Tenga en cuenta que el BLX: getProperty no termina con /&gt;, sino que 
+        es revocada por separado &lt;/ BLX: getProperty&gt; l&iacute;nea. Esto 
+        coloca a todos los campos del formulario de entrada dentro del BLX: getProperty 
+        para que puedan ser convenientemente modificados por la biblioteca de 
+        etiquetas .</p>
+      <p> Trate de poner un enlace a GetName.jsp de la NextPage.jsp, y ver&aacute; 
+        que los datos del bean aparece autom&aacute;ticamente en los campos de 
+        entrada.</p>
+      <p>Ahora el usuario puede editar los datos.</p>
+      <p>Todav&iacute;a tenemos un par de problemas. El usuario no puede limpiar 
+        el campo de nombre. Por otra parte, si el usuario introduce un elemento 
+        de mala en la era del &quot;campo&quot;, algo que no es un entero v&aacute;lido, 
+        se produce una excepci&oacute;n Java.</p>
+      <p>Vamos a utilizar otra etiqueta de la biblioteca de etiquetas Blazix a 
+        cuidar de esto. Blazix ofrece una BLX: tag setProperty que pueden ser 
+        utilizados para atender estos problemas. BLX: setProperty nos permite 
+        definir un m&eacute;todo de controlador de excepciones. Si se produce 
+        una excepci&oacute;n , podemos recoger un mensaje de error para el usuario 
+        y seguir procesando.</p>
+      <p>Lo que sigue es una versi&oacute;n de SaveName.jsp que los procesos de 
+        los errores, y que acrediten la GetName.jsp usuario nuevo para el usuario 
+        puede ingresar los datos correctamente, o reenv&iacute;a autom&aacute;ticamente 
+        a NextPage.jsp.</p>
+      <p> &lt;%@ taglib prefix=&quot;blx&quot; uri=&quot;/blx.tld&quot; %&gt; 
+        <br>
+        &lt;%! <br>
+        boolean haveError; <br>
+        StringBuffer errors;</p>
+      <p> public void errorHandler( String field, errorHandler <br>
+        Exception ex ) <br>
+        { (<br>
+        haveError = true; <br>
+        if ( errors == null ) <br>
+        errors = new StringBuffer(); <br>
+        else <br>
+        errors.append( &quot;&lt;P&gt;&quot; ); <br>
+        errors.append ( &quot;&lt;P&gt; valor para el campo \&quot; &quot;+<br>
+        + &quot;\&quot; no es v&aacute;lida. &quot;);<br>
+        if ( ex instanceof java.lang.NumberFormatException ) <br>
+        errors.append ( &quot;El valor debe ser un n&uacute;mero.&quot;);<br>
+        } )<br>
+        %&gt;<br>
+        &lt;%<br>
+        // Las variables deben ser inicializados declaraci&oacute;n fuera!<br>
+        haveError = false; <br>
+        errors = null; <br>
+        %&gt;<br>
+        &lt;HTML&gt; <br>
+        &lt;BODY&gt;<br>
+        &lt;jsp:useBean id=&quot;user&quot; class=&quot;user.UserData&quot; scope=&quot;session&quot;/&gt; 
+        <br>
+        &lt;blx:setProperty name=&quot;user&quot; <br>
+        property=&quot;*&quot; <br>
+        onError=&quot;errorHandler&quot;/&gt; <br>
+        &lt;%<br>
+        if ( haveError ) { <br>
+        out.println( errors.toString()); <br>
+        pageContext.include( &quot;GetName.jsp&quot; ); <br>
+        } else <br>
+        pageContext.forward( &quot;NextPage.jsp&quot; ); <br>
+        %&gt;<br>
+        &lt;/BODY&gt; <br>
+        &lt;/HTML&gt; </p>
+      <p> Tenga en cuenta que haveError y los errores deben ser re-inicializado 
+        cada vez que, por lo que se est&aacute; inicializado fuera de la declaraci&oacute;n.</p>
+      <p>Tambi&eacute;n observe el uso de pageContext.include y pageContext.forward. 
+        Son como jsp: incluir y jsp: adelante, pero es m&aacute;s conveniente 
+        utilizar en el interior de bloques de Java. AgeContext p es otro predefinido 
+        variable que hace que sea f&aacute;cil de hacer de determinadas operaciones 
+        dentro de los bloques de Java.</p>
+      <p>Aqu&iacute;, si se produce un error durante el procesamiento de BLX: 
+        setProperty, se muestra el error y, a continuaci&oacute;n incluyen el 
+        GetName.jsp de nuevo para el usuario puede corregir el error. Si no se 
+        producen errores, se reenviar&aacute; autom&aacute;ticamente al usuario 
+        a NextPage.jsp.</p>
+      <p>Todav&iacute;a hay un problema con las formas, la &quot;edad&quot; aparece 
+        inicialmente como cero en lugar de vac&iacute;o. Esto se puede solucionar 
+        mediante la adici&oacute;n de &quot;= 0&quot; emptyInt tanto a la BLX: 
+        getProperty y BLX: etiquetas setProperty (campos de Bean se debe inicializado 
+        a 0.) Sucede que el &quot;0&quot; no es un valor v&aacute;lido para la 
+        edad, para que podamos usar &quot;0&quot; para marcar las cadenas vac&iacute;as. 
+        SI &quot;0&quot; eran un valor v&aacute;lido para la edad, se podr&iacute;a 
+        haber agregado: &quot;emptyInt =- 1 &quot;(y se asegur&oacute; para inicializar 
+        los campos de Bean a -1.)</p>
+      <p>Otro peque&ntilde;o problema es que el &quot;&lt;HTML&gt;&quot; tag se 
+        duplica si hay un error y terminamos como &quot;GetName.jsp&quot; soluci&oacute;n. 
+        La m&aacute;s elegante es suprimir el out.println, y pasar de nuevo el 
+        error como se muestra</p>
+      <p> &lt;%<br>
+        if (haveError) (<br>
+        request.setAttribute( &quot;errors&quot;,<br>
+        errors.toString()); <br>
+        pageContext.forward( &quot;GetName.jsp&quot; );<br>
+        } else <br>
+        pageContext.forward( &quot;NextPage.jsp&quot; );<br>
+        %&gt;</p>
+      <p>Podemos hacer un &quot;request.getAttribute&quot; en el GetName.jsp, 
+        y si el valor devuelto no es nulo, mostrar el error.<br>
+      </p>
+      <p>&nbsp; </p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

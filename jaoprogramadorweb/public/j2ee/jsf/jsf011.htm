@@ -1,0 +1,353 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Creaci&oacute;n una aplicaci&oacute;n JSF en JDeveloper</title>
+<META http-equiv=Content-Language content=es>
+<META content="Manual JSP, ejemplos JSP, codigos JSP" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Manual JSP, ejemplos JSP, codigos JSP">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2> P&aacute;gina de alta y edici&oacute;n de 
+        contactos</h2></td>
+  </tr>
+    
+  <tr> 
+    <td height="39" colspan="3"><p>En este tema vamos a realizar el desarrollo 
+        de los formularios para dar de alta contactos en<br>
+        la agenda y poder editar los ya existentes.</p>
+      <h3>Navegacion</h3>
+      <p>Vamos a comenzar dando de alta las p&aacute;ginas en el fichero del controlador:<br>
+        1. En el proyecto ViewController, abrimos la carpeta WEB Content, WEB-INF 
+        y<br>
+        abrimos el fichero faces-config.xml como hicimos en el tema anterior. 
+        Pulsamos la<br>
+        pesta&ntilde;a de Diagram si no vemos el fichero en forma de diagrama. 
+        Como podemos<br>
+        ver, tenemos ya la p&aacute;gina buscadorContactos.jspx que es la p&aacute;gina 
+        inicial de la<br>
+        agenda.<br>
+        2. Accedemos a la paleta de componentes, arrastramos JSF Page al diagrama 
+        y<br>
+        cambiamos el nombre de la p&aacute;gina por el de &#8220;edicionContacto.jspx&#8221;.<br>
+        3. A continuaci&oacute;n, vamos a establecer una regla de navegaci&oacute;n 
+        desde la p&aacute;gina de<br>
+        b&uacute;squeda de contactos hasta la p&aacute;gina que utilizaremos para 
+        editar los datos de un<br>
+        contacto. En la paleta de componentes seleccionamos JSF Navigation Case,<br>
+        pulsamos con el rat&oacute;n sobre la p&aacute;gina buscadorContactos.jspx 
+        y volvemos a pulsar<br>
+        sobre la p&aacute;gina edicionContacto.jspx.<br>
+        Por defecto, el nombre de las reglas de navegaci&oacute;n es success. 
+        Para cambiar el<br>
+        nombre de la regla que acabamos de a&ntilde;adir, hacemos doble clic sobre 
+        success e<br>
+        introducimos &#8220;editar&#8221;.<br>
+        4. Volvemos a la paleta de componentes, seleccionamos JSF Page y arrastramos 
+        al<br>
+        diagrama otra p&aacute;gina. Esta p&aacute;gina ser&aacute; la encargada 
+        de dar de alta nuevos contactos y<br>
+        la nombraremos &#8220;nuevoContacto.jspx&#8221;.<br>
+        5. Para navegar a la p&aacute;gina de alta de contactos necesitaremos 
+        crear una nueva regla de<br>
+        navegaci&oacute;n desde buscadorContactos.jspx hasta nuevoContacto.jspx. 
+        Para hacer<br>
+        esto arrastraremos JSF Navegation Case hasta la p&aacute;gina del buscador 
+        y volvemos a<br>
+        pulsar con el bot&oacute;n derecho del rat&oacute;n cuando flecha est&eacute; 
+        encima de la p&aacute;gina del<br>
+        nuevo contacto. Renombraremos la regla de navegaci&oacute;n con el nombre 
+        nuevo.En este punto el diagrama debe presentar un aspecto similar al siguiente:<br>
+        Hasta ahora tenemos establecidas las reglas de navegaci&oacute;n para 
+        ir desde la p&aacute;gina del<br>
+        buscador hasta las p&aacute;ginas de edici&oacute;n y alta. Para volver 
+        desde cada una de &eacute;stas al<br>
+        buscador ser&iacute;a necesario establecer reglas de navegaci&oacute;n 
+        en ambas p&aacute;ginas. En estos casos,<br>
+        cuando se tiene una p&aacute;gina que tiene que ser navegable desde otras 
+        p&aacute;ginas, lo m&aacute;s<br>
+        indicado es establecer una regla de navegaci&oacute;n global.<br>
+        Para establecer una regla de navegaci&oacute;n global a la p&aacute;gina 
+        budcadorContactos.jspx<br>
+        seguiremos los siguientes pasos.<br>
+        1. Pulsamos en la pesta&ntilde;a OverView.<br>
+        2. Seleccionamos Navigation Rules y pulsamos New en el recuadro de Navigation<br>
+        Rules.<br>
+        3. En la ventana emergente, en el campo From View ID introducimos &#8220;*&#8221; 
+        y pulsamos<br>
+        Aceptar.4. En el recuadro de Navigation Cases pulsamos New. En la ventana 
+        emergente,<br>
+        seleccionamos buscadorContactos.jspx en el campo To View ID, establecemos 
+        el<br>
+        valor del campo From Outcome a &#8220;buscadorGlobal&#8221; y pulsamos 
+        Aceptar.<br>
+        Finalizado el punto cuatro tendremos definida una regla de navegaci&oacute;n 
+        global sobre la<br>
+        p&aacute;gina del buscador &uacute;til para todas las p&aacute;ginas de 
+        la agenda.</p>
+      <h3>P&aacute;gina de edici&oacute;n de contactos</h3>
+      <p>Vamos a desarrollar el formulario de la p&aacute;gina para la edici&oacute;n 
+        de los contactos de la agenda.<br>
+        En primer lugar, tendremos que dar de alta la p&aacute;gina y aplicar 
+        la plantilla que definimos en el<br>
+        tema 3.<br>
+        Para dar de alta la p&aacute;gina en el proyecto seguiremos los siguientes 
+        pasos:<br>
+        1. En el fichero del controlador faces-config.xml, pulsamos sobre la pesta&ntilde;a 
+        de<br>
+        Diagram para volver a ver el diagrama.<br>
+        2. Hacemos doble clic con el rat&oacute;n sobre la p&aacute;gina de edici&oacute;nContactos.jspx 
+        para<br>
+        iniciar el wizard de creaci&oacute;n de las paginas JSF.<br>
+        3. En el paso 1 verificamos que la opci&oacute;n marcada es JSP Document 
+        (*.jspx).4. En el paso 4 publicamos autom&aacute;ticamente los componentes 
+        UI en un Managed Bean<br>
+        marcando sobre Automatically Expose UI Components in a New Magnaged<br>
+        Bean.<br>
+        5. En el siguiente paso, si no est&aacute;n incluidas las librer&iacute;as 
+        de ADF Faces las a&ntilde;adimos y<br>
+        pulsamos Terminar.<br>
+        Finalizado este punto, tenemos creada la p&aacute;gina en el proyecto. 
+        Podemos observar que<br>
+        ahora el diagrama del controlador no muestra un s&iacute;mbolo de advertencia 
+        en la p&aacute;gina de<br>
+        edici&oacute;n, al contrario que en la p&aacute;gina de nuevo contacto. 
+        Esto indica que el componente JSP<br>
+        Page que representa la p&aacute;gina en el diagrama no tiene asociado 
+        ninguna p&aacute;gina en el<br>
+        proyecto.Lo siguiente ser&aacute; aplicar la plantilla:<br>
+        1. Abrimos la p&aacute;gina de la plantilla y en la paleta de estructura 
+        copiamos la etiqueta<br>
+        afh:html.<br>
+        2. Abrimos la p&aacute;gina edicionContacto.jspx si no est&aacute; abierta 
+        y, en la paleta de<br>
+        estructura eliminamos la etiqueta afh:html y pegamos sobre la etiqueta 
+        view.<br>
+        3. Desplegamos la etiqueta afh:html hasta llegar a la etiqueta del componente<br>
+        af:panelPage donde estableceremos el valor de la propiedad Title a &#8220;Edici&oacute;n<br>
+        Contactos&#8221;.Ya tenemos lista la p&aacute;gina de edici&oacute;n para 
+        empezar a a&ntilde;adir los componentes UI necesarios.</p>
+      <h3>Nueva consulta para la entidad de contacto</h3>
+      <p>Para implementar el formulario de edici&oacute;n necesitaremos crear 
+        una nueva consulta en la<br>
+        entidad Contacto para poder localizar un contacto en la agenda por su 
+        identificador.<br>
+        Para a&ntilde;adir el nuevo m&eacute;todo de consulta por el identificador 
+        de contacto, seguiremos los<br>
+        siguientes puntos:<br>
+        1. En el proyecto Model, abrimos la clase agenda.model.Contacto.<br>
+        2. A&ntilde;adimos la nueva query dentro del bloque de c&oacute;digo donde 
+        se declaran todas las<br>
+        consultas. El c&oacute;digo de la nueva consulta es:<br>
+        3. Compilamos la clase para verificar que no contiene errores.<br>
+        4. Seleccionamos la clase del EJB, pulsamos bot&oacute;n derecho, Edit 
+        Session Facade y en la<br>
+        ventana emergente marcamos el m&eacute;todo findContactoByIdContacto perteneciente<br>
+        a la clase Contacto y pulsamos Aceptar.<br>
+        @NamedQuery(name = &quot;findContactoByIdContacto&quot;, query = &quot;select 
+        object(o) from<br>
+        Contacto o where o.idcontacto = :idcontacto&quot;)</p>
+      <p>5. Pulsamos de nuevo bot&oacute;n derecho sobre la clase del EJB y seleccionamos 
+        Create Data<br>
+        Control. Una vez generado el Data Control tenemos disponible el m&eacute;todo<br>
+        findContactoByIdContacto para poder utilizarlo en las p&aacute;ginas JSF.</p>
+      <h3>Construcci&oacute;n del formulario</h3>
+      <p>En este punto vamos a realizar la construcci&oacute;n del formulario 
+        que nos permitir&aacute; modificar la<br>
+        informaci&oacute;n de un contacto. Para crear el formulario realizaremos 
+        los siguientes pasos:<br>
+        1. Accedemos a la paleta de Data Control.<br>
+        2. Seleccionamos la lista de tipo Contacto que nos devuelve el m&eacute;todo<br>
+        findContactoByIdContacto(Object) y lo arrastramos hasta la paleta de estructura<br>
+        sobre la etiqueta af:panelPage.<br>
+        3. En el men&uacute; de la ventana emergente seleccionamos Forms, ADF 
+        Forms.<br>
+        4. Una vez seleccionamos Forms, ADF Forms, se abre una ventana emergente 
+        donde<br>
+        determinamos que campos van a componer el formulario. Nosotros eliminamos 
+        los<br>
+        campos idcontacto, idcontactorelacionado e idtipocontacto.<br>
+        5. En la siguiente ventana debemos introducir la fuente del par&aacute;metro 
+        con el que la<br>
+        consulta nos devolver&aacute; el contacto que queremos editar. Hacemos 
+        doble clic sobre el<br>
+        campo Valor y pulsamos el bot&oacute;n que tiene tres puntos. Seleccionamos 
+        ADF<br>
+        Bindings, data, buscadorContactosPageDef, findContactoByParametersIter,<br>
+        currentRow, dataProvider y hacemos doble clic. El &aacute;rea Expression, 
+        a&ntilde;adiremos<br>
+        despu&eacute;s de dataProvider &#8220;.idcontacto&#8221;. La expresi&oacute;n 
+        debe quedar de tal y como esta:<br>
+        ${data.buscadorContactosPageDef.findContactoByParametersIter.currentRow.dataProvide<br>
+        r.idcontacto}</p>
+      <p>6. Abrimos el fichero UIResource.properties y a&ntilde;adimos:<br>
+        7. En este punto vamos a aplicar las propiedades que hemos a&ntilde;adido 
+        al fichero de<br>
+        recursos a cada una de las propiedades Label de los componentes InputText 
+        que<br>
+        contiene la etiqueta af:panelPage. Por ejemplo, seleccionamos la etiqueta<br>
+        af:inputText del atributo nombre, hacemos doble clic y cambiamos el valor 
+        del<br>
+        atributo Label por:<br>
+        Debemos repetir el proceso para el resto de af:inputText.<br>
+        buscadorContactos.tablaContactos.botonEditar=Editar<br>
+        buscadorContactos.tablaContactos.botonNuevo=Nuevo<br>
+        buscadorContactos.tablaContactos.botonEliminar=Eliminar<br>
+        edicionContacto.formulario.nombre=Nombre<br>
+        edicionContacto.formulario.apellido1=Primer Apellido<br>
+        edicionContacto.formulario.apellido2=Segundo Apellido<br>
+        edicionContacto.formulario.telefono=Tel&eacute;fono<br>
+        edicionContacto.formulario.tipoContacto=Tipo de Contacto<br>
+        edicionContacto.formulario.botonGrabar=Grabar<br>
+        edicionContacto.formulario.botonVolver=Volver<br>
+        #{res['edicionContactos.formulario.nombre']}</p>
+      <p>8. En la paleta de Data Control seleccionamos la lista de objetos de 
+        tipo Contacto que<br>
+        devuelve el m&eacute;todo findContactoByIdContacto(Object) y la desplegamos. 
+        Marcamos<br>
+        idtipocontacto y lo arrastramos sobre la etiqueta af:panelForm en la paleta 
+        de<br>
+        estructura.<br>
+        9. En el men&uacute; de la ventana emergente seleccionamos Sigle Selections, 
+        ADF Select<br>
+        One Choice.<br>
+        10. En la siguiente ventana emergente, pulsamos Add para a&ntilde;adir 
+        un valor a la propiedad<br>
+        List Data Source y seleccionamos la lista de tipo TipoContacto que devuelve 
+        el<br>
+        m&eacute;todo findAllTipocontacto();</p>
+      <p>11. Pulsamos Aceptar y verificamos el que atributo idtipocontacto de 
+        la entidad que<br>
+        vamos a actualizar est&aacute; relacionado con el atributo idtipocontacto 
+        del valor de List<br>
+        Data Source. En el valor del campo Display Attribute seleccionamos tipocontacto<br>
+        y pulsamos Aceptar.<br>
+        12. Hacemos doble clic sobre la etiqueta af:selectOneChoice del componente 
+        de<br>
+        selecci&oacute;n que acabamos de a&ntilde;adir y cambiamos el valor de 
+        la propiedad Label de la<br>
+        pesta&ntilde;a de propiedades comunes por:<br>
+        Hasta aqu&iacute; hemos concluido el pintado del formulario. En el siguiente 
+        apartado a&ntilde;adiremos<br>
+        los botones necesarios para poder grabar los cambios y volver a la p&aacute;gina 
+        del buscador de<br>
+        contactos.<br>
+        #{res['edicionContacto.formulario.tipoContacto']}</p>
+      <h3>Bot&oacute;n de Grabar para actualizar los datos del contacto</h3>
+      <p>En este apartado vamos a incluir el bot&oacute;n para grabar los cambios 
+        realizados en el<br>
+        formulario. Los pasos a seguir, ser&aacute;n los siguientes:<br>
+        1. Accedemos a la paleta de Data Control, seleccionamos el m&eacute;todo<br>
+        mergeEntity(Object) y lo arrastramos sobre la etiqueta af:panelForm en 
+        la paleta<br>
+        de Estructura. Este m&eacute;todo es un m&eacute;todo general para actualizar 
+        los cambios en una<br>
+        entidad.<br>
+        2. En el men&uacute; de la ventana emergente seleccionamos Methods, ADF 
+        Command<br>
+        Button.<br>
+        3. Una vez hemos seleccionado el componente de bot&oacute;n se abre un 
+        nueva ventana<br>
+        emergente donde se establece el valor del par&aacute;metro del m&eacute;todo 
+        mergeEntity(Object).<br>
+        Hacemos doble clic sobre el campo Value y pulsamos el bot&oacute;n con 
+        los tres puntos.<br>
+        4. En la ventana emergente desplegamos el contenido de ADF Bindings , 
+        bindings,<br>
+        findContactoByIdContactoIter, currentRow y hacemos doble clic sobre<br>
+        dataProvider. Con esto hemos indicado que la entidad a guardar los cambios 
+        es la<br>
+        fila actual del iterador del m&eacute;todo de consulta findContactoByIdContacto.</p>
+      <p>5. Pulsamos Aceptar, y de nuevo Aceptar en la ventana de Action Binding 
+        Editor.<br>
+        6. Hacemos doble clic sobre la etiqueta af:commandButton que acabamos 
+        de crear y<br>
+        cambiamos el valor de la propiedad Text por :<br>
+        Finalizado el punto seis tenemos completado la definici&oacute;n del bot&oacute;n 
+        para grabar los cambios<br>
+        de los contactos.<br>
+        <h3> Bot&oacute;n de Volver</h3>
+        Vamos a incluir un bot&oacute;n para volver a la p&aacute;gina del buscador 
+        de contactos. Para ello,<br>
+        seguiremos los pasos que a continuaci&oacute;n se describen.<br>
+        1. Accedemos a la paleta de componentes, seleccionamos commandButton de 
+        la<br>
+        librer&iacute;a de etiquetas ADF Faces Core y lo arrastramos sobre la 
+        etiqueta<br>
+        af:panelForm en la paleta de estructura.<br>
+        2. En la paleta de propiedades, cambiamos el valor de la propiedad Text 
+        por:<br>
+        3. Establecemos el valor de la propiedad Action a &#8220;buscadorGlobal&#8221;.<br>
+        <h3> Bot&oacute;n Editar en la p&aacute;gina de b&uacute;squeda de contactos</h3>
+        
+      <p>En este apartado vamos a incluir el bot&oacute;n de editar en la tabla 
+        de resultados de la b&uacute;squeda<br>
+        de contactos y vamos a definir una condici&oacute;n de refresco sobre 
+        esta tabla.<br>
+        Para introducir el bot&oacute;n de editar en la tabla de resultados de 
+        la b&uacute;squeda haremos lo<br>
+        siguiente:<br>
+        1. Abrimos la p&aacute;gina buscadorContactos.jspx si no est&aacute; abierta.<br>
+        2. En la paleta de estructura, buscamos la etiqueta af:tableSelectionOne 
+        del<br>
+        componente con identificador tableResultados.<br>
+        #{res['edicionContacto.formulario.botonGrabar']}<br>
+        #{res['edicionContacto.formulario.botonVolver']}</p> </p>
+      <p>3. Una vez localizado, lo seleccionamos, pulsamos bot&oacute;n derecho, 
+        Insert inside<br>
+        af:tableSelectionOne, CommandButton.<br>
+        4. En la paleta de propiedades, cambiamos la propiedad Text del nuevo 
+        bot&oacute;n por:<br>
+        5. Establecemos el valor de la propiedad Action a &#8220;editar&#8221;.<br>
+        Lo siguiente que haremos ser&aacute; establecer la condici&oacute;n de 
+        refresco:<br>
+        1. Sobre la vista de dise&ntilde;o de la p&aacute;gina del buscador pulsamos 
+        bot&oacute;n derecho del rat&oacute;n y<br>
+        seleccionamos Go to Page Definition.<br>
+        2. En la paleta de estructura seleccionamos con el rat&oacute;n executables, 
+        pulsamos bot&oacute;n<br>
+        derecho y elegimos Insert inside executables, invokeAction.<br>
+        3. En la ventana emergente asignamos el campo Id el valor &#8220;refreshResults&#8221; 
+        y en el<br>
+        campo Binds seleccionamos finContactoByParameters.<br>
+        4. Pulsamos la pesta&ntilde;a de opciones avanzadas y en el campo RefreshCondition 
+        pegamos<br>
+        el siguiente c&oacute;digo:<br>
+        #{res['buscadorContactos.tablaContactos.botonEditar']}Con esta condici&oacute;n 
+        estamos indicando que se ejecute la operaci&oacute;n de refresco sobre 
+        la<br>
+        consulta que genera los resultados cada vez que volvemos de otra p&aacute;gina.<br>
+        ${!adfFacesContext.postback} </p>
+      <h3>Ejecuci&oacute;n de la p&aacute;gina para la edici&oacute;n de contactos</h3>
+      <p> Vamos a ejecutar el proyecto para ver que todo funciona como cabe de 
+        esperar.<br>
+        Seleccionamos el proyecto ViewController, bot&oacute;n derecho del rat&oacute;n, 
+        Run.<br>
+        En la ventana del buscador, pulsamos el bot&oacute;n Editar y accedemos 
+        a la p&aacute;gina para la<br>
+        edici&oacute;n de contactos que debe parecerse a la que muestra la imagen 
+        siguiente:</p>
+      <p>Podemos realizar un cambio en cualquiera de los campos, pulsamos Grabar 
+        y al volver a la<br>
+        p&aacute;gina del buscador pulsando el bot&oacute;n Volver veremos la 
+        modificaci&oacute;n aplicada.</p></td>
+
+  </tr>
+  <tr> 
+    <td width="341"></td>
+    <td width="74">&nbsp;</td>
+    <td width="124"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+</body>
+</html>

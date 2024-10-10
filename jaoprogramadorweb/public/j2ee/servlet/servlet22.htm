@@ -1,0 +1,147 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Llamar a Servlets desde una P&aacute;gina HTML</title>
+<META http-equiv=Content-Language content=es>
+<META content="Manual Servlet, ejemplos Servlet, codigos Servlet" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Manual Servlet, ejemplos Servlet, codigos Servlet">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2> Llamar a Servlets desde una P&aacute;gina 
+        HTML</h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <p>Para invocar un servlet desde dentro de una 
+        p&aacute;gina HTML se utiliza la URL del servlet en la etiqueta<br>
+        HTML apropiada.<br>
+        Esta p&aacute;gina utiliza los servles ShowCart, Cashier, y Receipt de 
+        Duke's Bookstore.<br>
+        Afortunadamente este es el orden en que se ver&aacute;n los servlets cuando 
+        miremos nuestra hoja y
+        compremos nuestros libros.
+        Para un acceso m&aacute;s directo al servlet ShowCart servlet, pulsa el 
+        enlace Show Cart que hay en la
+        p&aacute;gina principal del Duke's Bookstore. Si tenemos servletrunner 
+        o un servidor web configurados
+        para ejecutar el ejemplo, vayamos a la p&aacute;gina principal de la librer&iacute;a 
+        mostrada en la p&aacute;gina anterior.
+        S&oacute;lo por diversi&oacute;n, podr&iacute;amos a&ntilde;adir un libro 
+        a nuestra hoja de pedido antes de acceder al servlet
+        ShowCart.
+        Ejemplos de URLs de Servlets en etiquetas HTML<br>
+        La p&aacute;gina devuelta por ShowCartServlet tiene varios enlaces, cada 
+        uno de los cuales tiene un servlet<br>
+        como destino. Aqu&iacute; podemos ver el c&oacute;digo de esos enlaces.<br>
+        public class ShowCartServlet extends HttpServlet {<br>
+        public void doGet (HttpServletRequest request,<br>
+        HttpServletResponse response)<br>
+        throws ServletException, IOException<br>
+        {<br>
+        ...<br>
+        out.println(... +<br>
+        &quot;&lt;a href=\&quot;&quot; +<br>
+        response.encodeUrl(&quot;/servlet/cashier&quot;) +<br>
+        &quot;\&quot;&gt;Check Out&lt;/a&gt; &quot; +<br>
+        ...);<br>
+        ...<br>
+        }<br>
+        ...<br>
+        }<br>
+        Este c&oacute;digo resulta en una p&aacute;gina HTML que tiene el siguiente 
+        enlace.<br>
+        &lt;a href=&quot;http://localhost:8080/servlet/cashier&gt;Check Out&lt;/a&quot;&gt;<br>
+        Si llamamos a la p&aacute;gina del showcart, podremos ver el enlace como 
+        si vieramos el fuente de la
+        p&aacute;gina. Luego pulsamos sobre el enlace. El servlet cashier devolver&aacute; 
+        la p&aacute;gina que contiene el
+        siguiente ejemplo.
+        La p&aacute;gina mostrada por el server cashier presenta un formulario 
+        que pide el nombre del usuario y el
+        n&uacute;mero de la tarjeta de cr&eacute;dito. El c&oacute;digo que imprime 
+        el formulario se parece a esto.<br>
+        public class CashierServlet extends HttpServlet {<br>
+        public void doGet (HttpServletRequest request,<br>
+        HttpServletResponse response)<br>
+        throws ServletException, IOException<br>
+        {<br>
+        ...<br>
+        out.println(... +<br>
+        &quot;&lt;form action=\&quot;&quot; +<br>
+        response.encodeUrl(&quot;/servlet/receipt&quot;) +<br>
+        &quot;\&quot; method=\&quot;post\&quot;&gt;&quot; +<br>
+        ...<br>
+        &quot;&lt;td&gt;&lt;input type=\&quot;text\&quot; name=\&quot;cardname\&quot;&quot; 
+        +<br>
+        &quot;value=\&quot;Gwen Canigetit\&quot; size=\&quot;19\&quot;&gt;&lt;/td&gt;&quot; 
+        +<br>
+        ...<br>
+        &quot;&lt;td&gt;&lt;input type=\&quot;submit\&quot;&quot; +<br>
+        &quot;value=\&quot;Submit Information\&quot;&gt;&lt;/td&gt;&quot; +<br>
+        ...<br>
+        &quot;&lt;/form&gt;&quot; +<br>
+        ...);<br>
+        out.close();<br>
+        }<br>
+        ...<br>
+        }<br>
+        Este c&oacute;digo resulta en una p&aacute;gina HTML que tiene la siguiente 
+        etiqueta para iniciar el formulario.<br>
+        &lt;form action=&quot;http://localhost:8080/servlet/receipt&quot; method=&quot;post&quot;&gt;<br>
+        Si cargamos la p&aacute;gina del servlet cashier en nuestro navegador 
+        podremos ver la etiqueta que inicia el
+        formulario como si vieramos el fuente de la p&aacute;gina. Luego enviamos 
+        el formulario. El servlet receipt
+        devolver&aacute; una p&aacute;gina que contiene el siguiente ejemplo. 
+        La p&aacute;gina del servlet receipt se resetea a s&iacute;<br>
+        misma, por eso si queremos verla, tenemos que hacerlo r&aacute;pido!.<br>
+        La p&aacute;gina devuelta por el servlet receipt tiene una &quot;meta 
+        tag&quot; que utiliza una URL de servlet como
+        parte del valor del atributo http-equiv. Espec&iacute;ficamente, la etiqueta 
+        redirecciona la p&aacute;gina hacia a la
+        p&aacute;gina principal del Duke's Bookstore despues de dar las gracias 
+        al usuario por su pedido. Aqu&iacute;
+        podemos ver el c&oacute;digo de esta etiqueta.<br>
+        public class ReceiptServlet extends HttpServlet {<br>
+        public void doPost(HttpServletRequest request,<br>
+        HttpServletResponse response)<br>
+        throws ServletException, IOException<br>
+        {<br>
+        ...<br>
+        out.println(&quot;&lt;html&gt;&quot; +<br>
+        &quot;&lt;head&gt;&lt;title&gt; Receipt &lt;/title&gt;&quot; +<br>
+        &quot;&lt;meta http-equiv=\&quot;refresh\&quot; content=\&quot;4; url=&quot; 
+        +<br>
+        &quot;http://&quot; + request.getHeader(&quot;Host&quot;) +<br>
+        &quot;/servlet/bookstore;\&quot;&gt;&quot; +<br>
+        &quot;&lt;/head&gt;&quot; +<br>
+        ...<br>
+        }<br>
+        ...<br>
+        }<br>
+        Este c&oacute;digo resulta en una p&aacute;gina HTML que tiene la siguiente 
+        etiqueta.<br>
+        &lt;meta http-equiv=&quot;refresh&quot;<br>
+        content=&quot;4; url=http://localhost:8080/servlet/bookstore;&quot;&gt; 
+      </p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

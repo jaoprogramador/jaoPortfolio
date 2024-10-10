@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>C&oacute;mo hacer una p&aacute;gina AJAX</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta name="keywords" content="Primera página AJAX, Como hacer una pagina AJAX, Manual AJAX, tutorial AJAX, Ejemplos AJAX, ejercicios AJAX">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2>Funciones para cadenas de texto</h2></td>
+  </tr>
+  <tr> 
+    <td height="394" colspan="3"> <p>El framework Prototype extiende las cadenas 
+        de texto de JavaScript a&ntilde;adi&eacute;ndoles una serie de funciones 
+        que pueden resultar muy &uacute;tiles:<br>
+        stripTags(): Elimina todas las etiquetas HTML y XML de la cadena de texto<br>
+        stripScripts(): Elimina todos los bloques de tipo &lt;script&gt;&lt;/script&gt; 
+        de la cadena de texto escapeHTML(): transforma todos los caracteres problem&aacute;ticos 
+        en HTML a su respectiva entidad HTML (&lt; se transforma en &amp;lt;, 
+        &amp; se transforma en &amp;amp;, etc.)<br>
+        var cadena = &quot;&lt;p&gt;Prueba de texto &amp; caracteres HTML&lt;/p&gt;&quot;.escapeHTML();<br>
+        // cadena = &quot;&amp;lt;p&amp;gt;Prueba de texto &amp;amp; caracteres 
+        HTML&amp;lt;/p&amp;gt;&quot;<br>
+        unescapeHTML(): funci&oacute;n inversa de escapeHTML()<br>
+        var cadena = &quot;&lt;p&gt;Prueba de texto &amp; caracteres HTML&lt;/p&gt;&quot;.unescapeHTML();<br>
+        // cadena = &quot;Prueba de texto &amp; caracteres HTML&quot;<br>
+        var cadena = &quot;&lt;p&gt;&amp;ntilde; &amp;aacute; &amp;iquest; &amp;amp;&lt;/p&gt;&quot;.unescapeHTML();<br>
+        // cadena = &quot;&ntilde; &aacute; &iquest; &amp;&quot;<br>
+        extractScripts(): devuelve un array con todos los bloques &lt;script&gt;&lt;/script&gt; 
+        de la cadena de texto<br>
+        evalScripts(): ejecuta cada uno de los bloques &lt;script&gt;&lt;/script&gt; 
+        de la cadena de texto toQueryParams(): convierte una cadena de texto de 
+        tipo query string en un array asociativo (hash) de pares par&aacute;metro/valor<br>
+        var cadena = &quot;parametro1=valor1&amp;parametro2=valor2&amp;parametro3=valor3&quot;;<br>
+        var parametros = cadena.toQueryParams();<br>
+        // $H(parametros).inspect() = #&lt;Hash:{'parametro1':'valor1', 'parametro2':'valor2','<br>
+        parametro3':'valor3'}&gt;<br>
+        toArray(): convierte la cadena de texto en un array que contiene sus letras<br>
+        camelize(): convierte una cadena de texto separada por guiones en una 
+        cadena con notaci&oacute;n de tipo CamelCase<br>
+        var cadena = &quot;el-nombre-de-la-variable&quot;.camelize();<br>
+        // cadena = &quot;elNombreDeLaVariable&quot;<br>
+        underscore(): funci&oacute;n inversa de camelize(), ya que convierte una 
+        cadena de texto escrita con notaci&oacute;n CamelCase en una cadena de 
+        texto con las palabras separadas por guiones bajos var cadena = &quot;elNombreDeLaVariable&quot;.underscore(); 
+        // cadena = &quot;el_nombre_de_la_variable&quot;<br>
+        dasherize(): modifica los guiones bajos (_) de una cadena de texto por 
+        guiones medios (-)<br>
+        var cadena = &quot;el_nombre_de_la_variable&quot;.dasherize();<br>
+        // cadena = &quot;el-nombre-de-la-variable&quot;<br>
+        Combinando camelize(), underscore() y dasherize(), se puede obtener el 
+        nombre DOM de cada propiedad CSS y viceversa:<br>
+        var cadena = 'borderTopStyle'.underscore().dasherize();<br>
+        // cadena = 'border-top-style'<br>
+        var cadena = 'border-top-style'.camelize();<br>
+        // cadena = 'borderTopStyle'</p></td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>C&oacute;mo hacer una p&aacute;gina AJAX</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta name="keywords" content="Primera página AJAX, Como hacer una pagina AJAX, Manual AJAX, tutorial AJAX, Ejemplos AJAX, ejercicios AJAX">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2>Rehaciendo ejemplos con jQuery</h2></td>
+  </tr>
+  <tr> 
+    <td height="394" colspan="3"> <p>Cuando se desarrollan aplicaciones complejas, 
+        es habitual encontrarse con decenas de archivos<br>
+        JavaScript de miles de l&iacute;neas de c&oacute;digo. Estructurar las 
+        aplicaciones de esta forma es correcto y<br>
+        facilita el desarrollo de la aplicaci&oacute;n, pero penaliza en exceso 
+        el rendimiento de la aplicaci&oacute;n.<br>
+        La primera recomendaci&oacute;n para mejorar el rendimiento de la aplicaci&oacute;n 
+        consiste en unir en un<br>
+        &uacute;nico archivo JavaScript el contenido de todos los diferentes archivos 
+        JavaScript. En Windows, se<br>
+        puede crear un peque&ntilde;o programa ejecutable que copia el contenido 
+        de varios archivos<br>
+        JavaScript en uno solo:<br>
+        more archivo1.js &gt; archivoUnico.js<br>
+        more archivo2.js &gt;&gt; archivoUnico.js<br>
+        more archivo3.js &gt;&gt; archivoUnico.js<br>
+        ...<br>
+        La primera instrucci&oacute;n tiene un solo s&iacute;mbolo &gt; para borrar 
+        el contenido del archivoUnico.js<br>
+        cada vez que se ejecuta el comando. El resto de instrucciones tienen un 
+        s&iacute;mbolo &gt;&gt; para a&ntilde;adir el<br>
+        contenido de los dem&aacute;s archivos al final del archivoUnico.js<br>
+        En sistemas operativos de tipo Linux es todav&iacute;a m&aacute;s sencillo 
+        unir varios archivos en uno solo:<br>
+        cat archivo1.js archivo2.js archivo3.js &gt; archivoUnico.jsLa &uacute;nica 
+        consideraci&oacute;n que se debe tener en cuenta con este m&eacute;todo 
+        es el de las dependencias<br>
+        entre archivos. Si por ejemplo el archivo1.js contiene funciones que dependen 
+        de otras<br>
+        funciones definidas en el archivo3.js, los archivos deber&iacute;an unirse 
+        en este otro orden:<br>
+        cat archivo3.js archivo1.js archivo2.js &gt; archivoUnico.js<br>
+        Otra recomendaci&oacute;n muy &uacute;til para mejorar el rendimiento 
+        de la aplicaci&oacute;n es la de comprimir el<br>
+        c&oacute;digo de JavaScript. Este tipo de herramientas compresoras de 
+        c&oacute;digo no modifican el<br>
+        comportamiento de la aplicaci&oacute;n, pero pueden reducir mucho su tama&ntilde;o.<br>
+        El proceso de compresi&oacute;n consiste en eliminar todos los espacios 
+        en blanco sobrantes, eliminar<br>
+        todos los comentarios del c&oacute;digo y convertir toda la aplicaci&oacute;n 
+        en una &uacute;nica l&iacute;nea de c&oacute;digo<br>
+        JavaScript muy larga. Algunos compresores van m&aacute;s all&aacute; y 
+        sustituyen el nombre de las variables<br>
+        y funciones por nombres m&aacute;s cortos.<br>
+        ShrinkSafe (http://dojotoolkit.org/shrinksafe/) es una de las herramientas 
+        que proporciona el<br>
+        framework Dojo (http://dojotoolkit.org/) y que puede ser utilizada incluso 
+        de forma online. Los<br>
+        creadores de la aplicaci&oacute;n aseguran de que es la herramienta m&aacute;s 
+        segura para reducir el tama&ntilde;o<br>
+        del c&oacute;digo, ya que no modifica ning&uacute;n elemento que pueda 
+        provocar errores en la aplicaci&oacute;n.</p></td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

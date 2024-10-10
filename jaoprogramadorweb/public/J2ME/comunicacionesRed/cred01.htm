@@ -1,0 +1,143 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Indice J2ME</title>
+<META http-equiv=Content-Language content=es>
+<META content="Manual J2ME, ejemplos J2ME, codigos J2ME" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Manual J2ME, ejemplos J2ME, codigos J2ME">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2>Introducci&oacute;n</h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <p>Dada la gran cantidad de restricciones que 
+        supone programar bajo el perfil MIDP, nuestra 
+        capacidad en casi todos los campos (interfaces gr&aacute;ficas de usuario, 
+        almacenamiento de 
+        datos, tipado, etc.), se ve mermada ante lo que ser&iacute;a trabajar 
+        pensando en equipos de 
+        superiores caracter&iacute;sticas, con m&aacute;quinas virtuales que soportar&aacute;n 
+        toda la potencia del 
+        lenguaje JAVA. No obstante, esto ocurre en todos menos en uno, que es 
+        donde reside la 
+        caracter&iacute;stica m&aacute;s importante y obvia de un dispositivo 
+        m&oacute;vil que act&uacute;e bajo MIDP: su 
+        capacidad de comunicaci&oacute;n con el exterior.</p>
+      <p> 
+        As&iacute;, en estos dispositivos siempre tendremos la oportunidad de 
+        estar conectados a 
+        una red y comunicarnos por ella de diferentes formas con otros dispositivos 
+        m&oacute;viles, 
+        servidores de aplicaciones, bases de datos; en definitiva, cualquier ente 
+        que tenga capacidad 
+        de establecer una comunicaci&oacute;n con nosotros.</p>
+      <p> 
+        Este segundo cap&iacute;tulo que nos ocupa puede tomarse, por tanto, como 
+        el m&aacute;s importante de 
+        los que veremos en el curso, ya que aqu&iacute; explotaremos la caracter&iacute;stica 
+        principal de nuestros 
+        dispositivos: la comunicaci&oacute;n en red que &eacute;stos nos ofrecen 
+        y la capacidad de transmitir 
+        cualquier tipo de informaci&oacute;n mientras &eacute;sta permanezca abierta.</p>
+      <p> 
+        Las comunicaciones en red J2ME m&aacute;s interesantes a programar hoy 
+        d&iacute;a son las basadas en el 
+        protocolo HTTP (Hyper Text Transfer Protocol). Dicho protocolo nos proporciona 
+        la capacidad 
+        de crear aplicaciones cliente-servidor para llevar la l&oacute;gica de 
+        trabajo m&aacute;s pesada de nuestra 
+        aplicaci&oacute;n cliente hacia un servidor J2EE en el cual, por ejemplo, 
+        poseeremos toda la 
+        capacidad del lenguaje JAVA y acceso a SGBD (Sistemas de Gesti&oacute;n 
+        de Bases de Datos) 
+        potentes con los que tratar, para con ello, una vez realizada la tarea 
+        requerida, devolver una 
+        respuesta al dispositivo.</p>
+      <p> 
+        En este tipo de comunicaci&oacute;n nos centraremos en este cap&iacute;tulo, 
+        ya que ser&aacute; el protocolo 
+        estrella por su flexibilidad, estar disponible universalmente, estar implementado 
+        por todo 
+        dispositivo que se precie de funcionar bajo MIDP 2.0 y, adem&aacute;s, 
+        ser el protocolo de 
+        transporte usado por mecanismos de servicios web como XML-RPC y SOAP. 
+        HTTP podr&aacute; 
+        implementarse utilizando tanto protocolos IP (como el TCP/IP) como protocolos 
+        no-IP (como 
+        WAP o I-MODE).</p>
+      <p> 
+        La especificaci&oacute;n MIDP 2.0 tambi&eacute;n recomienda (aunque no 
+        la exige, a diferencia de HTTP y 
+        HTTPS) la implementaci&oacute;n por parte de los dispositivos de conexiones 
+        distintas a la m&aacute;s 
+        habitual HTTP, conexiones por medio de SOCKETS y conexiones usando DATAGRAMAS, 
+        sobre las cuales hablaremos al pasar por los elementos del API implicados. 
+        Adem&aacute;s de losaccesos a red, MIDP 2.0 tambi&eacute;n define comunicaciones 
+        por PUERTO SERIE l&oacute;gico con la 
+        interface CommConnection. El puerto utilizado por la conexi&oacute;n estar&aacute; 
+        determinado por el 
+        dispositivo y puede no corresponder a un puerto serie RS-232 f&iacute;sico.</p>
+      <p> 
+        Un ejemplo de funcionamiento de una aplicaci&oacute;n de negocios J2ME 
+        que haga uso de su 
+        posibilidad de conectividad HTTP ser&iacute;a el caso de un viajante, 
+        el cual accede al servidor de su 
+        empresa donde se encuentra una aplicaci&oacute;n web que le indicar&aacute; 
+        cu&aacute;l es su siguiente tarea, 
+        tras recibir de &eacute;l en qu&eacute; punto geogr&aacute;fico se encuentra 
+        actualmente y bajo qu&eacute; condiciones. 
+        La aplicaci&oacute;n web que espera en el servidor estar&aacute; compuesta 
+        idealmente por servlets y 
+        p&aacute;ginas JSP (aunque podr&aacute; comunicarse nuestro MIDlet cliente 
+        con otras tecnolog&iacute;as de 
+        servidor, la relaci&oacute;n entre J2ME y J2EE ser&aacute; la m&aacute;s 
+        pr&aacute;ctica), los cuales reaccionar&aacute;n ante 
+        las peticiones HTTP de nuestro MIDlet como lo hacen ante las peticiones 
+        HTTP de un 
+        navegador web como pueden ser Mozilla o Internet Explorer. Este requerimiento 
+        lo 
+        gestionar&aacute;n como marque su l&oacute;gica de negocio y devolviendo 
+        una respuesta HTTP adecuada 
+        al MIDlet.</p>
+      <p> En J2ME no dispondremos de estos navegadores Web, siendo nosotros los 
+        encargados de implementar MIDlets capaces de formar convenientemente una 
+        petici&oacute;n HTTP que refleje lo que el usuario requiere y sea entendible 
+        por el servidor y, tras su tratamiento por parte de &eacute;ste, recoger 
+        la respuesta y presentarla ante el usuario convenientemente. </p>
+      <p>Aunque a primera vista la creaci&oacute;n de una aplicaci&oacute;n cliente-servidor 
+        con J2ME-J2EE pueda parecer compleja, m&aacute;s adelante intentaremos 
+        explicarlo de forma sencilla. As&iacute;, no debemos asustarnos ante la 
+        implementaci&oacute;n del cliente MIDP, ya que, la estructura de un cliente 
+        J2ME tendr&aacute; una l&oacute;gica de acceso a la red muy similar de 
+        una a otra aplicaci&oacute;n, lo cual har&aacute; factible su modularizaci&oacute;n 
+        en paquetes e incluso la generaci&oacute;n de este c&oacute;digo por medio 
+        de programas asistentes.<br>
+        En este sentido, SUN ofrece una herramienta, J2ME Wireless Connection 
+        Wizard, la cual nos facilitar&aacute; la creaci&oacute;n de este tipo 
+        de aplicaciones proporcionando el esqueleto de las clases necesarias tanto 
+        para el cliente como para el servidor y automatizando gran parte de la 
+        tarea de codificar la comunicaci&oacute;n entre ellos. </p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

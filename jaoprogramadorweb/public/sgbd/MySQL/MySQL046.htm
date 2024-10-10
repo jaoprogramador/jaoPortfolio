@@ -1,0 +1,1341 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Ejercicios MySQL</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="MySQL, sql, pl/sql, programacion MySQL, ejercicios MySQL, ejemplos MySQL, select">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2>M A N T E N I M I E N T O  T A B L A S</h2></td>
+  </tr>
+  <tr> 
+    <td><h3>Sintaxis de ANALYZE TABLE</h3>
+      <p>Este comando analiza y almacena la distribuci&oacute;n de clave para una 
+        tabla. Durante el an&aacute;lisis, la tabla se bloquea con un bloqueo 
+        de<br>
+        lectura. En MySQL 5.0, funciona en tablas MyISAM, BDB, y InnoDB . Para 
+        tablas MyISAM , este comando es equivalente a usar<br>
+        myisamchk -a.<br>
+        MySQL usa la distribuci&oacute;n de claves almacenada para decidir el 
+        orden en que las tablas deben hacer los joins cuando realiza uno en<br>
+        algo que no sea una constante.<br>
+        El comando retorna una tabla con las siguientes columnas:<br>
+        Columna Valor<br>
+        Tabla Nombre de tabla<br>
+        Op Siempre analyze<br>
+        Msg_type Es status, error, info, o warning<br>
+        Msg_text Mensaje<br>
+        Puede chequear la distribuci&oacute;n de claves almacenada con el comando 
+        SHOW INDEX .<br>
+        Si la tabla no ha cambiado desde el &uacute;ltimo comando ANALYZE TABLE 
+        , la tabla no se vuelve a analizar.<br>
+        En MySQL 5.0, los comandos ANALYZE TABLE se escriben en el log binario 
+        a no ser que la palabra clave<br>
+        NO_WRITE_TO_BINLOG opcional (o su alias LOCAL) se use.<br>
+        <h3>Sintaxis de BACKUP TABLE</h3><br>
+        BACKUP TABLE tbl_name [, tbl_name] ... TO '/path/to/backup/directory'<br>
+        Nota: Este comando est&aacute; obsoleto. Estamos trabajano en un mejor 
+        sustituto para este que proporcionar&aacute; capacidades de copia de<br>
+        seguridad en l&iacute;nea. De momento, el script mysqlhotcopy puede usarse.<br>
+        BACKUP TABLE copia al directorio de base de datos el m&iacute;nimo n&uacute;mero 
+        de ficheros de tablas necesarias para restaurar la tabla, tras<br>
+        volcar cualquier cambios almacenados en el buffer a disco. El comando 
+        funciona s&oacute;lo para tablas MyISAM . Copia los ficheros de<br>
+        definici&oacute;n .frm y de datos .MYD . El fichero &iacute;ndice .MYI 
+        puede reconstruirse desde estos otros. El directorio debe especificarse<br>
+        con la ruta entera.<br>
+        Antes de usar este comando consulte Secci&oacute;n 5.8.1, &#8220;Copias 
+        de seguridad de bases de datos&#8221;.<br>
+        Durante la copia de seguridad, se realiza un bloqueo de lectura para cada 
+        tabla, uno cada vez, mientras se hace la copia. Si quier hacer<br>
+        una copia de seguridad de varias tablas como una muestra (evitando que 
+        ninguna de ellas se cambie durante la operaci&oacute;n de la<br>
+        copia de seguridad), debe realizar un comando LOCK TABLES para obtener 
+        un bloqueo de lectura para cada tabla en el grupo.<br>
+        El comando retorna una tabla con las siguientes columnas:<br>
+        Columna Valor<br>
+        Tabla Nombre de tabla<br>
+        Op Siempre backup<br>
+        Msg_type Es status, error, info, o warning<br>
+        Msg_text Mensaje<br>
+        <h3>Sintaxis de CHECK TABLE</h3><br>
+        CHECK TABLE tbl_name [, tbl_name] ... [option] ...<br>
+        option = {QUICK | FAST | MEDIUM | EXTENDED | CHANGED}<br>
+        Chequea una tabla o tablas para errores. CHECK TABLE funciona para tablas 
+        MyISAM y InnoDB . Para tablas MyISAM , la estad&iacute;stica<br>
+        de clave se actualiza.<br>
+        Desde MySQL 5.0.2, CHECK TABLE puede comprobar las vistas en busca de 
+        problemas tales como tablas que se referencian en la<br>
+        definici&oacute;n de la vista que ya no existe.<br>
+        El comando CHECK TABLE retorna una tabla con las siguientes columnas:<br>
+        Columna Valor<br>
+        Tabla Nombre de tabla<br>
+        Op Siempre check<br>
+        Msg_type Es status, error, info, o warning<br>
+        Msg_text Mensaje<br>
+        Tenga en cuenta que el comando puede producir varios registros para informaci&oacute;n 
+        de cada tabla chequeada. El &uacute;ltimo registro tiene<br>
+        un valor Msg_type de status y Msg_text normalmente debe ser OK. Si no 
+        obtiene OK, o Table is already up to<br>
+        date debe realizar una reparaci&oacute;n de la tabla. Consulte Secci&oacute;n 
+        5.8.3, &#8220;Mantenimiento de tablas y recuperaci&oacute;n de un fallo 
+        catastr&oacute;fico<br>
+        (crash)&#8221;. Table is already up to date significa que el motor de 
+        almacenamiento para la tabla indicada indica<br>
+        que no hay necesidad de chequear la tabla.<br>
+        Las distintas opciones de chequeo que pueden darse se muestran en la siguiente 
+        tabla. Estas opciones se aplican s&oacute;lo para tablas<br>
+        MyISAM y se ignoran en tablas InnoDB y vistas.<br>
+        Tipo Significado<br>
+        QUICK No escanea los registros para chequear enlaces incorrectos.<br>
+        FAST S&oacute;lo chequea tablas que no se han cerrado correctamente.<br>
+        CHANGED S&oacute;lo las tablas chequeadas que se han cambiado desde el 
+        &uacute;litmo chequeo o no se han cerrado correctamente.<br>
+        MEDIUM Escanea registros para verificar que los enlaces borrados est&aacute;n 
+        bien. Tambi&eacute;n calcula el checksum de la clave<br>
+        para los registros y lo verifica con el checksum calculado para las claves.<br>
+        EXTENDED Realiza una b&uacute;squeda completa para todas las claves para 
+        cada registro. Se asegura que la tabla es consistente<br>
+        100%, pero tarda mucho tiempo!<br>
+        Si ninguna de las opciones QUICK, MEDIUM, o EXTENDED se especifica, el 
+        tipo de chequeo por defecto para tablas de formato din&aacute;mico<br>
+        MyISAM es MEDIUM. Esto es lo mismo que ejecutar myisamchk --medium-check 
+        tbl_name en la tabla. El tipo<br>
+        de chequeo por defecto tambi&eacute;n es MEDIUM para tablas MyISAM de 
+        formato est&aacute;tico, a no ser que se especifique CHANGED o<br>
+        FAST. En tal caso, por defecto es QUICK. El escaneo de registro se evita 
+        para CHANGED y FAST porque los registros est&aacute;n corruptos<br>
+        muy raramente.<br>
+        Puede combinar opciones de chequeo, como en el siguiente ejemplo, que 
+        realiza un chequeo r&aacute;pido de la tabla para ver si se cerr&oacute;<br>
+        correctamente:<br>
+        CHECK TABLE test_table FAST QUICK;<br>
+        Nota: En algunos casos, CHECK TABLE cambia la tabla. Esto ocurre si la 
+        tabla se marca como &#8220;corrupted&#8221; o &#8220;not closed properly&#8221;<br>
+        pero CHECK TABLE no encuentra ning&uacute;n problema en la tabla. En este 
+        caso, CHECK TABLE marca la tabla como correcta.<br>
+        Si una tabla est&aacute; corrupta, es m&aacute;s probable que el problema 
+        est&eacute; en el &iacute;ndice y no en la parte de datos. Todos los tipos 
+        de chequeo<br>
+        chequean los &iacute;ndices profundamente y deber&iacute;an encontrar 
+        la mayor&iacute;a de errores.<br>
+        Si quiere chequear una tabla que asume como correcta, no debe usar opciones 
+        de chequeo o la opci&oacute;n QUICK. &Eacute;sta debe usarse<br>
+        cuando tiene prisa y puede permitirse el peque&ntilde;o riesgo que QUICK 
+        no encuentre un error en el fichero de datos. (En la mayor&iacute;a de<br>
+        casos, MySQL deber&iacute;a encontrar, bajo uso normal, cualquier error 
+        en el fichero de datos. Si esto ocurre, la tabla se marca como<br>
+        &#8220;corrupted&#8221; y no puede usarse hasta que se repare.)<br>
+        FAST y CHANGED est&aacute;n pensados para usar desde un script (por ejemplo, 
+        para ejecutarse desde cron) si quiere chequear sus tablas<br>
+        de vez en cuando. En la mayor&iacute;a de casos, FAST se prefiere en lugar 
+        de CHANGED. (El &uacute;nico caso en que no es el m&eacute;todo preferido<br>
+        es cuando sospecha que ha encontrado un bug en el c&oacute;digo MyISAM 
+        .)<br>
+        EXTENDED debe usarse s&oacute;lo despu&eacute;s de ejecutar un chequeo 
+        normal pero todav&iacute;a obtiene errores extra&ntilde;os de la tabla 
+        cuando<br>
+        MySQL intenta actualizar un registro o encuentra un registro mediante 
+        la clave. (Esto es muy improbable si un chequeo normal ha<br>
+        tenido &eacute;xito.)<br>
+        Algunos problemas reportados por CHECK TABLE no pueden corregirse autom&aacute;ticamente:<br>
+        &#8226; Found row where the auto_increment column has the value 0.<br>
+        Esto significa que tiene un registro en la tabla donde la columna AUTO_INCREMENT 
+        contiene un valor de &iacute;ndice de 0. (Es posible<br>
+        crear un registro donde la columna AUTO_INCREMENT es 0 poneindo la columna 
+        expl&iacute;citamente a 0 con un comando<br>
+        UPDATE .)<br>
+        Esto no es un error por si mismo, pero puede causar problemas si decide 
+        volcar la tabla y restaurarla o realizar un ALTER TABLE<br>
+        en la tabla. En este caso, la columna AUTO_INCREMENT cambia los valores 
+        seg&uacute;n las reglas de las columnas AUTO_<br>
+        INCREMENT , que pueden causar problemas tales como errores de clave duplicada.<br>
+        Para evitar las advertencias, s&iacute;mplemente ejecute un comando UPDATE 
+        para poner en la columna un valor distinto a 0.<br>
+        <h3>Sintaxis de CHECKSUM TABLE</h3><br>
+        CHECKSUM TABLE tbl_name [, tbl_name] ... [ QUICK | EXTENDED ]<br>
+        Reporta un checksum de tabla.<br>
+        Si QUICK se especifica, el checksum de la tabla se reporta si est&aacute; 
+        disponible, o NULL en otro caso. Esto es muy r&aacute;pido. Un checksum<br>
+        en vivo est&aacute; permitido especificando la opci&oacute;n de tabla 
+        CHECKSUM=1 , actualmente s&oacute;lo soportado por tablas MyISAM<br>
+        En modo EXTENDED la tabla completa se lee registro a registro y se calcula 
+        el checksum. Esto puede ser muy lento para tablas<br>
+        grandes.<br>
+        Por defecto, si no se especifica ni QUICK ni EXTENDED , MySQL retorna 
+        un checksum en vivo si el motor de tabla lo soporta y<br>
+        escanea la tabla de otro modo.<br>
+        CHECKSUM TABLE retorna NULL para tablas no existentes. Desde MySQL 5.0.3, 
+        se genera una advertencia para esta condici&oacute;n.<br>
+        <h3>Sintaxis de OPTIMIZE TABLE</h3><br>
+        OPTIMIZE [LOCAL | NO_WRITE_TO_BINLOG] TABLE tbl_name [, tbl_name] ...<br>
+        OPTIMIZE TABLE debe usarse si ha borrado una gran parte de la tabla o 
+        si ha hecho varios cambios en una tabla con registros de<br>
+        longitud variable (tablas que tienen columnas VARCHAR, BLOB, o TEXT ). 
+        Los registros borrados se mantienen en una lista enlazada<br>
+        y operaciones INSERT posteriores re&uacute;san posiciones de antiguos 
+        registros. Puede usar OPTIMIZE TABLE para reclamar el<br>
+        usuario no usado y para defragmentar el fichero de datos.<br>
+        En la mayor&iacute;a de inicializaciones, no necesita ejecutar OPTIMIZE 
+        TABLE para nada. Incluso si hace muchas actualizaciones a registros<br>
+        de longitud variables, no es probable que necesite hacerlo m&aacute;s 
+        de una vez a la semana o mes y s&oacute;lo en ciertas tablas.<br>
+        Actualmente, OPTIMIZE TABLE funciona s&oacute;lo en tablas MyISAM, BDB 
+        y InnoDB .<br>
+        Para tablas MyISAM , OPTIMIZE TABLE funciona como sigue:<br>
+        1. Si la tabla ha borrado o dividido registros, repare la tabla.<br>
+        2. Si las p&aacute;ginas &iacute;ndice no est&aacute;n ordenadas, ord&eacute;nelas.<br>
+        3. Si las estad&iacute;sticas no est&aacute;n actualizadas (y la reparaci&oacute;n 
+        no puede hacerse ordenando el &iacute;ndice), actual&iacute;celas.<br>
+        Para tablas BDB , OPTIMIZE TABLE es mapea como ANALYZE TABLE. Para tablas 
+        InnoDB , se mapea con ALTER TABLE,<br>
+        que reconstruye la tabla. Reconstruye las estad&iacute;sticas actualizadas 
+        de &iacute;ndice y libera espacio no usado en el &iacute;ndice clusterizado.<br>
+        Consulte Secci&oacute;n 13.5.2.1, &#8220;Sintaxis de ANALYZE TABLE&#8221;.<br>
+        Puede hacer que OPTIMIZE TABLE funcione con otros tipos de tabla arrancando 
+        mysqld con la opci&oacute;n --skip-new o -<br>
+        -safe-mode ; en este caso OPTIMIZE TABLE se mapea con ALTER TABLE.<br>
+        Tenga en ceunta que MySQL bloquea la tabla mientras se ejecuta OPTIMIZE 
+        TABLE .<br>
+        En MySQL 5.0, los comandos OPTIMIZE TABLE se escriben en el log binario 
+        a no ser que la palabra NO_WRITE_TO_BINLOG<br>
+        opcional(o su alias LOCAL) se use. Esto se hace para que los comandos 
+        OPTIMIZE TABLE se usen en MySQL server actuando<br>
+        como maestro de replicaci&oacute;n se replique por defecto en el esclavo 
+        de replicaci&oacute;n.<br>
+        <h3>Sintaxis de REPAIR TABLE</h3><br>
+        REPAIR [LOCAL | NO_WRITE_TO_BINLOG] TABLE<br>
+        tbl_name [, tbl_name] ... [QUICK] [EXTENDED] [USE_FRM]<br>
+        REPAIR TABLE repara una tabla posiblemente corrupta. Por defecto, tiene 
+        el mismo efecto que myisamchk --recover<br>
+        tbl_name. REPAIR TABLE funciona s&oacute;lo en tablas MyISAM.<br>
+        Normalmente nunca debe ejecutar este comando. Sin embargo, si hay un desastre, 
+        REPAIR TABLE puede recuperar todos los datos<br>
+        de una tabla MyISAM . Si sus tablas se corrompen a menudo, debe intentar 
+        encontrar la raz&oacute;n de lo que lo causa, para eliminar<br>
+        la necesidad de usar REPAIR TABLE<br>
+        El comando retorna una tabla con las siguientes columnas:<br>
+        Columna Valor<br>
+        Tabla Nombre de tabla<br>
+        Op Siempre es repair<br>
+        Msg_type Es status, error, info, o warning<br>
+        Msg_text Mensaje<br>
+        El comando REPAIR TABLE puede producir muchos registros de informaci&oacute;n 
+        para cada tabla reparada. El &uacute;ltimo registro tiene<br>
+        un valor Msg_type de status y Msg_test normalmente debe ser OK. Si no 
+        obtiene OK, debe intentar reparar la tabla con<br>
+        myisamchk --safe-recover, ya que REPAIR TABLE no implementa todas las 
+        opciones de myisamchk. Plaenamos ha-cerlo m&aacute;s flexible en el futuro.<br>
+        Si se da QUICK , REPAIR TABLE intenta reparar s&oacute;lo el &aacute;rbol 
+        &iacute;ndice. Este tipo de reparaci&oacute;n es como lo que hace myisamchk<br>
+        --recover --quick.<br>
+        Si usa EXTENDED, MySQL crea el &iacute;ndice registro a registro en lugar 
+        de crear un &iacute;ndice a la vez ordenando. Este tipo de reparaci&oacute;n<br>
+        es como el hecho por myisamchk --safe-recover.<br>
+        Tambi&eacute;n hay un modo USE_FRM disponible en MySQL 5.0 para REPAIR 
+        TABLE. Use esto si el fichero &iacute;ndice .MYI no existe o<br>
+        su cabecera est&aacute; corrupta. En este modo, MySQL recrea el fichero 
+        .MYI usando informaci&oacute;n desde el fichero .frm . Este tipo de<br>
+        reparaci&oacute;n no puede hacerse con myisamchk. Nota: Use este modo 
+        s&oacute;lo si no puede usar modos REPAIR normalmente. La cabecera<br>
+        .MYI contiene informaci&oacute;n importante de metadatos (en particular, 
+        los valores actuales AUTO_INCREMENT y Delete<br>
+        link) que se pierden en REPAIR ... USE_FRM. No use USE_FRM si la tabla 
+        est&aacute; comprimida, ya que esta informaci&oacute;n se almacena<br>
+        en el fichero .MYI .<br>
+        En MySQL 5.0, los comandos REPAIR TABLE se escriben en el log binario 
+        a no ser que la palabra opcional<br>
+        NO_WRITE_TO_BINLOG (o su alias LOCAL) se use.<br>
+        Atenci&oacute;n: Si el servidor muere durante una operaci&oacute;n REPAIR 
+        TABLE, es esencial tras restaurarla que inmediatamente ejecute<br>
+        otro comando REPAIR TABLE para la tabla antes de realizar cualquier otra 
+        operaci&oacute;n en ella. (Siempre es una buena idea empezar<br>
+        haciendo una copia de seguridad.) En el peor caso, puede tener un nuevo 
+        fichero &iacute;ndice limpio sin informaci&oacute;n acerca del fichero<br>
+        de datos, y luego la siguiente operaci&oacute;n que realice puede sobreescribir 
+        el fichero de datos. Este es un escenario improbable pero<br>
+        posible.<br>
+        <h3>Sintaxis de RESTORE TABLE</h3><br>
+        RESTORE TABLE tbl_name [, tbl_name] ... FROM '/path/to/backup/directory'<br>
+        Restaura la tabla o tablas de una copia de seguridad que se hizo con BACKUP 
+        TABLE. Las tablas existentes no se sobreescriben; si<br>
+        trata restaurar una tabla existente, obtiene un error. Pero como BACKUP 
+        TABLE, RESTORE TABLE actualmente funciona s&oacute;lo<br>
+        para tablas MyISAM . El directorio debe especificarse como una ruta completa.<br>
+        La copia de seguridad para cada tabla consiste en su fichero de formato 
+        .frm y fichero de datos .MYD . La operaci&oacute;n de restauraci&oacute;n<br>
+        restaura aquellos ficheros, luego los usa para reconstruir el fichero 
+        &iacute;ndice .MYI. La restauraci&oacute;n tarda m&aacute;s tiempo que 
+        la copia<br>
+        de seguridad debido a la necesidad de reescribir los &iacute;ndices. Mientras 
+        m&aacute;s &iacute;ndices tenga la tabla, m&aacute;s tarda.<br>
+        El comando retorna una tabla con las siguientes columnas:<br>
+        Columna Valor<br>
+        Tabla Nombre de tabla<br>
+        Op Siempre restore<br>
+        Msg_type Es status, error, info, o warning<br>
+        Msg_text Mensaje<br>
+        <h3>Sintaxis de SET</h3><br>
+        SET variable_assignment [, variable_assignment] ...<br>
+        variable_assignment:<br>
+        user_var_name = expr<br>
+        | [GLOBAL | SESSION] system_var_name = expr<br>
+        | @@[global. | session.]system_var_name = expr<br>
+        SET inicializa distintos tipos de variables que afectan la operaci&oacute;n 
+        del servidor o de su cliente. Puede usarse para asignar valores a<br>
+        las variables de usuario o de sistema.<br>
+        El comando SET PASSWORD para asignar contrase&ntilde;as de cuenta se describen 
+        en Secci&oacute;n 13.5.1.5, &#8220;Sintaxis de SET<br>
+        PASSWORD&#8221;.<br>
+        La mayor&iacute;a del sistema puede cambiarse en tiempo de ejecuci&oacute;n.<br>
+        El siguiente ejemplo muestra las distintas sintaxis que puede usar para 
+        cambiar las variables.<br>
+        Una variable de usuario se escribe como @var_name y puede cambiarse como 
+        sigue:<br>
+        SET @var_name = expr;<br>
+        Se puede referir a las variables de sistema en comandos SET como var_name. 
+        El nombre puede ir precedido opcionalmente por<br>
+        GLOBAL o @@global. para indicar expl&iacute;citamente que la variable 
+        es global, o por SESSION, @@session., o @@ para indicar<br>
+        que es una variable de sesi&oacute;n. LOCAL y @@local. son sin&oacute;nimos 
+        para SESSION y @@session.. Si no hay modificador presente,<br>
+        SET asigna un valor a la variable de sesi&oacute;n.<br>
+        La sintaxis @@var_name para variables de sistema se soporta para hacer 
+        la sintaxis de MySQL compatible con otros sistemas de<br>
+        base de datos.<br>
+        Si cambia varias variables de sistema en el mismo comando, la &uacute;ltima 
+        opci&oacute;n GLOBAL o SESSION usada se usa para variables que<br>
+        no tienen modo especificado.<br>
+        SET sort_buffer_size=10000;<br>
+        SET @@local.sort_buffer_size=10000;<br>
+        SET GLOBAL sort_buffer_size=1000000, SESSION sort_buffer_size=1000000;<br>
+        SET @@sort_buffer_size=1000000;<br>
+        SET @@global.sort_buffer_size=1000000, @@local.sort_buffer_size=1000000;<br>
+        Si cambia una variable de sistema usando SESSION (por defecto), el valor 
+        queda en efecto hasta que la sesi&oacute;n actual finaliza o<br>
+        hasta que cambia la variable con un valor distinto. Si cambia la variable 
+        de sistema usando GLOBAL, que requiere el permiso SUPER<br>
+        , el valor se recuerda y se usa para nuevas conexiones hasta que el servidor 
+        se reinicia. Si quiere hacer un cambio de variable<br>
+        permanente, debe ponerlo en un fichero de opciones. Consulte Secci&oacute;n 
+        4.3.2, &#8220;Usar ficheros de opciones&#8221;.<br>
+        Para evitar uso incorrecto, MySQL produce un error si usa SET GLOBAL con 
+        una variable que s&oacute;lo puede ser usada con SET<br>
+        SESSION o si no especifica GLOBAL (o @@) cuando cambie una variable global.<br>
+        Si quiere cambiar una variable SESSION al valor GLOBAL o un valor GLOBAL 
+        al valor de compilaci&oacute;n de MySQL por defecto,<br>
+        puede hacerlo con DEFAULT. Por ejemplo, los siguientes dos comandos son 
+        id&eacute;nticos en cambiar los valores de sesi&oacute;n o<br>
+        max_join_size al valor global:<br>
+        SET max_join_size=DEFAULT;<br>
+        SET @@session.max_join_size=@@global.max_join_size;<br>
+        Puede obtener una lista de la mayor&iacute;a de variables de sistema con 
+        SHOW VARIABLES. (Consulte Secci&oacute;n 13.5.4.21, &#8220;Sintaxis de<br>
+        SHOW VARIABLES&#8221;.) Para obtener un nombre de variable espec&iacute;fico, 
+        use una cl&aacute;usula LIKE commo se muestra:<br>
+        SHOW VARIABLES LIKE 'max_join_size';<br>
+        SHOW GLOBAL VARIABLES LIKE 'max_join_size';<br>
+        Para obtener una lista de variables cuyos nombres coinciden con un patr&oacute;n, 
+        use el comod&iacute;n '%':<br>
+        SHOW VARIABLES LIKE 'have%';<br>
+        SHOW GLOBAL VARIABLES LIKE 'have%';<br>
+        El comod&iacute;n puede usarse en cualquier posici&oacute;n dentro del 
+        patr&oacute;n para coincidir.<br>
+        Puede obtener el valor de un valor espec&iacute;fico usando la sintaxis 
+        @@[global.|local.]var_name con SELECT:<br>
+        SELECT @@max_join_size, @@global.max_join_size;<br>
+        Cuando recibe una variable con SELECT @@var_name (esto es,no especifica 
+        global., session., o local.), MySQL retorna<br>
+        el valor SESSION si existe y el valor GLOBAL en otro caso.<br>
+        La siguiente lista describe variables que tienen sintaxis no est&aacute;ndar 
+        o que no se describe en la lista de variables de sistema que se<br>
+        encuentra en Secci&oacute;n 5.3.3, &#8220;Variables de sistema del servidor&#8221;. 
+        Aunque estas variables no se muestran con SHOW VARIABLES,<br>
+        puede obtener sus valores con SELECT (con la excepci&oacute;n de CHARACTER 
+        SET y SET NAMES). Por ejemplo:<br>
+        mysql&gt; SELECT @@AUTOCOMMIT;<br>
+        +--------------+<br>
+        | @@autocommit |<br>
+        +--------------+<br>
+        | 1 |<br>
+        +--------------+<br>
+        &#8226; AUTOCOMMIT = {0 | 1}<br>
+        Pone el modo autocommit . Con valor 1, todos los cambios de una tabla 
+        toman efecto inmediatamente. Si se pone a 0, debe<br>
+        usar COMMIT para aceptar una transacci&oacute;n o ROLLBACK para cancelarla. 
+        Si cambia el modo AUTOCOMMIT de 0 a 1, MySQL<br>
+        realiza un COMMIT autom&aacute;tico de cualquier transacci&oacute;n abierta 
+        . Otra forma de comenzar una transacci&oacute;n es usar un comando<br>
+        START TRANSACTION o BEGIN. Consulte Secci&oacute;n 13.4.1, &#8220;Sintaxis 
+        de START TRANSACTION, COMMIT y ROLLBACK&#8221;.<br>
+        &#8226; BIG_TABLES = {0 | 1}<br>
+        Si se pone a 1, todas las tablas temporales se almacenan en disco en lugar 
+        que en memoria. Esto es un poco lento, pero el error<br>
+        The table tbl_name is full no ocurre para operaciones SELECT que requieran 
+        una tabla temporal grande. El valor<br>
+        por defecto para una nueva conexi&oacute;n es 0 (use tablas temporales 
+        en memoria). Normalmente, nunca deber&iacute;a necesitar usar esta<br>
+        variable, ya que MySQL 5.0 convierte autom&aacute;ticamente tablas en 
+        memoria a tablas en disco como se requiere. (Nota: Esta variable<br>
+        se llamaba pr&eacute;viamente SQL_BIG_TABLES.)<br>
+        &#8226; CHARACTER SET {charset_name | DEFAULT}<br>
+        Esto mapea todas las cadenas desde y hacia el cliente con el mapeo dado. 
+        Puede a&ntilde;adir nuevos mapeos editando sql/<br>
+        convert.cc en la distribuci&oacute;n fuente MySQL. En MySQL 5.0, SET CHARACTER 
+        SET cambia tres variables de sistema<br>
+        character_set_client y character_set_results se actualizan con el conjunto 
+        de caracteres dado, y character_<br>
+        set_connection al valor de character_set_database.<br>
+        El mapeo por defecto puede restaurarse usando el valor DEFAULT.<br>
+        Tenga en cuenta que la sintaxis para SET CHARACTER SET difiere de la de 
+        la mayor&iacute;a de otras opciones.<br>
+        &#8226; FOREIGN_KEY_CHECKS = {0 | 1}<br>
+        Con valor de 1 (por defecto), las claves for&aacute;neas para tablas InnoDB 
+        se chequean. Si se pone a 0, se ignoran. Deshabilitar el<br>
+        chequeo de clave for&aacute;nea puede ser &uacute;til para recargar tablas 
+        InnoDB en un orden distinto que el requerido por sus relaciones<br>
+        padre/hijo, Consulte Secci&oacute;n 15.6.4, &#8220;Restricciones (constraints) 
+        FOREIGN KEY&#8221;.<br>
+        &#8226; IDENTITY = value<br>
+        La variable es un sin&oacute;nimo para la variable LAST_INSERT_ID . Existe 
+        por compatibilidad con otras bases de datos. Puede<br>
+        leer su valor con SELECT @@IDENTITY, y cambiarlo mediante SET IDENTITY.<br>
+        &#8226; INSERT_ID = value<br>
+        Cambia el valor a ser usado por los comandos INSERT o ALTER TABLE al insertar 
+        un valor AUTO_INCREMENT . Esto se<br>
+        usa principalmente con el lob binario.<br>
+        &#8226; LAST_INSERT_ID = value<br>
+        Cambia el valor a ser retornado de LAST_INSERT_ID(). Esto se almacena 
+        en el log binario cuando usa<br>
+        LAST_INSERT_ID() en un comando que actualice una tabla. Cambiar esta variable 
+        no actualiza el valor retornado por la<br>
+        funci&oacute;n de la mysql_insert_id() API de C.<br>
+        &#8226; NAMES {'charset_name' | DEFAULT}<br>
+        SET NAMES cambia tres variables de sesi&oacute;n de sistema character_set_client, 
+        character_set_connection, y<br>
+        character_set_results al conjunto de caracteres dado. Cambiar character_set_connection 
+        a charset_<br>
+        name tambi&eacute;n cambia collation_connection a la colaci&oacute;n por 
+        defecto para charset_name.<br>
+        El mapeo por defecto puede restaurarse usando un valor de DEFAULT.<br>
+        Tenga en cuenta que la sintaxis para SET NAMES difiere de la usada para 
+        la mayor&iacute;a de otras opciones.<br>
+        &#8226; SQL_NOTES = {0 | 1}<br>
+        Con el valor 1 (por defecto), advertencias del nivel Note se registran. 
+        Con valor 0, las advertencias Note se suprimen.<br>
+        mysqldump incluye la salida para cambiar esta variable a 0 as&iacute; 
+        que recargar el fichero volcado no produce advertencias para<br>
+        eventos que no afectan a la integridad de la operaci&oacute;n de recarga. 
+        SQL_NOTES se a&ntilde;adi&oacute; en MySQL 5.0.3.<br>
+        &#8226; SQL_AUTO_IS_NULL = {0 | 1}<br>
+        Con valor 1 (por defecto), puede encontrar el &uacute;ltimo registro insertado 
+        para una tabla que contiene una columna AUTO_<br>
+        INCREMENT usando el siguiente constructor:<br>
+        WHERE auto_increment_column IS NULL<br>
+        Este comportamiento lo usan algunos programas ODBC, como Access.<br>
+        &#8226; SQL_BIG_SELECTS = {0 | 1}<br>
+        Con valor 0, MySQL aborta los comandos SELECT que probablemente tardar&aacute;n 
+        mucho tiempo (esto es, comandos para los que<br>
+        el optimizador estima que el n&uacute;mero de registros examinados excede 
+        el valor de max_join_size). Esto es &uacute;til cuando un comando<br>
+        WHERE no aconsejable se ejecuta. El valor por defecto para una nueva conexi&oacute;n 
+        es 1, que permite todos los comandos<br>
+        SELECT .<br>
+        Si cambia la variable de sistema max_join_size a un valor distinto a DEFAULT, 
+        SQL_BIG_SELECTS se pone a 0.<br>
+        &#8226; SQL_BUFFER_RESULT = {0 | 1}<br>
+        SQL_BUFFER_RESULT fuerza los resultados de los comandos SELECT a poner 
+        en tablas temporales. Esto ayuda a MySQL a<br>
+        liberar los bloqueos de tabla r&aacute;pidamente y pueden ser beneficioso 
+        en caso que tarde un largo tiempo para enviar resultados al<br>
+        cliente.<br>
+        &#8226; SQL_LOG_BIN = {0 | 1}<br>
+        Con valor 0, no se realiza logueo en el log binario para el cliente. El 
+        cliente debe tener el permiso SUPER para cambiar esta opci&oacute;n.<br>
+        &#8226; SQL_LOG_OFF = {0 | 1}<br>
+        Con valor 1, no se realiza logueo en el log de consultas generales para 
+        el cliente. El cliente debe tener el permiso SUPER para<br>
+        cambiar esta opci&oacute;n.<br>
+        &#8226; SQL_LOG_UPDATE = {0 | 1}<br>
+        Esta variable est&aacute; obsoleta, y es mapea a SQL_LOG_BIN.<br>
+        &#8226; SQL_QUOTE_SHOW_CREATE = {0 | 1}<br>
+        Con valor 1, SHOW CREATE TABLE entrecomilla los nombres de tabla y columnas. 
+        Si se pone a 0, se desactiva el entrecomillado.<br>
+        Esta opci&oacute;n est&aacute; activada por defecto, as&iacute; que la 
+        replicaci&oacute;n funciona para tablas con nombres de tabla y columna 
+        que no<br>
+        lo requieren. Consulte Secci&oacute;n 13.5.4.5, &#8220;Sintaxis de SHOW 
+        CREATE TABLE&#8221;.<br>
+        &#8226; SQL_SAFE_UPDATES = {0 | 1}<br>
+        Con valor 1, MySQL aborta comandos UPDATE o DELETE que no usan una clave 
+        en la cl&aacute;usula WHERE o LIMIT . Esto hace<br>
+        posible cazar los comandos UPDATE o DELETE donde las claves no se usan 
+        apropiadamente y que probablemente cambiar&iacute;an<br>
+        o borrar&iacute;an un gran n&uacute;mero de registros.<br>
+        &#8226; SQL_SELECT_LIMIT = {value | DEFAULT}<br>
+        El m&aacute;ximo n&uacute;mero de registros a retornar desde comandos 
+        SELECT . El valor por defecto para una nueva conexi&oacute;n es<br>
+        &#8220;unlimited.&#8221; Si cambia este l&iacute;mite, el valor por defecto 
+        puede restaurarse usando un valor SQL_SELECT_LIMIT de<br>
+        DEFAULT.<br>
+        Si un SELECT tiene una cl&aacute;usula LIMIT el LIMIT tiene preferencia 
+        sobre el valor de SQL_SELECT_LIMIT.<br>
+        SQL_SELECT_LIMIT no se aplica a comandos SELECT ejecutados en rutinas 
+        almacenadas. Tampoco se aplica a comandos<br>
+        SELECT que no producen un conjunto de resultados a ser retornado al cliente. 
+        Esto incluye comandos SELECT en subconsultas,<br>
+        CREATE TABLE ... SELECT, y INSERT INTO ... SELECT.<br>
+        &#8226; SQL_WARNINGS = {0 | 1}<br>
+        Esta variable controla si comandos INSERT de un registro producen una 
+        cadena de informaci&oacute;n si hay una advertencia. Por defecto<br>
+        es 0. Cambie el valor a 1 para producir una cadena de informaci&oacute;n.<br>
+        &#8226; TIMESTAMP = {timestamp_value | DEFAULT}<br>
+        Cambia la hora del cliente. Se usar para obtener la fecha y hora original 
+        si usa el log binario para restaurar registros. timestamp_<br>
+        value debe ser un Unix epoch timestamp, no un timestamp de MySQL.<br>
+        &#8226; UNIQUE_CHECKS = {0 | 1}<br>
+        Con valor 1 (por defecto), se realizan chequeos en tablas InnoDB para 
+        &iacute;ndices secundarios. Con valor 0, no se hacen chequeos<br>
+        de valores &uacute;nicos para entradas de &iacute;ndices insertados en 
+        el b&uacute;ffer de inserci&oacute;n de InnoDB. Si sabe con certeza que 
+        sus datos no<br>
+        contienen violaciones de valores &uacute;nicos, puede ponerlo a 0 para 
+        acelerar importaciones de tablas grandes a InnoDB.<br>
+        <h3>Sintaxis de SHOW</h3><br>
+        SHOW tiene varias formas que proporcionan informaci&oacute;n acerca de 
+        bases de datos, tablas, columnas o informaci&oacute;n de estado acerca<br>
+        del servidor. Esta secci&oacute;n describe estos puntos:<br>
+        SHOW [FULL] COLUMNS FROM tbl_name [FROM db_name] [LIKE 'pattern']<br>
+        SHOW CREATE DATABASE db_name<br>
+        SHOW CREATE TABLE tbl_name<br>
+        SHOW DATABASES [LIKE 'pattern']<br>
+        SHOW ENGINE engine_name {LOGS | STATUS }<br>
+        SHOW [STORAGE] ENGINES<br>
+        SHOW ERRORS [LIMIT [offset,] row_count]<br>
+        SHOW GRANTS FOR user<br>
+        SHOW INDEX FROM tbl_name [FROM db_name]<br>
+        SHOW INNODB STATUS<br>
+        SHOW [BDB] LOGS<br>
+        SHOW PRIVILEGES<br>
+        SHOW [FULL] PROCESSLIST<br>
+        SHOW [GLOBAL | SESSION] STATUS [LIKE 'pattern']<br>
+        SHOW TABLE STATUS [FROM db_name] [LIKE 'pattern']<br>
+        SHOW [OPEN] TABLES [FROM db_name] [LIKE 'pattern']<br>
+        SHOW TRIGGERS<br>
+        SHOW [GLOBAL | SESSION] VARIABLES [LIKE 'pattern']<br>
+        SHOW WARNINGS [LIMIT [offset,] row_count]<br>
+        SHOW BINLOG EVENTS<br>
+        SHOW MASTER LOGS<br>
+        SHOW MASTER STATUS<br>
+        SHOW SLAVE HOSTS<br>
+        SHOW SLAVE STATUS<br>
+        En la sintaxis para un comando SHOW dado incluye una parte LIKE 'pattern' 
+        , 'pattern' es una cadena que puede contener<br>
+        los caracteres de SQL '%' y '_' . El patr&oacute;n es &uacute;til para 
+        restringir la salida del comando para valores coincidentes<br>
+        <h3>Sintaxis de SHOW CHARACTER SET&lt;/h3<br>
+        SHOW CHARACTER SET [LIKE 'pattern']<br>
+        El comando SHOW CHARACTER SET muestra todos los conjuntos de caracteres 
+        disponibles. Esto tiene una cl&aacute;usula LIKE opcional<br>
+        que indica qu&eacute; nombres de conjuntos de caracteres hay coincidentes. 
+        Por ejemplo:<br>
+        mysql&gt; SHOW CHARACTER SET LIKE 'latin%';<br>
+        +---------+-----------------------------+-------------------+--------+<br>
+        | Charset | Description | Default collation | Maxlen |<br>
+        +---------+-----------------------------+-------------------+--------+<br>
+        | latin1 | ISO 8859-1 West European | latin1_swedish_ci | 1 |<br>
+        | latin2 | ISO 8859-2 Central European | latin2_general_ci | 1 |<br>
+        | latin5 | ISO 8859-9 Turkish | latin5_turkish_ci | 1 |<br>
+        | latin7 | ISO 8859-13 Baltic | latin7_general_ci | 1 |<br>
+        +---------+-----------------------------+-------------------+--------+<br>
+        La columna Maxlen muestra el m&aacute;ximo n&uacute;mero de bytes usados 
+        para almacenar un car&aacute;cter.<br>
+        <h3>Sintaxis de SHOW COLLATION</h3><br>
+        SHOW COLLATION [LIKE 'pattern']<br>
+        La salida de SHOW COLLATION incluye todos los conjuntos de caracteres 
+        disponibles. Tiene una cl&aacute;usula LIKE opcional cuyo<br>
+        pattern indica qu&eacute; nombres de colaci&oacute;n coinciden. Por ejemplo:<br>
+        mysql&gt; SHOW COLLATION LIKE 'latin1%';<br>
+        +-------------------+---------+----+---------+----------+---------+<br>
+        | Collation | Charset | Id | Default | Compiled | Sortlen |<br>
+        +-------------------+---------+----+---------+----------+---------+<br>
+        | latin1_german1_ci | latin1 | 5 | | | 0 |<br>
+        | latin1_swedish_ci | latin1 | 8 | Yes | Yes | 0 |<br>
+        | latin1_danish_ci | latin1 | 15 | | | 0 |<br>
+        | latin1_german2_ci | latin1 | 31 | | Yes | 2 |<br>
+        | latin1_bin | latin1 | 47 | | Yes | 0 |<br>
+        | latin1_general_ci | latin1 | 48 | | | 0 |<br>
+        | latin1_general_cs | latin1 | 49 | | | 0 |<br>
+        | latin1_spanish_ci | latin1 | 94 | | | 0 |<br>
+        +-------------------+---------+----+---------+----------+---------+<br>
+        La columna Default indica si una colaci&oacute;n est&aacute; por defecto 
+        para su conjunto de caracteres. Compiled indica si el conjunto de<br>
+        caracteres est&aacute; compilado en el servidor. Sortlen est&aacute; relacionado 
+        con la cantidad de memoria requerida para ordenar cadenas<br>
+        expresadas en el conjunto de caracteres.<br>
+        <h3>Sintaxis de SHOW COLUMNS</h3><br>
+        SHOW [FULL] COLUMNS FROM tbl_name [FROM db_name] [LIKE 'pattern']<br>
+        SHOW COLUMNS muestra informaci&oacute;n acerca de las columnas en una 
+        tabla dada. Tambi&eacute;n funciona para vistas desde MySQL<br>
+        5.0.1.<br>
+        Si los tipos de columnas difieren de los que espera basados en su comando 
+        CREATE TABLE, tenga en cuenta que MySQL a veces<br>
+        cambia tipos de columnas cuando crea o altera una tabla. Las condiciones 
+        en que esto ocurre se describen en Secci&oacute;n 13.1.5.1,<br>
+        &#8220;Cambios t&aacute;citos en la especificaci&oacute;n de columnas&#8221;.<br>
+        La palabra clave FULL hace que la salida incluya los permisos que tiene 
+        as&iacute; como cualquier comentario por columna para cada columna.<br>
+        Puede usar db_name.tbl_name como alternativa a la sintaxis tbl_name FROM 
+        db_name . En otras palabras, estos dos comandos<br>
+        son equivalentes:<br>
+        mysql&gt; SHOW COLUMNS FROM mytable FROM mydb;<br>
+        mysql&gt; SHOW COLUMNS FROM mydb.mytable;<br>
+        SHOW FIELDS es un sin&oacute;nimo para SHOW COLUMNS. Puede listar las 
+        columnas de una tabla con el comando mysqlshow<br>
+        db_name tbl_name .<br>
+        <h3>Sintaxis de SHOW CREATE DATABASE</h3><br>
+        SHOW CREATE {DATABASE | SCHEMA} db_name<br>
+        Muestra un comando CREATE DATABASE que crea la base de datos dada. SHOW 
+        CREATE SCHEMA puede usarse desde MySQL<br>
+        5.0.2.<br>
+        mysql&gt; SHOW CREATE DATABASE test\G<br>
+        *************************** 1. row ***************************<br>
+        Database: test<br>
+        Create Database: CREATE DATABASE `test`<br>
+        /*!40100 DEFAULT CHARACTER SET latin1 */<br>
+        <h3>Sintaxis de SHOW CREATE TABLE</h3><br>
+        SHOW CREATE TABLE tbl_name<br>
+        Muestra un comando CREATE TABLE que crea la tabla dada. Desde MySQL 5.0.1, 
+        este comando funciona con vistas.<br>
+        mysql&gt; SHOW CREATE TABLE t\G<br>
+        *************************** 1. row ***************************<br>
+        Table: t<br>
+        Create Table: CREATE TABLE t (<br>
+        id INT(11) default NULL auto_increment,<br>
+        s char(60) default NULL,<br>
+        PRIMARY KEY (id)<br>
+        ) ENGINE=MyISAM<br>
+        SHOW CREATE TABLE entrecomilla los nombres de tabla y columna seg&uacute;n 
+        el valor de la opci&oacute;n SQL_QUOTE_SHOW_CREATE .<br>
+        <h3>Sintaxis de SHOW DATABASES</h3><br>
+        SHOW {DATABASES | SCHEMAS} [LIKE 'pattern']<br>
+        SHOW DATABASES lista la base de datos en el servidor MySQL . Puede obtener 
+        esta lista usando el comando mysqlshow . En<br>
+        MySQL 5.0, ve s&oacute;lo las bases de datos para las que tiene alguna 
+        clase de permiso, si no tiene el permiso SHOW DATABASES .<br>
+        Si el servidor se arranc&oacute; con la opci&oacute;n --skip-show-database 
+        , no puede usar este comando a no ser que tenga el permiso<br>
+        SHOW DATABASES .<br>
+        SHOW SCHEMAS puede usarse desde MySQL 5.0.2<br>
+        <h3>Sintaxis de SHOW ENGINE</h3><br>
+        SHOW ENGINE engine_name {LOGS | STATUS }<br>
+        SHOW ENGINE muestra informaci&oacute;n de log o estado acerca de motores 
+        de almacenamiento. Los siguientes comandos se soportan<br>
+        actualmente:<br>
+        SHOW ENGINE BDB LOGS<br>
+        SHOW ENGINE INNODB STATUS<br>
+        SHOW ENGINE BDB LOGS muestra informaci&oacute;n de estado acerca de ficheros 
+        de log BDB existentes. Retorna los siguientes campos:<br>
+        &#8226; File<br>
+        Ruta completa al fichero de log.<br>
+        &#8226; Type<br>
+        Tipo del fichero de log (BDB para ficheros de log Berkeley DB).<br>
+        &#8226; Status<br>
+        Estado del fichero de log (FREE si el fichero puede borrarse, o IN USE 
+        si el fichero se necesita en el subsistema de transacci&oacute;n)<br>
+        SHOW ENGINE INNODB STATUS muestra informaci&oacute;n extendida acerca 
+        del estado del comando InnoDB .<br>
+        Sin&oacute;nimos antiguos (ahora obsoletos) para estos comandos son SHOW 
+        [BDB] LOGS y SHOW INNODB STATUS.<br>
+        SHOW ENGINE puede usarse desde MySQL 4.1.2.<br>
+        <h3>Sintaxis de SHOW ENGINES</h3><br>
+        SHOW [STORAGE] ENGINES<br>
+        SHOW ENGINES muestra su informaci&oacute;n de estado acerca del motor 
+        de almacenamiento. Esto es particularmente &uacute;til para chequear<br>
+        si un motor de almacenamiento se soporta, o para ver si el motr es. SHOW 
+        TABLE TYPES es un sin&oacute;nimo obsoleto.<br>
+        mysql&gt; SHOW ENGINES\G<br>
+        *************************** 1. row ***************************<br>
+        Engine: MyISAM<br>
+        Support: DEFAULT<br>
+        Comment: Default engine as of MySQL 3.23 with great performance<br>
+        *************************** 2. row ***************************<br>
+        Engine: MEMORY<br>
+        Support: YES<br>
+        Comment: Hash based, stored in memory, useful for temporary tables<br>
+        *************************** 3. row ***************************<br>
+        Engine: HEAP<br>
+        Support: YES<br>
+        Comment: Alias for MEMORY<br>
+        *************************** 4. row ***************************<br>
+        Engine: MERGE<br>
+        Support: YES<br>
+        Comment: Collection of identical MyISAM tables<br>
+        *************************** 5. row ***************************<br>
+        Engine: MRG_MYISAM<br>
+        Support: YES<br>
+        Comment: Alias for MERGE<br>
+        *************************** 6. row ***************************<br>
+        Engine: ISAM<br>
+        Support: NO<br>
+        Comment: Obsolete storage engine, now replaced by MyISAM<br>
+        *************************** 7. row ***************************<br>
+        Engine: MRG_ISAM<br>
+        Support: NO<br>
+        Comment: Obsolete storage engine, now replaced by MERGE<br>
+        *************************** 8. row ***************************<br>
+        Engine: InnoDB<br>
+        Support: YES<br>
+        Comment: Supports transactions, row-level locking, and foreign keys<br>
+        *************************** 9. row ***************************<br>
+        Engine: INNOBASE<br>
+        Support: YES<br>
+        Comment: Alias for INNODB<br>
+        *************************** 10. row ***************************<br>
+        Engine: BDB<br>
+        Support: YES<br>
+        Comment: Supports transactions and page-level locking<br>
+        *************************** 11. row ***************************<br>
+        Engine: BERKELEYDB<br>
+        Support: YES<br>
+        Comment: Alias for BDB<br>
+        *************************** 12. row ***************************<br>
+        Engine: NDBCLUSTER<br>
+        Support: NO<br>
+        Comment: Clustered, fault-tolerant, memory-based tables<br>
+        *************************** 13. row ***************************<br>
+        Engine: NDB<br>
+        Support: NO<br>
+        Comment: Alias for NDBCLUSTER<br>
+        *************************** 14. row ***************************<br>
+        Engine: EXAMPLE<br>
+        Support: NO<br>
+        Comment: Example storage engine<br>
+        *************************** 15. row ***************************<br>
+        Engine: ARCHIVE<br>
+        Support: YES<br>
+        Comment: Archive storage engine<br>
+        *************************** 16. row ***************************<br>
+        Engine: CSV<br>
+        Support: NO<br>
+        Comment: CSV storage engine<br>
+        *************************** 17. row ***************************<br>
+        Engine: FEDERATED<br>
+        Support: YES<br>
+        Comment: Federated MySQL storage engine<br>
+        *************************** 18. row ***************************<br>
+        Engine: BLACKHOLE<br>
+        Support: YES<br>
+        Comment: /dev/null storage engine (anything you write to it disappears)<br>
+        Un valor Support indica si el motor se soporta, y cu&aacute;l est&aacute; 
+        activo por defecto. Por ejemplo, si el servidor se arranca con la opci&oacute;n<br>
+        --default-table-type=InnoDB, el valor Support para el registro InnoDB 
+        tiene el valor DEFAULT.<br>
+        <h3>Sintaxis de SHOW ERRORS</h3><br>
+        SHOW ERRORS [LIMIT [offset,] row_count]<br>
+        SHOW COUNT(*) ERRORS<br>
+        Este comando es similar a SHOW WARNINGS, excepto que en lugar de mostrar 
+        errores, advertencias, y notas s&oacute;lo muestra errores.<br>
+        La cl&aacute;usula LIMIT tiene la misma sintaxis que para el comando SELECT 
+        . Consulte Secci&oacute;n 13.2.7, &#8220;Sintaxis de SELECT&#8221;.<br>
+        El comando SHOW COUNT(*) ERRORS muestra el n&uacute;mero de errores. Puede 
+        recibir este n&uacute;mero de la variable error_count<br>
+        :<br>
+        SHOW COUNT(*) ERRORS;<br>
+        SELECT @@error_count;<br>
+        <h3>Sintaxis de SHOW GRANTS</h3><br>
+        SHOW GRANTS FOR user<br>
+        Este comando lista el comando GRANT que debe realizarse para duplicar 
+        los permisos para una cuenta de usuario MySQL.<br>
+        mysql&gt; SHOW GRANTS FOR 'root'@'localhost';<br>
+        +---------------------------------------------------------------------+<br>
+        | Grants for root@localhost |<br>
+        +---------------------------------------------------------------------+<br>
+        | GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' WITH GRANT OPTION 
+        |<br>
+        +---------------------------------------------------------------------+<br>
+        Para listar los permisos de la sesi&oacute;n actual, puede usar cualquiera 
+        de los siguientes comandos:<br>
+        SHOW GRANTS;<br>
+        SHOW GRANTS FOR CURRENT_USER;<br>
+        SHOW GRANTS FOR CURRENT_USER();<br>
+        <h3>Sintaxis de SHOW INDEX</h3><br>
+        SHOW INDEX FROM tbl_name [FROM db_name]<br>
+        SHOW INDEX retorna informaci&oacute;n de &iacute;ndice de tabla en un 
+        formato que recuerda la llamada SQLStatistics en ODBC.<br>
+        SHOW INDEX returna los siguientes campso:<br>
+        &#8226; Table<br>
+        Nombre de tabla.<br>
+        &#8226; Non_unique<br>
+        0 si el &iacute;ndice no puede contener duplicados, 1 si puede.<br>
+        &#8226; Key_name<br>
+        Nombre del &iacute;ndice<br>
+        &#8226; Seq_in_index<br>
+        N&uacute;mero de secuencia de columna en el &iacute;ndice, comenzando 
+        con 1.<br>
+        &#8226; Column_name<br>
+        Nombre de columna.<br>
+        &#8226; Collation<br>
+        C&oacute;mo se ordena la columna en el &iacute;ndice. En MySQL, puede 
+        tener valores 'A' (Ascendente) o NULL (No ordenado).<br>
+        &#8226; Cardinality<br>
+        N&uacute;mero de valores &uacute;nicos en el &iacute;ndice. Se actualiza 
+        ejecutando ANALYZE TABLE o myisamchk -a. Cardinality se<br>
+        cuenta bas&aacute;ndose en las estad&iacute;sticas almacenadas como enteros, 
+        as&iacute; que no es necesariamente precisa para tablas peque&ntilde;as.<br>
+        Mientras m&aacute;s grande sea, m&aacute;s grande es la probabilidad que 
+        MySQL use el &iacute;ndice al hacer joins.<br>
+        &#8226; Sub_part<br>
+        N&uacute;mero de caracteres indexados si la columna s&oacute;lo est&aacute; 
+        indexada parcialmente. NULL si la columna entera est&aacute; indexada.<br>
+        &#8226; Packed<br>
+        Indica c&oacute;mo est&aacute; empaquetada la clave. NULL si no lo est&aacute;.<br>
+        &#8226; Null<br>
+        Contiene YES si la columna puede contener NULL. Si no, la columna contiene 
+        NO desde MySQL 5.0.3, y '' antes.<br>
+        &#8226; Index_type<br>
+        M&eacute;todo de &iacute;ndice usado (BTREE, FULLTEXT, HASH, RTREE).<br>
+        &#8226; Comment<br>
+        Comentarios varios.<br>
+        Puede usar db_name.tbl_name como alternativa para la sintaxis tbl_name 
+        FROM db_name . Estos dos comandos son<br>
+        equivalentes:<br>
+        mysql&gt; SHOW INDEX FROM mytable FROM mydb;<br>
+        mysql&gt; SHOW INDEX FROM mydb.mytable;<br>
+        SHOW KEYS es sin&oacute;nimo para SHOW INDEX. Puede listar los &iacute;ndices 
+        de una tabla con el comando mysqlshow -k db_name<br>
+        tbl_name .<br>
+        <h3>Sintaxis de SHOW INNODB STATUS</h3><br>
+        SHOW INNODB STATUS<br>
+        En MySQL 5.0, este es un sin&oacute;nimo obsoleto para SHOW ENGINE INNODB 
+        STATUS.<br>
+        <h3>Sintaxis de SHOW LOGS</h3><br>
+        SHOW [BDB] LOGS<br>
+        En MySQL 5.0, este es un sin&oacute;nimo obsoleto para SHOW ENGINE BDB 
+        LOGS.<br>
+        <h3>Sintaxis de SHOW OPEN TABLES</h3><br>
+        SHOW OPEN TABLES<br>
+        SHOW OPEN TABLES lista las tablas no TEMPORARY abiertas actualmente en 
+        la cach&eacute; de tablas.<br>
+        SHOW OPEN TABLES returna los siguientes campos:<br>
+        &#8226; Database<br>
+        La base de datos que contiene la tabla.<br>
+        &#8226; Table<br>
+        Nombre de tabla.<br>
+        &#8226; In_use<br>
+        N&uacute;mero de veces que la tabla est&aacute; en uso para consultas. 
+        Si el contador es cero, la tabla est&aacute; abierta, pero no est&aacute; 
+        siendo usada.<br>
+        &#8226; Name_locked<br>
+        Si un nombre de tabla est&aacute; bloqueado. El bloqueo de nombres se 
+        usa para operaciones tales como borrar o renombrar tablas.<br>
+        SHOW OPEN TABLES se a&ntilde;adi&oacute; en MySQL 3.23.33.<br>
+        <h3>Sintaxis de SHOW PRIVILEGES</h3><br>
+        SHOW PRIVILEGES<br>
+        SHOW PRIVILEGES muestra la lista de permisos de sistema que soporta MySQL 
+        server. La salida exacta depende de la versi&oacute;n<br>
+        de su servidor.<br>
+        mysql&gt; SHOW PRIVILEGES\G<br>
+        *************************** 1. row ***************************<br>
+        Privilege: Alter<br>
+        Context: Tables<br>
+        Comment: To alter the table<br>
+        *************************** 2. row ***************************<br>
+        Privilege: Alter routine<br>
+        Context: Functions,Procedures<br>
+        Comment: To alter or drop stored functions/procedures<br>
+        *************************** 3. row ***************************<br>
+        Privilege: Create<br>
+        Context: Databases,Tables,Indexes<br>
+        Comment: To create new databases and tables<br>
+        *************************** 4. row ***************************<br>
+        Privilege: Create routine<br>
+        Context: Functions,Procedures<br>
+        Comment: To use CREATE FUNCTION/PROCEDURE<br>
+        *************************** 5. row ***************************<br>
+        Privilege: Create temporary tables<br>
+        Context: Databases<br>
+        Comment: To use CREATE TEMPORARY TABLE<br>
+        *************************** 6. row ***************************<br>
+        Privilege: Create view<br>
+        Context: Tables<br>
+        Comment: To create new views<br>
+        *************************** 7. row ***************************<br>
+        Privilege: Create user<br>
+        Context: Server Admin<br>
+        Comment: To create new users<br>
+        *************************** 8. row ***************************<br>
+        Privilege: Delete<br>
+        Context: Tables<br>
+        Comment: To delete existing rows<br>
+        *************************** 9. row ***************************<br>
+        Privilege: Drop<br>
+        Context: Databases,Tables<br>
+        Comment: To drop databases, tables, and views<br>
+        *************************** 10. row ***************************<br>
+        Privilege: Execute<br>
+        Context: Functions,Procedures<br>
+        Comment: To execute stored routines<br>
+        *************************** 11. row ***************************<br>
+        Privilege: File<br>
+        Context: File access on server<br>
+        Comment: To read and write files on the server<br>
+        *************************** 12. row ***************************<br>
+        Privilege: Grant option<br>
+        Context: Databases,Tables,Functions,Procedures<br>
+        Comment: To give to other users those privileges you possess<br>
+        *************************** 13. row ***************************<br>
+        Privilege: Index<br>
+        Context: Tables<br>
+        Comment: To create or drop indexes<br>
+        *************************** 14. row ***************************<br>
+        Privilege: Insert<br>
+        Context: Tables<br>
+        Comment: To insert data into tables<br>
+        *************************** 15. row ***************************<br>
+        Privilege: Lock tables<br>
+        Context: Databases<br>
+        Comment: To use LOCK TABLES (together with SELECT privilege)<br>
+        *************************** 16. row ***************************<br>
+        Privilege: Process<br>
+        Context: Server Admin<br>
+        Comment: To view the plain text of currently executing queries<br>
+        *************************** 17. row ***************************<br>
+        Privilege: References<br>
+        Context: Databases,Tables<br>
+        Comment: To have references on tables<br>
+        *************************** 18. row ***************************<br>
+        Privilege: Reload<br>
+        Context: Server Admin<br>
+        Comment: To reload or refresh tables, logs and privileges<br>
+        *************************** 19. row ***************************<br>
+        Privilege: Replication client<br>
+        Context: Server Admin<br>
+        Comment: To ask where the slave or master servers are<br>
+        *************************** 20. row ***************************<br>
+        Privilege: Replication slave<br>
+        Context: Server Admin<br>
+        Comment: To read binary log events from the master<br>
+        *************************** 21. row ***************************<br>
+        Privilege: Select<br>
+        Context: Tables<br>
+        Comment: To retrieve rows from table<br>
+        *************************** 22. row ***************************<br>
+        Privilege: Show databases<br>
+        Context: Server Admin<br>
+        Comment: To see all databases with SHOW DATABASES<br>
+        *************************** 23. row ***************************<br>
+        Privilege: Show view<br>
+        Context: Tables<br>
+        Comment: To see views with SHOW CREATE VIEW<br>
+        *************************** 24. row ***************************<br>
+        Privilege: Shutdown<br>
+        Context: Server Admin<br>
+        Comment: To shut down the server<br>
+        *************************** 25. row ***************************<br>
+        Privilege: Super<br>
+        Context: Server Admin<br>
+        Comment: To use KILL thread, SET GLOBAL, CHANGE MASTER, etc.<br>
+        *************************** 26. row ***************************<br>
+        Privilege: Update<br>
+        Context: Tables<br>
+        Comment: To update existing rows<br>
+        *************************** 27. row ***************************<br>
+        Privilege: Usage<br>
+        Context: Server Admin<br>
+        Comment: No privileges - allow connect only<br>
+        <h3>Sintaxis de SHOW PROCESSLIST</h3><br>
+        SHOW [FULL] PROCESSLIST<br>
+        SHOW PROCESSLIST le muestra qu&eacute; flujos est&aacute;n en ejecuci&oacute;n. 
+        Puede obtener esta informaci&oacute;n usando el comando mysqladmin<br>
+        processlist . Si tiene el permiso SUPER , puede ver todos los flujos. 
+        De otro modo, puede ver s&oacute;lo los propios (esto es,<br>
+        flujos asociados con la cuenta MySQL que est&aacute; usando). Consulte 
+        Secci&oacute;n 13.5.5.3, &#8220;Sintaxis de KILL&#8221;. Si no usa la 
+        palabra clave<br>
+        FULL , s&oacute;lo los primeros 100 caracteres de cada consulta se muestran.<br>
+        En MySQL 5.0, el comando reporta el nombre de equipo ara conexiones TCP/IP 
+        en formato host_name:client_port para<br>
+        hacer m&aacute;s f&aacute;cil determinar qu&eacute; hace cada cliente.<br>
+        Este comando es &uacute;til si obtiene el mensaje de error &quot;demasiadas 
+        conexiones&quot; para encontrar qu&eacute; ocurre. MySQL reserva una conexi&oacute;n<br>
+        extra para usar por cuentas con el permiso SUPER, para asegurar que el 
+        administrador siempre es capaz de conectar y comprobar<br>
+        el sistema (asumiendo que no da este permiso a todos los usuarios).<br>
+        Algunos estados vistos com&uacute;nmente en la salida de SHOW PROCESSLIST:<br>
+        &#8226; Checking table<br>
+        El flujo est&aacute; realizando un chequeo (autom&aacute;tico) de la tabla.<br>
+        &#8226; Closing tables<br>
+        Significa que el flujo est&aacute; volcando los datos que han cambiado 
+        de la tabla a disco y cerrando las tablas usadas. Esto debe ser<br>
+        una operaci&oacute;n r&aacute;pido. Si no lo es, debe verificar que no 
+        tiene el disco lleno y que el disco no tiene un uso muy pesado.<br>
+        &#8226; Connect Out<br>
+        Esclavo conectando con el maestro.<br>
+        &#8226; Copying to tmp table on disk<br>
+        El conjunto de resultados temporal era mayor que tmp_table_size y el flujo 
+        est&aacute; cambiando la tabla temporal de memoria<br>
+        a disco para ahorrar memoria.<br>
+        &#8226; Creating tmp table<br>
+        El flujo est&aacute; creando una tabla temporal para guardar parte del 
+        resultado de una consulta.<br>
+        &#8226; deleting from main table<br>
+        El servidor est&aacute; ejecutando la primera parte de un borrado de tablas 
+        m&uacute;ltiple y borrando s&oacute;lo la primera tabla.<br>
+        &#8226; deleting from reference tables<br>
+        El servidor est&aacute; ejecutando la segunda parte de un borrado de tablas 
+        m&uacute;ltiples y borrando los registros coincidentes de las otras<br>
+        tablas.<br>
+        &#8226; Flushing tables<br>
+        El flujo est&aacute; ejecutando FLUSH TABLES y espera a que todos los 
+        flujos cierren sus tablas.<br>
+        &#8226; Killed<br>
+        Alguien ha enviado un comando KILL al flujo y deber&iacute;a abortar en 
+        cuanto chequee el flag kill. El flag se chequea en cada vuelta<br>
+        al bucle principal de MySQL, pero en algunos casos puede tardar algo de 
+        tiempo en que muera el flujo. Si el flujo est&aacute; bloqueado<br>
+        por alg&uacute;n otro flujo, el kill tiene efecto en cuanto el otro flujo 
+        libera el bloqueo.<br>
+        &#8226; Locked<br>
+        La consulta est&aacute; bloqueada por otra consulta.<br>
+        &#8226; Sending data<br>
+        El flujo est&aacute; procesando registros para un comando SELECT y tambi&eacute;n 
+        enviando datos al cliente.<br>
+        &#8226; Sorting for group<br>
+        El flujo est&aacute; ordenando para un GROUP BY.<br>
+        &#8226; Sorting for order<br>
+        El flujo est&aacute; ordenando para un ORDER BY.<br>
+        &#8226; Opening tables<br>
+        El flujo est&aacute; intentando abrir una tabla. Esto deber&iacute;a ser 
+        un proceso muy r&aacute;pido, a no ser que algo importante evite la abertura.<br>
+        Por ejemplo, un comando ALTER TABLE o LOCK TABLE puede evitar abrir una 
+        tabla hasta que el comando acabe.<br>
+        &#8226; Removing duplicates<br>
+        La consulta usaba SELECT DISTINCT de forma que MySQL no pod&iacute;a optimizar 
+        las distintas operaciones en una fase tem-<br>
+        prana. Debido a ello, MySQL necesita una fase extra para borrar todos 
+        los registros duplicados antes de enviar el resultado al<br>
+        cliente.<br>
+        &#8226; Reopen table<br>
+        El flujo obtivo un bloqueo para la tabla, pero se dio cuenta tras obtenerlo 
+        que la estructura de la tabla cambi&oacute;. Se libera el bloqueo,<br>
+        cierra la tabla y trata de reabrirla.<br>
+        &#8226; Repair by sorting<br>
+        El c&oacute;digo de reparaci&oacute;n est&aacute; usando una ordenaci&oacute;n 
+        para crear &iacute;ndices.<br>
+        &#8226; Repair with keycache<br>
+        El c&oacute;digo de reparaci&oacute;n est&aacute; usando creaci&oacute;n 
+        de claves una a una en la cach&eacute; de claves. Esto es mucho m&aacute;s 
+        lento que Repair<br>
+        by sorting.<br>
+        &#8226; Searching rows for update<br>
+        El flujo hace una primera fase para encontrar todos los registro coincidentes 
+        antes de actualizarlos. Esto debe hacerse si UPDATE<br>
+        est&aacute; cambiando el &iacute;ndice que se usa para encontrar los registros 
+        implicados.<br>
+        &#8226; Sleeping<br>
+        El flujo espera que el cliente env&iacute;e un nuevo comando .<br>
+        &#8226; System lock<br>
+        El flujo espera obtener un bloqueo de sistema externo para la tabla. Si 
+        no est&aacute; usando m&uacute;ltiples servidors mysqld accediendo a<br>
+        las mismas tablas, puede deshabilitar los bloqueos de sistema con la opci&oacute;n 
+        --skip-external-locking .<br>
+        &#8226; Upgrading lock<br>
+        El handler INSERT DELAYED trata de obtener un bloqueo para la tabla para 
+        insertar registros.<br>
+        &#8226; Updating<br>
+        El flujo est&aacute; buscando registros para actualizar.<br>
+        &#8226; User Lock<br>
+        El flujo espera un GET_LOCK().<br>
+        &#8226; Waiting for tables<br>
+        El flujo obtuvo una notificaci&oacute;n que la estructura de la tabla 
+        cambi&oacute; y necesita reabrirla. Sin embargo, para ello, debe esperar 
+        a<br>
+        que el resto de flujos cierren la tabla en cuesti&oacute;n.<br>
+        Esta notificaci&oacute;n tiene lugar si otro flujo ha usado FLUSH TABLES 
+        o uno de los siguientes comandos en la tabla en cuesti&oacute;n:<br>
+        FLUSH TABLES tbl_name, ALTER TABLE, RENAME TABLE, REPAIR TABLE, ANALYZE 
+        TABLE, o OPTIMIZE<br>
+        TABLE.<br>
+        &#8226; waiting for handler insert<br>
+        El handler INSERT DELAYED ha procesado las inserciones pendientes y espera 
+        nuevas.<br>
+        La mayor&iacute;a de estados se corresponden a operaciones r&aacute;pidas. 
+        Si un flujo est&aacute; en alguno de ellos varios segundos, puede existir 
+        un<br>
+        problema que necesite investigar.<br>
+        Hay algunos estdos que no se mencionan en la lista precedente, pero varios 
+        de ellos son &uacute;tiles s&oacute;lo para encontrar fallos en el servidor.<br>
+        <h3>Sintaxis de SHOW STATUS</h3><br>
+        SHOW [GLOBAL | SESSION] STATUS [LIKE 'pattern']<br>
+        SHOW STATUS proporciona informaci&oacute;n de estado del servidor. Esta 
+        informaci&oacute;n puede obtenerse usando el comando mysqladmin<br>
+        extended-status .<br>
+        Aqu&iacute; se muestra una salida parcial. La lista de variables y sus 
+        vallires pueden ser distintos para su servidor. El significado de cada<br>
+        mysql&gt; SHOW STATUS;<br>
+        +--------------------------+------------+<br>
+        | Variable_name | Value |<br>
+        +--------------------------+------------+<br>
+        | Aborted_clients | 0 |<br>
+        | Aborted_connects | 0 |<br>
+        | Bytes_received | 155372598 |<br>
+        | Bytes_sent | 1176560426 |<br>
+        | Connections | 30023 |<br>
+        | Created_tmp_disk_tables | 0 |<br>
+        | Created_tmp_tables | 8340 |<br>
+        | Created_tmp_files | 60 |<br>
+        ... ... ...<br>
+        | Open_tables | 1 |<br>
+        | Open_files | 2 |<br>
+        | Open_streams | 0 |<br>
+        | Opened_tables | 44600 |<br>
+        | Questions | 2026873 |<br>
+        ... ... ...<br>
+        | Table_locks_immediate | 1920382 |<br>
+        | Table_locks_waited | 0 |<br>
+        | Threads_cached | 0 |<br>
+        | Threads_created | 30022 |<br>
+        | Threads_connected | 1 |<br>
+        | Threads_running | 1 |<br>
+        | Uptime | 80380 |<br>
+        +--------------------------+------------+<br>
+        Con una cl&aacute;usula LIKE , el comando muestra s&oacute;lo las variables 
+        que coinciden con el patr&oacute;n:<br>
+        mysql&gt; SHOW STATUS LIKE 'Key%';<br>
+        +--------------------+----------+<br>
+        | Variable_name | Value |<br>
+        +--------------------+----------+<br>
+        | Key_blocks_used | 14955 |<br>
+        | Key_read_requests | 96854827 |<br>
+        | Key_reads | 162040 |<br>
+        | Key_write_requests | 7589728 |<br>
+        | Key_writes | 3813196 |<br>
+        +--------------------+----------+<br>
+        Las opciones GLOBAL y SESSION son nuevas en MySQL 5.0.2 Con GLOBAL, obtiene 
+        los valores de estado para todas las conexiones<br>
+        a MySQL. Con SESSION, obtiene los valores de estado para la conexi&oacute;n 
+        actual. Si no usa estas opciones, por defecto es<br>
+        SESSION. LOCAL es sin&oacute;nimo de SESSION.<br>
+        Tenga en cuenta que algunas variables de estado s&oacute;lo tienen un 
+        valor global. Para ellas obtiene el mismo valor para GLOBAL y<br>
+        SESSION.<br>
+        <h3>Sintaxis de SHOW TABLE STATUS</h3><br>
+        SHOW TABLE STATUS [FROM db_name] [LIKE 'pattern']<br>
+        SHOW TABLE STATUS funciona como SHOW TABLE, pero proporciona mucha m&aacute;s 
+        informaci&oacute;n acerca de cada tabla. Puede obtener<br>
+        esta lista usando el comando mysqlshow --status db_name . Desde MySQL 
+        5.0.1, este comando tambi&eacute;n muestra informaci&oacute;n<br>
+        sobre vistas.<br>
+        SHOW TABLE STATUS returna los siguientes campos:<br>
+        &#8226; Name<br>
+        Nombre de tabla.<br>
+        &#8226; Engine<br>
+        Motor para la tabla. Antes de MySQL 4.1.2, este valor se llama Type. Consulte 
+        Cap&iacute;tulo 14, Motores de almacenamiento de<br>
+        MySQL y tipos de tablas.<br>
+        &#8226; Version<br>
+        N&uacute;mero de versi&oacute;n del fichero .frm de la tabla.<br>
+        &#8226; Row_format<br>
+        Formato de almacenamiento de registros (Fixed, Dynamic, Compressed, Redundant, 
+        Compact). Desde MySQL/InnoDB<br>
+        5.0.3, el formato de tablas InnoDB se reporta como Redundant o Compact. 
+        Antes de 5.0.3, las tablas InnoDB siempre<br>
+        est&aacute;n en formato Redundant .<br>
+        &#8226; Rows<br>
+        N&uacute;mero de registros. Algunos motores como MyISAM, guardan el n&uacute;mero 
+        exacto.<br>
+        Para otros motores, como InnoDB, este valor es una aproximaci&oacute;n 
+        y puede variar del valor real hasta de un 40 a 50%. En tales<br>
+        casos, use SELECT COUNT(*) para obtener el n&uacute;mero real de registros.<br>
+        El valor Rows es NULL para tablas en la base de datos INFORMATION_SCHEMA 
+        .<br>
+        &#8226; Avg_row_length<br>
+        Longitud de registro media.<br>
+        &#8226; Data_length<br>
+        Tama&ntilde;o del fichero de datos.<br>
+        &#8226; Max_data_length<br>
+        M&aacute;xima longitud del fichero d edatos. Este es el n&uacute;mero 
+        total de bytes de datos que pueden almacenarse en la tabla dado el tama&ntilde;o<br>
+        de puntero de datos usado.<br>
+        &#8226; Index_length<br>
+        Tama&ntilde;o de fichero &iacute;ndice.<br>
+        &#8226; Data_free<br>
+        N&uacute;mero de bytes reservados no usados.<br>
+        &#8226; Auto_increment<br>
+        Siguiente valor AUTO_INCREMENT .<br>
+        &#8226; Create_time<br>
+        Cu&aacute;ndo se cre&oacute; la tabla .<br>
+        &#8226; Update_time<br>
+        Cu&aacute;ndo se actualiz&oacute; por &uacute;ltima vez el fichero de 
+        datos.<br>
+        &#8226; Check_time<br>
+        Cu&aacute;ndo se cheque&oacute; la tabla por &uacute;ltima vez.<br>
+        &#8226; Collation<br>
+        Conjunto de caracteres y colaci&oacute;n de la tabla.<br>
+        &#8226; Checksum<br>
+        Valor de checksum en vivo (si hay).<br>
+        &#8226; Create_options<br>
+        Opciones extra usadas con CREATE TABLE.<br>
+        &#8226; Comment<br>
+        Comentario usado al crear la tabla (o informaci&oacute;n de porqu&eacute; 
+        MySQL no puede acceder a la informaci&oacute;n de tabla).<br>
+        En el comentario de tabla, las tablas InnoDB reportan el espacio libre 
+        del espacio de tabla al que pertenece la tabla. Para una tabla<br>
+        localizada en el espacio compartido, este es el espacio libre del espacio 
+        de tabla compartido. Si usa m&uacute;ltiples espacios y la tabla tiene<br>
+        el suyo, el espacio libre es s&oacute;lo para esa tabla.<br>
+        Para tablas MEMORY (HEAP) los valores Data_length, Max_data_length, y 
+        Index_length aproximan la cantidad real<br>
+        de memoria reservada. El algoritmo de reserva reserva grandes cantidades 
+        de memoria para reducir el n&uacute;mero de operaciones de reserva.<br>
+        Para vistas, todos los campos mostrados por SHOW TABLE STATUS son NULL 
+        excepto que Name indicata el nombre de vista y<br>
+        Comment dice view.<br>
+        <h3>Sintaxis de SHOW TABLES</h3><br>
+        SHOW [FULL] TABLES [FROM db_name] [LIKE 'pattern']<br>
+        SHOW TABLES lista las tablas no TEMPORARY en una base de datos dada. Puede 
+        obtener esta lista usando el comando mysqlshow<br>
+        db_name .<br>
+        Antes de MySQL 5.0.1, la salida de SHOW TABLES contiene una &uacute;nica 
+        columna de nombres de tabla. Desde MySQL 5.0.1, este<br>
+        comando lista cualquier vista en la base de datos. Desde MySQL 5.0.2, 
+        se soporta el modificador FULL de forma que SHOW FULL<br>
+        TABLES muestra una segunda columna de salida. Los valores para la segunda 
+        columna son BASE TABLE para una tabla VIEW<br>
+        para una vista.<br>
+        Nota: Si no tiene permisos para una tabla, la tabla no se muestra en la 
+        salida de SHOW TABLES o mysqlshow db_name.<br>
+        <h3>Sintaxis de SHOW TRIGGERS</h3><br>
+        SHOW TRIGGERS [FROM db_name] [LIKE expr]<br>
+        SHOW TRIGGERS lista los disparadores definidos en el MySQL server. Se 
+        implement&oacute; en MySQL 5.0.10.<br>
+        Para el disparadores ins_sum como se define en Secci&oacute;n 20.3, &#8220;Utilizaci&oacute;n 
+        de disparadores&#8221;, la salida de este comando es la que<br>
+        se muestra:<br>
+        mysql&gt; SHOW TRIGGERS LIKE 'acc%';<br>
+        +---------+--------+---------+-------------------------------+--------+---------+<br>
+        | Trigger | Event | Table | Statement | Timing | Created |<br>
+        +---------+--------+---------+-------------------------------+--------+---------+<br>
+        | ins_sum | INSERT | account | SET @sum = @sum + NEW.amount | BEFORE | 
+        NULL |<br>
+        +---------+--------+---------+-------------------------------+--------+---------+<br>
+        Nota: Cuando use una cl&aacute;usula LIKE con SHOW TRIGGERS, la expresi&oacute;n 
+        a cumplir (expr) se compara con el nombre de la tabla<br>
+        en que se declara el disparador, y no con el nombre del disparador:<br>
+        mysql&gt; SHOW TRIGGERS LIKE 'ins%';<br>
+        Empty set (0.01 sec)<br>
+        Aqu&iacute; se muestra una breve explicaci&oacute;n de las columnas de 
+        la salida de este comando:<br>
+        &#8226; Trigger: Nombre del disparador.<br>
+        &#8226; Event: Evento que invoca el disparador. Debe ser 'INSERT', 'UPDATE', 
+        o 'DELETE'.<br>
+        &#8226; Table: La tabla para la que se define el disparador.<br>
+        &#8226; Statement: Comando a ejecutar cuando se invoca el disparador. 
+        Es lo mismo que el texto mostrado en la columna ACTION_<br>
+        STATEMENT de INFORMATION_SCHEMA.TRIGGERS.<br>
+        &#8226; Timing: Puede ser 'BEFORE' o 'AFTER'.<br>
+        &#8226; Created: Actualmente el valor de esta columna siempre es NULL.<br>
+        Debe tener el permiso SUPER para ejecutar SHOW TRIGGERS.<br>
+        Consulte Secci&oacute;n 22.1.16, &#8220;La tabla INFORMATION_SCHEMA TRIGGERS&#8221;.<br>
+        <h3>Sintaxis de SHOW VARIABLES</h3><br>
+        SHOW [GLOBAL | SESSION] VARIABLES [LIKE 'pattern']<br>
+        SHOW VARIABLES muestra los valores de algunas variables de sistema de 
+        MySQL. Esta informaci&oacute;n puede obtenerse usando el<br>
+        comando mysqladmin variables .<br>
+        Con la opci&oacute;n GLOBAL, obtiene los valores que se usan para nuevas 
+        conexiones de MySQL. Con SESSION, obtiene los valores<br>
+        que hay en efecto para la conexi&oacute;n actual. Si no usa estas opciones, 
+        por defecto es SESSION.<br>
+        LOCAL es sin&oacute;nimo de SESSION.<br>
+        Si los valores por defecto no son adecuados, puede cambiar la mayor&iacute;a 
+        de variables usando opciones de l&iacute;nea de comandos cuando<br>
+        mysqld arranca o en tiempo de ejecuci&oacute;n con el comando SET .<br>
+        La salida parcial se muestra aqu&iacute;. La lista de variables y sus 
+        valores pueden ser distintos para su servidor.<br>
+        mysql&gt; SHOW VARIABLES;<br>
+        +---------------------------------+---------------------------------------------------------+<br>
+        | Variable_name | Value |<br>
+        +---------------------------------+---------------------------------------------------------+<br>
+        | auto_increment_increment | 1 |<br>
+        | auto_increment_offset | 1 |<br>
+        | automatic_sp_privileges | ON |<br>
+        | back_log | 50 |<br>
+        | basedir | / |<br>
+        | bdb_cache_size | 8388600 |<br>
+        | bdb_home | /var/lib/mysql/ |<br>
+        | bdb_log_buffer_size | 32768 |<br>
+        ... ... ...<br>
+        | max_connections | 100 |<br>
+        | max_connect_errors | 10 |<br>
+        | max_delayed_threads | 20 |<br>
+        | max_error_count | 64 |<br>
+        | max_heap_table_size | 16777216 |<br>
+        | max_join_size | 4294967295 |<br>
+        | max_relay_log_size | 0 |<br>
+        | max_sort_length | 1024 |<br>
+        ... ... ...<br>
+        | time_zone | SYSTEM |<br>
+        | timed_mutexes | OFF |<br>
+        | tmp_table_size | 33554432 |<br>
+        | tmpdir | |<br>
+        | transaction_alloc_block_size | 8192 |<br>
+        | transaction_prealloc_size | 4096 |<br>
+        | tx_isolation | REPEATABLE-READ |<br>
+        | updatable_views_with_limit | YES |<br>
+        | version | 5.0.7-beta-Max |<br>
+        | version_bdb | Sleepycat Software: Berkeley DB 4.1.24: (June 11, 2005) 
+        |<br>
+        | version_comment | MySQL Community Edition - Max (GPL) |<br>
+        | version_compile_machine | i686 |<br>
+        | version_compile_os | pc-linux-gnu |<br>
+        | wait_timeout | 28800 |<br>
+        +---------------------------------+---------------------------------------------------------+<br>
+        Con una cl&aacute;usula LIKE , el comando muestra s&oacute;lo las variables 
+        que coinciden con el patr&oacute;n:<br>
+        mysql&gt; SHOW VARIABLES LIKE 'have%';<br>
+        +-----------------------+----------+<br>
+        | Variable_name | Value |<br>
+        +-----------------------+----------+<br>
+        | have_archive | NO |<br>
+        | have_bdb | YES |<br>
+        | have_blackhole_engine | YES |<br>
+        | have_compress | YES |<br>
+        | have_crypt | YES |<br>
+        | have_csv | YES |<br>
+        | have_example_engine | YES |<br>
+        | have_federated_engine | YES |<br>
+        | have_geometry | YES |<br>
+        | have_innodb | YES |<br>
+        | have_isam | NO |<br>
+        | have_ndbcluster | DISABLED |<br>
+        | have_openssl | NO |<br>
+        | have_query_cache | YES |<br>
+        | have_raid | NO |<br>
+        | have_rtree_keys | YES |<br>
+        | have_symlink | YES | </p>
+        </td>
+    <td>&nbsp;</td>
+    <td><a href="http://www.euskalnet.net/juanarana/oraclezip/Ejer3.rar"><img src="../../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td>
+<div align="right"><a href="http://www.euskalnet.net/juanarana/index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a>
+      </div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

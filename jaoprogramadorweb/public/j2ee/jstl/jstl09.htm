@@ -1,0 +1,616 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Literales y objetos</title>
+<META http-equiv=Content-Language content=es>
+<META content="Manual JSTL, ejemplos JSTL, codigos JSTL" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Manual JSTL, ejemplos JSTL, codigos JSTL">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2> Literales y objetos</h2></td>
+  </tr>
+    
+  <tr> 
+    <td height="39" colspan="3"> 
+      <p>
+      <h3><span style='font-size:10.0pt'>Literales</span></h3>
+
+<p class=sect2><span style='font-size:10.0pt'>En expresiones EL podemos usar
+números, caracteres, booleanos (palabras clave </span><tt><span
+style='font-size:10.0pt'>true</span></tt><span style='font-size:10.0pt'>, </span><tt><span
+style='font-size:10.0pt'>false</span></tt><span style='font-size:10.0pt'>), y
+nulls (palabra clave </span><tt><span style='font-size:10.0pt'>null</span></tt><span
+style='font-size:10.0pt'>).</span><o:p></o:p></p>
+
+      <h3><span style='font-size:10.0pt'>Objetos implícitos</span></h3>
+
+<p class=sect2><span style='font-size:10.0pt'>Ciertos objetos son
+automáticamente accesibles a cualquier etiqueta JSP.</span><o:p></o:p></p>
+
+      <p class=sect2><span style='font-size:10.0pt'>A través de ellos es posible 
+        a cualquier variable de los ámbitos </span><tt><span style='font-size:10.0pt'>page</span></tt><span
+style='font-size:10.0pt'>, </span><tt><span style='font-size:10.0pt'>request</span></tt><span
+style='font-size:10.0pt'>, </span><tt><span style='font-size:10.0pt'>session</span></tt><span
+style='font-size:10.0pt'>, </span><tt><span style='font-size:10.0pt'>application</span></tt><span
+style='font-size:10.0pt'>, a parametros HTTP, cookies, valores de cabeceras, contexto 
+        de la página, y parámetros de inicialización del contexto. Todos, excepto 
+        </span><tt><span style='font-size:10.0pt'>pageContext</span></tt><span
+style='font-size:10.0pt'>, están implementados usando la clase </span><tt><span
+style='font-size:10.0pt'>java.util.Map</span></tt><span style='font-size:10.0pt'>.</span><o:p></o:p></p>
+<h3><span lang=EN style='font-size:10.0pt;
+mso-ansi-language:EN'>Objetos implicitos</span></h3>
+
+<table class=MsoNormalTable border=1 cellpadding=0 style='mso-cellspacing:1.5pt'>
+ <thead>
+  <tr style='mso-yfti-irow:0'>
+   <td style='padding:.7????
+????º?5pt .75pt .75pt .75pt'>
+   <p class=MsoNormal align=center style='text-align:center'><b><span
+   style='font-size:10.0pt'>Objetos implicitos</span><o:p></o:p></b></p>
+   </td>
+
+   <td style='padding:.75pt .75pt .75pt .75pt'>
+   <p class=MsoNormal align=center style='text-align:center'><b><span
+   style='font-size:10.0pt'>contiene</span><o:p></o:p></b></p>
+   </td>
+  </tr>
+ </thead>
+ <tr style='mso-yfti-irow:1'>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><tt><span style='font-size:10.0pt'>pageScope</span></tt></p>
+
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt'>Variables de ámbito página.</span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:2'>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><tt><span style='font-size:10.0pt'>requestScope</span></tt></p>
+
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt'>Variables de ámbito
+  request.</span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:3'>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><tt><span style='font-size:10.0pt'>sessionScope</span></tt></p>
+
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt'>Variables de ámbito
+  session.</span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:4'>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><tt><span style='font-size:10.0pt'>applicationScope</span></tt></p>
+
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt'>Variables de ámbito
+  application.</span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:5'>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><tt><span style='font-size:10.0pt'>param</span></tt></p>
+
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt'>Parametros del request como 
+              cadenas.</span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:6'>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><tt><span style='font-size:10.0pt'>paramValues</span></tt></p>
+
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt'>Parametros del request como
+  array de cadenas.</span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:7'>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><tt><span style='font-size:10.0pt'>header</span></tt></p>
+
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt'>Cabeceras del request HTTP
+  como cadenas.</span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:8'>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><tt><span style='font-size:10.0pt'>headerValues</span></tt></p>
+
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt'>Cabeceras del request HTTP
+  como array de cadenas.</span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:9'>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><tt><span style='font-size:10.0pt'>cookie</span></tt></p>
+
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt'>Valores de las cookies
+  recibidas en el request.</span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:10'>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><tt><span style='font-size:10.0pt'>initParam</span></tt></p>
+
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt'>Parametros de
+  inicialización de la aplicación Web.</span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:11;mso-yfti-lastrow:yes'>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><tt><span style='font-size:10.0pt'>pageContext</span></tt></p>
+
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p cl????
+????º?ass=MsoNormal><span style='font-size:10.0pt'>El objeto </span><tt><span
+  style='font-size:10.0pt'>PageContext</span></tt><span style='font-size:10.0pt'>
+  de la página actual.</span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=sect2><span style='font-size:10.0pt'>Ejemplo:</span> <o:p></o:p></p>
+
+<pre>&lt;%@ taglib prefix=&quot;c&quot; uri=&quot;http://java.sun.com/jstl/core_rt&quot; %&gt;<o:p></o:p></pre><pre><o:p>&nbsp;</o:p></pre><pre>&lt;%-- ACCESO A TODOS LOS ELEMENTOS --%&gt;<o:p></o:p></pre><pre><span
+lang=EN style='mso-ansi-language:EN'>&lt;c:forEach items=&quot;${header}&quot; var=&quot;item&quot;&gt;<o:p></o:p></span></pre><pre><span
+lang=EN style='mso-ansi-language:EN'> &lt;c:out value=&quot;${item}&quot;/&gt;&lt;br/&gt;<o:p></o:p></span></pre><pre>&lt;/c:forEach&gt;<o:p></o:p></pre><pre><o:p>&nbsp;</o:p></pre><pre>&lt;br/&gt;<o:p></o:p></pre><pre><o:p>&nbsp;</o:p></pre><pre>&lt;%-- ACCESO POR NOMBRE CON PUNTO: objeto.propiedad --%&gt;<o:p></o:p></pre><pre><span
+lang=EN style='mso-ansi-language:EN'>Host: &lt;c:out value=&quot;${header.Host}&quot;/&gt;<span style='mso-spacerun:yes'>  </span>&lt;br/&gt;<o:p></o:p></span></pre><pre><span
+lang=EN style='mso-ansi-language:EN'><o:p>&nbsp;</o:p></span></pre><pre>&lt;%-- ACCESO POR NOMBRE CON CORCHETES: objeto['propiedad']<o:p></o:p></pre><pre><span style='mso-spacerun:yes'>     </span>Usar este formato evita que se interprete el nombre como una expresión.<o:p></o:p></pre><pre><span style='mso-spacerun:yes'>     </span>Por ejemplo: queremos la propiedad &quot;Accept-Language&quot; no una resta entre <o:p></o:p></pre><pre><span style='mso-spacerun:yes'>     </span>las variables Accept y Language.<o:p></o:p></pre><pre><span
+lang=EN style='mso-ansi-language:EN'>--%&gt;<o:p></o:p></span></pre><pre><span
+lang=EN style='mso-ansi-language:EN'>Host:<span style='mso-spacerun:yes'>            </span>&lt;c:out value=&quot;${header['Host']}&quot;/&gt;<span style='mso-spacerun:yes'>             </span>&lt;br/&gt;<o:p></o:p></span></pre><pre><span
+lang=EN style='m????
+????º?so-ansi-language:EN'>Accept-Language: &lt;c:out value=&quot;${header['Accept-Language']}&quot;/&gt;<span style='mso-spacerun:yes'>  </span>&lt;br/&gt;<o:p></o:p></span></pre>
+
+<p class=MsoNormal><span style='font-size:10.0pt'>El resultado es</span><o:p></o:p></p>
+
+<pre>accept-encoding=gzip, deflate<o:p></o:p></pre><pre><span lang=EN
+style='mso-ansi-language:EN'>cache-control=no-cache<o:p></o:p></span></pre><pre><span
+lang=EN style='mso-ansi-language:EN'>connection=Keep-Alive<o:p></o:p></span></pre><pre><span
+lang=EN style='mso-ansi-language:EN'>referer=http://127.0.0.1:8080/sampleJSTL/<o:p></o:p></span></pre><pre><span
+lang=EN style='mso-ansi-language:EN'>host=127.0.0.1:8080<o:p></o:p></span></pre><pre><span
+lang=EN style='mso-ansi-language:EN'>accept-language=es<o:p></o:p></span></pre><pre><span
+lang=EN style='mso-ansi-language:EN'>user-agent=Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; MyIE2; .NET CLR 1.1.4322)<o:p></o:p></span></pre><pre><span
+lang=EN style='mso-ansi-language:EN'>cookie=JSESSIONID=E58368E8FFA066A654750C4CED08AA88<o:p></o:p></span></pre><pre><span
+lang=EN style='mso-ansi-language:EN'>accept=*/*<o:p></o:p></span></pre><pre><span
+lang=EN style='mso-ansi-language:EN'><o:p>&nbsp;</o:p></span></pre><pre><span
+lang=EN style='mso-ansi-language:EN'>Host: 127.0.0.1:8080 <o:p></o:p></span></pre><pre>Host: 127.0.0.1:8080 <o:p></o:p></pre><pre>Accept-Language: es<o:p></o:p></pre>
+
+<h3><span style='font-size:10.0pt'>pageContext</span><o:p></o:p></h3>
+
+      <p class=sect3><span style='font-size:10.0pt'>Aquí se listan algunos de 
+        los valores disponibles en el contexto de la página. Existen otros que 
+        podemos consultar en el javadoc. Por ejemplo, </span><tt><span style='font-size:10.0pt'>pageContext.request.authType</span></tt><span
+style='font-size:10.0pt'> esta ejecutando el método </span><span lang=EN
+style='mso-ansi-language:EN'><a
+href="http://java.sun.com/j2ee/1.4/docs/api/javax/servlet/http/HttpServletRequest.html#getAuthType%28%29"
+target="_top"><span class=Gra????
+????º?mE><span lang=ES style='font-size:10.0pt;
+mso-ansi-language:ES'>HttpServletRequest.getAuthType(</span></span><span
+lang=ES style='font-size:10.0pt;mso-ansi-language:ES'>)</span></a></span><span
+style='font-size:10.0pt'>. De igual modo podemos acceder al resto de métodos.</span><o:p></o:p></p>
+      <p class=sect3><o:p></o:p></p>
+
+<table class=MsoNormalTable border=1 cellpadding=0 style='mso-cellspacing:1.5pt'>
+ <thead>
+  <tr style='mso-yfti-irow:0'>
+   <td width="322" style='padding:.75pt .75pt .75pt .75pt'>
+   <p class=MsoNormal align=center style='text-align:center'><b><span
+   style='font-size:10.0pt'>Expresión</span><o:p></o:p></b></p>
+   </td>
+   <td width="114" style='padding:.75pt .75pt .75pt .75pt'>
+   <p class=MsoNormal align=center style='text-align:center'><b><span
+   style='font-size:10.0pt'>Descripción</span><o:p></o:p></b></p>
+
+   </td>
+   <td width="290" style='padding:.75pt .75pt .75pt .75pt'>
+   <p class=MsoNormal align=center style='text-align:center'><b><span
+   style='font-size:10.0pt'>Ejemplo</span><o:p></o:p></b></p>
+   </td>
+  </tr>
+ </thead>
+ <tr style='mso-yfti-irow:1'>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+
+  <p class=MsoNormal><tt><span style='font-size:10.0pt'>${pageContext.<br>exception.message}</span></tt></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt'>Devuelve una descripción
+  del error cuando la página en curso es una página de error JSP.</span></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><tt><span style='font-size:10.0pt'>&quot;Algo ha ido
+  mal&quot;</span></tt></p>
+
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:2'>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><tt><span style='font-size:10.0pt'>${pageContext.<br>errorData}</span></tt></p>
+  </td>
+          <td style='padding:.75pt .75pt .75pt .75pt'> <p class=MsoNormal>Informaci&oacute;n 
+              de un error JSP.</p>
+
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;</span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:3'>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><tt><span style='font-size:10.0pt'>${pageContext.<br>request.authType}</span></tt></p>
+
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt'>Tipo de autentificación
+  usado en la página.</span></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><tt><span style='font-size:10.0pt'>BASIC</span></tt></p>
+  </td>
+ </tr>
+
+ <tr style='mso-yfti-irow:4'>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><tt><span style='font-size:10.0pt'>${pageContext.<br>request.remoteUser}</span></tt></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt'>Identificador del usuario
+  (cuando esta en uso la autentificación del contenedor).</span></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+
+  <p class=MsoNormal><tt><span style='font-size:10.0pt'>fulano</span></tt></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:5'>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><tt><span style='font-size:10.0pt'>${pageContext.<br>request.contextPath}</span></tt></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+
+  <p class=MsoNormal><span style='font-size:10.0pt'>Nombre (también llamado
+  contexto) de la aplicación.</span></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><tt><span style='font-size:10.0pt'>/apuntes-jstl</span></tt></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:6'>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+
+  <p class=MsoNormal><tt><span style='font-size:10.0pt'>${pageContext.<br>request.cookies}</span></tt></p>
+  </td>
+          <td style='padding:.75pt .75pt .75pt .75pt'> <p class=MsoNormal><span style='font-size:10.0pt'>Array 
+              de cookies.</span></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;</span></p>
+  </td>
+
+ </tr>
+ <tr style='mso-yfti-irow:7'>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><tt><span style='font-size:10.0pt'>${pageContext.<br>request.method}</span></tt></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt'>Método HTTP usado para
+  acceder a la página.</span></p>
+  </td>
+
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><tt><span style='font-size:10.0pt'>GET</span></tt></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:8'>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><tt><span style='font-size:10.0pt'>${pageContext.<br>request.queryString}</span></tt></p>
+  </td>
+
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt'>Query de la página (el
+  texto de </span><st1:PersonName ProductID="la URL"><span style='font-size:
+   10.0pt'>la URL</span></st1:PersonName><span style='font-size:10.0pt'> que
+  viene despues del PATH)</span></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><tt><span style='font-size:10.0pt'>p1=valor&amp;p2=valor</span></tt></p>
+  </td>
+
+ </tr>
+ <tr style='mso-yfti-irow:9'>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><tt><span style='font-size:10.0pt'>${pageContext.<br>request.requestURL}</span></tt></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt'>URL usada para acceder a la
+  página.</span></p>
+  </td>
+
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><tt><span style='font-size:10.0pt'>http://localhost<br>/app/pagecontext.jsp</span></tt></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:10'>
+          <td style='padding:.75pt .75pt .75pt .75pt'> <p class=MsoNormal><tt><span style='font-size:10.0pt'>${pageContext.<br>
+              session.new}</span></tt></p>
+  </td>
+
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt'>Contiene </span><tt><span
+  style='font-size:10.0pt'>true</span></tt><span style='font-size:10.0pt'> si
+  la sesión es nueva, </span><tt><span style='font-size:10.0pt'>false</span></tt><span
+  style='font-size:10.0pt'> si no lo es.</span></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><tt><span style='font-size:10.0pt'>true</span></tt></p>
+
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:11;mso-yfti-lastrow:yes'>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><tt><span style='font-size:10.0pt'>${pageContext.<br>servletContext.serverInfo}</span></tt></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt'>Información sobre el
+  contenedor JSP.</span></p>
+
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><tt><span style='font-size:10.0pt'>Tomcat 5.0.1</span></tt></p>
+  </td>
+ </tr>
+</table>
+
+<p class=sect3><span style='font-size:10.0pt'>Pruebalo tu mismo, añade la
+página </span><tt><span style='font-size:10.0pt'>pageContext.jsp</span></tt><span
+style='font-size:10.0pt'> a tu aplicación con este contenido:</span> <o:p></o:p></p>
+
+<pre><span lang=EN style='mso-ansi-language:EN'>&lt;%@include file=&quot;taglibs.jsp&quot; %&gt;<o:p></o:p></span></pre><pre><span
+lang=EN style='mso-ansi-language:EN'>&lt;html&gt;<o:p></o:p></span></pre><pre><span
+lang=EN style='mso-ansi-language:EN'>&lt;body&gt;<o:p></o:p></span></pre>
+      <pre><span
+lang=EN style='mso-ansi-language:EN'><span style='mso-spacerun:yes'>  </span>authType:<span style='mso-spacerun:yes'>    </span>&lt;c:out value=&quot;${pageContext.request.authType}&quot;/&gt;<span style='mso-spacerun:yes'> </span><o:p></o:p></span></pre>
+      <pre><span
+lang=EN style='mso-ansi-language:EN'><span style='mso-spacerun:yes'>  </span>remoteUser:<span style='mso-spacerun:yes'>  
+&lt;c:out value=&quot;${pageContext.request.remoteUser}&quot;/&gt;<span style='mso-spacerun:yes'>         </span><o:p></o:p></span></pre>
+      <pre><span
+lang=EN style='mso-ansi-language:EN'><span style='mso-spacerun:yes'>  </span>contextPath: &lt;c:out value=&quot;${pageContext.request.contextPath}&quot;/&gt;<span style='mso-spacerun:yes'>        </span><o:p></o:p></span></pre>
+      <pre><span
+lang=EN style='mso-ansi-language:EN'><span style='mso-spacerun:yes'>  </span>cookies:<span style='mso-spacerun:yes'>     </span>&lt;c:out value=&quot;${pageContext.request.cookies}&quot;/&gt;<span style='mso-spacerun:yes'>            </span><o:p></o:p></span></pre>
+      <pre><span
+lang=EN style='mso-ansi-language:EN'><span style='mso-spacerun:yes'>  </span>method:<span style='mso-spacerun:yes'>      </span>&lt;c:out value=&quot;${pageContext.request.method}&quot;/&gt;<span style='mso-spacerun:yes'>             </span><o:p></o:p></span></pre>
+      <pre><span
+lang=EN style='mso-ansi-language:EN'><span style='mso-spacerun:yes'>  </span>queryString: &lt;c:out value=&quot;${pageContext.request.queryString}&quot;/&gt;<span style='mso-spacerun:yes'>        </span><o:p></o:p></span></pre>
+      <pre><span
+lang=EN style='mso-ansi-language:EN'><span style='mso-spacerun:yes'>  </span>requestURL:<span style='mso-spacerun:yes'>  </span>&lt;c:out value=&quot;${pageContext.request.requestURL}&quot;/&gt;<span style='mso-spacerun:yes'>        </span><o:p></o:p></span></pre>
+      <pre><span
+lang=EN style='mso-ansi-language:EN'><span style='mso-spacerun:yes'>  </span>session.new: &lt;c:out value=&quot;${pageContext.session.new}&quot;/&gt;<span style='mso-spacerun:yes'>               </span><o:p></o:p></span></pre>
+      <pre><span
+lang=EN style='mso-ansi-language:EN'><span style='mso-spacerun:yes'>  </span>serverInfo:<span style='mso-spacerun:yes'>  </span>&lt;c:out value=&quot;${pageContext.servletContext.serverInfo}&quot;/&gt;<span style='mso-spacerun:yes'> </span></span></pre>
+      <pre><span
+lang=EN style='mso-ansi-language:EN'><span style='mso-spacerun:yes'>  </span>message:<span style='mso-spacerun:yes'>     </span>&lt;c:out value=&quot;${pageContext.exception.message}&quot;/&gt;<o:p></o:p></span></pre><pre>&lt;/body&gt;<o:p></o:p></pre><pre>&lt;/html&gt;<o:p></o:p></pre>
+
+<p class=sect3><span style='font-size:10.0pt'>Cuando visites </span><span
+lang=EN style='mso-ansi-language:EN'><a
+href="http://127.0.0.1:8080/myApp/pageContext.jsp" target="_top"><span lang=ES
+style='font-size:10.0pt;mso-ansi-language:ES'>http://127.0.0.1:8080/myApp/pageContext.jsp</span></a></span><span
+style='font-size:10.0pt'> aparecerá algo como </span><o:p></o:p></p>
+
+<pre><span lang=EN style='mso-ansi-language:EN'>authType: <o:p></o:p></span></pre><pre><span
+lang=EN style='mso-ansi-language:EN'>remoteUser: <o:p></o:p></span></pre><pre><span
+lang=EN style='mso-ansi-language:EN'>contextPath: /sampleJSTL <o:p></o:p></span></pre><pre><span
+lang=EN style='mso-ansi-language:EN'>cookies: [Ljavax.servlet.http.Cookie;@1add463 <o:p></o:p></span></pre><pre><span
+lang=EN style='mso-ansi-language:EN'>method: GET <o:p></o:p></span></pre><pre><span
+lang=EN style='mso-ansi-language:EN'>queryString: <o:p></o:p></span></pre><pre><span
+lang=EN style='mso-ansi-language:EN'>requestURL: http://127.0.0.1:8080/sampleJSTL/pageContext.jsp <o:p></o:p></span></pre><pre><span
+lang=EN style='mso-ansi-language:EN'>session.new: false <o:p></o:p></span></pre><pre><span
+lang=EN style='mso-ansi-language:EN'>serverInfo: Apache Tomcat/4.1.29 <o:p></o:p></span></pre><pre>message: <o:p></o:p></pre>
+
+<p class=MsoNormal><span style='font-size:10.0pt'>Vemos que varios valores
+aparecen en blanco: </span><o:p></o:p></p>
+
+      <p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l16 level1 lfo14;
+tab-stops:list 36.0pt'> <span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Symbol;mso-fareast-font-family:Symbol;
+mso-bidi-font-family:Symbol'><span style='mso-list:Ignore'>·<span
+style='font:7.0????
+????º?pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span></span><tt><span style='font-size:10.0pt'>authType</span></tt><span
+style='font-size:10.0pt'> y </span><tt><span style='font-size:10.0pt'>remoteUser</span></tt><span
+style='font-size:10.0pt'> porque no estamos usando autentificación.</span><o:p></o:p></p>
+      <p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l16 level1 lfo14;
+tab-stops:list 36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Symbol;mso-fareast-font-family:Symbol;
+mso-bidi-font-family:Symbol'><span style='mso-list:Ignore'>·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+        </span></span></span> <tt><span style='font-size:10.0pt'>queryString</span></tt><span
+style='font-size:10.0pt'> porque no hay parametros, prueba con </span><span
+lang=EN style='mso-ansi-language:EN'><a
+href="http://127.0.0.1:8080/myApp/pageContext.jsp?var1=valor1&amp;var2=valor2"
+target="_top"><span lang=ES style='font-size:10.0pt;mso-ansi-language:ES'>pageContext.jsp?var1=valor1&amp;var2=valor2</span></a></span><span
+style='font-size:10.0pt'>.</span><o:p></o:p></p>
+      <p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l16 level1 lfo14;
+tab-stops:list 36.0pt'> <span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Symbol;mso-fareast-font-family:Symbol;
+mso-bidi-font-family:Symbol'><span style='mso-list:Ignore'>·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+        </span></span></span><tt><span style='font-size:10.0pt'>message</span></tt><span
+style='font-size:10.0pt'> porque no es una página de error, y por tanto no existe 
+        una excepción en el contexto de página.</span><o:p></o:p></p>
+      <h4><span style='font-size:10.0pt'>pageContext.errorData</span><o:p></o:p></h4>      
+      <p class=sect3><span style='font-size:10.0pt'>En JSP 2.0, cuando se produce 
+        un error la excepción ocurrida está disponible en el ámbito </span><tt><span
+style='font-size:10.0pt'>request</span></tt><span style='font-size:10.0pt'> con 
+        el nombre </span><tt><span style='font-size:10.0pt'>javax.servlet.error.exception</span></tt><span
+style='font-size:10.0pt'>. Ademas, se adjunta al contexto de la página, información 
+        adicional en forma de bean con nombre </span><tt><span
+style='font-size:10.0pt'>errorData</span></tt><span style='font-size:10.0pt'>. 
+        </span><span
+lang=EN style='font-size:10.0pt;mso-ansi-language:EN'>Este bean tiene las siguientes 
+        propiedades: </span><span lang=EN style='mso-ansi-language:EN'><o:p></o:p></span><span lang=EN
+style='mso-ansi-language:EN'><o:p></o:p></span></p>
+
+<table class=MsoNormalTable border=1 cellpadding=0 style='mso-cellspacing:1.5pt'>
+ <thead>
+  <tr style='mso-yfti-irow:0'>
+   <td style='padding:.75pt .75pt .75pt .75pt'>
+   <p class=MsoNormal align=center style='text-align:center'><b><span
+   style='font-size:10.0pt'>Propiedad</span><o:p></o:p></b></p>
+   </td>
+
+   <td style='padding:.75pt .75pt .75pt .75pt'>
+   <p class=MsoNormal align=center style='text-align:center'><b><span
+   style='font-size:10.0pt'>Tipo Java</span><o:p></o:p></b></p>
+   </td>
+   <td style='padding:.75pt .75pt .75pt .75pt'>
+   <p class=MsoNormal align=center style='text-align:center'><b><span
+   style='font-size:10.0pt'>Descripción</span><o:p></o:p></b></p>
+   </td>
+  </tr>
+ </thead>
+
+ <tr style='mso-yfti-irow:1'>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><tt><span
+  style='font-size:10.0pt'>requestURI</span></tt></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><tt><span style='font-size:10.0pt'>String</span></tt></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+
+  <p class=MsoNormal><span style='font-size:10.0pt'>URI de????
+????º? la petición fallida.</span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:2'>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><tt><span
+  style='font-size:10.0pt'>servletName</span></tt></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+
+  <p class=MsoNormal><tt><span style='font-size:10.0pt'>String</span></tt></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt'>Nombre de la página o
+  servlet que lanzó la excepción.</span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:3'>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+
+  <p class=MsoNormal align=center style='text-align:center'><tt><span
+  style='font-size:10.0pt'>statusCode</span></tt></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><tt><span style='font-size:10.0pt'>int</span></tt></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt'>Código HTTP del fallo.</span></p>
+
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:4;mso-yfti-lastrow:yes'>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><tt><span
+  style='font-size:10.0pt'>throwable</span></tt></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><tt><span style='font-size:10.0pt'>Throwable</span></tt></p>
+
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt'>La excepción que produjo el
+  fallo.</span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=sect3><span style='font-size:10.0pt'>Para declarar una página de error
+JSP que responda a un código o excepción, podemos usar el </span><tt><span
+style='font-size:10.0pt'>web.xml</span></tt><span style='font-size:10.0pt'>:</span>
+
+<o:p></o:p></p>
+
+<pre><span style='mso-spacerun:yes'>  </span><span lang=EN style='mso-ansi-language:
+EN'>&lt;error-page&gt;<o:p></o:p></span></pre>
+      <span lang=EN
+style='mso-ansi-language:EN'><span style='mso-spacerun:yes'> </span>&lt;exception-type&gt;java.lang.Throwable&lt;/exception-type&gt;<o:p></o:p></span></pre>
+<pre><span
+lang=EN style='mso-ansi-language:EN'><span style='mso-spacerun:yes'>    </span>&lt;location&gt;/error.jsp&lt;/location&gt;<o:p></o:p></span></pre><pre><span
+lang=EN style='mso-ansi-language:EN'><span style='mso-spacerun:yes'>  </span>&lt;/error-page&gt;<o:p></o:p></span></pre><pre><span
+lang=EN style='mso-ansi-language:EN'><span style='mso-spacerun:yes'>  </span>&lt;error-page&gt;<o:p></o:p></span></pre><pre><span
+lang=EN style='mso-ansi-language:EN'><span style='mso-spacerun:yes'>    </span>&lt;exception-code&gt;500&lt;/exception-code&gt;<o:p></o:p></span></pre><pre><span
+lang=EN style='mso-ansi-language:EN'><span style='mso-spacerun:yes'>    </span>&lt;location&gt;/error.jsp&lt;/location&gt;<o:p></o:p></span></pre><pre><span
+lang=EN style='mso-ansi-language:EN'><span style='mso-spacerun:yes'>  </span></span>&lt;/error-page&gt;<o:p></o:p></pre>
+
+<p class=MsoNormal><span style='font-size:10.0pt'>o una declaración para una
+página concreta:</span><o:p></o:p></p>
+
+<pre>&lt;%@ page errorPage=&quot;/error2.jsp&quot; contentType=&quot;text/html&quot; %&gt;<o:p></o:p></pre>
+
+<p class=sect3><span style='font-size:10.0pt'>Ejemplo de página de error:</span>
+<o:p></o:p></p>
+
+      <pre><span lang=EN style='mso-ansi-language:EN'>&lt;%@ page isErrorPage=&quot;true&quot; contentType=&quot;text/html&quot; %&gt;<o:p></o:p></span><o:p></o:p></pre>
+      <pre><span style='mso-spacerun:yes'>  </span>URI de la petición fallida: ${pageContext.errorData.requestURI}<o:p></o:p></pre><pre><span style='mso-spacerun:yes'>  </span>Quien lanzo el error: ${pageContext.errorData.servletName}<o:p></o:p></pre><pre><span style='mso-spacerun:yes'>  </span>Código del fallo: ${pageContext.errorData.statusCode}<o:p></o:p></pre><pre><span style='mso-spacerun:yes'>  </span>Excepción: ${pageContext.errorData.throwable}<o:p></o:p></pre>
+      <pre><o:p>
+</o:p></pre>
+      <pre><span style='mso-spacerun:yes'>  </span>La misma excepción anterior: ${requestScope['javax.servlet.error.exception']}<o:p></o:p><o:p></o:p></pre>
+      <p class=MsoNormal><span style='font-size:10.0pt'>Para probarla podemos emplear
+esta otra página que lanza intencionadamente una excepción:</span><o:p></o:p></p>
+
+<pre><span lang=EN style='mso-ansi-language:EN'>&lt;%@ page errorPage=&quot;error.jsp&quot; contentType=&quot;text/html&quot; %&gt;<o:p></o:p></span></pre><pre><span
+lang=EN style='mso-ansi-language:EN'>&lt;% if (true) throw new Exception(&quot;just do it!&quot;); %&gt;<o:p></o:p></span></pre>
+
+<p class=MsoNormal><span style='font-size:10.0pt'>El resultado será este:</span><o:p></o:p></p>
+
+<pre><span style='mso-spacerun:yes'>  </span>URI de la petición fallida: /sampleJSTL/null.jsp<o:p></o:p></pre><pre><span style='mso-spacerun:yes'>  </span>Quien lanzo el error: jsp<o:p></o:p></pre><pre><span style='mso-spacerun:yes'>  </span>Código del fallo: 500<o:p></o:p></pre><pre><span style='mso-spacerun:yes'>  </span><span
+lang=EN style='mso-ansi-language:EN'>Excepción: java.lang.Exception: just do it!<o:p></o:p></span></pre><pre><span
+lang=EN style='mso-ansi-language:EN'><o:p>&nbsp;</o:p></span></pre><pre><span
+lang=EN style='mso-ansi-language:EN'><span style='mso-spacerun:yes'>  </span></span>La misma excepción anterior: java.lang.Exception: just do it!<o:p></o:p></pre>
+
+<h3><o:p></o:p></h3>
+
+<h1>
+</p></td>
+
+  </tr>
+  <tr> 
+    <td ></td>
+    <td >&nbsp;</td>
+    <td ><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+</body>
+</html>

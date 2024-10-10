@@ -1,0 +1,513 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Entrada/Salida de datos en Java</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación en Java,Programas Java,Aplicaciones en Java,Ejercicios en Java, Ejemplos de Java,Tutorial de Java,Manual Java" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Java, Manual Java, tutorial Java, Ejemplos Java, ejercicios Java">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> Entrada/Salida de datos en Java</h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <h3>Introducci&oacute;n</h3>
+      <p> Los programas necesitan comunicarse con su entorno, tanto para recoger 
+        datos e informaci&oacute;n que deben procesar, como para devolver los 
+        resultados obtenidos.<br>
+        La manera de representar estas entradas y salidas en Java es a base de 
+        streams (flujos de datos). Un stream es una conexi&oacute;n entre el programa 
+        y la fuente o destino de los datos. La informaci&oacute;n se traslada 
+        en serie (un car&aacute;cter a continuaci&oacute;n de otro) a trav&eacute;s 
+        de esta conexi&oacute;n. Esto da lugar a una forma general de representar 
+        muchos tipos de comunicaciones.<br>
+        Por ejemplo, cuando se quiere imprimir algo en pantalla, se hace a trav&eacute;s 
+        de un stream que conecta el monitor al programa. Se da a ese stream la 
+        orden de escribir algo y &eacute;ste lo traslada a la pantalla. Este concepto 
+        es suficientemente general para representar la lectura/escritura de archivos, 
+        la comunicaci&oacute;n a trav&eacute;s de Internet o la lectura de la 
+        informaci&oacute;n de un sensor a trav&eacute;s del puerto<br>
+        en serie.</p>
+      <h3>CLASES DE JAVA PARA LECTURA Y ESCRITURA DE DATOS</h3>
+      <p>El package java.io contiene las clases necesarias para la comunicaci&oacute;n 
+        del programa con el exterior. Dentro de este package existen dos familias 
+        de jerarqu&iacute;as distintas para la entrada/salida de datos.<br>
+        La diferencia principal consiste en que una opera con bytes y la otra 
+        con caracteres (el car&aacute;cter de Java est&aacute; formado por dos 
+        bytes porque sigue el c&oacute;digo Unicode). En general, para el mismo 
+        fin hay dos clases que manejan bytes (una clase de entrada y otra de salida) 
+        y otras dos que manejan caracteres.<br>
+        Desde Java 1.0, la entrada y salida de datos del programa se pod&iacute;a 
+        hacer con clases derivadas de InputStream (para lectura) y OutputStream 
+        (para escritura). Estas clases tienen los m&eacute;todos b&aacute;sicos 
+        read() y write() que manejan bytes y que no se suelen utilizar directamente. 
+        En Java 1.1 aparecieron dos nuevas familias de clases, derivadas de Reader 
+        y Writer, que manejan caracteres en vez de bytes. Estas clases resultan 
+        m&aacute;s pr&aacute;cticas para las aplicaciones en lasque se maneja 
+        texto.En las cuatro &uacute;ltimas figuras las clases con fondo gris definen 
+        de d&oacute;nde o a d&oacute;nde se est&aacute;n enviando los datos, es 
+        decir, el dispositivo con que conecta el stream. Las dem&aacute;s (fondo 
+        blanco) a&ntilde;aden caracter&iacute;sticas particulares a la forma de 
+        enviarlos. La intenci&oacute;n es que se combinen para obtener el comportamiento 
+        deseado. Por ejemplo:<br>
+        BufferedReader in = new BufferedReader(new FileReader(&quot;autoexec.bat&quot;));<br>
+        Con esta l&iacute;nea se ha creado un stream que permite leer del archivo 
+        autoexec.bat. Adem&aacute;s, se ha creado a partir de &eacute;l un objeto 
+        BufferedReader (que aporta la caracter&iacute;stica de utilizar buffer6).<br>
+        Los caracteres que lleguen a trav&eacute;s del FileReader pasar&aacute;n 
+        a trav&eacute;s del BufferedReader, es decir utilizar&aacute;n el buffer.<br>
+        A la hora de definir una comunicaci&oacute;n con un dispositivo siempre 
+        se comenzar&aacute; determinando el origen o destino de la comunicaci&oacute;n 
+        (clases en gris) y luego se le a&ntilde;adiran otras caracter&iacute;sticas 
+        (clases en blanco).<br>
+        Se recomienda utilizar siempre que sea posible las clases Reader y Writer, 
+        dejando las de Java 1.0 para cuando sean imprescindibles. Algunas tareas 
+        como la serializaci&oacute;n y la compresi&oacute;n necesitan las clases 
+        InputStream y OutputStream.</p>
+      <h3>Los nombres de las clases de java.io</h3>
+      <p>Las clases de java.io siguen una nomenclatura sistem&aacute;tica que 
+        permite deducir su funci&oacute;n a partir de las palabras que componen 
+        el nombre,</p>
+      <table width="500" border="1">
+        <tr>
+          <td>Palabra</td>
+          <td>Significado</td>
+        </tr>
+        <tr>
+          <td>InputStream, OutputStream</td>
+          <td>Lectura/Escritura de bytes</td>
+        </tr>
+        <tr>
+          <td>Reader, Writer</td>
+          <td>Lectura/Escritura de caracteres</td>
+        </tr>
+        <tr>
+          <td>File</td>
+          <td>Archivos</td>
+        </tr>
+        <tr>
+          <td>String, CharArray, ByteArray, StringBuffer</td>
+          <td>Memoria (a trav&eacute;s del tipo primitivo indicado)</td>
+        </tr>
+        <tr>
+          <td>Piped</td>
+          <td>Tubo de datos</td>
+        </tr>
+        <tr>
+          <td>Buffered</td>
+          <td>Buffer</td>
+        </tr>
+        <tr>
+          <td>Filter</td>
+          <td>Filtro</td>
+        </tr>
+        <tr>
+          <td>Data</td>
+          <td>Intercambio de datos en formato propio de Java</td>
+        </tr>
+        <tr>
+          <td>Object</td>
+          <td>Persistencia de objetos</td>
+        </tr>
+        <tr>
+          <td>Print</td>
+          <td>Imprimir</td>
+        </tr>
+      </table>
+      <p>&nbsp;</p>
+      <h3>Clases que indican el origen o destino de los datos</h3>
+      <p>A continuaci&oacute;n se explica el uso de las clases que definen el 
+        lugar con que conecta el stream.</p>
+      <table width="484" border="1">
+        <tr> 
+          <td>Clases</td>
+          <td>Funci&oacute;n que realizan</td>
+        </tr>
+        <tr> 
+          <td>FileReader, FileWriter, FileInputStream yFileOutputStream</td>
+          <td>Son las clases que leen y escriben en archivos de disco. Se explicar&aacute;n 
+            luego con m&aacute;s detalle.</td>
+        </tr>
+        <tr> 
+          <td>StringReader, StringWriter, CharArrayReader, CharArrayWriter, ByteArrayInputStream, 
+            ByteArrayOutputStream, StringBufferInputStream </td>
+          <td>Estas clases tienen en com&uacute;n que se comunican con la memoria 
+            del ordenador. En vez de acceder del modo habitual al contenido de 
+            un String, por ejemplo, lo leen como si llegara car&aacute;cter a 
+            car&aacute;cter. Son &uacute;tiles cuando se busca un modo general 
+            e id&eacute;ntico de tratar con todos los dispositivos que maneja 
+            un programa.</td>
+        </tr>
+        <tr> 
+          <td>PipedReader, PipedWriter, PipedInputStream, PipedOutputStream</td>
+          <td>Se utilizan como un &#8220;tubo&#8221; o conexi&oacute;n bilateral 
+            para transmisi&oacute;n de datos. Por ejemplo, en un programa con 
+            dos threads pueden permitir la comunicaci&oacute;n entre ellos. Un 
+            thread tiene el objeto PipedReader y el otro el PipedWriter. Si los 
+            streams est&aacute;n conectados, lo que se escriba en el PipedWriter 
+            queda disponible para que se lea del PipedReader. Tamb&iacute;en puede 
+            comunicar a dos programas distintos.</td>
+        </tr>
+      </table>
+      <p>&nbsp;</p>
+      <h3>Clases que a&ntilde;aden caracter&iacute;sticas</h3>
+      <p>A continuaci&oacute;n se explica las funciones de las clases que alteran 
+        el comportamiento de un stream ya definido.</p>
+      <table width="521" border="1">
+        <tr> 
+          <td width="238">Clases</td>
+          <td width="267">Funci&oacute;n que realizan</td>
+        </tr>
+        <tr> 
+          <td>BufferedReader, BufferedWriter, BufferedInputStream, BufferedOutputStream</td>
+          <td>Como ya se ha dicho, a&ntilde;aden un buffer al manejo de los datos. 
+            Es decir, se reducen las operaciones directas sobre el dispositivo 
+            (lecturas de disco, comunicaciones por red), para hacer m&aacute;s 
+            eficiente su uso. BufferedReader por ejemplo tiene el m&eacute;todo 
+            readLine() que lee una l&iacute;nea y la devuelve como un String. 
+          </td>
+        </tr>
+        <tr> 
+          <td>InputStreamReader, OutputStreamWriter</td>
+          <td>Son clases puente que permiten convertir streams que utilizan bytes 
+            en otros que manejan caracteres. Son la &uacute;nica relaci&oacute;n 
+            entre ambas jerarqu&iacute;as y no existen clases que realicen la 
+            transformaci&oacute;n inversa. </td>
+        </tr>
+        <tr> 
+          <td>ObjectInputStream, ObjectOutputStream</td>
+          <td>Pertenecen al mecanismo de la serializaci&oacute;n y se explicar&aacute;n 
+            m&aacute;s<br>
+            adelante.</td>
+        </tr>
+        <tr> 
+          <td>FilterReader, FilterWriter, FilterInputStream, FilterOutputStream</td>
+          <td>Son clases base para aplicar diversos filtros o procesos al stream 
+            de datos. Tambi&eacute;n se podr&iacute;an extender para conseguir 
+            comportamientos a medida. </td>
+        </tr>
+        <tr> 
+          <td>DataInputStream, DataOutputStream</td>
+          <td>Se utilizan para escribir y leer datos directamente en los formatos 
+            propios de Java. Los convierten en algo ilegible , pero independiente 
+            de plataforma y se usan por tanto para almacenaje o para transmisiones 
+            entre ordenadores de distinto funcionamiento.</td>
+        </tr>
+        <tr> 
+          <td>PrintWriter, PrintStream</td>
+          <td>Tienen m&eacute;todos adaptados para imprimir las variables de Java 
+            con la apariencia normal. A partir de un boolean escriben &#8220;true&#8221; 
+            o &#8220;false&#8221;, colocan la coma de un n&uacute;mero decimal, 
+            etc. </td>
+        </tr>
+      </table>
+      <h3>ENTRADA Y SALIDA EST&Aacute;NDAR (TECLADO Y PANTALLA)</h3>
+      <p>En Java, la entrada desde teclado y la salida a pantalla est&aacute;n 
+        reguladas a traves de la clase System.<br>
+        Esta clase pertenece al package java.lang y agrupa diversos m&eacute;todos 
+        y objetos que tienen relaci&oacute;n con el sistema local. Contiene, entre 
+        otros, tres objetos static que son:<br>
+        System.in: Objeto de la clase InputStream preparado para recibir datos 
+        desde la entrada est&aacute;ndar del sistema (habitualmente el teclado).<br>
+        System.out: Objeto de la clase PrintStream que imprimir&aacute; los datos 
+        en la salida est&aacute;ndar del sistema (normalmente asociado con la 
+        pantalla).<br>
+        System.err: Objeto de la clase PrintStream. Utilizado para mensajes de 
+        error que salen tambi&eacute;n por pantalla por defecto.<br>
+        Estas clases permiten la comunicaci&oacute;n alfanum&eacute;rica con el 
+        programa a trav&eacute;s de lo m&eacute;todos incluidos en la Tabla 9.4. 
+        Son m&eacute;todos que permiten la entrada/salida a un nivel muy elemental. 
+        Existen tres m&eacute;todos de System que permiten sustituir la entrada 
+        y salida est&aacute;ndar. Por ejemplo, se utiliza para hacer que el programa 
+        lea de un archivo y no del teclado.<br>
+        System.setIn(InputStream is);<br>
+        System.setOut(PrintStream ps);<br>
+        System.setErr(PrintStream ps);<br>
+        El argumento de setIn() no tiene que ser necesariamente del tipo InputStream. 
+        Es una referencia a la clase base, y por tanto puede apuntar a objetos 
+        de cualquiera de sus clases derivadas (como FileInputStream). Asimismo, 
+        el constructor de PrintStream acepta un OutputStream, luego se puede dirigir 
+        la salida est&aacute;ndar a cualquiera de las clases definidas para salida.<br>
+        Si se utilizan estas sentencias con un compilador de Java 1.1 se obtiene 
+        un mensaje de m&eacute;todo obsoleto (deprecated) al crear un objeto PrintStream. 
+        Al se&ntilde;alar como obsoleto el constructor de esta clase se pretend&iacute;a 
+        animar al uso de PrintWriter, pero existen casos en los cuales es imprescindible 
+        un elemento PrintStream. Afortunadamente, Java 1.2 ha reconsiderado esta 
+        decisi&oacute;n y de nuevo se puede utilizar sin problemas.</p>
+      <h3>Salida de texto y variables por pantalla</h3>
+      <p>Para imprimir en la pantalla se utilizan los m&eacute;todos System.out.print() 
+        y System.out.println(). Son los primeros m&eacute;todos que aprende cualquier 
+        programador. Sus caracter&iacute;sticas fundamentales son:<br>
+        1. Pueden imprimir valores escritos directamente en el c&oacute;digo o 
+        cualquier tipo de variable primitiva de Java.<br>
+        System.out.println(&quot;Hola, Mundo!&quot;);<br>
+        System.out.println(57);<br>
+        double numeroPI = 3.141592654;<br>
+        System.out.println(numeroPI);<br>
+        String hola = new String(&quot;Hola&quot;);<br>
+        System.out.println(hola);<br>
+        2. Se pueden imprimir varias variables en una llamada al m&eacute;todo 
+        correspondiente utilizando el operador + de concatenaci&oacute;n, que 
+        equivale a convertir a String todas las variables que no lo sean y concatenar 
+        las cadenas de caracteres (el primer argumento debe ser un String).<br>
+        System.out.println(&quot;Hola, Mundo! &quot; + numeroPI);<br>
+        Se debe recordar que los objetos System.out y System.err son de la clase 
+        PrintStream y aunque imprimen las variables de un modo legible, no permiten 
+        dar a la salida un formato a medida.<br>
+        El programador no puede especificar un formato distinto al disponible 
+        por defecto.</p>
+      <h3>Lectura desde teclado</h3>
+      <p>Para leer desde teclado se puede utilizar el m&eacute;todo System.in.read() 
+        de la clase InputStream. Este m&eacute;todo lee un car&aacute;cter por 
+        cada llamada. Su valor de retorno es un int. Si se espera cualquier otro 
+        tipo hay que hacer una conversi&oacute;n expl&iacute;cita mediante un 
+        cast. char c;<br>
+        c=(char)System.in.read();<br>
+        Este m&eacute;todo puede lanzar la excepci&oacute;n java.io.IOException 
+        y siempre habr&aacute; que ocuparse de ella, por ejemplo en la forma:<br>
+        try {<br>
+        c=(char)System.in.read();<br>
+        }<br>
+        catch(java.io.IOException ioex) {<br>
+        // qu&eacute; hacer cuando ocurra la excepci&oacute;n<br>
+        }<br>
+        Para leer datos m&aacute;s largos que un simple car&aacute;cter es necesario 
+        emplear un bucle while o for y unir los caracteres. Por ejemplo, para 
+        leer una l&iacute;nea completa se podr&iacute;a utilizar un bucle while 
+        guardando los caracteres le&iacute;dos en un String o en un StringBuffer 
+        (m&aacute;s r&aacute;pido que String):<br>
+        char c;<br>
+        String frase = new String(&quot;&quot;); // StringBuffer frase=new StringBuffer(&quot;&quot;);<br>
+        try {<br>
+        while((c=System.in.read()) != '\n')<br>
+        frase = frase + c; // frase.append(c);<br>
+        }<br>
+        catch(java.io.IOException ioex) {}<br>
+        Una vez que se lee una l&iacute;nea, &eacute;sta puede contener n&uacute;meros 
+        de coma flotante, etc. Sin embargo, hay una manera m&aacute;s f&aacute;cil 
+        de conseguir lo mismo: utilizar adecuadamente la librer&iacute;a java.io.</p>
+      <h3>M&eacute;todo pr&aacute;ctico para leer desde teclado</h3>
+      <p>Para facilitar la lectura de teclado se puede conseguir que se lea una 
+        l&iacute;nea entera con una sola orden si se utiliza un objeto BufferedReader. 
+        El m&eacute;todo String readLine() perteneciente a BufferReader lee todos 
+        los caracteres hasta encontrar un '\n' o '\r' y los devuelve como un String 
+        (sin incluir '\n' ni '\r'). Este m&eacute;todo tambi&eacute;n puede lanzar 
+        java.io.IOException.<br>
+        System.in es un objeto de la clase InputStream. BufferedReader pide un 
+        Reader en el<br>
+        constructor. El puente de uni&oacute;n necesario lo dar&aacute; InputStreamReader, 
+        que acepta un InputStream como argumento del constructor y es una clase 
+        derivada de Reader. Por lo tanto si se desea leer una l&iacute;nea completa 
+        desde la entrada est&aacute;ndar habr&aacute; que utilizar el siguiente 
+        c&oacute;digo:<br>
+        InputStreamReader isr = new InputStreamReader(System.in);<br>
+        BufferedReader br = new BufferedReader(isr);<br>
+        // o en una l&iacute;nea:<br>
+        // BufferedReader br2 = new BufferedReader(new InputStreamReader(System.in));<br>
+        String frase = br2.readLine(); // Se lee la l&iacute;nea con una llamada<br>
+        As&iacute; ya se ha leido una l&iacute;nea del teclado. El thread que 
+        ejecute este c&oacute;digo estar&aacute; parado en esta l&iacute;nea hasta 
+        que el usuario termine la l&iacute;nea (pulse return). Es m&aacute;s sencillo 
+        y pr&aacute;ctico que la posibilidad anterior.<br>
+        &iquest;Y qu&eacute; hacer con una l&iacute;nea entera? La clase java.util.StringTokenizer 
+        da la posibilidad de separar una cadena de car&aacute;cteres en las &#8220;palabras&#8221; 
+        (tokens) que la forman (por defecto, conjuntos de caracteres separados 
+        por un espacio, '\t', '\r', o por '\n'). Cuando sea preciso se pueden 
+        convertir las &#8220;palabras&#8221; en n&uacute;meros.</p>
+      <p>La clase StreamTokenizer de java.io aporta posibilidades m&aacute;s avanzadas 
+        que<br>
+        StringTokenizer, pero tambi&eacute;n es m&aacute;s compleja. Directamente 
+        separa en tokens lo que entra por un InputStream o Reader.<br>
+        Se recuerda que la manera de convertir un String del tipo &#8220;3.141592654&#8221; 
+        en el valor double correspondiente es crear un objeto Double a partir 
+        de &eacute;l y luego extraer su valor double:<br>
+        double pi = (Double.valueOf(&quot;3.141592654&quot;)).doubleValue();<br>
+        El uso de estas clases facilita el acceso desde teclado, resultando un 
+        c&oacute;digo m&aacute;s f&aacute;cil de escribir y de leer. Adem&aacute;s 
+        tiene la ventaja de que se puede generalizar a la lectura de archivos.</p>
+		<h3>LECTURA Y ESCRITURA DE ARCHIVOS</h3>
+      <p>Aunque el manejo de archivos tiene caracter&iacute;sticas especiales, 
+        se puede utilizar lo dicho hasta ahora para las entradas y salidas est&aacute;ndar 
+        con peque&ntilde;as variaciones. Java ofrece las siguientes posibilidades:<br>
+        Existen las clases FileInputStream y FileOutputStream (extendiendo InputStream 
+        y OutputStream) que permiten leer y escribir bytes en archivos. Para archivos 
+        de texto son preferibles FileReader (desciende de Reader) y FileWriter 
+        (desciende de Writer), que realizan las mismas funciones. Se puede construir 
+        un objeto de cualquiera de estas cuatro clases a partir de un String que 
+        contenga el nombre o la direcci&oacute;n en disco del archivo o con un 
+        objeto de la clase File que representa dicho archivo. Por ejemplo el c&oacute;digo 
+        FileReader fr1 = new FileReader(&quot;archivo.txt&quot;);<br>
+        es equivalente a:<br>
+        File f = new File(&quot;archivo.txt&quot;);<br>
+        FileReader fr2 = new FileReader(f);<br>
+        Si no encuentran el archivo indicado, los constructores de FileReader 
+        y FileInputStream pueden lanzar la excepci&oacute;n java.io.FileNotFoundException.<br>
+        Los constructores de FileWriter y FileOutputStream pueden lanzar java.io.IOException. 
+        Si no encuentran el archivo indicado, lo crean nuevo. Por defecto, estas 
+        dos clases comienzan a escribir al comienzo del archivo. Para escribir 
+        detr&aacute;s de lo que ya existe en el archivo (&#8220;append&#8221;), 
+        se utiliza un segundo argumento de tipo boolean con valor true:<br>
+        FileWriter fw = new FileWriter(&quot;archivo.txt&quot;, true);<br>
+        Las clases que se explican a continuaci&oacute;n permiten un manejo m&aacute;s 
+        f&aacute;cil y eficiente que las vistas hasta ahora.</p>
+      <h3>Clases File y FileDialog</h3>
+      <p>Un objeto de la clase File puede representar un archivo o un directorio. 
+        Tiene los siguientes constructores: </p>
+      <p>File(String name)<br>
+        File(String dir, String name)<br>
+        File(File dir, String name).<br>
+        Se puede dar el nombre de un archivo, el nombre y el directorio, o s&oacute;lo 
+        el directorio, como path absoluto y como path relativo al directorio actual. 
+        Para saber si el archivo existe se puede llamar al m&eacute;todo boolean 
+        exists().<br>
+        File f1 = new File(&quot;c:\\windows\\notepad.exe&quot;); // La barra 
+        '\' se escribe '\\'<br>
+        File f2 = new File(&quot;c:\\windows&quot;); // Un directorio<br>
+        File f3 = new File(f2, &quot;notepad.exe&quot;); // Es igual a f1<br>
+        Si File representa un archivo que existe los m&eacute;todos:</p>
+      <table width="500" border="1">
+        <tr>
+          <td>M&eacute;todos</td>
+          <td>Funci&oacute;n que realizan</td>
+        </tr>
+        <tr>
+          <td>boolean isFile()</td>
+          <td>true si el archivo existe</td>
+        </tr>
+        <tr>
+          <td>long length()</td>
+          <td>tama&ntilde;o del archivo en bytes</td>
+        </tr>
+        <tr>
+          <td>long lastModified()</td>
+          <td>fecha de la &uacute;ltima modificaci&oacute;n</td>
+        </tr>
+        <tr>
+          <td>boolean canRead()</td>
+          <td>true si se puede leer</td>
+        </tr>
+        <tr>
+          <td>boolean canWrite()</td>
+          <td>true si se puede escribir</td>
+        </tr>
+        <tr>
+          <td>delete()</td>
+          <td>borrar el archivo</td>
+        </tr>
+        <tr>
+          <td>RenameTo(File)</td>
+          <td>cambiar el nombre</td>
+        </tr>
+      </table>
+      <p>Una forma t&iacute;pica de preguntar por un archivo es presentar un caja 
+        de di&aacute;logo. La clase java.awt.FileDialog presenta el di&aacute;logo 
+        t&iacute;pico de cada sistema operativo para guardar o abrir ficheros. 
+        Sus constructores son:<br>
+        FileDialog(Frame fr)<br>
+        FileDialog(Frame fr, String title)<br>
+        FileDialog(Frame fr, String title, int type)<br>
+        donde type puede ser FileDialog.LOAD o FileDialog.SAVE seg&uacute;n la 
+        operaci&oacute;n que se desee realizar.<br>
+        Es muy f&aacute;cil conectar este di&aacute;logo con un File, utilizando 
+        los m&eacute;todos String getFile() y<br>
+        String getDirectory(). Por ejemplo:</p>
+      <p>FileDialog fd = new FileDialog(f, &quot;Elija un archivo&quot;);<br>
+        fd.show();<br>
+        File f = new File(fd.getDirectory(), fd.getFile());</p>
+      <h3>Lectura de archivos de texto</h3>
+      <p>Se puede crear un objeto BufferedReader para leer de un archivo de texto 
+        de la siguiente manera:<br>
+        BufferedReader br = new BufferedReader(new FileReader(&quot;archivo.txt&quot;));<br>
+        Utilizando el objeto de tipo BufferedReader se puede conseguir exactamente 
+        lo mismo que en las secciones anteriores utilizando el m&eacute;todo readLine() 
+        y la clase StringTokenizer. En el caso de archivos es muy importante utilizar 
+        el buffer puesto que la tarea de escribir en disco es muy lenta respecto 
+        a los procesos del programa y realizar las operaciones de lectura de golpe 
+        y no de una en<br>
+        una hace mucho m&aacute;s eficiente el acceso. Por ejemplo:<br>
+        // Lee un archivo entero de la misma manera que de teclado<br>
+        String texto = new String();<br>
+        try {<br>
+        FileReader fr = new FileReader(&quot;archivo.txt&quot;);<br>
+        entrada = new BufferedReader(fr);<br>
+        String s;<br>
+        while((s = entrada.readLine()) != null)<br>
+        texto += s;<br>
+        entrada.close();<br>
+        }<br>
+        catch(java.io.FileNotFoundException fnfex) {<br>
+        System.out.println(&quot;Archivo no encontrado: &quot; + fnfex);}<br>
+        catch(java.io.IOException ioex) {}</p>
+      <h3>Escritura de archivos de texto</h3>
+      <p>La clase PrintWriter es la m&aacute;s pr&aacute;ctica para escribir un 
+        archivo de texto porque posee los m&eacute;todos print(cualquier tipo) 
+        y println(cualquier tipo), id&eacute;nticos a los de System.out (de clase 
+        PrintStream).<br>
+        Un objeto PrintWriter se puede crear a partir de un BufferedWriter (para 
+        disponer de buffer), que se crea a partir del FileWriter al que se la 
+        pasa el nombre del archivo. Despu&eacute;s, escribir en el archivo es 
+        tan f&aacute;cil como en pantalla. El siguiente ejemplo ilustra lo anterior:<br>
+        try {<br>
+        FileWriter fw = new FileWriter(&quot;escribeme.txt&quot;);<br>
+        BufferedWriter bw = new BufferedWriter(fw);<br>
+        PrintWriter salida = new PrintWriter(bw);<br>
+        salida.println(&quot;Hola, soy la primera l&iacute;nea&quot;);<br>
+        salida.close();<br>
+        // Modo append<br>
+        bw = new BufferedWriter(new FileWriter(&quot;escribeme.txt&quot;, true));<br>
+        salida = new PrintWriter(bw);<br>
+        salida.print(&quot;Y yo soy la segunda. &quot;);<br>
+        double b = 123.45;<br>
+        salida.println(b);<br>
+        salida.close();<br>
+        }<br>
+        cacth(java.io.IOException ioex) { }</p>
+      <h3>Archivos que no son de texto</h3>
+      <p>DataInputStream y DataOutputStream son clases de Java 1.0 que no han 
+        sido alteradas hasta ahora. Para leer y escribir datos primitivos directamente 
+        (sin convertir a/de String) siguen siendo m&aacute;s &uacute;tiles estas 
+        dos clases.<br>
+        Son clases dise&ntilde;adas para trabajar de manera conjunta. Una puede 
+        leer lo que la otra escribe, que en s&iacute; no es algo legible, sino 
+        el dato como una secuencia de bytes. Por ello se utilizan para almacenar 
+        datos de manera independiente de la plataforma (o para mandarlos por una 
+        red entre ordenadores muy distintos).<br>
+        El problema es que obligan a utilizar clases que descienden de InputStream 
+        y OutputStream y por lo tanto algo m&aacute;s complicadas de utilizar. 
+        El siguiente c&oacute;digo primero escribe en el fichero prueba.dat para 
+        despu&eacute;s leer los datos escritos:<br>
+        // Escritura de una variable double<br>
+        DataOutputStream dos = new DataOutputStream(<br>
+        new BufferedOutputStream(<br>
+        new FileOutputStream(&quot;prueba.dat&quot;)));<br>
+        double d1 = 17/7;<br>
+        dos.writeDouble(d);<br>
+        dos.close();<br>
+        // Lectura de la variable double<br>
+        DataInputStream dis = new DataInputStream(<br>
+        new BufferedInputStream(<br>
+        new FileInputStream(&quot;prueba.dat&quot;)));<br>
+        double d2 = dis.readDouble();</p>
+	  
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

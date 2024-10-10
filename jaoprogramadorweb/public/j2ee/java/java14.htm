@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Packages</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación en Java,Programas Java,Aplicaciones en Java,Ejercicios en Java, Ejemplos de Java,Tutorial de Java,Manual Java" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Java, Manual Java, tutorial Java, Ejemplos Java, ejercicios Java">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> Packages</h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <h3>Qu&eacute; es un package</h3> 
+      <p> Un package es una agrupaci&oacute;n de clases. En la API de Java 1.1 
+        hab&iacute;a 22 packages; en Java 1.2 hay<br>
+        59 packages, lo que da una idea del &#8220;crecimiento&#8221; experimentado 
+        por el lenguaje.<br>
+        Adem&aacute;s, el usuario puede crear sus propios packages. Para que una 
+        clase pase a formar parte<br>
+        de un package llamado pkgName, hay que introducir en ella la sentencia:<br>
+        package pkgName;<br>
+        que debe ser la primera sentencia del fichero sin contar comentarios y 
+        l&iacute;neas en blanco.<br>
+        Los nombres de los packages se suelen escribir con min&uacute;sculas, 
+        para distinguirlos de las<br>
+        clases, que empiezan por may&uacute;scula. El nombre de un package puede 
+        constar de varios nombres<br>
+        unidos por puntos (los propios packages de Java siguen esta norma, como 
+        por ejemplo<br>
+        java.awt.event).<br>
+        Todas las clases que forman parte de un package deben estar en el mismo 
+        directorio. Los<br>
+        nombres compuestos de los packages est&aacute;n relacionados con la jerarqu&iacute;a 
+        de directorios en que se<br>
+        guardan las clases. Es recomendable que los nombres de las clases de Java 
+        sean &uacute;nicos en Internet.<br>
+        Es el nombre del package lo que permite obtener esta caracter&iacute;stica. 
+        Una forma de conseguirlo es<br>
+        incluir el nombre del dominio (quitando quiz&aacute;s el pa&iacute;s), 
+        como por ejemplo en el package siguiente:<br>
+        es.ceit.jgjalon.infor2.ordenar<br>
+        Las clases de un package se almacenan en un directorio con el mismo nombre 
+        largo (path)<br>
+        que el package. Por ejemplo, la clase,<br>
+        es.ceit.jgjalon.infor2.ordenar.QuickSort.class<br>
+        deber&iacute;a estar en el directorio,<br>
+        CLASSPATH\es\ceit\jgjalon\infor2\ordenar\QuickSort.class<br>
+        donde CLASSPATH es una variable de entorno del PC que establece la posici&oacute;n 
+        absoluta de los<br>
+        directorios en los que hay clases de Java (clases del sistema o de usuario), 
+        en este caso la posici&oacute;n<br>
+        del directorio es en los discos locales del ordenador.</p>
+      <p>Los packages se utilizan con las finalidades siguientes:<br>
+        1. Para agrupar clases relacionadas.<br>
+        2. Para evitar conflictos de nombres (se recuerda que el dominio de nombres 
+        de Java es la<br>
+        Internet). En caso de conflicto de nombres entre clases importadas, el 
+        compilador obliga a<br>
+        cualificar en el c&oacute;digo los nombres de dichas clases con el nombre 
+        del package.<br>
+        3. Para ayudar en el control de la accesibilidad de clases y miembros.</p>
+      <h3>C&oacute;mo funcionan los packages</h3>
+      <p>Con la sentencia import packname; se puede evitar tener que utilizar 
+        nombres muy largos, al<br>
+        mismo tiempo que se evitan los conflictos entre nombres. Si a pesar de 
+        todo hay conflicto entre<br>
+        nombres de clases, Java da un error y obliga a utilizar los nombres de 
+        las clases cualificados con el<br>
+        nombre del package.<br>
+        El importar un package no hace que se carguen todas las clases del package: 
+        s&oacute;lo se cargar&aacute;n<br>
+        las clases public que se vayan a utilizar. Al importar un package no se 
+        importan los sub-packages.<br>
+        &Eacute;stos deben ser importados expl&iacute;citamente, pues en realidad 
+        son packages distintos. Por ejemplo, al<br>
+        importar java.awt no se importa java.awt.event.<br>
+        Es posible guardar en jerarqu&iacute;as de directorios diferentes los 
+        ficheros *.class y *.java, con<br>
+        objeto por ejemplo de no mostrar la situaci&oacute;n del c&oacute;digo 
+        fuente. Los packages hacen referencia a<br>
+        los ficheros compilados *.class.<br>
+        En un programa de Java, una clase puede ser referida con su nombre completo 
+        (el nombre del<br>
+        package m&aacute;s el de la clase, separados por un punto). Tambi&eacute;n 
+        se pueden referir con el nombre<br>
+        completo las variables y los m&eacute;todos de las clases. Esto se puede 
+        hacer siempre de modo opcional,<br>
+        pero es inc&oacute;modo y hace m&aacute;s dif&iacute;cil el reutilizar 
+        el c&oacute;digo y portarlo a otras m&aacute;quinas.<br>
+        La sentencia import permite abreviar los nombres de las clases, variables 
+        y m&eacute;todos, evitando<br>
+        el tener que escribir continuamente el nombre del package importado. Se 
+        importan por defecto el<br>
+        package java.lang y el package actual o por defecto (las clases del directorio 
+        actual).<br>
+        Existen dos formas de utilizar import: para una clase y para todo un package:<br>
+        import es.ceit.jgjalon.infor2.ordenar.QuickSort.class;<br>
+        import es.ceit.jgjalon.infor2.ordenar.*;<br>
+        que deber&iacute;an estar en el directorio:<br>
+        classpath\es\ceit\jgjalon\infor2\ordenar<br>
+      </p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

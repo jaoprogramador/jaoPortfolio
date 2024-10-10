@@ -1,0 +1,160 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Indice J2ME</title>
+<META http-equiv=Content-Language content=es>
+<META content="Manual J2ME, ejemplos J2ME, codigos J2ME" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Manual J2ME, ejemplos J2ME, codigos J2ME">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2>TiledLayer extends Layer</h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <p>Estando la anterior clase orientada a la 
+        capa de personajes, la que estudiamos a continuaci&oacute;n nos servir&aacute; 
+        para las otras capas del juego. Con esta clase instanciamos un tipo de 
+        capa orientada al dibujo de elementos gr&aacute;ficos que necesitar&aacute;n 
+        menos movimiento y animaci&oacute;n, aunque tambi&eacute;n podr&aacute;n 
+        animarse de forma menos potente.<br>
+        Adem&aacute;s, esta clase est&aacute; orientada a la construcci&oacute;n 
+        de im&aacute;genes virtuales de grandes dimensiones (pensemos en el escenario 
+        del juego, su fondo, etc., los cuales iremos mostrando por medio de scroll) 
+        a partir de im&aacute;genes muy sencillas y de peque&ntilde;o tama&ntilde;o 
+        que repetiremos, animaremos, etc.<br>
+        Para ello, se recoger&aacute;n m&uacute;ltiples elementos gr&aacute;ficos 
+        a partir de una sola imagen como antes, la cual ser&aacute; divida de 
+        forma an&aacute;loga a un Sprite dando lugar a un conjunto de subim&aacute;genes 
+        de igual tama&ntilde;o, seg&uacute;n un ancho y alto determinado. Por 
+        su finalidad, en este caso, ser&aacute;n denominados TILES, en lugar de 
+        FRAMES como en Sprite. Estas subim&aacute;genes son numeradas con un &iacute;ndice 
+        &uacute;nico, dando valor 1 (en Sprite comenzaban en 0) a la que ocupa 
+        la esquina superior izquierda, y siguiendo la numeraci&oacute;n contando 
+        hacia la derecha y abajo. As&iacute;, las tres im&aacute;genes originales 
+        que vemos en la figura producir&iacute;an el mismo conjunto de tiles. 
+        Estos tiles as&iacute; obtenidos son denominados est&aacute;ticos y tendr&aacute;n 
+        una imagen asociada desde la instanciaci&oacute;n del objeto TiledLayer. 
+        M&aacute;s adelante, veremos que podr&aacute;n ser variados con el m&eacute;todo 
+        setStaticTileSet(), de forma an&aacute;loga a como vari&aacute;bamos los 
+        frames primitivos del Sprite con el m&eacute;todo setImage().<br>
+        Adem&aacute;s de los est&aacute;ticos, podremos definir tiles animados 
+        para dar elementos gr&aacute;ficos que var&iacute;en su apariencia con 
+        el tiempo. Un tile animado ser&aacute; un tile virtual, no adquirido a 
+        partir de la imagen original, al que le asignaremos la gr&aacute;fica 
+        de uno u otro tile est&aacute;tico seg&uacute;n creamos conveniente. Con 
+        ello, provocamos efectos simples de animaci&oacute;n en el juego, por 
+        ejemplo, el movimiento del agua, el ondeo de una bandera, el burbujeo 
+        de una copa de champ&aacute;n, etc.Mientras que los tiles est&aacute;ticos 
+        se numerar&aacute;n con &iacute;ndices positivos correlativos; los animados 
+        lo har&aacute;n con &iacute;ndices negativos correlativos y un &iacute;ndice 
+        de valor 0 indicar&aacute; inexistencia de contenido.<br>
+        Estos &iacute;ndices que comentamos nos servir&aacute;n para invocar un 
+        tile u otro para su presentaci&oacute;n en pantalla. Dicha presentaci&oacute;n 
+        se define por medio de la estructura siguiente:<br>
+        - Los tiles son insertados (sus &iacute;ndices en realidad, aunque visualmente 
+        presentemos una estructura de im&aacute;genes repetidas) en lo que denominamos 
+        una malla. Esta &uacute;ltima se define como una tabla bidimensional de 
+        im&aacute;genes por filas y columnas que indexan celdas de igual tama&ntilde;o.<br>
+        - El n&uacute;mero de filas y columnas es dado al construir el TiledLayer.- 
+        El tama&ntilde;o gr&aacute;fico del resultado de dibujar una celda corresponder&aacute; 
+        con el tama&ntilde;o del tile que la ocupa (recordemos que el tama&ntilde;o 
+        es constante para todos los tiles de la capa).<br>
+        Muchas celdas podr&aacute;n contener al mismo tile, sin embargo, una celda 
+        no puede albergar varios tiles a la vez, como pod&iacute;amos comprobar 
+        en la figura anterior. Por defecto, al construir el TiledLayer le asignamos 
+        valor 0 a todas las celdas de su malla asociada (transparencia), por lo 
+        cual, tras la construcci&oacute;n, debemos hacer uso de los m&eacute;todos 
+        que veremos a continuaci&oacute;n para rellenar la malla de la forma deseada.<br>
+        Seguidamente, pasamos a estudiar los elementos que nos ofrece esta clase. 
+        Todos ellos son<br>
+        m&eacute;todos, con un solo constructor:<br>
+        - TiledLayer(int columns, int rows, Image image, int tileWidth, int tileHeight). 
+        Constructor del TiledLayer, al cual debemos pasar el n&uacute;mero de 
+        filas y columnas que compondr&aacute;n su malla asociada, la imagen original 
+        a dividir y el ancho y alto en p&iacute;xeles de los tiles a obtener.<br>
+        El ancho del objeto Image debe ser m&uacute;ltiplo entero de tileWidth 
+        y el alto, de tileHeight, para que as&iacute; el n&uacute;mero de tiles 
+        obtenido sea un entero correcto (si no, IllegalArgumentException).<br>
+        Tras la construcci&oacute;n, los tiles de la malla (por defecto, todos 
+        0) podr&aacute;n ser variados usando los m&eacute;todos setCell(), fillCells() 
+        o setStaticTileSet(), debiendo limitar el uso de este &uacute;ltimo por 
+        suponer un coste de memoria y computacional elevado.<br>
+        - int createAnimatedTile(int staticTileIndex). Crea un tile animado asociado 
+        inicialmente al tile est&aacute;tico cuyo &iacute;ndice pasamos como par&aacute;metro 
+        (0 o un &iacute;ndice positivo existente). El &iacute;ndice devuelto corresponde 
+        al tile animado, siendo siempre el &iacute;ndice de un tile animado un 
+        n&uacute;mero negativo.<br>
+        - void fillCells(int col, int row, int numCols, int numRows, int tileIndex). 
+        Rellena una regi&oacute;n de celdas de la malla con el tile que indica 
+        el par&aacute;metro tileIndex. &Eacute;ste puede apuntar a un tile est&aacute;tico, 
+        animado o vac&iacute;o (dando &iacute;ndice 0).<br>
+        Para indicar la regi&oacute;n damos el elemento superior izquierdo de 
+        ella (su fila y columna) y el n&uacute;mero de filas y columnas que la 
+        compondr&aacute;n a partir de &eacute;ste.- int getAnimatedTile(int animatedTileIndex). 
+        Obtiene el &iacute;ndice del tile est&aacute;tico asociado actualmente 
+        con el tile animado cuyo &iacute;ndice damos como entrada.<br>
+        Recordemos que &eacute;ste debe ser un n&uacute;mero negativo y que el 
+        de salida ser&aacute; positivo.<br>
+        - int getCell(int col, int row). Obtiene el &iacute;ndice del tile (animado 
+        o est&aacute;tico) que actualmente ocupa la celda indicada por su n&uacute;mero 
+        de fila y columna. Si la celda est&aacute; vac&iacute;a, se devuelve 0.<br>
+        - int getCellHeight(). Obtiene el alto en p&iacute;xeles de las celdas 
+        de la malla. Ser&aacute; un valor constante para toda celda.<br>
+        - int getCellWidth(). Adquiere el ancho en p&iacute;xeles de las celdas 
+        de la malla. Ser&aacute; un valor constante para toda celda.<br>
+        - int getColumns(). Alcanza el n&uacute;mero de columnas de la malla. 
+        Para obtener el ancho en p&iacute;xeles de la malla completa no har&iacute;a 
+        falta usar este m&eacute;todo junto a getCellWidth(), simplemente nos 
+        lo dar&iacute;a el m&eacute;todo heredado Layer.getWidth().<br>
+        - int getRows(). Obtiene el n&uacute;mero de filas de la malla. El alto 
+        en p&iacute;xeles de la malla completa se obtiene de la misma forma que 
+        en el m&eacute;todo anterior.<br>
+        - void paint(Graphics g). Dibuja el TiledLayer (si &eacute;ste es visible) 
+        utilizando para ello el Graphics par&aacute;metro. La esquina superior 
+        izquierda del TiledLayer es dibujada en la posici&oacute;n actual de &eacute;ste 
+        relativa al sistema de coordenadas global, la cual puede obtenerse con 
+        los m&eacute;todos Layer.getX() y Layer.getY().<br>
+        - void setAnimatedTile(int animatedTileIndex, int staticTileIndex). Asocia 
+        el tile est&aacute;tico, cuyo &iacute;ndice es el dado en el segundo par&aacute;metro, 
+        con el tile animado de &iacute;ndice el dado en el primer par&aacute;metro. 
+        Ambos tiles deben existir o el est&aacute;tico ser vac&iacute;o (&iacute;ndice 
+        0).<br>
+        - void setCell(int col, int row, int tileIndex). Modifica el contenido 
+        de una celda, indicando &eacute;sta con su n&uacute;mero de fila y columna, 
+        y dando en el tercer par&aacute;metro el &iacute;ndice del tile que fijaremos 
+        en ella (est&aacute;tico, din&aacute;mico o vac&iacute;o).<br>
+        void setStaticTileSet(Image image, int tileWidth, int tileHeight). Recibiendo 
+        los mismos par&aacute;metros (salvo los que definen la malla, la estructura 
+        de la cual no puede ser variada) que el constructor visto, funciona de 
+        forma an&aacute;loga a aqu&eacute;l pero con el TiledLayer ya creado. 
+        Reemplazar&aacute;, por tanto, el conjunto original de tiles est&aacute;ticos 
+        alcompleto, debiendo tener en cuenta ante este acto que si el nuevo conjunto 
+        de tiles<br>
+        tiene el mismo o mayor n&uacute;mero de elementos que el antiguo conjunto, 
+        los tiles animados y el contenido de la malla asociada (los &iacute;ndices 
+        que en realidad almacena) ser&aacute;n conservados. En caso contrario, 
+        las celdas de la malla ser&aacute;n reiniciadas (&iacute;ndice 0) y los 
+        tiles animados ser&aacute;n eliminados.</p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

@@ -1,0 +1,208 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Ejercicios MySQL</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="MySQL, sql, pl/sql, programacion MySQL, ejercicios MySQL, ejemplos MySQL, select">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2>JOIN</h2></td>
+  </tr>
+  <tr> 
+    <td><h3>Consultas del proyecto Mellizos (Twin)</h3>
+      <p>En Analytikerna y Lentus, hemos estado realizando los sistemas y el trabajo 
+        de campo para un gran proyecto de investigaci&oacute;n. Este<br>
+        proyecto es en colaboraci&oacute;n entre el Institute of Environmental 
+        Medicine del Karolinska Institutet Stockholm y la Secci&oacute;n de Investigaci&oacute;n<br>
+        Cl&iacute;nica sobre Envejecimiento y Psicolog&iacute;a de la Universidad 
+        de California del Sur.<br>
+        El proyecto comprende una parte de selecci&oacute;n, en la cual se entrevista 
+        por tel&eacute;fono a todos los gemelos de Suecia mayores de 65<br>
+        a&ntilde;os. Aquellos que satisfacen ciertos criterios son pasados a la 
+        siguiente etapa. En esta, los gemelos que desean participar son visitados<br>
+        por un equipo de m&eacute;dico y enfermera. Algunos de los &eacute;xamenes 
+        practicados son f&iacute;sico, neuropsicol&oacute;gico, laboratorio, diag-<br>
+        n&oacute;stico neurol&oacute;gico por im&aacute;genes, evaluaci&oacute;n 
+        de estado psicol&oacute;gico, y recolecci&oacute;n de la historia familiar. 
+        Adicionalmete, se recogen<br>
+        datos sobre factores de riesgo m&eacute;dicos y ambientales.<br>
+        Se puede ver m&aacute;s informaci&oacute;n sobre estudio de Gemelos en: 
+        http://www.mep.ki.se/twinreg/index_en.html<br>
+        La &uacute;ltima parte del proyecto es administrada mediante una interface 
+        Web escrita usando Perl y MySQL.<br>
+        Cada noche, los datos de las entrevistas son volcados en una base de datos 
+        MySQL.<br>
+        Encontrar todos los mellizos no repartidos<br>
+        La siguiente consulta es empleada para determinar qui&eacute;nes pasan 
+        a la segunda parte del proyecto:<br>
+        SELECT<br>
+        CONCAT(p1.id, p1.tvab) + 0 AS tvid,<br>
+        CONCAT(p1.christian_name, ' ', p1.surname) AS Name,<br>
+        p1.postal_code AS Code,<br>
+        p1.city AS City,<br>
+        pg.abrev AS Area,<br>
+        IF(td.participation = 'Aborted', 'A', ' ') AS A,<br>
+        p1.dead AS dead1,<br>
+        l.event AS event1,<br>
+        td.suspect AS tsuspect1,<br>
+        id.suspect AS isuspect1,<br>
+        td.severe AS tsevere1,<br>
+        id.severe AS isevere1,<br>
+        p2.dead AS dead2,<br>
+        l2.event AS event2,<br>
+        h2.nurse AS nurse2,<br>
+        h2.doctor AS doctor2,<br>
+        td2.suspect AS tsuspect2,<br>
+        id2.suspect AS isuspect2,<br>
+        td2.severe AS tsevere2,<br>
+        id2.severe AS isevere2,<br>
+        l.finish_date<br>
+        FROM<br>
+        twin_project AS tp<br>
+        /* For Twin 1 */<br>
+        LEFT JOIN twin_data AS td ON tp.id = td.id<br>
+        AND tp.tvab = td.tvab<br>
+        LEFT JOIN informant_data AS id ON tp.id = id.id<br>
+        AND tp.tvab = id.tvab<br>
+        LEFT JOIN harmony AS h ON tp.id = h.id<br>
+        AND tp.tvab = h.tvab<br>
+        LEFT JOIN lentus AS l ON tp.id = l.id<br>
+        AND tp.tvab = l.tvab<br>
+        /* For Twin 2 */<br>
+        LEFT JOIN twin_data AS td2 ON p2.id = td2.id<br>
+        AND p2.tvab = td2.tvab<br>
+        LEFT JOIN informant_data AS id2 ON p2.id = id2.id<br>
+        AND p2.tvab = id2.tvab<br>
+        LEFT JOIN harmony AS h2 ON p2.id = h2.id<br>
+        AND p2.tvab = h2.tvab<br>
+        LEFT JOIN lentus AS l2 ON p2.id = l2.id<br>
+        AND p2.tvab = l2.tvab,<br>
+        person_data AS p1,<br>
+        person_data AS p2,<br>
+        postal_groups AS pg<br>
+        WHERE<br>
+        /* p1 gets main twin and p2 gets his/her twin. */<br>
+        /* ptvab is a field inverted from tvab */<br>
+        p1.id = tp.id AND p1.tvab = tp.tvab AND<br>
+        p2.id = p1.id AND p2.ptvab = p1.tvab AND<br>
+        /* Just the screening survey */<br>
+        tp.survey_no = 5 AND<br>
+        /* Skip if partner died before 65 but allow emigration (dead=9) */<br>
+        (p2.dead = 0 OR p2.dead = 9 OR<br>
+        (p2.dead = 1 AND<br>
+        (p2.death_date = 0 OR<br>
+        (((TO_DAYS(p2.death_date) - TO_DAYS(p2.birthday)) / 365)<br>
+        &gt;= 65))))<br>
+        AND<br>
+        (<br>
+        /* Twin is suspect */<br>
+        (td.future_contact = 'Yes' AND td.suspect = 2) OR<br>
+        /* Twin is suspect - Informant is Blessed */<br>
+        (td.future_contact = 'Yes' AND td.suspect = 1<br>
+        AND id.suspect = 1) OR<br>
+        /* No twin - Informant is Blessed */<br>
+        (ISNULL(td.suspect) AND id.suspect = 1<br>
+        AND id.future_contact = 'Yes') OR<br>
+        /* Twin broken off - Informant is Blessed */<br>
+        (td.participation = 'Aborted'<br>
+        AND id.suspect = 1 AND id.future_contact = 'Yes') OR<br>
+        /* Twin broken off - No inform - Have partner */<br>
+        (td.participation = 'Aborted' AND ISNULL(id.suspect)<br>
+        AND p2.dead = 0))<br>
+        AND<br>
+        l.event = 'Finished'<br>
+        /* Get at area code */<br>
+        AND SUBSTRING(p1.postal_code, 1, 2) = pg.code<br>
+        /* Not already distributed */<br>
+        AND (h.nurse IS NULL OR h.nurse=00 OR h.doctor=00)<br>
+        /* Has not refused or been aborted */<br>
+        AND NOT (h.status = 'Refused' OR h.status = 'Aborted'<br>
+        OR h.status = 'Died' OR h.status = 'Other')<br>
+        ORDER BY<br>
+        tvid;<br>
+        Algunas explicaciones:<br>
+        &#8226; CONCAT(p1.id, p1.tvab) + 0 AS tvid<br>
+        Se desea ordenar por la concatenaci&oacute;n de id y tvab en orden num&eacute;rico. 
+        El agregado de 0 al resultado provoca que MySQL lo<br>
+        trate como un n&uacute;mero.<br>
+        &#8226; columna id<br>
+        Identifica una pareja de gemelos. Es un campo clave en todas las tablas.<br>
+        &#8226; columna tvab<br>
+        Identifica a un gemelo en una pareja. Toma un valor de 1 o 2.<br>
+        &#8226; columna ptvab<br>
+        Es lo inverso de tvab. Cuando tvab. vale 1, este vale 2, y viceversa. 
+        El motivo de su existencia es para ahorrar tipeo y facilitarle<br>
+        a MySQL la optimizaci&oacute;n de la consulta.<br>
+        Esta consulta muestra, entre otras cosas, c&oacute;mo realizar b&uacute;squedas 
+        en una tabla a partir de la misma tabla con una uni&oacute;n (p1 y p2).<br>
+        En el ejemplo, esto se usa para verificar cu&aacute;ndo una pareja de 
+        gemelos murieron antes de cumplir los 65 a&ntilde;os. Si sucede eso, la 
+        fila<br>
+        no se devuelve.<br>
+        Todo lo mencionado anteriormente existe en todas las tablas con informaci&oacute;n 
+        relativa a gemelos. Hay un &iacute;ndice definido sobre los<br>
+        campos id,tvab (en todas las tablas) y sobre id,ptvab (person_data) para 
+        realizar las consultas m&aacute;s r&aacute;pidamente.<br>
+        En nuestra m&aacute;quina de producci&oacute;n (un UltraSPARC a 200Mhz), 
+        esta consulta devuelve cerca de 150-200 filas y toma menos de un<br>
+        segundo.<br>
+        La cantidad actual de registros en las tablas usadas en la consulta:<br>
+        Table Rows<br>
+        person_data 71074<br>
+        lentus 5291<br>
+        twin_project 5286<br>
+        twin_data 2012<br>
+        informant_data 663<br>
+        harmony 381<br>
+        postal_groups 100<br>
+        Mostrar una tabla de estado de mellizos<br>
+        Cada entrevista termina con un c&oacute;digo de estado llamado event. 
+        La consulta mostrada aqu&iacute; se emplea para mostrar una tabla sobre<br>
+        todas las parejas de gemelos combinadas por evento. Esto indica en cuantas 
+        parejas ambos gemelos llegaron al final, en cuantas<br>
+        uno llego y el otro fue rechazado, etc.<br>
+        SELECT<br>
+        t1.event,<br>
+        t2.event,<br>
+        COUNT(*)<br>
+        FROM<br>
+        lentus AS t1,<br>
+        lentus AS t2,<br>
+        twin_project AS tp<br>
+        WHERE<br>
+        /* We are looking at one pair at a time */<br>
+        t1.id = tp.id<br>
+        AND t1.tvab=tp.tvab<br>
+        AND t1.id = t2.id<br>
+        /* Just the screening survey */<br>
+        AND tp.survey_no = 5<br>
+        /* This makes each pair only appear once */<br>
+        AND t1.tvab='1' AND t2.tvab='2'<br>
+        GROUP BY<br>
+        t1.event, t2.event;</p>
+    
+        </td>
+    <td>&nbsp;</td>
+    <td><a href="http://www.euskalnet.net/juanarana/oraclezip/Ejer3.rar"><img src="../../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td>
+<div align="right"><a href="http://www.euskalnet.net/juanarana/index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a>
+      </div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>C&oacute;mo hacer una p&aacute;gina AJAX</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta name="keywords" content="Primera página AJAX, Como hacer una pagina AJAX, Manual AJAX, tutorial AJAX, Ejemplos AJAX, ejercicios AJAX">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2>Autocompletar</h2></td>
+  </tr>
+  <tr> 
+    <td height="394" colspan="3"> <h3>Contexto</h3>
+      <p>Algunas veces, se presenta al usuario un cuadro de texto en el que tiene 
+        que introducir un valor que pertenece a un grupo muy grande de datos. 
+        Algunos casos habituales son: una direcci&oacute;n de correo electr&oacute;nico 
+        que pertenezca a la libreta de direcciones del usuario, el nombre v&aacute;lido 
+        de un municipio de un pa&iacute;s, el nombre de un empleado de una empresa 
+        grande, etc.<br>
+      </p>
+      <p>En la mayor&iacute;a de casos, utilizar una lista desplegable que muestre 
+        todos los valores es completamente inviable, ya que pueden existir miles 
+        de posibles valores. Por otra parte, un cuadro de texto simple resulta 
+        de poca utilidad para el usuario. La soluci&oacute;n consiste en combinar 
+        un cuadro de texto y una lista desplegable mediante AJAX.</p>
+      <p><br>
+        Al usuario se le presenta un cuadro de texto simple en el que puede introducir 
+        la informaci&oacute;n. A medida que el usuario escribe en el cuadro de 
+        texto, la aplicaci&oacute;n solicita al servidor aquellos t&eacute;rminos 
+        que est&eacute;n relacionados con lo escrito por el usuario. Cuando la 
+        aplicaci&oacute;n recibe la respuesta del servidor, la muestra al usuario 
+        a modo de ayuda para autocompletar la informaci&oacute;n.</p>
+      <p>A partir del formulario proporcionado, a&ntilde;adir la opci&oacute;n 
+        de autocompletar el nombre del municipio<br>
+        que est&aacute; escribiendo el usuario. El esquema del funcionamiento 
+        propuesto es el siguiente:<br>
+        1) Al cargar la p&aacute;gina, se debe crear un elemento HTML de tipo 
+        &lt;div&gt; en el que se van a mostrar las<br>
+        sugerencias enviadas por el servidor.<br>
+        Adem&aacute;s, se debe establecer el evento de teclado adecuado en el 
+        cuadro de texto y tambi&eacute;n se debe<br>
+        posicionar el cursor en ese cuadro de texto para poder escribir en el 
+        directamente (Pista: focus()).<br>
+        2) Cuando se pulse una tecla sobre el cuadro de texto, se debe ejecutar 
+        la funci&oacute;n autocompleta().<br>
+        Desde esta funci&oacute;n, se debe llamar a la funci&oacute;n responsable 
+        de obtener la lista de municipios del<br>
+        servidor. El script se llama autocompletaMunicipios.php, el par&aacute;metro 
+        que se env&iacute;a mediante<br>
+        POST, se llama municipio y debe contener la cadena de texto escrita por 
+        el usuario.</p>
+      <p>El servidor responde con un array en formato JSON con la lista de municipios 
+        cuyo nombre comienza<br>
+        por el texto enviado. Ejemplo de respuesta del servidor:<br>
+        [ &quot;Alegr&iacute;a-Dulantzi&quot;, &quot;Amurrio&quot;, &quot;A&ntilde;ana&quot;, 
+        &quot;Aramaio&quot;, &quot;Armi&ntilde;&oacute;n&quot;, ... ]<br>
+        3) Una vez obtenido el array de sugerencias, se debe mostrar en forma 
+        de lista de elementos<br>
+        (etiqueta &lt;ul&gt; de HTML). Para transformar el array en la lista &lt;ul&gt;, 
+        modificar el prototype del<br>
+        objeto Array y a&ntilde;adir una funci&oacute;n espec&iacute;fica que 
+        realice la transformaci&oacute;n.<br>
+        4) Modificar la funci&oacute;n autocompleta() para tener en consideraci&oacute;n 
+        3 teclas especiales: las flechas<br>
+        superior e inferior y la tecla Enter. (Pista: propiedad keyCode). Cuando 
+        se utilizan las flechas del<br>
+        teclado hacia arriba y hacia abajo, se van seleccionando los elementos 
+        de la lista. Cuando se pulsa el<br>
+        Enter, se selecciona el elemento copiando su valor al cuadro de texto 
+        y ocultando la lista de<br>
+        sugerencias. (Pista: variable global elementoSeleccionado)<br>
+        5) Para mejorar el rendimiento de la aplicaci&oacute;n, a&ntilde;adir 
+        una cache para las sugerencias. Cada vez que<br>
+        se recibe una lista de sugerencias del servidor, se almacena en un objeto 
+        que relaciona el texto que<br>
+        ha introducido el usuario y la respuesta del servidor. Ejemplo:{<br>
+        &quot;a&quot;: [&quot;Ababuj&quot;, &quot;Abades&quot;, &quot;Abad&iacute;a&quot;, 
+        &quot;Abad&iacute;n&quot;, &quot;Abadi&ntilde;o&quot;, &quot;Ab&aacute;igar&quot;, 
+        &quot;Abajas&quot;,<br>
+        &quot;Abaltzisketa&quot;, &quot;Ab&aacute;nades&quot;, &quot;Abanilla&quot;, 
+        &quot;Abanto y Ci&eacute;rvana-Abanto Zierbena&quot;, &quot;Abanto&quot;,<br>
+        &quot;Abar&aacute;n&quot;, &quot;Abarca de Campos&quot;, &quot;Ab&aacute;rzuza&quot;, 
+        &quot;Abaurregaina/Abaurrea Alta&quot;, &quot;Abaurrepea/<br>
+        Abaurrea Baja&quot;, &quot;Abegondo&quot;, &quot;Abejar&quot;, &quot;Abejuela&quot;, 
+        &quot;Abella de la Conca&quot;],<br>
+        &quot;al&quot;: [&quot;Alac&oacute;n&quot;, &quot;Aladr&eacute;n&quot;, 
+        &quot;Alaejos&quot;, &quot;Alag&oacute;n&quot;, &quot;Alaior&quot;, &quot;Al&aacute;jar&quot;, 
+        &quot;Alajer&oacute;&quot;,<br>
+        &quot;Alameda de Gard&oacute;n (La)&quot;, &quot;Alameda de la Sagra&quot;, 
+        &quot;Alameda del Valle&quot;, &quot;Alameda&quot;,<br>
+        &quot;Alamedilla (La)&quot;, &quot;Alamedilla&quot;, &quot;Alamillo&quot;, 
+        &quot;Alaminos&quot;, &quot;Alam&uacute;s (Els)&quot;, &quot;Alange&quot;,<br>
+        &quot;Alan&iacute;s&quot;, &quot;Alaqu&agrave;s&quot;, &quot;Alar del 
+        Rey&quot;, &quot;Alaraz&quot;],<br>
+        ...<br>
+        }<br>
+        De esta forma, antes de realizar una petici&oacute;n al servidor, se comprueba 
+        si ya est&aacute; disponible una lista<br>
+        de sugerencias para ese texto. Adem&aacute;s, cuando se realiza una consulta 
+        al servidor, la respuesta se<br>
+        almacena en la cache para su posible reutilizaci&oacute;n futura.<br>
+        6) Mostrar un mensaje adecuado cuando el servidor devuelva un array vac&iacute;o 
+        por no haber<br>
+        sugerencias para el texto introducido por el usuario.</p>
+      
+      <p></p></td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

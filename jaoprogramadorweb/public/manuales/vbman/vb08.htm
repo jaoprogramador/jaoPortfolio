@@ -1,0 +1,386 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Entrada y salida de datos</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta name="keywords" content="Entrada y salida de datos Visual Basic,Tutorial Visual Basic, Ejemplos Visual Basic">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="2"> <h2>Entrada 
+        y salida de datos</h2></td>
+  </tr>
+  <tr> 
+    <td height="144" colspan="2"> <table width="75%">
+        <tr> 
+          <td><h3>Contenido</h3></td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="vb08.htm#intro">- Introducci&oacute;n</a></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="vb08.htm#entrada">- Entrada de datos</a></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td ><a href="vb08.htm#salida">- Salida de datos</a></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="vb08.htm#visualizar">- Visualizar datos 
+            sobre un objeto</a></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="vb08.htm#posicion">- Posici&oacute;n de impresi&oacute;n</a></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="vb08.htm#spc">- Funci&oacute;n Spc</a></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="vb08.htm#tab">- Funci&oacute;n Tab</a></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="vb08.htm#dandosalida">- Dando formato a la salida</a></td>
+        </tr>
+      </table>
+      <h3>Introducci&oacute;n<a name="intro"></a></h3>
+      <p>Las cajas de dialogo son ventanas con controles que podemos visualizar 
+        en el instante que necesitemos hacer una entrada o salida de datos. Visual 
+        Basic tiene cajas de dialogo predefinidas que nos permiten realizar opciones 
+        de E/S con muy poco esfuerzo. Por ejemplo, la funci&oacute;n inputbox 
+        visualiza una caja de dialogo presentando informaci&oacute;n o resultados.<br>
+        <br>
+        <br>
+        <h3>Entrada de datos<a name="entrada"></a> 
+        </h3>
+      <p>La funci&oacute;n inputbox visualiza una caja de di&aacute;logo 
+        semejante a la de la figura siguiente, con un mensaje que indica al usuario 
+        el tipo de informaci&oacute;n que debe introducir; devuelve como resultado 
+        un valor de tipo String que se corresponde con el tecleado. Su 
+        sintaxis es:<br>
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;InputBox(mensaje,[titulo][,por omisi&oacute;n][posx],[posy]) 
+        <br>
+        <br>
+        <br>
+        La cadena de caracteres mensaje contiene el mensaje que indica el usuario 
+        el tipo de informaci&oacute;n que debe introducir; en el ejemplo, &quot;Dato:&quot;. 
+        Si el mensaje consiste en varias l&iacute;neas, hay que introducir expl&iacute;citamente 
+        al final de cada una de ellas los caracteres del retorno de carro y avance 
+        de l&iacute;nea (Chr(13)&amp;Chr(10) o la constante Visual Basic 
+        , vbCrLf, equivalente). Por ejemplo, la sentencia:<br>
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;NomAp = InputBox(&quot;Introduzca los apellidos 
+        y el nombre.&quot;&amp; _<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;vbCrLF 
+        &amp; &quot;Los apellidos en may&uacute;scula&quot;)<br>
+        <br>
+        visualiza la caja de dialogo que presenta &quot;Proyecto1&quot; 
+        como t&iacute;tulo junto con el texto en el interior de &quot;Introduzca 
+        los apellidos y el nombre. Los apellidos en may&uacute;scula&quot;
+        junto a dos botones &quot;Aceptar y Cancelar&quot;:<br>
+        <br>
+        El resto de los par&aacute;metros son opcionales. Si queremos omitir un 
+        argumento que precede a otro especificado, hay que poner las correspondientes 
+        comas delimitadoras. Por ejemplo:<br>
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;x = InputBox(&quot;Dato:&quot;, ,0)<br>
+        <br>
+        La cadena de caracteres titulo ser&aacute; visualizada en la 
+        barra de t&iacute;tulo de la caja de dialogo; si se omite se pone como 
+        titulo el nombre de la aplicaci&oacute;n. La cadena de caracteres por_omisi&oacute;n 
+        especifica el texto que aparecer&aacute; en la caja de texto; si se omite, 
+        la caja de texto aparecer&aacute; vac&iacute;a. Los elementos posx 
+        y posy son las coordenadas x e y donde aparecer&aacute; 
+        la caja de di&aacute;logo y don de aparecer&aacute; la caja de di&aacute;logo; 
+        si se omite se pone como t&iacute;tulo el nombre de la aplicaci&oacute;n. 
+        La cadena de caracteres por_omisi&oacute;n especifica el texto que aparecer&aacute; 
+        en la caja de texto; si se omite, la caja de texto aparecer&aacute; vac&iacute;a. 
+        Los argumentos posx y posyson las coordenadas x e y donde aparecer&aacute; 
+        la caja de di&aacute;logo, medidas desde la izquierda y desde la parte 
+        superior de la pantalla, respectivamente, y expresadas en twips (1 
+        twip = 1//1440 pulgadas); si se omiten, la caja de dialogo se visualizar&aacute; 
+        centrada horizontalmente y aun tercio de la parte superior de la pantalla.</p>
+      <h3>Salida de datos<a name="salida"></a></h3><br>
+        <br>
+        Seg&uacute;n hemos visto, el m&eacute;todo Print visualiza datos en un 
+        formulario (objeto Form). As&iacute; mismo, permite visualizar 
+        datos en la ventana inmediato (a trav&eacute;s del objeto Debug), 
+        en una caja de imagen (Control PictureBox) o en una impresora 
+        (utilizando el objeto Printer). Su sintaxis es <br>
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;objeto.Print lista_de_expresiones<br>
+        <br>
+        donde objeto, que es opcional, especifica uno de los objetos mencionados 
+        anteriormente, y lista de expresiones es un conjunto de expresiones num&eacute;ricas 
+        y alfanum&eacute;ricas separadas por comas, espacios en blanco o puntos 
+        y comas. Si se utiliza como separador un espacio en blanco, Visual Basic 
+        lo sustituye automaticamente por un punto y coma. Las constantes de caracteres 
+        (literales) deben ponerse entre comillas. Cuando un objeto se omite, los 
+        datos se omiten sobre el objeto al que pertenece el procedimiento que 
+        invica a Print.<br>
+        <br>
+        Las siguientes sentencias muestran algunos ejemplos de la utilizaci&oacute;n 
+        del m&eacute;todoPrint:<br>
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Print a +5, a * b / 2, c$, 
+        &quot;Fin&quot;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Print x; y +5; w<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Print n; m<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Print &quot;LISTADO DE RESULTADOS&quot;<br>
+        <br>
+        Si se omite la lista de expresiones, se visualiza una l&iacute;nea en 
+        blanco. En cambio, si se incluye la lista de expresiones, se visualizan 
+        los valores de las expresiones en el objeto correspondiente. Por ejemplo:<br>
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a = 1000: b = 2000: c = 
+        500<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Print &quot;El valor de a es&quot;; 
+        a<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Print 'l&iacute;nea en blanco<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Print &quot;El valor de &quot;; 
+        b; &quot;+&quot;; c; &quot;=&quot;; b + c<br>
+        <br>
+        El resultado que se obtiene al ejecutar las sentencias anteriores es:<br>
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;El valor de a es 1000<br>
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;El valor de 2000 + 500 = 2500<br>
+        <br>
+        La posici&oacute;n de cada elemento a visualizar est&aacute; determinada 
+        por la puntuaci&oacute;n utilizada para separar los elementos en la lista 
+        de expresiones. Visual Basic divide la l&iacute;nea en zonas de 14 espacios 
+        cada una, cuando se utiliza como separador una coma. En la lista de expresiones, 
+        una coma produce la visualizaci&oacute;n de la expresi&oacute;n, inmediatamente 
+        despu&eacute;s de la &uacute;ltima visualizada. Por ejemplo:<br>
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Print &quot;1&nbsp;&nbsp;2&nbsp;&nbsp;3&quot;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Print &quot;123457890123456789012345678901234&quot;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a = 5<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Print a; a&#710;2; a * (-5)<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Print a, a&#710;2; a * (-5)<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Print &quot;FIN DEL PROCESO&quot;<br>
+        <br>
+        <br>
+        <h3>Visualizar datos sobre un objeto<a name="visualizar"></a></h3><br>
+        <br>
+        El m&eacute;todo Print &iquest;sobre qu&eacute; objetos visualiza 
+        los datos? La respuesta es: sobre el objeto sobre el que se ha invocado 
+        Print. Por ejemplo, volviendo a la aplicaci&oacute;n inputbox.vbp, 
+        el procedimiento<br>
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Private Sub Form_Load()<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Print 
+        NomAp<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Print 
+        Edad<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Print 
+        FechaNa<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;End Sub<br>
+        <br>
+        pertenece al formulario Form1. Por lo tanto, es el objeto Form1 
+        el que implicitamente a trav&eacute;s de su procedimiento Form_Load 
+        invoca el m&eacute;todo Print, por eso los datos se visualizan 
+        sobre el &aacute;rea de trabajo de Form1. Esto lo podr&iacute;amos 
+        haber indicado expl&iacute;citamente as&iacute;:<br>
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Private Sub Form_Load()<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'...<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NomAp 
+        = InputBox (&quot;Nombre y apellidos:&quot;, , &quot;Nombre apellidos&quot;)<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Edad 
+        = InputBox(&quot;Edad:&quot;, ,1)<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FechaNa 
+        = InputBox(&quot;Fecha:&quot;, , #1/1/80)<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'Salida 
+        de datos<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Form1.Print 
+        NomAp<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Form1.Print 
+        Edad<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Form1.Print 
+        FechaNa<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;End Sub<br>
+        <br>
+        <br>
+        <h3>Posici&oacute;n de impresi&oacute;n<a name="posicion"></a> 
+        </h3>
+      <p>A continuaci&oacute;n se presentan dos funciones que podremos utilizar 
+        como apoyo para posicionar los datos en la salida.<br>
+        <br>
+        <h3>Funci&oacute;n Spc<a name="spc"></a></h3><br>
+        <br>
+        Inserta n espaciones antes de imprimir la expresi&oacute;n especificada 
+        a continuaci&oacute;n. Su sintaxis es<br>
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;Spc(n) <br>
+        <br>
+        donde n es el n&uacute;mero de espacios a insertar.<br>
+        <br>
+        Spc s&oacute;lo puede utilizarse con Print o Print#. 
+        Cuando se utiliza esta funci&oacute;n, se asume un punto y coma (;) a 
+        continuaci&oacute;n.<br>
+        <br>
+        Si Spc est&aacute; al final de la lista de expresiones, no se 
+        produce un retorno de carro. Esto es, act&uacute;a como si se tratase 
+        de un punto y coma al final.<br>
+        <br>
+        A continuaci&oacute;n se muestra un ejemplo de c&oacute;mo se utiliza:<br>
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;n$ = InputBox(&quot;Nombre y apellidos&quot;)<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;edad = InputBox(&quot;Edad&quot;)<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Print Spc(12); &quot;NOMBRE&quot;; Spc(16); 
+        &quot;EDAD&quot; <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Print &quot;-----------------------------------------&quot;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Print n$; Spc(11);edad<br>
+        <br>
+        <br>
+        <h3>Funci&oacute;n Tab<a name="tab"></a></h3>
+      <p><br>
+        Indica la posici&oacute;n (columna) donde se desea que comience la impresi&oacute;n 
+        de una determinada expresi&oacute;n. Su sintaxis es<br>
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tab(n)<br>
+        <br>
+        donde n es una expresi&oacute;n entera que indica el n&uacute;mero de 
+        cada columna en el que hay que situarse antes de imprimir la expresi&oacute;n 
+        especificada a continuaci&oacute;n.<br>
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tab s&oacute;lo puede utilizarse con 
+        sentencias Print o Print#<br>
+        <br>
+        Si la posici&oacute;n de la impresi&oacute;n actual es superior a la indicada 
+        por n, entonces Tab indicala posici&oacute;n n en la linea siguiente. 
+        La posici&oacute;n mas baja es la 1. Si Tab est&aacute; al final de la 
+        lista de expresiones, no se produce un retorno de carro.<br>
+      </p>
+      <h3>Dando formato a la salida<a name="dandosalida"></a></h3>
+      <p>La funci&oacute;n format permite dar formato a la salida seg&uacute;n 
+        un patr&oacute;n especificado (Print Format(Entrada, Patron)). Por ejemplo:<br>
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Print Format (n, &quot;#,##0.00&quot;)<br>
+        <br>
+        La tabla siguiente muestra los resultados que se producen para unas determinadas 
+        entradas y distintos patrones:<br>
+        <br>
+      </p>
+      <table width="75%" align="center">
+        <tr> 
+          <td>Patr&oacute;n</td>
+          <td>Entrada: 5</td>
+          <td>Entrada: -5</td>
+          <td>Entrada: .5</td>
+        </tr>
+        <tr> 
+          <td>Sin patron</td>
+          <td>5</td>
+          <td>- 5</td>
+          <td>,5</td>
+        </tr>
+        <tr> 
+          <td>0</td>
+          <td>5</td>
+          <td>- 5</td>
+          <td>1</td>
+        </tr>
+        <tr> 
+          <td>0.00</td>
+          <td>5,00</td>
+          <td>- 5,00</td>
+          <td>0,50</td>
+        </tr>
+        <tr> 
+          <td>#,##0</td>
+          <td>5</td>
+          <td>- 5</td>
+          <td>1</td>
+        </tr>
+        <tr> 
+          <td>#,##0.00</td>
+          <td>5,00</td>
+          <td>- 5,00</td>
+          <td>0,50</td>
+        </tr>
+        <tr> 
+          <td>#,###.##</td>
+          <td>5,</td>
+          <td>- 5,</td>
+          <td>,5</td>
+        </tr>
+        <tr> 
+          <td>0%</td>
+          <td>500%</td>
+          <td>- 500</td>
+          <td>50%</td>
+        </tr>
+        <tr> 
+          <td>0.00%</td>
+          <td>500,00%</td>
+          <td>- 500,00%</td>
+          <td>50,00%</td>
+        </tr>
+        <tr> 
+          <td>0.00E+00</td>
+          <td>5,00E+00</td>
+          <td>- 5,00E+00</td>
+          <td>5,00E-01</td>
+        </tr>
+        <tr> 
+          <td>0.00E-00</td>
+          <td>5,00E00</td>
+          <td>- 5,00E00</td>
+          <td>5,00E-01</td>
+        </tr>
+      </table>
+      <p>El s&iacute;mbolo # representa un d&iacute;gito cualquiera, excepto los 
+        ceros no significativos. El s&iacute;mbolo 0 representa un d&iacute;gito 
+        cualquiera, incluyendo los ceros no significativos, y adem&aacute;s redondea 
+        el resultado. El punto indica la posici&oacute;n del punto decimal y la 
+        coma es el separador de los miles. Otros s&iacute;mbolos que tambi&eacute;n 
+        se pueden incluir son:- + $ () y el espacio. Estos &uacute;ltimos se visualizan 
+        tal cual. El s&acute;s&iacute;mbolo % presenta el valor por cien y a&ntilde;ade 
+        ese s&iacute;mbolo al resultado.<br>
+        <br>
+        Para crear una expresi&oacute;n de formato para cadenas, se pueden utilizar 
+        cualesquiera de los siguientes caracteres: @, &amp;, &lt;,&gt; y !.<br>
+        <br>
+        El s&iacute;mbolo @ presenta un car&aacute;cter o un espacio. Si la cadena 
+        tiene un car&aacute;cter en la posici&oacute;n donde aparece&amp;, &eacute;ste 
+        se presenta; de lo contrario, no se presenta nada.<br>
+        <br>
+        El s&iacute;mbolo &lt; fuerza min&uacute;scula y el &gt; a may&uacute;scula.<br>
+        <br>
+        El s&iacute;mbolo ! obliga a llenar de izquierda a derecha los lugares 
+        especificados por @ y &amp;. Si no se especifica, los lugares especificados 
+        por @ y &amp; son llenados de izquierda a derecha.<br>
+      </p></td>
+  </tr>
+  <tr> 
+    <td></td>
+    <td> 
+      <div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

@@ -1,0 +1,363 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Ejercicios MySQL</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="MySQL, sql, pl/sql, programacion MySQL, ejercicios MySQL, ejemplos MySQL, select">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2>P O S T I N S T A L A C I O N</h2></td>
+  </tr>
+  <tr> 
+    <td><h3>Pasos a seguir después de la instalación en Windows</h3>
+      <p>En Windows, el directorio de datos y la tabla de permisos no necesitan 
+        ser creados. MySQL para Windows incluye la tabla de permisos<br>
+        con un conjunto de cuentas ya inicializadas en la base de datos mysql, 
+        dentro del directorio de datos. Al contrario que en<br>
+        Unix, no se debe ejecutar el script mysql_install_db. Sin embargo, si 
+        no se instala MySQL utilizando el ASistente de Instalaci&oacute;n,<br>
+        se deber&iacute;an establecer contrase&ntilde;as para proteger las cuentas. 
+        Consulte Secci&oacute;n 2.3.4.1, &#8220;Introducci&oacute;n&#8221;. El 
+        procedimiento para<br>
+        hacerlo est&aacute; en Secci&oacute;n 2.9.3, &#8220;Hacer seguras las 
+        cuentas iniciales de MySQL&#8221;.<br>
+        Antes de establecer passwords, se podr&iacute;a desear ejecutar algunos 
+        programas cliente para asegurarse de que hay conexi&oacute;n con el servidor<br>
+        y que &eacute;ste se encuentra funcionando correctamente. Tras cerciorarse 
+        de que el servidor est&aacute; ejecut&aacute;ndose (consultar Secci&oacute;n<br>
+        2.3.10, &#8220;Arrancar el servidor la primera vez&#8221;), se utilizar&iacute;an 
+        los siguientes comandos para verificar que se puede traer informaci&oacute;n<br>
+        desde el mismo. La salida por pantalla debe ser similar a esto:<br>
+        C:\&gt; C:\mysql\bin\mysqlshow<br>
+        +-----------+<br>
+        | Databases |<br>
+        +-----------+<br>
+        | mysql |<br>
+        | test |<br>
+        +-----------+<br>
+        C:\&gt; C:\mysql\bin\mysqlshow mysql<br>
+        Database: mysql<br>
+        +--------------+<br>
+        | Tables |<br>
+        +--------------+<br>
+        | columns_priv |<br>
+        | db |<br>
+        | func |<br>
+        | host |<br>
+        | tables_priv |<br>
+        | user |<br>
+        +--------------+<br>
+        C:\&gt; C:\mysql\bin\mysql -e &quot;SELECT Host,Db,User FROM db&quot; 
+        mysql<br>
+        +------+-------+------+<br>
+        | host | db | user |<br>
+        +------+-------+------+<br>
+        | % | test% | |<br>
+        +------+-------+------+<br>
+        Si se est&aacute; empleando una versi&oacute;n de Windows que soporta 
+        servicios, y se desea que el servidor se ejecute autom&aacute;ticamente 
+        al iniciarse<br>
+        Windows, consulte Secci&oacute;n 2.3.12, &#8220;Arrancar MySQL como un 
+        servicio de Windows&#8221;.&lt;/p&gt;<br>
+        Pasos a seguir despu&eacute;s de la instalaci&oacute;n en Linux</h3><br>
+        &lt;p&gt;Luego de instalar MySQL en Unix, se necesita inicializar las 
+        tablas de permisos, ejecutar el servidor, y asegurarse de que &eacute;ste 
+        funciona<br>
+        correctamente. Tambi&eacute;n se podr&iacute;a desear que el servidor 
+        se inicie y detenga autom&aacute;ticamente cuando lo haga el sistema. 
+        Se<br>
+        deben asignar contrase&ntilde;as a las cuentas en las tablas de permisos.<br>
+        En Unix, las tablas de permisos se configuran mediante el programa mysql_install_db. 
+        En algunos m&eacute;todos de instalaci&oacute;n,<br>
+        este programa se ejecuta autom&aacute;ticamente.<br>
+        &#8226; Si se instala MySQL en Linux a partir de una distribuci&oacute;n 
+        RPM, el servidor RPM ejecuta mysql_install_db.<br>
+        &#8226; Si se instala MySQL en Mac OS X a partir de una distribuci&oacute;n 
+        PKG, el instalador ejecuta mysql_install_db.<br>
+        En otro caso, ser&aacute; necesario ejecutar manualmente mysql_install_db.<br>
+        Instalar MySQL<br>
+        80<br>
+        El siguiente procedimiento describe c&oacute;mo inicializar las tablas 
+        de permisos (si no se hizo anteriormente) y luego iniciar el servidor.<br>
+        Tambi&eacute;n sugiere posibles comandos a utilizar para verificar que 
+        el servidor est&aacute; accesible y en correcto funcionamiento. Para informaci&oacute;n<br>
+        relativa a iniciar y detener el servidor autom&aacute;ticamente, consulte 
+        Secci&oacute;n 2.9.2.2, &#8220;Arrancar y parar MySQL autom&aacute;ticamente&#8221;.<br>
+        Luego de completar el procedimiento y tener el servidor en funcionamiento, 
+        se deber&iacute;an asignar contrase&ntilde;as a las cuentas creadas<br>
+        por mysql_install_db. Las instrucciones para hacerlo se hallan en Secci&oacute;n 
+        2.9.3, &#8220;Hacer seguras las cuentas iniciales de<br>
+        MySQL&#8221;.<br>
+        En los ejemplos mostrados, el servidor se ejecuta bajo el identificador 
+        de usuario de la cuenta de inicio de sesi&oacute;n mysql. Se asume<br>
+        que dicha cuenta existe. La cuenta mysql puede haber sido creda especialmente 
+        o bien originarse al cambiar el nombre de una<br>
+        cuenta existente.<br>
+        1. Posicionarse en el nivel m&aacute;s alto del directorio de instalaci&oacute;n 
+        de MySQL, representado por BASEDIR:<br>
+        shell&gt; cd BASEDIR<br>
+        BASEDIR muy probablemente se reemplace por algo similar a /usr/local/mysql 
+        o /usr/local. Los siguientes pasos<br>
+        asumen que se est&aacute; en este directorio.<br>
+        2. De ser necesario, ejecutar el programa mysql_install_db para establecer 
+        las tablas de permisos MySQL iniciales, las<br>
+        que contienen los privilegios que determinan qu&eacute; usuarios est&aacute;n 
+        autorizados a conectarse al servidor. Habr&aacute; que ejecutarlo si<br>
+        se utiliz&oacute; una distribuci&oacute;n que no lo hace autom&aacute;ticamente.<br>
+        Por lo general, mysql_install_db s&oacute;lo requiere ser ejecutado la 
+        primera vez que se instala MySQL, de modo que este paso<br>
+        puede obviarse si se est&aacute; actualizando una instalaci&oacute;n existente. 
+        No obstante, mysql_install_db no sobreescribe ninguna<br>
+        tabla, por lo tanto, es seguro utilizarlo en cualquier circunstancia.<br>
+        Para inicializar las tablas de permisos se utilizar&aacute; uno de los 
+        siguientes comandos, dependiendo de si mysql_install_db<br>
+        se encuentra en el directorio bin o scripts:<br>
+        shell&gt; bin/mysql_install_db --user=mysql<br>
+        shell&gt; scripts/mysql_install_db --user=mysql<br>
+        El script mysql_install_db crea el directorio de datos, la base de datos 
+        mysql que almacena todos los privilegios para<br>
+        el servidor, y la base de datos test que puede emplearse para probar MySQL. 
+        El script tambi&eacute;n crea entradas en la tabla de<br>
+        permisos para la cuenta root y la cuenta de usuario an&oacute;nimo. Las 
+        cuentas no est&aacute;n protegidas por contrase&ntilde;a en un principio.<br>
+        Una descripci&oacute;n de los permisos que tienen se encuentra en Secci&oacute;n 
+        2.9.3, &#8220;Hacer seguras las cuentas iniciales de MySQL&#8221;.<br>
+        Brevemente, estos privilegios le permiten al usuario root de MySQL hacer 
+        cualquier cosa, y le permiten a cualquier usuario<br>
+        de MySQL crear o utilizar bases de datos cuyo nombre sea test o comience 
+        con test_.<br>
+        Es importante asegurarse de que los directorios y ficheros de bases de 
+        datos tienen como propietario a la cuenta de inicio de<br>
+        sesi&oacute;n mysql, para que el servidor tenga acceso de lectura y escritura 
+        a los mismos. Para cerciorarse de esto, si<br>
+        mysql_install_db se ejecuta mientras se est&aacute; como root del sistema 
+        operativo, hay que usar la opci&oacute;n --user como<br>
+        se muestra. En otro caso, el script se deber&aacute; ejecutar mientras 
+        se est&aacute; como usuario mysql del sistema operativo, en cuyo caso<br>
+        se puede omitir la opci&oacute;n --user.<br>
+        mysql_install_db crea varias tablas en la base de datos mysql, incluyendo 
+        user, db, host, tables_priv, columns_<br>
+        priv, y func, entre otras. Consulte Secci&oacute;n 5.6, &#8220;El sistema 
+        de privilegios de acceso de MySQL&#8221; para una descripci&oacute;n<br>
+        completa.<br>
+        Si no se desea tener la base de datos test, se la puede eliminar con mysqladmin 
+        -u root drop test luego de iniciar<br>
+        el servidor.<br>
+        Si ocurren problemas con mysql_install_db, consulte Secci&oacute;n 2.9.2.1, 
+        &#8220;Problemas en la ejecuci&oacute;n de<br>
+        mysql_install_db&#8221;.<br>
+        Hay algunas alternativas para ejecutar el script mysql_install_db que 
+        se provee con la distribuci&oacute;n de MySQL:<br>
+        &#8226; Si se desea que los privilegios iniciales sean diferentes de los 
+        establecidos por defecto, se puede modificar<br>
+        mysql_install_db antes de ejecutarlo. Sin embargo, es preferible utilizar 
+        GRANT y REVOKE para modificar los privilegios<br>
+        despu&eacute;s que las tablas de permisos se hayan creado. En otras palabras, 
+        se puede ejecutar mysql_install_db, y<br>
+        posteriormente emplear mysql -u root mysql para conectarse al servidor 
+        como usuario root de MySQL y aplicar<br>
+        las sentencias GRANT y REVOKE que sean necesarias.<br>
+        Si se desea instalar MySQL en varios ordenadores con los mismos privilegios, 
+        se pueden colocar las sentencias GRANT y<br>
+        REVOKE en un fichero y ejecutarlo como un script utilizando mysql despu&eacute;s 
+        de ejecutar mysql_install_db. Por<br>
+        ejemplo:<br>
+        Instalar MySQL<br>
+        81<br>
+        shell&gt; bin/mysql_install_db --user=mysql<br>
+        shell&gt; bin/mysql -u root &lt; your_script_file<br>
+        De este modo se evita tipear las sentencias en cada ordenador.<br>
+        &#8226; Es posible regenerar las tablas de permisos completamente aunque 
+        ya est&eacute;n creadas. Se puede necesitar esto si se est&aacute;<br>
+        aprendiendo a usar GRANT y REVOKE y se han hecho tantas modificaciones 
+        tras la ejecuci&oacute;n de mysql_install_db<br>
+        que se desea vaciar las tablas de permisos y comenzar de nuevo.<br>
+        Para regenerar las tablas de permisos, eliminar todos los ficheros .frm, 
+        .MYI, y .MYD en el directorio que contiene la base<br>
+        de datos mysql. (Este es el directorio llamado mysql dentro del directorio 
+        de datos, el cual aparece listado como el<br>
+        valor datadir cuando se ejecuta mysqld --help.) Luego debe ejecutarse 
+        nuevamente el script<br>
+        mysql_install_db<br>
+        &#8226; Se puede iniciar mysqld manualmente utilizando la opci&oacute;n 
+        --skip-grant-tables e ingresar los permisos manualmente<br>
+        utilizando mysql:<br>
+        shell&gt; bin/mysqld_safe --user=mysql --skip-grant-tables &amp;<br>
+        shell&gt; bin/mysql mysql<br>
+        Desde mysql, ejecutar manualmente los comandos contenidos en mysql_install_db. 
+        Al finalizar hay que asegurarse<br>
+        de ejecutar mysqladmin flush-privileges o mysqladmin reload para indicarle 
+        al servidor que lea nuevamente<br>
+        las tablas de permisos.<br>
+        N&oacute;tese que al no utilizar mysql_install_db, no solamente hay que 
+        cargar manualmente el contenido de las tablas de<br>
+        permisos, sino que tambi&eacute;n hay que crearlas primero.<br>
+        3. Iniciar el servidor MySQL:<br>
+        shell&gt; bin/mysqld_safe --user=mysql &amp;<br>
+        Es importante que el servidor MySQL sea ejecutado utilizando una cuenta 
+        de sistema operativo sin privilegios (distinta a<br>
+        root). Para cerciorarse de esto, se debe usar la opci&oacute;n --user 
+        si se ejecuta mysql_safe habiendo iniciado sesi&oacute;n del sistema<br>
+        operativo como root. En otro caso, se deber&iacute;a ejecutar el script 
+        mientras se ha iniciado sesi&oacute;n como mysql, en cuyo<br>
+        caso se puede omitir la opci&oacute;n --user.<br>
+        Mayores instrucciones para ejecutar MySQL como un usuario sin privilegios 
+        se encuentran en Secci&oacute;n A.3.2, &#8220;C&oacute;mo ejecutar<br>
+        MySQL como usuario normal&#8221;.<br>
+        Si se omite la creaci&oacute;n de las tablas de permisos antes de llegar 
+        a este paso, aparecer&aacute; el siguiente mensaje en el fichero de registro<br>
+        de error cuando se inicie el servidor:<br>
+        mysqld: Can't find file: 'host.frm'<br>
+        Si ocurren otros problemas al iniciar el servidor, consulte Secci&oacute;n 
+        2.9.2.3, &#8220;Arrancar y resolver problemas del servidor<br>
+        MySQL&#8221;.<br>
+        4. Utilizar mysqladmin para verificar que el servidor se encuentra en 
+        ejecuci&oacute;n. Los siguientes comandos proporcionan formas<br>
+        simples de saber si el servidor est&aacute; activo y responde a conexiones:<br>
+        shell&gt; bin/mysqladmin version<br>
+        shell&gt; bin/mysqladmin variables<br>
+        La salida producida por mysqladmin version var&iacute;a dependiendo de 
+        la plataforma y la versi&oacute;n de MySQL, pero deber&iacute;a<br>
+        ser similar a esto:<br>
+        shell&gt; bin/mysqladmin version<br>
+        mysqladmin Ver 8.41 Distrib 5.0.9-beta, for pc-linux-gnu on i686<br>
+        Copyright (C) 2000 MySQL AB &amp; MySQL Finland AB &amp; TCX DataKonsult 
+        AB<br>
+        This software comes with ABSOLUTELY NO WARRANTY. This is free software,<br>
+        and you are welcome to modify and redistribute it under the GPL license<br>
+        Server version 5.0.9-beta-Max<br>
+        Protocol version 10<br>
+        Connection Localhost via UNIX socket<br>
+        UNIX socket /var/lib/mysql/mysql.sock<br>
+        Uptime: 14 days 5 hours 5 min 21 sec<br>
+        Threads: 1 Questions: 366 Slow queries: 0<br>
+        Opens: 0 Flush tables: 1 Open tables: 19<br>
+        Queries per second avg: 0.000<br>
+        Instalar MySQL<br>
+        82<br>
+        Para ver qu&eacute; otras tareas pueden hacerse con mysqladmin, se lo 
+        debe invocar con la opci&oacute;n --help.<br>
+        5. Verificar que se pueda detener el servidor:<br>
+        shell&gt; bin/mysqladmin -u root shutdown<br>
+        6. Verificar que se pueda reiniciar el servidor. Hacerlo mediante mysqld_safe 
+        o invocando directamente a mysqld. Por<br>
+        ejemplo:<br>
+        shell&gt; bin/mysqld_safe --user=mysql --log &amp;<br>
+        Si mysqld_safe fallara, consultar Secci&oacute;n 2.9.2.3, &#8220;Arrancar 
+        y resolver problemas del servidor MySQL&#8221;.<br>
+        7. Ejecutar algunas pruebas sencillas para comprobar que se puede traer 
+        informaci&oacute;n desde el servidor. La salida deber&iacute;a ser similar<br>
+        a lo que se muestra aqu&iacute;:<br>
+        shell&gt; bin/mysqlshow<br>
+        +-----------+<br>
+        | Databases |<br>
+        +-----------+<br>
+        | mysql |<br>
+        | test |<br>
+        +-----------+<br>
+        shell&gt; bin/mysqlshow mysql<br>
+        Database: mysql<br>
+        +---------------------------+<br>
+        | Tables |<br>
+        +---------------------------+<br>
+        | columns_priv |<br>
+        | db |<br>
+        | func |<br>
+        | help_category |<br>
+        | help_keyword |<br>
+        | help_relation |<br>
+        | help_topic |<br>
+        | host |<br>
+        | proc |<br>
+        | procs_priv |<br>
+        | tables_priv |<br>
+        | time_zone |<br>
+        | time_zone_leap_second |<br>
+        | time_zone_name |<br>
+        | time_zone_transition |<br>
+        | time_zone_transition_type |<br>
+        | user |<br>
+        +---------------------------+<br>
+        shell&gt; bin/mysql -e &quot;SELECT Host,Db,User FROM db&quot; mysql<br>
+        +------+--------+------+<br>
+        | host | db | user |<br>
+        +------+--------+------+<br>
+        | % | test | |<br>
+        | % | test_% | |<br>
+        +------+--------+------+<br>
+        8. Hay un conjunto de pruebas de rendimiento en el directorio sql-bench 
+        (dentro del directorio de instalaci&oacute;n de MySQL) que<br>
+        puede utilizarse para comparar el desempe&ntilde;o de MySQL en distintas 
+        plataformas. Este conjunto de pruebas est&aacute; escrito en<br>
+        Perl. Utiliza el m&oacute;dulo Perl DBI para proporcionar una interface 
+        independiente de la base de datos a varias bases de datos, y<br>
+        algunos otros m&oacute;dulos adicionales de Perl tambi&eacute;n son requeridos 
+        para ejecutar las pruebas. Se deben tener los siguientes m&oacute;dulos<br>
+        instalados:<br>
+        DBI<br>
+        DBD::mysql<br>
+        Data::Dumper<br>
+        Data::ShowTable<br>
+        Estos m&oacute;dulos pueden ser obtenidos desde CPAN (http://www.cpan.org/). 
+        Tambi&eacute;n, consulte Secci&oacute;n 2.13.1, &#8220;Instalaci&oacute;n 
+        de<br>
+        Perl en Unix&#8221;.<br>
+        El directorio sql-bench/Results contiene los resultados de muchas ejecuciones 
+        a trav&eacute;s de diferentes bases de datos y<br>
+        plataformas. Para ejecutar todos los tests, deben introducirse estos comandos:<br>
+        shell&gt; cd sql-bench<br>
+        shell&gt; perl run-all-tests<br>
+        Si no se encuentra el directorio sql-bench, probablemente se ha instalado 
+        MySQL empleando otros ficheros RPM que no<br>
+        son el RPM de c&oacute;digo fuente (El RPM de c&oacute;digo fuente incluye 
+        el directorio de pruebas de rendimiento sql-bench) En este<br>
+        caso, se deber&aacute; primero instalar el conjunto de pruebas de rendimiento 
+        antes de poder utilizarlo. Para MySQL 5.0, hay un<br>
+        Instalar MySQL<br>
+        83<br>
+        RPM separado con pruebas de rendimiento llamado mysql-bench-VERSION-i386.rpm 
+        que contiene el c&oacute;digo de prueba<br>
+        y los datos.<br>
+        Si se posee una distribuci&oacute;n de c&oacute;digo fuente, tambi&eacute;n 
+        hay pruebas en su subdirectorio tests. Por ejemplo, para ejecutar<br>
+        auto_increment.tst, debe ejecutarse este comando desde el directorio de 
+        m&aacute;s alto nivel en la distribuci&oacute;n de c&oacute;digo<br>
+        fuente:<br>
+        shell&gt; mysql -vvf test &lt; ./tests/auto_increment.tst<br>
+        El resultado esperado del test se encuentra en el fichero ./tests/auto_increment.res.<br>
+        9. En este punto, se deber&iacute;a tener el servidor en funcionamiento. 
+        Sin embargo, ninguna de las cuentas iniciales de MySQL tiene<br>
+        una contrase&ntilde;a, as&iacute; que se les debe asignar empleando las 
+        instrucciones halladas en Secci&oacute;n 2.9.3, &#8220;Hacer seguras las 
+        cuentas<br>
+        iniciales de MySQL&#8221;.<br>
+        En MySQL 5.0, el procedimiento de instalaci&oacute;n crea zonas horarias 
+        en la base de datos mysql. No obstante, se deben llenar las tablas<br>
+        en forma manual. Las instrucciones para hacerlo se encuentran en Secci&oacute;n 
+        5.9.8, &#8220;Soporte de zonas horarias en el servidor<br>
+        MySQL&#8221;. </p>
+        </td>
+    <td>&nbsp;</td>
+    <td><a href="http://www.euskalnet.net/juanarana/oraclezip/Ejer3.rar"><img src="../../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td>
+<div align="right"><a href="http://www.euskalnet.net/juanarana/index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a>
+      </div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Ejercicios MySQL</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="MySQL, sql, pl/sql, programacion MySQL, ejercicios MySQL, ejemplos MySQL, select">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2>S E N T E N C I A S  U T I L E S</h2></td>
+  </tr>
+  <tr> 
+    <td><h3>Sintaxis de DESCRIBE (Información acerca de las columnas)</h3>
+      <p>{DESCRIBE | DESC} tbl_name [col_name | wild]<br>
+        DESCRIBE proporciona informaci&oacute;n acerca de columnas en una tabla. 
+        Es una abreviaci&oacute;n de SHOW COLUMNS FROM. Desde<br>
+        MySQL 5.0.1, estos comandos tambi&eacute;n muestran informaci&oacute;n 
+        para vistas.<br>
+        Consulte Secci&oacute;n 13.5.4.3, &#8220;Sintaxis de SHOW COLUMNS&#8221;.<br>
+        col_name puede ser un nombre de columna, o una cadena con los caracteres 
+        de SQL '%' y '_' para obtener salida s&oacute;lo para las columnas<br>
+        con nombres que coincidan con la cadena. No hay necesidad de delimitar 
+        la cadena con comillas a no ser que contenga espacios<br>
+        u otros caracteres especiales.<br>
+        mysql&gt; DESCRIBE city;<br>
+        +------------+----------+------+-----+---------+----------------+<br>
+        | Field | Type | Null | Key | Default | Extra |<br>
+        +------------+----------+------+-----+---------+----------------+<br>
+        | Id | int(11) | | PRI | NULL | auto_increment |<br>
+        | Name | char(35) | | | | |<br>
+        | Country | char(3) | | UNI | | |<br>
+        | District | char(20) | YES | MUL | | |<br>
+        | Population | int(11) | | | 0 | |<br>
+        +------------+----------+------+-----+---------+----------------+<br>
+        5 rows in set (0.00 sec)<br>
+        La columna Null indica si pueden almacenarse los valores NULL , mostrando 
+        YES cuando se permiten valores NULL.<br>
+        La columna Key indica si el campo est&aacute; indexado. Un valor de PRI 
+        indica que el campo es parte de una clave primaria de tabla.<br>
+        UNI indica que el campo es parte de un &iacute;ndice UNIQUE. El valor 
+        MUL indica que se permiten m&uacute;ltiples ocurrencias de un valor dado<br>
+        dentro del campo.<br>
+        Un campo puede designarse como MUL incluso si se usa un &iacute;ndice 
+        UNIQUE si se permiten valores NULL , ya que m&uacute;ltiples registros<br>
+        en un &iacute;ndice UNIQUE pueden tener un valor NULL si la columna no 
+        se declara NOT NULL. Otra causa para MUL en un &iacute;ndice<br>
+        UNIQUE es cuando dos columnas de un &iacute;ndice UNIQUE compuesto; mientras 
+        la combinaci&oacute;n de las columnas sea &uacute;nica, cada columna<br>
+        puede tener m&uacute;ltiples ocurrencias de un valor dado. Tenga en cuenta 
+        que en un &iacute;ndice compuesto s&oacute;lo el campo de m&aacute;s a 
+        la<br>
+        izquierda del &iacute;ndice tiene una entrada en la columna Key .<br>
+        La columna Default indica el valor por defecto asignado al campo.<br>
+        La columna Extra contiene cualquier informaci&oacute;n adicional disponible 
+        acerca de un campo dado. En nuestro ejemplo la columna<br>
+        Extra indica que la columna Id se cre&oacute; con la palabra clave AUTO_INCREMENT 
+        .<br>
+        Si los tipos de columna son distintos a los esperados seg&uacute;n el 
+        comando CREATE TABLE , tenga en cuenta que a veces MySQL<br>
+        cambia los tipos de columa. Consulte Secci&oacute;n 13.1.5.1, &#8220;Cambios 
+        t&aacute;citos en la especificaci&oacute;n de columnas&#8221;.<br>
+        El comando DESCRIBE se proporciona por compatibilidad con Oracle.<br>
+        Los comandos SHOW CREATE TABLE y SHOW TABLE STATUS proporcionan informaci&oacute;n 
+        acerca de tablas .<br>
+        <h3>Sintaxis de USE</h3><br>
+        USE db_name<br>
+        El comando USE db_name le dice a MySQL que use la base de datos db_name 
+        como la base de datos por defecto para los comandos<br>
+        siguientes. Sigue siendo la base de datos por defecto hasta el final de 
+        la sesi&oacute;n o hasta que se realiza otro comando USE :<br>
+        mysql&gt; USE db1;<br>
+        mysql&gt; SELECT COUNT(*) FROM mytable; # selects from db1.mytable<br>
+        mysql&gt; USE db2;<br>
+        mysql&gt; SELECT COUNT(*) FROM mytable; # selects from db2.mytable<br>
+        Hacer una base de datos particular la actual signfica que el comando USE 
+        no le imposibilita a acceder a tablas en otras bases de datos.<br>
+        El siguiente ejemplo accede a la tabla author desde la base de datos db1 
+        y a la tabla editor desde la base de datos db2:<br>
+        mysql&gt; USE db1;<br>
+        mysql&gt; SELECT author_name,editor_name FROM author,db2.editor<br>
+        -&gt; WHERE author.editor_id = db2.editor.editor_id;<br>
+        El comando USE se proporciona por compatibilidad con Sybase. </p>
+        </td>
+    <td>&nbsp;</td>
+    <td><a href="http://www.euskalnet.net/juanarana/oraclezip/Ejer3.rar"><img src="../../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td>
+<div align="right"><a href="http://www.euskalnet.net/juanarana/index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a>
+      </div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

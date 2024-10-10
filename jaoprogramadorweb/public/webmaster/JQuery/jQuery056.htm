@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Introducci&oacute;n a JQuery</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta name="keywords" content="Introduccion a JQuery, Manual JQuery, tutorial JQuery, Ejemplos JQuery, ejercicios JQuery">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos"><tr> 
+    <td height="39" colspan="3"> <h2>Conclusión sobre los selectores</h2></td>
+  </tr>
+  <tr> 
+    <td height="268" colspan="3"> <p>Hasta este punto hemos visto los selectores 
+        b&aacute;sicos de jQuery, que nos servir&aacute;n para hacer la<br>
+        mayor&iacute;a de nuestros ejemplos y resolver tambi&eacute;n la mayor 
+        parte de las necesidades de<br>
+        selecci&oacute;n de elementos que nos podamos encontrar en ejemplos reales. 
+        Sin embargo, el<br>
+        framework Javascript incluye una buena gama de selectores adicionales 
+        que pueden venirnos<br>
+        bien en algunos casos m&aacute;s concretos y que dejamos para pr&oacute;ximos 
+        art&iacute;culos.</p>
+<h3>Ejemplo para practicar con selectores en jQuery</h3>
+      <p>En el art&iacute;culo anterior explicamos lo que eran los selectores de jQuery 
+        y los tipos de selectores<br>
+        b&aacute;sicos. Ahora, para que podamos ver por la pr&aacute;ctica c&oacute;mo 
+        funcionan cada uno de los<br>
+        selectores, hemos creado un ejemplo donde podremos escribir varios selectores 
+        y ver c&oacute;mo<br>
+        funcionan, es decir, qu&eacute; elementos de la p&aacute;gina se consigue 
+        seleccionar con cada uno.<br>
+        En este ejemplo tenemos una p&aacute;gina que tiene varias etiquetas y 
+        un formulario. En el<br>
+        formulario hay un campo de texto y un bot&oacute;n. En el campo de texto 
+        podemos escribir cualquier<br>
+        selector y pulsando luego el bot&oacute;n, mediante jQuery, hacemos que 
+        parpadeen los elementos<br>
+        que concuerdan con ese selector.Para hacer este ejemplo tenemos que utilizar 
+        varios m&eacute;todos y funciones jQuery de los cuales,<br>
+        casi todos, ya hemos hablado a lo largo del manual.<br>
+        Veamos el formulario que hemos creado en la p&aacute;gina:<br>
+        &lt;form&gt;<br>
+        Selector: &lt;input type=&quot;Text&quot; name=&quot;camposelector&quot; 
+        id=&quot;camposelector&quot;&gt;<br>
+        &lt;input type=&quot;button&quot; id=&quot;boton&quot; value=&quot;Ver 
+        qu&eacute; elementos seleccionas&quot;&gt;<br>
+        &lt;/form&gt;<br>
+        Como se puede ver, tiene un campo INPUT de texto al que le hemos puesto 
+        un identificador para referirnos a &eacute;l<br>
+        mediante jQuery. Fijarse tambi&eacute;n el INPUT para hacer un bot&oacute;n, 
+        al que tambi&eacute;n le pusimos un identificador.<br>
+        Ahora veamos el c&oacute;digo Javascript empleado:<br>
+        $(document).ready(function(){<br>
+        $(&quot;#boton&quot;).click(function(evento){<br>
+        var selectorEscrito = $(&quot;#camposelector&quot;).attr(&quot;value&quot;);<br>
+        if (selectorEscrito==&quot;&quot;){<br>
+        alert(&quot;Escribe algo en el campo de texto&quot;)<br>
+        }else{<br>
+        elementosSeleccionados = $(selectorEscrito);<br>
+        elementosSeleccionados.fadeOut(&quot;slow&quot;, function(){<br>
+        elementosSeleccionados.fadeIn(&quot;slow&quot;);<br>
+        });<br>
+        }<br>
+        });<br>
+        });<br>
+        Con document.ready() indicamos una funci&oacute;n a invocar cuando la 
+        p&aacute;gina est&aacute; lista para recibir<br>
+        acciones de programaci&oacute;n que modifiquen su estructura.<br>
+        Con $(&quot;#boton&quot;).click() indicamos una funci&oacute;n a ejecutar 
+        cuando se hace clic sobre el bot&oacute;n.<br>
+        var selectorEscrito = $(&quot;#camposelector&quot;).attr(&quot;value&quot;);<br>
+        Nos sirve para acceder al atributo value del campo de texto, es decir, 
+        a lo que haya escrito<br>
+        dentro.<br>
+        Si no hay nada escrito en el campo, muestro un mensaje de alerta, porque 
+        en este caso el<br>
+        selector cadena vac&iacute;a no ser&iacute;a valido y recibir&iacute;amos 
+        un mensaje de error.<br>
+        Si hab&iacute;a algo en el campo, pues selecciono con jQuery los elementos 
+        de la p&aacute;gina que<br>
+        corresponden con el selector escrito en el campo de texto. Eso se hace 
+        con la l&iacute;nea:<br>
+        elementosSeleccionados = $(selectorEscrito);<br>
+        Luego, sobre el elemento o elementos seleccionados, invoco el m&eacute;todo 
+        fadeOut(), que sirve<br>
+        para ocultar elementos de la p&aacute;gina. A fadeOut() le paso dos par&aacute;metros, 
+        uno es la velocidad<br>
+        con la que tiene que hacer el efecto y otro es una funci&oacute;n callback, 
+        a ejecutar s&oacute;lo en el<br>
+        momento que el efecto haya concluido. Eso es con la l&iacute;nea:<br>
+        elementosSeleccionados.fadeOut(&quot;slow&quot;, function(){<br>
+        Por &uacute;ltimo, en la funci&oacute;n callback realizamos una llamada 
+        al m&eacute;todo fadeIn() sobre el mismo<br>
+        objeto jQuery resultado de aplicar el selector anterior, que sirve para 
+        que los elementos<br>
+        ocultados se muestren de nuevo en la p&aacute;gina. Esto &uacute;ltimo 
+        con la l&iacute;nea:<br>
+        elementosSeleccionados.fadeIn(&quot;slow&quot;);<br>
+        En resumen, ocultando y mostrando luego los elementos de vuelta conseguimos 
+        ese parpadeo.<br>
+        Si nos resulta extra&ntilde;o este c&oacute;digo, recordamos que en el 
+        Manual de jQuery de<br>
+        ya hemos publicado varios art&iacute;culos que aclaran los puntos tratados 
+        en este<br>
+        ejemplo, como los efectos r&aacute;pidos o las funciones callback. </p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

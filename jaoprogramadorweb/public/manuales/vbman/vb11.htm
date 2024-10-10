@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Procedimientos</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Procedimientos, Manual Visual Basic,Tutorial Visual Basic, Ejemplos Visual Basic">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="2"> <h2>Procedimientos</h2></td>
+  </tr>
+  <tr> 
+    <td height="144" colspan="2">
+<table width="75%" >
+        <tr> 
+          <td width="21%"><h3>Contenido</h3></td>
+          <td width="79%">&nbsp;</td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="vb11.htm#intro">- Introducci&oacute;n</a></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="vb11.htm#sentencia">- Sentencia For Each..Next</a></td>
+        </tr>
+      </table>
+      
+      <h3>Intoducci&oacute;n<a name="intro"></a></h3>
+      
+      <p>
+      Una funci&oacute;n es un procedimiento que cuando se ejecuta devuelve un 
+      resultado. 
+      La sintaxis correspondiente a un a funci&oacute;n es la siguiente:</p>
+      <p>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Private|Public] [Static] Function nombre 
+      [(parametros)] [As tipo]</p><p>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[sentencias] 
+      </p><p>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[nombre=expresi&oacute;n] 
+      </p><p>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exit 
+      Function </p><p>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[sentencias] 
+      </p><p>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[nombre 
+      expresi&oacute;n] </p><p>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;End Function</p>
+      <p>
+      Por compatibilidad con otros lenguajes, es aconsejable escribir los par&eacute;stesis 
+      cada vez que se llama a la funci&oacute;n aunque &eacute;sta no tenga argumentos. 
+      Una llamada a la funci&oacute;n puede formar parte de una expresi&oacute;n.</p>
+      
+      <h3>
+      Sentencia For Each ... Next<a name="sentencia"></a></h3>
+      <p>
+      La sentencia For Each ... Next se similar a la sentencia For, con la diferencia 
+      de que ahora se repite un grupo de sentencias por cada elemento de una colecci&oacute;n 
+      de objetos o de una matriz (excepto matrices de elementos de un tipo definido 
+      por el usuario). Esto es especialmente &uacute;til cuando no conocemos c&uacute;antos 
+      elementos hay en la colecci&oacute;n o en la matriz. Su sintaxis es la siguiente.</p>
+      <p>
+      &nbsp;&nbsp;&nbsp;&nbsp;For each elemento ln grupo</p><p>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [sentencias]<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [Exit For]<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [sentencias]<br>
+      &nbsp;&nbsp;&nbsp; Next elemento</p>
+      <p>
+      Un ejemplo pr&aacute;ctico pord&iacute;a ser:<br>
+      <br>
+      &nbsp;&nbsp;&nbsp;&nbsp;Public Sub Sum(matrizx() as integer)<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dim x , suma<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; For each x ln matrizx<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; suma = suma + x<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Next x<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;msgbox suma<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;End Sub</p></td>
+  </tr>
+  <tr> 
+    <td></td>
+    <td> <div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

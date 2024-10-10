@@ -1,0 +1,220 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Colecciones</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación en Java,Programas Java,Aplicaciones en Java,Ejercicios en Java, Ejemplos de Java,Tutorial de Java,Manual Java" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Java, Manual Java, tutorial Java, Ejemplos Java, ejercicios Java">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> Las clases Date, Calendar y GregorianCalendar</h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <h3>Introducci&oacute;n</h3>
+      <p> El package java.util tiene otras clases interesantes para aplicaciones 
+        de distinto tipo, entre ellas algunas destinadas a considerar todo lo 
+        relacionado con fechas y horas. A continuaci&oacute;n se consideran algunas 
+        de dichas clases.</p>
+      <h3>Clase Date</h3>
+      <p>La clase Date representa un instante de tiempo dado con precisi&oacute;n 
+        de milisegundos. La informaci&oacute;n sobre fecha y hora se almacena 
+        en un entero long de 64 bits que contiene los milisegundos transcurridos 
+        desde las 00:00:00 del 1 de enero de 1970 GMT (Greenwich mean time). Ya 
+        se ver&aacute; que otras clases permiten a partir de un objeto Date obtener 
+        informaci&oacute;n del a&ntilde;o, mes, d&iacute;a, horas, minutos y segundos. 
+        A continuaci&oacute;n se muestran los m&eacute;todos de la clase Date, 
+        habi&eacute;ndose eliminado los m&eacute;todos declarados obsoletos (deprecated) 
+        en el JDK 1.2: Compiled from Date.java public class java.util.Date extends 
+        java.lang.Object implements<br>
+        java.io.Serializable, java.lang.Cloneable, java.lang.Comparable {<br>
+        public java.util.Date();<br>
+        public java.util.Date(long);<br>
+        public boolean after(java.util.Date);<br>
+        public boolean before(java.util.Date);<br>
+        public java.lang.Object clone();<br>
+        public int compareTo(java.lang.Object);<br>
+        public int compareTo(java.util.Date);<br>
+        public boolean equals(java.lang.Object);<br>
+        public long getTime();<br>
+        public int hashCode();<br>
+        public void setTime(long);<br>
+        public java.lang.String toString();<br>
+        }<br>
+        El constructor por defecto Date() crea un objeto a partir de la fecha 
+        y hora actual del ordenador. El segundo constructor crea el objeto a partir 
+        de los milisegundos transcurridos desde el 01/01/1970, 00:00:00 GMT. Los 
+        m&eacute;todos after() y before() permiten saber si la fecha indicada 
+        como argumento impl&iacute;cito (this) es posterior o anterior a la pasada 
+        como argumento. Los m&eacute;todos getTime() y setTime() permiten obtener 
+        o establecer los milisegundos transcurridos desde el<br>
+        01/01/1970, 00:00:00 GMT para un determinado objeto Date. Otros m&eacute;todos 
+        son consecuencia de las interfaces implementadas por la clase Date.<br>
+        Los objetos de esta clase no se utilizan mucho directamente, sino que 
+        se utilizan en combinaci&oacute;n con las clases que se vana ver a continuaci&oacute;n.</p>
+      <h3>Clases Calendar y GregorianCalendar</h3>
+      <p>La clase Calendar es una clase abstract que dispone de m&eacute;todos 
+        para convertir objetos de la clase Date en enteros que representan fechas 
+        y horas concretas. La clase GregorianCalendar es la &uacute;nica clase 
+        que deriva de Calendar y es la que se utilizar&aacute; de ordinario.<br>
+        Java tiene una forma un poco particular para representar las fechas y 
+        horas:</p>
+      <p>1. Las horas se representan por enteros de 0 a 23 (la hora o va de las 
+        00:00:00 hasta la 1:00:00), y los minutos y segundos por enteros entre 
+        0 y 59.<br>
+        2. Los d&iacute;as del mes se representan por enteros entre 1 y 31 (l&oacute;gico).<br>
+        3. Los meses del a&ntilde;o se representan mediante enteros de 0 a 11 
+        (no tan l&oacute;gico).<br>
+        4. Los a&ntilde;os se representan mediante enteros de cuatro d&iacute;gitos. 
+        Si se representan con dos d&iacute;gitos, se resta 1900. Por ejemplo, 
+        con dos d&iacute;gitos el a&ntilde;o 2000 es para Java el a&ntilde;o 00.<br>
+        La clase Calendar tiene una serie de variables miembro y constantes (variables 
+        final) que pueden resultar muy &uacute;tiles:<br>
+        &#8226; La variable int AM_PM puede tomar dos valores: las constantes 
+        enteras AM y PM.<br>
+        &#8226; La variable int DAY_OF_WEEK puede tomar los valores int SUNDAY, 
+        MONDAY,<br>
+        TUESDAY, WEDNESDAY, THURSDAY, FRIDAY y SATURDAY.<br>
+        &#8226; La variable int MONTH puede tomar los valores int JANUARY, FEBRUARY, 
+        MARCH, APRIL, MAY, JUNE, JULY, AUGUST, SEPTEMBER, OCTOBER, NOVEMBER,<br>
+        DECEMBER. Para hacer los programas m&aacute;s legibles es preferible utilizar 
+        estas constantes simb&oacute;licas que los correspondientes n&uacute;meros 
+        del 0 al 11.<br>
+        &#8226; La variable miembro HOUR se utiliza en los m&eacute;todos get() 
+        y set() para indicar la hora de la ma&ntilde;ana o de la tarde (en relojes 
+        de 12 horas, de 0 a 11). La variable HOUR_OF_DAY sirve para indicar la 
+        hora del d&iacute;a en relojes de 24 horas (de 0 a 23).<br>
+        &#8226; Las variables DAY_OF_WEEK, DAY_OF_WEEK_IN_MONTH, DAY_OF_MONTH 
+        (o bien DATE), DAY_OF_YEAR, WEEK_OF_MONTH, WEEK_OF_YEAR tienen un<br>
+        significado evidente.<br>
+        &#8226; Las variables ERA, YEAR, MONTH, HOUR, MINUTE, SECOND, MILLISECOND<br>
+        tienen tambi&eacute;n un significado evidente.<br>
+        &#8226; Las variables ZONE_OFFSET y DST_OFFSET indican la zona horaria 
+        y el desaf&iacute;e en milisegundos respecto a la zona GMT.<br>
+        La clase Calendar dispone de un gran n&uacute;mero de m&eacute;todos para 
+        establecer u obtener los distintos valores de la fecha y/u hora. Algunos 
+        de ellos se muestran a continuaci&oacute;n. Para m&aacute;s informaci&oacute;n, 
+        se recomienda utilizar la documentaci&oacute;n de JDK 1.2.</p>
+      <p>Compiled from Calendar.java<br>
+        public abstract class java.util.Calendar extends java.lang.Object implements<br>
+        java.io.Serializable, java.lang.Cloneable {<br>
+        protected long time;<br>
+        protected boolean isTimeSet;<br>
+        protected java.util.Calendar();<br>
+        protected java.util.Calendar(java.util.TimeZone,java.util.Locale);<br>
+        public abstract void add(int, int);<br>
+        public boolean after(java.lang.Object);<br>
+        public boolean before(java.lang.Object);<br>
+        public final void clear();<br>
+        public final void clear(int);<br>
+        protected abstract void computeTime();<br>
+        public boolean equals(java.lang.Object);<br>
+        public final int get(int);<br>
+        public int getFirstDayOfWeek();<br>
+        public static synchronized java.util.Calendar getInstance();<br>
+        public static synchronized java.util.Calendar getInstance(java.util.Locale);<br>
+        public static synchronized java.util.Calendar getInstance(java.util.TimeZone);<br>
+        public static synchronized java.util.Calendar getInstance(java.util.TimeZone,<br>
+        java.util.Locale);<br>
+        public final java.util.Date getTime();protected long getTimeInMillis();<br>
+        public java.util.TimeZone getTimeZone();<br>
+        public final boolean isSet(int);<br>
+        public void roll(int, int);<br>
+        public abstract void roll(int, boolean);<br>
+        public final void set(int, int);<br>
+        public final void set(int, int, int);<br>
+        public final void set(int, int, int, int, int);<br>
+        public final void set(int, int, int, int, int, int);<br>
+        public final void setTime(java.util.Date);<br>
+        public void setFirstDayOfWeek(int);<br>
+        protected void setTimeInMillis(long);<br>
+        public void setTimeZone(java.util.TimeZone);<br>
+        public java.lang.String toString();<br>
+        }<br>
+        La clase GregorianCalendar a&ntilde;ade las constante BC y AD para la 
+        ERA, que representan respectivamente antes y despu&eacute;s de Jesucristo. 
+        A&ntilde;ade adem&aacute;s varios constructores que admiten como argumentos 
+        la informaci&oacute;n correspondiente a la fecha/hora y &#8211;opcionalmente- 
+        la zona horaria.<br>
+        A continuaci&oacute;n se muestra un ejemplo de utilizaci&oacute;n de estas 
+        clases. Se sugiere al lector que cree y ejecute el siguiente programa, 
+        observando los resultados impresos en la consola.<br>
+        import java.util.*;<br>
+        public class PruebaFechas {<br>
+        public static void main(String arg[]) {<br>
+        Date d = new Date();<br>
+        GregorianCalendar gc = new GregorianCalendar();<br>
+        gc.setTime(d);<br>
+        System.out.println(&quot;Era: &quot;+gc.get(Calendar.ERA));<br>
+        System.out.println(&quot;Year: &quot;+gc.get(Calendar.YEAR));<br>
+        System.out.println(&quot;Month: &quot;+gc.get(Calendar.MONTH));<br>
+        System.out.println(&quot;Dia del mes: &quot;+gc.get(Calendar.DAY_OF_MONTH));<br>
+        System.out.println(&quot;D de la S en mes:&quot;<br>
+        +gc.get(Calendar.DAY_OF_WEEK_IN_MONTH));<br>
+        System.out.println(&quot;No de semana: &quot;+gc.get(Calendar.WEEK_OF_YEAR));<br>
+        System.out.println(&quot;Semana del mes: &quot;+gc.get(Calendar.WEEK_OF_MONTH));<br>
+        System.out.println(&quot;Fecha: &quot;+gc.get(Calendar.DATE));<br>
+        System.out.println(&quot;Hora: &quot;+gc.get(Calendar.HOUR));<br>
+        System.out.println(&quot;Tiempo del dia: &quot;+gc.get(Calendar.AM_PM));<br>
+        System.out.println(&quot;Hora del dia: &quot;+gc.get(Calendar.HOUR_OF_DAY));<br>
+        System.out.println(&quot;Minuto: &quot;+gc.get(Calendar.MINUTE));<br>
+        System.out.println(&quot;Segundo: &quot;+gc.get(Calendar.SECOND));<br>
+        System.out.println(&quot;Dif. horaria: &quot;+gc.get(Calendar.ZONE_OFFSET));<br>
+        }<br>
+        }</p>
+      <h3>Clases DateFormat y SimpleDateFormat</h3>
+      <p>DateFormat es una clase abstract que pertenece al package java.text y 
+        no al package java.util, como las vistas anteriormente. La raz&oacute;n 
+        es para facilitar todo lo referente a la internacionalizaci&oacute;n, 
+        que es un aspecto muy importante en relaci&oacute;n con la conversi&oacute;n, 
+        que permite dar formato a fechas y horas de acuerdo con distintos criterios 
+        locales. Esta clase dispone de m&eacute;todos static para convertir Strings 
+        representando fechas y horas en objetos de la clase Date, y viceversa.<br>
+        La clase SimpleDateFormat es la &uacute;nica clase derivada de DateFormat. 
+        Es la clase que conviene utilizar. Esta clase se utiliza de la siguiente 
+        forma: se le pasa al constructor un String definiendo el formato que se 
+        desea utilizar. Por ejemplo:<br>
+        import java.util.*;<br>
+        import java.text.*;<br>
+        class SimpleDateForm {<br>
+        public static void main(String arg[]) throws ParseException {<br>
+        SimpleDateFormat sdf1 = new SimpleDateFormat(&quot;dd-MM-yyyy hh:mm:ss&quot;);<br>
+        SimpleDateFormat sdf2 = new SimpleDateFormat(&quot;dd-MM-yy&quot;);<br>
+        Date d = sdf1.parse(&quot;12-04-1968 11:23:45&quot;);<br>
+        String s = sdf2.format(d);<br>
+        System.out.println(s);<br>
+        }<br>
+        }</p>
+      <p>La documentaci&oacute;n de la clase SimpleDateFormat proporciona abundante 
+        informaci&oacute;n al respecto, incluyendo algunos ejemplos.</p>
+      <h3>Clases TimeZone y SimpleTimeZone</h3>
+      <p>La clase TimeZone es tambi&eacute;n una clase abstract que sirve para 
+        definir la zona horaria. Los m&eacute;todos de esta clase son capaces 
+        de tener en cuenta el cambio de la hora en verano para ahorrar energ&iacute;a. 
+        La clase SimpleTimeZone deriva de TimeZone y es la que conviene utilizar.<br>
+        El valor por defecto de la zona horaria es el definido en el ordenador 
+        en que se ejecuta el programa. Los objetos de esta clase pueden ser utilizados 
+        con los constructores y algunos m&eacute;todos de la clase Calendar para 
+        establecer la zona horaria.</p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

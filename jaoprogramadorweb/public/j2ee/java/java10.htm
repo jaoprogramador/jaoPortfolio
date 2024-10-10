@@ -1,0 +1,363 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Estructuras de programaci&oacute;n Java</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación en Java,Programas Java,Aplicaciones en Java,Ejercicios en Java, Ejemplos de Java,Tutorial de Java,Manual Java" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Java, Manual Java, tutorial Java, Ejemplos Java, ejercicios Java">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> Estructuras de programaci&oacute;n </h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <p>En este apartado se supone que el lector 
+        tiene algunos conocimientos de programaci&oacute;n y por lo tanto<br>
+        no se explican en profundidad los conceptos que aparecen.<br>
+        Las estructuras de programaci&oacute;n o estructuras de control permiten 
+        tomar decisiones y<br>
+        realizar un proceso repetidas veces. Son los denominados bifurcaciones 
+        y bucles. En la mayor&iacute;a de<br>
+        los lenguajes de programaci&oacute;n, este tipo de estructuras son comunes 
+        en cuanto a concepto, aunque<br>
+        su sintaxis var&iacute;a de un lenguaje a otro. La sintaxis de Java coincide 
+        pr&aacute;cticamente con la utilizada<br>
+        en C/C++, lo que hace que para un programador de C/C++ no suponga ninguna 
+        dificultad adicional.</p>
+      <h3>Sentencias o expresiones</h3>
+      <p>Una expresi&oacute;n es un conjunto variables unidos por operadores. 
+        Son &oacute;rdenes que se le dan al<br>
+        computador para que realice una tarea determinada.<br>
+        Una sentencia es una expresi&oacute;n que acaba en punto y coma (;). Se 
+        permite incluir varias<br>
+        sentencias en una l&iacute;nea, aunque lo habitual es utilizar una l&iacute;nea 
+        para cada sentencia. Por ejemplo:<br>
+        i = 0; j = 5; x = i + j;// L&iacute;nea compuesta de tres sentencias<br>
+      </p>
+      <h3>Comentarios</h3>
+      <p>Existen dos formas diferentes de introducir comentarios entre el c&oacute;digo 
+        de Java (en realidad son<br>
+        tres, como pronto se ver&aacute;). Son similares a la forma de realizar 
+        comentarios en el lenguaje C++. Los<br>
+        comentarios son tremendamente &uacute;tiles para poder entender el c&oacute;digo 
+        utilizado, facilitando de ese<br>
+        modo futuras revisiones y correcciones. Adem&aacute;s permite que cualquier 
+        persona distinta al<br>
+        programador original pueda comprender el c&oacute;digo escrito de una 
+        forma m&aacute;s r&aacute;pida. Se recomienda<br>
+        acostumbrarse a comentar el c&oacute;digo desarrollado. De esta forma 
+        se simplifica tambi&eacute;n la tarea de<br>
+        estudio y revisi&oacute;n posteriores.Java interpreta que todo lo que 
+        aparece a la derecha de dos barras &#8220;//&#8221; en una l&iacute;nea 
+        cualquiera<br>
+        del c&oacute;digo es un comentario del programador y no lo tiene en cuenta. 
+        El comentario puede empezar<br>
+        al comienzo de la l&iacute;nea o a continuaci&oacute;n de una instrucci&oacute;n 
+        que debe ser ejecutada. La segunda<br>
+        forma de incluir comentarios consiste en escribir el texto entre los s&iacute;mbolos 
+        /*&#8230;*/. Este segundo<br>
+        m&eacute;todo es v&aacute;lido para comentar m&aacute;s de una l&iacute;nea 
+        de c&oacute;digo. Por ejemplo:</p>
+      <p>// Esta l&iacute;nea es un comentario<br>
+        int a=1; // Comentario a la derecha de una sentencia<br>
+        // Esta es la forma de comentar m&aacute;s de una l&iacute;nea utilizando<br>
+        // las dos barras. Requiere incluir dos barras al comienzo de cada l&iacute;nea<br>
+        /* Esta segunda forma es mucho m&aacute;s c&oacute;moda para comentar 
+        un n&uacute;mero elevado de l&iacute;neas<br>
+        ya que s&oacute;lo requiere modificar<br>
+        el comienzo y el final. */<br>
+        En Java existe adem&aacute;s una forma especial de introducir los comentarios 
+        (utilizando /**&#8230;*/<br>
+        m&aacute;s algunos caracteres especiales) que permite generar autom&aacute;ticamente 
+        la documentaci&oacute;n sobre<br>
+        las clases y packages desarrollados por el programador. Una vez introducidos 
+        los comentarios, el<br>
+        programa javadoc.exe (incluido en el JDK) genera de forma autom&aacute;tica 
+        la informaci&oacute;n de forma<br>
+        similar a la presentada en la propia documentaci&oacute;n del JDK. La 
+        sintaxis de estos comentarios y la<br>
+        forma de utilizar el programa javadoc.exe se puede encontrar en la informaci&oacute;n 
+        que viene con el<br>
+        JDK.</p>
+      <h3>Bifurcaciones</h3>
+      <p>Las bifurcaciones permiten ejecutar una de entre varias acciones en funci&oacute;n 
+        del valor de una<br>
+        expresi&oacute;n l&oacute;gica o relacional. Se tratan de estructuras 
+        muy importantes ya que son las encargadas de<br>
+        controlar el flujo de ejecuci&oacute;n de un programa. Existen dos bifurcaciones 
+        diferentes: if y switch.</p>
+      <h3>Bifurcaci&oacute;n if</h3><p>
+        Esta estructura permite ejecutar un conjunto de sentencias en funci&oacute;n 
+        del valor que tenga la<br>
+        expresi&oacute;n de comparaci&oacute;n (se ejecuta si la expresi&oacute;n 
+        de comparaci&oacute;n tiene valor true). Tiene la<br>
+        forma siguiente:<br>
+        if (booleanExpression) {<br>
+        statements;<br>
+        }<br>
+        Las llaves {} sirven para agrupar en un bloque las sentencias que se han 
+        de ejecutar, y no son<br>
+        necesarias si s&oacute;lo hay una sentencia dentro del if.<br>
+        <h3>Bifurcaci&oacute;n if else</h3><p>
+        An&aacute;loga a la anterior, de la cual es una ampliaci&oacute;n. Las 
+        sentencias incluidas en el else se ejecutan en<br>
+        el caso de no cumplirse la expresi&oacute;n de comparaci&oacute;n (false),<br>
+        if (booleanExpression) {<br>
+        statements1;<br>
+        } else {<br>
+        statements2;<br>
+        }<br>
+        <h3>Bifurcaci&oacute;n if elseif else</h3><p>
+        Permite introducir m&aacute;s de una expresi&oacute;n de comparaci&oacute;n. 
+        Si la primera condici&oacute;n no se cumple, se<br>
+        compara la segunda y as&iacute; sucesivamente. En el caso de que no se 
+        cumpla ninguna de las<br>
+        comparaciones se ejecutan las sentencias correspondientes al else.<br>
+        if (booleanExpression1) {<br>
+        statements1;<br>
+        } else if (booleanExpression2) {<br>
+        statements2;<br>
+        } else if (booleanExpression3) {<br>
+        statements3;<br>
+        } else {<br>
+        statements4;<br>
+        }</p>
+      <p>V&eacute;ase a continuaci&oacute;n el siguiente ejemplo:<br>
+        int numero = 61; // La variable &quot;numero&quot; tiene dos d&iacute;gitos<br>
+        if(Math.abs(numero) &lt; 10) // Math.abs() calcula el valor absoluto. 
+        (false)<br>
+        System.out.println(&quot;Numero tiene 1 digito &quot;);<br>
+        else if (Math.abs(numero) &lt; 100) // Si numero es 61, estamos en este 
+        caso (true)<br>
+        System.out.println(&quot;Numero tiene 1 digito &quot;);<br>
+        else { // Resto de los casos<br>
+        System.out.println(&quot;Numero tiene mas de 3 digitos &quot;);<br>
+        System.out.println(&quot;Se ha ejecutado la opcion por defecto &quot;);<br>
+        }<br>
+        <h3> Sentencia switch</h3><p>
+        Se trata de una alternativa a la bifurcaci&oacute;n if elseif else cuando 
+        se compara la misma expresi&oacute;n con<br>
+        distintos valores. Su forma general es la siguiente:<br>
+        switch (expression) {<br>
+        case value1: statements1; break;<br>
+        case value2: statements2; break;<br>
+        case value3: statements3; break;<br>
+        case value4: statements4; break;<br>
+        case value5: statements5; break;<br>
+        case value6: statements6; break;<br>
+        [default: statements7;]<br>
+        }<br>
+        Las caracter&iacute;sticas m&aacute;s relevantes de switch son las siguientes:<br>
+        1. Cada sentencia case se corresponde con un &uacute;nico valor de expression. 
+        No se pueden establecer rangos o condiciones sino que se debe comparar 
+        con valores concretos. El ejemplo no se podr&iacute;a realizar utilizando 
+        switch.<br>
+        2. Los valores no comprendidos en ninguna sentencia case se pueden gestionar 
+        en default, que es opcional.<br>
+        3. En ausencia de break, cuando se ejecuta una sentencia case se ejecutan 
+        tambi&eacute;n todas las case que van a continuaci&oacute;n, hasta que 
+        se llega a un break o hasta que se termina el switch.<br>
+        Ejemplo:<br>
+        char c = (char)(Math.random()*26+'a'); // Generaci&oacute;n aleatoria 
+        de letras min&uacute;sculas<br>
+        System.out.println(&quot;La letra &quot; + c );<br>
+        switch (c) {<br>
+        case 'a': // Se compara con la letra a<br>
+        case 'e': // Se compara con la letra e<br>
+        case 'i': // Se compara con la letra i<br>
+        case 'o': // Se compara con la letra o<br>
+        case 'u': // Se compara con la letra u<br>
+        System.out.println(&quot; Es una vocal &quot;); break;<br>
+        default:<br>
+        System.out.println(&quot; Es una consonante &quot;);<br>
+        }</p>
+      <h3>Bucles</h3>
+      <p>Un bucle se utiliza para realizar un proceso repetidas veces. Se denomina 
+        tambi&eacute;n lazo o loop. El c&oacute;digo incluido entre las llaves 
+        {} (opcionales si el proceso repetitivo consta de una sola l&iacute;nea), 
+        se ejecutar&aacute; mientras se cumpla unas determinadas condiciones. 
+        Hay que prestar especial atenci&oacute;n a los bucles infinitos, hecho 
+        que ocurre cuando la condici&oacute;n de finalizar el bucle (booleanExpression) 
+        no se llega a cumplir nunca. Se trata de un fallo muy t&iacute;pico, habitual 
+        sobre todo entre programadores poco experimentados.</p>
+      <h3> Bucle while</h3><p>
+        Las sentencias statements se ejecutan mientras booleanExpression sea true.<br>
+        while (booleanExpression) {<br>
+        statements;<br>
+        }<br>
+        <h3>Bucle for</h3><p>
+        La forma general del bucle for es la siguiente:<br>
+        for (initialization; booleanExpression; increment) {<br>
+        statements;<br>
+        }<br>
+        que es equivalente a utilizar while en la siguiente forma, initialization;<br>
+        while (booleanExpression) {<br>
+        statements;<br>
+        increment;<br>
+        }<br>
+        La sentencia o sentencias initialization se ejecuta al comienzo del for, 
+        e increment despu&eacute;s de statements. La booleanExpression se eval&uacute;a 
+        al comienzo de cada iteraci&oacute;n; el bucle termina cuando la expresi&oacute;n 
+        de comparaci&oacute;n toma el valor false. Cualquiera de las tres partes 
+        puede estar vac&iacute;a. La initialization y el increment pueden tener 
+        varias expresiones separadas por comas. Por ejemplo, el c&oacute;digo 
+        situado a la izquierda produce la salida que aparece a la derecha:<br>
+        C&oacute;digo: Salida:<br>
+        for(int i = 1, j = i + 10; i &lt; 5; i++, j = 2*i) {<br>
+        System.out.println(&quot; i = &quot; + i + &quot; j = &quot; + j);<br>
+        }<br>
+        i = 1 j = 11<br>
+        i = 2 j = 4<br>
+        i = 3 j = 6<br>
+        i = 4 j = 8<br>
+        <h3> Bucle do while</h3>
+      <p> Es similar al bucle while pero con la particularidad de que el control 
+        est&aacute; al final del bucle (lo que hace que el bucle se ejecute al 
+        menos una vez, independientemente de que la condici&oacute;n se cumpla 
+        o no). Una vez ejecutados los statements, se eval&uacute;a la condici&oacute;n: 
+        si resulta true se vuelven a ejecutar las sentencias incluidas en el bucle, 
+        mientras que si la condici&oacute;n se eval&uacute;a a false finaliza 
+        el bucle.<br>
+        Este tipo de bucles se utiliza con frecuencia para controlar la satisfacci&oacute;n 
+        de una determinada condici&oacute;n de error o de convergencia.<br>
+        do {<br>
+        statements<br>
+        } while (booleanExpression);<br>
+        <h3> Sentencias break y continue</h3>
+      <p> La sentencia break es v&aacute;lida tanto para las bifurcaciones como 
+        para los bucles. Hace que se salga inmediatamente del bucle o bloque que 
+        se est&aacute; ejecutando, sin sin realizar la ejecuci&oacute;n del resto 
+        de las sentencias.</p>
+      <p> La sentencia continue se utiliza en los bucles (no en bifurcaciones). 
+        Finaliza la iteraci&oacute;n &#8220;i&#8221; que en ese momento se est&aacute; 
+        ejecutando (no ejecuta el resto de sentencias que hubiera hasta el final 
+        del bucle). Vuelve al comienzo del bucle y comienza la siguiente iteraci&oacute;n 
+        (i+1).</p>
+      <h3> Sentencias break y continue con etiquetas</h3>
+      <p> Las etiquetas permiten indicar un lugar donde continuar la ejecuci&oacute;n 
+        de un programa despu&eacute;s de un break o continue. El &uacute;nico 
+        lugar donde se pueden incluir etiquetas es justo delante de un bloque 
+        de c&oacute;digo entre llaves {} (if, switch, do...while, while, for) 
+        y s&oacute;lo se deben utilizar cuando se tiene uno o m&aacute;s bucles 
+        (o bloques) dentro de otro bucle y se desea salir (break) o continuar 
+        con la siguiente<br>
+        iteraci&oacute;n (continue) de un bucle que no es el actual.<br>
+        Por tanto, la sentencia break labelName finaliza el bloque que se encuentre 
+        a continuaci&oacute;n de labelName. Por ejemplo, en las sentencias, bucleI: 
+        // etiqueta o label<br>
+        for ( int i = 0, j = 0; i &lt; 100; i++){<br>
+        while ( true ) {<br>
+        if( (++j) &gt; 5) { break bucleI; } // Finaliza ambos bucles<br>
+        else { break; } // Finaliza el bucle interior (while)<br>
+        }<br>
+        }<br>
+        la expresi&oacute;n break bucleI; finaliza los dos bucles simult&aacute;neamente, 
+        mientras que la expresi&oacute;n break; sale del bucle while interior 
+        y seguir&iacute;a con el bucle for en i. Con los valores presentados ambos 
+        bucles finalizar&aacute;n con i = 5 y j = 6 (se invita al lector a comprobarlo).<br>
+        La sentencia continue (siempre dentro de al menos un bucle) permite transferir 
+        el control a un bucle con nombre o etiqueta. Por ejemplo, la sentencia,<br>
+        continue bucle1;<br>
+        transfiere el control al bucle for que comienza despu&eacute;s de la etiqueta 
+        bucle1: para que realice una nueva iteraci&oacute;n, como por ejemplo:<br>
+        bucle1:<br>
+        for (int i=0; i&lt;n; i++) {<br>
+        bucle2:<br>
+        for (int j=0; j&lt;m; j++) {<br>
+        ...<br>
+        if (expression) continue bucle1; then continue bucle2;<br>
+        ...<br>
+        }<br>
+        }</p>
+      <h3>Sentencia return</h3>
+      <p> Otra forma de salir de un bucle (y de un m&eacute;todo) es utilizar 
+        la sentencia return. A diferencia de continue o break, la sentencia return 
+        sale tambi&eacute;n del m&eacute;todo o funci&oacute;n. En el caso de 
+        que la funci&oacute;n devuelva alguna variable, este valor se deber&aacute; 
+        poner a continuaci&oacute;n del return (return value;).<br>
+        <h3>Bloque try {...} catch {...} finally {...}</h3>
+      <p> Java incorpora en el propio lenguaje la gesti&oacute;n de errores. El 
+        mejor momento para detectar los errores es durante la compilaci&oacute;n. 
+        Sin embargo pr&aacute;cticamente s&oacute;lo los errores de sintaxis son 
+        detectados en esta operaci&oacute;n. El resto de problemas surgen durante 
+        la ejecuci&oacute;n de los programas.<br>
+        En el lenguaje Java, una Exception es un cierto tipo de error o una condici&oacute;n 
+        anormal que se ha producido durante la ejecuci&oacute;n de un programa. 
+        Algunas excepciones son fatales y provocan que se deba finalizar la ejecuci&oacute;n 
+        del programa. En este caso conviene terminar ordenadamente y dar un mensaje 
+        explicando el tipo de error que se ha producido. Otras excepciones, como 
+        por ejemplo no encontrar un fichero en el que hay que leer o escribir 
+        algo, pueden ser recuperables. En este caso elprograma debe dar al usuario 
+        la oportunidad de corregir el error (definiendo por ejemplo un nuevo path 
+        del fichero no encontrado).<br>
+        Los errores se representan mediante clases derivadas de la clase Throwable, 
+        pero los que tiene que chequear un programador derivan de Exception (java.lang.Exception 
+        que a su vez deriva de Throwable). Existen algunos tipos de excepciones 
+        que Java obliga a tener en cuenta. Esto se hace mediante el uso de bloques 
+        try, catch y finally.<br>
+        El c&oacute;digo dentro del bloque try est&aacute; &#8220;vigilado&#8221;. 
+        Si se produce una situaci&oacute;n anormal y se lanza como consecuencia 
+        una excepci&oacute;n, el control pasa al bloque catch, que se hace cargo 
+        de la situaci&oacute;n y decide lo que hay que hacer. Se pueden incluir 
+        tantos bloques catch como se desee, cada uno de los cuales tratar&aacute; 
+        un tipo de excepci&oacute;n. Finalmente, si est&aacute; presente, se ejecuta 
+        el bloque finally, que<br>
+        es opcional, pero que en caso de existir se ejecuta siempre, sea cual 
+        sea el tipo de error.<br>
+        En el caso en que el c&oacute;digo de un m&eacute;todo pueda generar una 
+        Exception y no se desee incluir en dicho m&eacute;todo la gesti&oacute;n 
+        del error (es decir los bucles try/catch correspondientes), es necesario 
+        que el m&eacute;todo pase la Exception al m&eacute;todo desde el que ha 
+        sido llamado. Esto se consigue mediante la adici&oacute;n de la palabra 
+        throws seguida del nombre de la Exception concreta, despu&eacute;s de 
+        la lista de argumentos del m&eacute;todo. A su vez el m&eacute;todo superior 
+        deber&aacute; incluir los bloques try/catch o volver a pasar la Exception. 
+        De esta forma se puede ir pasando la Exception de un m&eacute;todo a otro 
+        hasta llegar al &uacute;ltimo m&eacute;todo del programa, el m&eacute;todo 
+        main().<br>
+        En el siguiente ejemplo se presentan dos m&eacute;todos que deben &quot;controlar&quot; 
+        una IOException relacionada con la lectura ficheros y una MyException 
+        propia. El primero de ellos (metodo1) realiza la gesti&oacute;n de las 
+        excepciones y el segundo (metodo2) las pasa al siguiente m&eacute;todo.<br>
+        void metodo1() {<br>
+        ...<br>
+        try {<br>
+        ... // C&oacute;digo que puede lanzar las excepciones IOException y MyException<br>
+        } catch (IOException e1) {// Se ocupa de IOException simplemente dando 
+        aviso<br>
+        System.out.println(e1.getMessage());<br>
+        } catch (MyException e2) {<br>
+        // Se ocupa de MyException dando un aviso y finalizando la funci&oacute;n<br>
+        System.out.println(e2.getMessage()); return;<br>
+        } finally { // Sentencias que se ejecutar&aacute;n en cualquier caso<br>
+        ...<br>
+        }]<br>
+        ...<br>
+        } // Fin del metodo1<br>
+        void metodo2() throws IOException, MyException {<br>
+        ...<br>
+        // C&oacute;digo que puede lanzar las excepciones IOException y MyException<br>
+        ...<br>
+        } // Fin del metodo2</p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

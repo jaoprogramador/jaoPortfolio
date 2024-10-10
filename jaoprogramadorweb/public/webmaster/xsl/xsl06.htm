@@ -1,0 +1,283 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Siblings, children, descendants y ancestros</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación en CSS,Programas CSS,Aplicaciones en CSS,Ejercicios en CSS, Ejemplos de CSS,Tutoriales de CSS,Manuales CSS" name=description>
+<meta name="keywords" content="CSS, Manual CSS, tutorial CSS, Ejemplos CSS, ejercicios CSS, Cascading Style Sheet">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">  <tr> 
+    <td height="39" colspan="3"> <h2> Elementos XSLT</h2></td>
+  </tr>
+  <tr> 
+    <td height="867" colspan="3"> 
+      <h3>&lt;xsl:sort&gt;</h3>
+      <p>El XSL otrece la posibilidad de ordenar los elementcs gracias a &lt;xsl:sort&gt; 
+        usado con &lt;xsl:apply-templates&gt; o &lt;xsl:for-each&gt;. Esta sentencia 
+        tiene los siguientes atributos:<br>
+        - select: especifica el area a ordenar; por defecto es &quot;.&quot;.<br>
+        - order: puede ser ascendente (ascending) que es p0r defecto y descendente 
+        (descending).<br>
+        - lang: idioma de ordenaci&oacute;n.<br>
+        - data-type: tipo de dato de la clave de ordenaci&eacute;n que puede ser 
+        no num&eacute;rico (text) [por defecto] onumeric&oacute; (number).<br>
+        - case-order: primero mayusculas (upper&middot;first) o primero min&uacute;sculas 
+        (lower-first).<br>
+        Ejemplo:<br>
+        Aplica la plantilla a todos los nodos crucero pero ordenandolos primero 
+        por precio, y estos por nombre de puerto.</p>
+      <p>&lt;xsl:apply-templates select=&quot;crucero&quot;&gt;<br>
+        &lt;xsl:sort select=&quot;precio&quot; data-type=&quot;number&quot; /&gt;<br>
+        &lt;xsl:sort select=&quot;ruta/puerto&quot;/&gt;<br>
+        &lt;/xsl:apply-templates&gt; </p>
+      <h3>&lt;xsl:number&gt;</h3>
+      <p>Nos dice el orden real en el que se precesan los elementos en el documento. 
+        Esta funci&oacute;n no se altera aunque se utilice el &lt;xsl:sort&gt;. 
+        Algunos atributos son:<br>
+        - level: puede ser single (en el misme nivel), any (los niveles desde 
+        donde esta hacia abajo) y multiple (se mueve per diferentes niveles).<br>
+        - count: le que queremos contar.<br>
+        - format: el formato en el que se nos presenta los n&uacute;meros. Puede 
+        tener los valores: i (n&uacute;meros romanos en min&uacute;sculas), /(n&uacute;meros 
+        romanos en may&uacute;sculas), a (letras en min&uacute;sculas), A (letras 
+        en may&uacute;sculas), 1 (formato decimal; est&aacute; por detecto)...<br>
+        &lt;xsl:template match=&quot;crucero&quot;&gt;<br>
+        Crucero n&uacute;mero:<br>
+        &lt;xsl:number level=&quot;single&quot; count=&quot;crucero&quot; format=&quot;1&quot;/&gt;<br>
+        &lt;/xsl:template&gt;</p>
+      <h3>Bucles</h3>
+      <p>xsl:for-each&gt; Al igual que el &lt;xsl:apply&#8212;templates&gt; nos 
+        sirve para procesar las nodos del &aacute;rbol, aunque a diferencia de 
+        &eacute;ste, con el &lt;xsl:for-each&gt; es menos clara la programaci&oacute;n, 
+        pero es memes aut&oacute;mata ya que le controlas mas. Deberemos tener 
+        en cuenta, que el &lt;xsl:for-each&gt; realiza desplazamiento y si vamos 
+        a referenciar a etro nodo diferente tenemos que centrelarlo.<br>
+        Tiene come atributo select, en donde se coloca la condici&oacute;n del 
+        bucle; si solo se pone el nombre de un elemento ejecuta todos los nodos 
+        que se llamen asi:<br>
+        &lt;xsl:template match=&quot;ruta&quot;&gt;<br>
+        &lt;xsl:for-each select=&quot;puerto&quot;&gt;<br>
+        &lt;li&gt;<br>
+        &lt;xsl:value-of select=&quot;.&quot;/&gt;<br>
+        &lt;/|i&gt;<br>
+        &lt;/xsl:for-each&gt;<br>
+        &lt;/xsl:template&gt;</p>
+      <h3>Estructuras de decisi&oacute;n</h3>
+      <p>&lt;xsl:if&gt; es una cendicion if simple que no admite else. Come atribute 
+        se puede utilizar tanto test como match.<br>
+        &lt;xsl:template match=&quot;ruta&quot;&gt;<br>
+        &lt;xsl:for-each select:&quot;puerto&quot;&gt;<br>
+        &lt;xsl:if test=&quot;positien()=1&quot;&gt;<br>
+        Puerto de salida: &lt;xsl:value-of seIect=&quot;.&quot;/&gt;<br>
+        &lt;/xsl:if&gt;<br>
+        &lt;/xsl:for-each&gt;<br>
+        &lt;/xsl:template&gt;<br>
+        <br>
+        &lt;xsl:tempIate match=&quot;crucero&quot;&gt;<br>
+        &lt;xsl:if test:&quot;ruta/puerto[(position()!=1) and (positien()!=last())]&quot;&gt;<br>
+        &lt;xsl:apply-templates seIect=&quot;ruta&quot;/&gt;<br>
+        &lt;/xsl:if&gt;<br>
+        &lt;/xsl:temp|ate&gt;<br>
+        &lt;xsl:cheose&gt; nes permite crear bloques de decision determinades 
+        per Ia clausula<br>
+        &lt;xsl:when&gt;. Posee ademas, &lt;xsl:0therwise&gt;, para les cases 
+        en que no se ejecuta ninguna de las clausulas &lt;xsl.&middot;when&gt; 
+        especiticadas.</p>
+      <p></p>
+      &lt;xsl:if&gt; es una cendicion if simple que no admite else. Come atribute 
+      se puede utilizar tanto test como match.<br>
+      &lt;xsl:template match=&quot;ruta&quot;&gt;<br>
+      &lt;xsl:for-each select:&quot;puerto&quot;&gt;<br>
+      &lt;xsl:if test=&quot;positien()=1&quot;&gt;<br>
+      Puerto de salida: &lt;xsl:value-of select=&quot;.&quot;/&gt;<br>
+      &lt;/xsl:if&gt;<br>
+      &lt;/xsl:for-each&gt;<br>
+      &lt;/xsl:template&gt;<br> <br>
+      &lt;xsl:template match=&quot;crucero&quot;&gt;<br>
+      &lt;xsl:if test:&quot;ruta/puerto[(position()!=1) and (positien()!=last())]&quot;&gt;<br>
+      &lt;xsl:apply-templates seIect=&quot;ruta&quot;/&gt;<br>
+      &lt;/xsl:if&gt;<br>
+      &lt;/xsl:temp|ate&gt;<br>
+      &lt;xsl:cheose&gt; nes permite crear bloques de decision determinades per 
+      Ia clausula<br>
+      &lt;xsl:when&gt;. Posee ademas, &lt;xsl:0therwise&gt;, para les cases en 
+      que no se ejecuta ninguna de las clausulas &lt;xsl.&middot;when&gt; especiticadas. 
+      <p>&lt;xsl:template match=&quot;ruta&quot;&gt;<br>
+        &lt;xsl:for-each select=&quot;puerto&quot;&gt;<br>
+        &lt;xsl:choose&gt;<br>
+        &lt;xsl:when test=&quot;position()=1&quot;&gt;<br>
+        Puerto de salida: &lt;xsl:vaIue-of select=&quot;.&quot;/&gt;<br>
+        &lt;/xsl:when&gt;<br>
+        &lt;xsl:when test:&quot;p0siti0n()=last()&quot;&gt;<br>
+        Puerto de Ilegada: &lt;xsl:value-of select=&quot;.&quot;/&gt;<br>
+        &lt;/xsl:when&gt;<br>
+        &lt;xsl:otherwise&gt;<br>
+        Escala: &lt;xsl:vaIue-of select=&quot;.&quot;/&gt;<br>
+        &lt;/xsl:otherwise<br>
+        &lt;/xsl:cho0se&gt;<br>
+        &lt;/xsl:for-each&gt;<br>
+        &lt;/xsl:template&gt;</p>
+      <h3>lncorporaci&oacute;n de atributos a los elementos.</h3>
+      <p>Nos puede ocurrlr por ejemplo que queramos escrlbir una etiqueta HTML 
+        pero los atributos no lo sepamos, slno que nos lo pasen a trav&eacute;s 
+        del documento XML. En este caso utilizamos la sentencla &lt;xsl:attribute&gt; 
+        que incorpora atrlbutos a los elementos XSL. Usa el atrlbuto name para 
+        indicar el nombre del atrlbuto, y su valor sera Io que contenga entre 
+        sus etiquetas de lniclo y clerre.<br>
+        &lt;xsl:tempIate match=&quot;foto&quot;&gt;<br>
+        &lt;img&gt;<br>
+        &lt;xsl:attribute name=&quot;src&quot;&gt;<br>
+        yates/&lt;xsl:vaIue-of select=&quot;.&quot;/&gt; HTML: &lt;img src=&quot;yate/carmen.jpg&quot;/&gt;<br>
+        &lt;/xsl:attribute&gt;<br>
+        &lt;/lmg&gt;<br>
+        &lt;/xsl:template&gt;<br>
+        <br>
+        &lt;xsl:for-each select=&quot;crucero&quot;&gt;<br>
+        &lt;a&gt;<br>
+        &lt;xsl:attribute name=&quot;href&quot;&gt;<br>
+        #&lt;xsl:value-of seIect=&quot;yate&quot;/&gt; HTML: &lt;a<br>
+        &lt;/xsl:attribute&gt; href=&quot;#carmen&quot;&gt;carmen&lt;/a&gt;<br>
+        &lt;xsl:value-of select=&quot;yate&quot;/&gt;<br>
+        &lt;/a&gt;<br>
+        &lt;/xsl:for-each&gt;<br>
+        <br>
+        &lt;a&gt;<br>
+        &lt;xsl:attribute name=&quot;nombre&quot;&gt;<br>
+        &lt;xsl:value-of select=&quot;../yate&quot;/&gt;<br>
+        &lt;/xsl:attribute&gt; HTML: &lt;a name=&quot;carmen&quot;&gt; .... &lt;/a&gt;<br>
+        &lt;/a&gt;<br>
+        &lt;xsl:vaIue-of select=&quot;..yate&quot;/&gt;<br>
+        Tambl&eacute;n podriamos haber creado los elementos con &lt;xsl:element&gt;, 
+        asl en lugar de poner &lt;a&gt; y &lt;/a&gt;, hubi&eacute;ramos puesto: 
+        &lt;xs/:e/ement name=&#8217;a&#8221;&gt; y &lt;/xsl:e/ement&gt;.<br>
+        
+      <h3>&lt;xsl:variable&gt;</h3>
+      <p>La sentencia &lt;xsl:variable&gt; nos permite definir variables. Tiene 
+        el atributo name que es el nombre de la variable que creamos, y para darle 
+        el valor podemos usar select 0 asignandole lo que contiene sus etiquetas 
+        de inicio y cierre. Para referenciarla despu&eacute;s usamos el nombre 
+        de la variable precedido de $.<br>
+        &lt;xsl:variabIe name=&quot;precio&quot; select=&quot;//preci0&quot;/&gt; 
+        _<br>
+        Precio: &lt;xsl:value-of select=&quot;$precio&quot;/&gt;<br>
+        &lt;xsl:variable name=&quot;lD&quot;&gt;&lt;xsl:value-of select:&quot;dni&quot;/&gt;&lt;/xsl:variable&gt;<br>
+        &lt;xsl:for-each select=&quot;//empleado&quot;&gt;<br>
+        &lt;xsl:sort select=&#8220;OFlDEN&quot;/&gt;<br>
+        &lt;xsl:if test=&quot;dni_padre=$ID&quot;&gt;<br>
+        &lt;xsl:apply-templates select=&quot;.&quot;/&gt;<br>
+        &lt;/xs|:if&gt;<br>
+        &lt;/xsl:for-each&gt;</p>
+      <table width="521" border="1">
+        <tr>
+          <td width="281">La funcion sum() realiza el sumatorio de<br>
+            todos los valores de los elementos que se<br>
+            referencian entre par&eacute;ntesis.<br>
+            Precio XML saca los valores reales de los<br>
+            elementos XML.<br>
+            Variable precio solo saca el valor del<br>
+            primer elemento preoio que se encuentra, y<br>
+            no cambia Ia variable de valor, aunque<br>
+            internamente Io cambia y lo acumula<br>
+            correctamente en la funcion sum0. Esto lo<br>
+            hace asl porque hemos utilizado //precio<br>
+            que coge siempre el primer elemento, para<br>
+            refrescar la variable pondriamos<br>
+            &lt;xsl:variable name=&#8217;precio&#8221;<br>
+            se/eot=&#8217;i/preoio&#8217;7&gt; 0 &lt;xsl:variable<br>
+            name=&#8217;72reoio&#8221; se/ect=&#8217;precio&#8217;7&gt;.</td>
+          <td width="224">&lt;xsl:template match=&quot;crucer0&quot;&gt;<br>
+            &lt;xsl:variable name=&quot;preci0&quot;<br>
+            select=&quot;//precio&quot;/&gt;<br>
+            &lt;hr/&gt;<br>
+            &lt;xsl:value-of select=&quot;yate&quot;/&gt;<br>
+            Precio XML: &lt;xsl:value-of<br>
+            select=&quot;preci0&quot;/&gt;<br>
+            Variable precioz &lt;xsl:vaIue-of<br>
+            select=&quot;$preci0&quot;/&gt;<br>
+            Suma: &lt;xsl:value-of<br>
+            se|ect=&quot;sum($precic)&quot;/&gt;<br>
+            &lt;/xsl:template&gt; 
+            <p></p></td>
+        </tr>
+      </table>
+      <h3> Comentarios.</h3>
+      <p> Si queremos comentar algo en un documento XSL utilizamos &lt;l-- y --&gt;. 
+        Estas etiquetas no se procesan y por tanto no aparecen en el documento 
+        de salida. Si se desea que aparezcan los comentarios se utiliza el elemento 
+        &lt;xsl:comment&gt;.<br>
+        &lt;!-- esto es un comentario y no se procesa --&gt;<br>
+        &lt;xsl:c0mment&gt;<br>
+        Esto es un comentario que aparece en el documento de salida.<br>
+        &lt;/xsl:comment&gt; .<br>
+      <h3>&lt;xsl:text&gt;</h3>
+        
+      <p>Si queremos que en el documento de salida nos aparezca texto podemos 
+        optar por utilizar el elemento &lt;xsl:text&gt;, aunque existen otras 
+        alternativas mejores, como poner lo que se quiere sin las etiquetas:<br>
+        &lt;xsl:text&gt;hola&lt;/xsl:text&gt; &lt;font&gt;hola &lt;/font&gt;</p>
+      <p>Pero sin embargo si el texto del ejemplo anterior contiene caracteres 
+        especiales como tildes, n, &amp;... nos da un error de documento mal formado. 
+        Para ello se utiliza el &lt;xs/:text&gt; en combinacion del CDATA:<br>
+        &lt;font&gt;<br>
+        &lt;xsl:text disable-output-escaping=&quot;yes&quot;&gt;<br>
+        &lt;![CDATA[&amp;lt; Qu&amp;eacute; tal el tiempo en Espa&amp;ntilde;a 
+        &amp;9t;]]&gt;<br>
+        &lt;/xsl:text&gt;<br>
+        &lt;/font&gt;<br>
+        Con el atributo disable-output&#8212;escaping deshabilitamos la obtencion 
+        en la salida de dichos caracteres. Asi la salida del ejemplo anterior 
+        sera: &lt;Qu&eacute; tal el tiempo en Espana&gt;</p>
+        </p>
+      <h3>Scripts</h3>
+      <p>A trav&eacute;s de las sentencias &lt;xsl:comment&gt; y &lt;![CDATA[ 
+        ]]&gt; podremos anadir al documento algun codigo javascript, vbscript...<br>
+        &lt;script Ianguage=&quot;javascript&quot;&gt;<br>
+        &lt;xsl:comment&gt;<br>
+        &lt;![CDATA[<br>
+        function ejecutar() {<br>
+        if(d0cument.comprar.haysize.value==&#8217;si&#8217;){<br>
+        alert (&#8216;debe seleccionar una talIa&#8217;);<br>
+        }<br>
+        }<br>
+        ]]&gt;<br>
+        &lt;/xsl:comment&gt;<br>
+        &lt;/script&gt;<br>
+        Aunque es muy trecuente que dentro del script necesitemos valores que 
+        nos lo pasen a trav&eacute;s del XML, en este caso se utiliza &lt;xs/:text&gt; 
+        en lugar de &lt;xsl:comment&gt;:<br>
+        &lt;script language=&quot;JavaScript&quot;&gt;<br>
+        &lt;xsl:text disable-output-escaping:&quot;yes&quot;&gt;<br>
+        &lt;![CDATA[ variable1 = &quot;vaIor1&quot;+&quot;]]&gt;<br>
+        &lt;/xsl:text&gt;<br>
+        &lt;xs:value-of select=&#8220;RESTO&quot;/&gt;<br>
+        &lt;xsl:text disable-output-escaping:&quot;yes&quot;&gt;<br>
+        &lt;![CDATA[&quot;; variable2 = 3; ]]&gt;<br>
+        &lt;/xsl:text&gt;<br>
+        &lt;/script&gt;<br>
+        Donde la variable1 se tormaria con valor1 y el valor de la etiqueta RESTO. 
+        Si esta ultima contiene valor2, daria como resultado en HTML:<br>
+        &lt;script language=&quot;JavaScript&quot;&gt;<br>
+        variablet = &#8220;vaIor1&quot;+&quot; vaIor2&quot;;<br>
+        variable2 = 3;<br>
+        &lt;/script&gt;</p>
+      </p></td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

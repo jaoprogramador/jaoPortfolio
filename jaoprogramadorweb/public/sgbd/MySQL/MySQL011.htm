@@ -1,0 +1,285 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Ejercicios MySQL</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="MySQL, sql, pl/sql, programacion MySQL, ejercicios MySQL, ejemplos MySQL, select">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2>S E L E C T</h2></td>
+  </tr>
+  <tr> 
+    <td><h3>Seleccion de datos en tablas</h3>
+      <p>La sentencia SELECT es utilizada para traer informaci&oacute;n desde 
+        una tabla. La sintaxis general de esta sentencia es:<br>
+        SELECT seleccionar_Esto<br>
+        FROM desde_tabla<br>
+        WHERE condiciones;<br>
+        seleccionar_esto es lo que se quiere ver. Puede ser una lista de columnas, 
+        o * para indicar &#8220;todas las columnas.&#8221; desde_<br>
+        tablaindica la tabla donde est&aacute;n los datos a recuperar. La cl&aacute;usula 
+        WHERE es opcional. Si est&aacute; presente, condiciones representa<br>
+        las condiciones que cada registro debe cumplir para retornar como resultado.<br>
+        3.3.4.1. Seleccionar todos los datos<br>
+        La forma m&aacute;s simple de SELECT recupera todo lo que hay en la tabla:<br>
+        mysql&gt; SELECT * FROM pet;<br>
+        +----------+--------+---------+------+------------+------------+<br>
+        | name | owner | species | sex | birth | death |<br>
+        +----------+--------+---------+------+------------+------------+<br>
+        | Fluffy | Harold | cat | f | 1993-02-04 | NULL |<br>
+        | Claws | Gwen | cat | m | 1994-03-17 | NULL |<br>
+        | Buffy | Harold | dog | f | 1989-05-13 | NULL |<br>
+        | Fang | Benny | dog | m | 1990-08-27 | NULL |<br>
+        | Bowser | Diane | dog | m | 1979-08-31 | 1995-07-29 |<br>
+        | Chirpy | Gwen | bird | f | 1998-09-11 | NULL |<br>
+        | Whistler | Gwen | bird | NULL | 1997-12-09 | NULL |<br>
+        | Slim | Benny | snake | m | 1996-04-29 | NULL |<br>
+        | Puffball | Diane | hamster | f | 1999-03-30 | NULL |<br>
+        +----------+--------+---------+------+------------+------------+<br>
+        Esta forma de SELECT es &uacute;til si se quiere revisar la tabla completa, 
+        por ejemplo, despues de haberla cargado con un conjunto de<br>
+        datos inicial. Por ejemplo, puede ocurrir que la fecha de nacimiento de 
+        Bowser no parezca correcta. Consultando los papeles de pedigri,<br>
+        se descubre que el a&ntilde;o correcto de nacimiento es 1989, no 1979.<br>
+        Existen al menos dos formas de solucionarlo:<br>
+        &#8226; Editando el fichero pet.txt para corregir el error, vaciando la 
+        tabla y volviendola a llenar con los datos. Para esto se usan las<br>
+        sentencias DELETE y LOAD DATA:<br>
+        mysql&gt; DELETE FROM pet;<br>
+        mysql&gt; LOAD DATA LOCAL INFILE 'pet.txt' INTO TABLE pet;<br>
+        No obstante, si opta por esto, deber&aacute; volver a cargar el registro 
+        de Puffball.<br>
+        &#8226; Corrigiendo &uacute;nicamente el registro err&oacute;neo. Para 
+        esto se usa la sentencia UPDATE:<br>
+        mysql&gt; UPDATE pet SET birth = '1989-08-31' WHERE name = 'Bowser';<br>
+        UPDATE modifica solo el registro en cuesti&oacute;n y no requiere que 
+        se vuelva a llenar la tabla.<br>
+        3.3.4.2. Seleccionar registros espec&iacute;ficos<br>
+        Como se ha visto en la secci&oacute;n anterior, es f&aacute;cil recuperar 
+        una tabla en su totalidad. S&oacute;lo debe omitir la cl&aacute;usula 
+        WHERE en la sentencia<br>
+        SELECT. Pero, generalmente, no se desea ver la tabla completa, especialmente 
+        cuando alcanza un gran tama&ntilde;o. En cambio,<br>
+        usualmente, se tiene inter&eacute;s en obtener una respuesta para una 
+        consulta en particular, en cuyo caso se especifican algunas restricciones<br>
+        para la informaci&oacute;n que se traer&aacute;. A continuaci&oacute;n 
+        se ver&aacute;n algunas consultas que responden preguntas acerca de las 
+        mascotas.<br>
+        Se pueden seleccionar s&oacute;lo algunos registros de la tabla. Por ejemplo, 
+        si quisiera verificar los cambios realizados sobre la fecha de<br>
+        nacimiento de Bowser, seleccione el registro de Bowser de esta manera:<br>
+        mysql&gt; SELECT * FROM pet WHERE name = 'Bowser';<br>
+        +--------+-------+---------+------+------------+------------+<br>
+        | name | owner | species | sex | birth | death |<br>
+        +--------+-------+---------+------+------------+------------+<br>
+        | Bowser | Diane | dog | m | 1989-08-31 | 1995-07-29 |<br>
+        +--------+-------+---------+------+------------+------------+<br>
+        La salida confirma que el a&ntilde;o fue correctamente registrado como 
+        1989, ya no es 1979.<br>
+        Normalmente, las comparaciones de cadenas no son case sensitive, por eso 
+        puede escribir el nombre como 'bowser', 'BOWSER',<br>
+        etc. El resultado de la consulta ser&aacute; el mismo.<br>
+        Se pueden indicar condiciones a cumplir por cualquier columna, no solamente 
+        por name. Por ejemplo, si quisiera saber qu&eacute; animales<br>
+        han nacido luego de 1998, necesita evaluar la columna birth:<br>
+        mysql&gt; SELECT * FROM pet WHERE birth &gt; '1998-1-1';<br>
+        +----------+-------+---------+------+------------+-------+<br>
+        | name | owner | species | sex | birth | death |<br>
+        +----------+-------+---------+------+------------+-------+<br>
+        | Chirpy | Gwen | bird | f | 1998-09-11 | NULL |<br>
+        | Puffball | Diane | hamster | f | 1999-03-30 | NULL |<br>
+        +----------+-------+---------+------+------------+-------+<br>
+        Se pueden combinar condiciones, por ejemplo para localizar perros hembra:<br>
+        mysql&gt; SELECT * FROM pet WHERE species = 'dog' AND sex = 'f';<br>
+        +-------+--------+---------+------+------------+-------+<br>
+        | name | owner | species | sex | birth | death |<br>
+        +-------+--------+---------+------+------------+-------+<br>
+        | Buffy | Harold | dog | f | 1989-05-13 | NULL |<br>
+        +-------+--------+---------+------+------------+-------+<br>
+        La consulta anterior emplea el operador l&oacute;gico AND. Tambi&eacute;n 
+        existe el operador OR:<br>
+        mysql&gt; SELECT * FROM pet WHERE species = 'snake' OR species = 'bird';<br>
+        +----------+-------+---------+------+------------+-------+<br>
+        | name | owner | species | sex | birth | death |<br>
+        +----------+-------+---------+------+------------+-------+<br>
+        | Chirpy | Gwen | bird | f | 1998-09-11 | NULL |<br>
+        | Whistler | Gwen | bird | NULL | 1997-12-09 | NULL |<br>
+        | Slim | Benny | snake | m | 1996-04-29 | NULL |<br>
+        +----------+-------+---------+------+------------+-------+<br>
+        AND and OR pueden ser combinadas, si bien AND tiene mayor precedencia 
+        que OR. Si utiliza ambos operadores, es buena idea emplear<br>
+        par&eacute;ntesis para indicar explicitamente la forma en que las condiciones 
+        deben agruparse:<br>
+        Curso (tutorial) de MySQL<br>
+        132<br>
+        mysql&gt; SELECT * FROM pet WHERE (species = 'cat' AND sex = 'm')<br>
+        -&gt; OR (species = 'dog' AND sex = 'f');<br>
+        +-------+--------+---------+------+------------+-------+<br>
+        | name | owner | species | sex | birth | death |<br>
+        +-------+--------+---------+------+------------+-------+<br>
+        | Claws | Gwen | cat | m | 1994-03-17 | NULL |<br>
+        | Buffy | Harold | dog | f | 1989-05-13 | NULL |<br>
+        +-------+--------+---------+------+------------+-------+<br>
+        3.3.4.3. Seleccionar columnas concretas<br>
+        Si no se quieren ver filas completas, solo hace falta indicar las columnas 
+        en las que se est&aacute; interesado, separadas por comas. Por<br>
+        ejemplo, si desea saber cu&aacute;ndo naci&oacute; cada animal, seleccione 
+        las columnas name y birth:<br>
+        mysql&gt; SELECT name, birth FROM pet;<br>
+        +----------+------------+<br>
+        | name | birth |<br>
+        +----------+------------+<br>
+        | Fluffy | 1993-02-04 |<br>
+        | Claws | 1994-03-17 |<br>
+        | Buffy | 1989-05-13 |<br>
+        | Fang | 1990-08-27 |<br>
+        | Bowser | 1989-08-31 |<br>
+        | Chirpy | 1998-09-11 |<br>
+        | Whistler | 1997-12-09 |<br>
+        | Slim | 1996-04-29 |<br>
+        | Puffball | 1999-03-30 |<br>
+        +----------+------------+<br>
+        Para saber quien posee mascotas, utilice esta consulta:<br>
+        mysql&gt; SELECT owner FROM pet;<br>
+        +--------+<br>
+        | owner |<br>
+        +--------+<br>
+        | Harold |<br>
+        | Gwen |<br>
+        | Harold |<br>
+        | Benny |<br>
+        | Diane |<br>
+        | Gwen |<br>
+        | Gwen |<br>
+        | Benny |<br>
+        | Diane |<br>
+        +--------+<br>
+        Observe que esta sentencia retorna el campo owner de cada registro, y 
+        algunos de ellos aparecen m&aacute;s de una vez. Para reducir la<br>
+        salida, recupere solamente una vez cada registro repetido, agregando la 
+        palabra clave DISTINCT:<br>
+        mysql&gt; SELECT DISTINCT owner FROM pet;<br>
+        +--------+<br>
+        | owner |<br>
+        +--------+<br>
+        | Benny |<br>
+        | Diane |<br>
+        | Gwen |<br>
+        | Harold |<br>
+        +--------+<br>
+        Puede emplearse una cl&aacute;sula WHERE para combinar la selecci&oacute;n 
+        de ciertas filas y de ciertas columnas. Por ejemplo, para obtener<br>
+        &uacute;nicamente la fecha de nacimiento de perros y gatos, ejecute esta 
+        consulta:<br>
+        mysql&gt; SELECT name, species, birth FROM pet<br>
+        -&gt; WHERE species = 'dog' OR species = 'cat';<br>
+        +--------+---------+------------+<br>
+        | name | species | birth |<br>
+        +--------+---------+------------+<br>
+        | Fluffy | cat | 1993-02-04 |<br>
+        | Claws | cat | 1994-03-17 |<br>
+        | Buffy | dog | 1989-05-13 |<br>
+        | Fang | dog | 1990-08-27 |<br>
+        | Bowser | dog | 1989-08-31 |<br>
+        +--------+---------+------------+<br>
+        3.3.4.4. Ordenar registros<br>
+        Quiz&aacute; advirti&oacute;, en los ejemplos anteriores, que las filas 
+        resultantes se mostraron sin ning&uacute;n orden en particular. A menudo 
+        es m&aacute;s<br>
+        f&aacute;cil examinar la salida de una consulta cuando las filas se ordenan 
+        de alg&uacute;n modo significativo. Para ordenar un resultado, se usa<br>
+        la cl&aacute;sula ORDER BY.<br>
+        Aqui tiene las fechas de cumplea&ntilde;os de los animales, ordenadas 
+        por fecha:<br>
+        Curso (tutorial) de MySQL<br>
+        133<br>
+        mysql&gt; SELECT name, birth FROM pet ORDER BY birth;<br>
+        +----------+------------+<br>
+        | name | birth |<br>
+        +----------+------------+<br>
+        | Buffy | 1989-05-13 |<br>
+        | Bowser | 1989-08-31 |<br>
+        | Fang | 1990-08-27 |<br>
+        | Fluffy | 1993-02-04 |<br>
+        | Claws | 1994-03-17 |<br>
+        | Slim | 1996-04-29 |<br>
+        | Whistler | 1997-12-09 |<br>
+        | Chirpy | 1998-09-11 |<br>
+        | Puffball | 1999-03-30 |<br>
+        +----------+------------+<br>
+        Por lo general, cuando se trata de columnas de tipo car&aacute;cter, la 
+        ordenaci&oacute;n, &#8212; al igual que otras operaciones de comparaci&oacute;n&#8212; 
+        no<br>
+        es case-sensitive. Significa que el orden permanece indefinido para las 
+        columnas que son id&eacute;nticas excepto por sus may&uacute;sculas y<br>
+        min&uacute;sculas. Puede no obstante forzar a que una columna se ordene 
+        en forma sensible a may&uacute;sculas empleando el modificador BINARY:<br>
+        ORDER BY BINARY columna.<br>
+        El sentido de ordenaci&oacute;n, por defecto, es ascendente, con los valores 
+        m&aacute;s peque&ntilde;os primero. Para ordenar en sentido inverso<br>
+        (descendente), agregue la palabra clave DESC luego del nombre de la columna 
+        por la que ordena:<br>
+        mysql&gt; SELECT name, birth FROM pet ORDER BY birth DESC;<br>
+        +----------+------------+<br>
+        | name | birth |<br>
+        +----------+------------+<br>
+        | Puffball | 1999-03-30 |<br>
+        | Chirpy | 1998-09-11 |<br>
+        | Whistler | 1997-12-09 |<br>
+        | Slim | 1996-04-29 |<br>
+        | Claws | 1994-03-17 |<br>
+        | Fluffy | 1993-02-04 |<br>
+        | Fang | 1990-08-27 |<br>
+        | Bowser | 1989-08-31 |<br>
+        | Buffy | 1989-05-13 |<br>
+        +----------+------------+<br>
+        Puede ordenar bas&aacute;ndose en varias columnas, y cada columna en un 
+        sentido diferente. Por ejemplo, para ordenar por tipo de animal<br>
+        en sentido ascendente y, dentro de cada tipo, ordenar por nacimiento en 
+        sentido descendente (los animales m&aacute;s j&oacute;venes primero)<br>
+        utilice la siguiente consulta:<br>
+        mysql&gt; SELECT name, species, birth FROM pet<br>
+        -&gt; ORDER BY species, birth DESC;<br>
+        +----------+---------+------------+<br>
+        | name | species | birth |<br>
+        +----------+---------+------------+<br>
+        | Chirpy | bird | 1998-09-11 |<br>
+        | Whistler | bird | 1997-12-09 |<br>
+        | Claws | cat | 1994-03-17 |<br>
+        | Fluffy | cat | 1993-02-04 |<br>
+        | Fang | dog | 1990-08-27 |<br>
+        | Bowser | dog | 1989-08-31 |<br>
+        | Buffy | dog | 1989-05-13 |<br>
+        | Puffball | hamster | 1999-03-30 |<br>
+        | Slim | snake | 1996-04-29 |<br>
+        +----------+---------+------------+<br>
+        Advierta que la palabra clave DESC se aplica sobre la columna inmediatamente 
+        anterior (birth); no afecta el sentido de ordenaci&oacute;n<br>
+        de la columna species.</p>
+    <p>
+      </p>
+        </td>
+    <td>&nbsp;</td>
+    <td><a href="http://www.euskalnet.net/juanarana/oraclezip/Ejer3.rar"><img src="../../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td>
+<div align="right"><a href="http://www.euskalnet.net/juanarana/index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a>
+      </div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Llamar a un Servlet desde otro Servlet</title>
+<META http-equiv=Content-Language content=es>
+<META content="Manual Servlet, ejemplos Servlet, codigos Servlet" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Manual Servlet, ejemplos Servlet, codigos Servlet">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2> Llamar a un Servlet desde otro Servlet</h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <p>Para hacer que nuestro servlet llame a otro 
+        servlet, podemos.<br>
+        Un servlet puede hacer peticiones HTTP a otro servlet. La apertura de 
+        una conexi&oacute;n URL se explica en las
+        p&aacute;ginas de la secci&oacute;n Trabajar con URLs.<br>
+         <br>
+        Un servlet puede llamar directamente a los m&eacute;todos p&uacute;blicos 
+        de otros servlet, si los dos se est&aacute;n ejecutando<br>
+        dentro del mismo servidor.<br>
+        <br>
+        Esta p&aacute;gina explica la segunda opci&oacute;n. Para llamar directamente 
+        a los m&eacute;todos p&uacute;blicos de otro servlet,
+        debemos.<br>
+        Conocer el nombre del servlet al que queremos llamar.  <br>
+        Obtener el acceso al objeto Servlet del servlet.  <br>
+        Llamar al m&eacute;todo p&uacute;blico del servlet.  <br>
+        Para obtener el acceso al objetoServlet, utilizamos el m&eacute;todo getServlet 
+        del objeto ServletContext.<br>
+        Obtener el objeto ServletContext desde el objeto ServletConfig almacenado 
+        en el objeto Servlet. Un
+        ejemplo aclarar&aacute; esto. Cuando el servlet BookDetail llama al servlet 
+        BookDB, el servlet BookDetail<br>
+        obtiene el objeto Servlet del BookDB Servlet de esta forma.<br>
+        public class BookDetailServlet extends HttpServlet {<br>
+        public void doGet (HttpServletRequest request,<br>
+        HttpServletResponse response)<br>
+        throws ServletException, IOException<br>
+        {<br>
+        ...<br>
+        BookDBServlet database = (BookDBServlet)<br>
+        getServletConfig().getServletContext().getServlet(&quot;bookdb&quot;);<br>
+        ...<br>
+        }<br>
+        }<br>
+        Una vez que tenemos el objeto Servlet, podemos llamar a cualquiera de 
+        los m&eacute;todos p&uacute;blicos del<br>
+        servlet. Por ejemplo, el servlet BookDetail llama al m&eacute;todo getBookDetails 
+        del servlet BookDB.<br>
+        public class BookDetailServlet extends HttpServlet {<br>
+        public void doGet (HttpServletRequest request,<br>
+        HttpServletResponse response)<br>
+        throws ServletException, IOException<br>
+        {<br>
+        ...<br>
+        BookDBServlet database = (BookDBServlet)<br>
+        getServletConfig().getServletContext().getServlet(&quot;bookdb&quot;);<br>
+        BookDetails bd = database.getBookDetails(bookId);<br>
+        ...<br>
+        }<br>
+        }<br>
+        Debemos tener precauci&oacute;n cuando llamemos a m&eacute;todos de otro 
+        servlet. Si el servlet al que queremos
+        llamar implementa el interface SingleThreadModel, nuestra llamada podr&iacute;a 
+        violar la naturaleza
+        mono-thread del servlet. (El servidor no tiene forma de intervenir y asegurarse 
+        de que nuestra llamada
+        suceda cuando el servlet no est&aacute; interactuando con otro cliente). 
+        En este caso, nuestro servlet deber&iacute;a
+        hacer una petici&oacute;n HTTP al otro servlet en vez de llamar directamente 
+        a sus m&eacute;todos. </p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

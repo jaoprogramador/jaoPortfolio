@@ -1,0 +1,308 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Ejercicios MySQL</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="MySQL, sql, pl/sql, programacion MySQL, ejercicios MySQL, ejemplos MySQL, select">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2>V A R I A B L E S</h2></td>
+  </tr>
+  <tr> 
+    <td><h3>Variables de usuario</h3>
+      <p>MySQL 5.0 soporta variables de usuario, las cuales permiten almacenar 
+        un valor y hacer referencia a &eacute;l m&aacute;s tarde; esto posibilita<br>
+        pasar valores de una sentencia a otra. Las variables de usuario son espec&iacute;ficas 
+        de la conexi&oacute;n. Esto significa que una variable definida<br>
+        por un cliente no puede ser vista o utilizada por otros clientes. Todas 
+        las variables de un cliente son autom&aacute;ticamente liberadas<br>
+        cuando ese cliente abandona la conexi&oacute;n.<br>
+        Las variables de usuario se escriben como @nombre_var, donde el nombre 
+        de variable nombre_var puede consistir de caracteres<br>
+        alfanum&eacute;ricos tomados del conjunto de caracteres actual, '.', '_', 
+        y '$'. El conjunto de caracteres predeterminado es ISO-8859-1<br>
+        (Latin1). Esto puede cambiarse con la opci&oacute;n de mysqld --default-character-set. 
+        Consulte Secci&oacute;n 5.9.1, &#8220;El conjunto<br>
+        de caracteres utilizado para datos y ordenaci&oacute;n&#8221;. Los nombres 
+        de variables de usuario no son sensibles a may&uacute;sculas en MySQL<br>
+        5.0.<br>
+        Una forma de establecer una variable de usuario es empleando una sentencia 
+        SET:<br>
+        SET @nombre_var = expr [, @nombre_var = expr] ...<br>
+        Con SET, tanto = como := pueden usarse como operadores de asignaci&oacute;n. 
+        La expr asignada a cada variable puede evaluarse a un<br>
+        valor entero, real, cadena, o NULL.<br>
+        Una variable de usuario tambi&eacute;n puede recibir valores en otras 
+        sentencias que no sean SET. En este caso, el operador de asignaci&oacute;n<br>
+        debe ser := y no = porque = se considera operador de comparaci&oacute;n 
+        en otras sentencias que no sean SET:<br>
+        mysql&gt; SET @t1=0, @t2=0, @t3=0;<br>
+        mysql&gt; SELECT @t1:=(@t2:=1)+@t3:=4,@t1,@t2,@t3;<br>
+        +----------------------+------+------+------+<br>
+        | @t1:=(@t2:=1)+@t3:=4 | @t1 | @t2 | @t3 |<br>
+        +----------------------+------+------+------+<br>
+        | 5 | 5 | 1 | 4 |<br>
+        +----------------------+------+------+------+<br>
+        Las variables de usuario pueden emplearse en cualquier parte donde se 
+        permitan expresiones. Generalmente esto no incluye situa-<br>
+        ciones donde expl&iacute;citamente se requiere un valor literal, como 
+        en la cl&aacute;usula LIMIT de una sentencia SELECT, o la cl&aacute;usula 
+        IGNORE<br>
+        n&uacute;mero LINES de una sentencia LOAD DATA.<br>
+        Si se hace referencia a una variable a&uacute;n sin inicializar, su valor 
+        ser&aacute; NULL.<br>
+        En MySQL 5.0, si a una variable se le asigna un valor de cadena, el conjunto 
+        de caracteres y la forma de comparaci&oacute;n (collation) de<br>
+        la variable ser&aacute;n forzados para ser iguales a los de la cadena. 
+        Este comportamiento es impl&iacute;cito desde MySQL 5.0.3 y lo mismo sucede<br>
+        con las columnas de una tabla.<br>
+        Nota: en una sentencia SELECT, cada expresi&oacute;n se eval&uacute;a 
+        solamente cuando se env&iacute;a al cliente. Esto significa que en una 
+        cl&aacute;usula<br>
+        HAVING, GROUP BY, u ORDER BY, no es posible hacer referencia a una expresi&oacute;n 
+        que comprenda variables que reciben su valor<br>
+        en la lista del SELECT. Por ejemplo, la siguiente sentencia no funcionar&aacute; 
+        como se espera:<br>
+        mysql&gt; SELECT (@aa:=id) AS a, (@aa+3) AS b FROM tbl_name HAVING b=5;<br>
+        La referencia a b en la cl&aacute;usula HAVING hace referencia al alias 
+        de una expresi&oacute;n de la lista SELECT que hace uso de la variable<br>
+        @aa. Esto no funciona como se esperar&iacute;a: @aa no contiene el valor 
+        de la fila actual, sino el valor del id de la fila anteriormente seleccionada.<br>
+        La regla general es que nunca se asigne un valor a una variable de usuario 
+        en una parte de una sentencia y se use la misma variable<br>
+        en otra parte de la misma sentencia. Se podr&iacute;an obtener los resultados 
+        esperados, pero esto no est&aacute; garantizado.<br>
+        Otro problema asociado a asignar el valor de una variable y emplearla 
+        en la misma sentencia es que el tipo de dato resultante estar&aacute;<br>
+        basado en el tipo que ten&iacute;a la variable al comienzo de la sentencia. 
+        El siguiente ejemplo ilustra esto:<br>
+        mysql&gt; SET @a='test';<br>
+        mysql&gt; SELECT @a,(@a:=20) FROM tbl_name;<br>
+        En esta sentencia SELECT, MySQL informa al cliente que la primer columna 
+        es una cadena, y convierte todos los accesos a @a en<br>
+        cadenas, a&uacute;n cuando @a recibe un valor num&eacute;rico en la segunda 
+        l&iacute;nea. Luego de que la sentencia SELECT se ejecuta, @a se considera<br>
+        un n&uacute;mero para la siguiente sentencia.<br>
+        Para evitar problemas con este comportamiento, no se debe inicializar 
+        y utilizar la misma variable en la misma sentencia, o, de lo<br>
+        contrario, hay que establecer su valor en 0, 0.0, o '' para definir su 
+        tipo antes de utilizarla.<br>
+        Una variable sin asignaci&oacute;n tiene el valor NULL con un tipo cadena.<br>
+        <h3>Variables de sistema</h3><br>
+        MySQL proporciona acceso a muchas variables de sistema y de conexi&oacute;n. 
+        Muchas variables pueden modificarse din&aacute;micamente<br>
+        mientras el servidor se est&aacute; ejecutando. Esto a menudo permite 
+        variar la operaci&oacute;n del servidor sin tener que detenerlo y reiniciarlo.<br>
+        El servidor mysqld mantiene dos clases de variables. Las variables globales 
+        afectan la operaci&oacute;n general del servidor. Las variables<br>
+        de sesi&oacute;n act&uacute;an sobre la operaci&oacute;n en conexiones 
+        de clientes individuales.<br>
+        Cuando el servidor arranca, inicializa todas las variables globales a 
+        sus valores predeterminados. Estos valores pueden ser modificados<br>
+        por opciones especificadas en ficheros de opciones o en la l&iacute;nea 
+        de comandos. Luego de que el servidor se inicia, las variables<br>
+        globales pueden ser modificadas din&aacute;micamente conect&aacute;ndose 
+        y emitiendo una sentencia SET GLOBAL var_name. Para<br>
+        cambiar una variable global debe tenerse el privilegio SUPER.<br>
+        El servidor tambi&eacute;n mantiene un conjunto de variables de sesi&oacute;n 
+        para cada cliente que se conecta. Las variables de sesi&oacute;n de cliente<br>
+        se inicializan al momento de conectarse, empleando el valor actual de 
+        la correspondiente variable global. Las variables de sesi&oacute;n<br>
+        din&aacute;micas pueden ser modificadas por el cliente mediante una sentencia 
+        SET SESSION var_name. No se requieren privilegios<br>
+        especiales para establecer el valor una variable de sesi&oacute;n, pero 
+        un cliente puede modificar solamente sus propias variables, no las<br>
+        de otros clientes.<br>
+        Un cambio en una variable global es visible para cualquier cliente que 
+        acceda esa variable. Sin embargo, afectar&aacute; solamente a las<br>
+        correspondientes variables de sesi&oacute;n de las conexiones que se realicen 
+        luego del cambio. No afectar&aacute; las variables de sesi&oacute;n de 
+        los<br>
+        clientes actualmente conectados (ni siquiera las del cliente que emiti&oacute; 
+        la sentencia SET GLOBAL).<br>
+        Los valores de las variables globales y de sesi&oacute;n pueden establecerse 
+        y recuperarse usando varias sintaxis diferentes. Los siguientes<br>
+        ejemplos est&aacute;n basados en la variable sort_buffer_size.<br>
+        Para establecer el valor de una variable GLOBAL, debe emplearse una de 
+        las siguientes sintaxis:<br>
+        mysql&gt; SET GLOBAL sort_buffer_size=valor;<br>
+        mysql&gt; SET @@global.sort_buffer_size=valor;<br>
+        Para establecer el valor de una variable SESSION, debe emplearse una de 
+        las siguientes sintaxis:<br>
+        mysql&gt; SET SESSION sort_buffer_size=valor;<br>
+        mysql&gt; SET @@session.sort_buffer_size=valor;<br>
+        mysql&gt; SET sort_buffer_size=valor;<br>
+        LOCAL es un sin&oacute;nimo de SESSION.<br>
+        Si al establecer el valor de una variable no se utiliza GLOBAL, SESSION, 
+        o LOCAL, por defecto se asume SESSION. Consulte<br>
+        Secci&oacute;n 13.5.3, &#8220;Sintaxis de SET&#8221;.<br>
+        Para recuperar el valor de una variable GLOBAL debe utilizarse una de 
+        las siguientes sentencias:<br>
+        mysql&gt; SELECT @@global.sort_buffer_size;<br>
+        mysql&gt; SHOW GLOBAL VARIABLES like 'sort_buffer_size';<br>
+        Para recuperar el valor de una variable SESSION debe utilizarse una de 
+        las siguientes sentencias:<br>
+        mysql&gt; SELECT @@sort_buffer_size;<br>
+        mysql&gt; SELECT @@session.sort_buffer_size;<br>
+        mysql&gt; SHOW SESSION VARIABLES like 'sort_buffer_size';<br>
+        Aqu&iacute;, tambi&eacute;n, LOCAL es un sin&oacute;nimo de SESSION.<br>
+        Cuando se recupera una variable con SELECT @@nombre_var (o sea, no se 
+        especifica global., session., o local.),<br>
+        MySQL devuelve el valor de SESSION si existe y el valor GLOBAL en otro 
+        caso.<br>
+        En el caso de SHOW VARIABLES, si no se especifica GLOBAL, SESSION, o LOCAL, 
+        MySQL devuelve los valores de SESSION.<br>
+        La raz&oacute;n por la que la palabra clave GLOBAL se requiere para establecer 
+        el valor de variables que solamente existen como GLOBAL<br>
+        pero no para recuperar dicho valor, es para prevenir futuros problemas. 
+        Si se elimina una variable SESSION con el mismo nombre<br>
+        que una variable GLOBAL, un cliente con el privilegio SUPER podr&iacute;a 
+        cambiar accidentalmente la variable GLOBAL en lugar de hacerlo<br>
+        solamente sobre la variable SESSION de su propia conexi&oacute;n. Si se 
+        agrega una variable SESSION con el mismo nombre que<br>
+        una GLOBAL, un cliente que intentase modificar la variable GLOBAL podr&iacute;a 
+        encontrarse con que s&oacute;lo se ha modificado su propia<br>
+        variable SESSION.<br>
+        Puede encontrarse mayor informaci&oacute;n acerca de las opciones de inicio 
+        del sistema y de las variables de sistema en Secci&oacute;n 5.3.1,<br>
+        &#8220;Opciones del comando mysqld&#8221; y Secci&oacute;n 5.3.3, &#8220;Variables 
+        de sistema del servidor&#8221;. Una lista de las variables que pueden 
+        establecerse<br>
+        en tiempo de ejecuci&oacute;n se brinda en Secci&oacute;n 5.3.3.1, &#8220;Variables 
+        de sistema din&aacute;micas&#8221;.<br>
+        <h3>Variables estructuradas de sistema</h3><br>
+        MySQL 5.0 tambi&eacute;n soporta variables de sistema estructuradas. Una 
+        variable estructurada difiere de una variable de sistema convencional<br>
+        en dos aspectos:<br>
+        &#8226; Su valor es una estructura con componentes que especifican par&aacute;metros 
+        de servidor que se consideran estrechamente relacionados.<br>
+        &#8226; Pueden existir varias instancias de un determinado tipo de variable 
+        estructurada. Cada una tiene un nombre diferente y se refiere<br>
+        a un recurso mantenido por el servidor.<br>
+        Actualmente, MySQL soporta un solo tipo de variable estructurada. &Eacute;ste 
+        especifica par&aacute;metros que regulan el funcionamiento de<br>
+        los cach&eacute;s de claves (key caches). Una variable estructurada de 
+        cach&eacute; de claves tiene estos componentes:<br>
+        &#8226; key_buffer_size<br>
+        &#8226; key_cache_block_size<br>
+        &#8226; key_cache_division_limit<br>
+        &#8226; key_cache_age_threshold<br>
+        Esta secci&oacute;n describe la sintaxis para referirse a variables estructuradas. 
+        Para los ejemplos de sintaxis se emplean variables de cach&eacute;<br>
+        de claves, pero los detalles espec&iacute;ficos sobre c&oacute;mo funcionan 
+        los cach&eacute;s de claves se encuentran en Secci&oacute;n 7.4.6, &#8220;La 
+        cach&eacute; de<br>
+        claves de MyISAM&#8221;.<br>
+        Para referirse a un componente de una instancia de una variable estructurada, 
+        se emplea un nombre compuesto con el formato<br>
+        nombre_instancia.nombre_componente. Ejemplos:<br>
+        hot_cache.key_buffer_size<br>
+        hot_cache.key_cache_block_size<br>
+        cold_cache.key_cache_block_size<br>
+        Siempre hay predefinida una instancia con el nombre default para cada 
+        variable de sistema estructurada. Si se hace referencia a<br>
+        un componente de una variable estructurada sin mencionar el nombre de 
+        instancia, se utiliza default. Por lo tanto, default.<br>
+        key_buffer_size y key_buffer_size se refieren a la misma variable de sistema.<br>
+        Las reglas para la denominaci&oacute;n de instancias y componentes pertenecientes 
+        a variables estructuradas son las siguientes:<br>
+        &#8226; Para un determinado tipo de variable estructurada, cada instancia 
+        debe tener un nombre que sea &uacute;nico dentro de ese tipo de variable.<br>
+        Sin embargo, los nombres de instancia no necesitan ser &uacute;nicos a 
+        trav&eacute;s de distintos tipos de variable estructurada. Por<br>
+        ejemplo, cada variable estructurada tiene una instancia llamada default, 
+        as&iacute; que default no es &uacute;nico a trav&eacute;s de distintos<br>
+        tipos de variable.<br>
+        &#8226; Los nombres de los componentes de cada tipo de variable estructurada 
+        deben ser &uacute;nicos a trav&eacute;s de todos los nombres de variables<br>
+        de sistema. Si esto no fuese as&iacute; (o sea, si dos tipos diferentes 
+        de variable estructurada compartiesen nombres de miembros),<br>
+        no ser&iacute;a posible determinar la variable estructurada por defecto 
+        a emplear cuando un nombre de miembro no estuviese precedido<br>
+        por un nombre de instancia.<br>
+        &#8226; Si un nombre de instancia de variable estructurada no fuese legal 
+        al usarlo como identificador sin delimitar, habr&aacute; que referirse<br>
+        a &eacute;l delimit&aacute;ndolo con acentos graves (ASCII 96). Por ejemplo, 
+        hot-cache no es un nombre legal, pero `hot-cache` lo<br>
+        es.<br>
+        &#8226; global, session, y local no son nombres legales de instancia. 
+        Esto evita conflictos con notaciones del tipo<br>
+        @@global.nombre_var, que se utilizan para hacer referencias a variables 
+        de sistema no estructuradas.<br>
+        Actualmente, las primeras dos reglas no tienen posibilidad de ser infringidas, 
+        porque el &uacute;nico tipo de variable estructurada es el empleado<br>
+        para cach&eacute;s de claves. Estas reglas cobrar&aacute;n mayor significado 
+        si en el futuro se crean otros tipos de variable estructurada.<br>
+        Con una excepci&oacute;n, se puede hacer referencia a los componentes 
+        de una variable estructurada utilizando nombres compuestos en<br>
+        cualquier contexto en que puedan aparecer nombres simples de variable. 
+        Por ejemplo, se puede asignar un valor a una variable estructurada<br>
+        empleando una opci&oacute;n de l&iacute;nea de comandos:<br>
+        shell&gt; mysqld --hot_cache.key_buffer_size=64K<br>
+        En un fichero de opciones, se utilizar&iacute;a:<br>
+        [mysqld]<br>
+        hot_cache.key_buffer_size=64K<br>
+        Si se inicia el servidor con esta opci&oacute;n, crea un cach&eacute; 
+        de claves llamado hot_cache con un tama&ntilde;o de 64KB adicionalmente 
+        al<br>
+        cach&eacute; por defecto, que tiene un tama&ntilde;o predeterminado de 
+        8MB.<br>
+        Suponiendo que se inicie el servidor de esta manera:<br>
+        shell&gt; mysqld --key_buffer_size=256K \<br>
+        --extra_cache.key_buffer_size=128K \<br>
+        --extra_cache.key_cache_block_size=2048<br>
+        En este caso, el servidor establece el tama&ntilde;o del cach&eacute; 
+        de claves pedeterminado a 256KB. (Tambi&eacute;n se podr&iacute;a haber 
+        escrito -<br>
+        -default.key_buffer_size=256K.) Adicionalmente, el servidor crea un segundo 
+        cach&eacute; llamado extra_cache con un<br>
+        tama&ntilde;o de 128KB, y fija un tama&ntilde;o de 2048 bytes para los 
+        buffers de bloque destinados al cach&eacute; de bloques de &iacute;ndice 
+        de tablas.<br>
+        El siguiente ejemplo inicia el servidor con tres diferentes cach&eacute;s 
+        de claves, manteniendo sus tama&ntilde;os en una proporci&oacute;n de 
+        3:1:1:<br>
+        shell&gt; mysqld --key_buffer_size=6M \<br>
+        --hot_cache.key_buffer_size=2M \<br>
+        --cold_cache.key_buffer_size=2M<br>
+        Los valores de las variables estructuradas tambi&eacute;n pueden establecerse 
+        y leerse en tiempo de ejecuci&oacute;n. Por ejemplo, para establecer<br>
+        a 10MB el tama&ntilde;o de un cach&eacute; de claves llamado hot_cache, 
+        pueden emplearse cualquiera de estas sentencias:<br>
+        mysql&gt; SET GLOBAL hot_cache.key_buffer_size = 10*1024*1024;<br>
+        mysql&gt; SET @@global.hot_cache.key_buffer_size = 10*1024*1024;<br>
+        Para obtener el tama&ntilde;o del cach&eacute;, se realiza lo siguiente:<br>
+        mysql&gt; SELECT @@global.hot_cache.key_buffer_size;<br>
+        Sin embargo, las siguientes sentencias no funcionar&aacute;n. La variable 
+        no es interpretada como un nombre compuesto, sino como una<br>
+        cadena proporcionada a LIKE para buscar coincidencias con un patr&oacute;n.<br>
+        mysql&gt; SHOW GLOBAL VARIABLES LIKE 'hot_cache.key_buffer_size';<br>
+        Esta es la excepci&oacute;n mencionada sobre la posibilidad de utilizar 
+        en cualquier sitio un nombre de variable estructurada del mismo<br>
+        modo que se hace con una variable simple.<br>
+      </p>
+      </td>
+    <td>&nbsp;</td>
+    <td><a href="http://www.euskalnet.net/juanarana/oraclezip/Ejer3.rar"><img src="../../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td>
+<div align="right"><a href="http://www.euskalnet.net/juanarana/index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a>
+      </div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

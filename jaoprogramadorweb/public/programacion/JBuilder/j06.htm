@@ -1,0 +1,410 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Ejercicios Java</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Descargar Ejercicios de Java, Ejemplos de java, Aplicaciones  de java, JBuilder, J Builder, codigo java">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2>E 
+        J E R C I C I O S</h2></td>
+  </tr>
+  <tr> 
+    <td ><h3> Subclases</h3>
+      <p> 29.- VerClaseAnidada: Aplicacion con subclases </p>
+      <p>//en la clase veranidada.java</p>
+      <p>package pprimercontenedor;<br>
+        <br>
+        public class VerClaseAnidad {<br>
+        public static void main(String[] args) {<br>
+        /*<br>
+        Para crear una clase de la instancia anidada<br>
+        */<br>
+        PrimerContenedor.contenido i1 =new PrimerContenedor.contenido(29);<br>
+        i1.numero2=25;<br>
+        System.out.println(i1.muestraContenido());<br>
+        PrimerContenedor c1 = new PrimerContenedor(34);<br>
+        System.out.println(c1.muestraContenedor(i1));<br>
+        }<br>
+        }</p>
+      <p>//en la clase primercontenedor.java</p>
+      <p>package pprimercontenedor;<br>
+        <br>
+        public class PrimerContenedor {<br>
+        public int numero=0;<br>
+        static public int numero3=13;<br>
+        public PrimerContenedor(int numero){<br>
+        this.numero=numero;<br>
+        }<br>
+        public String muestraContenedor (contenido refCont){<br>
+        return &quot;N&ordm; contenedor = &quot;+numero +&quot; numero contenedor 
+        = &quot; +refCont.numero2;<br>
+        }<br>
+        static class contenido{<br>
+        public int numero2;<br>
+        public contenido (int numero){<br>
+        numero2=numero;<br>
+        }<br>
+        public String muestraContenido(){<br>
+        return &quot;numeroContedor &quot;+numero3+&quot; numero contenedor = 
+        &quot;+numero2;<br>
+        }<br>
+        }<br>
+        }<br>
+      </p>
+      </td>
+    <td>&nbsp;</td>
+    <td><a href="http://www.euskalnet.net/juanarana/JBuilderZip/29.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>Control 
+      de errores</h3>
+      <p> 30.- pexcepcion: Aplicaci&oacute;n que nos pide que introduzcamos dos 
+        n&uacute;meros para hacer la divisi&oacute;n tratanto los posibles errores 
+        (cuando introducimos una cadena en vez de un n&ordm;). </p>
+      <p>package pexcepcion1;<br>
+        <br>
+        import java.io.*;<br>
+        public class exception1 {<br>
+        public static void main(String[] args) {<br>
+        BufferedReader teclado=new BufferedReader (new InputStreamReader (System.in));<br>
+        boolean error=false;<br>
+        do{<br>
+        try{<br>
+        System.out.print(&quot;\nIntroduce un numero: &quot;);<br>
+        String texto= teclado.readLine();<br>
+        int i=Integer.parseInt(texto);<br>
+        System.out.print(&quot;\nTeclea otro numero: &quot;);<br>
+        texto= teclado.readLine();<br>
+        int j=Integer.parseInt(texto);<br>
+        System.out.print(&quot;\nLa divisi&oacute;n &quot;+i+&quot; / &quot;+j+&quot; 
+        = &quot;+i/j);<br>
+        }catch(Exception e){<br>
+        //System.out.print(e.getMessage());//mostramos el error que ha dado<br>
+        //e.printStackTrace();<br>
+        error=true;<br>
+        }<br>
+        }while(error);<br>
+        }<br>
+        }<br>
+      </p></td>
+    <td>&nbsp;</td>
+    <td><a href="http://www.euskalnet.net/juanarana/JBuilderZip/30.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>Control de errores</h3>
+      <p> 31.- pgestionalimentos: Aplicaci&oacute;n que nos pide que introduzcamos 
+        la denominaci&oacute;n de un alimento junto con su n&ordm; de proteinas, 
+        l&iacute;pidos, hidratos, minerales, vitaminas, para sacar el contenido 
+        energ&eacute;tico en kalorias/gr. </p>
+      <p>//en la clase gestionaAlimentos.java</p>
+      <p>package pgestionalimentos;</p>
+      <p>import java.io.*;<br>
+        public class GestionaAlimentos{<br>
+        public static void main(String args[])<br>
+        throws IOException{<br>
+        BufferedReader teclado = new BufferedReader(<br>
+        new InputStreamReader(System.in));<br>
+        System.out.print(&quot;Denominaci&oacute;n de un alimento: &quot;);<br>
+        String nombre = teclado.readLine();<br>
+        System.out.print(&quot;Contenido en prote&iacute;nas: &quot;);<br>
+        double pro = Double.parseDouble(teclado.readLine());<br>
+        System.out.print(&quot;Contenido en l&iacute;pidos: &quot;);<br>
+        double lip = Double.parseDouble(teclado.readLine());<br>
+        System.out.print(&quot;Contenido en hidratos: &quot;);<br>
+        double hid = Double.parseDouble(teclado.readLine());<br>
+        System.out.print(&quot;Contenido en minerales (A,M,B): &quot;);<br>
+        char min= teclado.readLine().charAt(0);<br>
+        System.out.print(&quot;Contenido en vitaminas (A,M,B): &quot;);<br>
+        char vita= teclado.readLine().charAt(0);<br>
+        System.out.print(&quot;Es de origen animal? (S/N): &quot;);<br>
+        char esOrA= teclado.readLine().charAt(0);<br>
+        Alimento ali= new Alimento(nombre, lip, esOrA=='S',<br>
+        hid, pro, vita, min);<br>
+        System.out.println(&quot;\n&quot;+ali.muestraAlimento());<br>
+        System.out.println(&quot;Contenido energ&eacute;tico: &quot;+<br>
+        ali.calculaContenidoEnergetico()+&quot; Kcal./100gr.&quot;);<br>
+        }<br>
+        }</p>
+      <p>//en la clase alimento.java</p>
+	  <blockquote>
+      <p>package pgestionalimentos;</p>
+      <p>public class Alimento{<br>
+        String denominaci&oacute;n;<br>
+        double l&iacute;pidos;<br>
+        double hidratos;<br>
+        double prote&iacute;nas;<br>
+        boolean esOrigenAnimal;<br>
+        char contenidoVita;<br>
+        char contenidoMine;<br>
+        Alimento(String nombre){<br>
+        denominaci&oacute;n = nombre;<br>
+        }<br>
+        Alimento(String nombre, double lp, boolean esOA,<br>
+        double hi, double pro, char v, char m){<br>
+        denominaci&oacute;n = nombre;<br>
+        l&iacute;pidos=lp;<br>
+        hidratos=hi;<br>
+        prote&iacute;nas=pro;<br>
+        esOrigenAnimal=esOA;<br>
+        contenidoVita=v;<br>
+        contenidoMine=m;<br>
+        }<br>
+        boolean esDietetico(){<br>
+        return l&iacute;pidos &lt;= 20 &amp;&amp; contenidoVita != 'B';<br>
+        }<br>
+        String muestraAlimento(){<br>
+        return &quot;Nombre: &quot;+denominaci&oacute;n+<br>
+        &quot;\nAn&aacute;lisis: \n\tL&iacute;pidos: &quot;+l&iacute;pidos+<br>
+        &quot;\n\tHidratos de carbono: &quot;+hidratos+<br>
+        &quot;\n\tProte&iacute;nas: &quot;+prote&iacute;nas+<br>
+        &quot;\nContenido en vitaminas: &quot;+ (contenidoVita == 'A'?<br>
+        &quot;alto&quot; :contenidoVita == 'M'? &quot;medio&quot; : &quot;bajo&quot;)+<br>
+        &quot;\nContenido en minerales: &quot;+ (contenidoMine == 'A'?<br>
+        &quot;alto&quot; :contenidoMine == 'M'? &quot;medio\n&quot; : &quot;bajo\n&quot;)+<br>
+        (esOrigenAnimal? &quot;Es de origen animal\n&quot; :<br>
+        &quot;No es de origen animal\n&quot;)+<br>
+        (esDietetico()? &quot;Es diet&eacute;tico\n&quot;:&quot;No es diet&eacute;tico\n&quot;)+<br>
+        (esRecomendableParaDeportistas()? &quot;Es &quot;:&quot;No es &quot;)+<br>
+        &quot;recomendable para deportistas&quot;;<br>
+        }<br>
+        boolean esRecomendableParaDeportistas(){<br>
+        return l&iacute;pidos &lt; 35 &amp;&amp;<br>
+        prote&iacute;nas &gt;= 9 &amp;&amp; prote&iacute;nas &lt;35 &amp;&amp;<br>
+        hidratos &gt;= 55 &amp;&amp; hidratos &lt; 85;<br>
+        }<br>
+        double calculaContenidoEnergetico(){<br>
+        return l&iacute;pidos*9.4+ hidratos*4.1+ prote&iacute;nas*5.3;<br>
+        }<br>
+        }</p></blockquote>
+      <p><br>
+      </p></td>
+    <td>&nbsp;</td>
+    <td><a href="http://www.euskalnet.net/juanarana/JBuilderZip/31.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>Control de errores</h3>
+      <p> 32.- pexcepcion2.- Aplicaci&oacute;n que nos pide que introduzcamos 
+        dos n&uacute;meros para hacer la divisi&oacute;n tratanto los posibles 
+        errores (cuando introducimos una cadena en vez de un n&ordm;, al introducir 
+        un 0 o nada...).</p>
+      <blockquote>
+        <p> package pexcepcion2;<br>
+          <br>
+          import java.io.*;<br>
+          public class excepcion2 {<br>
+          public static void main(String[] args) {<br>
+          BufferedReader teclado=new BufferedReader (new InputStreamReader (System.in));<br>
+          boolean error=false;<br>
+          do{<br>
+          try{<br>
+          System.out.print(&quot;\nIntroduce un numero: &quot;);<br>
+          String texto= teclado.readLine();<br>
+          int i=Integer.parseInt(texto);<br>
+          System.out.print(&quot;\nTeclea otro numero: &quot;);<br>
+          texto= teclado.readLine();<br>
+          int j=Integer.parseInt(texto);<br>
+          System.out.print(&quot;\nLa divisi&oacute;n &quot;+i+&quot; / &quot;+j+&quot; 
+          = &quot;+i/j);<br>
+          }catch(NumberFormatException e){<br>
+          System.out.print(&quot;Error: en la conversion&quot;);<br>
+          //System.out.print(e.getMessage());//mostramos el error que ha dado<br>
+          //e.printStackTrace();<br>
+          error=true;<br>
+          }catch(IOException e){<br>
+          System.out.print(&quot;Error: en la lectura&quot;);<br>
+          error=true;<br>
+          }<br>
+          catch(ArithmeticException e){<br>
+          System.out.print(&quot;Error: en la conversion divisi&oacute;n por cero&quot;);<br>
+          error=true;<br>
+          }<br>
+          catch(Exception e){<br>
+          System.out.print(&quot;Error: intrucci&oacute;n desconocida&quot;);<br>
+          error=true;<br>
+          } }while(error);<br>
+          }}</p>
+	  </blockquote></td>
+    <td>&nbsp;</td>
+    <td><a href="http://www.euskalnet.net/juanarana/JBuilderZip/32.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>Control de errores</h3>
+      <p> 33.- ppersona.- Aplicaci&oacute;n que nos captura excepciones al pedir 
+        una edad. </p>
+      <p>//en la clase verpersona2.java</p>
+      <p>package ppersona2;<br>
+        <br>
+        import java.io.*;<br>
+        public class verpersona2 {<br>
+        public static void main(String[] args) {<br>
+        BufferedReader teclado=new BufferedReader (new InputStreamReader (System.in));<br>
+        boolean error=false;<br>
+        persona2 p=new persona2();<br>
+        do{<br>
+        error=false;<br>
+        System.out.print(&quot;Introduzca la edad: &quot;);<br>
+        try{<br>
+        int edad = Integer.parseInt(teclado.readLine());<br>
+        p.ponedad(edad);<br>
+        System.out.print(p.toString());<br>
+        }catch(Exception e){<br>
+        System.out.println(e.getMessage());<br>
+        error=true;<br>
+        }<br>
+        }while(error);<br>
+        }<br>
+        }<br>
+      </p>
+      <p>//en la clase persona2.java</p>
+      <p>package ppersona2;<br>
+        <br>
+        public class persona2 {<br>
+        private int edad;<br>
+        public void ponedad(int edadnueva)throws Exception{<br>
+        if(edadnueva&lt;0||edadnueva&gt;100)<br>
+        throw (new Exception (&quot;Edad no valida&quot;));<br>
+        edad=edadnueva;<br>
+        }<br>
+        public String toString(){<br>
+        return &quot;Edad: &quot;+edad;<br>
+        }<br>
+        }</p>
+      <p>&nbsp;</p></td>
+    <td>&nbsp;</td>
+    <td><a href="http://www.euskalnet.net/juanarana/JBuilderZip/33.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>Control de errores</h3>
+      <p> 34.- porepaso.- Aplicaci&oacute;n que nos piede que introduzcamos un 
+        n&ordm; entre 10 y 23, nos dice si es divisible entre 5, nos pide que 
+        introduzcamos nuestro nombre y nos dice el n&ordm; de caracteres, el car&aacute;cter 
+        por el que empieza y acaba y la cadena en may&uacute;sculas y min&uacute;sculas. 
+      </p>
+      <p>package prepaso;<br>
+        <br>
+        import java.io.*;<br>
+        public class repaso {<br>
+        public static void main(String[] args) {<br>
+        String nombre=&quot;&quot;;<br>
+        int numero;<br>
+        boolean tienenN=false;<br>
+        BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));<br>
+        /*Solicita un n&ordm; y no termina hasta que el numero sea mayor de 10 
+        y menor de 30*/<br>
+        try{<br>
+        do{<br>
+        System.out.println(&quot;Teclea un numero mayor de 10 y menor de 30: &quot;);<br>
+        nombre=teclado.readLine();<br>
+        numero=Integer.parseInt(nombre);<br>
+        }while(numero&lt;=10||numero&gt;=30);<br>
+        if(numero%5==0){<br>
+        System.out.println(&quot;El numero &quot;+numero+&quot; es divisible por 
+        5&quot;);<br>
+        }else{<br>
+        System.out.println(&quot;El numero :&quot;+numero+ &quot; no es divisible 
+        por 5 &quot;);<br>
+        }<br>
+        System.out.println(&quot;Escribe tu nombre: &quot;);<br>
+        nombre=teclado.readLine();<br>
+        }catch(Exception e){<br>
+        System.out.print(e.getMessage());<br>
+        }<br>
+        System.out.println(&quot;Tu nombre tiene &quot;+nombre.length()+&quot; 
+        caracteres&quot;);<br>
+        System.out.println(&quot;Empieza por la letra &quot;+nombre.charAt(0));<br>
+        System.out.println(&quot;Y termina por la letra &quot;+nombre.charAt(nombre.length()-1));<br>
+        for(numero=0;numero&lt;nombre.length();numero++){<br>
+        if(nombre.charAt(numero)=='&ntilde;'||nombre.charAt(numero)=='&Ntilde;'){<br>
+        tienenN=true;<br>
+        }<br>
+        }<br>
+        System.out.println(&quot;Tu nombre en mayusculas es &quot;+nombre.toUpperCase());<br>
+        System.out.println(&quot;Tu nombre en minusculas es &quot;+nombre.toLowerCase());<br>
+        if (tienenN)<br>
+        System.out.println(&quot;Tu nombre tiene &ntilde;&quot;);<br>
+        else<br>
+        System.out.println(&quot;Tu nombre no tiene &Ntilde;&quot;);<br>
+        }<br>
+        }<br>
+      </p></td>
+    <td>&nbsp;</td>
+    <td><a href="http://www.euskalnet.net/juanarana/JBuilderZip/34.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>Control de errores</h3>
+      <p> 35.- pvermierror.- Aplicaci&oacute;n que nos muestra como personalizar 
+        excepciones en distintas clases. </p>
+      <p>//en la clase vermierror.java</p>
+      <p>package pvermierror;<br>
+        <br>
+        import java.io.*;<br>
+        import java.util.*;<br>
+        public class vermierror {<br>
+        public static void main(String[] args) {<br>
+        BufferedReader teclado=new BufferedReader (new InputStreamReader (System.in));<br>
+        boolean error =false;<br>
+        int nu=0;<br>
+        do{<br>
+        error=false;<br>
+        try{<br>
+        System.out.println(&quot;Introduce un n&ordm; entero positivo: &quot;);<br>
+        nu=Integer.parseInt(teclado.readLine());<br>
+        Validar.esValido(nu&gt;0);<br>
+        }catch(MiError e){<br>
+        System.out.println(e.getMessage());<br>
+        error=true;<br>
+        }<br>
+        catch(Exception e){<br>
+        System.out.println(e.getMessage());<br>
+        error=true;<br>
+        }<br>
+        }while(error);<br>
+        System.out.println(&quot;Admitido el valor &quot;+nu);<br>
+        }<br>
+        }</p>
+      <p>//en la clase mieerror.java</p>
+      <p>package pvermierror;<br>
+        import java.util.*;<br>
+        <br>
+        import java.io.*;<br>
+        public class MiError extends RuntimeException{<br>
+        public MiError(){<br>
+        super (&quot;!Ya me ha fallado !&quot;);<br>
+        }<br>
+        public MiError(String mensaje){<br>
+        super (mensaje);<br>
+        }<br>
+        }</p>
+      <p>//en la clase validar.java</p>
+      <p>package pvermierror;<br>
+        <br>
+        import java.io.*;<br>
+        public class Validar {<br>
+        public static void esValido( boolean valido) throws MiError{<br>
+        if (!valido) throw new MiError();<br>
+        }<br>
+        }<br>
+      </p></td>
+    <td>&nbsp;</td>
+    <td><a href="http://www.euskalnet.net/juanarana/JBuilderZip/35.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td>
+<div align="right"><a href="http://www.euskalnet.net/juanarana/index3.htm" target="_parent">&lt;&lt;Menu Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

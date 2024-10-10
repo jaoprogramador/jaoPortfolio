@@ -1,0 +1,287 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>&iquest;Qu&eacute; es Java 2?</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación en Java,Programas Java,Aplicaciones en Java,Ejercicios en Java, Ejemplos de Java,Tutorial de Java,Manual Java" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Java, Manual Java, tutorial Java, Ejemplos Java, ejercicios Java">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> <strong>Ejemplo de clase java</strong></h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <p>Este ejemplo contiene algunas de las caracter&iacute;sticas 
+        m&aacute;s importantes de Java: clases, herencia, interfaces, gr&aacute;ficos, 
+        polimorfismo, etc. Las sentencias se numeran en cada fichero, de modo 
+        que resulta m&aacute;s f&aacute;cil hacer referencia a ellas en los comentarios. 
+        La ejecuci&oacute;n de este programa imprime algunas l&iacute;neas en 
+        la consola MS-DOS y conduce a crear la ventana mostrada en la Error! Unknown 
+        switch argument..</p>
+      <p><br>
+        Ejemplo: </p>
+      <p><br>
+        A continuaci&oacute;n se muestra el programa principal, contenido en el 
+        fichero Ejemplo1.java. En realidad, este programa principal lo &uacute;nico 
+        que hace es utilizar la clase Geometr&iacute;a y sus clases derivadas. 
+        Es pues un programa puramente &quot;usuario&#8221;, a pesar de lo cual 
+        hay que definirlo dentro de una clase, como todos los programas en Java.<br>
+        1. // fichero Ejemplo1.java<br>
+        2. import java.util.Vector;<br>
+        3. import java.awt.*;<br>
+        4. class Ejemplo1 {<br>
+        5. public static void main(String arg[]) throws InterruptedException<br>
+        6. {<br>
+        7. System.out.println(&quot;Comienza main()...&quot;);<br>
+        8. Circulo c = new Circulo(2.0, 2.0, 4.0);<br>
+        9. System.out.println(&quot;Radio = &quot; + c.r + &quot; unidades.&quot;);<br>
+        10. System.out.println(&quot;Centro = (&quot; + c.x + &quot;,&quot; + 
+        c.y + &quot;) unidades.&quot;);<br>
+        11. Circulo c1 = new Circulo(1.0, 1.0, 2.0);<br>
+        12. Circulo c2 = new Circulo(0.0, 0.0, 3.0);<br>
+        13. c = c1.elMayor(c2);<br>
+        14. System.out.println(&quot;El mayor radio es &quot; + c.r + &quot;.&quot;);<br>
+        15. c = new Circulo(); // c.r = 0.0;<br>
+        16. c = Circulo.elMayor(c1, c2);<br>
+        17. System.out.println(&quot;El mayor radio es &quot; + c.r + &quot;.&quot;);<br>
+        18. VentanaCerrable ventana =<br>
+        19. new VentanaCerrable(&quot;Ventana abierta al mundo...&quot;);<br>
+        20. ArrayList v = new ArrayList();<br>
+        21. CirculoGrafico cg1 = new CirculoGrafico(200, 200, 100, Color.red);<br>
+        22. CirculoGrafico cg2 = new CirculoGrafico(300, 200, 100, Color.blue);<br>
+        23. RectanguloGrafico rg = new<br>
+        24. RectanguloGrafico(50, 50, 450, 350, Color.green);<br>
+        25. v.add(cg1);<br>
+        26. v.add(cg2);<br>
+        27. v.add(rg);<br>
+        28. PanelDibujo mipanel = new PanelDibujo(v);<br>
+        29. ventana.add(mipanel);<br>
+        30. ventana.setSize(500, 400);<br>
+        31. ventana.setVisible(true);<br>
+        32. System.out.println(&quot;Termina main()...&quot;);<br>
+        33. } // fin de main()<br>
+        34. } // fin de class Ejemplo1</p>
+      <p>La sentencia 1 es simplemente un comentario que contiene el nombre del 
+        fichero. El compilador de Java ignora todo lo que va desde los caracteres 
+        // hasta el final de la l&iacute;nea.<br>
+        Las sentencias 2 y 3 &#8220;importan&#8221; clases de los packages de 
+        Java, esto es, hacen posible acceder a dichas clases utilizando nombres 
+        cortos. Por ejemplo, se puede acceder a la clase Vector simplemente con 
+        el nombre Vector en lugar de con el nombre completo java.util.Vector, 
+        por haber introducido la sentencia import de la l&iacute;nea 2. Un package 
+        es una agrupaci&oacute;n de clases que tienen una finalidad relacionada. 
+        Existe una jerarqu&iacute;a de packages que se refleja en nombres compuestos, 
+        separados por un punto (.). Es habitual nombrar los packages con letras 
+        min&uacute;sculas (como java.util o java.awt), mientras que los nombres 
+        de las clases suelen empezar siempre por una letra may&uacute;scula (como 
+        Vector). El asterisco (*) de la sentencia 3 indica que se importan todas 
+        las clases del<br>
+        package. Hay un package, llamado java.lang, que se importa siempre autom&aacute;ticamente. 
+        Las clases de java.lang se pueden utilizar directamente, sin importar 
+        el package.<br>
+        La sentencia 4 indica que se comienza a definir la clase Ejemplo1. La 
+        definici&oacute;n de dicha clase va entre llaves {}. Como tambi&eacute;n 
+        hay otras construcciones que van entre llaves, es habitual indentar o 
+        sangrar el c&oacute;digo, de forma que quede claro donde empieza (l&iacute;nea 
+        4) y donde termina (l&iacute;nea 34) la definici&oacute;n de la clase. 
+        En Java todo son clases: no se puede definir una variable o una funci&oacute;n 
+        que no pertenezca a una clase. En este caso, la clase Ejemplo1 tiene como 
+        &uacute;nica finalidad<br>
+        acoger al m&eacute;todo main(), que es el programa principal del ejemplo. 
+        Las clases utilizadas por main() son mucho m&aacute;s importantes que 
+        la propia clase Ejemplo1. Se puede adelantar ya que una clase es una agrupaci&oacute;n 
+        de variables miembro (datos) y funciones miembro (m&eacute;todos) que 
+        operan sobre dichos datos y permiten comunicarse con otras clases. Las 
+        clases son verdaderos tipos de variableso datos, creados por el usuario. 
+        Un objeto (en ocasiones tambi&eacute;n llamado instancia) es una variable 
+        concreta de una clase, con su propia copia de las variables miembro.</p>
+      <p> Las l&iacute;neas 5-33 contienen la definici&oacute;n del programa principal 
+        de la aplicaci&oacute;n, que en Java siempre se llama main(). La ejecuci&oacute;n 
+        siempre comienza por el programa o m&eacute;todo main(). La palabra public 
+        indica que esta funci&oacute;n puede ser utilizada por cualquier clase; 
+        la palabra static indica que es un m&eacute;todo de clase, es decir, un 
+        m&eacute;todo que puede ser utilizado aunque no se haya creado ning&uacute;n 
+        objeto de la clase Ejemplo1 (que de hecho, no se han creado); la palabra 
+        void indica<br>
+        que este m&eacute;todo no tiene valor de retorno. A continuaci&oacute;n 
+        del nombre aparecen, entre par&eacute;ntesis, los argumentos del m&eacute;todo. 
+        En el caso de main() el argumento es siempre un vector o array (se sabe 
+        por la presencia de los corchetes []), en este caso llamado arg, de cadenas 
+        de caracteres (objetos de la clase String). Estos argumentos suelen ser 
+        par&aacute;metros que se pasan al programa en el momento<br>
+        de comenzar la ejecuci&oacute;n (por ejemplo, el nombre del fichero donde 
+        est&aacute;n los datos).</p>
+      <p><br>
+        El cuerpo (body) del m&eacute;todo main(), definido en las l&iacute;neas 
+        6-33, va tambi&eacute;n encerrado entre llaves {...}. A un conjunto de 
+        sentencias encerrado entre llaves se le suele llamar bloque. Es conveniente 
+        indentar para saber d&oacute;nde empieza y d&oacute;nde terminan los bloques 
+        del m&eacute;todo main() y de la clase Ejemplo1. Los bloques nunca pueden 
+        estar entrecruzados; un bloque puede contener a otro, pero nunca se puede 
+        cerrar el bloque exterior antes de haber cerrado el interior.</p>
+      <p><br>
+        La sentencia 7 (System.out.println(&quot;Comienza main()...&quot;);) imprime 
+        una cadena de caracteres o String en la salida est&aacute;ndar del sistema, 
+        que normalmente ser&aacute; una ventana de MSDOS o una ventana especial 
+        del entorno de programaci&oacute;n que se utilice (por ejemplo Visual 
+        J++, de Microsoft). Para ello se utiliza el m&eacute;todo println(), que 
+        est&aacute; asociado con una variable static llamada out, perteneciente 
+        a la clase System (en el package por defecto, java.lang). Una variable 
+        miembro static, tambi&eacute;n llamada variable de clase, es una variable 
+        miembro que es &uacute;nica para toda la clase y que existe aunque no 
+        se haya creado ning&uacute;n objeto de la clase. La variable out es una 
+        variable static de la clase System. La sentencia 7, al igual que las que 
+        siguen, termina con el car&aacute;cter punto y coma (;).<br>
+        La sentencia 8 (Circulo c = new Circulo(2.0, 2.0, 4.0);) es muy propia 
+        de Java. En ella se crea un objeto de la clase Circulo, que se define 
+        en el Apartado 1.3.4, en la p&aacute;gina 11. Esta sentencia es equivalente 
+        a las dos sentencias siguientes:<br>
+        Circulo c; c = new Circulo(2.0, 2.0, 4.0); que quiz&aacute;s son m&aacute;s 
+        f&aacute;ciles de explicar. En primer lugar se crea una referencia llamada 
+        c a un objeto de la clase Circulo. Crear una referencia es como crear 
+        un &#8220;nombre&#8221; v&aacute;lido para referirse a un objeto de la 
+        clase Circulo. A continuaci&oacute;n, con el operador new se crea el objeto 
+        propiamente dicho. Puede verse que el nombre de la clase va seguido por 
+        tres argumentos entre par&eacute;ntesis. Estos argumentos se le pasan 
+        al constructor de la clase como datos concretos para crear el objeto (en 
+        este caso los argumentos son las dos coordenadas del centro y el radio).</p>
+      <p><br>
+        Interesa ahora insistir un poco m&aacute;s en la diferencia entre clase 
+        y objeto. La clase Circulo es lo gen&eacute;rico: es el patr&oacute;n 
+        o modelo para crear c&iacute;rculos concretos. El objeto c es un c&iacute;rculo 
+        concreto, con su centro y su radio. De la clase Circulo se pueden crear 
+        tantos objetos como se desee; la clase dice que cada objeto necesita tres 
+        datos (las dos coordenadas del centro y el radio) que son las variables 
+        miembro de la clase. Cada objeto tiene sus propias copias de las variables 
+        miembro, con sus propios valores, distintos de los dem&aacute;s objetos 
+        de la clase.</p>
+      <p>La sentencia 9 (System.out.println(&quot;Radio = &quot; + c.r + &quot; 
+        unidades.&quot;);) imprime por la salida est&aacute;ndar una cadena de 
+        texto que contiene el valor del radio. Esta cadena de texto se compone 
+        de tres sub-cadenas, unidas mediante el operador de concatenaci&oacute;n 
+        (+). Obs&eacute;rvese c&oacute;mo se accedeal radio del objeto c: el nombre 
+        del objeto seguido del nombre de la variable miembro r, unidos por el 
+        operador punto (c.r). El valor num&eacute;rico del radio se convierte 
+        autom&aacute;ticamente en cadena de caracteres. La sentencia 10 es similar 
+        a la 9, imprimiendo las coordenadas del centro del c&iacute;rculo.<br>
+        Las sentencias 11 y 12 crean dos nuevos objetos de la clase Circulo, llamados 
+        c1 y c2.</p>
+      <p><br>
+        La sentencia 13 (c = c1.elMayor(c2);) utiliza el m&eacute;todo elMayor() 
+        de la clase Circulo. Este m&eacute;todo compara los radios de dos c&iacute;rculos 
+        y devuelve como valor de retorno una referencia al c&iacute;rculo que 
+        tenga mayor radio. Esa referencia se almacena en la referencia previamente 
+        creada c. Un<br>
+        punto importante es que todos los m&eacute;todos de Java (excepto los 
+        m&eacute;todos de clase o static) se aplican a un objeto de la clase por 
+        medio del operador punto (por ejemplo, c1.elMayor()). El otro objeto (c2) 
+        se pasa como argumento entre par&eacute;ntesis. Obs&eacute;rvese la forma 
+        &#8220;asim&eacute;trica&#8221; en la que se pasan los dos argumentos 
+        al m&eacute;todo elMayor(). De ordinario se llama argumento impl&iacute;cito 
+        a c1, mientras que c2 ser&iacute;a el argumento expl&iacute;cito del m&eacute;todo.</p>
+      <p><br>
+        La sentencia 14 imprime el resultado de la comparaci&oacute;n anterior 
+        y la sentencia 15 crea un nuevo objeto de la clase Circulo guard&aacute;ndolo 
+        en la referencia c. En este caso no se pasan argumentos al constructor 
+        de la clase. Eso quiere decir que deber&aacute; utilizar algunos valores 
+        &#8220;por defecto&#8221; para el centro y el radio. Esta sentencia anula 
+        o borra el resultado de la primera comparaci&oacute;n de radios, de modo 
+        que se pueda comprobar el resultado de la segunda comparaci&oacute;n.<br>
+        La sentencia 16 (c = Circulo.elMayor(c1, c2);) vuelve a utilizar un m&eacute;todo 
+        llamado elMayor() para comparar dos c&iacute;rculos: &iquest;Se trata 
+        del mismo m&eacute;todo de la sentencia 13, utilizado de otra forma? No. 
+        Se trata de un m&eacute;todo diferente, aunque tenga el mismo nombre. 
+        A las funciones o m&eacute;todos que son diferentes porque tienen distinto 
+        c&oacute;digo, aunque tengan el mismo nombre, se les llama funciones sobrecargadas 
+        (overloaded). Las funciones sobrecargadas se diferencian por el numero 
+        y tipo de sus argumentos. El m&eacute;todo de la sentencia 13 tiene un 
+        &uacute;nico argumento, mientras que el de la sentencia 16 tiene dos (en 
+        todos los casos objetos de la clase Circulo). En realidad, el m&eacute;todo 
+        de la sentencia 16 es un m&eacute;todo static (o m&eacute;todo de clase), 
+        esto es, un m&eacute;todo que no necesita ning&uacute;n objeto como argumento 
+        impl&iacute;cito. Los m&eacute;todos static suelen ir precedidos por el 
+        nombre de la clase y el operador punto (Java tambi&eacute;n permite que 
+        vayan precedidos por el nombre de cualquier objeto, pero es considerada 
+        una nomenclatura m&aacute;s confusa.). La sentencia 16 es absolutamente 
+        equivalente a la sentencia 13, pero el m&eacute;todo static de la sentencia 
+        16 es m&aacute;s &#8220;sim&eacute;trico&#8221;. Las sentencias 17 y 18 
+        no requieren ya comentarios especiales.</p>
+      <p><br>
+        Las sentencias 18-31 tienen que ver con la parte gr&aacute;fica del ejemplo. 
+        En las l&iacute;neas 18-19 (VentanaCerrable ventana = new VentanaCerrable(&quot;Ventana 
+        abierta al mundo...&quot;);) se crea una ventana para dibujar sobre ella. 
+        Una ventana es un objeto de la clase Frame, del package java.awt.</p>
+      <p><br>
+        La clase VentanaCerrable, explicada en el Apartado 1.3.9 en la p&aacute;gina 
+        17, a&ntilde;ade a la clase Frame la capacidad de responder a los eventos 
+        que provocan el cierre de una ventana. La cadena que se le pasa como argumento 
+        es el t&iacute;tulo que aparecer&aacute; en la ventana (ver Figura 1.1). 
+        En la sentencia 20 (Vector v = new Vector();) se crea un objeto de la 
+        clase ArrayList (contenida o definida en el package java.util). La clase 
+        ArrayList permite almacenar referencias a objetos de distintas clases. 
+        En este caso se utilizar&aacute; para almacenar referencias a varias figuras 
+        geom&eacute;tricas diferentes.</p>
+      <p>Las siguientes sentencias 21-27 crean elementos gr&aacute;ficos y los 
+        incluyen en la lista v para ser dibujados m&aacute;s tarde en el objeto 
+        de la clase PanelDibujo. Los objetos de la clase Circulo creados anteriormente 
+        no eran objetos aptos para ser dibujados, pues s&oacute;lo ten&iacute;an 
+        informaci&oacute;n del centro y el radio, y no del color de l&iacute;nea. 
+        Las clases RectanguloGrafico y CirculoGrafico, definidas en los Apartados 
+        1.3.6 y 1.3.7, derivan respectivamente de las clases Rectangulo (Apartado 
+        1.3.3) y Circulo (Apartado 1.3.4), heredando de dichas clases sus variables 
+        miembro y m&eacute;todos, a&ntilde;adiendo la informaci&oacute;n y los 
+        m&eacute;todos necesarios para poder dibujarlos en la pantalla. En las 
+        sentencias 21-22 se definen dos objetos de la clase CirculoGrafico; a 
+        las coordenadas del centro y al radio se une el color de la l&iacute;nea. 
+        En la sentencia 23-24 se define un objeto de la clase RectanguloGrafico, 
+        especificando asimismo un color, adem&aacute;s de las coordenadas del 
+        v&eacute;rtice superior izquierdo, y del v&eacute;rtice inferior derecho. 
+        En las sentencias 25-27 los objetos gr&aacute;ficos creados se a&ntilde;aden 
+        al vector v, utilizando el m&eacute;todo addElement() de la propia clase 
+        Vector.</p>
+      <p><br>
+        En la sentencia 28 (PanelDibujo mipanel = new PanelDibujo(v);) se crea 
+        un objeto de la clase PanelDibujo, definida en el Apartado 1.3.8. Por 
+        decirlo de alguna manera, los objetos de dicha clase son paneles, esto 
+        es superficies en las que se puede dibujar. Al constructor de PanelDibujo 
+        se le pasa como argumento el vector v con las referencias a los objetos 
+        a dibujar. La sentencia 29 (ventana.add(mipanel);) a&ntilde;ade o incluye 
+        el panel (la superficie de dibujo) en la ventana; la sentencia 30 (ventana.setSize(500, 
+        400);) establece el tama&ntilde;o de la ventana en pixels; finalmente, 
+        la sentencia 31 (ventana.setVisible(true);) hace visible la ventana creada.</p>
+      <p><br>
+        &iquest;C&oacute;mo se consigue que se dibuje todo esto? La clave est&aacute; 
+        en la serie de &oacute;rdenes que se han ido dando al computador. La clase 
+        PanelDibujo deriva de la clase Container a trav&eacute;s de Panel, y redefine 
+        el m&eacute;todo paint() de Container. En este m&eacute;todo, explicado 
+        en el Apartado 1.3.8, se realiza el dibujo de los objetos gr&aacute;ficos 
+        creados. El usuario no tiene que preocuparse de llamar al m&eacute;todo 
+        paint(), pues se llama de modo autom&aacute;tico cada vez que el sistema 
+        operativo tiene alguna raz&oacute;n para ello (por ejemplo cuando se crea 
+        la ventana, cuando se mueve, cuando se minimiza o maximiza, cuando aparece 
+        despu&eacute;s de haber estado oculta, etc.). La Figura 1.1 muestra la 
+        ventana resultante de la ejecuci&oacute;n del programa main() de la clase 
+        Ejemplo1. Para entender m&aacute;s a fondo este resultado es necesario 
+        considerar detenidamente las clases definidas en los apartados que siguen.</p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>SQLPlus Oracle</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta name="keywords" content="Manual Oracle, Tutorial Oracle, Manual SQL, Tutorial SQL, Ejercicios Oracle">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="2"> <h2>SQLPlus</h2></td>
+  </tr>
+  <tr> 
+    <td height="158" colspan="2"> <p>Todas las tareas anteriormente 
+        estudiadas se realizan con el m&oacute;dulo SQLPLUS de Oracle, que trabaja 
+        en forma interactiva. A continuaci&oacute;n enunciaremos los pasos deseados 
+        para usar SQLPLUS y poder crear tablas, &iacute;ndices o secuencias, as&iacute; 
+        como insertar datos y obtener listados:</p>
+      <blockquote >1.- Llamar al programa
+        SQLPLUS
+        2.- Identificaci&oacute;n del usuario:
+        Enter user-name:
+        Enter password:
+        Si la identificaci&oacute;n es correcta se obtiene el mensaje de Connected 
+        to :ORACLE
+        Si por el contrario la identificación es incorrecta se obtiene el siguiente 
+        mensaje:ERROR: ORA-01017; 
+        invalid username/password;
+        Logon denied
+        3.- Indicador en la pantalla de que SQLPlus est&aacute; a la espera de 
+        la orden: 
+        SQL&gt;_
+        4.- Escribir los mandatos de creación de tablas, índices y secuencia en 
+        un archivo(TABLAS.SQL) con el uso del editor. 
+        SQL&gt;edit tablas
+        5.- Ejecutar los mandatos escritos en el archivo TABLAS.SQL
+        SQL&gt;@tablas
+        6.- Para salir de SQLPlus 
+        SQL&gt;exit</blockquote>
+       </td>
+  </tr>
+  <tr> 
+    <td></td>
+    <td> <div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

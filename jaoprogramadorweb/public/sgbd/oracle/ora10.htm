@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Ejercicios Oracle</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Oracle, sql, pl/sql, programacion oracle, ejercicios, ejemplos">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="52" colspan="3"> <h2>E 
+        J E R C I C I O S</h2></td>
+  </tr>
+  <tr> 
+    <td><h3>DECLARE...BEGIN...END</h3>
+    <p>
+        a) Ejemplos de creaci&oacute;n de un bloque PL/SQL.</p>
+    <p>1.- Escribir un bloque PL/SQL que escriba el texto &lsquo;Hola&rsquo;<br>
+      SQL&gt; BEGIN<br>
+2 DBMS_OUTPUT.PUT_LINE('HOLA');<br>
+3 END;<br>
+4 /</p></td>
+    <td>&nbsp;</td>
+    <td><a href="http://www.euskalnet.net/juanarana/oraclezip/Ejer32.rar"><img src="../../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>SAVE...</h3>
+    <p>
+      b) Ejemplos de como guardar un bloque PL/SQL.</p>
+    <p>2.- Escribir un bloque PL/SQL que cuente el n&uacute;mero de filas que hay en la tabla productos, deposita el resultado en la variable v_num, y visualiza su contenido.</p>
+    <p>SQL&gt;DECLARE<br>
+  2 v_num NUMBER;<br>
+  3 BEGIN<br>
+  4 SELECT count(*) INTO v_num<br>
+  5 FROM productos;<br>
+  6 DBMS_OUTPUT.PUT_LINE(v_num);<br>
+  7 END;<br>
+  8 /</p></td>
+    <td>&nbsp;</td>
+    <td><a href="http://www.euskalnet.net/juanarana/oraclezip/Ejer33.rar"><img src="../../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3> START...,GET...,RUN</h3>
+    <p> 
+      c) Ejemplos como ejecutar o arrancar un bloque 
+      PL/SQL.</p>
+    <p>5.- Cargar y ejecutar el bloque de nuevo. (Comprobar que aparecen el resultado en pantalla).</p>
+    <p>SQL&gt; START A:\PROG01.SQL</p>
+    <p>O bien: <br>
+      SQL&gt; GET A:\PROG01.SQL<br>
+      SQL&gt; RUN </p></td>
+    <td>&nbsp;</td>
+    <td><a href="http://www.euskalnet.net/juanarana/oraclezip/Ejer34.rar"><img src="../../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><div align="right"><a href="http://www.euskalnet.net/juanarana/index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a>
+      </div>
+      </td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

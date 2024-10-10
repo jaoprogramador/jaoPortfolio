@@ -1,0 +1,154 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Ejercicios MySQL</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="MySQL, sql, pl/sql, programacion MySQL, ejercicios MySQL, ejemplos MySQL, select">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2>C R E A T E  Y  U S E</h2></td>
+  </tr>
+  <tr> 
+    <td><h3>Crear y seleccionar una base de datos</h3>
+      <p>Si el administrador crea su base de datos en el mismo momento que le otorga 
+        privilegios, puede comenzar a utilizarla, de lo contrario<br>
+        necesitar&aacute; crearla:<br>
+        mysql&gt; CREATE DATABASE menagerie;<br>
+        En ambientes Unix, los nombres de las bases de datos son case sensitive 
+        (al contrario que las palabras clave), de modo que siempre<br>
+        debe referirse a su base de datos como menagerie, y no Menagerie, MENAGERIE, 
+        o una variante similar. Esto tambi&eacute;n se<br>
+        aplica a los nombres de tablas. Esta restricci&oacute;n no existe en Windows, 
+        aunque puede utilizar el mismo esquema de may&uacute;sculas<br>
+        cuando se refiera a bases de datos y tablas en una consulta dada.<br>
+        Al crear una base de datos, &eacute;sta no se selecciona para su uso, 
+        debe hacerlo explicitamente. Para convertir a menagerie en la base<br>
+        de datos actual, use este comando:<br>
+        mysql&gt; USE menagerie<br>
+        Database changed<br>
+        Las bases de datos s&oacute;lo necesitan ser creadas una sola vez, pero 
+        deben ser seleccionadas cada vez que se inicia una sesi&oacute;n de<br>
+        mysql. Puede hacerse a trav&eacute;s del comando USE como se muestra en 
+        el ejemplo, o puede indicar la base de datos en la linea de<br>
+        comandos al ejecutar mysql. Simplemente debe indicar el nombre de la base 
+        de datos a continuaci&oacute;n de los par&aacute;metros que necesite<br>
+        ingresar. Por ejemplo:<br>
+        shell&gt; mysql -h host -u user -p menagerie<br>
+        Enter password: ********<br>
+        Advierta en el comando anterior que menagerie no es la contrase&ntilde;a. 
+        Si se quisiera suministrar la contrase&ntilde;a en la linea de comandos,<br>
+        despu&eacute;s de la opci&oacute;n -p, debe hacerse sin dejar espacios 
+        en blanco (por ejemplo, -pmypassword, no -p mypassword).<br>
+        De todos modos, colocar la contrase&ntilde;a en la linea de comandos no 
+        es recomendable porque lo expone a la vista de otros<br>
+        usuarios.<br>
+        3.3.2. Crear una tabla<br>
+        La creaci&oacute;n de la base de datos ha sido una tarea sencilla, pero 
+        hasta ahora permanece vac&iacute;a, como le muestra SHOW TABLES:<br>
+        mysql&gt; SHOW TABLES;<br>
+        Empty set (0.00 sec)<br>
+        La parte dif&iacute;cil es decidir c&oacute;mo deber&iacute;a ser la estructura 
+        de su base de datos: qu&eacute; tablas necesitar&aacute;, y qu&eacute; 
+        columnas habr&aacute; en cada<br>
+        tabla.<br>
+        Querr&aacute; una tabla para contener un registro por cada mascota. Esta 
+        tabla puede llamarse pet, y deber&iacute;a contener, como m&iacute;nimo, 
+        el<br>
+        nombre de cada animal. Dado que el nombre no es muy relevante por s&iacute; 
+        mismo, tendr&iacute;a que tener m&aacute;s informaci&oacute;n. Por ejemplo, 
+        si<br>
+        m&aacute;s de una persona en su familia tendr&aacute; mascotas, querr&aacute; 
+        listar tambi&eacute;n el due&ntilde;o de cada animal. Y algunos otros 
+        datos descriptivos<br>
+        b&aacute;sicos, como especie y sexo.<br>
+        &iquest;Qu&eacute; hacer con la edad? Podr&iacute;a ser de inter&eacute;s, 
+        pero no es un buen dato para almacenar en una base de datos. La edad cambia 
+        a medida<br>
+        que pasa el tiempo, lo cual significa que deber&iacute;a actualizar la 
+        base de datos a menudo. En lugar de esto, es mejor almacenar un<br>
+        valor fijo, como la fecha de nacimiento. De este modo, cada vez que requiera 
+        saber la edad, podr&aacute; calcularla como la diferencia entre<br>
+        la fecha de nacimiento y la fecha actual. MySQL provee funciones para 
+        realizar c&aacute;lculos con fechas, por lo que no es dificultoso.<br>
+        Almacenar la fecha de nacimiento en lugar de la edad tiene otras ventajas:<br>
+        &#8226; Puede usar la base de datos para tareas como generar recordatorios 
+        para los pr&oacute;ximos cumplea&ntilde;os de mascotas. (Si piensa que<br>
+        este tipo de consultas no es importante, considere que es lo mismo que 
+        har&iacute;a en un contexto de base de datos de negocios para<br>
+        identificar aquellos clientes a los que habr&aacute; que enviar una tarjeta 
+        por su cumplea&ntilde;os, para conseguir ese toque personal con la<br>
+        asistencia del ordenador).<br>
+        &#8226; Puede calcular edades en relaci&oacute;n a otras fechas adem&aacute;s 
+        de la actual. Por ejemplo, almacenar la fecha de muerte de una mascota<br>
+        le posibilita calcular la edad que ten&iacute;a a ese momento.<br>
+        Probablemente pensar&aacute; en otros tipos de informaci&oacute;n que 
+        resultar&iacute;an &uacute;tiles dentro de la tabla pet pero los identificados 
+        hasta ahora<br>
+        son suficientes: name (nombre), owner (propietario), species (especie), 
+        sex (sexo), birth (nacimiento) y death (muerte).<br>
+        Debe usar la sentencia CREATE TABLE para especificar la estructura de 
+        una tabla:<br>
+        mysql&gt; CREATE TABLE pet (name VARCHAR(20), owner VARCHAR(20),<br>
+        -&gt; species VARCHAR(20), sex CHAR(1), birth DATE, death DATE);<br>
+        El tipo de dato VARCHAR es una buena elecci&oacute;n para las columnas 
+        name, owner, y species porque los datos que all&iacute; se almacenan<br>
+        no son de longitud uniforme. En realidad no es necesario que todas estas 
+        columnas tengan la misma longitud ni que &eacute;sta sea<br>
+        20. En MySQL 5.0.3 y versiones posteriores, normalmente se puede adoptar 
+        cualquier longitud entre 1 y 65535, seg&uacute;n lo que se<br>
+        crea m&aacute;s razonable. (Nota: Anteriormente a MySQL 5.0.3, el l&iacute;mite 
+        de longitud era 255.) Si en el futuro debiera aumentar la longitud<br>
+        de estos campos, MySQL tiene la sentencia ALTER TABLE.<br>
+        Hay varios tipos de datos que podr&iacute;an usarse para representar el 
+        sexo en los registros de animales, tal como 'm' y 'f', o 'male'<br>
+        (masculino) y 'female' (femenino). Lo m&aacute;s simple es usar los caracteres 
+        'm' y 'f'.<br>
+        Es obvio el uso del tipo de dato DATE para las columnas birth y death.<br>
+        Luego de crear una tabla, SHOW TABLES deber&iacute;a producir una salida:<br>
+        mysql&gt; SHOW TABLES;<br>
+        +---------------------+<br>
+        | Tables in menagerie |<br>
+        +---------------------+<br>
+        | pet |<br>
+        +---------------------+<br>
+        Para verificar que la tabla ha sido creada en la forma esperada, utilice 
+        la sentencia DESCRIBE:<br>
+        mysql&gt; DESCRIBE pet;<br>
+        +---------+-------------+------+-----+---------+-------+<br>
+        | Field | Type | Null | Key | Default | Extra |<br>
+        +---------+-------------+------+-----+---------+-------+<br>
+        | name | varchar(20) | YES | | NULL | |<br>
+        | owner | varchar(20) | YES | | NULL | |<br>
+        | species | varchar(20) | YES | | NULL | |<br>
+        | sex | char(1) | YES | | NULL | |<br>
+        | birth | date | YES | | NULL | |<br>
+        | death | date | YES | | NULL | |<br>
+        +---------+-------------+------+-----+---------+-------+<br>
+        DESCRIBE puede ser utilizada en cualquier momento, por ejemplo, si olvida 
+        los nombres o el tipo de dato de las columnas de la<br>
+        tabla. </p>
+        </td>
+    <td>&nbsp;</td>
+    <td><a href="http://www.euskalnet.net/juanarana/oraclezip/Ejer3.rar"><img src="../../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td>
+<div align="right"><a href="http://www.euskalnet.net/juanarana/index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a>
+      </div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Interactuar con los Clientes</title>
+<META http-equiv=Content-Language content=es>
+<META content="Manual Servlet, ejemplos Servlet, codigos Servlet" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Manual Servlet, ejemplos Servlet, codigos Servlet">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2> Interactuar con los Clientes</h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <table  border="0" >
+        <tr> 
+          <td width="21%"><h3>Contenido:</h3></td>
+          <td width="79%"></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="struts09.htm#Inter">- Interactuar con los Clientes</a></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="struts09.htm#Peti">- Peticiones y Respuestas  </a></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="struts09.htm#Getpost">- Manejar Peticiones GET y POST   </a></td>
+        </tr>
+		<tr> 
+          <td>&nbsp;</td>
+          <td><a href="struts09.htm#Prob">- Problemas con los Threads </a></td>
+        </tr>
+		<tr> 
+          <td>&nbsp;</td>
+          <td><a href="struts09.htm#Desc">- Descripciones de Servlets </a></td>
+        </tr>
+      </table>
+      <p>&nbsp;</p>
+      <h3>Interactuar con los Clientes:<a name="Inter"></a></h3>
+      <p>Un Servlet HTTP maneja peticiones del cliente a trav&eacute;s de su m&eacute;todo 
+        service. Este m&eacute;todo soporta
+        peticiones est&aacute;ndard de cliente HTTP despachando cada petici&oacute;n 
+        a un m&eacute;todo designado para
+        manejar esa petici&oacute;n. Por ejemplo, el m&eacute;todo service llama 
+        al m&eacute;todo doGet mostrado
+        anteriormente en el ejemplo del servlet sencillo.</p>
+      <h3>Peticiones y Respuestas:<a name="Peti"></a></h3>
+      <p>Esta p&aacute;gina explica la utilizaci&oacute;n de los objetos que representan 
+        peticiones de clientes (un objeto
+        HttpServletRequest) y las respuestas del servlet (un objeto HttpServletResponse). 
+        Estos
+        objetos se proporcionan al m&eacute;todo service y a los m&eacute;todos 
+        que service llama para menejar
+        peticiones HTTP.</p>
+	  <h3>Manejar Peticiones GET y POST:<a name="Getpost"></a></h3>
+      <p>Los m&eacute;todos en los que delega el m&eacute;todo service las peticiones 
+        HTTP, incluyen<br>
+        - doGet, para manejar GET, GET condicional, y peticiones de HEAD <br>
+        - doPost, para menajar peticiones POST <br>
+        - doPut, para manejar peticiones PUT <br>
+        - doDelete, para manejar peticiones DELETE </p>
+      <p>Por defecto, estos m&eacute;todos devuelven un error BAD_REQUEST (400). 
+        Nuestro servlet deber&iacute;a sobrescribir el m&eacute;todo o m&eacute;todos 
+        dise&ntilde;ados para manejar las interacciones HTTP que soporta. Esta 
+        secci&oacute;n muestra c&oacute;mo implementar m&eacute;todo para manejar 
+        las peticiones HTTP m&aacute;s comunes: GET y POST.<br>
+        El m&eacute;todo service de HttpServlet tambi&eacute;n llama al m&eacute;todo 
+        doOptions cuando el servlet recibe una petici&oacute;n OPTIONS, y a doTrace 
+        cuando recibe una petici&oacute;n TRACE. La implementaci&oacute;n por 
+        defecto de doOptions determina autom&aacute;ticamente que opciones HTTP 
+        son soportadas y devuelve esa informaci&oacute;n. La implementaci&oacute;n 
+        por defecto de doTrace realiza una respuesta con un mensaje que contiene 
+        todas las cabeceras enviadas en la petici&oacute;n trace. Estos m&eacute;todos 
+        no se sobreescriben normalmente. </p>
+	  <h3>Problemas con los Threads<a name="Prob"></a></h3>
+      <p>Los Servlets HTTP normalmente pueden servir a m&uacute;ltiples clientes 
+        concurrentes. Si los m&eacute;todos de
+        nuestro Servlet no funcionan con clientes que acceden a recursos compartidos, 
+        deberemos.
+        Sincronizar el acceso a estos recursos, o 
+        Crear un servlet que maneje s&oacute;lo una petici&oacute;n de cliente 
+        a la vez. 
+        Esta lecci&oacute;n te muestra c&oacute;mo implementar la segunda opci&oacute;n. 
+        (la primera est&aacute; cubierta en la p&aacute;gina
+        Threads de Control.)</p>
+      <h3>Descripciones de Servlets:<a name="Desc"></a></h3>
+      <p>Adem&aacute;s de manejar peticiones de cliente HTTP, los servlets tambi&eacute;n 
+        son llamados para suministrar
+        descripci&oacute;n de ellos mismos. Esta p&aacute;gina muestra como proporcionar 
+        una descripci&oacute;n
+        sobreescribiendo el m&eacute;todo getServletInfo, que suministra una descripci&oacute;n 
+        del servlet.</p>
+	  <p>&nbsp; </p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

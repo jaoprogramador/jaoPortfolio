@@ -1,0 +1,916 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Ejercicios MySQL</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="MySQL, sql, pl/sql, programacion MySQL, ejercicios MySQL, ejemplos MySQL, select">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2>I N S E R T</h2></td>
+  </tr>
+  <tr> 
+    <td><h3>Sintaxis de INSERT</h3>
+      <p>INSERT [LOW_PRIORITY | DELAYED | HIGH_PRIORITY] [IGNORE]<br>
+        [INTO] tbl_name [(col_name,...)]<br>
+        VALUES ({expr | DEFAULT},...),(...),...<br>
+        [ ON DUPLICATE KEY UPDATE col_name=expr, ... ]<br>
+        O:<br>
+        INSERT [LOW_PRIORITY | DELAYED | HIGH_PRIORITY] [IGNORE]<br>
+        [INTO] tbl_name<br>
+        SET col_name={expr | DEFAULT}, ...<br>
+        [ ON DUPLICATE KEY UPDATE col_name=expr, ... ]<br>
+        O:<br>
+        INSERT [LOW_PRIORITY | HIGH_PRIORITY] [IGNORE]<br>
+        [INTO] tbl_name [(col_name,...)]<br>
+        SELECT ...<br>
+        [ ON DUPLICATE KEY UPDATE col_name=expr, ... ]<br>
+        INSERT inserta nuevos registros en una tabla existente. Las formas INSERT 
+        ... VALUES y INSERT ... SET del comando<br>
+        insertan registros basados en valores expl&iacute;citamente especificados. 
+        La forma INSERT ... SELECT inserta registros seleccionados<br>
+        de otra tabla o tablas. INSERT ... SELECT se discute en Secci&oacute;n 
+        13.2.4.1, &#8220;Sintaxis de INSERT ... SELECT&#8221;.<br>
+        tbl_name es la tabla en que los registros deben insertarse. Las columnas 
+        para las que el comando proporciona valores pueden especificarse<br>
+        como sigue:<br>
+        &#8226; La lista de nombres de columna o la cl&aacute;usula SET indican 
+        las columnas expl&iacute;citamente.<br>
+        &#8226; Si no especifica la lista de columnas para INSERT ... VALUES o 
+        INSERT ... SELECT, los valores para cada columna<br>
+        en la tabla deben proporcionarse en la lista VALUES o por el SELECT. Si 
+        no sabe el orden de las columnas en la tabla, use<br>
+        DESCRIBE tbl_name para encontrarlo.<br>
+        Los valores de columna pueden darse de distintos modos:<br>
+        &#8226;<br>
+        Si no est&aacute; ejecutando el modo estricto, cualquier columna que no 
+        tenga un valor asignado expl&iacute;citamente recibe su valor por defecto<br>
+        (expl&iacute;cito o impl&iacute;cito). Por ejemplo, si especifica una 
+        lista de columnas que no nombra todas las columnas en la tabla, las<br>
+        no nombradas reciben sus valores por defecto. Los valores por defecto 
+        asignados se describen en Secci&oacute;n 13.1.5, &#8220;Sintaxis de<br>
+        CREATE TABLE&#8221;. Consulte Secci&oacute;n 1.7.6.2, &#8220;Restricciones 
+        (constraints) sobre datos inv&aacute;lidos&#8221;.<br>
+        Si quiere que un comando INSERT genere un error a no ser que especifique 
+        expl&iacute;citamente valores para todas las columnas que<br>
+        no tienen un valor por defecto, debe usar modo STRICT . Consulte Secci&oacute;n 
+        5.3.2, &#8220;El modo SQL del servidor&#8221;.<br>
+        &#8226; Use DEFAULT para asignar a una columna expl&iacute;citamente su 
+        valor por defecto. Esto hace m&aacute;s f&aacute;cil escribir comandos 
+        INSERT<br>
+        que asignan valores a todas las columnas excepto unas pocoas, ya que le 
+        permite evitar la escritura de una lista de valores VALUES<br>
+        incompleta. De otro modo, tendr&iacute;a que escribir la lista de los 
+        nombres de columna correspondientes a cada valor en la lista<br>
+        VALUES .<br>
+        En MySQL 5.0, puede usar DEFAULT(col_name) como forma m&aacute;s general 
+        que puede usarse en expresiones para producir<br>
+        un valor por defecto de una columna.<br>
+        &#8226; Si la lista de columnas y la lista VALUES est&aacute;n vac&iacute;as, 
+        INSERT crea un registro con cada conjunto de columnas con sus valores<br>
+        por defecto:<br>
+        mysql&gt; INSERT INTO tbl_name () VALUES();<br>
+        En modo STRICT obtendr&aacute; un error si una columna no tiene un valor 
+        por defecto. De otro modo, MySQL usar&aacute; el valor impl&iacute;cito<br>
+        para cualquier columna sin un valor expl&iacute;cito por defecto definido.<br>
+        &#8226; Puede especificar una expresi&oacute;n expr para proporcionar 
+        un valor de columna. Esto puede involucar convesi&oacute;n de tipos si 
+        el tipo<br>
+        de la expresi&oacute;n no coincide con el tipo de la columna, y la conversi&oacute;n 
+        de un valor dado puede resultar en distintos valores insertados<br>
+        dependiendo del tipo de columna. Por ejmplo, insertar la cadena '1999.0e-2' 
+        en una columna INT, FLOAT, DECIMAL(<br>
+        10,6), o YEAR resulta en los valores 1999, 19.9921, 19.992100, y 1999 
+        insertados, respectivamente. La raz&oacute;n<br>
+        de que el valor almacenado en las columnas INT y YEAR sea 1999 es que 
+        la conversi&oacute;n cadena-a-entero consulta s&oacute;lo el trozo<br>
+        de la parte inicial de la cadena que se puede considerar como un entero 
+        v&aacute;lido o a&ntilde;o. Para las columnas de coma flotante o punto<br>
+        fijo, la conversi&oacute;n cadena-a-coma-flotante considera la cadena 
+        entera un valor v&aacute;lido.<br>
+        Una expresi&oacute;n expr puede referirse a cualquier columna que se haya 
+        asignado antes en una lista de valores. Por ejemplo, puede<br>
+        hacer esto porque el valor para col2 se refiere a col1, que se ha asignado 
+        pr&eacute;viamente:<br>
+        mysql&gt; INSERT INTO tbl_name (col1,col2) VALUES(15,col1*2);<br>
+        Pero lo siguiente no es legal, ya que el valor para col1 se refiere a 
+        col2, que se asigna tras col1:<br>
+        mysql&gt; INSERT INTO tbl_name (col1,col2) VALUES(col2*2,15);<br>
+        Una excepci&oacute;n involucra a columnas que contienen valores AUTO_INCREMENT 
+        . Como el valor AUTO_INCREMENT se genera<br>
+        tras otras asignaciones de valores, cualquier referencia a una columna 
+        AUTO_INCREMENT en la asignaci&oacute;n retorna un 0.<br>
+        El comando INSERT soporta los siguientes modificadores:<br>
+        &#8226; Si usa la palabra DELAYED, el servidor pone el registro o registros 
+        a ser insertados en un b&uacute;ffer, y el cliente realizando el comando<br>
+        INSERT DELAYED puede continuar. Si la tabla est&aacute; en uso, el servidor 
+        trata los registros. Cuando la tabla se libera, el<br>
+        servidor comienza a insertar registros, chequeando peri&oacute;dicamente 
+        para ver si hay alguna petici&oacute;n de lectura para la tabla. Si la<br>
+        hay, la cola de registros retardados se suspende hasta que la tabla se 
+        libera de nuevo. Consulte Secci&oacute;n 13.2.4.2, &#8220;Sintaxis de<br>
+        INSERT DELAYED&#8221;.<br>
+        &#8226; Si usa la palabra LOW_PRIORITY , la ejecuci&oacute;n de INSERT 
+        se retrasa hasta que no hay otros clientes leyendo de la tabla. Esto<br>
+        incluye a otros clientes que comiencen a leer mientras que los clientes 
+        existentes est&aacute;n leyendo, y meintras el comando INSERT<br>
+        LOW_PRIORITY est&aacute; en espera. Es posible, por lo tanto, para un 
+        cliente que realice un comando INSERT<br>
+        LOW_PRIORITY esperar durante mucho tiempo (o incluso para siempre) en 
+        un entorno de muchas lecturas. (Esto es un contraste<br>
+        de INSERT DELAYED, que deja al cliente continuar. <br>
+        Tenga en cuenta que LOW_PRIORITY no debe usarse normalmente con tablas 
+        MyISAM y que hacerlo deshabilita inserciones<br>
+        concurrentes. Consulte Secci&oacute;n 14.1, &#8220;El motor de almacenamiento 
+        MyISAM&#8221;.<br>
+        &#8226; Si especifica HIGH_PRIORITY, deshabilita el efecto de la opci&oacute;n 
+        --low-priority-updates si el servidor se arranc&oacute;<br>
+        con esa opci&oacute;n. Hace que las insecionces concurrentes no se usen.<br>
+        &#8226; Los valores afectados por un INSERT pueden usarse usando la funci&oacute;n 
+        mysql_affected_rows() de la API de C. Consulte<br>
+        Secci&oacute;n 24.2.3.1, &#8220;mysql_affected_rows()&#8221;.<br>
+        &#8226; Si usa la palabra IGNORE en un comando INSERT , los errores que 
+        ocurren mientras se ejecuta el comando se tratan como advertencias.<br>
+        Por ejemplo, sin IGNORE, un registro que duplique un &iacute;ndice UNIQUE 
+        existente o valor PRIMARY KEY en la tabla<br>
+        hace que un error de clave duplicada en el comando se aborte. Con IGNORE, 
+        el registro todav&iacute;a no se inserta, pero no se muestra<br>
+        error. Las conversionse de datos disparar&iacute;an errores y abortar&iacute;an 
+        el comando si no se sepecificara IGNORE . Con IGNORE,<br>
+        los valores inv&aacute;lidaos se ajustan al valor m&aacute;s cercano y 
+        se insertan; las advertencias se producen pero el comando no se aborta.<br>
+        Puede determinar con la funci&oacute;n mysql_info() de la API de C cu&aacute;ntos 
+        registros se insertan realmente en la tabla.<br>
+        Si especifica ON DUPLICATE KEY UPDATE, y se inserta un registro que duplicar&iacute;a 
+        un valor en un &iacute;ndice UNIQUE o PRIMARY<br>
+        KEY, se realiza un UPDATE del antiguo registro. Por ejemplo, si la columna 
+        a se declara como UNIQUE y contiene el valor 1, los<br>
+        siguientes dos comandos tienen efectos id&eacute;nticos:<br>
+        mysql&gt; INSERT INTO table (a,b,c) VALUES (1,2,3)<br>
+        -&gt; ON DUPLICATE KEY UPDATE c=c+1;<br>
+        mysql&gt; UPDATE table SET c=c+1 WHERE a=1;<br>
+        El valor de registros afectados es 1 si el registros se inserta como un 
+        nuevo registro y 2 si un valor existente se actualiza.<br>
+        Nota: Si la columna b es &uacute;nica, el INSERT ser&iacute;a equivalente 
+        a este comando UPDATE :<br>
+        mysql&gt; UPDATE table SET c=c+1 WHERE a=1 OR b=2 LIMIT 1;<br>
+        Si a=1 OR b=2 se cumple para varios registros, s&oacute;lo un registro 
+        se actualiza. En general, deber&iacute;a intentar evitar usar una cl&aacute;usula<br>
+        ON DUPLICATE KEY en tablas con claves &uacute;nicas m&uacute;ltiples.<br>
+        MySQL 5.0 permite el uso de la funci&oacute;n VALUES(col_name) en la cl&aacute;usula 
+        UPDATE que se refiere a los valores de columna de<br>
+        la porci&oacute;n INSERT del comando INSERT ... UPDATE . En otras palabras, 
+        VALUES(col_name) en la cl&aacute;usula UPDATE se<br>
+        refiere al valor de col_name que se insertar&iacute;an, no ocurre conflicto 
+        de clave duplicada. Esta funci&oacute;n es especialmente &uacute;til en 
+        inserciones<br>
+        de m&uacute;ltiples registros. La funci&oacute;n VALUES() tiene sentido 
+        s&oacute;lo en comandos INSERT ... UPDATE y retorna NULL<br>
+        de otro modo.<br>
+        Ejemplo:<br>
+        mysql&gt; INSERT INTO table (a,b,c) VALUES (1,2,3),(4,5,6)<br>
+        -&gt; ON DUPLICATE KEY UPDATE c=VALUES(a)+VALUES(b);<br>
+        Este comando es id&eacute;ntico a los siguientes dos comandos:<br>
+        mysql&gt; INSERT INTO table (a,b,c) VALUES (1,2,3)<br>
+        -&gt; ON DUPLICATE KEY UPDATE c=3;<br>
+        mysql&gt; INSERT INTO table (a,b,c) VALUES (4,5,6)<br>
+        -&gt; ON DUPLICATE KEY UPDATE c=9;<br>
+        Cuando usa ON DUPLICATE KEY UPDATE, la opci&oacute;n DELAYED se ignora.<br>
+        Puede encontrar el valor usado para una columna AUTO_INCREMENT usando 
+        la funci&oacute;n SQL LAST_INSERT_ID() . Desde la<br>
+        API C, use la funci&oacute;n mysql_insert_id() . Sin embargo, debe tener 
+        en cuenta que las dos funciones no siempre se comportan<br>
+        id&eacute;nticamente. El comportamiento de comandos INSERT respecto a 
+        columnas AUTO_INCREMENT se discute en Secci&oacute;n 12.9.3,<br>
+        &#8220;Funciones de informaci&oacute;n&#8221; y Secci&oacute;n 24.2.3.34, 
+        &#8220;mysql_insert_id()&#8221;.<br>
+        Si usa un comando INSERT ... VALUES con listas de m&uacute;ltiples valores 
+        o INSERT ... SELECT, el comando retorna una<br>
+        cadena de informaci&oacute;n en este formato:<br>
+        Records: 100 Duplicates: 0 Warnings: 0<br>
+        Records indica el n&uacute;mero de registros procesados por el comando. 
+        (Este no es necesariamente el n&uacute;mero de registros realmente<br>
+        insertados, ya que Duplicates puede ser distinto a cero.) Duplicates indica 
+        el n&uacute;mero de registros que no pueden insertarse<br>
+        ya que duplicar&iacute;an algunos valores de &iacute;ndice &uacute;nicos 
+        existentes Warnings indicata el n&uacute;mero de intentos para insertar 
+        valores de<br>
+        columna que fueron problem&aacute;ticos por algo. Las advertencias pueden 
+        ocurrir bajo cualquiera de las siguientes condiciones:<br>
+        &#8226; Insertar NULL en una columna que se ha declarado NOT NULL. Para 
+        comandos INSERT de m&uacute;ltiples columnas o comandos<br>
+        INSERT INTO... SELECT, la columna se asigna con el valor por defecto para 
+        el tipo de datos de la columna. Este es 0 para<br>
+        tipos num&eacute;ricos, la cadena vac&iacute;a ('') para tipos de cadenas, 
+        y el valor &#8220;cero&#8221; para tipos de fecha y hora. Los comandos 
+        INSERT<br>
+        INTO ... SELECT se tratan del mismo modo que inserciones de m&uacute;ltiples 
+        registros porque el servidor no examina el<br>
+        resultado del SELECT para ver si retorna o no un &uacute;nico registro. 
+        (para un &uacute;nico registro INSERT, no hay ninguna advertencia<br>
+        cuando NULL se inserta en una columna NOT NULL . En lugar de eso, el comando 
+        falla con un error.)<br>
+        &#8226; Poner en una columna num&eacute;rica un valor fuera del rango 
+        de la columna. El valor se redondea al punto final del rango m&aacute;s 
+        cercano.<br>
+        &#8226; Asigne un valor tal como '10.34 a' a una columna num&eacute;rica. 
+        El texto final se elimina y la parte num&eacute;rica se inserta. Si el<br>
+        valor de cadena no tiene parte inicial num&eacute;rica, la columna se 
+        pone a 0.<br>
+        &#8226; Insertar una cadena en una columna de cadena (CHAR, VARCHAR, TEXT, 
+        o BLOB) que excede la maxima longitud de la columna.<br>
+        El valor se trunca a la m&aacute;xima longitud de la columna.<br>
+        &#8226; Insertar un valor en una columna de fecha u hora que es ilegal 
+        para el tipo de la columna. La columna se asigna con el valor cero<br>
+        apropiado para el tipo.<br>
+        Si usa la API de C, la cadena de informaci&oacute;n puede obtenerse invocando 
+        la funci&oacute;n mysql_info() Consulte Secci&oacute;n 24.2.3.32,<br>
+        &#8220;mysql_info()&#8221;.<br>
+        <h3>Sintaxis de INSERT ... SELECT</h3><br>
+        INSERT [LOW_PRIORITY | HIGH_PRIORITY] [IGNORE]<br>
+        [INTO] tbl_name [(col_name,...)]<br>
+        SELECT ...<br>
+        [ ON DUPLICATE KEY UPDATE col_name=expr, ... ]<br>
+        Con INSERT ... SELECT, puede insertar r&aacute;pidamente varios registros 
+        en un atabla desde una o varias tablas.<br>
+        Por ejemplo:<br>
+        INSERT INTO tbl_temp2 (fld_id)<br>
+        SELECT tbl_temp1.fld_order_id<br>
+        FROM tbl_temp1 WHERE tbl_temp1.fld_order_id &gt; 100;<br>
+        La siguiente condici&oacute;n sirve para un comando INSERT ... SELECT 
+        :<br>
+        &#8226; En MySQL 5.0, especifique IGNORE expl&iacute;citamente para ignorar 
+        registros que causar&iacute;an violaciones de clave duplicada.<br>
+        &#8226; No use DELAYED con INSERT ... SELECT.<br>
+        &#8226; En MySQL 5.0, la tabla objetivo del comando INSERT puede aparecer 
+        en la cl&aacute;usula FROM de la parte SELECT de la consulta.<br>
+        (Esto no era posible en algunas versiones antiguas de MySQL.)<br>
+        &#8226; Las columnas AUTO_INCREMENT funcionan normalmente.<br>
+        &#8226; Para asegurar que el log binario puede usarse para recrear las 
+        tablas originales, MySQL no permite inserciones concurrentes durante<br>
+        INSERT ... SELECT.<br>
+        &#8226; Actualmente, no puede insertar en una tabla y seleccionar de la 
+        misma tabla en una subconsulta.<br>
+        En las partes de valores de ON DUPLICATE KEY UPDATE puede referirse a 
+        una columna en otras tablas, mientras no use<br>
+        GROUP BY en la parte SELECT . Un efecto lateral es que debe calificar 
+        los nombres de columna no &uacute;nicos en la parte de valores.<br>
+        Puede usar REPLACE en lugar de INSERT para sobreescribir registros antiguos 
+        REPLACE es la contraparte de INSERT IGNORE<br>
+        en el tratamiento de nuevos registros que contienen valores de clave &uacute;nica 
+        que duplican registros antiguos: Los nuevos registros se<br>
+        usan para reemplazar los antiguos registros en lugar de descartarlos.<br>
+        <h3>Sintaxis de INSERT DELAYED</h3><br>
+        INSERT DELAYED ...<br>
+        La opci&oacute;n DELAYED para el comando INSERT es una extensi&oacute;n 
+        de MySQL del est&aacute;ndar SQL muy &uacute;til si tiene clientes que 
+        no<br>
+        pueden esperar a que se complete el INSERT . Este es un problema com&uacute;n 
+        cuando usa MySQL para loguear y peri&oacute;dicamente ejecuta<br>
+        comandos SELECT y UPDATE que tardan mucho tiempo en completarse.<br>
+        Cuando un cliente usa INSERT DELAYED, obtiene un ok del servidor una vez, 
+        y el registro se encola para insertarse cuando la tabla<br>
+        no est&aacute; en uso por otro flujo.<br>
+        Otro beneficio de usar INSERT DELAYED es que las inserciones desde varios 
+        clientes se tratan juntas y se escriben en un bloque.<br>
+        Esto es mucho m&aacute;s r&aacute;pido que realizar inserciones separadas.<br>
+        Hay algunas restricciones al uso de DELAYED:<br>
+        &#8226; En MySQL 5.0, INSERT DELAYED funciona s&oacute;lo con tablas MyISAM 
+        y MEMORY . Para tablas MyISAM , si no hay bloques libres<br>
+        en medio del fichero de datos, se soportan comandos SELECT y INSERT concurrentes. 
+        Bajo estas circunst&aacute;ncias, muy raramente<br>
+        necesitar&aacute; usar INSERT DELAYED con MyISAM. Consulte Secci&oacute;n 
+        14.1, &#8220;El motor de almacenamiento MyISAM&#8221; y<br>
+        Secci&oacute;n 14.3, &#8220;El motor de almacenamiento MEMORY (HEAP)&#8221;.<br>
+        &#8226; En MySQL 5.0, INSERT DELAYED debe usarse s&oacute;lo para comandos 
+        INSERT que especifiquen una lista de valores. El servidor<br>
+        ignora DELAYED para comandos INSERT DELAYED ... SELECT .<br>
+        &#8226; El servidor ignora DELAYED para comandos INSERT DELAYED ... ON 
+        DUPLICATE UPDATE.<br>
+        &#8226; Debido a que el comando retorna inmediatamente antes que los registros 
+        se inserten, no puede usar LAST_INSERT_ID() para<br>
+        obtener el valor AUTO_INCREMENT que el comando genera.<br>
+        &#8226; Los registros DELAYED no son visibles por los comandos SELECT 
+        hasta que se hayan insertado realmente.<br>
+        &#8226; DELAYED se ignora en la replicaci&oacute;n de esclavos porque 
+        puede causar que el esclavo tenga distintos datos que el maestro.<br>
+        Tenga en cuenta que los registros encolados se tratan s&oacute;lo en memoria 
+        hasta que se insertan en la tabla. Esto significa que si termina<br>
+        mysqld forzadamente (por ejemplo, con kill -9) o si mysqld muere inesperadamente, 
+        cualquier registro encolado que no<br>
+        se escriba en disco se pierde.<br>
+        A continuaci&oacute;n se describe en detalle qu&eacute; ocurre cuando 
+        usa la opci&oacute;n DELAYED con INSERT o REPLACE. En esta descrii&oacute;n, 
+        el<br>
+        &#8220;flujo&#8221; es el flujo que recibe un comando INSERT DELAYED y 
+        &#8220;handler&#8221; es el flujo que trata todos los comandos INSERT 
+        DELAYED<br>
+        para una tabla particular.<br>
+        &#8226; Cuando un flujo ejecuta un comando DELAYED para una tabla, un 
+        flujo handler se crea para procesar todos los comandos DELAYED<br>
+        para la tabla, si tal handler no exist&iacute;a pr&eacute;viamente.<br>
+        &#8226; El flujo chequea si el handler ha adquirido pr&eacute;viamente 
+        un bloqueo DELAYED ; si no, le dice al flujo handler que lo haga. El<br>
+        bloqueo DELAYED puede obtenerse incluso si otros flujos tienen el bloqueo 
+        READ o WRITE en la tabla. Sin embargo, el handler<br>
+        espera a todos los bloqueos ALTER TABLE o FLUSH TABLES para asegurar que 
+        la estructura de tabla est&aacute; actualizada.<br>
+        &#8226; El flujo ejecuta el comando INSERT, pero en lugar de escribir 
+        el registro en la tabla, pone una copia del registro final en una<br>
+        cola administrada por el flujo handler. Cualquier error de sintaxis es 
+        detectado por el flujo y se reporta al programa cliente.<br>
+        &#8226; El cliente no puede obtener del servidor el n&uacute;mero de registros 
+        duplicados o el valor AUTO_INCREMENT del registro resultante,<br>
+        ya que INSERT retorna antes que se complete la operaci&oacute;n de inserci&oacute;n. 
+        (Si usa la API C, la funci&oacute;n mysql_info() no<br>
+        retorna nada inteligible por la misma raz&oacute;n.)<br>
+        &#8226; El log binario se actualiza por parte del flujo handler cuando 
+        el registro se inserta en la tabla. En caso de inserciones de m&uacute;ltiples<br>
+        registros, el log binario se actualiza cuando el primer registro se inserta.<br>
+        &#8226; Tras cada delayed_insert_limit los registros se escriben, el handler 
+        chequea si alg&uacute;n comando SELECT todav&iacute;a est&aacute;<br>
+        pendiente. Si es as&iacute;, les permite ejecutarse antes de continuar.<br>
+        &#8226; Cuando el handler no tiene m&aacute;s registros en su cola, la 
+        tabla se desbloquea. Si no se reciben nuevos comandos INSERT DELAYED<br>
+        en delayed_insert_timeout segundos, el handler termina.<br>
+        &#8226; Si m&aacute;s de delayed_queue_size registros est&aacute;n pendientes 
+        en una cola de handler espec&iacute;fica, el flujo que pida el INSERT<br>
+        DELAYED espera hasta que haya espacio en la cola. Esto se hace para asegurar 
+        que mysqld no usa toda la memoria para la cola<br>
+        de memoria retrasada.<br>
+        &#8226; El flujo handler se muestra en l lista de procesos MySQL con delayed_insert 
+        en la columna Command . Si muere si ejecuta<br>
+        un comando FLUSH TABLES o puede matarlo con KILL thread_id. Sin embargo, 
+        antes de salir, primero almacena<br>
+        todos los registros encolados en la tabla. Durante esta operaci&oacute;n 
+        no acepta ning&uacute;n nuevo comando INSERT de otros flujos. Si<br>
+        ejecuta un comando INSERT DELAYED a continuaci&oacute;n, se crea un nuevo 
+        flujo handler.<br>
+        Tenga en cuenta que esto significa que comandos INSERT DELAYED tienen 
+        mayor prioridad que comandos INSERT normales<br>
+        si hay un handler INSERT DELAYED en ejecuci&oacute;n. Otros comandos de 
+        actualizaci&oacute;n tienen que esperar hast que la cola<br>
+        INSERT DELAYED est&aacute; vac&iacute;a, alguien termine el flujo handler 
+        (con KILL thread_id), o alguien ejecute un FLUSH TABLES.<br>
+        &#8226; Las siguientes variables de estado proporcionan informaci&oacute;n 
+        acerca de comandos INSERT DELAYED :<br>
+        Variable de estado Significado<br>
+        Delayed_insert_threads N&uacute;mero de flujos handler<br>
+        Delayed_writes N&uacute;mero de registros escritos con INSERT DELAYED<br>
+        Not_flushed_delayed_rows N&uacute;mero de registros esperando a ser escritos<br>
+        Puede ver estas variables ejecutando un comando SHOW STATUS o mysqladmin 
+        extended-status.<br>
+        Tenga en cuenta que INSERT DELAYED es m&aacute;s lento que un INSERT normal 
+        si la tabla no est&aacute; en uso. Tambi&eacute;n hay una sobrecarga<br>
+        adicional para el servidor debido a que tiene que tratar un flujo separado 
+        para cada tabla en que haya registros retardados. Esto<br>
+        significa que debe usar INSERT DELAYED s&oacute;lo cuando est&eacute; 
+        realmente seguro que lo necesita.<br>
+        <h3>Sintaxis de LOAD DATA INFILE</h3><br>
+        LOAD DATA [LOW_PRIORITY | CONCURRENT] [LOCAL] INFILE 'file_name.txt'<br>
+        [REPLACE | IGNORE]<br>
+        INTO TABLE tbl_name<br>
+        [FIELDS<br>
+        [TERMINATED BY 'string']<br>
+        [[OPTIONALLY] ENCLOSED BY 'char']<br>
+        [ESCAPED BY 'char' ]<br>
+        ]<br>
+        [LINES<br>
+        [STARTING BY 'string']<br>
+        [TERMINATED BY 'string']<br>
+        ]<br>
+        [IGNORE number LINES]<br>
+        [(col_name_or_user_var,...)]<br>
+        [SET col_name = expr,...)]<br>
+        El comando LOAD DATA INFILE lee registros desde un fichero de texto a 
+        una tabla a muy alta velocidad. El nombre de fichero<br>
+        debe darse como una cadena literal.<br>
+        Para m&aacute;s informaci&oacute;n acerca de la eficiencia de INSERT contra 
+        LOAD DATA INFILE y acelerar LOAD DATA INFILE, consulte<br>
+        Secci&oacute;n 7.2.14, &#8220;Velocidad de la sentencia INSERT&#8221;.<br>
+        En MySQL 5.0, el conjunto de caracteres indicado por la variable de sistema 
+        character_set_database se usa para interpretar<br>
+        la informaci&oacute;n en el fichero. SET NAMES y el valor de character_set_client 
+        no afecta la interpretaci&oacute;n de la entrada.<br>
+        Puede cargar ficheros de datos usando la utilidad mysqlimport ; opera 
+        enviando un comando LOAD DATA INFILE al servidor.<br>
+        La opci&oacute;n --local hace que mysqlimport lea ficheros de datos desde 
+        el equipo cliente. Puede especificar la opci&oacute;n -<br>
+        -compress para obtener un mejor rendimiento en redes lentas si el cliente 
+        y el servidor soportan el protocolo comprimido. Consulte<br>
+        Secci&oacute;n 8.9, &#8220;El programa para importar datos mysqlimport&#8221;.<br>
+        Si usa LOW_PRIORITY, la ejecuci&oacute;n del comando LOAD DATA se retarda 
+        hasta que no haya m&aacute;s clientes leyendo de la tabla.<br>
+        Si especifica CONCURRENT con una tabla MyISAM que satisfaga la condici&oacute;n 
+        para inserciones concurrentes (esto es, no contiene<br>
+        bloques libres en medio), entonces otros flujos pueden recibir datos desde 
+        la tabla mientras se ejecuta LOAD DATA . Usar esta opci&oacute;n<br>
+        afecta al rendimiento de LOAD DATA ligeramente, incluso si no hay otro 
+        flujo usando la tabla al mismo tiempo.<br>
+        Si se especifica LOCAL, se interpreta respecto al cliente final de la 
+        conexi&oacute;n:<br>
+        &#8226; Si especificamos LOCAL, el programa cliente lee el fichero en 
+        el equipo cliente y lo env&iacute;a al servidor. Podemos indicar la ruta<br>
+        completa del fichero para especificar su localizaci&oacute;n exacta. Si 
+        indicamos la ruta relativa, el fichero se interpreta relativo al directorio<br>
+        en el que el cliente se inici&oacute;.<br>
+        &#8226; Si no se especifica LOCAL , el fichero tiene que estar en el equipo 
+        servidor y el servidor lo lee directamente.<br>
+        Al localizar ficheros en el equipo servidor, el servidor usa las siguientes 
+        reglas:<br>
+        &#8226; Si se da una ruta absoluta, el servidor usa la ruta como tal.<br>
+        &#8226; Si se da una ruta relativa con uno o m&aacute;s componentes, el 
+        servidor busca este fichero relativo al directorio de datos del servidor.<br>
+        &#8226; Si se da un nombre de fichero sin ninguna ruta, el servidor busca 
+        el fichero en el directorio de base de datos de la base de datos<br>
+        por defecto.<br>
+        Tenga en cuenta que estas reglas significan que un fichero llamado ./myfile.txt 
+        se lee del directorio de datos del servidor,<br>
+        mientras que el mismo fichero llamado como myfile.txt se lee desde el 
+        directorio de base de datos de la base de datos por defecto.<br>
+        Por ejemplo, el siguiente comando LOAD DATA lee el fichero data.txt del 
+        directorio de la base de datos para db1 porque<br>
+        db1 es la base de datos actual, incluso si el comando carga expl&iacute;citamente 
+        el fichero en una tabla en la base de datos db2:<br>
+        mysql&gt; USE db1;<br>
+        mysql&gt; LOAD DATA INFILE 'data.txt' INTO TABLE db2.my_table;<br>
+        Tenga en cuenta que las rutas de windows se especifican usando barras 
+        en lugar de antibarras. Si usa barras, debe doblarlas.<br>
+        Por razones de seguridad, al leer ficheros de texto localizados en el 
+        servidor, los ficheros deben residir en el directorio de la base de<br>
+        datos o ser le&iacute;bles por todo el mundo. Adem&aacute;s, para usar 
+        LOAD DATA INFILE en ficheros del servidor, debe tener el permiso<br>
+        FILE .<br>
+        Consulte Secci&oacute;n 5.6.3, &#8220;Privilegios de los que provee MySQL&#8221;.<br>
+        Usar LOCAL es un poco m&aacute;s lento que dejar al servidor acceder al 
+        fichero directamente, porque el contenido del fichero debe enviarse<br>
+        por la conexi&oacute;n desde el cliente al servidor . Por otra parte, 
+        no necesita el permiso FILE para cargar ficheros locales.<br>
+        En MySQL 5.0, LOCAL funciona s&oacute;lo si su servidor y su cliente lo 
+        tienen activado. Por ejemplo, si mysqld se arranca con -<br>
+        -local-infile=0, entonces LOCAL no funciona. Consulte Secci&oacute;n 5.5.4, 
+        &#8220;Cuestiones relacionadas con la seguridad y LOAD<br>
+        DATA LOCAL&#8221;.<br>
+        Si necesita LOAD DATA para leer desde un pipe, puede usar la siguiente 
+        t&eacute;cnica (aqu&iacute; cargamos el listado del directorio / en una<br>
+        tabla):<br>
+        mkfifo /mysql/db/x/x<br>
+        chmod 666 /mysql/db/x/x<br>
+        find / -ls &gt; /mysql/db/x/x<br>
+        mysql -e &quot;LOAD DATA INFILE 'x' INTO TABLE x&quot; x<br>
+        Las palabaras REPLACE y IGNORE controlan el tratamiento de registros de 
+        entrada que duplican registros existentes en claves &uacute;nicas.<br>
+        Si especifica REPLACE, los registros de entrada reemplazan registros existentes 
+        (en otras palabras, los registros que tienen el mismo<br>
+        valor para una clave primaria o &uacute;nica que un registro existente). 
+        Consulte Secci&oacute;n 13.2.6, &#8220;Sintaxis de REPLACE&#8221;.<br>
+        Si especifica IGNORE, los registros de entrada que dupliquen un registro 
+        existente en una clave &uacute;nica se ignoran. Si no especifica<br>
+        ninguna opci&oacute;n, el comportamiento depende de si la palabra LOCAL 
+        se ha especificado o no. Sin LOCAL, ocurre un error cuando se<br>
+        encuentra un valor de clave duplicado, y el resto del fichero de texto 
+        se ignora. Con LOCAL, el comportamiento por defecto es el<br>
+        mismo que si se especifica IGNORE, esto es porque el servidor no tiene 
+        forma de parar la transmisi&oacute;n del fichero en medio de la<br>
+        operaci&oacute;n.<br>
+        Si quiere ignorar restricciones de clave for&aacute;nea durante la operaci&oacute;n 
+        de carga, puede realizar un comando SET FOREIGN_<br>
+        KEY_CHECKS=0 antes de ejecutar LOAD DATA.<br>
+        Si usa LOAD DATA INFILE en una tabla vac&iacute;a MyISAM , todos los &iacute;ndices 
+        no &uacute;nicos se crean en batch separados (como para<br>
+        REPAIR TABLE). Esto hace LOAD DATA INFILE mucho m&aacute;s r&aacute;pido 
+        cuando tiene varios &iacute;ndices. Normalmente esto es muy<br>
+        r&aacute;pido, pero en algunos casos extromos, puede crear los &iacute;ndices 
+        incluso m&aacute;s r&aacute;pido desactiv&aacute;ndolos con ALTER TABLE 
+        ...<br>
+        DISABLE KEYS antes de cargar el fichero en la tabla y usar ALTER TABLE 
+        ... ENABLE KEYS para recrear los &iacute;ndices tras<br>
+        cargar el fichero. Consulte Secci&oacute;n 7.2.14, &#8220;Velocidad de 
+        la sentencia INSERT&#8221;.<br>
+        LOAD DATA INFILE es el complemento de SELECT ... INTO OUTFILE. (Consulte 
+        Secci&oacute;n 13.2.7, &#8220;Sintaxis de<br>
+        SELECT&#8221;.) Para escribir datos de una tabla en un fichero use SELECT 
+        ... INTO OUTFILE. Para leer el fichero de nuevo en<br>
+        una tabla, use LOAD DATA INFILE. La sintaxis de las cl&aacute;usulas FIELDS 
+        y LINES es la misma para ambos. Ambas son opcionales,<br>
+        pero FIELDS debe preceder a LINES si se especifican ambas.<br>
+        Si especifica una cl&aacute;usula FIELDS , cada una de sus subcl&aacute;usulas 
+        (TERMINATED BY, [OPTIONALLY] ENCLOSED BY, y ESCAPED<br>
+        BY) tambi&eacute;n es opcional, excepto que debe especificar al menos 
+        una de ellas.<br>
+        Si no especifica una cl&aacute;usula FIELDS, por defecto es como si hubiera 
+        escrito esto:<br>
+        FIELDS TERMINATED BY '\t' ENCLOSED BY '' ESCAPED BY '\\'<br>
+        Si no especifica una cl&aacute;usula LINES, por defecto es como si hubiera 
+        escrito esto:<br>
+        LINES TERMINATED BY '\n' STARTING BY ''<br>
+        En otras palabras, por defecto LOAD DATA INFILE act&uacute;a como sigue 
+        al leer la entrada:<br>
+        &#8226; Busca delimitadores de l&iacute;nea como nuevas l&iacute;neas.<br>
+        &#8226; No ignora ning&uacute;n prefijo de l&iacute;nea.<br>
+        &#8226; Rompe las l&iacute;neas en campos con los tabuladores.<br>
+        &#8226; No espera campos entrecomillados dentro de ning&uacute;n car&aacute;cter 
+        delimitador.<br>
+        &#8226; Interpreta las ocurrencias de tabuladores, nuevas l&iacute;neas 
+        o '\' precedidas por '\' como caracteres literales que son parte de valores<br>
+        de campos.<br>
+        Por defecto SELECT ... INTO OUTFILE act&uacute;a como sigue al escribir 
+        la salida:<br>
+        &#8226; Escribe tabuladores entre campos.<br>
+        &#8226; No entrecomilla los campos.<br>
+        &#8226; Usa '\' para escapar las instancias de tabuladores, nuevas l&iacute;neas 
+        o '\' que ocurren entre valores de campos.<br>
+        &#8226; Escribe nuevas l&iacute;neas al final de las l&iacute;neas.<br>
+        Tenga en cuenta que para escribir FIELDS ESCAPED BY '\\', debe escribir 
+        dos antibarras para que se interprete como una<br>
+        &uacute;nica antibarra.<br>
+        Nota: Si ha generado el fichero de texto en un sistema Windows , puede 
+        tener que usar LINES TERMINATED BY '\r\n' para<br>
+        leer correctamente el fichero, ya que los programas de Windows t&iacute;picamente 
+        usan dos caracteres como terminadores de l&iacute;nea . Algunos<br>
+        programas como WordPad, pueden usar \r como terminador de l&iacute;nea 
+        al escribir ficheros. Para leer tales ficheros, use LINES<br>
+        TERMINATED BY '\r'.<br>
+        Si todas las l&iacute;neas que quiere leer tienen un prefijo com&uacute;n 
+        que quiere ignorar, puede usar LINES STARTING BY 'prefix_<br>
+        string' para ignorar el prefijo (y cualquier cosa antes del mismo). Si 
+        una l&iacute;nea no incluye el prefijo, la l&iacute;nea entera se ignora.<br>
+        Nota prefix_string puede ocurrir en medio de una l&iacute;nea.<br>
+        Ejemplo:<br>
+        mysql&gt; LOAD DATA INFILE '/tmp/test.txt'<br>
+        -&gt; INTO TABLE test LINES STARTING BY &quot;xxx&quot;;<br>
+        Con esto puede leer en un fichero que contenga algo como:<br>
+        xxx&quot;row&quot;,1<br>
+        something xxx&quot;row&quot;,2<br>
+        Y obtener los datos (&quot;row&quot;,1) y (&quot;row&quot;,2).<br>
+        La opci&oacute;n IGNORE number LINES puede usarse para ignorar l&iacute;neas 
+        al inicio del fichero. Por ejemplo, puede usar IGNORE 1<br>
+        LINES para ignorar una cabecera inicial que contenga los nombres de las 
+        columnas:<br>
+        mysql&gt; LOAD DATA INFILE '/tmp/test.txt'<br>
+        -&gt; INTO TABLE test IGNORE 1 LINES;<br>
+        Cuando usa SELECT ... INTO OUTFILE junto con LOAD DATA INFILE para escribir 
+        datos desde una base de datos en un<br>
+        fichero y luego lee datos del fichero de nuevo en la base de datos, las 
+        opciones de tratamiento de fichero y de l&iacute;nea para ambos comandos<br>
+        deben coincidir. De otro modo, LOAD DATA INFILE no interpreta los contenidos 
+        del fichero correctamente. Suponga<br>
+        que usa SELECT ... INTO OUTFILE para escribir un fichero con campos delimitados 
+        por comas:<br>
+        mysql&gt; SELECT * INTO OUTFILE 'data.txt'<br>
+        -&gt; FIELDS TERMINATED BY ','<br>
+        -&gt; FROM table2;<br>
+        Para leer el fichero delimitado por comas, el comando correcto ser&iacute;a:<br>
+        mysql&gt; LOAD DATA INFILE 'data.txt' INTO TABLE table2<br>
+        -&gt; FIELDS TERMINATED BY ',';<br>
+        Si en lugar de esto trata de leer en el fichero con el comando mostrado 
+        aqu&iacute;, no funcionar&iacute;a porque le dice a LOAD DATA INFILE<br>
+        que busque tabuladores entre campos:<br>
+        mysql&gt; LOAD DATA INFILE 'data.txt' INTO TABLE table2<br>
+        -&gt; FIELDS TERMINATED BY '\t';<br>
+        El resultado esperado es que cada l&iacute;nea de entrada se interprete 
+        como un &uacute;nico campo.<br>
+        LOAD DATA INFILE puede usarse para leer ficheros obtenidos de fuentes 
+        externas. Por ejemplo, un fichero en formato dBASE<br>
+        tiene campos separados por comas y entrecomillados por comillas dobles. 
+        Si las l&iacute;neas en el fichero se terminan con nuevas l&iacute;neas,<br>
+        el comando mostrado aqu&iacute; ilustra las opciones de campo y l&iacute;nea 
+        que deber&iacute;a usar para cargar el fichero:<br>
+        mysql&gt; LOAD DATA INFILE 'data.txt' INTO TABLE tbl_name<br>
+        -&gt; FIELDS TERMINATED BY ',' ENCLOSED BY '&quot;'<br>
+        -&gt; LINES TERMINATED BY '\n';<br>
+        Cualquiera de las opciones de tratamiento de campo o l&iacute;nea pueden 
+        especificarse como una cadena vac&iacute;a (''). Si no est&aacute; vac&iacute;a, 
+        los<br>
+        valores FIELDS [OPTIONALLY] ENCLOSED BY y FIELDS ESCAPED BY deben ser 
+        un &uacute;nico car&aacute;cter. Los valores<br>
+        FIELDS TERMINATED BY, LINES STARTING BY, y LINES TERMINATED BY pueden 
+        tener m&aacute;s de un car&aacute;cter . Por<br>
+        ejemplo, para escribir l&iacute;neas terminadas por parejas de retorno 
+        de carro y nueva l&iacute;nea, o para leer un fichero conteniendo tales 
+        l&iacute;neas,<br>
+        especifique una cl&aacute;usula LINES TERMINATED BY '\r\n' .<br>
+        Para leer un fichero que contenga bromas separadas por l&iacute;neas consistentes 
+        de %%, puede hacer lo siguiente<br>
+        mysql&gt; CREATE TABLE jokes<br>
+        -&gt; (a INT NOT NULL AUTO_INCREMENT PRIMARY KEY,<br>
+        -&gt; joke TEXT NOT NULL);<br>
+        mysql&gt; LOAD DATA INFILE '/tmp/jokes.txt' INTO TABLE jokes<br>
+        -&gt; FIELDS TERMINATED BY ''<br>
+        -&gt; LINES TERMINATED BY '\n%%\n' (joke);<br>
+        FIELDS [OPTIONALLY] ENCLOSED BY controla el entrecomillado de los campos. 
+        Para la salida (SELECT ... INTO<br>
+        OUTFILE), si omite la palabra OPTIONALLY, todos los campos se delimitan 
+        por el car&aacute;cter ENCLOSED BY. Un ejemplo de tal<br>
+        salida (usando coma como el delimitador de campo) se muestra aqu&iacute;:<br>
+        &quot;1&quot;,&quot;a string&quot;,&quot;100.20&quot;<br>
+        &quot;2&quot;,&quot;a string containing a , comma&quot;,&quot;102.20&quot;<br>
+        &quot;3&quot;,&quot;a string containing a \&quot; quote&quot;,&quot;102.20&quot;<br>
+        &quot;4&quot;,&quot;a string containing a \&quot;, quote and comma&quot;,&quot;102.20&quot;<br>
+        Si especifica OPTIONALLY, el car&aacute;cter ENCLOSED BY se usa s&oacute;lo 
+        para delimitar valores en columnas que tienen datos de cadenas<br>
+        (tales como CHAR, BINARY, TEXT, o ENUM):<br>
+        1,&quot;a string&quot;,100.20<br>
+        2,&quot;a string containing a , comma&quot;,102.20<br>
+        3,&quot;a string containing a \&quot; quote&quot;,102.20<br>
+        4,&quot;a string containing a \&quot;, quote and comma&quot;,102.20<br>
+        Tenga en cuenta que la ocurrencias del car&aacute;cter ENCLOSED BY dentro 
+        de un campo se escapan mediante un prefijo del car&aacute;cter<br>
+        ESCAPED BY. Tambi&eacute;n tenta en cuenta que si especifica un valor 
+        ESCAPED BY vac&iacute;o, es posible generar salida que no puede<br>
+        leerse correctamente con LOAD DATA INFILE. Por ejemplo, la salida precedente 
+        tendr&iacute;a la siguiente apariencia si el car&aacute;cter de<br>
+        escape estuviera vac&iacute;o. Observe que el segundo campo en la cuarta 
+        l&iacute;nea contiene una coma siguiendo la delimitaci&oacute;n, que<br>
+        (err&oacute;neamente) parece que termine el campo:<br>
+        1,&quot;a string&quot;,100.20<br>
+        2,&quot;a string containing a , comma&quot;,102.20<br>
+        3,&quot;a string containing a &quot; quote&quot;,102.20<br>
+        4,&quot;a string containing a &quot;, quote and comma&quot;,102.20<br>
+        Para entrada, el car&aacute;cter ENCLOSED BY , si est&aacute; presente, 
+        se elimina del final de los valores de campos . (Esto es cierto se especifique<br>
+        OPTIONALLY o no; OPTIONALLY no tiene efecto en la interpretaci&oacute;n 
+        de la entrada.) Las ocurrencias del car&aacute;cter ENCLOSED<br>
+        BY prececdidas por el carater ESCAPED BY se interpretan como parte del 
+        campo actual.<br>
+        Si el campo comienza con el car&aacute;cter ENCLOSED BY , las instancias 
+        del mismo se reorganizan como terminadores del campo s&oacute;lo<br>
+        si van seguidas por el campo o la secuencia TERMINATED BY . Para evitar 
+        ambig&uuml;edad, las ocurrencias del car&aacute;cter ENCLOSED<br>
+        BY dentro de un campo se pueden doblar y se interpretan como una &uacute;nica 
+        instancia del car&aacute;cter. Por ejemplo, si se especifica ENCLOSED<br>
+        BY '&quot;' , la delimitaci&oacute;n se trata como se muestra aqu&iacute;:<br>
+        &quot;The &quot;&quot;BIG&quot;&quot; boss&quot; -&gt; The &quot;BIG&quot; 
+        boss<br>
+        The &quot;BIG&quot; boss -&gt; The &quot;BIG&quot; boss<br>
+        The &quot;&quot;BIG&quot;&quot; boss -&gt; The &quot;&quot;BIG&quot;&quot; 
+        boss<br>
+        FIELDS ESCAPED BY controla c&oacute;mo escribir o leer caracteres especiales. 
+        Si el car&aacute;cter FIELDS ESCAPED BY no est&aacute; vac&iacute;o,<br>
+        se usa como prefijo para los siguientes caracteres de salida:<br>
+        &#8226; El car&aacute;cter FIELDS ESCAPED BY<br>
+        &#8226; El car&aacute;cter FIELDS [OPTIONALLY] ENCLOSED BY<br>
+        &#8226; El primer car&aacute;cter de los valores FIELDS TERMINATED BY 
+        y LINES TERMINATED BY<br>
+        &#8226; ASCII 0 (lo que realmente se escribe a continuaci&oacute;n del 
+        car&aacute;cter de escape es '0' en ASCCI, no un byte con valor cero)<br>
+        Si el car&aacute;cter FIELDS ESCAPED BY est&aacute; vac&iacute;o, no se 
+        escapan caracteres y NULL se muestra como NULL, no \N. Probablemente<br>
+        no es una buena idea especificar un car&aacute;cter de escape vac&iacute;o, 
+        particularmente si los valores de campos en sus datos contienen cualquiera<br>
+        de los caracteres en la lista dada.<br>
+        Para entrada, si el car&aacute;cter FIELDS ESCAPED BY no est&aacute; vac&iacute;o, 
+        las ocurrencias del mismo se eliminan y el siguiente car&aacute;cter se<br>
+        toma literalmente como parte del campo. Las excepciones son un '0' escapado 
+        o 'N' (por ejemplo, \0 o \N si el car&aacute;cter de escape<br>
+        es '\'). Estas secuencias se interpretan como ASCII NUL (un byte con valor 
+        cero) y NULL. Las reglas para tratamiento de NULL se<br>
+        describen posteriormente.<br>
+        Para m&aacute;s infomaci&oacute;n de la sintaxis de escape '\' consulte 
+        Secci&oacute;n 9.1, &#8220;Valores literales&#8221;.<br>
+        En ciertos casos, las opciones de tratamiento de campos y l&iacute;nea 
+        interact&uacute;an:<br>
+        &#8226; Si LINES TERMINATED BY es una cadena vac&iacute;o y FIELDS TERMINATED 
+        BY no est&aacute; vac&iacute;o, las l&iacute;neas se terminan con<br>
+        FIELDS TERMINATED BY.<br>
+        &#8226; Si los valores FIELDS TERMINATED BY y FIELDS ENCLOSED BY est&aacute;n 
+        vac&iacute;ois (''), se usa un formato fijo de registro<br>
+        (no delimitado). Con este formato, no se usan delimitadores entre campos 
+        (pero puede tener un terminador de l&iacute;nea). En su lugar,<br>
+        los valores de columna se escriben y leen usando los anchos de muestra 
+        de las columnas. Por ejemplo, si una columna se<br>
+        declara como INT(7), los valores para la columna se escriben usando campos 
+        de siete caracteres. En la entrada, los valores<br>
+        para la columna se obtienen leyendo siete caracteres.<br>
+        LINES TERMINATED BY se usa para separar l&iacute;neas. Si una l&iacute;nea 
+        no contiene todos los campos, el resto de columnas se asignan<br>
+        con sus valores por defecto. Si no tiene un terminador de l&iacute;nea, 
+        debe asignarlo a ''. En este caso, el fichero de texto debe<br>
+        contener todos los campos para cada registro.<br>
+        El formato fijo de registro tambi&eacute;n afecta al tratamiento de valores 
+        NULL, como se describe posteriormente. Tenga en cuenta<br>
+        que el formato de tama&ntilde;o fijo no funciona si est&aacute; usando 
+        un conjunto de caracteres multi byte.<br>
+        El tratamiento de valores NULL var&iacute;a en funci&oacute;n de las opciones 
+        FIELDS y LINES en uso:<br>
+        &#8226; Para los valores FIELDS y LINES por defecto, NULL se escribe como 
+        \N para la salida, y \N para la entrada se lee como<br>
+        NULL (considerando que el car&aacute;cter ESCAPED BY es '\').<br>
+        &#8226; Si FIELDS ENCLOSED BY no est&aacute; vac&iacute;lo, un campo que 
+        contenga el literal NULL como valor se lee como el valor NULL .<br>
+        Esto difiere de la palabra NULL delimitada por caracteres FIELDS ENCLOSED 
+        BY , que se lee como la cadena 'NULL'.<br>
+        &#8226; Si FIELDS ESCAPED BY est&aacute; vac&iacute;o, NULL se escribe 
+        como la palabra NULL.<br>
+        &#8226; Con formato fijo de registro (lo que ocurre cuando FIELDS TERMINATED 
+        BY y FIELDS ENCLOSED BY est&aacute;n vac&iacute;os),<br>
+        NULL se escribe como una cadena vac&iacute;a. Teng en cuenta que esto 
+        hace que ambos valores NULL y cadenas vac&iacute;as en la tabla<br>
+        sean indistinguibles cuando se escriben en el fichero ya que ambos se 
+        escriben como cadenas vac&iacute;as. Si necesita distinguir entre<br>
+        ambos al leer del fichero, no debe usar el formato de registro fijo.<br>
+        Algunos casos no son soportados por LOAD DATA INFILE:<br>
+        &#8226; Registros de tama&ntilde;o fijo (FIELDS TERMINATED BY y FIELDS 
+        ENCLOSED BY ambos vac&iacute;os) y columnas BLOB o TEXT<br>
+        .<br>
+        &#8226; Si especifica un separador que es igual o prefijo de otro, LOAD 
+        DATA INFILE no ser&aacute; capaz de interpretar la entrada correctamente.<br>
+        Por ejemplo, la siguiente cl&aacute;usula FIELDS causar&iacute;a problemas:<br>
+        FIELDS TERMINATED BY '&quot;' ENCLOSED BY '&quot;'<br>
+        &#8226; Si FIELDS ESCAPED BY est&aacute; vac&iacute;o, un valor que contenga 
+        una ocurrencia de FIELDS ENCLOSED BY o LINES TERMINATED<br>
+        BY seguido por el valor FIELDS TERMINATED BY causa que LOAD DATA INFILE 
+        pare de leer un campo o<br>
+        l&iacute;nea demasiado r&aacute;pido. Esto ocurre porque LOAD DATA INFILE 
+        no puede determinar apropiadamente d&oacute;nde acaba el campo<br>
+        o l&iacute;nea.<br>
+        El siguiente ejemplo carga todas las columnas de la tabla persondata :<br>
+        mysql&gt; LOAD DATA INFILE 'persondata.txt' INTO TABLE persondata;<br>
+        Por defecto, cuando no se proporciona una lista al final de un comando 
+        LOAD DATA INFILE, las l&iacute;neas de entrada se espera que<br>
+        contengan un campo para cada columna de la tabla. Si quiere cargar s&oacute;lo 
+        algunas columnas de una tabla, especifique una lista de<br>
+        columnas:<br>
+        mysql&gt; LOAD DATA INFILE 'persondata.txt'<br>
+        -&gt; INTO TABLE persondata (col1,col2,...);<br>
+        Debe especificar una lista de columnas si el orden de los campos del fichero 
+        de entrada difiere del orden de las columnas en la tabla.<br>
+        De otro modo, MySQL no puede decir c&oacute;mo hacer coincidir los campos 
+        de entrada con las columnas de la tabla.<br>
+        Antes de MySQL 5.0.3, la lista de columnas debe contener s&oacute;lo nombres 
+        de columnas en la tabla que se carga, y la cl&aacute;usula SET no<br>
+        se soporta. Desde MySQL 5.0.3, la lista de columnas puede contener nombres 
+        de columna o variables y la cl&aacute;usula SET se soporta.<br>
+        Esto le permite asignar valores de entrada a variables de usuario, y luego 
+        realizar transformaciones on estos valores antes de asignar<br>
+        los resultados a las columnas.<br>
+        Las variables de usuario en la cl&aacute;usula SET puede usarse de distintos 
+        modos. El siguiente ejemplo usa la primera columna en el fichero<br>
+        de datos directamente para el valor de t1.column1, y asigna la segunda 
+        columna a una variable de usuario que est&aacute; sujeta<br>
+        a una operaci&oacute;n de divisi&oacute;n antes de ser usada por el valor 
+        de t2.column2:<br>
+        LOAD DATA INFILE 'file.txt'<br>
+        INTO TABLE t1<br>
+        (column1, @var1)<br>
+        SET column2 = @var1/100;<br>
+        La cl&aacute;usula SET puede usarse para proporcionar valores no derivados 
+        del fichero de entrada. Los siguientes comandos actualizan<br>
+        column3 con la fecha y hora actuales:<br>
+        LOAD DATA INFILE 'file.txt'<br>
+        INTO TABLE t1<br>
+        (column1, column2)<br>
+        SET column3 = CURRENT_TIMESTAMP;<br>
+        Tambi&eacute;n puede descartar un valor de entrada asign&aacute;ndolo 
+        a una variable de usuario y no asignando la variable a una columna de 
+        tabla:<br>
+        LOAD DATA INFILE 'file.txt'<br>
+        INTO TABLE t1<br>
+        (column1, @dummy, column2, @dummy, column3);<br>
+        El uso de la lista de columnas/variables y la cl&aacute;usula SET est&aacute; 
+        sujeto a las siguientes restricciones:<br>
+        &#8226; Las asignaciones en la cl&aacute;usula SET deben tener s&oacute;lo 
+        nombres de columna en el lado izquierdo del operador de asignaci&oacute;n.<br>
+        &#8226; Puede usar subconsultas en la parte derecha de la asignaci&oacute;n 
+        de SET. Una subconsulta que retorne un valor a ser asignado a<br>
+        otra coluimna s&oacute;lo puede ser una subconsulta escalar. Adem&aacute;s, 
+        no puede usar una subconsulta para seleccionar desde la tabla<br>
+        que se est&aacute; cargando.<br>
+        &#8226; Las l&iacute;neas ignoradas por un cl&aacute;usula IGNORE no se 
+        procesan por parta de la lista de columnas/variables o por la cl&aacute;usula 
+        SET .<br>
+        &#8226; Las variables de usuario no pueden usarse al cargar datos con 
+        formato de registo ya que las variables de usuario no tienen un<br>
+        ancho de muestra.<br>
+        Al procesar una l&iacute;nea de entrada, LOAD DATA la divide en campos 
+        y usa los valores seg&uacute;n la lista de columnas/ variables y la cl&aacute;usula<br>
+        SET , si est&aacute;n presentes. A continuaci&oacute;n se inserta el registro 
+        resultante en la tabla. Si hay disparadores BEFORE INSERT o<br>
+        AFTER INSERT para la tabla, se activan antes o despu&eacute;s de insertar 
+        el registro, respectivamente.<br>
+        Si una l&iacute;nea de entrada tiene demasiados campos, los campos extra 
+        se ignoran y el n&uacute;mero de advertencias se incrementa.<br>
+        Si una l&iacute;nea de entrada no tiene suficientes campos, las columnas 
+        de la tabla que no tienen entrada adquieren su valor por defecto.<br>
+        Los valores por defecto se describen en Secci&oacute;n 13.1.5, &#8220;Sintaxis 
+        de CREATE TABLE&#8221;.<br>
+        Un valor de campo vac&iacute;o se interpreta de forma distinta que si 
+        el valor no est&aacute; presente:<br>
+        &#8226; Para tipos de cadenas, la columna adquiere la cadena vac&iacute;a.<br>
+        &#8226; Para tipos num&eacute;ricos, la columna recibe el valor 0.<br>
+        &#8226; Para tipos de fecha y hora, la columna obtiene el valor &#8220;cero&#8221; 
+        apropiado para el tipo. Consulte Secci&oacute;n 11.3, &#8220;Tipos de 
+        fecha y<br>
+        hora&#8221;.<br>
+        Estos son los mismos valores que resultan si asigna una cadena vac&iacute;a 
+        expl&iacute;citamente a un tipo de cadena de caracteres, num&eacute;rico 
+        o<br>
+        de fecha u hora en un comando INSERT o UPDATE statement.<br>
+        Las columnas TIMESTAMP obtienen la fecha y hora actuales s&oacute;lo si 
+        hay un valor NULL para la columna (esto es, \N), o (para la<br>
+        primera columna TIMESTAMP &uacute;nicamente) si se omite TIMESTAMP de 
+        la lista de campos cuando se especifica una.<br>
+        LOAD DATA INFILE trata todas las entradas como cadenas, asi que no puede 
+        usar valores num&eacute;ricos para columnas ENUM o<br>
+        SET del modo en que puede hacerlo con comandos INSERT . Todos los valores 
+        ENUM y SET deben especificarse como cadenas.<br>
+        Cuando acaba el comando LOAD DATA INFILE, retorna una cadena de informaci&oacute;n 
+        con el siguiente formato:<br>
+        Records: 1 Deleted: 0 Skipped: 0 Warnings: 0<br>
+        Si usa la API de C, puede obtener informaci&oacute;n acerca del comando 
+        mediante la funci&oacute;n mysql_info(). Consulte Secci&oacute;n<br>
+        24.2.3.32, &#8220;mysql_info()&#8221;.<br>
+        Las advertencias se producen bajo las mismas circunstancias que cuando 
+        los valores se insertan mediante el comando INSERT<br>
+        (consulte Secci&oacute;n 13.2.4, &#8220;Sintaxis de INSERT&#8221;), excepto 
+        que LOAD DATA INFILE tambi&eacute;n genera advertencias cuando hay<br>
+        muy pocos o demasiados campos en el registro de entrada. Las advertencias 
+        no se almacenan en ning&uacute;n lugar; el n&uacute;mero de las<br>
+        mismas puede usarse s&oacute;lo como indicaci&oacute;n de si todo ha ido 
+        bien.<br>
+        En MySQL 5.0, puede usar SHOW WARNINGS para obtener una lista de las primeras 
+        max_error_count advertencias como informaci&oacute;n<br>
+        acerca de qu&eacute; ha fallado. Consulte Secci&oacute;n 13.5.4.22, &#8220;Sintaxis 
+        de SHOW WARNINGS&#8221;.<br>
+        <h3>Sintaxis de REPLACE</h3><br>
+        REPLACE [LOW_PRIORITY | DELAYED]<br>
+        [INTO] tbl_name [(col_name,...)]<br>
+        VALUES ({expr | DEFAULT},...),(...),...<br>
+        O:<br>
+        REPLACE [LOW_PRIORITY | DELAYED]<br>
+        [INTO] tbl_name<br>
+        SET col_name={expr | DEFAULT}, ...<br>
+        O:<br>
+        REPLACE [LOW_PRIORITY | DELAYED]<br>
+        [INTO] tbl_name [(col_name,...)]<br>
+        SELECT ...<br>
+        REPLACE funciona exactamente como INSERT, excepto que si un valor de la 
+        tabla tiene el mismo valor que un nuevo registro para<br>
+        un &iacute;ndice PRIMARY KEY o UNIQUE , el antiguo registro se borra antes 
+        de insertar el nuevo. Consulte Secci&oacute;n 13.2.4, &#8220;Sintaxis<br>
+        de INSERT&#8221;.<br>
+        Tenga en cuenta que a menos que la tabla tenga un &iacute;ndice PRIMARY 
+        KEY, o UNIQUE usar un comando REPLACE no tiene sentido.<br>
+        Es equivalente a INSERT, ya que no hay &iacute;ndice para determinar si 
+        un nuevo registro duplica otro.<br>
+        Los valores para todas las columnas se toman de los valores especificados 
+        en el comando REPLACE. Cualquier columna no presente<br>
+        adquiere su valor por defecto, como ocurre con INSERT. No puede referirse 
+        a valores del registro actual y usarlos en el nuevo<br>
+        registro. Si usa un comando tal como SET col_name = col_name + 1, la referencia 
+        al nombre de columna en la parte derecha<br>
+        se trata como DEFAULT(col_name), as&iacute; que es equivalente a SET col_name 
+        = DEFAULT(col_name) + 1.<br>
+        Para ser capaz de usar REPLACE, debe tener los permisos INSERT y DELETE 
+        para la tabla.<br>
+        El comando REPLACE retorna un contador con el n&uacute;mero de registros 
+        afectados. Esta es la suma de registros borrados e insertados.<br>
+        Si el contador es 1 para REPLACE de un &uacute;nico registro, se inserta 
+        un registro y no se borra ninguno. Si el contador es mayor que 1,<br>
+        uno o m&aacute;s registros se borraron antes de insertar el nuevo. Es 
+        posible para un &uacute;nico registro reemplazar m&aacute;s de un registro 
+        antiguo<br>
+        si la tabla contiene m&uacute;ltiples &iacute;ndices &uacute;nicos y el 
+        nuevo registro duplica valores para distintos registros antiguos en distintos 
+        &iacute;ndices<br>
+        &uacute;nicos.<br>
+        El contador de registros afectados hace f&aacute;cil determinar si REPLACE 
+        s&oacute;lo a&ntilde;adi&oacute; un registro o si tambi&eacute;n reemplazo 
+        alguno: Compruebe<br>
+        si el contador es 1 (a&ntilde;adido) o mayor (reemplazados).<br>
+        Si usa la API de C, el contador de registros afectados puede obtenerse 
+        usando la funci&oacute;n mysql_affected_rows().<br>
+        Actualmente, no puede reemplzar en una tabla y seleccionar de la misma 
+        en una subconsulta.<br>
+        Aqu&iacute; sigue en m&aacute;s detalle el algoritmo usado (tambi&eacute;n 
+        se usa con LOAD DATA ... REPLACE):<br>
+        1. Intenta insertar el nuevo registro en la tabla<br>
+        2. Mientras falle la inserci&oacute;n debido a error de clave duplicada 
+        por clave &uacute;nica o primaria:<br>
+        a. Borra de la tabla el registro conflictivo que tiene el valor de clave 
+        duplicada<br>
+        b. Intenta insertar de nuevo el registro en la tabla </p>
+        </td>
+    <td>&nbsp;</td>
+    <td><a href="http://www.euskalnet.net/juanarana/oraclezip/Ejer3.rar"><img src="../../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td>
+<div align="right"><a href="http://www.euskalnet.net/juanarana/index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a>
+      </div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Ciclo de vida de una entidad</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación en EJB 3.0 Ciclo de vida de la Entidad" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="EJB 3.0 JPA, Manual EJB 3.0 JPA, tutorial EJB 3.0 JPA, Ejemplos EJB 3.0 JPA, ejercicios EJB 3.0 JPA">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> Ciclo de vida de una entidad</h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <p>Engloba dos aspectos: la relaci&oacute;n 
+        entre el objeto Entidad y su contexto a persistir y por otro lado la sincronizaci&oacute;n 
+        de su estado con la base de datos. Para realizar estas operaciones la 
+        Entidad puede encontrarse en cualquiera de estos cuatro estados:</p>
+      <p> - new - Nueva instancia de la Entidad en memoria sin que a&uacute;n 
+        le sea asignado su contexto persistente almacenado en la tabla de la base 
+        de datos.</p>
+      <p> - managed - La Entidad dispone de contenido asociado con el de la tabla 
+        de la base de datos debido a que se utiliz&oacute; el m&eacute;todo persist(). 
+        Los cambios que se produzcan en la Entidad se podr&aacute;;n sincronizar 
+        con los de la base de datos llamando al m&eacute;todo flush().</p>
+      <p> - detached - La Entidad se ha quedado sin su contenido persistente. 
+        Es necesario utilizar el m&eacute;todo merge() para actualizarla.</p>
+      <p> - removed - Estado despu&eacute;s de llamarse al m&eacute;todo remove() 
+        y el contenido de la Entidad ser&aacute;; eliminado de la base de datos</p>
+      <p>&nbsp; </p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

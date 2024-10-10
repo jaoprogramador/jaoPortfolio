@@ -1,0 +1,166 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>El entorno de desarrollo Java</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación en Java,Programas Java,Aplicaciones en Java,Ejercicios en Java, Ejemplos de Java,Tutorial de Java,Manual Java" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Java, Manual Java, tutorial Java, Ejemplos Java, ejercicios Java">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> <strong>El entorno de desarrollo Java</strong></h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <p>Existen distintos programas comerciales que 
+        permiten desarrollar c&oacute;digo Java. La compa&ntilde;&iacute;a Sun, 
+        creadora de Java, distribuye gratuitamente el Java(tm) Development Kit 
+        (JDK). Se trata de un conjunto de programas y librer&iacute;as que permiten 
+        desarrollar, compilar y ejecutar programas en Java. Incorpora adem&aacute;s 
+        la posibilidad de ejecutar parcialmente el programa, deteniendo la ejecuci&oacute;n 
+        en el punto deseado y estudiando en cada momento el valor de cada una 
+        de las variables (con el denominado Debugger). Cualquier programador con 
+        un m&iacute;nimo de experiencia sabe que una parte muy importante (muchas 
+        veces la mayor parte) del tiempo destinado a la elaboraci&oacute;n de 
+        un programa se destina a la detecci&oacute;n y correcci&oacute;n de errores. 
+        Existe tambi&eacute;n una versi&oacute;n reducida del JDK, denominada 
+        JRE (Java Runtime Environment) destinada &uacute;nicamente a ejecutar 
+        c&oacute;digo Java (no permite compilar). </p>
+      <p>Los IDEs (Integrated Development Environment), tal y como su nombre indica, 
+        son entornos de desarrollo integrados. En un mismo programa es posible 
+        escribir el c&oacute;digo Java, compilarlo y ejecutarlo sin tener que 
+        cambiar de aplicaci&oacute;n. Algunos incluyen una herramienta para realizar 
+        Debug gr&aacute;ficamente, frente a la versi&oacute;n que incorpora el 
+        JDK basada en la utilizaci&oacute;n de una consola (denominada habitualmente 
+        ventana de comandos de MS-DOS, en Windows NT/95/98) bastante dif&iacute;cil 
+        y pesada de utilizar. Estos entornos integrados permiten desarrollar las 
+        aplicaciones de forma mucho m&aacute;s r&aacute;pida, incorporando en 
+        muchos casos librer&iacute;as con componentes ya desarrollados, los cuales 
+        se incorporan al proyecto o programa. Como inconvenientes se pueden se&ntilde;alar 
+        algunos fallos de compatibilidad entre plataformas, y ficheros resultantes 
+        de mayor tama&ntilde;o que los basados en clases est&aacute;ndar.</p>
+		<h3>El compilador de Java</h3>
+		
+      <p>Se trata de una de las herramientas de desarrollo incluidas en el JDK. 
+        Realiza un an&aacute;lisis de sintaxis del c&oacute;digo escrito en los 
+        ficheros fuente de Java (con extensi&oacute;n *.java). Si no encuentra 
+        errores en el c&oacute;digo genera los ficheros compilados (con extensi&oacute;n 
+        *.class). En otro caso muestra la l&iacute;nea o l&iacute;neas err&oacute;neas. 
+        En el JDK de Sun dicho compilador se llama javac.exe. Tiene numerosas 
+        opciones, algunas de las cuales var&iacute;an de una versi&oacute;n a 
+        otra. Se aconseja consultar la documentaci&oacute;n de la versi&oacute;n 
+        del JDK utilizada para obtener una informaci&oacute;n detallada de las 
+        distintas posibilidades.</p>
+		<h3>La Java Virtual Machine</h3>
+		
+      <p>Tal y como se ha comentado al comienzo del cap&iacute;tulo, la existencia 
+        de distintos tipos de procesadores y ordenadores llev&oacute; a los ingenieros 
+        de Sun a la conclusi&oacute;n de que era muy importante conseguir un software 
+        que no dependiera del tipo de procesador utilizado. Se plante&oacute; 
+        la necesidad de conseguir un c&oacute;digo capaz de ejecutarse en cualquier 
+        tipo de m&aacute;quina. Una vez compilado no deber&iacute;a ser necesaria 
+        ninguna modificaci&oacute;n por el hecho de cambiar de procesador o de 
+        ejecutarlo en otra m&aacute;quina. La clave consisti&oacute; en desarrollar 
+        un c&oacute;digo &#8220;neutro&#8221; el cual estuviera preparado para 
+        ser ejecutado sobre una &#8220;m&aacute;quina hipot&eacute;tica o virtual&#8221;, 
+        denominada Java Virtual Machine (JVM). Es esta JVM quien interpreta este 
+        c&oacute;digo neutro convirti&eacute;ndolo a c&oacute;digo particular 
+        de la CPU utilizada. Se evita tener que realizar un programa diferente 
+        para cada CPU o plataforma.<br>
+        La JVM es el int&eacute;rprete de Java. Ejecuta los &#8220;bytecodes&#8221; 
+        (ficheros compilados con extensi&oacute;n *.class) creados por el compilador 
+        de Java (javac.exe). Tiene numerosas opciones entre las que destaca la 
+        posibilidad de utilizar el denominado JIT (Just-In-Time Compiler), que 
+        puede mejorar entre 10 y 20 veces la velocidad de ejecuci&oacute;n de 
+        un programa.</p>
+		<h3>Las variables PATH y CLASSPATH</h3>
+		
+      <p>El desarrollo y ejecuci&oacute;n de aplicaciones en Java exige que las 
+        herramientas para compilar (javac.exe) y ejecutar (java.exe) se encuentren 
+        accesibles. El ordenador, desde una ventana de comandos de MS-DOS, s&oacute;lo 
+        es capaz de ejecutar los programas que se encuentran en los directorios 
+        indicados en la variable PATH del ordenador (o en el directorio activo). 
+        Si se desea compilar o ejecutar c&oacute;digo en Java, el directorio donde 
+        se encuentran estos programas (java.exe y javac.exe) deber&aacute; encontrarse 
+        en el PATH. Tecleando PATH en una ventana de comandos de MS-DOS se muestran 
+        los nombres de directorios incluidos en dicha variable de entorno.</p>
+      <p>Java utiliza adem&aacute;s una nueva variable de entorno denominada CLASSPATH, 
+        la cual determina d&oacute;nde buscar tanto las clases o librer&iacute;as 
+        de Java (el API de Java) como otras clases de usuario. A partir de la 
+        versi&oacute;n 1.1.4 del JDK no es necesario indicar esta variable, salvo 
+        que se desee a&ntilde;adir conjuntos de clases de usuario que no vengan 
+        con dicho JDK. La variable CLASSPATH puede incluir la ruta de directorios 
+        o ficheros *.zip o *.jar en los que se encuentren los ficheros *.class. 
+        En el caso de los ficheros *.zip hay que observar que los ficheros en 
+        &eacute;l incluidos no deben estar comprimidos. En el caso de archivos 
+        *.jar existe una herramienta (jar.exe), incorporada en el JDK, que permite 
+        generar estos ficheros a partir de los archivos compilados *.class. Los 
+        ficheros *.jar son archivos comprimidos y por lo tanto ocupan menos espacio 
+        que los archivos *.class por separado o que el fichero *.zip equivalente.</p>
+      <p>Una forma general de indicar estas dos variables es crear un fichero 
+        batch de MS-DOS (*.bat) donde se indiquen los valores de dichas variables. 
+        Cada vez que se abra una ventana de MS-DOS ser&aacute; necesario ejecutar 
+        este fichero *.bat para asignar adecuadamente estos valores. Un posible 
+        fichero llamado jdk117.bat, podr&iacute;a ser como sigue:</p>
+      <p>set JAVAPATH=C:\jdk1.1.7<br>
+        set PATH=.;%JAVAPATH%\bin;%PATH%<br>
+        set CLASSPATH=.\;%JAVAPATH%\lib\classes.zip;%CLASSPATH%<br>
+        lo cual ser&iacute;a v&aacute;lido en el caso de que el JDK estuviera 
+        situado en el directorio C:\jdk1.1.7.</p>
+      <p>Si no se desea tener que ejecutar este fichero cada vez que se abre una 
+        consola de MS-DOS es necesario indicar estos cambios de forma &#8220;permanente&#8221;. 
+        La forma de hacerlo difiere entre Windows 95/98 y Windows NT. En Windows 
+        95/98 es necesario modificar el fichero Autoexec.bat situado en C:\, a&ntilde;adiendo 
+        las l&iacute;neas antes mencionadas. Una vez rearrancado el ordenador 
+        estar&aacute;n presentes en<br>
+        cualquier consola de MS-DOS que se cree. La modificaci&oacute;n al fichero 
+        Autoexec.bat en Windows 95/98 ser&aacute; la siguiente:</p>
+      <p>set JAVAPATH=C:\jdk1.1.7<br>
+        set PATH=.;%JAVAPATH%\bin;%PATH%<br>
+        set CLASSPATH=<br>
+        donde en la tercera l&iacute;nea debe incluir la ruta de los ficheros 
+        donde est&aacute;n las clases de Java. En el caso de utilizar Windows 
+        NT se a&ntilde;adir&aacute; la variable PATH en el cuadro de di&aacute;logo 
+        que se abre con Start -&gt; Settings -&gt; Control Panel -&gt; System 
+        -&gt; Environment -&gt; User Variables for NombreUsuario.</p>
+      <p>Tambi&eacute;n es posible utilizar la opci&oacute;n &#8211;classpath 
+        en el momento de llamar al compilador javac.exe o al int&eacute;rprete 
+        java.exe. En este caso los ficheros *.jar deben ponerse con el nombre 
+        completo en el CLASSPATH: no basta poner el PATH o directorio en el que 
+        se encuentra. Por ejemplo, si se desea compilar y ejecutar el fichero 
+        ContieneMain.java, y &eacute;ste necesitara la librer&iacute;a de clases 
+        G:\MyProject\OtherClasses.jar, adem&aacute;s de las incluidas en el CLASSPATH, 
+        la forma de compilar y ejecutar ser&iacute;a:</p>
+      <p><br>
+        javac -classpath .\;G:\MyProject\OtherClasses.jar ContieneMain.java<br>
+        java -classpath .\;G:\MyProject\OtherClasses.jar ContieneMain</p>
+      <p><br>
+        Se aconseja consultar la ayuda correspondiente a la versi&oacute;n que 
+        se est&eacute; utilizando, debido a que existen peque&ntilde;as variaciones 
+        entre las distintas versiones del JDK.<br>
+        Cuando un fichero filename.java se compila y en ese directorio existe 
+        ya un fichero filename.class, se comparan las fechas de los dos ficheros. 
+        Si el fichero filename.java es m&aacute;s antiguo que el filename.class 
+        no se produce un nuevo fichero filename.class. Esto s&oacute;lo es v&aacute;lido 
+        para ficheros *.class que se corresponden con una clase public.</p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

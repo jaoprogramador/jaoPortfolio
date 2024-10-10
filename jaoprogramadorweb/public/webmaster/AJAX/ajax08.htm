@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>C&oacute;mo hacer una p&aacute;gina AJAX</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta name="keywords" content="Primera página AJAX, Como hacer una pagina AJAX, Manual AJAX, tutorial AJAX, Ejemplos AJAX, ejercicios AJAX">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2>Refactorizando la utilidad net.CargadorContenidos</h2></td>
+  </tr>
+  <tr> 
+    <td height="394" colspan="3"> <h3>Cargador contenidos</h3>
+      
+      <p>La utilidad dise&ntilde;ada anteriormente para la carga de contenidos 
+        y recursos almacenados en el servidor, solamente est&aacute; preparada 
+        para realizar peticiones HTTP sencillas mediante GET. A continuaci&oacute;n 
+        se refactoriza esa utilidad para que permita las peticiones POST y el 
+        env&iacute;o de par&aacute;metros al servidor.<br>
+        El primer cambio necesario es el de adaptar el constructor para que se 
+        puedan especificar los nuevos par&aacute;metros:<br>
+        net.CargadorContenidos = function(url, funcion, funcionError, metodo, 
+        parametros,<br>
+        contentType) {<br>
+        Se han a&ntilde;adido tres nuevos par&aacute;metros: el m&eacute;todo 
+        HTTP empleado, los par&aacute;metros que se env&iacute;an al servidor 
+        junto con la petici&oacute;n y el valor de la cabecera content-type.<br>
+        A continuaci&oacute;n, se sustituye la instrucci&oacute;n this.req.open('GET', 
+        url, true); por esta otra:<br>
+        this.req.open(metodo, url, true);<br>
+        El siguiente paso es a&ntilde;adir (si as&iacute; se indica) la cabecera 
+        Content-Type de la petici&oacute;n:<br>
+        if(contentType) {<br>
+        this.req.setRequestHeader(&quot;Content-Type&quot;, contentType);<br>
+        }<br>
+        Por &uacute;ltimo, se sustituye la instrucci&oacute;n this.req.send(null); 
+        por esta otra:<br>
+        this.req.send(parametros);<br>
+        As&iacute;, el c&oacute;digo completo de la soluci&oacute;n refactorizada 
+        es el siguiente:<br>
+        var net = new Object();<br>
+        net.READY_STATE_UNINITIALIZED=0;<br>
+        net.READY_STATE_LOADING=1;<br>
+        net.READY_STATE_LOADED=2;<br>
+        net.READY_STATE_INTERACTIVE=3;<br>
+        net.READY_STATE_COMPLETE=4;<br>
+        // Constructor<br>
+        net.CargadorContenidos = function(url, funcion, funcionError, metodo, 
+        parametros,<br>
+        contentType) {<br>
+        this.url = url;<br>
+        this.req = null;<br>
+        this.onload = funcion;<br>
+        this.onerror = (funcionError) ? funcionError : this.defaultError;<br>
+        this.cargaContenidoXML(url, metodo, parametros, contentType);<br>
+        }<br>
+        net.CargadorContenidos.prototype = {<br>
+        cargaContenidoXML: function(url, metodo, parametros, contentType) {<br>
+        if(window.XMLHttpRequest) {<br>
+        this.req = new XMLHttpRequest();<br>
+        }<br>
+        else if(window.ActiveXObject) {<br>
+        this.req = new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);<br>
+        }<br>
+        if(this.req) {<br>
+        try {<br>
+        var loader = this;<br>
+        this.req.onreadystatechange = function() {<br>
+        loader.onReadyState.call(loader);<br>
+        }<br>
+        this.req.open(metodo, url, true);<br>
+        if(contentType) {<br>
+        this.req.setRequestHeader(&quot;Content-Type&quot;, contentType);<br>
+        }<br>
+        this.req.send(parametros);<br>
+        } catch(err) {<br>
+        this.onerror.call(this);<br>
+        }<br>
+        }<br>
+        },<br>
+        onReadyState: function() {<br>
+        var req = this.req;<br>
+        var ready = req.readyState;<br>
+        if(ready == net.READY_STATE_COMPLETE) {<br>
+        var httpStatus = req.status;<br>
+        if(httpStatus == 200 || httpStatus == 0) {<br>
+        this.onload.call(this);<br>
+        }<br>
+        else {<br>
+        this.onerror.call(this);<br>
+        }<br>
+        }<br>
+        },<br>
+        defaultError: function() {<br>
+        alert(&quot;Se ha producido un error al obtener los datos&quot;<br>
+        + &quot;\n\nreadyState:&quot; + this.req.readyState<br>
+        + &quot;\nstatus: &quot; + this.req.status<br>
+        + &quot;\nheaders: &quot; + this.req.getAllResponseHeaders());<br>
+        }<br>
+        }</p></td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

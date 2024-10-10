@@ -1,0 +1,403 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Introducci&oacute;n a DLL</title>
+<META http-equiv=Content-Language content=es>
+<META content="Conceptos redes,LAN" name=description>
+<meta name="keywords" content="Conceptos redes,LAN">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2>C O N C E P T O S</h2></td>
+  </tr>
+  <tr> 
+    <td height="197"> 
+      <h3>Implantación de redes de área local</h3>
+      <p>1.-&iquest;Qu&eacute; es un sistema operativo de red NOS?<br>
+        Es el software que hace que un sistema inform&aacute;tico pueda comunicarse 
+        con otros equipos en el &aacute;mbito de una red.<br>
+        2.-&iquest;Qu&eacute; es un programa de comunicaciones?&iquest;Ejemplos?<br>
+        Es un programa en el que los usuarios pueden hacer transferencia de ficheros 
+        a trav&eacute;s de l&iacute;neas serie sin necesidad de adquirir productos 
+        a&ntilde;adidos.<br>
+        Interlink-Interserver (DOS)<br>
+        3.-Evoluci&oacute;n de los sistemas operativos NOS.<br>
+        ETAPA INICIAL: Se necesitaba software especial para enviar grandes vol&uacute;menes 
+        de datos.<br>
+        INTEGRACI&Oacute;N DE LOS PROGRAMAS DE COMUNICACIONES EN EL DOS: Se utilizan 
+        programas de comunicaciones.<br>
+        SOFTWARE DE RED A&Ntilde;ADIDO: Se requieren productos de red que deben 
+        instalarse sobre el DOS o sobre Windows.<br>
+        ACTUALMENTE: Los sistemas operativos de red est&aacute;n perfectamente 
+        integrados.<br>
+        4.-&iquest;Qu&eacute; es un grupo de trabajo en un entorno de red?<br>
+        Es una agrupaci&oacute;n de recursos con objeto de facilitar la gesti&oacute;n 
+        de los mismos.<br>
+        5.-&iquest;Cu&aacute;l es el concepto de dominio en una red?<br>
+        Es una extensi&oacute;n del concepto de grupo de trabajo<br>
+        Centralizaci&oacute;n de la gesti&oacute;n de la red<br>
+        Facilidad para la administraci&oacute;n de los equipos<br>
+        Control de usuarios y contrase&ntilde;as<br>
+        Jerarquizaci&oacute;n de los recursos<br>
+        6.-&iquest;Qu&eacute; es un servicio de directorio?<br>
+        Es una base de datos jer&aacute;rquica y organizada en forma de objetos 
+        que contienen informaci&oacute;n f&aacute;cilmente accesible y &uacute;til 
+        para el sistema operativo, la red o los usuarios que solicitan los recursos 
+        del sistema.<br>
+        7.-Enumera los elementos de hardware necesarios para instalar una red.<br>
+        Adaptadores de red, las estaciones de trabajo, los servidores de red y 
+        los clientes ligeros.</p>
+      <p></p>
+      <p></p>
+      <p><br>
+        8.-&iquest;Qu&eacute; es un adaptador de red, tarjeta de red o NIC? &iquest;D&oacute;nde 
+        se coloca?<br>
+        Es un interface hardware, entre la plataforma o sistema inform&aacute;tico 
+        y el medio de transmisi&oacute;n f&iacute;sico, por el que se transporta 
+        la informaci&oacute;n de un lugar a otro.</p>
+      <p> Se inserta en el bus de comunicaciones del orednador personal (ranuras 
+        de expansi&oacute;n), aunque en ocasiones el propio equipo posee adaptadores 
+        de red. <br>
+        9.-Enumera las partes de una tarjeta de red.<br>
+        - Interface de conexi&oacute;n al bus del ordenador (Ranuras de expansi&oacute;n)<br>
+        - Interface de conexi&oacute;n al medio de transmisi&oacute;n (Conectores)<br>
+        - Componentes electr&oacute;nicos internos, propios de la trajeta<br>
+        - Elementos de configuraci&oacute;n de la tarjeta: Puentes, conmutadores...<br>
+        10.-&iquest;Qu&eacute; es un slot de conexi&oacute;n?<br>
+        Es el conector f&iacute;sico en donde se inserta la tarjeta.<br>
+        El slot de conexi&oacute;n debe coincidir con el interface de la tarjeta.<br>
+        11.-&iquest;Cu&aacute;l es el slot de conexi&oacute;n que m&aacute;s se 
+        usa actualmente?&iquest;Cu&aacute;les son sus caracter&iacute;sticas?<br>
+        El slot es el PCI.<br>
+        Bus de 32 bits, 40 Mhz y 120 Mbps. Actualmente han aparecido est&aacute;ndares 
+        PCI de 64 Mbps.<br>
+        12.-&iquest;Qu&eacute; necesita una tarjeta de red para comunicarse con 
+        el sistema operativo del sistema en el que se inserta?<br>
+        Un driver o controlador.<br>
+        13.-Enumera alguna de las funciones que realiza una tarjeta de red.<br>
+        - Procesa la informaci&oacute;n que le llega procedente del bus del ordenador, 
+        para producir una se&ntilde;alizaci&oacute;n adecuada en el medio de transmisi&oacute;n.<br>
+        - Realiza la confecci&oacute;n de paquetes<br>
+        14.-&iquest;Cu&aacute;les son los principales par&aacute;metros que deben 
+        ser configurados en una tarjeta de red?<br>
+        - IRQ: Interrupciones<br>
+        - Direcci&oacute;n de E/S (entrada/salida): Intercambio de datos<br>
+        - DMA: Acceso directo a memoria<br>
+        - Direcci&oacute;n del puerto E/S<br>
+        - Tipo de transceptor<br>
+        15.-&iquest;Qu&eacute; es una interrupci&oacute;n IRQ?<br>
+        Es el n&uacute;mero de una l&iacute;nea de interrupci&oacute;n con el 
+        que se avisan sistema y tarjeta de que se producir&aacute; un evento de 
+        comunicaci&oacute;n entre ellos.<br>
+        16.-Qu&eacute; es una direcci&oacute;n de entrada/salida E/S? &iquest;En 
+        qu&eacute; se suele expresar?<br>
+        Es una direcci&oacute;n de memoria en la que se escriben y leen tanto 
+        el procesador central del sistema como la tarjeta, de modo que les sirve 
+        de bloque de memoria para el intercambio mutuo de datos.<br>
+        Se suele expresar en HEXADECIMAL.<br>
+        17.-&iquest;C&oacute;mo se configuraban y c&oacute;mo se configuran los 
+        par&aacute;metros de la tarjeta?<br>
+        Se configuraban a trav&eacute;s de puentes (jumpers) y conmutadores (switches).<br>
+        Actualmente la configuraci&oacute;n es por software.<br>
+        18.-Dibuja un puente (jumper) y un conmutador (switches).</p>
+      <p></p>
+      <p></p>
+      <p><br>
+        19.-&iquest;En qu&eacute; consiste la tecnolog&iacute;a Plug&amp;Play?<br>
+        Es una tecnolog&iacute;a en la que la configuraci&oacute;n es autom&aacute;tica 
+        y facilita el trabajo del instalador.<br>
+        20.-&iquest;Qu&eacute; caracter&iacute;sticas hay que tener en cuenta 
+        en una tarjeta de red?<br>
+        - Existen tarjetas apropiadas para cada tecnolog&iacute;a de red<br>
+        - Algunos adaptadores no se conectan directamente al bus de comunicaciones 
+        del ordenador sino que a trav&eacute;s de otros puertos<br>
+        21.-&iquest;Cu&aacute;l es la misi&oacute;n fundamental de una estaci&oacute;n 
+        de trabajo?<br>
+        Proporcionar a los usuarios el acceso a los servicios de la red.<br>
+        22.-&iquest;Cu&aacute;les son las caracter&iacute;sticas de un ordenador 
+        de prop&oacute;sito general cuando trabaja como estaci&oacute;n de trabajo?<br>
+        - Potencia de proceso<br>
+        - Subsistema gr&aacute;fico<br>
+        - Conectividad a red<br>
+        - Capacidad de almacenamiento en disco<br>
+        23.-&iquest;C&oacute;mo clasificar&iacute;as las estaciones de trabajo 
+        en funci&oacute;n de su potencia?<br>
+        - Potencia baja: 80386 con poca memoria y adaptador ISA (8bits)<br>
+        - Potencia media: Pentium con 32 Mb de memoria RAM y adaptador ISA (16 
+        bits)<br>
+        - Potencia alta: Pentium III con 256 Mb de memoria RAM y adaptador PCI 
+        (32 bits)</p>
+      <p>24.-&iquest;Qu&eacute; es un servidor de red?<br>
+        Es un nodo especializado en brindar servicios al resto de los nodos de 
+        la red.<br>
+        25.-&iquest;Cu&aacute;les son los servicios m&aacute;s comunes de un servidor 
+        de red?<br>
+        Discos, ficheros, impresoras y comunicaciones.<br>
+        26.-&iquest;Qu&eacute; caracter&iacute;sticas se le piden a un servidor 
+        de red?<br>
+        - Potencia de proceso: A veces poseen m&aacute;s de un microprocesador<br>
+        - Memoria RAM: 64 Mbytes como m&iacute;nimo<br>
+        - Capacidad de almacenamiento en disco<br>
+        - Conexi&oacute;n a la red: Debe der eficaz puesto que soportar&aacute; 
+        todo el tr&aacute;fico de la red<br>
+        27.-&iquest;Qu&eacute; software se carga sobre las tarjetas de red?<br>
+        Se carga un software controlador.<br>
+        28.-&iquest;Qu&eacute; es un controlador o driver de red?<br>
+        Es un programa de muy bajo nivel en el que las aplicaciones, mediante 
+        el sistema operativo, tienen controlados los accesos al hardware del sistema, 
+        y en concreto, a la red.<br>
+        29.-&iquest;Qu&eacute; son las pilas o stacks de protocolos?<br>
+        Son fraccionamientos del software en capas de programas que permiten que 
+        sobre la misma tarjeta de red, puedan soportarse distintos protocolos 
+        sin interferencias entre ellos.<br>
+        30.-&iquest;Cu&aacute;les son las tecnolog&iacute;as b&aacute;sicas para 
+        realizar el enlace entre las capas de alto nivel y la tarjeta?<br>
+        NDIS (Network Driver Interface Specification) Microsoft y 3COM<br>
+        ODI (Open Datalink Interface) Novell y Apple<br>
+        31.-&iquest;Qu&eacute; es el redirector?<br>
+        Es el encargado de realizar la transparencia de software entre servicios 
+        remotos y locales.<br>
+        32.-&iquest;Qu&eacute; distribuidores Linux conoces?<br>
+        Red Hat, Suse, Es Ware...</p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p><br>
+        33.-Haz un esquema de la arquitectura TCP/IP y comparala con el modelo 
+        OSI<br>
+        OSI TCP/IP<br>
+        Aplicaci&oacute;n<br>
+        Presentaci&oacute;n<br>
+        Sesi&oacute;n<br>
+        Transporte<br>
+        Red<br>
+        Enlace<br>
+        F&iacute;sica<br>
+        Aplicaci&oacute;n<br>
+        Transporte<br>
+        Internet<br>
+        Interface de red</p>
+      <p><br>
+        34.-Caracter&iacute;sticas del protocolo IP<br>
+        - Protocolo del nivel de red (Arpanet)<br>
+        - Protocolo sin conexi&oacute;n por lo que carece de seguridad<br>
+        - Protocolo preparado para que sus paquetes sean encaminados<br>
+        35.-Partes de un datagrama IP<br>
+        Un datagrama IP se divide en 2 partes: Cabecera y campo de datos.<br>
+        36.-Explicaci&oacute;n de los campos de la cabecera de un paquete IP<br>
+        - Versi&oacute;n: Versi&oacute;n del protocolo. Puede ser Ipv4 o Ipv6<br>
+        - IHL (Longitud de la cabecera): El valor puede oscilar entre 5x32 bits 
+        y 15x32 bits<br>
+        - Tipo de servicio: Escoge qu&eacute; tipo de servicio le da m&aacute;s 
+        importancia, bien seguridad o bien velocidad.<br>
+        - Longitud total: Contiene la longitud total del datagrama. M&aacute;xima 
+        longitud es 64 Kbytes.<br>
+        - Identificaci&oacute;n: Cuando un datgrama se fragmenta, es necesario 
+        que todas las partes lleven la misma identificaci&oacute;n.<br>
+        - Bit D/F (bit de no fragmentaci&oacute;n): Cuando se pone a 1, indica 
+        que el datgrama no ha de ser fragmentado.<br>
+        - Bit M/F (Bit de m&aacute;s fragmentos): Este bit estar&aacute; a 1 en 
+        todos los fragmentos en que se haya dividido un datgrama, con excepci&oacute;n 
+        del &uacute;ltimo fragmento.<br>
+        - Desplazamiento del fragmento: Indica el lugar del datagrama en que debe 
+        ser insertado un fragmento, para que su ensamblaje final sea correcto.<br>
+        - Tiempo de vida: Contador que determina la vida de un paquete. Este contador 
+        va disminuyendo por cada router que pasa. Con esto se evita que un paquete 
+        quede atrapado en la red.<br>
+        - Protocolo: Indica el protocolo de transporte que ha generado el datagrama 
+        (TCP, UDP).<br>
+        - C&oacute;digo de redundancia c&iacute;clica de la cabecera: CRC de la 
+        cabecera del paquete IP.<br>
+        - Direcci&oacute;n fuente: Codifica la direcci&oacute;n de nivel de red 
+        del host que produce el paquete.<br>
+        - Direcci&oacute;n de destino: Codifica la direcci&oacute;n del host destinatario.<br>
+        - Opci&oacute;n: Campo para posibles ampliaciones.<br>
+        37.-&iquest;C&oacute;mo es una direcci&oacute;n IP?<br>
+        Cada direcci&oacute;n IP consta de 32 bits agrupados en grupos de 8 bits 
+        81 byte), por lo tanto se expresa con 4 n&uacute;meros decimales separados 
+        por puntos.<br>
+        Cada n&uacute;mero decimal var&iacute;a entre 0 y 255, aunque hay algunas 
+        restricciones.<br>
+        Cada direcci&oacute;n IP codifica una red y un host dentro de esa red.<br>
+        38.-Caracter&iacute;sticas de las redes clase A<br>
+        El primer bit es un 0.<br>
+        Con los 8 primeros bits se codifica la red y con los 24 restante el host.<br>
+        39.-Caracter&iacute;sticas de las redes clase B<br>
+        Los dos primeros bits son 10.<br>
+        Con los 16 primeros bits se codifica la red y con los 16 restantes el 
+        host.<br>
+        40.-Caracter&iacute;sticas de las redes clase C<br>
+        Los tres primeros bits son 110.<br>
+        Con los 24 primeros bits se codifica la red y con los 8 restantes el host.<br>
+        41.-&iquest;Por qu&eacute; solo existen 126 redes de clase A cuando con 
+        7 bits se pueden codificar 128?.</p>
+      <p>42.-&iquest;Para qu&eacute; sirve la m&aacute;scara de subred?<br>
+        Es una secuencia de 32 bits que sirve para distinguir con facilidad qu&eacute; 
+        parte de una direcci&oacute;n codifica la subred y cu&aacute;l el host.<br>
+        43.-&iquest;Qu&eacute; es el protocolo ICMP? &iquest;Para qu&eacute; sirve?<br>
+        ICMP (Internet Control Message Protocol, protocolo de mensajes de control 
+        entre redes): Es un protocolo que encapsula en un &uacute;nico paquete 
+        IP alg&uacute;n evento que se produce en la red. Es un protocolo de supervisi&oacute;n.<br>
+        44.-Caracter&iacute;sticas del protocolo TCP<br>
+        TCP(Transport Control Protocol): Fue dise&ntilde;ado para realizar las 
+        conexiones en redes inseguras (Tipo C). Es un protocolo CON conexi&oacute;n.</p>
+      <p></p>
+      <p>45.-Caracter&iacute;sticas del protocolo UDP<br>
+        UDP(User Datagram Protocol, protocolo de datagrama de usuario): <br>
+        - Protocolo SIN conexi&oacute;n que permite la transmisi&oacute;n de mensaes 
+        sin garant&iacute;a de entrega.<br>
+        - Act&uacute;a de interface entre los procesos de los usuarios de la red 
+        y el protocolo IP.<br>
+        46.-&iquest;Qu&eacute; hace el protocolo ARP?<br>
+        ARP(Address Resolution Protocol, protocolo de resoluci&oacute;n de direcciones): 
+        El protocolo env&iacute;a un paquete IP a todos los nodos de la red, y 
+        el nodo que tenga esa IP, contesta con otro paquete ARP de respuesta con 
+        su direcci&oacute;n MAC.<br>
+        El protocolo contrario es el RARP.<br>
+        47.-&iquest;Para qu&eacute; sirve el protocolo NFS?<br>
+        NFS(Network File System, sistema de ficheros de red): Permite servir discos 
+        locales al resto de una red, de modo que a los usuarios remotos les parece 
+        que son propietarios del disco al que se conectan.<br>
+        48.-&iquest;Qu&eacute; par&aacute;metros son necesarios para configurar 
+        una direcci&oacute;n TCP/IP?<br>
+        - Direcci&oacute;n IP del host: Suministarda por el administrador de red 
+        de la instalaci&oacute;n.<br>
+        - La m&aacute;scara de subred: Determinara c&oacute;mo identificar lo 
+        que es red de lo que es host.<br>
+        - La direcci&oacute;n de una puerta de enlace o gateway: Cuando llega 
+        un paquete IP con una direcci&oacute;n desconocida, este paquete es retransmitido 
+        por esta puerta de enlace que lo enviar&aacute; a su correspondiente red 
+        o lo drenar&aacute;.<br>
+        49.-&iquest;Qu&eacute; hace el protocolo DHCP?<br>
+        DHCP(Dynamic Host Configuration Protocol, protocolo de configuraci&oacute;n 
+        din&aacute;mica de host): Ayuda al administrador de red para automatizar 
+        las asignaciones de direcciones IP, haci&eacute;ndolas din&aacute;micamente, 
+        es decir, no son Ips fijas.<br>
+        50.-&iquest;Qu&eacute; hace un servidor DNS?<br>
+        DNS(Domain Name System, sistema de nombres de dominio): Convierte una 
+        direcci&oacute;n IP en lenguaje articulado para que se pueda entender 
+        o memorizar mejor.</p>
+      <p></p>
+      <p></p>
+      <p><br>
+        51.-Indica las partes y el significado de cada una en una direcci&oacute;n 
+        DNS.<br>
+        Una direcci&oacute;n DNS consta de 2 partes: <br>
+        La primera parte identifica al nodo dentro de la subred.<br>
+        La segunda parte identifica a la subred y se llama &#8220;dominio&#8221;.<br>
+        La proliferaci&oacute;n de nodos en la internet ha creado la necesidad 
+        de fraccionar los dominios en sub-dominios. Cada uno de los niveles va 
+        separado del siguiente nivel por un punto en la escritura del nombre.</p>
+      <p>VENUS.SOLAR.VIALACTEA.UNIV</p>
+      <p>52.-&iquest;Qu&eacute; es un servidor Wins?<br>
+        Wins(Servicio de nombres de Internet de Windows): Es un sistema de nombres 
+        planos, no articulados, que identifican cada nodo de una red por un nombre 
+        &uacute;nico.<br>
+        Es un servicio de Microsoft que utiliza esto para evitar el tr&aacute;fico 
+        de paquetes de difusi&oacute;n.<br>
+        53.-&iquest;Para qu&eacute; son las direcciones IP del tipo 127.x.y.z</p>
+      <p>54.-&iquest;Para qu&eacute; es la direcci&oacute;n 0.0.0.0?</p>
+      <p>55.-Pon ejemplos de direcciones broadcast para redes tipo A,B y C</p>
+      <p>56.-&iquest;Qu&eacute; es una direcci&oacute;n oficial de red? Pon ejemplos 
+        de direcciones oficales de red para redes tipo A,B y C.</p>
+      <p>57.-&iquest;Qu&eacute; clase de direcci&oacute;n es una direcci&oacute;n 
+        multicast o de grupo? &iquest;Para qu&eacute; sirve?</p>
+      <p>58.-Nombra algunos de los mensajes del protocolo ICMP<br>
+        - Destino inalcanzable: Imposible dar con el destino.<br>
+        - Tiempo excedido: Tiempo de vida excedido.<br>
+        - Problemas en par&aacute;metros: Valor asignado a un par&aacute;metro 
+        de la cabecera imposible.<br>
+        - Enfriar fuente: Mensaje para moderar la velocidad de transmisi&oacute;n 
+        de los paquetes.<br>
+        59.-Haz un diagrama con la familia de protocolos de Internet.</p>
+      <p>60.-&iquest;Qu&eacute; es escalabilidad?<br>
+        La capacidad de crecimiento de un sistema operativo.</p>
+      <p><br>
+        61.-&iquest;Qu&eacute; configuraciones conoces para los protocolos IPX/SPX<br>
+        - Configuraci&oacute;n monol&iacute;tica del IPX<br>
+        - Configuraci&oacute;n con ODI<br>
+        62.-Pasos para instalar una red Novell<br>
+        - Elecci&oacute;n del tipo de instalaci&oacute;n<br>
+        - Elecci&oacute;n del software servidor<br>
+        - Modo de instalaci&oacute;n<br>
+        - Elecci&oacute;n del nombre del servidor<br>
+        - Elecci&oacute;n del n&uacute;mero interno de red IPX<br>
+        - Elecci&oacute;n del sistema de ficheros que soportar&aacute; el servidor<br>
+        - Elecci&oacute;n del controlador de discos<br>
+        - Elecci&oacute;n del adaptador de red<br>
+        - Elecci&oacute;n de los protocolos de red<br>
+        - Copia de ficheros de red al servidor<br>
+        - Configuraci&oacute;n del NDS<br>
+        - Creaci&oacute;n de los ficheros de configuraci&oacute;n de la red<br>
+        63.-&iquest;Qu&eacute; protocolos se pueden usar en la redes Microsoft?<br>
+        - Protocolo NetBEUI: Protocolo de transporte a nivel de redes de &aacute;rea 
+        local.<br>
+        - Protocolo IPX/SPX<br>
+        - Protocolo TCP/IP<br>
+        64.-&iquest;Qu&eacute; tecnolog&iacute;as utilizan Microsoft y Novell 
+        para proporcionar soporte a m&uacute;ltiples protocolos sobre un &uacute;nico 
+        adaptador?<br>
+        Tecnolog&iacute;a NDIS<br>
+        65.-&iquest;Qu&eacute; sistemas de resoluci&oacute;n de nombres existen 
+        en las redes Microsoft?<br>
+        - Servicio Wins o Servicio de nombres de Internet de Windows: Asociaci&oacute;n 
+        de nombres NetBios con direcciones IP.<br>
+        - Servicio DNS o Sistema de Nombres de Dominio: Asociaci&oacute;n de nombres 
+        DNS con direcciones IP.<br>
+        66.-Enumera los servicios que se pueden encontrar en las redes Microsoft<br>
+        - Sercicio DHCP: Asigna direcciones IP din&aacute;micamente.<br>
+        - Servicio BOOTP: Permite la configuraci&oacute;n del arranque remoto 
+        de una estaci&oacute;n sin disco.<br>
+        - Servicio SNMP: Protocolo de gesti&oacute;n de red.<br>
+        - Servicio Wins<br>
+        - Servicio DNS</p>
+      <p></p>
+      <p>67.-Pasos para instalar Windows 2000<br>
+        - Elecci&oacute;n y configuraci&oacute;n del adaptador de red<br>
+        - Elecci&oacute;n del dominio<br>
+        - Elecci&oacute;n de servidor: Puede ser primario, de reserva o no controlador.<br>
+        - Elecci&oacute;n de protocolos<br>
+        68.-&iquest;Qu&eacute; es un dominio Microsoft?<br>
+        Es un grupo de ordenadores que comparten la misma base de datos de cuentas 
+        de usuario, privilegios, derechos de acceso, seguridad, etc.<br>
+        69.-&iquest;Qu&eacute; es un servicio de directorio?<br>
+        Es la gesti&oacute;n de todos los elementos que comparten el dominio.<br>
+        70.-&iquest;Qu&eacute; diferencia existe entre un dominio y un grupo de 
+        trabajo en Microsoft?<br>
+        En un dominio el grupo de ordenadores comparten las cuentas de usuario, 
+        y en un grupo de trabajo, cada ordenador del grupo es propietario de sus 
+        propias cuentas.<br>
+        El grupo de trabajo s&oacute;lo sirve como agrupador de servicios al examinar 
+        la red.<br>
+        71.-&iquest;Qu&eacute; tipos de servidores existen en Windows NT?<br>
+        - Controlador primario: Tiene la posesi&oacute;n de la base de datos de 
+        los servicios de directorio.<br>
+        - Controlador de reserva: Almacena una copia de seguridad de la base de 
+        datos de los servicios de directorio. Cuando el controlador primario est&aacute; 
+        fuera de servicio, el de reserva puede tomar sus funciones.<br>
+        - Servidor no controlador: Servidor que pertenece al dominio pero que 
+        act&uacute;a como estaci&oacute;n normal.</p>
+      <p> </p></td>
+    
+  </tr>
+ 
+  <tr> 
+    <td height="16"> 
+      <p align="right"><a href="http://www.euskalnet.net/juanarana/index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a> </p></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

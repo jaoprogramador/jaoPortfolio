@@ -1,0 +1,291 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Introducci&oacute;n a DLL</title>
+<META http-equiv=Content-Language content=es>
+<META content="Conceptos redes,LAN" name=description>
+<meta name="keywords" content="Conceptos redes,LAN">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2>C O N C E P T O S</h2></td>
+  </tr>
+  <tr> 
+    <td height="197"> 
+      <h3>Sistemas de comunicacion</h3>
+      <p> 1.¿Qué es la teleinformática?La teleinform&aacute;tica es la t&eacute;cnica 
+        que trata de la comunicaci&oacute;n entre procesos.<br>
+        2.Diferencia entre transmisi&oacute;n y comunicaci&oacute;n<br>
+        La transmisi&oacute;n es el proceso que trata de transportar las se&ntilde;ales 
+        f&iacute;sicas para que se produzca un proceso y la comunicaci&oacute;n 
+        es el transporte de la propia informaci&oacute;n de los datos.<br>
+        Por lo tanto la se&ntilde;al es transmisi&oacute;n y la informaci&oacute;n 
+        es comunicaci&oacute;n.<br>
+        3.Explica los tipos de estandarizaci&oacute;n que existen.<br>
+        EST&Aacute;NDAR DE FACTO O DE HECHO: Aceptado en el mercado por su gran 
+        utilizaci&oacute;n.<br>
+        EST&Aacute;NDAR DE IURE O DE DERECHO: Es un est&aacute;ndar que propone 
+        a los fabricantes para que dise&ntilde;en sus equipos de acuerdo a unas 
+        normas generales que recomienda ese est&aacute;ndar.<br>
+        4.Nombra alguna de las asociaciones de estandarizaci&oacute;n que existen<br>
+        ADSL Forum &#8220;Asymetric Digital Subscribe Line&#8221;<br>
+        ANSI &#8220;American National Standards Institute&#8221;<br>
+        ATM Forum &#8220;Asynchvonons Transfer Mode&#8221;<br>
+        ETSI &#8220;European Telecomunications Standards Institute&#8221;<br>
+        5.Clasificaci&oacute;n de los tipos de l&iacute;neas. Criterios de clasificaci&oacute;n.<br>
+        Los tipos de l&iacute;neas se pueden clasificar seg&uacute;n la topolog&iacute;a 
+        de la conexi&oacute;n o seg&uacute;n su propietario.<br>
+        SEG&Uacute;N TOPOLOG&Iacute;A DE LA CONEXI&Oacute;N:<br>
+        A) L&Iacute;NEAS PUNTO A PUNTO<br>
+        Dos equipos se encuentran conectados mediante una l&iacute;nea punto a 
+        punto cuando existe algo f&iacute;sico que une esos dos equipos, y a trav&eacute;s 
+        de la cual se puede producir comunicaci&oacute;n.<br>
+        B) L&Iacute;NEAS MULTIPUNTO<br>
+        Estas l&iacute;neas est&aacute;n constituidas por un bus de comunicaciones 
+        com&uacute;n a todos los equipos que se conectan a la red.<br>
+        Desde el bus parte hacia cada equipo una l&iacute;nea de conexi&oacute;n 
+        que se conecta a trav&eacute;s de un concentrador.<br>
+        SEG&Uacute;N SU PROPIETARIO:<br>
+        A) L&Iacute;NEAS PRIVADAS<br>
+        Tiene un propietario no p&uacute;blico. El recorrido es propiedad del 
+        poseedor de la red. (Redes de &aacute;rea local)<br>
+        B) L&Iacute;NEAS P&Uacute;BLICAS:<br>
+        Tienen un &aacute;mbito de actuaci&oacute;n nacional. El usuario contrata 
+        los servicios de comunicaciones con la compa&ntilde;&iacute;a que le suministra 
+        la l&iacute;nea. (Redes de &aacute;rea extensa)<br>
+        C) L&Iacute;NEAS DEDICADAS:<br>
+        Estas l&iacute;neas de datos son privadas y p&uacute;blicas a la vez.<br>
+        6. &iquest;Qu&eacute; es un equipo terminal de datos?<br>
+        Es el componente que hace de fuente o de destino de la informaci&oacute;n. 
+        (Impresora)<br>
+        7. &iquest;Qu&eacute; es un equipo terminal del circuito de datos?<br>
+        Es el transporte que se encarga de cambiar las se&ntilde;ales que viajan 
+        por el canal de comunicaciones y convertirlas a un formato adecuado para 
+        un equipo terminal de datos. (M&oacute;dem)</p>
+      <p><br>
+        8.&iquest;Qu&eacute; es un circuito de datos?<br>
+        Es el conjunto de equipos terminales de circuito de datos (ECD) y l&iacute;neas 
+        de transmisi&oacute;n encargados de comunicar el ETD transmisor y el ETD 
+        receptor.<br>
+        Las se&ntilde;ales ser&aacute;n entregadas de modo seguro.<br>
+        9.&iquest;Qu&eacute; es sincronismo?<br>
+        Es un procedimiento por el que un emisor y un receptor se ponen de acuerdo 
+        para el comienzo o finalizaci&oacute;n de una informaci&oacute;n que se 
+        ha puesto en el medio de transmisi&oacute;n.<br>
+        10.Clasificaci&oacute;n de las transmisiones por el modo de sincronismo<br>
+        Transmisi&oacute;n as&iacute;ncrona y transmisi&oacute;n s&iacute;ncrona.<br>
+        11.&iquest;Qu&eacute; es la transmisi&oacute;n as&iacute;ncrona?<br>
+        El proceso de sincronizaci&oacute;n entre emisor y receptor se realiza 
+        en cada palabra de c&oacute;digo transmitida.<br>
+        12.&iquest;Qu&eacute; es la transmisi&oacute;n s&iacute;ncrona?<br>
+        Se realiza sin atender a las unidades de comunicaci&oacute;n b&aacute;sicas. 
+        Este tipo de transmisi&oacute;n permite velocidades mayores que la transmisi&oacute;n 
+        as&iacute;ncrona.<br>
+        13.Tipos de sincronismo y explicaci&oacute;n de cada uno.<br>
+        SINCRONISMO DE BIT:<br>
+        Determina el momento en que comienza o termina la transmisi&oacute;n de 
+        un bit.<br>
+        SINCRONISMO DE CAR&Aacute;CTER:<br>
+        Determina el momento cu&aacute;les son los bits que componen cada palabra 
+        transmitida en el c&oacute;digo elegido para efectuar dicha transmisi&oacute;n. 
+        Debe saber cu&aacute;l es el primer y &uacute;ltimo bit de una cadena 
+        de caracteres.<br>
+        SINCRONISMO DE BLOQUE:<br>
+        Es un proceso de sincronismo m&aacute;s avanzado, en el que se define 
+        un conjunto de caracteres especiales que parten el mensaje en bloques 
+        y que deben llevar una secuencia determinada.<br>
+        14.Clasificaci&oacute;n de la transmisi&oacute;n seg&uacute;n c&oacute;mo 
+        se efect&uacute;e el env&iacute;o de bits: Explicaci&oacute;n de cada 
+        tipo.<br>
+        TRANSMISI&Oacute;N EN SERIE:<br>
+        Todas las se&ntilde;ales se transmiten por tan solo una l&iacute;nea de 
+        datos secuencialmente. Los bits se transmiten en cadena por esa l&iacute;nea 
+        de datos a una velocidad constante. (De ordenador a m&oacute;dem)<br>
+        TRANSMISION EN PARALELO:<br>
+        Los datos se transmiten simult&aacute;neamente mediante grupos de bits, 
+        uno por cada l&iacute;nea del canal. Esta transmisi&oacute;n es mucho 
+        m&aacute;s r&aacute;pida que la transmisi&oacute;n en serie.<br>
+        15.Clasificaci&oacute;n de la transmisi&oacute;n seg&uacute;n el tipo 
+        de se&ntilde;al. Explicaci&oacute;n.<br>
+        TRANSMISI&Oacute;N ANAL&Oacute;GICA Y DIGITAL:<br>
+        Si la se&ntilde;al es anal&oacute;gica, capaz de tomar varios valores 
+        posibles, se dice que la transmisi&oacute;n es anal&oacute;gica. Cuando 
+        las se&ntilde;ales son digitales, capaces de tomar valores finitos, se 
+        dice que la transmisi&oacute;n es digital. <br>
+        TRANSMISI&Oacute;N EN BANDA BASE Y EN BANDA ANCHA:<br>
+        La transmisi&oacute;n es en banda base cuando la transmisi&oacute;n no 
+        realiza una modulaci&oacute;n para la adecuaci&oacute;n entre las l&iacute;neas 
+        y los equipos. En cambio, en transmisi&oacute;n de banda ancha esa modulaci&oacute;n 
+        s&iacute; existe.</p>
+      <p><br>
+        16. Clasificaci&oacute;n de la transmisi&oacute;n seg&uacute;n la explotaci&oacute;n 
+        que se haga en el canal.<br>
+        COMUNICACI&Oacute;N SIMPLEX:<br>
+        Esta comunicaci&oacute;n se efect&uacute;a si est&aacute;n perfectamente 
+        definidas las funciones del emisor y del receptor, y la transmisi&oacute;n 
+        de datos se efect&uacute;a de emisor a receptor.<br>
+        COMUNICACI&Oacute;N SEMID&Uacute;PLEX:<br>
+        En &eacute;sta, la comunicaci&oacute;n puede ser tanto de emisor a receptor 
+        como viceversa. Hay un &uacute;nico canal f&iacute;sico y un canal l&oacute;gico 
+        bidireccional.<br>
+        COMUNICACI&Oacute;N D&Uacute;PLEX:<br>
+        Es bidireccional y simult&aacute;nea. Emisor y receptor act&uacute;an 
+        indistintamente. Hay un canal f&iacute;sico y dos canales l&oacute;gicos.<br>
+        17.Cuadro esquem&aacute;tico de los distintos tipos de transmisiones.<br>
+        TIPO VELOCIDAD DISTANCIAS EJEMPLOS<br>
+        Transmisi&oacute;n Lenta Largas Ordenador-rat&oacute;n <br>
+        En serie<br>
+        Transmisi&oacute;n R&aacute;pida Cortas Ordenador-impresora<br>
+        En paralelo<br>
+        18.Nombra los elementos de un sistema de comunicaci&oacute;n<br>
+        Emisor y receptor, transductores, canal, moduladores y codificadores.<br>
+        19.Tabla de clasificaci&oacute;n de los terminales atendiendo a dos criterios. 
+        Pon dos ejemplos de cada caso.<br>
+        ATENDIENDO A SU ATONOM&Iacute;A:<br>
+        Terminales simples (monitor, televisi&oacute;n)<br>
+        Terminales aut&oacute;nomos (terminales programables, ordenador personal)<br>
+        ATENDIENDO A SU SERVICIO:<br>
+        Terminales de prop&oacute;sito general (pantallas, teclados)<br>
+        Terminales de prop&oacute;sito espec&iacute;fico (teletexto, cajeros autom&aacute;ticos)<br>
+        20.&iquest;Qu&eacute; es un transductor? Pon dos ejemplos.<br>
+        Es un dispositivo encargado de cambiar la naturaleza de la se&ntilde;al. 
+        Bombilla, diodo LED.<br>
+        21.&iquest;Qu&eacute; es un canal?<br>
+        Es el elemento encargado del transporte de la se&ntilde;al sobre la que 
+        viaja la informaci&oacute;n que emisor y receptor pretenden intercambiar.<br>
+        22.&iquest;Qu&eacute; es un modulador? Ejemplo<br>
+        Es un dispositivo que adecua las se&ntilde;ales a los canales de transmisi&oacute;n. 
+        M&oacute;dem<br>
+        23.&iquest;Qu&eacute; es un codificador?<br>
+        Es un dispositivo que adecua las se&ntilde;ales el&eacute;ctricas digitales 
+        al modo requerido por el canal que es siempre digital.<br>
+        24.&iquest;Qu&eacute; es un amplificador?<br>
+        Es un dispositivo encargado de restaurar una se&ntilde;al anal&oacute;gica 
+        devolvi&eacute;ndole su amplitud original y suprimiendo la atenuaci&oacute;n.<br>
+        25.&iquest;Qu&eacute; es un repetidor?<br>
+        Dispositivo que regenera las se&ntilde;ales digitales.<br>
+        26.&iquest;Qu&eacute; es un conmutador?<br>
+        Es el dispositivo encargado de establecer un canal de comunicaci&oacute;n 
+        adecuado.<br>
+        27.Enumera las redes de comunicaci&oacute;n que conozcas.<br>
+        Red telegr&aacute;fica, red telef&oacute;nica, redes de &aacute;rea local, 
+        redes de &aacute;rea extensa, redes metropolitanas y redes virtuales.<br>
+        28.&iquest;Qu&eacute; es la velocidad de transferencia de datos? &iquest;En 
+        qu&eacute; unidades se mide?<br>
+        Es la cantidad de datos que es capaz de mover una red de comunicaci&oacute;n 
+        en cada unidad de tiempo. Se mide en KPS (Kilobit por segundo) o en MBPS 
+        (Megabits por segundo)<br>
+        29.&iquest;Cu&aacute;les son los elementos de la red telef&oacute;nica?<br>
+        L&iacute;neas de transmisi&oacute;n telef&oacute;nica, las centrales de 
+        conmutaci&oacute;n, los terminales de la red telef&oacute;nica y funcionalidad 
+        de la red telef&oacute;nica.<br>
+        30.&iquest;Cu&aacute;les son los principales tipos de l&iacute;neas que 
+        utiliza la red telef&oacute;nica?<br>
+        Cables de pares, fibra &oacute;ptica, cables coaxiales, enlaces radio 
+        terrestres y sat&eacute;lites.<br>
+        31.&iquest;Cu&aacute;l es el objetivo de una central de conmutaci&oacute;n?<br>
+        La interconexi&oacute;n entre emisor y receptor.<br>
+        32.&iquest;Qu&eacute; es una red de &aacute;rea local (LAN)?<br>
+        Es un conjunto de elementos f&iacute;sicos y l&oacute;gicos que proporcionan 
+        interconexi&oacute;n entre dispositivos en un &aacute;rea privada y restringida.<br>
+        33.&iquest;qu&eacute; dos tipos de redes de &aacute;rea local existen?<br>
+        REDES ENTRE IGUALES<br>
+        Todos los ordenadores ponen a disposici&oacute;n de los dem&aacute;s todos 
+        los recursos que disponen.<br>
+        SERVIDORES<br>
+        Privilegiar a alg&uacute;n ordenador d&aacute;ndole capacidad en forma 
+        de servicio.<br>
+        34.&iquest;Cu&aacute;l de los dos tipos anteriores es el m&aacute;s adecuado 
+        cuando se interconectan muchos ordenadores? &iquest;Por qu&eacute;?<br>
+        El servidor, puesto que con que tan s&oacute;lo un ordenador haga servicio 
+        puede suministrar a todos los dem&aacute;s. Adem&aacute;s la organizaci&oacute;n 
+        es mucho m&aacute;s f&aacute;cil de administrar.<br>
+        35.&iquest;Qu&eacute; tipos de servidores pueden existir en una red?<br>
+        Servidores de discos, servidores de impresoras, servidores de comunicaciones, 
+        servidores de correo electr&oacute;nico y servidores gr&aacute;ficos.<br>
+        36.&iquest;Qu&eacute; tipos de topolog&iacute;as son las m&aacute;s frecuentes 
+        en las redes de &aacute;rea local?<br>
+        Las m&aacute;s frecuentes son servicio de discos e impresora.<br>
+        </p>
+      
+      <p>39.Cuesti&oacute;n n&ordm;9 del libro<br>
+        TIPO DE RED &Aacute;MBITO GEOGR&Aacute;FICO VELOCIDAD M&Aacute;X. TASA 
+        ERRO.<br>
+        LAN Restringido 100 Mbps Baja<br>
+        MAN Muy amplio 155 Mbps Alta<br>
+        WAN Amplio 56/64 Kbps Media<br>
+        40.Busca en Internet o por otro medio informaci&oacute;n sobre: IEEE, 
+        ISO, ANSI e ITU.<br>
+        IEEE</p>
+      <p> El Instituto de Ingenieros El&eacute;ctricos y Electr&oacute;nicos (IEEE) 
+        es la sociedad profesional de mayor tama&ntilde;o a escala mundial en 
+        el &aacute;rea tecnol&oacute;gica. La integran alrededor de 315.000 miembros 
+        repartidos en aproximadamente 150 pa&iacute;ses. <br>
+        <br>
+        El IEEE y sus sociedades predecesoras &#8212;el Instituto Americano de 
+        Ingenieros El&eacute;ctricos y el Instituto de Ingenieros de Radio&#8212; 
+        tuvieron su origen en 1884. Entre las actividades fundamentales del Instituto 
+        se encuentran las publicaciones t&eacute;cnicas, las conferencias y las 
+        normas. Cada a&ntilde;o el IEEE produce aproximadamente el 25 por ciento 
+        de la literatura publicada en el &aacute;mbito mundial en electrotecnolog&iacute;a, 
+        y lleva a cabo m&aacute;s de 300 conferencias en las cuales los ingenieros 
+        aprenden e intercambian informaci&oacute;n. El Instituto tambi&eacute;n 
+        ha creado m&aacute;s de 800 normas industriales activas, y posee otras 
+        600 actualmente en desarrollo.<br>
+        <br>
+        ISO</p>
+      <p>El International Organization for Standardization (ISO) es una<br>
+        federaci&oacute;n mundial de los cuerpos nacionales de los est&aacute;ndares 
+        de<br>
+        unos 140 pa&iacute;ses, uno de cada pa&iacute;s.</p>
+      <p>La ISO es una organizaci&oacute;n no gubernamental establecida en 1947. 
+        La<br>
+        misi&oacute;n de la ISO es promover el desarrollo de la estandardizaci&oacute;n 
+        y<br>
+        de las actividades relacionadas en el mundo con objeto de facilitar el<br>
+        intercambio internacional de mercanc&iacute;as y de servicios, y a la<br>
+        cooperaci&oacute;n que se convierte en las esferas de la actividad<br>
+        intelectual, cient&iacute;fica, tecnol&oacute;gica y econ&oacute;mica.</p>
+      <p>ANSI</p>
+      <p>El ANSI es una organizaci&oacute;n privada, no lucrativa 501(c) que<br>
+        administra y coordina el sistema voluntario del gravamen de la<br>
+        estandardizaci&oacute;n y de la conformidad de los E.E.U.U.. La misi&oacute;n 
+        del instituto es realzar la competitividad global del negocio de los<br>
+        E.E.U.U. y la calidad de los E.E.U.U. de la vida promoviendo y<br>
+        facilitando est&aacute;ndares del consenso y sistemas voluntarios del<br>
+        gravamen de la conformidad, y salvaguardando su integridad.</p>
+      <p>ITU</p>
+      <p>Las telecomunicaciones han continuado desarrollando<br>
+        la historia del ITU refleja completamente los avances que se han hecho. 
+        Despu&eacute;s de la invenci&oacute;n del tel&eacute;fono en 1876 y de<br>
+        la extensi&oacute;n subsecuente de la telefon&iacute;a, la uni&oacute;n 
+        del tel&eacute;grafo<br>
+        comenz&oacute;, en 1885, a trazar encima de la telefon&iacute;a que gobernaba 
+        de la legislaci&oacute;n internacional. Con invenci&oacute;n en 1896<br>
+        sin hilos telegraf&iacute;a - primero tipo radiocomunicaci&oacute;n - 
+        y<br>
+        utilizaci&oacute;n este nuevo t&eacute;cnica, determinado para prop&oacute;sito 
+        mar&iacute;timo, se decidi&oacute; convocar una radio-conferencia.</p>
+      <p>&nbsp; </p></td>
+    
+  </tr>
+ 
+  <tr> 
+    <td height="16"> 
+      <p align="right"><a href="http://www.euskalnet.net/juanarana/index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a> </p></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

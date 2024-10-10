@@ -1,0 +1,75 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Directivas</title>
+<META http-equiv=Content-Language content=es>
+<META content="Manual JSP, ejemplos JSP, codigos JSP" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Manual JSP, ejemplos JSP, codigos JSP">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> <strong> Directivas </strong></h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <p>Hemos sido plenamente calificar la java.util.Date 
+        en los ejemplos en las secciones anteriores. Tal vez usted se pregunta 
+        por qu&eacute; no nos limitamos a importar java.util.*;</p>
+      <p> Es posible utilizar &quot;importar&quot; las declaraciones en JSP, pero 
+        la sintaxis es un poco diferente de Java normal. Pruebe el ejemplo siguiente:</p>
+      <p>&lt;%@ page import=&quot;java.util.*&quot; %&gt; <br>
+        &lt;HTML&gt; <br>
+        &lt;BODY&gt; <br>
+        &lt;% <br>
+        System.out.println( &quot;Evaluating date now&quot; );<br>
+        Date date = new Date(); <br>
+        %&gt; <br>
+        Hola hoy es: &lt;%= date %&gt; <br>
+        &lt;/BODY&gt; <br>
+        &lt;/HTML&gt; </p>
+      <p> La primera l&iacute;nea en el ejemplo anterior se llama una &quot;Directiva&quot;. 
+        Una &quot;directiva JSP&quot; comienza con &lt;% @ caracteres.</p>
+      <p> Esta es una &quot;directiva de p&aacute;gina&quot;. La directiva de 
+        p&aacute;gina puede contener la lista de todos los paquetes importados. 
+        Para importar m&aacute;s de un art&iacute;culo, los nombres de paquetes 
+        separados por comas, por ejemplo,</p>
+      <p> &lt;%@ page import=&quot;java.util.*,java.text.*&quot; %&gt; </p>
+      <p> Hay una serie de directivas JSP, adem&aacute;s de la directiva de p&aacute;gina. 
+        Adem&aacute;s de las directivas de p&Atilde;&iexcl;gina, las directivas 
+        de otros m&aacute;s &uacute;tiles son incluir y taglib. Estaremos cubriendo 
+        taglib por separado.</p>
+      <p> La directiva include se utiliza para f&iacute;sicamente incluir el contenido 
+        de otro archivo. El archivo incluido puede ser HTML o JSP o cualquier 
+        otra cosa, el resultado es como si el fichero JSP original que realmente 
+        contienen el texto incluido. Para ver esta directiva en la acci&oacute;n, 
+        crear un JSP nuevo</p>
+      <p> &lt;HTML&gt; <br>
+        &lt;BODY&gt; <br>
+        &lt;BR&gt; Va a incluir hello.jsp ... &lt;BR&gt;<br>
+        &lt;% @ page import = &quot;hello.jsp&quot;%&gt;</p>
+      <p>&lt;/BODY&gt; <br>
+        &lt;/HTML&gt; </p>
+      <p> Ver este JSP en tu navegador y podr&aacute;s ver tu hello.jsp originales 
+        se incluyen en el JSP.</p>
+      <p> </p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

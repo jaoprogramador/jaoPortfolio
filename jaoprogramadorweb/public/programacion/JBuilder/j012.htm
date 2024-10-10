@@ -1,0 +1,334 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Ejercicios de Java</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Descargar Ejercicios de Java, Ejemplos de java, Aplicaciones  de java, JBuilder, J Builder, codigo java">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2>E J E R C I C I O S</h2></td>
+  </tr>
+  <tr> 
+    <td> <h3> Applet</h3>
+      <p> PrimerApplet.- ejercicio que nos ense&ntilde;a a realizar un applet 
+        que cambia un texto segun lo seleccionado en un combobox.</p>
+		<applet
+  			codebase = "."
+  			code     = "primerapplet.BuenosDias.class"
+  			name     = "TestApplet"
+  			width    = "400"
+  			height   = "300"
+  			hspace   = "0"
+  			vspace   = "0"
+  			align    = "middle"
+			></applet>
+
+
+      <p>//en la ventana BuenosDias.html</p>
+      <p>&lt;html&gt;<br>
+        &lt;head&gt;<br>
+        &lt;title&gt;<br>
+        PrimerApplet<br>
+        &lt;/title&gt;<br>
+        &lt;/head&gt;<br>
+        &lt;body&gt;<br>
+        primerapplet.BuenosDias aparecer&aacute; m&aacute;s abajo en un visualizador 
+        que interpreta Java.&lt;br&gt;<br>
+        &lt;applet<br>
+        codebase = &quot;.&quot;<br>
+        code = &quot;primerapplet.BuenosDias.class&quot;<br>
+        name = &quot;TestApplet&quot;<br>
+        width = &quot;400&quot;<br>
+        height = &quot;300&quot;<br>
+        hspace = &quot;0&quot;<br>
+        vspace = &quot;0&quot;<br>
+        align = &quot;middle&quot;<br>
+        &gt;<br>
+        &lt;/applet&gt;<br>
+        &lt;/body&gt;<br>
+        &lt;/html&gt;</p>
+      <p>//en la clase BuenosDias.java</p>
+      <p>package primerapplet;</p>
+      <p>import java.awt.*;<br>
+        import java.awt.event.*;<br>
+        import java.applet.*;</p>
+      <p>public class BuenosDias extends Applet {<br>
+        private boolean isStandalone = false;<br>
+        BorderLayout borderLayout1 = new BorderLayout();<br>
+        Panel superior = new Panel();<br>
+        Panel inferior = new Panel();<br>
+        CardLayout cardLayout1 = new CardLayout();<br>
+        Panel panel1 = new Panel();<br>
+        Panel panel2 = new Panel();<br>
+        Panel panel3 = new Panel();<br>
+        Panel panel4 = new Panel();<br>
+        Panel panel5 = new Panel();<br>
+        Choice choice1 = new Choice();<br>
+        Label label1 = new Label();<br>
+        Label label2 = new Label();<br>
+        Label label3 = new Label();<br>
+        Label label4 = new Label();<br>
+        Label label5 = new Label();<br>
+        Label label6 = new Label();<br>
+        FlowLayout flowLayout1 = new FlowLayout();<br>
+        FlowLayout flowLayout2 = new FlowLayout();<br>
+        FlowLayout flowLayout3 = new FlowLayout();<br>
+        FlowLayout flowLayout4 = new FlowLayout();<br>
+        FlowLayout flowLayout5 = new FlowLayout();<br>
+        Button button1 = new Button();</p>
+      <p> //Obtener el valor de un par&aacute;metro<br>
+        public String getParameter(String key, String def) {<br>
+        return isStandalone ? System.getProperty(key, def) :<br>
+        (getParameter(key) != null ? getParameter(key) : def);<br>
+        }</p>
+      <p> //Construir el applet<br>
+        public BuenosDias() {<br>
+        }</p>
+      <p> //Inicializar el applet<br>
+        public void init() {<br>
+        choice1.addItem(&quot;Ingl&eacute;s&quot;);<br>
+        choice1.addItem(&quot;Alem&aacute;n&quot;);<br>
+        choice1.addItem(&quot;Italiano&quot;);<br>
+        choice1.addItem(&quot;Franc&eacute;s&quot;);<br>
+        choice1.addItem(&quot;Holand&eacute;s&quot;);</p>
+      <p><br>
+        try {<br>
+        jbInit();<br>
+        }<br>
+        catch(Exception e) {<br>
+        e.printStackTrace();<br>
+        }<br>
+        }</p>
+      <p> //Inicializaci&oacute;n de componentes<br>
+        private void jbInit() throws Exception {<br>
+        this.setLayout(borderLayout1);<br>
+        superior.setBackground(Color.red);<br>
+        inferior.setBackground(SystemColor.activeCaption);<br>
+        inferior.setLayout(cardLayout1);<br>
+        panel1.setLayout(flowLayout1);<br>
+        panel2.setLayout(flowLayout2);<br>
+        panel3.setLayout(flowLayout3);<br>
+        panel4.setLayout(flowLayout4);<br>
+        panel5.setLayout(flowLayout5);<br>
+        panel1.setBackground(Color.pink);<br>
+        panel2.setBackground(Color.orange);<br>
+        panel3.setBackground(Color.yellow);<br>
+        panel4.setBackground(Color.green);<br>
+        panel5.setBackground(Color.magenta);<br>
+        label1.setFont(new java.awt.Font(&quot;Comic Sans MS&quot;, 1, 20));<br>
+        label1.setForeground(Color.white);<br>
+        label1.setText(&quot;Seleccione un idioma&quot;);<br>
+        label2.setAlignment(Label.LEFT);<br>
+        label2.setFont(new java.awt.Font(&quot;Comic Sans MS&quot;, 1, 20));<br>
+        label2.setText(&quot;&iexcl;Goodnigth!&quot;);<br>
+        label3.setFont(new java.awt.Font(&quot;Comic Sans MS&quot;, 1, 20));<br>
+        label3.setText(&quot;\&quot;Guten Abend.\&quot;&quot;);<br>
+        label4.setAlignment(Label.LEFT);<br>
+        label4.setFont(new java.awt.Font(&quot;Comic Sans MS&quot;, 1, 20));<br>
+        label4.setText(&quot;Buona sera!&quot;);<br>
+        label5.setFont(new java.awt.Font(&quot;Comic Sans MS&quot;, 1, 20));<br>
+        label5.setText(&quot;Bonsoir !&quot;);<br>
+        label6.setFont(new java.awt.Font(&quot;Comic Sans MS&quot;, 1, 20));<br>
+        label6.setText(&quot;Goede avond!&quot;);<br>
+        button1.setLabel(&quot;P&uacute;lseme&quot;);<br>
+        button1.addActionListener(new BuenosDias_button1_actionAdapter(this));<br>
+        choice1.addItemListener(new BuenosDias_choice1_itemAdapter(this));<br>
+        panel2.add(button1, null);<br>
+        this.add(superior, BorderLayout.NORTH);<br>
+        superior.add(label1, null);<br>
+        superior.add(choice1, null);<br>
+        this.add(inferior, BorderLayout.CENTER);<br>
+        inferior.add(panel1, &quot;panel1&quot;);<br>
+        panel1.add(label2, null);<br>
+        inferior.add(panel2, &quot;panel2&quot;);<br>
+        panel2.add(label3, null);<br>
+        inferior.add(panel3, &quot;panel3&quot;);<br>
+        panel3.add(label4, null);<br>
+        inferior.add(panel4, &quot;panel4&quot;);<br>
+        panel4.add(label5, null);<br>
+        inferior.add(panel5, &quot;panel5&quot;);<br>
+        panel5.add(label6, null);<br>
+        }</p>
+      <p> //Iniciar el applet<br>
+        public void start() {<br>
+        }</p>
+      <p> //Detener el applet<br>
+        public void stop() {<br>
+        }</p>
+      <p> //Destruir el applet<br>
+        public void destroy() {<br>
+        }</p>
+      <p> //Obtener informaci&oacute;n del applet<br>
+        public String getAppletInfo() {<br>
+        return &quot;Informaci&oacute;n del applet&quot;;<br>
+        }</p>
+      <p> //Obtener informaci&oacute;n del par&aacute;metro<br>
+        public String[][] getParameterInfo() {<br>
+        return null;<br>
+        }</p>
+      <p> void choice1_itemStateChanged(ItemEvent e) {<br>
+        if (&quot;Ingl&eacute;s&quot;.equals(choice1.getSelectedItem())){<br>
+        cardLayout1.show(inferior, &quot;panel1&quot;);<br>
+        }<br>
+        else if (&quot;Alem&aacute;n&quot;.equals(choice1.getSelectedItem())){<br>
+        cardLayout1.show(inferior, &quot;panel2&quot;);<br>
+        }<br>
+        else if (&quot;Italiano&quot;.equals(choice1.getSelectedItem())){<br>
+        cardLayout1.show(inferior, &quot;panel3&quot;);<br>
+        }<br>
+        else if (&quot;Franc&eacute;s&quot;.equals(choice1.getSelectedItem())){<br>
+        cardLayout1.show(inferior, &quot;panel4&quot;);<br>
+        }<br>
+        else if (&quot;Holand&eacute;s&quot;.equals(choice1.getSelectedItem())){<br>
+        cardLayout1.show(inferior, &quot;panel5&quot;);<br>
+        }</p>
+      <p> }</p>
+      <p> void button1_actionPerformed(ActionEvent e) {<br>
+        label3.setForeground(new Color(255,255,0));<br>
+        }<br>
+        }</p>
+      <p>class BuenosDias_choice1_itemAdapter implements java.awt.event.ItemListener 
+        {<br>
+        BuenosDias adaptee;</p>
+      <p> BuenosDias_choice1_itemAdapter(BuenosDias adaptee) {<br>
+        this.adaptee = adaptee;<br>
+        }<br>
+        public void itemStateChanged(ItemEvent e) {<br>
+        adaptee.choice1_itemStateChanged(e);<br>
+        }<br>
+        }</p>
+      <p>class BuenosDias_button1_actionAdapter implements java.awt.event.ActionListener 
+        {<br>
+        BuenosDias adaptee;</p>
+      <p> BuenosDias_button1_actionAdapter(BuenosDias adaptee) {<br>
+        this.adaptee = adaptee;<br>
+        }<br>
+        public void actionPerformed(ActionEvent e) {<br>
+        adaptee.button1_actionPerformed(e);<br>
+        }<br>
+        }<br>
+      </p>
+      <p><br>
+      </p></td>
+    <td>&nbsp;</td>
+    <td><p><a href="http://www.euskalnet.net/juanarana/JBuilderZip/PrimerApplet.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></p></td>
+  </tr>
+  <tr> 
+    <td> <h3>Applet</h3>
+      <p> pApplet1.- ejercicio que nos ense&ntilde;a a realizar un applet que 
+        puede ejecutar con un menu distintas opciones</p>
+      <p>//en la ventana</p>
+      <p>&lt;html&gt;<br>
+        &lt;head&gt;<br>
+        &lt;title&gt;<br>
+        Mi primer Applet con JBuilder<br>
+        &lt;/title&gt;<br>
+        &lt;/head&gt;<br>
+        &lt;body&gt;<br>
+        papplet1.Applet1 aparecer&aacute; m&aacute;s abajo en un visualizador 
+        que interpreta Java.&lt;br&gt;<br>
+        &lt;applet<br>
+        codebase = &quot;.&quot;<br>
+        code = &quot;papplet1.Applet1.class&quot;<br>
+        name = &quot;TestApplet&quot;<br>
+        width = &quot;400&quot;<br>
+        height = &quot;300&quot;<br>
+        hspace = &quot;0&quot;<br>
+        vspace = &quot;0&quot;<br>
+        align = &quot;middle&quot;<br>
+        &gt;<br>
+        &lt;/applet&gt;<br>
+        &lt;/body&gt;<br>
+        &lt;/html&gt;</p>
+      <p>//en la clase applet1.java</p>
+      <p>package papplet1;</p>
+      <p>import java.awt.*;<br>
+        import java.awt.event.*;<br>
+        import java.applet.*;</p>
+      <p>public class Applet1 extends Applet {<br>
+        private boolean isStandalone = false;</p>
+      <p> //Obtener el valor de un par&aacute;metro<br>
+        public String getParameter(String key, String def) {<br>
+        return isStandalone ? System.getProperty(key, def) :<br>
+        (getParameter(key) != null ? getParameter(key) : def);<br>
+        }</p>
+      <p> //Construir el applet<br>
+        public Applet1() {<br>
+        }</p>
+      <p> //Inicializar el applet<br>
+        public void init() {<br>
+        try {<br>
+        jbInit();<br>
+        }<br>
+        catch(Exception e) {<br>
+        e.printStackTrace();<br>
+        }<br>
+        }</p>
+      <p> //Inicializaci&oacute;n de componentes<br>
+        private void jbInit() throws Exception {<br>
+        }</p>
+      <p> //Iniciar el applet<br>
+        public void start() {<br>
+        }</p>
+      <p> //Detener el applet<br>
+        public void stop() {<br>
+        }</p>
+      <p> //Destruir el applet<br>
+        public void destroy() {<br>
+        }</p>
+      <p> //Obtener informaci&oacute;n del applet<br>
+        public String getAppletInfo() {<br>
+        return &quot;Informaci&oacute;n del applet&quot;;<br>
+        }</p>
+      <p> //Obtener informaci&oacute;n del par&aacute;metro<br>
+        public String[][] getParameterInfo() {<br>
+        return null;<br>
+        }</p>
+      <p> //M&eacute;todo Main<br>
+        public static void main(String[] args) {<br>
+        Applet1 applet = new Applet1();<br>
+        applet.isStandalone = true;<br>
+        Frame frame;<br>
+        frame = new Frame();<br>
+        frame.setTitle(&quot;Marco del applet&quot;);<br>
+        frame.add(applet, BorderLayout.CENTER);<br>
+        applet.init();<br>
+        applet.start();<br>
+        frame.setSize(400,320);<br>
+        Dimension d = Toolkit.getDefaultToolkit().getScreenSize();<br>
+        frame.setLocation((d.width - frame.getSize().width) / 2, (d.height - frame.getSize().height) 
+        / 2);<br>
+        frame.setVisible(true);<br>
+        }<br>
+        }</p>
+      <p><br>
+      </p></td>
+    <td  >&nbsp;</td>
+    <td  ><a href="http://www.euskalnet.net/juanarana/JBuilderZip/pApplet1.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td> <h3>&nbsp;</h3>
+    </td>
+    <td  >&nbsp;</td>
+    <td  >&nbsp;</td>
+  </tr>
+  
+  <tr> 
+    <td> <div align="right"><a href="http://www.euskalnet.net/juanarana/index3.htm" target="_parent">&lt;&lt;Menu 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

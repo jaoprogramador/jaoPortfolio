@@ -1,0 +1,74 @@
+﻿ul.navegador {
+  width: 180px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: 1px solid #F8727C;
+}
+ul.navegador li {
+	list-style: none;
+  border-bottom: 1px solid #F8727C;
+  border-top: 1px solid #FFF;
+  background: #F8727C;
+}
+ul.navegador li a {
+
+  padding: .2em 0 .2em 1.5em;
+  display: block;
+  text-decoration: none;
+  color: #FFFEFE;
+  background: #F8727C /*url("../../comun/imagenes/flecha_inactiva.png") no-repeat*/ 3px;
+}
+ul.navegador li a:hover, ul.navegador li a:active {
+  background: #7285FD /*url("../../comun/imagenes/flecha_activa.png") no-repeat*/ 3px;
+  
+}
+ul.subnavegador li a:hover, ul.subnavegador li a:active {
+  background: #FFFFFF /*url("../../comun/imagenes/flecha_activa.png") no-repeat*/ 3px;
+  color:#7285FD;
+  border: 1px solid #7285FD;
+  
+}
+ul.subnavegador {
+  width: 180px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: 1px solid #7285FD;
+}
+ul.subnavegador li {
+	list-style: none;
+  border-bottom: 1px solid #FFFEFE;
+  border-top: 1px solid #FFF;
+  background: #7285FD;
+}	
+ul.subnavegador li a {
+
+  padding: .2em 0 .2em 2.3em;
+  display: block;
+  text-decoration: none;
+  color: #FFFEFE;
+  background: #7285FD /*url("../../comun/imagenes/flecha_inactiva.png") no-repeat*/ 3px;
+}
+
+a:link {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	font-style: normal;
+	font-weight: bold;
+	color: #FFFEFE;
+}
+a:visited {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	font-style: normal;
+	font-weight: bold;
+	color: #FFFEFE;
+}
+a:hover {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-style: normal;
+	font-weight: bold;
+	color: #FFFEFE;
+}

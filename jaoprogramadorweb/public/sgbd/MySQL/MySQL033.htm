@@ -1,0 +1,839 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Ejercicios MySQL</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="MySQL, sql, pl/sql, programacion MySQL, ejercicios MySQL, ejemplos MySQL, select">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2>C R E A T E</h2></td>
+  </tr>
+  <tr> 
+    <td><h3>Sintaxis de CREATE DATABASE</h3>
+      <p>CREATE {DATABASE | SCHEMA} [IF NOT EXISTS] db_name<br>
+        [create_specification [, create_specification] ...]<br>
+        create_specification:<br>
+        [DEFAULT] CHARACTER SET charset_name<br>
+        | [DEFAULT] COLLATE collation_name<br>
+        CREATE DATABASE crea una base de datos con el nombre dado. Para usar CREATE 
+        DATABASE, necesita el permiso CREATE<br>
+        en la base de datos.<br>
+        Las reglas para nombres de bases de datos permitidos se dan en Secci&oacute;n 
+        9.2, &#8220;Nombres de bases de datos, tablas, &iacute;ndices, columnas<br>
+        y alias&#8221;. Ocurre un error si la base de datos existe y no especifica 
+        IF NOT EXISTS.<br>
+        En MySQL 5.0, las opciones create_specification pueden darse para especificar 
+        caracter&iacute;stica de la base de datos. Las caracter&iacute;sticas<br>
+        se almacenan en el fichero db.opt en el directorio de la base de datos. 
+        La cl&aacute;usula CHARACTER SET especifica el<br>
+        conjunto de caracteres por defecto de la base de datos. La cl&aacute;usula 
+        COLLATE especifica la colaci&oacute;n por defecto de la base de datos.<br>
+        Los nombres de colaci&oacute;n y de conjunto de caracteres se discuten 
+        en Cap&iacute;tulo 10, Soporte de conjuntos de caracteres.<br>
+        Las bases de datos en MySQL se implementan como directorios que contienen 
+        ficheros que se corresponden a tablas en la base de<br>
+        datos. Como no hay tablas en la base de datos cuando se crean inicialmente, 
+        el comando CREATE DATABASE en MySQL 5.0 crea<br>
+        s&oacute;lo un directorio bajo el directorio de datos de MySQL y el fichero 
+        db.opt file.<br>
+        Si crea manualmente un directorio bajo el directorio de datos (por ejemplo, 
+        con mkdir), el servidor lo considera como un directorio<br>
+        de base de datos y muestra la salida de SHOW DATABASES.<br>
+        CREATE SCHEMA puede usarse desde MySQL 5.0.2.<br>
+        Tambi&eacute;n puede usar el programa mysqladmin para crear bases de datos. 
+        Consulte Secci&oacute;n 8.4, &#8220;Administrar un servidor MySQL<br>
+        con mysqladmin&#8221;.<br>
+        <h3>Sintaxis de CREATE INDEX</h3><br>
+        CREATE [UNIQUE|FULLTEXT|SPATIAL] INDEX index_name<br>
+        [USING index_type]<br>
+        ON tbl_name (index_col_name,...)<br>
+        index_col_name:<br>
+        col_name [(length)] [ASC | DESC]<br>
+        En MySQL 5.0, CREATE INDEX se mapea a un comando ALTER TABLE para crear 
+        &iacute;ndices. Consulte Secci&oacute;n 13.1.2, &#8220;Sintaxis<br>
+        de ALTER TABLE&#8221;.<br>
+        Normalmente, crea todos los &iacute;ndices en una tabla cuando se crea 
+        la propia tabla con CREATE TABLE. Consulte Secci&oacute;n 13.1.5,<br>
+        &#8220;Sintaxis de CREATE TABLE&#8221;. CREATE INDEX le permite a&ntilde;adir 
+        &iacute;ndices a tablas existentes.<br>
+        Una lista de columnas de la forma (col1,col2,...) crea un &iacute;ndice 
+        de m&uacute;ltiples columnas. Los valores de &iacute;ndice se forman al<br>
+        concatenar los valores de las columnas dadas.<br>
+        Para columnas CHAR y VARCHAR, los &iacute;ndices pueden crearse para que 
+        usen s&oacute;lo parte de una columna, usando<br>
+        col_name(length) para indexar un prefijo consistente en los primeros length 
+        caracteres de cada valor de la columna. BLOB<br>
+        t TEXT pueden indexarse, pero se debe dar una longitud de prefijo.<br>
+        El comando mostrado aqu&iacute; crea un &iacute;ndice usando los primeros 
+        10 caracteres de la columna name :<br>
+        CREATE INDEX part_of_name ON customer (name(10));<br>
+        Como la mayor&iacute;a de nombres usualmente difieren en los primeros 
+        10 caracteres, este &iacute;ndice no deber&iacute;a ser mucho m&aacute;s 
+        lento que un<br>
+        &iacute;ndice creado con la columna name entera. Adem&aacute;s, usar columnas 
+        parcialmente para &iacute;ndices puede hacer un fichero &iacute;ndice 
+        mucho<br>
+        menor, que puede ahorrar mucho espacio de disco y adem&aacute;s acelarar 
+        las operaciones INSERT .<br>
+        Los prefijos pueden tener una longitud de hasta 255 bytes. Para tablas 
+        MyISAM y InnoDB en MySQL 5.0, pueden tener una longitud<br>
+        de hasta 1000 bytes . Tenga en cuenta que los l&iacute;mites de los prefijos 
+        se miden en bytes, mientras que la longitud de prefijo en<br>
+        comandos CREATE INDEX se interpreta como el n&uacute;mero de caracteres. 
+        Tenga esto en cuenta cuando especifique una longitud de<br>
+        prefijo para una columna que use un conjunto de caracteres de m&uacute;ltiples 
+        bytes.<br>
+        En MySQL 5.0:<br>
+        &#8226; Puede a&ntilde;adir un &iacute;ndice en una columna que puede 
+        tener valores NULL s&oacute;lo si est&aacute; usando MyISAM, InnoDB, o 
+        BDB .<br>
+        &#8226; Puede a&ntilde;adir un &iacute;ndice en una columna BLOB o TEXT 
+        s&oacute;lo si est&aacute; usando el tipo de tabla MyISAM, BDB, o InnoDB 
+        .<br>
+        Una especificaci&oacute;n index_col_name puede acabar con ASC o DESC. 
+        Estas palabras se permiten para extensiones futuras para<br>
+        especificar almacenamiento de &iacute;ndice ascendente o descendente. 
+        Actualmente se parsean pero se ignoran; los valores de &iacute;ndice<br>
+        siempre se almacenan en orden ascendente.<br>
+        En MySQL 5.0, algunos motores le permiten especificar un tipo de &iacute;ndice 
+        cuando se crea un &iacute;ndice. La sintaxis para el especificador<br>
+        index_type es USING type_name. Los valores type_name posibles soportados 
+        por distintos motores se muestran en la<br>
+        siguiente tabla. Donde se muestran m&uacute;ltiples tipos de &iacute;ndice 
+        , el primero es el tipo por defecto cuando no se especifica index_<br>
+        type .<br>
+        Motor de almacenamiento Tipos de &iacute;ndice permitidos<br>
+        MyISAM BTREE<br>
+        InnoDB BTREE<br>
+        MEMORY/HEAP HASH, BTREE<br>
+        Ejemplo:<br>
+        CREATE TABLE lookup (id INT) ENGINE = MEMORY;<br>
+        CREATE INDEX id_index USING BTREE ON lookup (id);<br>
+        TYPE type_name puede usarse como sin&oacute;nimo de USING type_name para 
+        especificar un tipo de &iacute;ndice. Sin embargo,<br>
+        USING es la forma preferida. Adem&aacute;s, el nombre de &iacute;ndice 
+        que precede el tipo de &iacute;ndice en la especificaci&oacute;n de la 
+        sintaxis de &iacute;ndice<br>
+        no es opcional con TYPE. Esto es debido a que, en contra de USING, TYPE 
+        no es una palabra reservada y se interpreta como<br>
+        nombre de &iacute;ndice.<br>
+        Si especifica un tipo de &iacute;ndice que no es legal para un motor de 
+        almacenamiento, pero hay otro tipo de &iacute;ndice disponible que puede<br>
+        usar el motor sin afectar los resultados de la consulta, el motor usa 
+        el tipo disponible.<br>
+        Para m&aacute;s informaci&oacute;n sobre c&oacute;mo MySQL usa &iacute;ndices, 
+        consulte Secci&oacute;n 7.4.5, &#8220;C&oacute;mo utiliza MySQL los &iacute;ndices&#8221;.<br>
+        &Iacute;ndices FULLTEXT en MySQL 5.0 puede indexar s&oacute;lo columnas 
+        CHAR, VARCHAR, y TEXT , y s&oacute;lo en tablas MyISAM . Consulte<br>
+        Secci&oacute;n 12.7, &#8220;Funciones de b&uacute;squeda de texto completo 
+        (Full-Text)&#8221;.<br>
+        &Iacute;ndices SPATIAL en MySQL 5.0 puede indexar s&oacute;lo columnas 
+        espaciales, y s&oacute;lo en tablas MyISAM<br>
+        <h3>Sintaxis de CREATE TABLE</h3><br>
+        CREATE [TEMPORARY] TABLE [IF NOT EXISTS] tbl_name<br>
+        [(create_definition,...)]<br>
+        [table_options] [select_statement]<br>
+        O:<br>
+        CREATE [TEMPORARY] TABLE [IF NOT EXISTS] tbl_name<br>
+        [(] LIKE old_tbl_name [)];<br>
+        create_definition:<br>
+        column_definition<br>
+        | [CONSTRAINT [symbol]] PRIMARY KEY [index_type] (index_col_name,...)<br>
+        | KEY [index_name] [index_type] (index_col_name,...)<br>
+        | INDEX [index_name] [index_type] (index_col_name,...)<br>
+        | [CONSTRAINT [symbol]] UNIQUE [INDEX]<br>
+        [index_name] [index_type] (index_col_name,...)<br>
+        | [FULLTEXT|SPATIAL] [INDEX] [index_name] (index_col_name,...)<br>
+        | [CONSTRAINT [symbol]] FOREIGN KEY<br>
+        [index_name] (index_col_name,...) [reference_definition]<br>
+        | CHECK (expr)<br>
+        column_definition:<br>
+        col_name type [NOT NULL | NULL] [DEFAULT default_value]<br>
+        [AUTO_INCREMENT] [UNIQUE [KEY] | [PRIMARY] KEY]<br>
+        [COMMENT 'string'] [reference_definition]<br>
+        type:<br>
+        TINYINT[(length)] [UNSIGNED] [ZEROFILL]<br>
+        | SMALLINT[(length)] [UNSIGNED] [ZEROFILL]<br>
+        | MEDIUMINT[(length)] [UNSIGNED] [ZEROFILL]<br>
+        | INT[(length)] [UNSIGNED] [ZEROFILL]<br>
+        | INTEGER[(length)] [UNSIGNED] [ZEROFILL]<br>
+        | BIGINT[(length)] [UNSIGNED] [ZEROFILL]<br>
+        | REAL[(length,decimals)] [UNSIGNED] [ZEROFILL]<br>
+        | DOUBLE[(length,decimals)] [UNSIGNED] [ZEROFILL]<br>
+        | FLOAT[(length,decimals)] [UNSIGNED] [ZEROFILL]<br>
+        | DECIMAL(length,decimals) [UNSIGNED] [ZEROFILL]<br>
+        | NUMERIC(length,decimals) [UNSIGNED] [ZEROFILL]<br>
+        | DATE<br>
+        | TIME<br>
+        | TIMESTAMP<br>
+        | DATETIME<br>
+        | CHAR(length) [BINARY | ASCII | UNICODE]<br>
+        | VARCHAR(length) [BINARY]<br>
+        | TINYBLOB<br>
+        | BLOB<br>
+        | MEDIUMBLOB<br>
+        | LONGBLOB<br>
+        | TINYTEXT [BINARY]<br>
+        | TEXT [BINARY]<br>
+        | MEDIUMTEXT [BINARY]<br>
+        | LONGTEXT [BINARY]<br>
+        | ENUM(value1,value2,value3,...)<br>
+        | SET(value1,value2,value3,...)<br>
+        | spatial_type<br>
+        index_col_name:<br>
+        col_name [(length)] [ASC | DESC]<br>
+        reference_definition:<br>
+        REFERENCES tbl_name [(index_col_name,...)]<br>
+        [MATCH FULL | MATCH PARTIAL | MATCH SIMPLE]<br>
+        [ON DELETE reference_option]<br>
+        [ON UPDATE reference_option]<br>
+        reference_option:<br>
+        RESTRICT | CASCADE | SET NULL | NO ACTION<br>
+        table_options: table_option [table_option] ...<br>
+        table_option:<br>
+        {ENGINE|TYPE} = engine_name<br>
+        | AUTO_INCREMENT = value<br>
+        | AVG_ROW_LENGTH = value<br>
+        | [DEFAULT] CHARACTER SET charset_name [COLLATE collation_name]<br>
+        | CHECKSUM = {0 | 1}<br>
+        | COMMENT = 'string'<br>
+        | MAX_ROWS = value<br>
+        | MIN_ROWS = value<br>
+        | PACK_KEYS = {0 | 1 | DEFAULT}<br>
+        | PASSWORD = 'string'<br>
+        | DELAY_KEY_WRITE = {0 | 1}<br>
+        | ROW_FORMAT = {DEFAULT|DYNAMIC|FIXED|COMPRESSED|REDUNDANT|COMPACT}<br>
+        | RAID_TYPE = { 1 | STRIPED | RAID0 }<br>
+        RAID_CHUNKS = value<br>
+        RAID_CHUNKSIZE = value<br>
+        | UNION = (tbl_name[,tbl_name]...)<br>
+        | INSERT_METHOD = { NO | FIRST | LAST }<br>
+        | DATA DIRECTORY = 'absolute path to directory'<br>
+        | INDEX DIRECTORY = 'absolute path to directory'<br>
+        select_statement:<br>
+        [IGNORE | REPLACE] [AS] SELECT ... (Some legal select statement)<br>
+        CREATE TABLE crea una tabla con el nombre dado. Debe tener el permiso 
+        CREATE para la tabla.<br>
+        Las reglas para nombres de tabla permitidos se dan en Secci&oacute;n 9.2, 
+        &#8220;Nombres de bases de datos, tablas, &iacute;ndices, columnas y alias&#8221;.<br>
+        Por defecto, la tabla se crea en la base de datos actual. Ocurre un error 
+        si la tabla existe, si no hay base de datos actual o si la base<br>
+        de datos no existe.<br>
+        En MySQL 5.0, el nombre de tabla puede especificarse como db_name.tbl_name 
+        para crear la tabla en la base de datos espec&iacute;fica.<br>
+        Esto funciona haya una base de datos actual o no. Si usa identificadores 
+        entre comillas, entrecomille el nombre de base de datos<br>
+        y de tabla por separado. Por ejemplo, `mydb`.`mytbl` es legal, pero `mydb.mytbl` 
+        no.<br>
+        Puede usar la palabra TEMPORARY al crear una tabla. Una tabla TEMPORARY 
+        es visible s&oacute;lo para la conexi&oacute;n actual, y se borra autom&aacute;ticamente<br>
+        cuando la conexi&oacute;n se cierra. Esto significa que dos conexiones 
+        distintas pueden usar el mismo nombre de tabla<br>
+        temporal sin entrar en conflicto entre ellas ni con tablas no TEMPORARY 
+        con el mismo nombre. (La tabla existente se oculta hasta<br>
+        que se borra la tabla temporal.) En MySQL 5.0, debe tener el permiso CREATE 
+        TEMPORARY TABLES para crear tablas temporales.<br>
+        MySQL 5.0 soporta las palabras IF NOT EXISTS para que no ocurra un error 
+        si la tabla existe. Tenga en cuenta que no hay verificaci&oacute;n<br>
+        que la tabla existente tenga una estructura id&eacute;ntica a la indicada 
+        por el comando CREATE TABLE . Nota: Si usa IF NOT<br>
+        EXISTS en un comando CREATE TABLE ... SELECT ,cualquier registro seleccionado 
+        por la parte SELECT se inserta si la tabla<br>
+        existe o no.<br>
+        MySQL representa cada tabla mediante un fichero .frm de formato de tabla 
+        (definici&oacute;n) en el directorio de base de datos. El motor<br>
+        para la tabla puede crear otros ficheros tambi&eacute;n. En el caso de 
+        tablas MyISAM , el motor crea ficheros &iacute;ndice y de datos. Por lo<br>
+        tanto, para cada tabla MyISAM tbl_name, hay tres ficheros de disco:<br>
+        Fichero Prop&oacute;sito<br>
+        tbl_name.frm Fichero de formato de tabla (definici&oacute;n)<br>
+        tbl_name.MYD Fichero de datos<br>
+        tbl_name.MYI Fichero &iacute;ndice<br>
+        Los ficheros creados por cada motor de almacenamiento para representar 
+        tablas se describen en Cap&iacute;tulo 14, Motores de almacenamiento<br>
+        de MySQL y tipos de tablas.<br>
+        Para informaci&oacute;n general de las propiedades de los diversos tipos 
+        de columna, consulte Cap&iacute;tulo 11, Tipos de columna. Para informaci&oacute;n<br>
+        acerca de tipos de columna espaciales, consulte Cap&iacute;tulo 18, Extensiones 
+        espaciales de MySQL.<br>
+        &#8226; Si no se especifica NULL ni NOT NULL, la columna se trata como 
+        si se especificara NULL .<br>
+        &#8226; Una columna entera puede tener el atributo adicional AUTO_INCREMENT. 
+        Cuando inserta un valor de NULL (recomendado) o<br>
+        0 en una columna AUTO_INCREMENT autoindexada, la columna se asigna al 
+        siguiente valor de secuencia. T&iacute;picamente esto es<br>
+        value+1, donde value es el mayor valor posible para la columna en la tabla. 
+        Secuencias AUTO_INCREMENT comienzan<br>
+        con 1. Tales columnas deben definirse como uno de los tipos enteros como 
+        se describe en Secci&oacute;n 11.1.1, &#8220;Panor&aacute;mica de tipos<br>
+        num&eacute;ricos&#8221;. (El valor 1.0 no es un entero.) Consulte Secci&oacute;n 
+        24.2.3.34, &#8220;mysql_insert_id()&#8221;.<br>
+        En MySQL 5.0, especificar NO_AUTO_VALUE_ON_ZERO para la opci&oacute;n 
+        de servidor --sql-mode o la variable de sistema<br>
+        sql_mode le permite almacenar 0 en columnas AUTO_INCREMENT como 0 sin 
+        generar un nuevo valor de secuencia. Consulte<br>
+        Secci&oacute;n 5.3.1, &#8220;Opciones del comando mysqld&#8221;.<br>
+        Nota: S&oacute;lo puede haber una columna AUTO_INCREMENT por tabla, debe 
+        estar indexada, y no puede tener un valor DEFAULT<br>
+        . Una columna AUTO_INCREMENT funciona correctamente s&oacute;lo si contiene 
+        s&oacute;lo valores positivos. Insertar un n&uacute;mero negativo<br>
+        se trata como insertar un n&uacute;mero positivo muy grande. Esto se hace 
+        para evitar problemas de precisi&oacute;n cuando los n&uacute;meros<br>
+        &#8220;cambian&#8221; de positivos a negativos y asegura que no obtiene 
+        accidentalmente una columna AUTO_INCREMENT que contenga<br>
+        0.<br>
+        Para tablas MyISAM y BDB , puede especificar una columna AUTO_INCREMENT 
+        secundaria en una clave de m&uacute;ltiples columnas.<br>
+        Consulte Secci&oacute;n 3.6.9, &#8220;Utilizaci&oacute;n de AUTO_INCREMENT&#8221;.<br>
+        Para hacer MySQL compatible con otras aplicaciones ODBC , puede encontrar 
+        el valor AUTO_INCREMENT para el &uacute;ltimo registro<br>
+        insertado con la siguiente consulta:<br>
+        SELECT * FROM tbl_name WHERE auto_col IS NULL<br>
+        &#8226; En MySQL 5.0, las definiciones de columnas de caracteres puede 
+        incluir un atributo CHARACTER SET para especificar el<br>
+        conjunto de caracteres y, opcionalmente, una colaci&oacute;n para la columna. 
+        Para detalles, consulte Cap&iacute;tulo 10, Soporte de conjuntos<br>
+        de caracteres. CHARSET es sin&oacute;nimo de CHARACTER SET.<br>
+        CREATE TABLE t (c CHAR(20) CHARACTER SET utf8 COLLATE utf8_bin);<br>
+        MySQL 5.0 interpreta las especificaciones de longitud en definiciones 
+        de columna en caracteres. (Algunas versiones anteriores<br>
+        los interpretan en bytes.)<br>
+        &#8226;<br>
+        La cl&aacute;usula DEFAULT especifica el valor por defecto para una columna. 
+        Con una excepci&oacute;n, el valor por defecto debe ser constante;<br>
+        no puede ser una funci&oacute;n o una expresi&oacute;n. Esto significa 
+        , por ejemplo, que no puede poner como valor por defecto de<br>
+        una columna el valor de una funci&oacute;n como NOW() o CURRENT_DATE. 
+        La excepci&oacute;n es que pude especificar CURRENT_<br>
+        TIMESTAMP como defecto para columnas TIMESTAMP . Consulte Secci&oacute;n 
+        11.3.1.1, &#8220;Propiedades de TIMESTAMP<br>
+        desde MySQL 4.1&#8221;.<br>
+        Antes de MySQL 5.0.2, si una definici&oacute;n de columna no incluye valor 
+        DEFAULT expl&iacute;cito, MySQL determina el valor por defecto<br>
+        como sigue:<br>
+        Si la columna puede tener valores NULL , la columna se define como una 
+        cl&aacute;usula DEFAULT NULL expl&iacute;cita.<br>
+        Si la columna no puede tener valores NULL , MySQL define la columna con 
+        una cl&aacute;usula DEFAULT expl&iacute;cita, usando el valor<br>
+        por defecto impl&iacute;cito para el tipo de datos de la columna . Los 
+        valores por defecto impl&iacute;citos se definen como sigue:<br>
+        &#8226; Para tipos num&eacute;ricos distintos a los declarados con el 
+        atributo AUTO_INCREMENT , por defecto es 0. Para una columna<br>
+        AUTO_INCREMENT , el valor por defecto es el siguiente valor de la secuencia.<br>
+        &#8226; Para tipos de fecha y hora distintos a TIMESTAMP, el valor por 
+        defecto es el valor &#8220;cero&#8221; apropiado para el tipo. Para la 
+        primera<br>
+        columna TIMESTAMP en una tabla, el valor por defecto es la fecha actual 
+        y la hora. Consulte Secci&oacute;n 11.3, &#8220;Tipos de<br>
+        fecha y hora&#8221;.<br>
+        &#8226; Para tipos de cadenas distintos a ENUM, el valor por defecto es 
+        la cadena vac&iacute;a. Para ENUM, el valor por defecto es el primer<br>
+        valor de la enumeraci&oacute;n.<br>
+        Las columnas BLOB y TEXT no pueden tener un valor por defecto.<br>
+        Desde MySQL 5.0.2, si una definici&oacute;n de columna no incluye valor 
+        DEFAULT expl&iacute;cito , MySQL determina el valor por defecto<br>
+        como sigue:<br>
+        Si la columna puede tener NULL como valor, la columna se define con una 
+        cl&aacute;usula DEFAULT NULL expl&iacute;cita. Esto es lo mismo<br>
+        que antes de 5.0.2.<br>
+        Si la columna no puede tener valores NULL , MySQL define la columna sin 
+        cl&aacute;usula DEFAULT expl&iacute;cita. Para entradas de datos,<br>
+        si un comando INSERT o REPLACE no incluye valor para la columna, MySQL 
+        trata la columna seg&uacute;n el modo SQL activo<br>
+        en ese momento:<br>
+        &#8226; Si el modo estricto no est&aacute; activado, MySQL pone en la 
+        columna el valor por defecto impl&iacute;cito para el tipo de datos de 
+        la<br>
+        columna.<br>
+        &#8226; Si est&aacute; activo el modo estricto, ocurre un error para tablas 
+        transaccionales y el comando se deshace. Para tablas no transaccionales,<br>
+        ocurre un error, pero si esto ocurre para el segundo registro o siguientes 
+        de un comando de m&uacute;ltiples registros, los<br>
+        registros precedentes se insertar&aacute;n.<br>
+        Suponga que una tabla t se define como sigue:<br>
+        CREATE TABLE t (i INT NOT NULL);<br>
+        En este caso, i no tiene valor expl&iacute;cito, as&iacute; que en modo 
+        estricto todos los siguientes comandos producen un error en modo estricto<br>
+        y no se inserta ning&uacute;n registro. Para modo no estricto, s&oacute;lo 
+        el tercer comando produce un error; el valor impl&iacute;cito por defecto<br>
+        se inserta para las dos primeras, pero la tercera falla ya que DEFAULT(i) 
+        no puede producir un valor:<br>
+        INSERT INTO t VALUES();<br>
+        INSERT INTO t VALUES(DEFAULT);<br>
+        INSERT INTO t VALUES(DEFAULT(i));<br>
+        Consulte Secci&oacute;n 5.3.2, &#8220;El modo SQL del servidor&#8221;.<br>
+        Para una tabla dada, puede usar el comando SHOW CREATE TABLE para ver 
+        qu&eacute; columnas puede tener una cl&aacute;usula expl&iacute;cita<br>
+        DEFAULT.<br>
+        &#8226;<br>
+        Un comentario para una columna puede especificarse en MySQL 5.0 con la 
+        opci&oacute;n COMMENT . El comentario se muestra con<br>
+        los comandos SHOW CREATE TABLE y SHOW FULL COLUMNS .<br>
+        &#8226; En MySQL 5.0, el atributo SERIAL puede usarse como un alias para 
+        BIGINT UNSIGNED NOT NULL AUTO_<br>
+        INCREMENT UNIQUE.<br>
+        &#8226; KEY normalemente es sin&oacute;nimo para INDEX. En MySQL 5.0, 
+        el atributo clave PRIMARY KEY puede especificarse como KEY<br>
+        cuando se da en una definici&oacute;n de columna. Esto se implement&oacute; 
+        por compatibilidad con otros sistemas de bases de datos.<br>
+        &#8226; En MySQL, un &iacute;ndice UNIQUE es uno en que todos los valores 
+        en el &iacute;ndice deben ser distintos. Ocurre un error si intenta a&ntilde;adir<br>
+        un nuevo registro con una clave que coincida con un registro existente. 
+        La excepci&oacute;n es que una columna en el &iacute;ndice puede<br>
+        contener valores NULL , puede contener valores NULL m&uacute;ltiples. 
+        Esta excepci&oacute;n no se aplica a tablas BDB , en las que una columna<br>
+        indexada le permita un &uacute;nico NULL.<br>
+        &#8226;<br>
+        Una PRIMARY KEY es una KEY &uacute;nica donde todas las columnas de la 
+        clave deben definirse como NOT NULL. Si no se declaran<br>
+        expl&iacute;citamente como NOT NULL, MySQL las declara impl&iacute;citamente 
+        ( y sin decirlo ) . Una tabla puede tener s&oacute;lo una<br>
+        PRIMARY KEY. Si no tiene una PRIMARY KEY y una aplicaci&oacute;n pide 
+        una PRIMARY KEY en sus tablas, MySQL retorna el<br>
+        primer &iacute;ndice UNIQUE que no tenga columnas NULL como la PRIMARY 
+        KEY.<br>
+        &#8226; En la tabla creada, una PRIMARY KEY se guarda en primer lugar, 
+        seguida por todos los &iacute;ndices UNIQUE, y luego los &iacute;ndices<br>
+        no &uacute;nicos. Esto ayuda al optimizador MySQL a priorizar qu&eacute; 
+        indice usar y tambi&eacute;n detectar m&aacute;s r&aacute;pido claves 
+        UNIQUE duplicadas.<br>
+        &#8226; Una PRIMARY KEY puede ser un &iacute;ndice de m&uacute;ltiples 
+        columnas. Sin embargo, no puede crear un &iacute;ndice de m&uacute;ltiples 
+        columnas<br>
+        usando el atributo de clave PRIMARY KEY en una especificaci&oacute;n de 
+        columna. Hacerlo s&oacute;lo marca la columna como primaria.<br>
+        Debe usar una cl&aacute;usula PRIMARY KEY(index_col_name, ...) separada.<br>
+        &#8226; Si un &iacute;ndice PRIMARY KEY o UNIQUE consite s&oacute;lo de 
+        una columna que tenga un tipo entero, puede referirse a la columna como<br>
+        _rowid en comandos SELECT.<br>
+        &#8226; En MySQL, el nombre de una PRIMARY KEY es PRIMARY. Para otros 
+        &iacute;ndices, si no asigna un nombre, el &iacute;ndice tieen el mismo<br>
+        nombre que la primera columna indexada, con un sufijo opcional (_2, _3, 
+        ...) para hacerlo &uacute;nico. Puede ver los nombres<br>
+        de &iacute;ndice para una tabla usando SHOW INDEX FROM tbl_name. Consulte 
+        Secci&oacute;n 13.5.4.11, &#8220;Sintaxis de SHOW INDEX&#8221;.<br>
+        &#8226; A partir de MySQL 5.0, algunos motores de almacenamiento le permiten 
+        especificar un tipo de &iacute;ndice al crear el &iacute;ndice. Consulte<br>
+        Secci&oacute;n 13.1.4, &#8220;Sintaxis de CREATE INDEX&#8221;.<br>
+        Para m&aacute;s informaci&oacute;n acerca de c&oacute;mo usa los &iacute;ndices 
+        MySQL, consulte Secci&oacute;n 7.4.5, &#8220;C&oacute;mo utiliza MySQL 
+        los &iacute;ndices&#8221;.<br>
+        &#8226;<br>
+        En MySQL 5.0, s&oacute;lo los motores MyISAM, InnoDB, BDB, y MEMORY soporta 
+        &iacute;ndices en columnas que pueden tener valores<br>
+        NULL . En otros casos, debe declarar columnas indexadas como NOT NULL 
+        u ocurre un error.<br>
+        &#8226; Con sintaxis col_name(length) en una especificaci&oacute;n de 
+        &iacute;ndice, puede crear un &iacute;ndice que use s&oacute;lo los primeros 
+        length<br>
+        caracteres de una columna CHAR o VARCHAR . Indexar s&oacute;lo un prefijo 
+        de valores de columna como este puede hacer el fichero<br>
+        de &iacute;ndice mucho m&aacute;s peque&ntilde;o. Consulte Secci&oacute;n 
+        7.4.3, &#8220;&Iacute;ndices de columna&#8221;.<br>
+        En MySQL 5.0, los motores MyISAM y InnoDB soportan indexaci&oacute;n en 
+        columnas BLOB y TEXT . Al indexar columnas BLOB<br>
+        o TEXT debe especificar una longitud de prefijo para el &iacute;ndice. 
+        Por ejemplo:<br>
+        CREATE TABLE test (blob_col BLOB, INDEX(blob_col(10)));<br>
+        En MySQL 5.0, los prefijos pueden tener hasta 1000 bytes de longitud para 
+        tablas MyISAM y InnoDB y 255 bytes para otros<br>
+        tipos de tabla. Tenga en cuenta que los l&iacute;mites de prefijo se miden 
+        en bytes, mientras que la longitud de prefijo en comandos<br>
+        CREATE TABLE se interpretan como el n&uacute;mero de caracteres. Aseg&uacute;rese 
+        de tener esto en cuenta al especificar una longitud de<br>
+        prefijo para una columna que use un conjunto de caracteres multi-byte 
+        .<br>
+        &#8226; Una especificaci&oacute;n index_col_name puede acabar con ASC 
+        o DESC. Estas palabras clave se permiten para extensiones futuras<br>
+        para especificar almacenamiento de &iacute;ndices ascendente o descendentemente. 
+        Actualmente se parsean pero se ignoran; los<br>
+        valores de &iacute;ndice siempre se almacenan en orden ascendente.<br>
+        &#8226; Cuando usa ORDER BY o GROUP BY en una columna TEXT o BLOB en un 
+        SELECT, el servidor ordena los valores usando s&oacute;lo<br>
+        el n&uacute;mero inicial de bytes indicados por la variable de sistema 
+        max_sort_length . Consulte Secci&oacute;n 11.4.3, &#8220;Los tipos<br>
+        BLOB y TEXT&#8221;.<br>
+        &#8226; En MySQL 5.0, puede crear &iacute;ndices especiales FULLTEXT , 
+        que se usan para &iacute;ndices full-text . S&oacute;lo las tablas MyISAM 
+        soportan<br>
+        &iacute;ndices FULLTEXT . Pueden crearse s&oacute;lo desde columnas CHAR, 
+        VARCHAR, y TEXT. La indexaci&oacute;n siempre se hace sobre<br>
+        la columna entera; la indexaci&oacute;n parcial no se soporta y cualquier 
+        longitud de prefijo se ignora. Consulte Secci&oacute;n 12.7,<br>
+        &#8220;Funciones de b&uacute;squeda de texto completo (Full-Text)&#8221; 
+        para m&aacute;s detalles.<br>
+        &#8226; En MySQL 5.0, puede crear &iacute;ndices SPATIAL en tipos de columna 
+        espaciales. Los tipos espaciales se soportan s&oacute;lo para tablas<br>
+        MyISAM y las columnas indexadas deben declararase como NOT NULL. Consulte 
+        Cap&iacute;tulo 18, Extensiones espaciales de<br>
+        MySQL.<br>
+        &#8226; En MySQL 5.0, las tablas InnoDB soportan el chequeo de restricciones 
+        de claves for&aacute;neas . Consulte Cap&iacute;tulo 15, El motor de<br>
+        almacenamiento InnoDB. Tenga en cuenta que la sintaxis FOREIGN KEY en 
+        InnoDB es m&aacute;s restrictiva que la sintaxis presentada<br>
+        para el comando CREATE TABLE al inicio de esta secci&oacute;n: las columnas 
+        en la tabla referenciada debe siempre nombrarse<br>
+        expl&iacute;citamente. InnoDB soporta tanto acciones ON DELETE como ON 
+        UPDATE en MySQL 5.0. Para la sintaxis precisa,<br>
+        consulte Secci&oacute;n 15.6.4, &#8220;Restricciones (constraints) FOREIGN 
+        KEY&#8221;.<br>
+        Para otros motores de almacenamiento, MySQL Server parsea la sintaxis 
+        FOREIGN KEY y REFERENCES en comandos<br>
+        CREATE TABLE , pero no hace nada. La cl&aacute;usula CHECK se parsea paro 
+        se ignora en todos los motores de almacenamiento.<br>
+        Consulte Secci&oacute;n 1.7.5.5, &#8220;Claves for&aacute;neas (foreign 
+        keys)&#8221;.<br>
+        &#8226; Para tablas MyISAM cada columna NULL ocupa un bit extra, redondeado 
+        al byte m&aacute;s pr&oacute;ximo. La m&aacute;xima longitud de registro<br>
+        en bytes puede calcularse como sigue:<br>
+        row length = 1<br>
+        + (sum of column lengths)<br>
+        + (number of NULL columns + delete_flag + 7)/8<br>
+        + (number of variable-length columns)<br>
+        delete_flag es 1 para tables con formato de registro est&aacute;tico. 
+        Las tablas est&aacute;ticas usan un bit en el registro para un flag que<br>
+        indica si el registro se ha borrado. delete_flag es 0 para tablas din&aacute;micas 
+        ya que el flag se almacena en una cabecera de re-<br>
+        gistro din&aacute;mica.<br>
+        Estos c&aacute;lculos no se aplican en tablas InnoDB , en las que el tama&ntilde;o 
+        de almacenamiento no es distinto para columnas NULL y<br>
+        NOT NULL .<br>
+        La parte table_options de la sintaxis CREATE TABLE puede usarse desde 
+        MySQL 3.23.<br>
+        Las opciones ENGINE y TYPE especifican el motor de almacenamiento para 
+        la tabla. ENGINE es el nombre preferido para la opci&oacute;n<br>
+        en MySQL 5.0, y TYPE est&aacute; obsoleto. El soporte para la palabra 
+        TYPE usada en este contexto desaparecer&aacute; en MySQL 5.1.<br>
+        Las opciones ENGINE y TYPE pueden tener los siguientes valores:<br>
+        Motor de almacenamiento Descripci&oacute;n<br>
+        ARCHIVE El motor de almacenamiento para archivar. Consulte Secci&oacute;n 
+        14.7, &#8220;El motor de almacenamiento<br>
+        ARCHIVE&#8221;.<br>
+        BDB Tablas transaccionales con bloqueo de p&aacute;gina. Conocidas como 
+        BerkeleyDB. Consulte Secci&oacute;n<br>
+        14.4, &#8220;El motor de almacenamiento BDB (BerkeleyDB)&#8221;.<br>
+        CSV Tablas que almacenan registros en valores separados por comas. Consulte 
+        Secci&oacute;n 14.8, &#8220;El<br>
+        motor de almacenamiento CSV&#8221;.<br>
+        EXAMPLE Motor de ejemplo. Consulte Secci&oacute;n 14.5, &#8220;El motor 
+        de almacenamiento EXAMPLE&#8221;.<br>
+        FEDERATED Motor que accede a tablas remotas. Consulte Secci&oacute;n 14.6, 
+        &#8220;El motor de almacenamiento FEDERATED&#8221;.<br>
+        HEAP Consulte Secci&oacute;n 14.3, &#8220;El motor de almacenamiento MEMORY 
+        (HEAP)&#8221;.<br>
+        (OBSOLETE) ISAM No disponible en MySQL 5.0. Si est&aacute; actualizando 
+        a MySQL 5.0 desde una versi&oacute;n pr&eacute;via, debe<br>
+        convertir cualquier tabla ISAM existente a MyISAM antes de la actualizaci&oacute;n. 
+        Consulte Cap&iacute;tulo<br>
+        14, Motores de almacenamiento de MySQL y tipos de tablas.<br>
+        InnoDB Tablas transaccionales con bloqueo de registro y claves for&aacute;neas. 
+        Consulte Cap&iacute;tulo 15, El motor<br>
+        de almacenamiento InnoDB.<br>
+        MEMORY Los datos de este tipo de tabla se almacenan s&oacute;lo en memoria. 
+        (Conocido anteriormente como<br>
+        HEAP.)<br>
+        MERGE Colecci&oacute;n de tablas MyISAM usadas como una sola tabla. Tambi&eacute;n 
+        conocido como<br>
+        MRG_MyISAM. Consulte Secci&oacute;n 14.2, &#8220;El motor de almacenamiento 
+        MERGE&#8221;.<br>
+        MyISAM Motor binario portable que es el motor por defecto usado en MySQL. 
+        Consulte Secci&oacute;n 14.1,<br>
+        &#8220;El motor de almacenamiento MyISAM&#8221;.<br>
+        NDBCLUSTER Clusterizado, tolerante a errores, tablas en memoria. Tambi&eacute;n 
+        conocido como NDB. Consulte<br>
+        Cap&iacute;tulo 16, MySQL Cluster.<br>
+        Para m&aacute;s informaci&oacute;n acerca de motores MySQL, consulte Cap&iacute;tulo 
+        14, Motores de almacenamiento de MySQL y tipos de tablas.<br>
+        Si un motor no est&aacute; disponible, MySQL usa en su lugar MyISAM . 
+        Por ejemplo, si una definici&oacute;n de tabla incluye la opci&oacute;n 
+        ENGINE=<br>
+        BDB pero el servidor MySQL no soporta tablas BDB , la tabla se crea como 
+        MyISAM . Esto hace posible tener un entorno de<br>
+        replicaci&oacute;n donde tiene tablas transaccionales en el maestro pero 
+        tablas no transaccionales en el esclavo (para tener m&aacute;s velocidad).<br>
+        En MySQL 5.0, aparece una advertencia si la especificaci&oacute;n del 
+        motor no es correcta.<br>
+        Las otras opciones de tabla se usan para optimizar el comportamiento de 
+        la tabla. En la mayor&iacute;a de casos, no tiene que especificar<br>
+        ninguna de ellas. La opci&oacute;n funciona para todos los motores a no 
+        ser que se indique lo contrario:<br>
+        &#8226; AUTO_INCREMENT<br>
+        El valor inicial para AUTO_INCREMENT para la tabla. En MySQL 5.0, s&oacute;lo 
+        funciona para tablas MyISAM y MEMORY. Tambi&eacute;n<br>
+        se soporta para InnoDB desde MySQL 5.0.3. Para inicializar el primer valor 
+        de auto incremento para motores que no soporten<br>
+        esta opci&oacute;n, inserte un registro de prueba con un valor que sea 
+        uno menor al deseado tras crear la tabla, y luego borre este<br>
+        registro.<br>
+        Para motores que soportan la opci&oacute;n de tabla AUTO_INCREMENT en 
+        comandos CREATE TABLE puede usar ALTER TABLE<br>
+        tbl_name AUTO_INCREMENT = n para resetear el valor AUTO_INCREMENT .<br>
+        &#8226; AVG_ROW_LENGTH<br>
+        Una aproximaci&oacute;n de la longitud media de registro para su tabla. 
+        Necesita inicializarla s&oacute;lo para tablas grandes con registros de<br>
+        longitud variable.<br>
+        Cuando crea una tabla MyISAM , MySQL usa el producto de las opciones MAX_ROWS 
+        y AVG_ROW_LENGTH para decidir el tama&ntilde;o<br>
+        de la tabla resultante. Si no las especifica, el tama&ntilde;o m&aacute;ximo 
+        para la tabla es 65,536TB de datos (4GB antes de MySQL<br>
+        5.0.6). (Si su sistema operativo no soporta ficheros de este tama&ntilde;o, 
+        los tama&ntilde;os de fichero se restringen al l&iacute;mite del sistema<br>
+        operativo.) Si quiere mantener bajos los tama&ntilde;os de los punteros 
+        para que el &iacute;ndice sea peque&ntilde;o y r&aacute;pido y no necesita 
+        realmente<br>
+        ficheros grandes, puede decrementar el tama&ntilde;o de puntero por defecto 
+        mediante la variable de sistema myisam_<br>
+        data_pointer_size que se a&ntilde;adi&oacute; en MySQL 4.1.2. (Consulte 
+        Secci&oacute;n 5.3.3, &#8220;Variables de sistema del servidor&#8221;.)<br>
+        Si quiere que todas sus tablas sean capaces de crecer por encima del l&iacute;mite 
+        por defecto y quiere mantener sus tablas ligeramente<br>
+        m&aacute;s lentas y m&aacute;s grandes de lo necesario, puede incrementar 
+        el tama&ntilde;o de punter por defecto cambiando esta variable.<br>
+        &#8226; [DEFAULT] CHARACTER SET<br>
+        Especifica el conjunto de caracteres para la tabla. CHARSET es un sin&oacute;nimo.<br>
+        para CHARACTER SET.<br>
+        &#8226; COLLATE<br>
+        Especifica la colaci&oacute;n por defecto de la tabla.<br>
+        &#8226; CHECKSUM<br>
+        P&oacute;ngalo a 1 si quiere que MySQL mantenga un checksum para todos 
+        los registros (un checksum que MySQL actualiza autom&aacute;ticamente<br>
+        seg&uacute;n cambia la tabla). Esto hace que la tabla tenga actualizaciones 
+        m&aacute;s lentas, pero hace m&aacute;s f&aacute;cil encontrar tablas<br>
+        corruptas. El comando CHECKSUM TABLE muestra el checksum (s&oacute;lo 
+        para MyISAM).<br>
+        &#8226; COMMENT<br>
+        Un comentario para su tabla, hasta 60 caracteres.<br>
+        &#8226; MAX_ROWS<br>
+        M&aacute;ximo n&uacute;mero de registros que planea almacenar en la tabla. 
+        No es un l&iacute;mite absoluto, sino un indicador que la tabla debe ser<br>
+        capaz de almacenar al menos estos registros.<br>
+        &#8226; MIN_ROWS<br>
+        M&iacute;nimo n&uacute;mero de registros que planea almacenar en la tabla.<br>
+        &#8226; PACK_KEYS<br>
+        Ponga esta opci&oacute;n a 1 si quiere tener &iacute;ndices m&aacute;s 
+        peque&ntilde;os. Esto hace normalmente que las actualizaciones sean m&aacute;s 
+        lentas y<br>
+        las lecturas m&aacute;s r&aacute;pidas. Poner esta opci&oacute;n a 0 deshabilita 
+        la compresi&oacute;n de claves. Ponerla a DEFAULT le dice al motor que<br>
+        comprima s&oacute;lo columnas CHAR/VARCHAR largas (MyISAM y ISAM s&oacute;lo).<br>
+        Si no usa PACK_KEYS, por defecto se comprimen s&oacute;lo cadenas, no 
+        n&uacute;meros. Si usa PACK_KEYS=1, tambi&eacute;n se empaquetan<br>
+        n&uacute;meros.<br>
+        Al comprimir claves de n&uacute;meros binarios, MySQL usa compresi&oacute;n 
+        de prefijo:<br>
+        &#8226; Cada clave necesita un byte extra para indicar cu&aacute;ntos 
+        bytes de la clave previa son los mismos para la siguiente clave.<br>
+        &#8226; El puntero al registro se almacena en orden de el-mayor-byte-primero 
+        directamente tras la clave, para mejorar la compresi&oacute;n.<br>
+        Esto significa que si tiene muchas claves iguales en dos registros consecutivos, 
+        todas las &#8220;mismas&#8221; claves siguientes usualmente<br>
+        s&oacute;lo ocupan dos bytes (incluyendo el puntero al registro). Comparar 
+        esto con el caso ordinario donde las siguente claves ocupan<br>
+        storage_size_for_key + pointer_size (donde el tama&ntilde;o del puntero 
+        es usualmente 4). Obtiene un gran beneficio<br>
+        a partir de la compresi&oacute;n de prefijos s&ntilde;olo si tiene muchos 
+        n&uacute;meros que sean el mismo. Si todas las claves son totalmente<br>
+        distintas, usa un byte m&aacute;s por clave, si la clave no es una clave 
+        que pueda tener valores NULL . (En ese caso, el tama&ntilde;o empaquetado<br>
+        de la clave se almacena en el mismo byte que se usa para marcar si una 
+        clave es NULL.)<br>
+        &#8226; PASSWORD<br>
+        Encripta el fichero .frm con una contrase&ntilde;a. Esta opci&oacute;n 
+        no hace nada en la versi&oacute;n est&aacute;ndar de MySQL.<br>
+        &#8226; DELAY_KEY_WRITE<br>
+        P&oacute;ngalo a 1 si quiere retardar actualizaciones de clave para la 
+        tabla hasta que la tabla se cierra (s&oacute;lo en MyISAM).<br>
+        &#8226; ROW_FORMAT<br>
+        Define c&oacute;mo deben almacenarse los registros. Actualmente esta opci&oacute;n 
+        s&oacute;lo funciona con tablas MyISAM. El valor de la opci&oacute;n<br>
+        puede ser FIXED o DYNAMIC para formato de longitud est&aacute;tica o variable. 
+        myisampack cambia el tipo a COMPRESSED.<br>
+        Consulte Secci&oacute;n 14.1.3, &#8220;Formatos de almacenamiento de tablas 
+        MyISAM&#8221;.<br>
+        Desde MySQL/InnoDB-5.0.3, los registros de InnoDB se almacenan de forma 
+        m&aacute;s compacta (ROW_FORMAT=COMPACT) por<br>
+        defecto. El antiguo formato puede usarse espeficicando ROW_FORMAT=REDUNDANT.<br>
+        &#8226; RAID_TYPE<br>
+        Tenga en cuenta que el soporte para RAID se ha eliminado desde MySQL 5.0. 
+        Para informaci&oacute;n sobre RAID, consulte Manual<br>
+        de referencia de MySQL 4.1.<br>
+        &#8226; UNION<br>
+        UNION se usa cuando quiere usar una colecci&oacute;n de tablas id&eacute;nticas 
+        como una. Funciona s&oacute;lo con tablas MERGE . Consulte Secci&oacute;n<br>
+        14.2, &#8220;El motor de almacenamiento MERGE&#8221;.<br>
+        En MySQL 5.0, debe tener permisos SELECT, UPDATE, y DELETE para las tablas 
+        mapeadas en una tabla MERGE . (Nota: Originalmente,<br>
+        todas las tablas usadas ten&iacute;an que estar en la misma base de datos 
+        que la tabla MERGE. Esta restricci&oacute;n se ha eliminado.)<br>
+        &#8226; INSERT_METHOD<br>
+        Si quiere insertar datos en una tabla MERGE debe especificarlo con INSERT_METHOD 
+        en la tabla en que se debe insertar el registro.<br>
+        INSERT_METHOD es una opci&oacute;n &uacute;til para tablas MERGE s&oacute;lo. 
+        Use un valor dee FIRST o LAST para que las inserciones<br>
+        vayan a la primera o &uacute;ltima tabla, o un valor de NO para evitar 
+        inserciones. Consulte Secci&oacute;n 14.2, &#8220;El motor de almacenamiento<br>
+        MERGE&#8221;.<br>
+        &#8226; DATA DIRECTORY, INDEX DIRECTORY<br>
+        Usando DATA DIRECTORY='directory' o INDEX DIRECTORY='directory' puede 
+        especificar d&oacute;nde debe el moto<br>
+        MyISAM buardar un fichero de datos e &iacute;ndice de una tabla. Tenga 
+        en cuenta que el directorio debe ser una ruta completa al<br>
+        directorio (no una ruta relativa).<br>
+        Estas opciones s&oacute;lo funcionan cuando no usa la opci&oacute;n --skip-symbolic-links 
+        . Su sistema operativo debe tener una<br>
+        llamada realpath() que funcione bien. Consulte Secci&oacute;n 7.6.1.2, 
+        &#8220;Utilizaci&oacute;n de enlaces simb&oacute;licos para tablas en 
+        Unix&#8221;<br>
+        para m&aacute;s informaci&oacute;n.<br>
+        En MySQL 5.0, puede crear una tabla de otra a&ntilde;adiendo un comando 
+        SELECT al final del comando CREATE TABLE :<br>
+        CREATE TABLE new_tbl SELECT * FROM orig_tbl;<br>
+        MySQL crea nuevas columnas para todos los elementos en un SELECT. Por 
+        ejemplo:<br>
+        mysql&gt; CREATE TABLE test (a INT NOT NULL AUTO_INCREMENT,<br>
+        -&gt; PRIMARY KEY (a), KEY(b))<br>
+        -&gt; TYPE=MyISAM SELECT b,c FROM test2;<br>
+        Esto crea una tabla MyISAM con tres columnas, a, b, y c. Tenga en cuenta 
+        que las columnas para el comando SELECT se a&ntilde;aden a<br>
+        la derecha de la tabla, no se sobreescriben en la misma. Consulte el siguiente 
+        ejemplo:<br>
+        mysql&gt; SELECT * FROM foo;<br>
+        +---+<br>
+        | n |<br>
+        +---+<br>
+        | 1 |<br>
+        +---+<br>
+        mysql&gt; CREATE TABLE bar (m INT) SELECT n FROM foo;<br>
+        Query OK, 1 row affected (0.02 sec)<br>
+        Records: 1 Duplicates: 0 Warnings: 0<br>
+        mysql&gt; SELECT * FROM bar;<br>
+        +------+---+<br>
+        | m | n |<br>
+        +------+---+<br>
+        | NULL | 1 |<br>
+        +------+---+<br>
+        1 row in set (0.00 sec)<br>
+        Para cada registro en la tabla foo, se inserta un registro en bar con 
+        los valores de foo y valores por defecto para las nuevas columnas:<br>
+        Si hay cualquier error al copiar los datos a la tabla, se borra autom&aacute;ticamente 
+        y no se crea.<br>
+        CREATE TABLE ... SELECT no crea ning&uacute;n &iacute;ndice autom&aacute;ticamente. 
+        Se hace a prop&oacute;sito para hacer el comando lo m&aacute;s flexible<br>
+        posible. Si quiere tener &iacute;ndices en la tabla creada, debe especificarlo 
+        antes del comando SELECT :<br>
+        mysql&gt; CREATE TABLE bar (UNIQUE (n)) SELECT n FROM foo;<br>
+        Algunas conversiones de tipos de columnas pueden ocurrir. Por ejemplo, 
+        el atributo AUTO_INCREMENT no se preserva, y las columnas<br>
+        VARCHAR pueden ser CHAR .<br>
+        Al crear una tabla con CREATE ... SELECT, asegur&eacute;se de poner un 
+        alias para cualquier llamada a funci&oacute;n o expresi&oacute;n en la<br>
+        consulta. Si no lo hace, el comando CREATE puede fallar o crear nombres 
+        de columnas no deseados.<br>
+        CREATE TABLE artists_and_works<br>
+        SELECT artist.name, COUNT(work.artist_id) AS number_of_works<br>
+        FROM artist LEFT JOIN work ON artist.id = work.artist_id<br>
+        GROUP BY artist.id;<br>
+        Puede especificar expl&iacute;citamente el tipo de una columna generada:<br>
+        CREATE TABLE foo (a TINYINT NOT NULL) SELECT b+1 AS a FROM bar;<br>
+        En MySQL 5.0, use LIKE para crear una tabla vac&iacute;a basada en la 
+        definici&oacute;n de otra tabla, incluyendo cualquier atributo de columna<br>
+        e &iacute;ndice definido en la tabla original:<br>
+        CREATE TABLE new_tbl LIKE orig_tbl;<br>
+        CREATE TABLE ... LIKE no copia ninguna opci&oacute;n de tabla DATA DIRECTORY 
+        o INDEX DIRECTORY especificadas en la<br>
+        tabla original, ni ninguna definici&oacute;n de clave for&aacute;nea.<br>
+        Puede preceder SELECT con IGNORE o REPLACE para indicar c&oacute;mo tratar 
+        registros que dupliquen claves &uacute;nicas. Con IGNORE,<br>
+        los nuevos registros que duplican un registro &uacute;nico existente se 
+        descartan. Con REPLACE, los nuevos registros reemplazan a los<br>
+        antiguos con el mismo valor. Si ni IGNORE ni REPLACE se indican, los valores 
+        &uacute;nicos duplicados dan un error.<br>
+        Para asegurar que el log de update o binario puede usarse para recrear 
+        tablas originales, MySQL no permite inserciones concurrentes<br>
+        durante CREATE TABLE ... SELECT.<br>
+        <h3>Cambios t&aacute;citos en la especificaci&oacute;n de columnas</h3><br>
+        En algunos casos, MySQL cambia especificaciones de columnas silencioasmente 
+        de las dadas en un comando CREATE TABLE o<br>
+        ALTER TABLE . Pueden ser cambiso a un tipo de datos, a atributos asociados 
+        con un tipo de datos o a una especificaci&oacute;n de &iacute;ndice.<br>
+        Los posibles cambios de tipos de datos se dan en la siguiente lista. Ocurren 
+        antes de MySQL 5.0.3. Desde 5.0.3, ocurre un error si<br>
+        no se puede crear una columna usando el tipo de datos especificado.<br>
+        &#8226; Columnas VARCHAR con una longitudo menor que cuatro se cambian 
+        a CHAR.<br>
+        &#8226; Si cualquier columna en una tabla tiene una longitud variable, 
+        el registro entero pasa a tener longitud variable. Por lo tanto, si<br>
+        una tabla contiene cualquier columna de longitud variable (VARCHAR, TEXT, 
+        o BLOB), toda columna CHAR con m&aacute;s de tres<br>
+        caracteres se cambia a columna VARCHAR . Esto no afecta c&oacute;mo usa 
+        las columnas en ning&uacute;n modo; en MySQL, VARCHAR es<br>
+        s&oacute;lo un modo distinto de almacenar caracteres. MySQL realiza esta 
+        conversi&oacute;n porque ahorra espacio y hacer las operaciones<br>
+        de tabla m&aacute;s r&aacute;pidas. Consulte Cap&iacute;tulo 14, Motores 
+        de almacenamiento de MySQL y tipos de tablas.<br>
+        &#8226; Antes de MySQL 5.0.3, una columna CHAR o VARCHAR con una longitud 
+        mayor a 255 se convierte al tipo TEXT m&aacute;s peque&ntilde;o<br>
+        que puede contener valores de la longitud dada. Por ejemplo, VARCHAR(500) 
+        se convierte en TEXT, y VARCHAR(200000)<br>
+        se convierte en MEDIUMTEXT. Tenga en cuenta que esta conversi&oacute;n 
+        resulta en un cambio de comportamiento del tratamiento<br>
+        de espacios finales.<br>
+        Conversiones similares ocurren para BINARY y VARBINARY, excepto que se 
+        convierten en tipo BLOB.<br>
+        Desde MySQL 5.0.3, una columna CHAR o BINARY con una longitud mayor a 
+        255 no se convierte silenciosamente . En su lugar,<br>
+        ocurre un error. Desde MySQL 5.0.6 , la conversi&oacute;n silenciosa de 
+        columnas VARCHAR y VARBINARY con una longitudo<br>
+        mayor a 65,535 no ocurre si el modo estricto SQL est&aacute; activado. 
+        En su lugar, ocurre un error.<br>
+        &#8226; Para una especificaci&oacute;n de DECIMAL(M,D), si M no es mayor 
+        que D, se ajusta por encima. Por ejemplo DECIMAL(10,10)<br>
+        pasa a ser DECIMAL(11,10).<br>
+        Otros cambios de columna incluyen cambios de atributos o especficaci&oacute;n 
+        de &iacute;ndice:<br>
+        &#8226; Los tama&ntilde;os de muestra de TIMESTAMP se descartan. Tenga 
+        en cuenta que columnas TIMESTAMP han cambiado considrablemente<br>
+        en versiones recientes de MySQL anteriores a 5.0; para una descripci&oacute;n, 
+        consulte Manual de referencia de MySQL 4.1.<br>
+        &#8226; Las columnas que son parte de PRIMARY KEY son NOT NULL incluso 
+        si no se declaran como tales.<br>
+        &#8226; Los espacios finales se borran autom&aacute;ticamente para ENUM 
+        y SET cuando se crea la tabla.<br>
+        &#8226; MySQL mapea ciertos tipos de columna usados por otras bases de 
+        datos SQL a tipos MySQL . Consulte Secci&oacute;n 11.7, &#8220;Usar tipos<br>
+        de columnas de otros motores de bases de datos&#8221;.<br>
+        &#8226; Si incluye una cl&aacute;usula USING para especificar un tipo 
+        de &iacute;ndice que no sea legal para un motor de almacenamiento dado, 
+        pero<br>
+        hay otro tipo de &iacute;ndice disponible que puede usar el motor sin 
+        afectar el resultado de la consulta, el motor usa el tipo disponible.<br>
+        Para ver si MySQL usa un tipo de columna distinto al especificado, realice 
+        un comando DESCRIBE o SHOW CREATE TABLE<br>
+        tras crear o alterar la tabla.<br>
+        Otros cambios de tipo de columna pueden ocurrir si comprime una tabla 
+        usando myisampack. </p>
+        </td>
+    <td>&nbsp;</td>
+    <td><a href="http://www.euskalnet.net/juanarana/oraclezip/Ejer3.rar"><img src="../../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td>
+<div align="right"><a href="http://www.euskalnet.net/juanarana/index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a>
+      </div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

@@ -1,0 +1,423 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Funciones</title>
+<META http-equiv=Content-Language content=es>
+<META content="Manual JSTL, ejemplos JSTL, codigos JSTL" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Manual JSTL, ejemplos JSTL, codigos JSTL">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2> Funciones</h2></td>
+  </tr>
+    
+  <tr> 
+    <td height="39" colspan="3">
+<p><o:p></o:p>
+
+<h3><span style='font-size:10.0pt'>Funciones EL</span><o:p></o:p></h3>
+
+<p class=sect2><span style='font-size:10.0pt'>Las funciones representan un modo
+de extender la funcionalidad del lenguaje de expresiones. Se usan dentro de
+cualquier expresión EL, ejemplo:</span> <o:p></o:p></p>
+
+<pre>Mi nombre de usuario tiene ${fn:length(username)} letras.<o:p></o:p></pre>
+
+<p class=sect2><span style='font-size:10.0pt'>En el descriptor de la biblioteca 
+        de funciones, se establece una correspondencia entre el nombre de la función 
+        y un método estático de una clase Java: </span><o:p></o:p></p>
+
+<pre><span lang=EN style='mso-ansi-language:EN'>&lt;function&gt;<o:p></o:p></span></pre><pre><span
+lang=EN style='mso-ansi-language:EN'><span style='mso-spacerun:yes'>  </span>&lt;description&gt;<o:p></o:p></span></pre><pre><span
+lang=EN style='mso-ansi-language:EN'><span style='mso-spacerun:yes'>    </span>Returns the number of items in a collection <o:p></o:p></span></pre><pre><span
+lang=EN style='mso-ansi-language:EN'><span style='mso-spacerun:yes'>    </span>or the number of characters in a string.<o:p></o:p></span></pre><pre><span
+lang=EN style='mso-ansi-language:EN'><span style='mso-spacerun:yes'>  </span>&lt;/description&gt;<o:p></o:p></span></pre><pre><span
+lang=EN style='mso-ansi-language:EN'><span style='mso-spacerun:yes'>  </span>&lt;name&gt;length&lt;/name&gt;<o:p></o:p></span></pre><pre><span
+lang=EN style='mso-ansi-language:EN'><span style='mso-spacerun:yes'>  </span>&lt;function-class&gt;<o:p></o:p></span></pre><pre><span
+lang=EN style='mso-ansi-language:EN'><span style='mso-spacerun:yes'>    </span>org.apache.taglibs.standard.functions.Functions<o:p></o:p></span></pre><pre><span
+lang=EN style='mso-ansi-language:EN'><span style='mso-spacerun:yes'>  </span>&lt;/function-class&gt;<o:p></o:p></span></pre><pre><span
+lang=EN style='mso-ansi-language:EN'><span style='mso-spacerun:yes'>  </span>&lt;function-signature&gt;<o:p></o:p></span></pre><pre><span
+lang=EN style='mso-ansi-language:EN'><span style='mso-spacerun:yes'>    </span>int length(java.lang.Object)<o:p></o:p></span></pre><pre><span
+lang=EN style='mso-ansi-language:EN'><span style='mso-spacerun:yes'>  </span></span>&lt;/function-signature&gt;<o:p></o:p></pre><pre>&lt;/function&gt;<o:p></o:p></pre>
+
+<p class=sect2><span style='font-size:10.0pt'>En JSTL 1.1 existen 16 funciones
+de manipulación de cadenas: </span><o:p></o:p></p>
+
+      <p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l26 level1 lfo15;
+tab-stops:list 36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Symbol;mso-fareast-font-family:Symbol;
+mso-bidi-font-family:Symbol'><span style='mso-list:Ignore'>·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+        </span></span></span> <span style='font-size:10.0pt'>Alternar una cadena 
+        entre mayúsculas/minúsculas: </span><tt><span style='font-size:10.0pt'>toLowerCase</span></tt><span
+style='font-size:10.0pt'>, </span><tt><span style='font-size:10.0pt'>toUpperCase</span></tt><span
+style='font-size:10.0pt'>.</span><o:p></o:p></p>
+      <p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l26 level1 lfo15;
+tab-stops:list 36.0pt'> <span lang=EN style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Symbol;mso-fareast-font-family:
+Symbol;mso-bidi-font-family:Symbol;mso-ansi-language:EN'><span
+style='mso-list:Ignore'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+        </span></span></span><span lang=EN style='font-size:10.0pt;
+mso-ansi-language:EN'>Obtener una subcadena: </span><tt><span lang=EN
+style='font-size:10.0pt;mso-ansi-language:EN'>substring</span></tt><span
+lang=EN style='font-size:10.0pt;mso-ansi-language:EN'>, </span><tt><span
+lang=EN style='font-size:10.0pt;mso-ansi-language:EN'>substringAfter</span></tt><span
+lang=EN style='font-size:10.0pt;mso-ansi-language:EN'>, </span><tt><span
+lang=EN style='font-size:10.0pt;mso-ansi-language:EN'>substringBefore</span></tt><span
+lang=EN style='font-size:10.0pt;mso-ansi-language:EN'>.</span><span lang=EN
+style='mso-ansi-language:EN'><o:p></o:p></span></p>
+      <p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l26 level1 lfo15;
+tab-stops:list 36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Symbol;mso-fareast-font-family:Symbol;
+mso-bidi-font-family:Symbol'><span style='mso-list:Ignore'>·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+        </span></span></span> <span style='font-size:10.0pt'>Eliminar el espacio 
+        en blanco en ambos extremos de una cadena: </span><tt><span
+style='font-size:10.0pt'>trim</span></tt><span style='font-size:10.0pt'>.</span><o:p></o:p></p>
+      <p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l26 level1 lfo15;
+tab-stops:list 36.0pt'> <span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Symbol;mso-fareast-font-family:Symbol;
+mso-bidi-font-family:Symbol'><span style='mso-list:Ignore'>·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+        </span></span></span><span style='font-size:10.0pt'>Reemplazar caracteres 
+        en una cadena: </span><tt><span style='font-size:10.0pt'>replace</span></tt><span
+style='font-size:10.0pt'>.</span><o:p></o:p></p>
+      <p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l26 level1 lfo15;
+tab-stops:list 36.0pt'><span lang=EN style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Symbol;mso-fareast-font-family:
+Symbol;mso-bidi-font-family:Symbol;mso-ansi-language:EN'><span
+style='mso-list:Ignore'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+        </span></span></span> <span lang=EN style='font-size:10.0pt;
+mso-ansi-language:EN'>Comprobar si una cadena contiene a otra: </span><tt><span
+lang=EN style='font-size:10.0pt;mso-ansi-language:EN'>indexOf</span></tt><span
+lang=EN style='font-size:10.0pt;mso-ansi-language:EN'>, </span><tt><span
+lang=EN style='font-size:10.0pt;mso-ansi-language:EN'>startsWith</span></tt><span
+lang=EN style='font-size:10.0pt;mso-ansi-language:EN'>, </span><tt><span
+lang=EN style='font-size:10.0pt;mso-ansi-language:EN'>endsWith</span></tt><span
+lang=EN style='font-size:10.0pt;mso-ansi-language:EN'>, </span><tt><span
+lang=EN style='font-size:10.0pt;mso-ansi-language:EN'>contains</span></tt><span
+lang=EN style='font-size:10.0pt;mso-ansi-language:EN'>, </span><tt><span
+lang=EN style='font-size:10.0pt;mso-ansi-language:EN'>containsIgnoreCase</span></tt><span
+lang=EN style='font-size:10.0pt;mso-ansi-language:EN'>.</span><span lang=EN
+style='mso-ansi-language:EN'><o:p></o:p></span></p>
+      <p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l26 level1 lfo15;
+tab-stops:list 36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Symbol;mso-fareast-font-family:Symbol;
+mso-bidi-font-family:Symbol'><span style='mso-list:Ignore'>·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+        </span></span></span> <span style='font-size:10.0pt'>Convertir una cadena 
+        en array (</span><tt><span style='font-size:10.0pt'>split</span></tt><span
+style='font-size:10.0pt'>), o un array en cadena (</span><tt><span
+style='font-size:10.0pt'>join</span></tt><span style='font-size:10.0pt'>).</span><o:p></o:p></p>
+      <p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l26 level1 lfo15;
+tab-stops:list 36.0pt'> <span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Symbol;mso-fareast-font-family:Symbol;
+mso-bidi-font-family:Symbol'><span style='mso-list:Ignore'>·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+        </span></span></span><span style='font-size:10.0pt'>Codificar los caracteres 
+        especiales del XML: </span><tt><span style='font-size:10.0pt'>escapeXml</span></tt><span
+style='font-size:10.0pt'>.</span><o:p></o:p></p>
+
+      <p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l26 level1 lfo15;
+tab-stops:list 36.0pt'> <span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Symbol;mso-fareast-font-family:Symbol;
+mso-bidi-font-family:Symbol'><span style='mso-list:Ignore'>·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+        </span></span></span><span style='font-size:10.0pt'>Obtener la longitud 
+        de una cadena: </span><tt><span style='font-size:10.0pt'>length</span></tt><span
+style='font-size:10.0pt'>.</span><o:p></o:p></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt'>La función </span><tt><span
+style='font-size:10.0pt'>length</span></tt><span style='font-size:10.0pt'>
+
+también puede aplicarse a instancias de </span><tt><span style='font-size:10.0pt'>java.util.Collection</span></tt><span
+style='font-size:10.0pt'>, caso en el cual, devolverá el número de elementos de
+una colección. </span><o:p></o:p></p>
+
+<p class=sect2><span style='font-size:10.0pt'>Todas las funciones EL
+interpretan las variables no definidas o definidas con valor igual a </span><tt><span
+style='font-size:10.0pt'>null</span></tt><span style='font-size:10.0pt'>, como
+cadenas vacías.</span><o:p></o:p></p>
+
+      <h3><span style='font-size:10.0pt'>fn:contains</span><o:p></o:p></h3>
+
+<p class=sect3><span style='font-size:10.0pt'>Devuelve </span><tt><span
+style='font-size:10.0pt'>true</span></tt><span style='font-size:10.0pt'> si una
+cadena contiene a otra, </span><tt><span style='font-size:10.0pt'>false</span></tt><span
+style='font-size:10.0pt'> en caso contrario.</span><o:p></o:p></p>
+
+<pre>fn:contains(string, substring) &#8594; boolean<o:p></o:p></pre>
+
+<p class=sect3><span style='font-size:10.0pt'>Si la cadena a buscar es vacía,
+siempre existirá coincidencia.</span><o:p></o:p></p>
+
+<p class=sect3><span style='font-size:10.0pt'>Ejemplo:</span> <o:p></o:p></p>
+
+<pre>&lt;%-- Muestra un mensaje si la variable query contiene la cadena 'sex' --%&gt;<o:p></o:p></pre><pre><span
+lang=EN style='mso-ansi-language:EN'>&lt;c:if test=&quot;${fn:contains('sex', query)}&quot;&gt;<o:p></o:p></span></pre><pre><span
+lang=EN style='mso-ansi-language:EN'><span style='mso-spacerun:yes'>  </span>Access control configuration prevents your request from being allowed. <o:p></o:p></span></pre><pre><span
+lang=EN style='mso-ansi-language:EN'><span style='mso-spacerun:yes'>  </span>Offending word: sex<o:p></o:p></span></pre><pre><span
+????
+????º?
+lang=EN style='mso-ansi-language:EN'>&lt;/c:if&gt;<o:p></o:p></span></pre>
+
+<h3><span style='font-size:10.0pt'>fn:containsIgnoreCase</span><o:p></o:p></h3>
+
+<p class=sect3><span style='font-size:10.0pt'>Devuelve </span><tt><span
+style='font-size:10.0pt'>true</span></tt><span style='font-size:10.0pt'> si una
+cadena contiene a otra sin distinguir entre minúsculas/mayúsculas, </span><tt><span
+style='font-size:10.0pt'>false</span></tt><span style='font-size:10.0pt'> en
+caso contrario.</span><o:p></o:p></p>
+
+<pre>fn:containsIgnoreCase(string, substring) &#8594; boolean<o:p></o:p></pre>
+
+<p class=sect3><span style='font-size:10.0pt'>Si la cadena a buscar es vacía,
+siempre existirá coincidencia.</span><o:p></o:p></p>
+
+<p class=sect3><span style='font-size:10.0pt'>Ejemplo:</span> <o:p></o:p></p>
+
+<pre>&lt;%-- Muestra un mensaje si 'james stratchan' es subcadena de username <o:p></o:p></pre><pre><span style='mso-spacerun:yes'>     </span>sin distinguir entre mayúsculas o minúsculas. --%&gt;<o:p></o:p></pre><pre><span
+lang=EN style='mso-ansi-language:EN'>&lt;c:set var=&quot;username&quot; value=&quot;James Stratchan&quot;/&gt;<o:p></o:p></span></pre><pre><span
+lang=EN style='mso-ansi-language:EN'>&lt;c:if test=&quot;${fn:containsIgnoreCase('james stratchan', username)}&quot;&gt;<o:p></o:p></span></pre><pre><span
+lang=EN style='mso-ansi-language:EN'><span style='mso-spacerun:yes'>  </span>Hi James Stratchan!<o:p></o:p></span></pre><pre><span
+lang=EN style='mso-ansi-language:EN'>&lt;/c:if&gt;<o:p></o:p></span></pre>
+
+<h3><span style='font-size:10.0pt'>fn:endsWith</span><o:p></o:p></h3>
+
+<p class=sect3><span style='font-size:10.0pt'>Devuelve </span><tt><span
+style='font-size:10.0pt'>true</span></tt><span style='font-size:10.0pt'> si una
+cadena termina con el sufijo indicado, </span><tt><span style='font-size:10.0pt'>false</span></tt><span
+style='font-size:10.0pt'> en caso contrario.</span><o:p></o:p></p>
+
+      <pre>fn:endsWith(string, suffix) &#8594; boolean<o:p></o:p></pre>
+
+<p class=sect3><span style='font-size:10.0pt'>Si la cadena a buscar es vacía,
+siempre existirá coincidencia.</span><o:p></o:p></p>
+
+<p class=sect3><span lang=EN style='font-size:10.0pt;mso-ansi-language:EN'>Ejemplo:</span><span
+lang=EN style='mso-ansi-language:EN'> <o:p></o:p></span></p>
+
+<pre><span lang=EN style='mso-ansi-language:EN'>&lt;c:set var=&quot;username&quot; value=&quot;James Stratchan&quot;/&gt;<o:p></o:p></span></pre><pre><span
+lang=EN style='mso-ansi-language:EN'>&lt;c:if test=&quot;${fn:endsWith(username, 'tratchan')}&quot;&gt;<o:p></o:p></span></pre><pre><span
+lang=EN style='mso-ansi-language:EN'><span style='mso-spacerun:yes'>  </span>Hi James Stratchan!<o:p></o:p></span></pre><pre><span
+lang=EN style='mso-ansi-language:EN'>&lt;/c:if&gt;<o:p></o:p></span></pre>
+
+<h3><span style='font-size:10.0pt'>fn:escapeXml</span><o:p></o:p></h3>
+
+<p class=sect3><span style='font-size:10.0pt'>Codifica los caracteres que
+podrían ser interpretados como parte de las etiquetas XML.</span> <o:p></o:p></p>
+
+<pre><span lang=EN style='mso-ansi-language:EN'>fn:escapeXml(string) &#8594; String<o:p></o:p></span></pre>
+
+<p class=sect3><span lang=EN style='font-size:10.0pt;mso-ansi-language:EN'>Es
+equivalente a </span><tt><span lang=EN style='font-size:10.0pt;mso-ansi-language:
+EN'>c:out</span></tt><span lang=EN style='font-size:10.0pt;mso-ansi-language:
+EN'> con atributo </span><tt><span lang=EN style='font-size:10.0pt;mso-ansi-language:
+EN'>xmlEscape=&quot;true&quot;</span></tt><span lang=EN style='font-size:10.0pt;
+mso-ansi-language:EN'>.</span><span lang=EN style='mso-ansi-language:EN'><o:p></o:p></span></p>
+
+      <h3><span style='font-size:10.0pt'>fn:indexOf</span><o:p></o:p></h3>
+
+<p class=sect3><span style='font-size:10.0pt'>Devuelve el índice (empezando
+desde cero) dentro de una cadena donde comienza otra cadena especificada.</span>
+<o:p></o:p></p>
+
+<pre>fn:indexOf(string, substring) &#8594; int<o:p></o:p></pre>
+
+<p class=sect3><span ????
+????º?style='font-size:10.0pt'>Si la cadena a buscar es vacía
+devuelve cero (comienzo de la cadena). Si la cadena a buscar no se encuentra
+devuelve -1.</span><o:p></o:p></p>
+
+      <h3><span style='font-size:10.0pt'>fn:join</span><o:p></o:p></h3>
+
+<p class=sect3><span style='font-size:10.0pt'>Convierte en cadena los elementos
+de un array. El separador se usa para separar los elementos en la cadena
+resultante.</span> <o:p></o:p></p>
+
+<pre>fn:join(array, separator) &#8594; String<o:p></o:p></pre>
+
+<p class=sect3><span style='font-size:10.0pt'>Si el array es nulo devuelve la
+cadena vacía.</span><o:p></o:p></p>
+
+      <h3><span style='font-size:10.0pt'>fn:length</span><o:p></o:p></h3>
+
+<p class=sect3><span style='font-size:10.0pt'>Devuelve el número de caracteres
+en una cadena, o de elementos en una colección.</span> <o:p></o:p></p>
+
+<pre>fn:length(input) &#8594; integer<o:p></o:p></pre>
+
+<p class=sect3><span style='font-size:10.0pt'>Devuelve cero para cadenas
+vacías.</span><o:p></o:p></p>
+
+      <h3><span style='font-size:10.0pt'>fn:replace</span><o:p></o:p></h3>
+
+<p class=sect3><span style='font-size:10.0pt'>Recorre una cadena (</span><tt><span
+style='font-size:10.0pt'>inputString</span></tt><span style='font-size:10.0pt'>)
+reemplazando todas las ocurrencias de una cadena (</span><tt><span
+style='font-size:10.0pt'>beforeSubstring</span></tt><span style='font-size:
+10.0pt'>) por otra (</span><tt><span style='font-size:10.0pt'>afterSubstring</span></tt><span
+style='font-size:10.0pt'>).</span> <o:p></o:p></p>
+
+<pre><span lang=EN style='mso-ansi-language:EN'>fn:replace(inputString, beforeSubstring, afterSubstring) &#8594; String<o:p></o:p></span></pre>
+
+<p class=sect3><span style='font-size:10.0pt'>El texto reemplazado no es vuelto
+a procesar para realizar más reemplazos. Si </span><tt><span style='font-size:
+10.0pt'>afterSubstring</span></tt><span style='font-size:10.0pt'> es vacía se
+eliminan todas las ocurrencias de </span><tt><span style='font-size:
+10.0pt'>beforeSubstring</span></tt><span
+style='font-size:10.0pt'>.</span><o:p></o:p></p>
+
+      <h3><span style='font-size:10.0pt'>fn:split</span><o:p></o:p></h3>
+
+<p class=sect3><span style='font-size:10.0pt'>Divide una cadena en subcadenas,
+usando como separador cualquier carácter de otra cadena. Los caracteres de la
+segunda cadena no forman parte del resultado.</span> <o:p></o:p></p>
+
+<pre><span lang=EN style='mso-ansi-language:EN'>fn:split(string, delimiters) &#8594; String[]<o:p></o:p></span></pre>
+
+<p class=sect3><span style='font-size:10.0pt'>No se realiza reemplazo alguno
+cuando: </span><o:p></o:p></p>
+
+      <p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l1 level1 lfo16;
+tab-stops:list 36.0pt'> <span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Symbol;mso-fareast-font-family:Symbol;
+mso-bidi-font-family:Symbol'><span style='mso-list:Ignore'>·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+        </span></span></span><span style='font-size:10.0pt'>La cadena a dividir 
+        es vacía (se devuelve la cadena vacía).</span><o:p></o:p></p>
+      <p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l1 level1 lfo16;
+tab-stops:list 36.0pt'> <span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Symbol;mso-fareast-font-family:Symbol;
+mso-bidi-font-family:Symbol'><span style='mso-list:Ignore'>·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+        </span></span></span><span style='font-size:10.0pt'>La cadena de delimitadores 
+        es vacía (se devuelve la cadena original).</span><o:p></o:p></p>
+      <h3><span style='font-size:10.0pt'>fn:startsWith</span><o:p></o:p></h3>
+
+<p class=sect3><span style='font-size:10.0pt'>Comprueba si una cadena comienza
+por otra.</span> <o:p></o:p></p>
+
+<pre>fn:startsWith(string, prefix) &#8594; boolean<o:p></o:p></pre>
+
+<p class=sect3><span style='font-size:10.????
+????º?0pt'>Devuelve </span><tt><span
+style='font-size:10.0pt'>true</span></tt><span style='font-size:10.0pt'> si la
+cadena a buscar es vacía.</span><o:p></o:p></p>
+
+      <h3><span style='font-size:10.0pt'>fn:substring</span><o:p></o:p></h3>
+
+<p class=sect3><span style='font-size:10.0pt'>Devuelve un subconjunto de una
+cadena. Los índices comienzan en cero. La cadena resultante comienza en </span><tt><span
+style='font-size:10.0pt'>beginIndex</span></tt><span style='font-size:10.0pt'>
+y llega hasta el caracter en </span><tt><span style='font-size:10.0pt'>endIndex-1</span></tt><span
+style='font-size:10.0pt'> (incluido). </span><span lang=EN style='font-size:
+10.0pt;mso-ansi-language:EN'>La longitud de la cadena es </span><tt><span
+lang=EN style='font-size:10.0pt;mso-ansi-language:EN'>endIndex-beginIndex</span></tt><span
+lang=EN style='font-size:10.0pt;mso-ansi-language:EN'>.</span><span lang=EN
+style='mso-ansi-language:EN'> <o:p></o:p></span></p>
+
+<pre><span lang=EN style='mso-ansi-language:EN'>fn:substring(string, beginIndex, endIndex) &#8594; String<o:p></o:p></span></pre>
+
+<p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l25 level1 lfo17;
+tab-stops:list 36.0pt'> <span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Symbol;mso-fareast-font-family:Symbol;
+mso-bidi-font-family:Symbol'><span style='mso-list:Ignore'>·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+        </span></span></span><span style='font-size:10.0pt'>Si </span><tt><span
+style='font-size:10.0pt'>beginIndex</span></tt><span style='font-size:10.0pt'> 
+        es menor que cero se ajusta su valor a cero.</span><o:p></o:p></p>
+
+      <p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l25 level1 lfo17;
+tab-stops:list 36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Symbol;mso-fareast-font-family:Symbol;
+mso-bidi-font-family:Symbol'><span style='mso-list:Ignore'>·<span
+style='font:7.0pt????
+????º? "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span></span> 
+        <span style='font-size:10.0pt'>Si </span><tt><span
+style='font-size:10.0pt'>beginIndex</span></tt><span style='font-size:10.0pt'> 
+        es mayor que la longitud de la cadena se ajusta su valor a la longitud 
+        de la cadena.</span><o:p></o:p></p>
+
+      <p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l25 level1 lfo17;
+tab-stops:list 36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Symbol;mso-fareast-font-family:Symbol;
+mso-bidi-font-family:Symbol'><span style='mso-list:Ignore'>·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+        </span></span></span> <span style='font-size:10.0pt'>Si </span><tt><span
+style='font-size:10.0pt'>endIndex</span></tt><span style='font-size:10.0pt'> es 
+        menor que cero o mayor que la longitud de la cadena, se ajusta su valor 
+        a la longitud de la cadena.</span><o:p></o:p></p>
+
+      <p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l25 level1 lfo17;
+tab-stops:list 36.0pt'> <span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Symbol;mso-fareast-font-family:Symbol;
+mso-bidi-font-family:Symbol'><span style='mso-list:Ignore'>·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+        </span></span></span> <span style='font-size:10.0pt'>Si </span><tt><span
+style='font-size:10.0pt'>endIndex</span></tt><span style='font-size:10.0pt'> es 
+        menor que </span><tt><span style='font-size:10.0pt'>beginIndex</span></tt><span
+style='font-size:10.0pt'> se devuelve una cadena vacía.</span><o:p></o:p></p>
+      <h3><span style='font-size:10.0pt'>fn:substringAfter</span><o:p></o:p></h3>
+      <p class=sect3><span style='font-size:10.0pt'>Devuelve la porción de una cadena 
+        que viene a continuación de cierta subcadena. La cadena devuelta comienza 
+        en el siguiente caracter tras la subcadena buscada.</span> </p>
+
+<pre>fn:substringAfter(string, substring) &#8594; String<o:p></o:p></pre>
+
+<p class=sect3><span style='font-size:10.0pt'>Si no se encuentra la subcadena o
+si esta es vacía se devuelve la cadena original.</span><o:p></o:p></p>
+
+      <h3><span style='font-size:10.0pt'>fn:substringBefore</span><o:p></o:p></h3>
+
+<p class=sect3><span style='font-size:10.0pt'>Devuelve la porción de una cadena
+que viene antes de cierta subcadena. La cadena devuelta va desde el primer
+carácter hasta el carácter anterior a la subcadena buscada.</span> <o:p></o:p></p>
+
+<pre>fn:substringBefore(string, substring) &#8594; String<o:p></o:p></pre>
+
+<p class=sect3><span style='font-size:10.0pt'>Si no se encuentra la subcadena 
+        o si esta es vacía se devuelve la cadena original.</span><o:p></o:p></p>
+      <h3><span style='font-size:10.0pt'>fn:toLowerCase</span><o:p></o:p></h3>
+
+<p class=sect3><span style='font-size:10.0pt'>Convierte todos los caracteres a
+minúsculas.</span> <o:p></o:p></p>
+
+      <pre><span lang=EN style='mso-ansi-language:EN'>fn:toLowerCase(string) &#8594; String<o:p></o:p></span></pre>
+	  
+<h3><span style='font-size:10.0pt'>fn:toUpperCase</span><o:p></o:p></h3>
+      <p class=sect3><span style='font-size:10.0pt'>Convierte todos los caracteres a
+mayúsculas.</span> <o:p></o:p></p>
+
+      <pre><span lang=EN style='mso-ansi-language:EN'>fn:toUpperCase(string) &#8594; String<o:p></o:p></span></pre>
+	  <h3><span lang=EN style='font-size:10.0pt;mso-ansi-language:
+EN'>
+
+fn:trim</span><span lang=EN style='mso-ansi-language:EN'><o:p></o:p></span></h3>
+      <p class=sect3><span style='font-size:10.0pt'>Elimina el espacio en blanco en
+los extremos de una cadena.</span> <o:p></o:p></p>
+
+<pre>fn:trim(string) &#8594; String<o:p></o:p></pre>
+
+<h1>
+</p></td>
+
+  </tr>
+  <tr> 
+    <td ></td>
+    <td >&nbsp;</td>
+    <td ><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+</body>
+</html>

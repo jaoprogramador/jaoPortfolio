@@ -1,0 +1,178 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Herencias</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación en Java,Programas Java,Aplicaciones en Java,Ejercicios en Java, Ejemplos de Java,Tutorial de Java,Manual Java" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Java, Manual Java, tutorial Java, Ejemplos Java, ejercicios Java">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> Herencias</h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <h3>Concepto de herencia</h3>
+      <p> Se puede construir una clase a partir de otra mediante el mecanismo 
+        de la herencia. Para indicar que<br>
+        una clase deriva de otra se utiliza la palabra extends, como por ejemplo:<br>
+        class CirculoGrafico extends Circulo {...}<br>
+        Cuando una clase deriva de otra, hereda todas sus variables y m&eacute;todos. 
+        Estas funciones y<br>
+        variables miembro pueden ser redefinidas (overridden) en la clase derivada, 
+        que puede tambi&eacute;ndefinir o a&ntilde;adir nuevas variables y m&eacute;todos. 
+        En cierta forma es como si la sub-clase (la clase<br>
+        derivada) &#8220;contuviera&#8221; un objeto de la super-clase; en realidad 
+        lo &#8220;ampl&iacute;a&#8221; con nuevas variables y<br>
+        m&eacute;todos.<br>
+        Java permite m&uacute;ltiples niveles de herencia, pero no permite que 
+        una clase derive de varias (no<br>
+        es posible la herencia m&uacute;ltiple). Se pueden crear tantas clases 
+        derivadas de una misma clase como<br>
+        se quiera.<br>
+        Todas las clases de Java creadas por el programador tienen una super-clase. 
+        Cuando no se<br>
+        indica expl&iacute;citamente una super-clase con la palabra extends, la 
+        clase deriva de java.lang.Object,<br>
+        que es la clase ra&iacute;z de toda la jerarqu&iacute;a de clases de Java. 
+        Como consecuencia, todas las clases<br>
+        tienen algunos m&eacute;todos que han heredado de Object.<br>
+        La composici&oacute;n (el que una clase contenga un objeto de otra clase 
+        como variable miembro) se<br>
+        diferencia de la herencia en que incorpora los datos del objeto miembro, 
+        pero no sus m&eacute;todos o<br>
+        interface (si dicha variable miembro se hace private).</p>
+      <h3>La clase Object</h3>
+      <p>Como ya se ha dicho, la clase Object es la ra&iacute;z de toda la jerarqu&iacute;a 
+        de clases de Java. Todas las<br>
+        clases de Java derivan de Object.<br>
+        La clase Object tiene m&eacute;todos interesantes para cualquier objeto 
+        que son heredados por<br>
+        cualquier clase. Entre ellos se pueden citar los siguientes:<br>
+        1. M&eacute;todos que pueden ser redefinidos por el programador:<br>
+        clone() Crea un objeto a partir de otro objeto de la misma clase. El m&eacute;todo 
+        original heredado<br>
+        de Object lanza una CloneNotSupportedException. Si se desea poder clonar 
+        una clase hay que<br>
+        implementar la interface Cloneable y redefinir el m&eacute;todo clone(). 
+        Este m&eacute;todo debe hacer una<br>
+        copia miembro a miembro del objeto original. No deber&iacute;a llamar 
+        al operador new ni a los<br>
+        constructores.<br>
+        equals() Indica si dos objetos son o no iguales. Devuelve true si son 
+        iguales, tanto si son<br>
+        referencias al mismo objeto como si son objetos distintos con iguales 
+        valores de las variables<br>
+        miembro.<br>
+        toString() Devuelve un String que contiene una representaci&oacute;n del 
+        objeto como cadena de<br>
+        caracteres, por ejemplo para imprimirlo o exportarlo.<br>
+        finalize() Este m&eacute;todo ya se ha visto al hablar de los finalizadores.<br>
+        2. M&eacute;todos que no pueden ser redefinidos (son m&eacute;todos final):<br>
+        getClass() Devuelve un objeto de la clase Class, al cual se le pueden 
+        aplicar m&eacute;todos para<br>
+        determinar el nombre de la clase, su super-clase, las interfaces implementadas, 
+        etc. Se puede<br>
+        crear un objeto de la misma clase que otro sin saber de qu&eacute; clase 
+        es.<br>
+        notify(), notifyAll() y wait() Son m&eacute;todos relacionados con las 
+        threads.</p>
+      <h3>Redefinici&oacute;n de m&eacute;todos heredados</h3>
+      <p>Una clase puede redefinir (volver a definir) cualquiera de los m&eacute;todos 
+        heredados de su super-clase<br>
+        que no sean final. El nuevo m&eacute;todo sustituye al heredado para todos 
+        los efectos en la clase que lo ha<br>
+        redefinido.Las m&eacute;todos de la super-clase que han sido redefinidos 
+        pueden ser todav&iacute;a accedidos por<br>
+        medio de la palabra super desde los m&eacute;todos de la clase derivada, 
+        aunque con este sistema s&oacute;lo se<br>
+        puede subir un nivel en la jerarqu&iacute;a de clases.<br>
+        Los m&eacute;todos redefinidos pueden ampliar los derechos de acceso de 
+        la super-clase (por<br>
+        ejemplo ser public, en vez de protected o package), pero nunca restringirlos.<br>
+        Los m&eacute;todos de clase o static no pueden ser redefinidos en las 
+        clases derivadas.</p>
+      <h3>Clases y m&eacute;todos abstractos</h3>
+      <p>Una clase abstracta (abstract) es una clase de la que no se pueden crear 
+        objetos. Su utilidad es<br>
+        permitir que otras clases deriven de ella, proporcion&aacute;ndoles un 
+        marco o modelo que deben seguir y<br>
+        algunos m&eacute;todos de utilidad general. Las clases abstractas se declaran 
+        anteponi&eacute;ndoles la palabra<br>
+        abstract, como por ejemplo,<br>
+        public abstract class Geometria { ... }<br>
+        Una clase abstract puede tener m&eacute;todos declarados como abstract, 
+        en cuyo caso no se da<br>
+        definici&oacute;n del m&eacute;todo. Si una clase tiene alg&uacute;n m&eacute;todo 
+        abstract es obligatorio que la clase sea<br>
+        abstract. En cualquier sub-clase este m&eacute;todo deber&aacute; bien 
+        ser redefinido, bien volver a declararse<br>
+        como abstract (el m&eacute;todo y la sub-clase).<br>
+        Una clase abstract puede tener m&eacute;todos que no son abstract. Aunque 
+        no se puedan crear<br>
+        objetos de esta clase, sus sub-clases heredar&aacute;n el m&eacute;todo 
+        completamente a punto para ser utilizado.<br>
+        Como los m&eacute;todos static no pueden ser redefinidos, un m&eacute;todo 
+        abstract no puede ser static.</p>
+      <h3>Constructores en clases derivadas</h3>
+      <p>Ya se coment&oacute; que un constructor de una clase puede llamar por 
+        medio de la palabra this a otro<br>
+        constructor previamente definido en la misma clase. En este contexto, 
+        la palabra this s&oacute;lo puede<br>
+        aparecer en la primera sentencia de un constructor.<br>
+        De forma an&aacute;loga el constructor de una clase derivada puede llamar 
+        al constructor de su<br>
+        super-clase por medio de la palabra super(), seguida entre par&eacute;ntesis 
+        de los argumentos apropiados<br>
+        para uno de los constructores de la super-clase. De esta forma, un constructor 
+        s&oacute;lo tiene que<br>
+        inicializar directamente las variables no heredadas.<br>
+        La llamada al constructor de la super-clase debe ser la primera sentencia 
+        del constructor4,<br>
+        excepto si se llama a otro constructor de la misma clase con this(). Si 
+        el programador no la incluye,<br>
+        Java incluye autom&aacute;ticamente una llamada al constructor por defecto 
+        de la super-clase, super().<br>
+        Esta llamada en cadena a los constructores de las super-clases llega hasta 
+        el origen de la jerarqu&iacute;a<br>
+        de clases, esto es al constructor de Object.<br>
+        Como ya se ha dicho, si el programador no prepara un constructor por defecto, 
+        el compilador<br>
+        crea uno, inicializando las variables de los tipos primitivos a sus valores 
+        por defecto, y los Strings y<br>
+        dem&aacute;s referencias a objetos a null. Antes, incluir&aacute; una 
+        llamada al constructor de la super-clase.<br>
+        En el proceso de finalizaci&oacute;n o de liberaci&oacute;n de recursos 
+        (diferentes de la memoria reservada<br>
+        con new, de la que se encarga el garbage collector), es importante llamar 
+        a los finalizadores de las<br>
+        distintas clases, normalmente en orden inverso al de llamada de los constructores. 
+        Esto hace que elfinalizador de la sub-clase deba realizar todas sus tareas 
+        primero y luego llamar al finalizador de la<br>
+        super-clase en la forma super.finalize(). Los m&eacute;todos finalize() 
+        deben ser al menos protected, ya<br>
+        que el m&eacute;todo finalize() de Object lo es, y no est&aacute; permitido 
+        reducir los permisos de acceso en la<br>
+        herencia.</p>
+      <h3>&nbsp;</h3>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

@@ -1,0 +1,206 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Tipos de letra</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="keywords" content="Tipos de letra Html, Html, Lenguaje Html, Manual Html, Tutorial, ejercicios Html">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+  <link href="../../styles/estilos.css" rel="stylesheet" type="text/css"></head>
+  
+<body>
+<table class="tablaContenidos">  <tr> 
+    <td height="38" colspan="2"> <h2>  Tipos 
+        de letra   </h2></td>
+  </tr>
+  <tr> 
+    <td height="183" colspan="2"> <table width="62%" border="0"  >
+        <tr> 
+          <td width="28%"  ><h3>Contenido:</h3></td>
+          <td width="72%">&nbsp;</td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="htm04.htm#introduccion">- Introducci&oacute;n</a></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="htm04.htm#hn">- Marca &lt;HN&gt;</a></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="htm04.htm#font">- Marca &lt;FONT&gt;</a></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="htm04.htm#basefont">- Marca &lt;  BASEFONT  &gt;</a></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="htm04.htm#caracteres">-   Estilos de caracteres  </a></td>
+        </tr>
+      </table>
+       <h3>  Introducci&oacute;n  <a name="introduccion"></a></h3>
+       <p>En este apartado se indica como definir cabeceras 
+        mediante el elemento &lt;Hn&gt;, y c&oacute;mo modificar el tama&ntilde;o 
+        y color de alg&uacute;n grupo de caracteres mediante el elemento &lt;FONT&gt; 
+        y sus atributos SIZE y COLOR. Se puede tambi&eacute;n cambiar el tama&ntilde;o 
+        de letra por defecto (3) de toda la p&aacute;gina mediante el elemento 
+        vac&iacute;o &lt;BASEFONT&gt;.</p>
+       <p>Finalmente se definen los estilos de caracteres disponibles 
+        distinguiendo entre los estilos f&iacute;sicos (negrita, cursiva,...) 
+        y los l&oacute;gicos (variables, citas, ejemplos,...).</p>
+       <h3>  HN<a name="hn"></a>  </h3>
+       <p>El elemento &lt;HN&gt; se utiliza fundamentalmente 
+        para escribir encabezamientos. Asigna un tama&ntilde;o a los caracteres, 
+        dependiendo del valor n, el cual var&iacute;a de uno a 6. Los mas grandes 
+        tienen valor 1y los mas peque&ntilde;os tienen valor 6. El texto entre 
+        estas marcas se trata en negrita. Se inserta autom&aacute;ticamente un 
+        salto de p&aacute;rrafo, como puede comprobar en el siguiente ejemplo:</p>
+       <p>Ejemplo:</p>
+       <p>Texto antes de la cabecera.&lt;H3&gt;Cabecera&lt;/H3&gt;M&aacute;s 
+        texto.</p>
+       <p>Esto dar&aacute; el siguiente resultado:</p>
+       <p>Texto antes de la cabecera 
+      <H3  >Cabecera</H3>
+        M&aacute;s texto    <p></p>
+       <p>En la siguiente tabla podemos podemos ver una muestra 
+        de los distintos tamaños de letra de cada una de las cabeceras:</p>
+      <table width="49%" height="152" border="1" align="center"  >
+        <tr> 
+          <td><div align="center">&lt;H1&gt;Cabecera H1&lt;/H1&gt;</div></td>
+          <td><h1 align="center">Cabecera H1</h1></td>
+        </tr>
+        <tr> 
+          <td><div align="center">&lt;H2&gt;Cabecera H2&lt;/H2&gt;</div></td>
+          <td><h2 align="center">Cabecera H2</h2></td>
+        </tr>
+        <tr> 
+          <td><div align="center">&lt;H3&gt;Cabecera H3&lt;/H3&gt;</div></td>
+          <td><h3 align="center">Cabecera H3</h3></td>
+        </tr>
+        <tr> 
+          <td><div align="center">&lt;H4&gt;Cabecera H4&lt;/H4&gt;</div></td>
+          <td><h4 align="center">Cabecera H4</h4></td>
+        </tr>
+        <tr> 
+          <td><div align="center">&lt;H5&gt;Cabecera H5&lt;/H5&gt;</div></td>
+          <td><h5 align="center">Cabecera H5</h5></td>
+        </tr>
+        <tr> 
+          <td><div align="center">&lt;H6&gt;Cabecera H6&lt;/H6&gt;</div></td>
+          <td><h6 align="center">Cabecera H6</h6></td>
+        </tr>
+      </table>
+      <p>&nbsp;</p>
+       <h3>  FONT<a name="font"></a>  </h3>
+      <p> 
+      <BLOCKQUOTE> 
+         <p>El elemento &lt;FONT&gt; permite definir el tama&ntilde;o, 
+          color y tipo de letra de un conjunto de caracteres mediante los siguientes 
+          atributos: - El atributo SIZE: Regula el tama&ntilde;o de los caracteres 
+          (1 - 7).
+          - El atributo COLOR: Especifica el color de los caracteres. Para consultar 
+          los c&oacute;digos de los colores que le interesen puede consultar la 
+          tabla de c&oacute;digo de los colores. - El atributo FACE: permite dividir 
+          el tipo de letra: Arial, Timer New Roman, Verdana... Este atributo es 
+          tan solo soportado por algunos browsers (el Netscape no lo reconoce).</BLOCKQUOTE></p> 
+      <p>  Ejemplos:
+        
+        &lt;FONT SIZE=4 COLOR=#008000&gt;Texto de color verde y tama&ntilde;o 
+        4&lt;/FONT&gt;   
+        <FONT SIZE=4 COLOR=#008000>Texto de color verde y tamaño 4</p>
+       <h3>  BASEFONT<a name="basefont"></a>  </h3>
+      <BLOCKQUOTE> 
+         <p>El elemento &lt;BASEFONT&gt; permite cambiar el 
+          tama&ntilde;o por defecto de toda la p&aacute;gina mediante el atributo 
+          SIZE.</p>
+         <p>Ejemplo: &lt;BASEFONT SIZE=5&gt; </p>
+         <p>Con esta sentencia se conseguir&aacute; que el 
+          tama&ntilde;o de la letra por defecto del documento pase a ser 5, hasta 
+          que aparezca otro elemento &lt;BASEFONT&gt; que lo restaure o lo cambie 
+          por otro valor diferente.</p>
+         <p>Ejemplo de uso de &lt;FONT&gt; y &lt;BASEFONT&gt;:</p>
+        <p>  Inicialmente el tama&ntilde;o por defecto 
+          es 3.&lt;br&gt;
+          &lt;FONT SIZE&gt;=+2Por tanto este texto est&aacute; en 3+2=5&lt;/FONT&gt;&lt;BR&gt;
+          &lt;BASEFONT SIZE=6&gt;
+          Ahora el tama&ntilde;o por defecto es 6.&lt;br&gt;  
+        </p>
+         <p><FONT SIZE=+2>Inicialmente el tamaño por defecto 
+          es 3.</p>
+         <p>
+          <BASEFONT SIZE=6>
+          Ahora el tamaño por defecto wes 6.
+          <FONT SIZE=-2>Este texto está en 6-2=4</p>
+        <p>&nbsp;</p>
+      </BLOCKQUOTE>
+       <h3>  Estilos de caracteres<a name="caracteres"></a> 
+          </h3>
+       <p>Los siguientes elementos llenos permitir&aacute;n 
+        definir distintos estilos para el grupo de caracteres que se defina entre 
+        sus marcas de inicio y cierre.</p>
+       <p>Ejemplo:</p>
+      <p>  &lt;i&gt; Texto en cursiva (it&aacute;lica)&lt;/i&gt;  
+          <em>Texto en cursiva (it&aacute;lica) </em>  </p>
+      <table width="75%"  >
+        <tr> 
+          <td>&nbsp;</td>
+          <td>  Estilos f&iacute;sicos  </td>
+        </tr>
+        <tr> 
+          <td>  Negrita  </td>
+          <td>&lt;b&gt;</td>
+        </tr>
+        <tr> 
+          <td><em>Cursiva</em></td>
+          <td>&lt;i&gt;</td>
+        </tr>
+        <tr> 
+          <td><u>Subrayado</u></td>
+          <td>&lt;u&gt;</td>
+        </tr>
+        <tr> 
+          <td><strike>Tachado</strike></td>
+          <td>&lt;strike&gt;</td>
+        </tr>
+        <tr> 
+          <td>A<sup>Super&iacute;ndice</sup></td>
+          <td>&lt;sup&gt;</td>
+        </tr>
+        <tr> 
+          <td height="32">B<sub>Sub&iacute;ndice</sub></td>
+          <td>&lt;sub&gt;</td>
+        </tr>
+        <tr> 
+          <td><blink>Parpadeo</blink></td>
+          <td>&lt;blink&gt;</td>
+        </tr>
+        <tr> 
+          <td><tt>Maquina de escribir teletipo</tt></td>
+          <td>&lt;tt&gt;</td>
+        </tr>
+        <tr> 
+          <td><big>Texto grande</big></td>
+          <td>&lt;big&gt;</td>
+        </tr>
+        <tr> 
+          <td><small>Texto peque&ntilde;o</small></td>
+          <td>&lt;small&gt;</td>
+        </tr>
+      </table></td>
+  </tr>
+  <tr> 
+    <td width="70" height="36"> </td>
+    <td height="36"> <div align="right"></a><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a> </div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

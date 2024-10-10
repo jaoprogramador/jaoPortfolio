@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Indice J2ME</title>
+<META http-equiv=Content-Language content=es>
+<META content="Manual J2ME, ejemplos J2ME, codigos J2ME" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Manual J2ME, ejemplos J2ME, codigos J2ME">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> Clases</h2></td>
+  </tr>
+  <tr> 
+    <td colspan="3"><p>En este apartado tendemos la imprescindible clase Connector, 
+        ya vista en CLDC, junto con<br>
+        otra que incorpora el perfil MIDP 2.0:<br>
+        - PushRegistry extends Object. El Push Registry es un componente del AMS 
+        (Application Management Software) que permite que los MIDlets puedan ser 
+        lanzados autom&aacute;ticamente sin necesidad de ser inicializados por 
+        el usuario.<br>
+        Este concepto no modifica el ciclo de vida del MIDlet, simplemente introduce 
+        dos nuevas v&iacute;as por las que puede ser activado: activaci&oacute;n 
+        causada por conexiones de red entrantes y activaci&oacute;n causada por 
+        temporizadores.</p>
+      <p>Con esta clase, por tanto, tratamos las conexiones de entrada que puede 
+        recibir el dispositivo. De ellas se informar&aacute; al AMS din&aacute;mica 
+        (lo comentaremos m&aacute;s adelante) o est&aacute;ticamente. Esto &uacute;ltimo 
+        se consigue por medio del archivo descriptor de la licaci&oacute;n (JAD) 
+        asociado a cada suite, donde aparecer&aacute; por cada conexi&oacute;n 
+        de entrada a registrar en el AMS para esta suite, una l&iacute;nea textual 
+        de formato:<br>
+        MIDlet-Push-&lt;n&gt;: &lt;ConnectionURL&gt;, &lt;MIDletClassName&gt;, 
+        &lt;AllowedSender&gt;<br>
+        Donde MIDlet-Push-&lt;n&gt; act&uacute;a como identificador de la entrada, 
+        &lt;ConnectionURL&gt;<br>
+        da la definici&oacute;n de la conexi&oacute;n de entrada (cadena dada 
+        al usar Connector.open());<br>
+        &lt;MIDletClassName&gt; el nombre del MIDlet que espera la conexi&oacute;n 
+        y al cual &eacute;staqueda asociada (de entre todos los de la suite propietaria 
+        del JAD); y &lt;AllowedSender&gt; un filtro por el cual discriminar qui&eacute;n 
+        puede hacer una petici&oacute;n a esta conexi&oacute;n. Por ejemplo, las 
+        siguientes l&iacute;neas registrar&iacute;an que el MIDlet &quot;SampleChat&quot; 
+        podr&aacute; recibir peticiones a las conexiones definidas por parte de 
+        cualquier cliente que lo desee:<br>
+        MIDlet-Push-1: socket://:79, com.sun.example.SampleChat, *<br>
+        MIDlet-Push-2: datagram://:50000, com.sun.example.SampleChat, *<br>
+        De esta forma, el AMS podr&aacute; lanzar el MIDlet (invocando su m&eacute;todo 
+        MIDlet.startApp()) asociado a la conexi&oacute;n de entrada si &eacute;ste 
+        no est&aacute; corriendo cuando la petici&oacute;n llega. Si el MIDlet 
+        s&iacute; est&aacute; en marcha, ser&aacute; &eacute;l el encargado de 
+        ocuparse de sus conexiones de entrada. Como seguidamente veremos, adem&aacute;s 
+        de con los ficheros descriptores, ser&aacute; posible informar din&aacute;micamente 
+        al AMS de las conexiones de entrada que deseemos esperar.<br>
+        Aunque el Push Registry es parte del AMS y est&aacute; gestionado por 
+        &eacute;l, nosotros podremos llevar a cabo actuaciones sobre este componente. 
+        Los m&eacute;todos de los que disponemos para ello, ofrecidos por la clase 
+        PushRegistry, son:<br>
+        &#8226; static String getFilter(String connection). Obtiene el filtro 
+        definido en el descriptor para esta conexi&oacute;n. Dicha conexi&oacute;n 
+        ser&aacute; proporcionada con una t&iacute;pica cadena protocolo-host-puerto.<br>
+        &#8226; static String getMIDlet(String connection). Obtiene el nombre 
+        del MIDlet asociado a esta conexi&oacute;n.<br>
+        &#8226; static String[] listConnections(boolean available). Devuelve un 
+        array con todas las conexiones de entrada registradas para la suite actual 
+        (available a false), o s&oacute;lo las que tengan en este momento la entrada 
+        disponible (available a true).<br>
+        &#8226; static long registerAlarm(String midlet, long time). Define un 
+        instante de tiempo en el cual el MIDlet par&aacute;metro ser&aacute; lanzado. 
+        Devuelve 0 si es la primera vez que se define un temporizador para este 
+        MIDlet o el existente si ya ha sido definido previamente. &Eacute;sta 
+        es la segunda nueva forma de activaci&oacute;n que coment&aacute;bamos, 
+        adem&aacute;s de la provocada por conexiones de red entrantes.<br>
+        &#8226; static void registerConnection(String connection, String midlet, 
+        String filter). De forma an&aacute;loga a como registramos est&aacute;ticamente 
+        la conexi&oacute;n deentrada por medio del archivo JAD descriptor, tambi&eacute;n 
+        podremos hacerlo din&aacute;micamente por medio de este m&eacute;todo. 
+        As&iacute;, en ejecuci&oacute;n informamos al AMS de las conexiones de 
+        entrada que admite el MIDlet dado.<br>
+        &#8226; static boolean unregisterConnection(String connection). Elimina 
+        una conexi&oacute;n de entrada que se haya registrado din&aacute;micamente.</p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

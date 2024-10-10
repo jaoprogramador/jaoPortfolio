@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Introducci&oacute;n a JQuery</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta name="keywords" content="Introduccion a JQuery, Manual JQuery, tutorial JQuery, Ejemplos JQuery, ejercicios JQuery">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos"><tr> 
+    <td height="39" colspan="3"> <h2>Retornando valores en la función que enviamos a each</h2></td>
+  </tr>
+  <tr> 
+    <td height="268" colspan="3"> <p>Ahora vamos a ver un par de posibilidades 
+        interesantes al utilizar each. Resulta que la funci&oacute;n<br>
+        que enviamos como par&aacute;metro a each() puede devolver valores y dependiendo 
+        de &eacute;stos,<br>
+        conseguir comportamientos parecidos a los conocidos break o continue de 
+        los bucles<br>
+        Javascript.<br>
+        Si la funci&oacute;n devuelve &quot;false&quot;, se consigue detener por 
+        completo el proceso de iteraciones de<br>
+        each(). Esto es como si hici&eacute;ramos el t&iacute;pico &quot;break&quot;.<br>
+        Si la funci&oacute;n devuelve &quot;true&quot;, se consigue pasar directamente 
+        a la pr&oacute;xima iteraci&oacute;n del bucle.<br>
+        Es como hacer el t&iacute;pico &quot;continue&quot;.<br>
+        Para ver estos dos casos realizaremos otro ejemplo de uso de each.<br>
+        Tenemos varios DIV, donde cada uno tiene un texto.<br>
+        &lt;div&gt;red&lt;/div&gt;<br>
+        &lt;div&gt;blue&lt;/div&gt;<br>
+        &lt;div&gt;red&lt;/div&gt;<br>
+        &lt;div&gt;white&lt;/div&gt;<br>
+        &lt;div&gt;red&lt;/div&gt;<br>
+        &lt;div&gt;green&lt;/div&gt;<br>
+        &lt;div&gt;orange&lt;/div&gt;<br>
+        &lt;div&gt;red&lt;/div&gt;<br>
+        &lt;div&gt;nada&lt;/div&gt;<br>
+        &lt;div&gt;red&lt;/div&gt;<br>
+        &lt;div&gt;blue&lt;/div&gt;<br>
+        Ahora queremos hacer un recorrido a esos DIV y en cada uno, mirar el texto 
+        que aparece.<br>
+        Entonces colocaremos como color del texto del DIV el color que aprece 
+        escrito en el DIV. Pero<br>
+        con dos casos especiales:<br>
+        &#8226; Si el texto del DIV es &quot;white&quot;, entonces no queremos 
+        hacer nada con ese elemento.<br>
+        &#8226; Si el texto del DIV es &quot;nada&quot;, entonces detendremos 
+        el bucle y dejaremos de colorear<br>
+        los siguientes elementos.<br>
+        Esto lo podr&iacute;amos hacer con el siguiente c&oacute;digo:<br>
+        $(&quot;div&quot;).each(function(i){<br>
+        elemento = $(this);<br>
+        if(elemento.html() == &quot;white&quot;)<br>
+        return true;<br>
+        if(elemento.html() == &quot;nada&quot;)<br>
+        return false;<br>
+        elemento.css(&quot;color&quot;, elemento.html());<br>
+        });</p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

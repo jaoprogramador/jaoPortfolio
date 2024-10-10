@@ -1,0 +1,195 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Ejercicios MySQL</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="MySQL, sql, pl/sql, programacion MySQL, ejercicios MySQL, ejemplos MySQL, select">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2>F E C H A S</h2></td>
+  </tr>
+  <tr> 
+    <td><h3>Calculos sobre fechas</h3>
+      <p>MySQL provee varias funciones que se aplican a c&aacute;lculos entre 
+        fechas, por ejemplo, para calcular edades u obtener partes de una<br>
+        fecha.<br>
+        Para determinar cu&aacute;ntos a&ntilde;os de edad tiene cada mascota, 
+        hay que calcular la diferencia entre el a&ntilde;o de la fecha actual 
+        y el de la fecha<br>
+        de nacimiento, y luego restar 1 al resultado si el dia y mes actuales 
+        son anteriores al d&iacute;a y mes indicados por la fecha de nacimiento.<br>
+        La siguiente consulta devuelve, para cada mascota, el nombre, la fecha 
+        de nacimiento, la fecha actual, y la edad en a&ntilde;os.<br>
+        mysql&gt; SELECT name, birth, CURDATE(),<br>
+        -&gt; (YEAR(CURDATE())-YEAR(birth))<br>
+        -&gt; - (RIGHT(CURDATE(),5)&lt;RIGHT(birth,5))<br>
+        -&gt; AS age<br>
+        -&gt; FROM pet;<br>
+        +----------+------------+------------+------+<br>
+        | name | birth | CURDATE() | age |<br>
+        +----------+------------+------------+------+<br>
+        | Fluffy | 1993-02-04 | 2003-08-19 | 10 |<br>
+        | Claws | 1994-03-17 | 2003-08-19 | 9 |<br>
+        | Buffy | 1989-05-13 | 2003-08-19 | 14 |<br>
+        | Fang | 1990-08-27 | 2003-08-19 | 12 |<br>
+        | Bowser | 1989-08-31 | 2003-08-19 | 13 |<br>
+        | Chirpy | 1998-09-11 | 2003-08-19 | 4 |<br>
+        | Whistler | 1997-12-09 | 2003-08-19 | 5 |<br>
+        | Slim | 1996-04-29 | 2003-08-19 | 7 |<br>
+        | Puffball | 1999-03-30 | 2003-08-19 | 4 |<br>
+        +----------+------------+------------+------+<br>
+        En el ejemplo anterior, YEAR() trae la parte correspondiente al a&ntilde;o 
+        de una fecha, y RIGHT() trae los 5 primeros caracteres contando<br>
+        desde la derecha, que representan la parte MM-DD de la fecha. La porci&oacute;n 
+        de la expresi&oacute;n que compara los valores MM-DD<br>
+        devuelve 1 o 0, lo cual se corresponde con la diferencia de 1 a&ntilde;o 
+        a restar de la edad si el dia de la fecha devuelto por CURDATE()<br>
+        ocurre antes que la fecha de nacimiento birth. La expresi&oacute;n completa 
+        es un tanto confusa para usar como encabezado, por lo que<br>
+        se emplea un alias (age) para que el encabezado sea m&aacute;s comprensible.<br>
+        La consulta funciona bien, pero los resultados podr&iacute;an revisarse 
+        m&aacute;s f&aacute;cilmente si las filas se presentaran en alg&uacute;n 
+        orden. Esto puede<br>
+        hacerse agregando la cl&aacute;usula ORDER BY name para ordenar por nombre 
+        la salida:<br>
+        mysql&gt; SELECT name, birth, CURDATE(),<br>
+        -&gt; (YEAR(CURDATE())-YEAR(birth))<br>
+        -&gt; - (RIGHT(CURDATE(),5)&lt;RIGHT(birth,5))<br>
+        -&gt; AS age<br>
+        -&gt; FROM pet ORDER BY name;<br>
+        +----------+------------+------------+------+<br>
+        | name | birth | CURDATE() | age |<br>
+        +----------+------------+------------+------+<br>
+        | Bowser | 1989-08-31 | 2003-08-19 | 13 |<br>
+        | Buffy | 1989-05-13 | 2003-08-19 | 14 |<br>
+        | Chirpy | 1998-09-11 | 2003-08-19 | 4 |<br>
+        | Claws | 1994-03-17 | 2003-08-19 | 9 |<br>
+        | Fang | 1990-08-27 | 2003-08-19 | 12 |<br>
+        | Fluffy | 1993-02-04 | 2003-08-19 | 10 |<br>
+        | Puffball | 1999-03-30 | 2003-08-19 | 4 |<br>
+        | Slim | 1996-04-29 | 2003-08-19 | 7 |<br>
+        | Whistler | 1997-12-09 | 2003-08-19 | 5 |<br>
+        +----------+------------+------------+------+<br>
+        Para ordenar la salida por edad (age) en lugar de por nombre (name), solo 
+        hay que utilizar una cl&aacute;usula ORDER BY diferente:<br>
+        mysql&gt; SELECT name, birth, CURDATE(),<br>
+        -&gt; (YEAR(CURDATE())-YEAR(birth))<br>
+        -&gt; - (RIGHT(CURDATE(),5)&lt;RIGHT(birth,5))<br>
+        -&gt; AS age<br>
+        -&gt; FROM pet ORDER BY age;<br>
+        +----------+------------+------------+------+<br>
+        | name | birth | CURDATE() | age |<br>
+        +----------+------------+------------+------+<br>
+        | Chirpy | 1998-09-11 | 2003-08-19 | 4 |<br>
+        | Puffball | 1999-03-30 | 2003-08-19 | 4 |<br>
+        | Whistler | 1997-12-09 | 2003-08-19 | 5 |<br>
+        | Slim | 1996-04-29 | 2003-08-19 | 7 |<br>
+        | Claws | 1994-03-17 | 2003-08-19 | 9 |<br>
+        | Fluffy | 1993-02-04 | 2003-08-19 | 10 |<br>
+        | Fang | 1990-08-27 | 2003-08-19 | 12 |<br>
+        | Bowser | 1989-08-31 | 2003-08-19 | 13 |<br>
+        | Buffy | 1989-05-13 | 2003-08-19 | 14 |<br>
+        +----------+------------+------------+------+<br>
+        Una consulta similar se utiliza para determinar la edad a la fecha de 
+        muerte de los animales. Se determinan los animales que han<br>
+        muerto verificando si el valor de la columna death es NULL. Entonces, 
+        para todos los valores no NULL calcula la diferencia entre<br>
+        las fechas de muerte (death) y nacimiento (birth):<br>
+        mysql&gt; SELECT name, birth, death,<br>
+        -&gt; (YEAR(death)-YEAR(birth)) - (RIGHT(death,5)&lt;RIGHT(birth,5))<br>
+        -&gt; AS age<br>
+        -&gt; FROM pet WHERE death IS NOT NULL ORDER BY age;<br>
+        +--------+------------+------------+------+<br>
+        | name | birth | death | age |<br>
+        +--------+------------+------------+------+<br>
+        | Bowser | 1989-08-31 | 1995-07-29 | 5 |<br>
+        +--------+------------+------------+------+<br>
+        La consulta utiliza la expresi&oacute;n death IS NOT NULL en lugar de 
+        death &lt;&gt; NULL porque NULL es un valor especial, que no<br>
+        puede ser comparado mediante los operadores l&oacute;gicos habituales. 
+        Este tema se trata m&aacute;s extensamente m&aacute;s adelante. Consultar<br>
+        Secci&oacute;n 3.3.4.6, &#8220;Trabajar con valores NULL&#8221;.<br>
+        &iquest;Qu&eacute; tal si se quisiera saber qu&eacute; animales cumplen 
+        a&ntilde;os el pr&oacute;ximo mes? Para esta clase de c&aacute;lculos, 
+        el a&ntilde;o y el d&iacute;a son irrelevantes;<br>
+        simplemente se desea extraer de la columna birth la parte correspondiente 
+        al mes. MySQL cuenta con varias funciones para<br>
+        extraer partes de fechas, como YEAR(), MONTH(), y DAYOFMONTH(). MONTH() 
+        es la funci&oacute;n apropiada para este caso. Para<br>
+        verla en funcionamiento, ejecute una consulta que muestra tanto el valor 
+        de birth como el de MONTH(birth):<br>
+        mysql&gt; SELECT name, birth, MONTH(birth) FROM pet;<br>
+        +----------+------------+--------------+<br>
+        | name | birth | MONTH(birth) |<br>
+        +----------+------------+--------------+<br>
+        | Fluffy | 1993-02-04 | 2 |<br>
+        | Claws | 1994-03-17 | 3 |<br>
+        Curso (tutorial) de MySQL| Buffy | 1989-05-13 | 5 |<br>
+        | Fang | 1990-08-27 | 8 |<br>
+        | Bowser | 1989-08-31 | 8 |<br>
+        | Chirpy | 1998-09-11 | 9 |<br>
+        | Whistler | 1997-12-09 | 12 |<br>
+        | Slim | 1996-04-29 | 4 |<br>
+        | Puffball | 1999-03-30 | 3 |<br>
+        +----------+------------+--------------+<br>
+        Encontrar los animales que cumplen a&ntilde;os el mes siguiente es tambi&eacute;n 
+        sencillo. Suponga que el mes actual es abril. De modo que su<br>
+        n&uacute;mero es 4, y se buscan los animales nacidos en Mayo (mes 5), 
+        de esta forma:<br>
+        mysql&gt; SELECT name, birth FROM pet WHERE MONTH(birth) = 5;<br>
+        +-------+------------+<br>
+        | name | birth |<br>
+        +-------+------------+<br>
+        | Buffy | 1989-05-13 |<br>
+        +-------+------------+<br>
+        Esto se complica ligeramente cuando el mes actual es Diciembre. No se 
+        puede simplemente sumarle 1 al n&uacute;mero del mes (12) y<br>
+        buscar animales nacidos en el mes 13, porque no existe tal mes. En lugar 
+        de eso, se debe buscar por animales nacidos en Enero<br>
+        (mes 1).<br>
+        Se puede incluso escribir la consulta de forma que funcione sin importar 
+        cual es el mes actual. As&iacute;, no se necesitar&aacute; indicar un 
+        mes<br>
+        en particular en la consulta. DATE_ADD() sirve para sumar un intervalo 
+        de tiempo a una fecha dada. Si se adiciona un mes al valor<br>
+        de CURDATE(), y se extrae el mes mediante MONTH(), el resultado ser&aacute; 
+        el mes en el que se buscar&aacute;n cumplea&ntilde;os:<br>
+        mysql&gt; SELECT name, birth FROM pet<br>
+        -&gt; WHERE MONTH(birth) = MONTH(DATE_ADD(CURDATE(),INTERVAL 1 MONTH));<br>
+        Una manera alternativa de alcanzar el mismo resultado es sumar 1 al mes 
+        actual para obtener el mes siguiente (despu&eacute;s de emplear<br>
+        la funci&oacute;n m&oacute;dulo (MOD) para dejar el n&uacute;mero de mes 
+        en 0 si resultara ser 12:<br>
+        mysql&gt; SELECT name, birth FROM pet<br>
+        -&gt; WHERE MONTH(birth) = MOD(MONTH(CURDATE()), 12) + 1;<br>
+        Advierta que MONTH devuelve un n&uacute;mero entre 1 y 12. Y MOD(algun_valor,12) 
+        devuelve un n&uacute;mero entre 0 y 11. La suma<br>
+        debe ser realizada despu&eacute;s de MOD(), en otro caso se estar&iacute;a 
+        pasando de Noviembre (11) a Enero (1).</p>
+    
+        
+        </td>
+    <td>&nbsp;</td>
+    <td><a href="http://www.euskalnet.net/juanarana/oraclezip/Ejer3.rar"><img src="../../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td>
+<div align="right"><a href="http://www.euskalnet.net/juanarana/index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a>
+      </div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

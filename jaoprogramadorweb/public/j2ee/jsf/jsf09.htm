@@ -1,0 +1,448 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Creaci&oacute;n una aplicaci&oacute;n JSF en JDeveloper</title>
+<META http-equiv=Content-Language content=es>
+<META content="Manual JSP, ejemplos JSP, codigos JSP" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Manual JSP, ejemplos JSP, codigos JSP">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2> Capa de presentaci&oacute;n de datos</h2></td>
+  </tr>
+    
+  <tr> 
+    <td height="39" colspan="3"><h3>ADF Faces</h3>
+      <p>En el cap&iacute;tulo anterior preparamos la Capa del Modelo para poder 
+        acceder a los datos y establecer la l&oacute;gica de negocio de la aplicaci&oacute;n 
+        de la agenda.<br>
+        En los sucesivos cap&iacute;tulos y apartados nos centraremos en la capa 
+        del controlador y la vista que implementa JSF.</p>
+      <h3>Preparaci&oacute;n de una pantalla</h3>
+      <p>En la gran mayor&iacute;a de los desarrollos Web, se hace uso de la definici&oacute;n 
+        de una plantilla para conseguir un aspecto similar en todas las p&aacute;ginas 
+        de la aplicaci&oacute;n. Nuestra primera p&aacute;gina JSF ser&aacute; 
+        una plantilla para definir un aspecto com&uacute;n para todas nuestras 
+        p&aacute;ginas.<br>
+        Para crear la p&aacute;gina JSF que nos servir&aacute; como plantilla 
+        vamos a seguir los siguientes pasos:<br>
+        1. Marcamos con el rat&oacute;n el proyecto ViewController, pulsamos bot&oacute;n 
+        derecho, New.<br>
+        2. Seleccionamos en el men&uacute; de la ventana desplegada Web Tier, 
+        JSF, JSF JSP y pulsamos Aceptar.<br>
+        3. Pulsamos Siguiente en la ventana de bienvenida para la creaci&oacute;n 
+        de p&aacute;ginas JSF JSP.<br>
+        4. A continuaci&oacute;n indicamos en nombre de la p&aacute;gina &#8220;template&#8221;, 
+        marcamos la opci&oacute;n de<br>
+        JSP Document (*.jspx) y pulsamos Siguiente.</p>
+      <p>5. En el siguiente paso se especifica si queremos publicar de forma autom&aacute;tica, 
+        m&eacute;todos de acceso a los componentes de nuestra p&aacute;gina en 
+        una clase Java que se denomina Backing. Por defecto el nombre de estas 
+        clases ser&aacute; &#8220;backing_&#8221; seguido del nombre de la p&aacute;gina 
+        JSF. A esta clase, Java la dar&aacute; de alta en el controlador como 
+        un Managed Bean.<br>
+        Para la plantilla seleccionamos la opci&oacute;n de Do Not Automatically 
+        Expose UI Component s in a Managed Bean y pulsamos Siguiente.<br>
+        6. A continuaci&oacute;n debemos elegir qu&eacute; librer&iacute;a de 
+        etiquetas a&ntilde;adimos a la p&aacute;gina. Por defecto aparecen seleccionadas 
+        siempre las del n&uacute;cleo JSF de SUN. Nosotros a&ntilde;adiremos ADF 
+        Faces Components 10_1_3_0_4 y ADF Faces HTML 10_1_3_0_4.</p>
+      <p>7. En el paso siguiente vamos a indicar el t&iacute;tulo de la p&aacute;gina 
+        y a definir aspectos visuales tales como incluir las hojas de estilo. 
+        Pulsamos Terminar.<br>
+        Finalizado el wizard, tendremos la p&aacute;gina &#8220;template.jspx&#8221; 
+        dentro de la carpeta Web Content del proyecto ViewController.<br>
+        Vamos a a&ntilde;adir componentes a nuestra p&aacute;gina que servir&aacute; 
+        de plantilla, para ello debemos acceder a la paleta de Componentes situada 
+        en la esquina superior derecha de JDeveloper.<br>
+        Si no est&aacute; visible pulsamos en el men&uacute; View, Component Palette.</p>
+      <p>El combo de selecci&oacute;n superior nos permite elegir de qu&eacute; 
+        librer&iacute;a de etiquetas queremos usar un componente. Seleccionamos 
+        la librer&iacute;a de etiquetas &#8220;ADF Faces Core&#8221; y arrastramos 
+        el componente Panel Page a la p&aacute;gina de plantilla. El resultado 
+        es el siguiente:<br>
+        Si queremos ver el c&oacute;digo fuente basta con que pulsemos en la pesta&ntilde;a 
+        Source situada en la parte inferior de la ventana.<br>
+        Vamos a cambiar el t&iacute;tulo de la ventana para dejarlo vac&iacute;o, 
+        para ello accedemos a la paleta de propiedades. Si no est&aacute; visible 
+        pulsamos View, Property Inspector.</p>
+      <p>Hacemos clic con el rat&oacute;n sobre el campo que contiene el valor 
+        de la propiedad Title y borramos el contenido.<br>
+        A continuaci&oacute;n, vamos a crear un fichero de recursos en el proyecto 
+        para permitir el soporte multilenguaje. Seleccionamos el proyecto ViewController 
+        con el rat&oacute;n, pulsamos bot&oacute;n derecho, seleccionamos New, 
+        General, File, Aceptar. En la ventana emergente introducimos el nombre 
+        del fichero &#8220;UIResources.properties&#8221; y pulsamos de nuevo Aceptar.<br>
+        Vamos a a&ntilde;adir una propiedad al fichero de recursos para hacer 
+        uso de ella en la plantilla. Abrimos el fichero &#8220;UIResources.properties&#8221; 
+        que hemos creado e introducimos:<br>
+        Ahora vamos a declarar en la plantilla el fichero de recursos:<br>
+        1. Abrimos la p&aacute;gina de la plantilla.<br>
+        2. Pulsamos en el men&uacute; View, Structure para ver la estructura de 
+        la p&aacute;gina.<br>
+        plantilla.marca=JSF<br>
+        plantilla.marcaAplicacion= Agenda Contactos<br>
+        plantilla.sobre=Curso JSF</p>
+      <p>3. Accedemos a la Paleta de Componentes, desplegamos la lista de componentes 
+        de la librer&iacute;a &#8220;JSF Core&#8221; y arrastramos a la etiqueta 
+        afh:head en la Paleta de Estructura el componente LoadBundle.<br>
+        4. En la ventana emergente pulsamos el bot&oacute;n que contiene tres 
+        puntos, elegimos la opci&oacute;n de Properties File, marcamos el fichero 
+        &#8220;UIResources.properties&#8221; y pulsamos Aceptar.</p>
+      <p>Para terminar indicamos el nombre de la variable que usaremos para acceder 
+        al fichero de recursos &#8220;res&#8221; y pulsamos aceptar.<br>
+        Una vez registrado el acceso al fichero de recursos en nuestra plantilla, 
+        vamos a hacer uso de las propiedades que definimos anteriormente.<br>
+        En la Paleta de Estructura abrimos el componente af:PanelPage que ya hab&iacute;amos 
+        arrastrado, marcamos con el rat&oacute;n branding, pulsamos bot&oacute;n 
+        derecho, Insert inside branding, ADF Faces Core y seleccionamos el componente 
+        OutputText.<br>
+        A continuaci&oacute;n, en la Paleta de Propiedades cambiamos el valor 
+        de la propiedad Value por #{res['plantilla.marca']}.<br>
+        Repetimos el proceso anterior para los elementos brandingApp y appAbout. 
+        El valor de la propiedad Value ser&aacute; #{res['plantilla.marcaAplicacion']} 
+        y #{res['plantilla.sobre']}<br>
+        respectivamente.</p>
+      <h3>Página de busqueda de contactos</h3>
+      <p>En este apartado vamos a desarrollar una p&aacute;gina que mostrar&aacute; 
+        el listado de los contactos de la agenda. Esta p&aacute;gina tendr&aacute; 
+        un buscador para poder filtrar el contenido de la lista de los contactos.<br>
+        Navegaci&oacute;n: Vamos a comenzar dando de alta la nueva p&aacute;gina:<br>
+        1. Desplegamos el contenido de la carpeta Web Content, WEB-INF y abrimos 
+        el archivo faces-config.xml. En este fichero se define todo el flujo de 
+        la navegaci&oacute;n entre lasp&aacute;ginas mediante la definici&oacute;n 
+        de reglas de navegaci&oacute;n y se dan de alta los Backings<br>
+        de las p&aacute;ginas como Managed Beans, tal y como mencionamos anteriormente.<br>
+        2. En la Paleta de Componentes seleccionamos JSF Navigation Diagram y 
+        arrastramos JSF Page al diagrama.<br>
+        3. Cambiamos el nombre de la p&aacute;gina por &#8220;buscadorContactos.jspx&#8221;.<br>
+        4. A continuaci&oacute;n, hacemos doble clic el diagrama de la p&aacute;gina 
+        para iniciar el wizard de creaci&oacute;n.<br>
+        5. Pulsamos siguiente hasta llegar al paso 2, donde marcamos Automatically 
+        Expose UI Components in a New Managed Bean y pulsamos Siguiente. El nombre 
+        del Managed Bean debe ser &#8220;backing_buscadorContactos&#8221;, la 
+        clase &#8220;BuscadorContactos&#8221; y el paquete &quot;agenda.view.backing&#8221;.6. 
+        Pulsamos Siguiente y debemos tener seleccionadas las librer&iacute;as 
+        de etiquetas ADF Faces Components 10_1_3_0_4, ADF Faces HTML 10_1_3_0_4, 
+        JSF Core 1.0 y<br>
+        JSF HTML 1.0. Si todo es correcto pulsamos Terminar y se abrir&aacute; 
+        en modo dise&ntilde;o la p&aacute;gina buscadorContactos.jspx que acabamos 
+        de dar de alta.<br>
+        Aplicando la plantilla definida: Para aplicar la plantilla a la p&aacute;gina 
+        para buscar contactos que acabamos de dar de alta, debemos seguir lo siguientes 
+        pasos:<br>
+        1. Abrimos plantilla.jspx, accedemos a la Paleta de Estructura, seleccionamos 
+        adf:html y pulsamos bot&oacute;n derecho Copiar.<br>
+        2. Volvemos a la p&aacute;gina buscadorContactos.jspx, nos situamos en 
+        la Paleta de Estructura y eliminamos la etiqueta adf:html.<br>
+        3. Pegamos la etiqueta adf:html que copiamos de la plantilla y guardamos 
+        los cambios.<br>
+        4. Seleccionamos la etiqueta af:panelPage y accedemos a la Paleta de Propiedades 
+        para establecer la propiedad Title a &#8220;Buscador Contactos&#8221;.</p>
+      <p>Si todo el proceso ha concluido satisfactoriamente, pulsamos en Source 
+        para ver el c&oacute;digo fuente de la p&aacute;gina del buscador. En 
+        la esquina superior derecha aparecer&aacute; un recuadro verde.<br>
+        Definici&oacute;n de la consulta de b&uacute;squeda: Vamos a definir una 
+        consulta para poder filtrar los contactos por nombre, primer apellido 
+        y tipo de contacto. Para realizarlo, accedemos al proyecto Model y abrimos 
+        la Entity Bean de los contactos (Contacto.java).<br>
+        Podemos observar que por defecto tiene definida inicialmente una consulta 
+        para obtener todos los contactos:<br>
+        Nosotros vamos a a&ntilde;adir la nueva consulta parametrizada de la siguiente 
+        forma:<br>
+        1. Importamos la clase NamedQueries del paquete javax.persistence a&ntilde;adiendo 
+        &#8220;import javax.persistence.NamedQueries;&#8221;.<br>
+        2. Eliminamos la consulta para obtener todos los contactos.<br>
+        3. A&ntilde;adimos el siguiente conjunto de consultas:<br>
+        Hemos mantenido la anterior y a&ntilde;adido una nueva &#8220;findContactoByParameters&#8221;.<br>
+        4. Recompilamos la clase para verificar que no hay ning&uacute;n error 
+        de sintaxis.<br>
+        5. A continuaci&oacute;n, seleccionamos con el rat&oacute;n la clase del 
+        EJB de Session<br>
+        &#8220;AgendaSessionEJBBeanBean&#8221;, pulsamos bot&oacute;n derecho 
+        Edit Session Facade.<br>
+        @NamedQuery(name=&quot;findAllContacto&quot;, query=&quot;select object(o) 
+        from Contacto o&quot;)<br>
+        @NamedQueries({<br>
+        @NamedQuery(name=&quot;findAllContacto&quot;, query=&quot;select object(o) 
+        from<br>
+        Contacto o&quot;),<br>
+        @NamedQuery(name=&quot;findContactoByParameters&quot;, query=&quot;select 
+        object(o)<br>
+        from Contacto o where o.nombre like :nombre and o.apellido1 like :apellido1 
+        and<br>
+        o.idtipocontacto like :idtipocontacto&quot;)})</p>
+      <p>6. En la ventana emergente desplegamos la clase de la entidad Contacto 
+        y marcamos la query que acabamos de a&ntilde;adir &#8220;findContactoByParameters&#8221;.<br>
+        7. Como &uacute;ltimo paso volvemos a seleccionar el EJB de Session, pulsamos 
+        bot&oacute;n derecho, Create Data Control. Con esta operaci&oacute;n refrescamos 
+        el Data Control para que a&ntilde;ada la nueva consulta y poder utilizarla 
+        desde las p&aacute;ginas JSF.<br>
+        De igual forma, cada vez que modifiquemos o incluyamos nuevos m&eacute;todos 
+        en el EJB deberemos generar el Data Control para que los cambios aplicados 
+        sean visibles durante el desarrollo de las p&aacute;ginas Web.<br>
+        Desarrollo del formulario de b&uacute;squeda: Volvemos al proyecto ViewController 
+        y a la p&aacute;gina del buscador. Para desarrollar el formulario seguiremos 
+        los siguientes pasos:<br>
+        1. Accedemos a la Paleta de Componentes y arrastramos el componente PanelBox 
+        de la librer&iacute;a de etiquetas ADF Faces Core a la etiqueta af:PanelPage 
+        que podremos ver con claridad en la paleta de Estructura.</p>
+      <p>2. En la Paleta de Propiedades editamos el valor de la propiedad Id y 
+        la establecemos a &#8220;panelBoxBuscador&#8221;.<br>
+        Esta propiedad hace referencia al identificador que tendr&aacute; el componente 
+        en la clase Java del backing. As&iacute;, despu&eacute;s de realizar este 
+        cambio tenemos un atributo en la clase agenda.view.backing.BuscadorContactos 
+        de tipo CorePanelBox con el nombre &#8220;panelBoxBuscador&#8221;.<br>
+        Es importante renombrar los componentes que iremos a&ntilde;adiendo a 
+        las p&aacute;ginas para poder localizarlos con mayor facilidad en el backing. 
+        Para no extender demasiado la descripci&oacute;n del desarrollo vamos 
+        a asumir que estamos renombrando los componentes con el siguiente formato: 
+        &#8220;nombre_componente + nombre_descriptivo&#8221;. Por ejemplo &#8220;panelBoxBuscador&#8221;.<br>
+        3. A continuaci&oacute;n, arrastramos cuatro componentes de tipo PanelHorizontal 
+        sobre la etiqueta af:PanelBox.<br>
+        4. Modificamos la propiedad Haling de los tres primeros componentes de 
+        tipo panel horizontal y la establecemos a &#8220;right&#8221;.<br>
+        5. Abrimos el fichero de recurso que creamos para el proyecto &#8220;UIResources.properties&#8221; 
+        y a&ntilde;adimos:<br>
+        6. En la paleta Data Control desplegamos el m&eacute;todo findContactoByParameters(Object, 
+        Object, Object) y arrastramos el par&aacute;metro nombre sobre la etiqueta 
+        af:PanelHorizontal. Se abrir&aacute; una peque&ntilde;a ventana emergente 
+        donde seleccionaremos Text, ADF InputText w/Label.<br>
+        buscadorContactos.formulario.nombre= Nombre<br>
+        buscadorContactos.formulario.apellido1=Primer Apellido<br>
+        buscadorContactos.formulario.tipoContacto=Tipo de Contacto<br>
+        buscadorContactos.tablaContactos.nombre=Nombre<br>
+        buscadorContactos.tablaContactos.apellido1=Primer Apellido<br>
+        buscadorContactos.tablaContactos.apellido2=Segundo Apellido<br>
+        buscadorContactos.tablaContactos.telefono=Telefono</p>
+      <p>7. Seguidamente, cambiamos la propiedad Label por la referencia al fichero 
+        de recursos.<br>
+        Introduciremos: &#8220;#{res['buscadorContactos.formulario.nombre']}&#8221;.<br>
+        8. A continuaci&oacute;n, arrastramos desde la paleta de Data Control 
+        el par&aacute;metro apellido1 hasta el segundo panel horizontal como TextInput. 
+        De igual forma cambiamos el valor de la propiedad Label por<br>
+        &#8220;#{res['buscadorContactos.formulario.apellido1']}&#8221;.<br>
+        9. Volvemos de nuevo a la paleta de Data Control para arrastrar el par&aacute;metro 
+        que hace referencia al tipo de contacto. Cuando lo arrastremos sobre el 
+        tercer panel horizontal los haremos como Single Selections, ADF Select 
+        One Choice.<br>
+        10. Una vez arrastrado se abrir&aacute; una ventana emergente para editar 
+        el binding del componente. El campo Base Data Source indica donde se recoger&aacute; 
+        el valor del componente, en este caso en la variable del par&aacute;metro 
+        idtipocontacto. La fuente de los datos de la lista se define en List Data 
+        Source. Pulsamos Add, marcamos la lista TipoContacto resultante de la 
+        query findAllTipoContacto y pulsamos Aceptar.</p>
+      <p>11. Indicamos la relaci&oacute;n de los atributos que queremos establecer. 
+        En este caso el par&aacute;metro idtipocontacto se relaciona con la propiedad 
+        idtipocontacto.<br>
+        Para concluir, indicamos que el atributo tipocontacto es el que se muestra 
+        en el combo de selecci&oacute;n y el texto de la opci&oacute;n de no selecci&oacute;n 
+        es &#8220;Todos&#8221;.</p>
+      <p>12. En este punto, vamos a arrastrar un componente commandButton sobre 
+        el &uacute;ltimo panel horizontal. Editamos el valor de la propiedad Text 
+        e introducimos el valor &#8220;#{res['buscadorContactos.formulario.botonBuscar']}&#8221;.<br>
+        Con este paso hemos terminado de desarrollar el formulario de b&uacute;squeda. 
+        En el apartado siguiente introduciremos un componente de tipo tabla para 
+        mostrar el resultado de la b&uacute;squeda.<br>
+        Tabla de resultados de la p&aacute;gina de b&uacute;squeda: Vamos a incluir 
+        nuestro primer componente de tipo tabla que nos servir&aacute; para mostrar 
+        el resultado de la consulta que realicemos mediante el formulario de b&uacute;squeda.<br>
+        El componente Table es uno de los m&aacute;s destacados de la implementaci&oacute;n 
+        de ADF Faces de<br>
+        JSF. Es un componente muy vers&aacute;til y personalizable que permite 
+        mostrar informaci&oacute;n organizada en filas y columnas.<br>
+        Alguna de las caracter&iacute;sticas que presenta son:<br>
+        1. Dispone de un componente de selecci&oacute;n simple o m&uacute;ltiple 
+        por filas.<br>
+        2. Realiza una paginaci&oacute;n autom&aacute;tica.<br>
+        3. Incluye ordenaci&oacute;n por columnas.<br>
+        4. Establece bandeo por filas y columnas.<br>
+        A lo largo del desarrollo de la tabla para presentar los resultados de 
+        la b&uacute;squeda, iremos aplicando cada una de las caracter&iacute;sticas 
+        que acabamos de comentar.<br>
+        Para crear la tabla de resultados seguiremos los siguientes pasos:<br>
+        1. Abrimos la p&aacute;gina buscadorContactos.jspx si no la tenemos abierta.<br>
+        2. Accedemos a la paleta de Data Control y desplegamos el m&eacute;todo<br>
+        finContactoByParameters(Object, Object, Object). Marcamos con el rat&oacute;n 
+        la lista de objetos Contacto que aparece como resultado de este m&eacute;todo 
+        y la arrastramos sobre la etiqueta af:panelPage.<br>
+        3. Se abrir&aacute; una ventana emergente y seleccionamos Tables, ADF 
+        Read-only Table.<br>
+        4. Una vez hemos seleccionado la opci&oacute;n de ADF Read-only Table, 
+        se abre una ventana<br>
+        donde podremos elegir qu&eacute; columnas mostramos en nuestra tabla, 
+        si incluimos<br>
+        selecci&oacute;n por filas y si queremos activar la opci&oacute;n de ordenaci&oacute;n 
+        por columnas.<br>
+        Eliminamos las columnas referentes a los atributos de identificador de 
+        contacto,<br>
+        identificador de tipo contacto y identificador del contacto relacionado.5. 
+        Ya tenemos el componente creado en la p&aacute;gina. Accedemos a la paleta 
+        de Propiedades<br>
+        y cambiamos la propiedad Id del componente por el valor &#8220;TableResultados&#8221;.<br>
+        6. En la paleta de Estructura desplegamos el componente af:table, marcamos 
+        la tercera<br>
+        columna que contiene la propiedad del nombre del contacto y la arrastramos 
+        para<br>
+        colocarla como la primera columna de la tabla.7. Editamos el valor de 
+        la propiedad HeaderText de cada una de las columnas y le<br>
+        asignamos la referencia correspondiente al fichero de recursos. Por ejemplo, 
+        el valor de la propiedad HeaderText para la columna que muestra el nombre 
+        de los contactos es &#8220;#{res[buscadorContactos.tablaContactos.nombre]}&#8221;.<br>
+        8. Eliminamos el bot&oacute;n de Submit del componente table.<br>
+        9. En la paleta de Estructura hacemos doble clic sobre la etiqueta af:table. 
+        En la ventana emergente, pulsamos sobre la pesta&ntilde;a Formating, marcamos 
+        la opci&oacute;n de Include Range Navigation y establecemos el valor del 
+        campo Rows a &#8220;5&#8221;. Con esto paginaremos los resultados de cinco 
+        en cinco filas.<br>
+        Marcamos Include Table Banding, seleccionamos Rows y establecemos el valor 
+        de Banding Interval a &#8220;1&#8221;. Este par&aacute;metro indica que 
+        bandearemos los resultados por filas y de uno en uno.10. Para finalizar 
+        pulsamos Aceptar.</p>
+      <p> Implementaci&oacute;n de la l&oacute;gica de negocio de la b&uacute;squeda: 
+        Ya tenemos pintado el formulario de b&uacute;squeda y la tabla para presentar 
+        los resultados. A continuaci&oacute;n, vamos a especificar la l&oacute;gica 
+        de negocio de la consulta:<br>
+        1. Abrimos la clase del EJB de sesi&oacute;n que tenemos en el proyecto 
+        Model y que hemos denominado AgendaSessionEJBBeanBean.<br>
+        2. Editamos el m&eacute;todo public List&lt;Contacto&gt; findContactoByParameters(Object 
+        nombre, Object apellido1, Object idtipocontacto) que es el encargado de 
+        realizar la consulta y a&ntilde;adimos el siguiente c&oacute;digo antes 
+        de la llamada a return.<br>
+        Con este c&oacute;digo estamos indicando que si no se especifica el valor 
+        de algunos de los par&aacute;metros, debe buscar por todo. Adem&aacute;s, 
+        se buscar&aacute; dentro del contenido de los campos de tipo texto como 
+        son nombre y apellidos, si se encuentra la cadena introducida como par&aacute;metro. 
+        Por ejemplo, si introducimos en la condici&oacute;n de b&uacute;squeda 
+        el valor &#8220;nt&#8221; como nombre, el resultado debe presentar todo 
+        los contactos cuyo nombre contenga la cadena &#8220;nt&#8221;.<br>
+        Ejecuci&oacute;n de la p&aacute;gina de b&uacute;squeda: Vamos a ver a 
+        continuaci&oacute;n como ejecutar una p&aacute;gina JSF y como establecer 
+        una p&aacute;gina como inicial a la hora de arrancar el Servidor de Aplicaciones 
+        OC4J embebido que incluye JDeveloper.<br>
+        Seguimos los siguientes pasos:<br>
+        1. Marcamos el proyecto ViewController, bot&oacute;n derecho del rat&oacute;n, 
+        y seleccionamos Run.<br>
+        2. Como es la primera vez que ejecutamos el proyecto, se abrir&aacute; 
+        una ventana emergente donde se nos pregunta cual es el objetivo de la 
+        ejecuci&oacute;n. Nosotros estableceremos como objetivo nuestra p&aacute;gina 
+        buscadorContactos.jspx. Pulsamos el bot&oacute;n de // Preparaci&oacute;n 
+        de los par&aacute;metros de b&uacute;squeda<br>
+        nombre = nombre!=null?nombre!=&quot;&quot;?&quot;%&quot;+nombre+&quot;%&quot;:&quot;%&quot;:&quot;%&quot;;<br>
+        apellido1 = apellido1!=null?apellido1!=&quot;&quot;?&quot;%&quot;+apellido1+&quot;%&quot;:&quot;%&quot;:&quot;%&quot;;<br>
+        idtipocontacto = idtipocontacto!=null?idtipocontacto!=&quot;&quot;?idtipocontacto:&quot;%&quot;:&quot;%&quot;;Browse, 
+        accedemos a la carpeta de ficheros public_html y seleccionamos nuestra 
+        p&aacute;gina de b&uacute;squeda. Una vez terminado pulsamos Aceptar.Despu&eacute;s 
+        de realizar estos pasos, el servidor comienza y iniciarse. Se abrir&aacute; 
+        una ventana de Internet Explorer y nos mostrar&aacute; la p&aacute;gina 
+        solicitada. El resultado deber ser muy parecido al siguiente:</p>
+      <p>Tabla detalle de los Domicilios de los Contactos: Para finalizar la p&aacute;gina 
+        del buscador, vamos a incluir una tabla m&aacute;s para mostrar los domicilios 
+        de los contactos. Cada vez que seleccionemos un contacto, se recargar&aacute; 
+        la tabla de los domicilios del nuevo contacto seleccionado.<br>
+        Vamos a seguir los siguientes pasos para presentar el detalle de los domicilios:<br>
+        1. En el proyecto Model, desplegamos el paquete agenda.model y abrimos 
+        la clase<br>
+        Domicilio.<br>
+        2. A continuaci&oacute;n, sustituimos la siguiente l&iacute;nea de c&oacute;digo 
+        donde se especifica la consulta de todos los domicilios (&#8220;@NamedQuery(name 
+        = &quot;findAllDomicilio&quot;, query =<br>
+        &quot;select object(o) from Domicilio o&quot;)&#8221;) por el siguiente 
+        c&oacute;digo:<br>
+        Para poder compilar la clase de Domicilio debemos importa javax.persistence.NamedQueries. 
+        Con este c&oacute;digo hemos a&ntilde;adido una consulta para buscar los 
+        domicilios de un contacto.<br>
+        3. A continuaci&oacute;n pulsamos bot&oacute;n derecho del rat&oacute;n 
+        sobre la clase del EJB de sesi&oacute;n y seleccionamos Edit Session Facade, 
+        desplegamos la entidad Domicilio y marcamos el nuevo m&eacute;todo de 
+        consulta que hemos creado.<br>
+        @NamedQueries( { @NamedQuery(name = &quot;findAllDomicilio&quot;, query 
+        = &quot;select<br>
+        object(o) from Domicilio o&quot;), @NamedQuery(name =&quot;findDomicilioByIdContacto&quot;,<br>
+        query = &quot;select object(o) from Domicilio o where o.idcontacto like 
+        :idcontacto&quot;)})</p>
+      <p>4. Por &uacute;ltimo, generamos el DataControl del EJB de sesi&oacute;n 
+        para poder trabajar en el proyecto de la vista con el nuevo m&eacute;todo 
+        de consulta de domicilios. Para realizar esta operaci&oacute;n, pulsamos 
+        bot&oacute;n derecho del rat&oacute;n sobre la clase del EJB y seleccionamos 
+        Create Data Control.<br>
+        5. Volvemos al proyecto ViewControler y abrimos la p&aacute;gina &#8220;buscadorContactos.jspx&#8221;<br>
+        6. Accedemos a la paleta de DataControl y pulsamos bot&oacute;n derecho, 
+        Refresh. Despu&eacute;s de realizar esta operaci&oacute;n debemos tener 
+        el nuevo m&eacute;todo publicado.</p>
+      <p>7. Seleccionamos con el rat&oacute;n a lista de tipo Domicilio que nos 
+        devuelve el m&eacute;todo findDomicilioByIdContacto(Object) y la arrastramos 
+        a la Paleta de Estructura sobre la etiqueta ad:panelPage. Seleccionamos 
+        Tables, ADF Read-only Table.8. Se abre una ventana emergente donde tenemos 
+        que indicar el origen del par&aacute;metro de idcontacto del m&eacute;todo. 
+        Pulsamos con el rat&oacute;n sobre el campo Value, hasta queaparece un 
+        bot&oacute;n con tres puntos, lo pulsamos. Se volver&aacute; a abrir otra 
+        ventana emergente y en el campo de Expression introduciremos lo iguiente:${bindings.findContactoByParametersIter.currentRow.dataProvider.idcontacto}Con 
+        esto estamos indicando que obtenga el valor del identificador de contacto 
+        del iterador de la tabla de contactos. Pulsamos Aceptar y volvemos a pulsar 
+        Aceptar.<br>
+        9. En la siguiente ventana eliminamos las columnas que muestran los atributos 
+        de idcontacto, idcomicilio. Marcamos la opci&oacute;n de Enable sorting.<br>
+        10. Accedemos a la paleta de Propiedades y cambiamos la propiedad Id asign&aacute;ndole 
+        el nuevo valor &#8220;tableDomicilios&#8221;. Accedemos a la propiedad 
+        PartialTriggers, pulsamos el bot&oacute;n con tres puntos. En la ventana 
+        emergente pulsamos New, marcamos con el rat&oacute;n sobre la nueva fila 
+        donde nos aparecer&aacute; una lista con los componentes de la p&aacute;gina. 
+        Seleccionamos tableResultados y pulsamos Aceptar. Con esto hemos especificado 
+        que cada vez que se recargue la tabla de los contactos se recargar&aacute; 
+        la tabla con los domicilios.<br>
+        11. Eliminamos el bot&oacute;n de Submit de la tabla de domicilios.<br>
+        12. Accedemos a la etiqueta af:tableSelectOne de la tabla de resultados 
+        que muestra los contactos y ponemos la propiedad AutoSubmit de este componente 
+        a true.Despu&eacute;s de realizar estos pasos hemos finalizado el desarrollo 
+        de la tabla de detalle de los domicilios de los contactos.<br>
+        Si ejecutamos el proyecto ViewController este es el resultado:Podemos 
+        observar que el t&iacute;tulo de las columnas de la tabla de los domicilios 
+        no tiene el texto a partir de propiedades definidas en el fichero de recursos. 
+        Proponemos como ejercicio definirlas en el fichero de recursos y utilizarlas 
+        en las propiedades HeaderText de cada columna.- Se debe definir una plantilla 
+        para proporcionar un aspecto est&aacute;ndar a todas las p&aacute;ginas 
+        de nuestras aplicaciones.<br>
+        - La p&aacute;gina de la plantilla no publica sus componentes en un Managed 
+        Bean.<br>
+        - Las librer&iacute;as de componentes JSF que utilizamos son ADF Faces 
+        Components 10_1_3_0_4 y ADF Faces HTML 10_1_3_0_4 adem&aacute;s de las 
+        del n&uacute;cleo de JSF de SUN.<br>
+        - Las clases java donde se publican los m&eacute;todos de acceso de a 
+        los componentes de la p&aacute;gina reciben el nombre de Backing. Los 
+        backing de las p&aacute;ginas se publican en el fichero faces-config.xml 
+        del Controlador como Managed Bean.<br>
+        - Debemos renombrar la propiedad Id de los componentes que a&ntilde;adimos 
+        a nuestras p&aacute;ginas con objeto de localizar los m&eacute;todos de 
+        acceso publicados en el Backing con mayor facilidad.<br>
+        - El componente Table de ADF Faces es uno de los componentes m&aacute;s 
+        destacados y permite introducir selecci&oacute;n simple o m&uacute;ltiple 
+        por filas, realizar paginaci&oacute;n, ordenaci&oacute;n por columnas 
+        y bandeo por filas y columnas.<br>
+        - La propiedad AutoSubmit de un componente indica que si se modifica el 
+        valor del componente, &eacute;ste hace submit de forma autom&aacute;tica.<br>
+        - La propiedad partialTrigger provoca un refresco del propio componente 
+        en funci&oacute;n del identificador del componente a quien referencia. 
+        Es decir, si el componente referenciado cambia, el componente que define 
+        el partialTrigger refresca.</p>
+      </td>
+
+  </tr>
+  <tr> 
+    <td width="341"></td>
+    <td width="74">&nbsp;</td>
+    <td width="124"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+</body>
+</html>

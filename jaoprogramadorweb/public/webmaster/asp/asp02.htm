@@ -1,0 +1,74 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>C&oacute;mo hacer una p&aacute;gina ASP</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta name="keywords" content="Primera página ASP, Como hacer una pagina ASP, Manual ASP, tutorial ASP, Ejemplos ASP, ejercicios ASP">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2>Primera p&aacute;gina ASP</h2></td>
+  </tr>
+  <tr> 
+    <td height="394" colspan="3"> <h3>C&oacute;mo hacer una p&aacute;gina ASP</h3>
+      
+      <p>La generaci&oacute;n de las tablas din&aacute;micas se har&aacute; con 
+        VBS, el c&oacute;digo est&aacute;tico con HTML. El contenido se genera 
+        en el servidor (html+VBS+&#8230;), el trabajo se hace en el servidor, 
+        y se envia HTML al cliente. El resultado de la p&aacute;gina Asp es el 
+        que ve el cliente en el navegador...</p>
+      <p>As&iacute; pues, tras haber introducido las etiquetas t&iacute;picas 
+        de HTML com &lt;html&gt;&lt;body&gt; cuando queramos empezar con el lenguaje 
+        VBS habr&aacute; que introducir &lt;% ...l&iacute;neas de c&oacute;digo 
+        ... %&gt;. Previamente habra que haber puesto antes de la etiqueta &lt;html&gt; 
+        esta linea de c&oacute;digo &lt;%@LANGUAGE=&quot;VBSCRIPT&quot; CODEPAGE=&quot;1252&quot;%&gt; 
+        para indicar el lenguaje de la p&aacute;gina y de codigos (el idioma en 
+        el que est&aacute; cifrada).</p>
+      <h3>EJEMPLO:</h3>
+      <p>&lt;%@LANGUAGE=&quot;VBSCRIPT&quot; CODEPAGE=&quot;1252&quot;%&gt;<br>
+        &lt;html&gt;<br>
+        &lt;head&gt;<br>
+        &lt;title&gt;Documento sin t&amp;iacute;tulo&lt;/title&gt;<br>
+        &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; 
+        charset=iso-8859-1&quot;&gt;<br>
+        &lt;/head&gt;<br>
+        &lt;%</p>
+      <p> author = &quot;Juan Arana Olalde&quot;</p>
+      <p> department= &quot;Desarrollo&quot;</p>
+      <p>%&gt;<br>
+        Esta p&aacute;gina fue actualizada &lt;B&gt;hoy&lt;/B&gt;, por &lt;%= 
+        author %&gt; del</p>
+      <p>departamento de &lt;%= department %&gt;. <br>
+        &lt;body&gt;</p>
+      <p>&lt;/body&gt;<br>
+        &lt;/html&gt;</p>
+      <p>para comprobar el resultado solo tendremos que guardar la p&aacute;gina 
+        con extensi&oacute;n .asp en el directorio del servidor local, que en 
+        este caso ser&aacute;: C:\Inetpub\wwwroot\NombreDelSitio\pagina.asp . 
+        Tras esto tendremos que abrir el explorador, Internet explorer por ejemplo, 
+        y escribir http://localhost/NombreDelSitio/index_marcos.htm. </p>
+      <p>NombreDelSitio es el nombre que tiene la carpeta creada en el directorio 
+        C:\Inetpub\wwwroot\ donde hemos puesto la p&aacute;gina creada en asp. 
+        Es posible que si tenemos instalado un Firewall nos de problemas as&iacute; 
+        que es recomendable cerrar esa aplicaci&oacute;n antes de comprobar en 
+        el explorador los resultados de una p&aacute;gina asp.</p></td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

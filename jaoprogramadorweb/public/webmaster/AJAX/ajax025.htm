@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>C&oacute;mo hacer una p&aacute;gina AJAX</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta name="keywords" content="Primera página AJAX, Como hacer una pagina AJAX, Manual AJAX, tutorial AJAX, Ejemplos AJAX, ejercicios AJAX">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2>Funciones para objetos enumerables</h2></td>
+  </tr>
+  <tr> 
+    <td height="394" colspan="3"> <p>Algunos tipos de objetos en JavaScript se 
+        comportan como colecciones de valores, tambi&eacute;n llamadas &quot;enumeraciones&quot; 
+        de valores. Prototype define varias utilidades para este tipo de objetos 
+        a trav&eacute;s de Enumerable, que es uno de los pilares b&aacute;sicos 
+        del framework y una de las formas m&aacute;s sencillas de mejorar la productividad 
+        cuando se desarrollan aplicaciones JavaScript.<br>
+        Algunos de los objetos obtenidos mediante las funciones de Prototype, 
+        ya incorporan todos los m&eacute;todos de Enumerable. Sin embargo, si 
+        se quieren a&ntilde;adir estos m&eacute;todos a un objeto propio, se pueden 
+        utilizar las utilidades de Prototype para crear objetos y extenderlos:var 
+        miObjeto = Class.create();<br>
+        Object.extend(miObjeto.prototype, Enumerable);<br>
+        Gracias a Enumerable, se pueden recorrer los arrays de forma mucho m&aacute;s 
+        eficiente:<br>
+        // Array original<br>
+        var vocales = [&quot;a&quot;, &quot;e&quot;, &quot;i&quot;, &quot;o&quot;, 
+        &quot;u&quot;];<br>
+        // Recorrer el array con JavaScript<br>
+        for(var i=0; i&lt;vocales.length; i++) {<br>
+        alert(&quot;Vocal &quot; + vocales[i] + &quot; est&aacute; en la posici&oacute;n 
+        &quot; + i);<br>
+        }<br>
+        // Recorrer el array con Prototype:<br>
+        vocales.each(function(elemento, indice) {<br>
+        alert(&quot;Vocal &quot; + elemento + &quot; est&aacute; en la posici&oacute;n 
+        &quot; + indice);<br>
+        });<br>
+        El m&eacute;todo select(), que es un alias del m&eacute;todo findAll(), 
+        permite filtrar los contenidos de un<br>
+        array:<br>
+        var numeros = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];<br>
+        resultado = numeros.findAll(function(elemento) { return elemento &gt; 
+        5; });<br>
+        // resultado = [6, 7, 8, 9, 10]<br>
+        Otro m&eacute;todo &uacute;til es pluck(), que permite obtener el valor 
+        de una misma propiedad para todos<br>
+        los elementos de la colecci&oacute;n:<br>
+        var numLetras = ['hola', 'mundo', 'que', 'bien', 'funciona',<br>
+        'Prototype'].pluck('length');<br>
+        // numLetras = [4, 5, 3, 4, 8, 9]<br>
+        Enumerable incluye decenas de utilidades y m&eacute;todos, algunos tan 
+        curiosos como partition()<br>
+        que permite dividir una colecci&oacute;n en dos grupos: el de los elementos 
+        de tipo true y el de los<br>
+        elementos de tipo false (valores como null, undefined, etc.)<br>
+        var valores = ['nombreElemento', 12, null, 2, true, , false].partition();<br>
+        // valores = [['nombreElemento', 12, 2, true], [null, undefined, false]]<br>
+        El m&eacute;todo partition() permite asignar una funci&oacute;n propia 
+        para decidir si un elemento se<br>
+        considera true o false. En el siguiente ejemplo, se divide un array con 
+        letras en dos grupos, el<br>
+        de las vocales y el de las consonantes:<br>
+        var letras = $R('a', 'k').partition(function(n) {<br>
+        return ['a', 'e', 'i', 'o', 'u'].include(n);<br>
+        })<br>
+        // letras = [['a', 'e', 'i'], ['b', 'c', 'd', 'f', 'g', 'h', 'j', 'k']]<br>
+        El m&eacute;todo invoke() permite ejecutar una funci&oacute;n para todos 
+        los elementos de la colecci&oacute;n:<br>
+        var palabras = ['hola', 'mundo', 'con', 'Prototype'].invoke('toUpperCase');<br>
+        // palabras = ['HOLA', 'MUNDO', 'CON', 'PROTOTYPE']<br>
+        La documentaci&oacute;n de Enumerable (http://www.prototypejs.org/api/enumerable) 
+        incluye la definici&oacute;n y ejemplos de muchos otros m&eacute;todos 
+        &uacute;tiles como inGroupsOf() (agrupa elementos en subconjuntos del 
+        mismo tama&ntilde;o), sortBy() (permite definir la ordenaci&oacute;n de 
+        los elementos mediante una funci&oacute;n propia), zip() (asocia uno a 
+        uno los elementos de dos colecciones), collect() (permite transformar 
+        los elementos de la colecci&oacute;n con una funci&oacute;n propia), etc.</p></td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

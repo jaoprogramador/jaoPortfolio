@@ -1,0 +1,171 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Uso de Streams valores muy grandes de filas</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación en JDBC,Programas JDBC,Aplicaciones en JDBC,Ejercicios en JDBC, Ejemplos de JDBC,Tutoriales de JDBC,Manuales JDBC" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="JDBC, Manual JDBC, tutorial JDBC, Ejemplos JDBC, ejercicios JDBC">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> Ejemplos JDBC</h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <p>import java.net.URL;<br>
+        import java.sql.*;</p>
+      <p>class SimpleSelect {</p>
+      <p> public static void main (String args[]) {<br>
+        String url = &quot;jdbc:odbc:my-dsn&quot;;<br>
+        String query = &quot;SELECT * FROM emp&quot;; </p>
+      <p> try {</p>
+      <p> // Load the jdbc-odbc bridge driver</p>
+      <p> Class.forName (&quot;sun.jdbc.odbc.JdbcOdbcDriver&quot;);</p>
+      <p> DriverManager.setLogStream(System.out);</p>
+      <p> // Attempt to connect to a driver. Each one<br>
+        // of the registered drivers will be loaded until<br>
+        // one is found that can process this URL</p>
+      <p> Connection con = DriverManager.getConnection (<br>
+        url, &quot;my-user&quot;, &quot;my-passwd&quot;);<br>
+      </p>
+      <p><br>
+        // If we were unable to connect, an exception<br>
+        // would have been thrown. So, if we get here,<br>
+        // we are successfully connected to the URL</p>
+      <p> // Check for, and display and warnings generated<br>
+        // by the connect.</p>
+      <p> checkForWarning (con.getWarnings ());</p>
+      <p> // Get the DatabaseMetaData object and display<br>
+        // some information about the connection</p>
+      <p> DatabaseMetaData dma = con.getMetaData ();</p>
+      <p> System.out.println(&quot;\nConnected to &quot; + dma.getURL());<br>
+        System.out.println(&quot;Driver &quot; + <br>
+        dma.getDriverName());<br>
+        System.out.println(&quot;Version &quot; +<br>
+        dma.getDriverVersion());<br>
+        System.out.println(&quot;&quot;);</p>
+      <p> // Create a Statement object so we can submit<br>
+        // SQL statements to the driver</p>
+      <p> Statement stmt = con.createStatement ();</p>
+      <p> // Submit a query, creating a ResultSet object</p>
+      <p> ResultSet rs = stmt.executeQuery (query);</p>
+      <p> // Display all columns and rows from the result set</p>
+      <p> dispResultSet (rs);</p>
+      <p> // Close the result set</p>
+      <p> rs.close();</p>
+      <p> // Close the statement</p>
+      <p> stmt.close();</p>
+      <p> // Close the connection</p>
+      <p> con.close();<br>
+        }<br>
+        catch (SQLException ex) {</p>
+      <p> // A SQLException was generated. Catch it and<br>
+        // display the error information. Note that there<br>
+        // could be multiple error objects chained<br>
+        // together<br>
+      </p>
+      <p><br>
+        System.out.println (&quot;\n*** SQLException caught ***\n&quot;);</p>
+      <p> while (ex != null) {<br>
+        System.out.println (&quot;SQLState: &quot; +<br>
+        ex.getSQLState ());<br>
+        System.out.println (&quot;Message: &quot; + ex.getMessage ());<br>
+        System.out.println (&quot;Vendor: &quot; +<br>
+        ex.getErrorCode ());<br>
+        ex = ex.getNextException ();<br>
+        System.out.println (&quot;&quot;);<br>
+        }<br>
+        }<br>
+        catch (java.lang.Exception ex) {</p>
+      <p> // Got some other type of exception. Dump it.</p>
+      <p> ex.printStackTrace ();<br>
+        }<br>
+        }</p>
+      <p>//-------------------------------------------------------------------<br>
+        // checkForWarning<br>
+        // Checks for and displays warnings. Returns true if a warning<br>
+        // existed<br>
+        //-------------------------------------------------------------------</p>
+      <p>private static boolean checkForWarning (SQLWarning warn) <br>
+        throws SQLException {<br>
+        boolean rc = false;</p>
+      <p> // If a SQLWarning object was given, display the<br>
+        // warning messages. Note that there could be<br>
+        // multiple warnings chained together</p>
+      <p> if (warn != null) {<br>
+        System.out.println (&quot;\n *** Warning ***\n&quot;);<br>
+        rc = true;<br>
+        while (warn != null) {<br>
+        System.out.println (&quot;SQLState: &quot; +<br>
+        warn.getSQLState ());<br>
+        System.out.println (&quot;Message: &quot; +<br>
+        warn.getMessage ());<br>
+        System.out.println (&quot;Vendor: &quot; +<br>
+        warn.getErrorCode ());<br>
+        System.out.println (&quot;&quot;);<br>
+        warn = warn.getNextWarning ();<br>
+        }<br>
+        }<br>
+        return rc;<br>
+        }</p>
+      <p> <br>
+        //-------------------------------------------------------------------<br>
+        // dispResultSet<br>
+        // Displays all columns and rows in the given result set<br>
+        //-------------------------------------------------------------------</p>
+      <p>private static void dispResultSet (ResultSet rs)<br>
+        throws SQLException<br>
+        {<br>
+        int i;</p>
+      <p> // Get the ResultSetMetaData. This will be used for<br>
+        // the column headings</p>
+      <p> ResultSetMetaData rsmd = rs.getMetaData ();</p>
+      <p> // Get the number of columns in the result set</p>
+      <p> int numCols = rsmd.getColumnCount ();</p>
+      <p> // Display column headings</p>
+      <p> for (i=1; i&lt;=numCols; i++) {<br>
+        if (i &gt; 1) System.out.print(&quot;,&quot;);<br>
+        System.out.print(rsmd.getColumnLabel(i));<br>
+        }<br>
+        System.out.println(&quot;&quot;);<br>
+        <br>
+        // Display data, fetching until end of the result set</p>
+      <p> boolean more = rs.next ();<br>
+        while (more) {</p>
+      <p> // Loop through each column, getting the<br>
+        // column data and displaying</p>
+      <p> for (i=1; i&lt;=numCols; i++) {<br>
+        if (i &gt; 1) System.out.print(&quot;,&quot;);<br>
+        System.out.print(rs.getString(i));<br>
+        }<br>
+        System.out.println(&quot;&quot;);</p>
+      <p> // Fetch the next result set row</p>
+      <p> more = rs.next ();<br>
+        }<br>
+        }<br>
+        }<br>
+      </p>
+      <p><br>
+      </p>
+      <p>&nbsp; </p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Permiso de acceso en java</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación en Java,Programas Java,Aplicaciones en Java,Ejercicios en Java, Ejemplos de Java,Tutorial de Java,Manual Java" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Java, Manual Java, tutorial Java, Ejemplos Java, ejercicios Java">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> Permiso de acceso en java</h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <h3>Introducci&oacute;n</h3>
+      <p> Una de las caracter&iacute;sticas de la Programaci&oacute;n Orientada 
+        a Objetos es la encapsulaci&oacute;n, que<br>
+        consiste b&aacute;sicamente en ocultar la informaci&oacute;n que no es 
+        pertinente o necesaria para realizar una<br>
+        determinada tarea. Los permisos de acceso de Java son una de las herramientas 
+        para conseguir esta<br>
+        finalidad.</p>
+      <h3>Accesibilidad de los paquetes</h3>
+      <p>El primer tipo de accesibilidad hace referencia a la conexi&oacute;n 
+        f&iacute;sica de los ordenadores y a los<br>
+        permisos de acceso entre ellos y en sus directorios y ficheros. En este 
+        sentido, un package es<br>
+        accesible si sus directorios y ficheros son accesibles (si est&aacute;n 
+        en un ordenador accesible y se tiene<br>
+        permiso de lectura). Adem&aacute;s de la propia conexi&oacute;n f&iacute;sica, 
+        ser&aacute;n accesibles aquellos packages que se<br>
+        encuentren en la variable CLASSPATH del sistema.</p>
+      <h3>Accesibilidad de clases o interfaces</h3>
+      <p>En principio, cualquier clase o interface de un package es accesible 
+        para todas las dem&aacute;s clases del<br>
+        package, tanto si es public como si no lo es. Una clase public es accesible 
+        para cualquier otra clase<br>
+        siempre que su package sea accesible. Recu&eacute;rdese que las clases 
+        e interfaces s&oacute;lo pueden ser public<br>
+        o package (la opci&oacute;n por defecto cuando no se pone ning&uacute;n 
+        modificador).</p>
+      <h3>Accesibilidad de las variables y m&eacute;todos miembros de una clase:</h3>
+      <p>Desde dentro de la propia clase:<br>
+        1. Todos los miembros de una clase son directamente accesibles (sin cualificar 
+        con ning&uacute;n<br>
+        nombre o cualificando con la referencia this) desde dentro de la propia 
+        clase. Los m&eacute;todos<br>
+        no necesitan que las variables miembro sean pasadas como argumento.<br>
+        2. Los miembros private de una clase s&oacute;lo son accesibles para la 
+        propia clase.<br>
+        3. Si el constructor de una clase es private, s&oacute;lo un m&eacute;todo 
+        static de la propia clase puede<br>
+        crear objetos.<br>
+        Desde una sub-clase:<br>
+        1. Las sub-clases heredan los miembros private de su super-clase, pero 
+        s&oacute;lo pueden acceder a<br>
+        ellos a trav&eacute;s de m&eacute;todos public, protected o package de 
+        la super-clase.<br>
+        Desde otras clases del package:</p>
+      <p>1. Desde una clase de un package se tiene acceso a todos los miembros 
+        que no sean private de<br>
+        las dem&aacute;s clases del package.<br>
+        Desde otras clases fuera del package:<br>
+        1. Los m&eacute;todos y variables son accesibles si la clase es public 
+        y el miembro es public.<br>
+        2. Tambi&eacute;n son accesibles si la clase que accede es una sub-clase 
+        y el miembro es protected.<br>
+        Aqu&iacute; muestra un resumen de los permisos de acceso en Java.</p>
+      <table width="488" border="1">
+        <tr> 
+          <td>Visibilidad</td>
+          <td>public</td>
+          <td>protected</td>
+          <td>private</td>
+          <td>default</td>
+        </tr>
+        <tr> 
+          <td>Desde la propia clase</td>
+          <td>S&iacute;</td>
+          <td>S&iacute;</td>
+          <td>S&iacute;</td>
+          <td>S&iacute;</td>
+        </tr>
+        <tr> 
+          <td>Desde otra clase en el propio package</td>
+          <td>S&iacute;</td>
+          <td>S&iacute;</td>
+          <td>No</td>
+          <td>Si</td>
+        </tr>
+        <tr> 
+          <td>Desde otra clase fuera del package</td>
+          <td>S&iacute;</td>
+          <td>No</td>
+          <td>No</td>
+          <td>No</td>
+        </tr>
+        <tr> 
+          <td>Desde una sub-clase en el propio package</td>
+          <td>S&iacute;</td>
+          <td>S&iacute;</td>
+          <td>No</td>
+          <td>Si</td>
+        </tr>
+        <tr> 
+          <td>Desde una sub-clase fuera del propio package</td>
+          <td>S&iacute;</td>
+          <td>S&iacute;</td>
+          <td>No</td>
+          <td>No</td>
+        </tr>
+      </table>
+      <p>&nbsp;</p>
+      <h3>Transformaciones de tipo casting</h3>
+      <p>En muchas ocasiones hay que transformar una variable de un tipo a otro, 
+        por ejemplo de int a<br>
+        double, o de float a long. En otras ocasiones la conversi&oacute;n debe 
+        hacerse entre objetos de clases<br>
+        diferentes, aunque relacionadas mediante la herencia. En este apartado 
+        se explican brevemente estas<br>
+        transformaciones de tipo.</p>
+      <h3>Conversi&oacute;n de tipos primitivos</h3>
+      <p>La conversi&oacute;n entre tipos primitivos es m&aacute;s sencilla. En 
+        Java se realizan de modo autom&aacute;tico<br>
+        conversiones impl&iacute;citas de un tipo a otro de m&aacute;s precisi&oacute;n, 
+        por ejemplo de int a long, de float a<br>
+        double, etc. Estas conversiones se hacen al mezclar variables de distintos 
+        tipos en expresiones<br>
+        matem&aacute;ticas o al ejecutar sentencias de asignaci&oacute;n en las 
+        que el miembro izquierdo tiene un tipo<br>
+        distinto (m&aacute;s amplio) que el resultado de evaluar el miembro derecho.<br>
+        Las conversiones de un tipo de mayor a otro de menor precisi&oacute;n 
+        requieren una orden expl&iacute;cita<br>
+        del programador, pues son conversiones inseguras que pueden dar lugar 
+        a errores (por ejemplo,<br>
+        para pasar a short un n&uacute;mero almacenado como int, hay que estar 
+        seguro de que puede ser<br>
+        representado con el n&uacute;mero de cifras binarias de short). A estas 
+        conversiones expl&iacute;citas de tipo se<br>
+        les llama cast. El cast se hace poniendo el tipo al que se desea transformar 
+        entre par&eacute;ntesis, como<br>
+        por ejemplo,<br>
+        long result;<br>
+        result = (long) (a/(b+c));<br>
+        A diferencia de C/C++, en Java no se puede convertir un tipo num&eacute;rico 
+        a boolean.<br>
+      </p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

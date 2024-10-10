@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Indice J2ME</title>
+<META http-equiv=Content-Language content=es>
+<META content="Manual J2ME, ejemplos J2ME, codigos J2ME" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Manual J2ME, ejemplos J2ME, codigos J2ME">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2>javax.microedition.media.control</h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <p>Se trata del segundo paquete de MIDP 2.0 
+        orientado al tratamiento multimedia. En &eacute;l<br>
+        encontraremos los controles que podremos ejercer sobre los reproductores 
+        Player que<br>
+        definamos. En MMA veremos c&oacute;mo este paquete ser&aacute; potentemente 
+        ampliado.
+      <h3> INTERFACES</h3>
+        
+      <p>S&oacute;lo aparecer&aacute;n en este paquete elementos de tipo Interface, 
+        en concreto, los dos controles (interfaces hijas de Control) siguientes:<br>
+        &#8226; ToneControl extends Control. Con esta interface damos al Player 
+        la secuencia de tonos no polif&oacute;nicos que debe reproducir. Dispondremos 
+        de m&uacute;ltiples constantes para definir la secuencia y un &uacute;nico 
+        m&eacute;todo que asocia la secuencia al objeto ToneControl. En un ejemplo 
+        anterior vimos c&oacute;mo se usaba esta interface, por lo que estudiaremos 
+        ahora c&oacute;mo se forma el array de bytes que llam&aacute;bamos all&iacute; 
+        secuenciaAReproducir como un conjunto de pares de bytes tono-duraci&oacute;n,</p> 
+        dispuestos en bloques definidos por nosotros. Por ejemplo, una secuencia 
+        v&aacute;lida ser&iacute;a:</p>
+      <p><br>
+        // &quot;Mary Had A Little Lamb&quot; tiene 3 bloques; A, B y C. Definimos 
+        el A entre BLOCK_START<br>
+        y BLOCK_END para as&iacute; //poderlo llamar de nuevo m&aacute;s adelante.<br>
+        byte tempo = 30; // tempo a 120 bpm (beats per minute)<br>
+        byte d = 8; // duraci&oacute;n del tono que le precede. En este ejemplo, 
+        todos tendr&aacute;n la misma.<br>
+        byte C4 = ToneControl.C4;<br>
+        byte D4 = (byte)(C4 + 2);<br>
+        byte E4 = (byte)(C4 + 4);<br>
+        byte G4 = (byte)(C4 + 7);<br>
+        byte rest = ToneControl.SILENCE;<br>
+        byte[] secuenciaAReproducir = { ToneControl.VERSION, 1, // versi&oacute;n 
+        1<br>
+        ToneControl.TEMPO, tempo, // fijamos el tempo<br>
+        ToneControl.BLOCK_START, 0, // comienza bloque A<br>
+        E4,d, D4,d, C4,d, E4,d,<br>
+        E4,d, E4,d, E4,d, rest,d,<br>
+        ToneControl.BLOCK_END, 0, // f&iacute;n del bloque A<br>
+        ToneControl.PLAY_BLOCK, 0, // reproducimos A<br>
+        D4,d, D4,d, D4,d, rest,d,<br>
+        E4,d, G4,d, G4,d, rest,d, // reproducimos directamente bloque B<br>
+        ToneControl.PLAY_BLOCK, 0, // repetimos bloque A<br>
+        D4,d, D4,d, E4,d, D4,d, C4,d // reproducimos directamente bloque C<br>
+        };<br>
+        Los elementos disponibles en la interface son:<br>
+        o static byte BLOCK_END. Indica el punto final del bloque, identificado 
+        &eacute;ste por el siguiente byte en la secuencia.<br>
+        o static byte BLOCK_START. Indica el punto inicial de un bloque. En el 
+        byte seguido a &eacute;l nominaremos el bloque, dando en ese siguiente 
+        byte un identificador de 0 a 127.<br>
+        o static byte C4. Valor de la nota DO central. Se suele usar como referencia 
+        de las dem&aacute;s notas a utilizar.o static byte PLAY_BLOCK. Reproduce 
+        el bloque identificado por el siguiente byte, el cual debe estar definido 
+        previamente en la secuencia.<br>
+        o static byte REPEAT. Seguido a esta constante indicaremos el n&uacute;mero 
+        de repeticiones para el tono definido justo antes de la ella (valor de 
+        2 a 127 dado en el siguiente byte a esta constante).<br>
+        o static byte RESOLUTION. A continuaci&oacute;n de esta constante indicaremos 
+        la resoluci&oacute;n aplicada a la secuencia. Con valores bajos se observa 
+        una reproducci&oacute;n m&aacute;s amplia de cada nota. Valores de 1 a 
+        127.<br>
+        o static byte SET_VOLUME. Daremos tras &eacute;l el volumen a aplicar 
+        a las notas que siguen a este par (ToneControl.SET_VOLUMEN, &lt;nuevoVolumen&gt;,...) 
+        en la secuencia. Valores posibles de 0 a 100.<br>
+        o static byte SILENCE. Representa un silencio, a usar como otro tono m&aacute;s 
+        en la secuencia (tras &eacute;l, se indicar&aacute; su duraci&oacute;n).<br>
+        o static byte TEMPO. Despu&eacute;s de &eacute;l fijamos el tempo de la 
+        secuencia definida.<br>
+        Valores de 5 a 127.<br>
+        o static byte VERSION. Tras &eacute;l fijamos la versi&oacute;n de la 
+        secuencia definida.<br>
+        o void setSequence(byte[] sequence). El &uacute;nico m&eacute;todo de 
+        la interface que permite asociar la secuencia formada, gracias a las constantes 
+        previas, con el ToneControl actual. Una vez hecho esto, podremos llamar 
+        a Player.start() para comenzar su reproducci&oacute;n, como vimos en un 
+        ejemplo anterior.<br>
+        &#8226; VolumeControl extends Control. Con esta interface podremos manipular 
+        el volumen de audio de un Player, desde un valor 0 de silencio hasta 100, 
+        que representar&aacute; el volumen m&aacute;ximo configurado en ese momento 
+        para el dispositivo.<br>
+        Cuando el estado de este objeto cambia (modificadores siguientes), un 
+        evento VOLUME_CHANGED ser&aacute; emitido.<br>
+        Los m&eacute;todos que tenemos en esta interface son:<br>
+        o int getLevel(). Devuelve el nivel de volumen actualmente establecido.<br>
+        Devolver&aacute; -1 s&oacute;lo si el Player est&aacute; en estado REALIZED 
+        y a&uacute;n no se ha llamado a setLevel().<br>
+        o boolean isMuted(). Indica si estamos en modo silencio o no.<br>
+        o int setLevel(int level). Modifica el nivel de volumen de este control 
+        del Player. Si se da un valor menor de 0 se impondr&aacute; un 0, si mayor 
+        de 100 se impondr&aacute; un valor de 100.<br>
+        o void setMute(boolean mute). Modifica el estado de silencio. Pasando 
+        el par&aacute;metro a true se silenciar&aacute; la se&ntilde;al. El hecho 
+        de variar esta caracter&iacute;stica no afecta al nivel de volumen que 
+        getLevel() devolver&aacute;.</p></td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

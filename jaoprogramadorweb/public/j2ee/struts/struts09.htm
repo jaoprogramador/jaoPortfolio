@@ -1,0 +1,196 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Primeros pasos con Struts junto con NetBeans</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación en Struts,Programas Struts,Aplicaciones en Struts,Ejercicios en Struts, Ejemplos de Struts,Tutoriales de Struts,Manuales Struts" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Struts, Manual Struts, tutorial Struts, Ejemplos Struts, ejercicios Struts">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2> Primeros pasos con Struts junto con NetBeans</h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <table width="472" border="0" >
+        <tr> 
+          <td width="21%"><h3>Contenido:</h3></td>
+          <td width="79%"></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="struts09.htm#ConfServ">- Configurar Servidor:</a></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="struts09.htm#Proyecto">- Crear Proyecto Web con Struts</a></td>
+        </tr>
+		<tr> 
+          <td>&nbsp;</td>
+          <td><a href="struts09.htm#JSP">- Arrancar JSP con Struts</a></td>
+        </tr>
+        
+      </table>
+      <p>&nbsp;</p>
+      <h3>Configurar Servidor:<a name="ConfServ"></a></h3>
+      <p>Bien, lo primero que haremos sera descargarnos en IDE en mi caso NetBeans 
+        6.7.1. aunque podr&iacute;amos haber utilizado JBuilder, Eclipse o cualquier 
+        otro. Lo siguiente ser&aacute; descargarse el servidor Tomcat versi&oacute;n 
+        5.5 para integrarlo con nuestro proyecto web.</p>
+      <p>Tras esto, ejecutamos el NetBeans y en el marco de la izquierda seleccionamos 
+        la pesta&ntilde;a &quot;Prestaciones&quot; y pinchamos boton derecho del 
+        rat&oacute;n sobre la opci&oacute;nn servidores y seleccionamos &quot;Agregar 
+        servidor&quot;. Nos aparecer&aacute;n una lista de servidores y nosotros 
+        seleccionaremos Tomcat 5.5. y le damos al bot&oacute;n de &quot;Siguiente&quot; 
+        y nos aparecer&aacute; una ventana donde especificar donde tenemos almacenado 
+        nuestro servidor Tomcat( Server Location). Pues bien, pulsamos el bot&oacute;n 
+        &quot;Browse&quot; y seleccionamos el directorio donde descargamos el 
+        Tomcat.</p>
+      <p>Posteriormente checkeamos &quot;Use Private Configuration Folder (Catalina 
+        Base)&quot; y seleccionamos el directorio donde tenemos instalado el Tomcat.</p>
+      <p>Luego, introducimos en &quot;Username:&quot; manager, y en &quot;Password:&quot; 
+        admin y pulsamos el bot&oacute;n &quot;Terminar&quot;.</p>
+      <p>Es entonces cuando podremos ver que se nos ha agregado el servidor Tomcat 
+        en el marco de la izquierda en la pesta&ntilde;a &quot;Prestaciones&quot; 
+        .Pues bien, pinchamos boton derecho del rat&oacute;n sobre &quot;Tomcar 
+        5.5&quot; y seleccionamos &quot;Start&quot; para arrancar el servidor. 
+        Si todo es correcto, que seguro que si, nos aparecer&aacute;n estas trazas 
+        en la salida del Tomcat 5.5:</p>
+	  <table border=1>
+	  <tr>
+          <td>Using CATALINA_BASE: C:\Archivos de programa\apache-tomcat-5.5.28<br>
+            Using CATALINA_HOME: C:\Archivos de programa\apache-tomcat-5.5.28<br>
+            Using CATALINA_TMPDIR: C:\Archivos de programa\apache-tomcat-5.5.28\temp<br>
+            Using JRE_HOME: C:\Sun\SDK\jdk<br>
+            Using CLASSPATH: C:\Archivos de programa\apache-tomcat-5.5.28\bin\bootstrap.jar<br>
+            09-ene-2010 11:39:07 org.apache.catalina.core.AprLifecycleListener 
+            lifecycleEvent<br>
+            INFO: The Apache Tomcat Native library which allows optimal performance<br>
+            in production environments was not found on the java.library.path:<br> 
+            C:\Sun\SDK\jdk\bin;.;
+			<br>C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;<br>
+			C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\Archivos<br> 
+            de programa\ATI Technologies\ATI Control Panel;C:\Sun\SDK\bin<br>
+            09-ene-2010 11:39:08 org.apache.coyote.http11.Http11BaseProtocol init<br>
+            INFO: Inicializando Coyote HTTP/1.1 en puerto http-8080<br>
+            09-ene-2010 11:39:08 org.apache.catalina.startup.Catalina load<br>
+            INFO: Initialization processed in 1875 ms<br>
+            09-ene-2010 11:39:08 org.apache.catalina.core.StandardService start<br>
+            INFO: Arrancando servicio Catalina<br>
+            09-ene-2010 11:39:08 org.apache.catalina.core.StandardEngine start<br>
+            INFO: Starting Servlet Engine: Apache Tomcat/5.5.28<br>
+            09-ene-2010 11:39:08 org.apache.catalina.core.StandardHost start<br>
+            INFO: Desactivada la validaci&oacute;n XML<br>
+            09-ene-2010 11:39:13 org.apache.struts.action.ActionServlet initChain<br>
+            INFO: Loading chain catalog from jar:file:/E:/Carpeta%20nueva/JAOS/build/web/WEB-INF/lib/struts-core-1.3.8.jar!/org/apache/struts/chain/chain-config.xml<br>
+            09-ene-2010 11:39:14 org.apache.struts.tiles.TilesPlugin initDefinitionsFactory<br>
+            INFO: Tiles definition factory loaded for module ''.<br>
+            09-ene-2010 11:39:14 org.apache.struts.validator.ValidatorPlugIn initResources<br>
+            INFO: Loading validation rules file from '/WEB-INF/validator-rules.xml'<br>
+            09-ene-2010 11:39:14 org.apache.struts.validator.ValidatorPlugIn initResources<br>
+            INFO: Loading validation rules file from '/WEB-INF/validation.xml'<br>
+            09-ene-2010 11:39:18 org.apache.coyote.http11.Http11BaseProtocol start<br>
+            INFO: Arrancando Coyote HTTP/1.1 en puerto http-8080<br>
+            09-ene-2010 11:39:18 org.apache.jk.common.ChannelSocket init<br>
+            INFO: JK: ajp13 listening on /0.0.0.0:8009<br>
+            09-ene-2010 11:39:18 org.apache.jk.server.JkMain start<br>
+            INFO: Jk running ID=0 time=0/234 config=null<br>
+            09-ene-2010 11:39:18 org.apache.catalina.storeconfig.StoreLoader load<br>
+            INFO: Find registry server-registry.xml at classpath resource<br>
+            09-ene-2010 11:39:18 org.apache.catalina.startup.Catalina start<br>
+            INFO: Server startup in 10547 ms<br></td></tr>
+	  </table>
+	        <p>&nbsp;</p>
+      <h3>Crear Proyecto Web con Struts:<a name="Proyecto"></a></h3>
+      <p>Lo primero, en el marco de la izquierda de Netbeans seleccionamos la 
+        pesta&ntilde;a &quot;Proyecto&quot; y pinchamos boton derecho del rat&oacute;n 
+        dentro del marco y seleccionamos &quot;Proyecto Nuevo&quot; en &quot;Categor&iacute;a&quot;: 
+        Java Web, y en &quot;Proyectos&quot;: Web Application, pulsamos bot&oacute;n 
+        &quot;Siguiente&quot;. </p>
+      <p>Nos aparece una ventana para introducir el nombre del proyecto, en mi 
+        caso JAO y seleccionamos el directorio donde queremos crear nuestro proyecto. 
+        Pulsamos el bot&oacute;n &quot;Siguiente&quot;.</p>
+      <p>Ahora nos sale una ventana donde pondremos el servidor, en nuestro caso, 
+        Tomcat 5.5, que es el servidor que configuramos anteriormente. Nos aparece 
+        la versi&oacute;n de Java que tenemos instalada y el Context Path introducido 
+        anteriormente(/JAO) . Le damos a &quot;Siguiente&quot; y es entonces donde 
+        le especificamos el Framework que tendr&aacute; nuestra aplicaci&oacute;n 
+        web: Struts 1.3.8, asi que lo chequeamos y pulsamos &quot;Terminar&quot;. 
+        Esto nos crea el proyecto JAO con las librerias necesarias para trabajar 
+        con Struts, el struts-config.xml donde definiremos la navegaci&oacute;n 
+        y la correspondencia ActionForm-FormBean, un par de JSPs, el fichero de 
+        recursos, el validation.xml para realizar validaciones de los formularios...</p>
+      <p>Y ya nos podemos poner a programar...</p>
+      <p>&nbsp;</p>
+	        <p>&nbsp;</p>
+      <h3>Arrancar JSP con Struts:<a name="JSP"></a></h3>
+      <p>Pues bien esto es lo mas sencillo de todo. Selecciomos nuestro proyecto 
+        JAO con el boton derecho del rat&oacute;n y le damos a &quot;Build&quot; 
+        que har&aacute; distintas operaciones y el tomcat nos mostrar&aacute; 
+        una salida por consola como esta:</p>
+      <p>init:<br>
+        deps-module-jar:<br>
+        deps-ear-jar:<br>
+        deps-jar:<br>
+        Created dir: E:\Carpeta nueva\JAO\build\web\WEB-INF\classes<br>
+        Created dir: E:\Carpeta nueva\JAO\build\web\META-INF<br>
+        Copying 1 file to E:\Carpeta nueva\JAO\build\web\META-INF<br>
+        Copying 19 files to E:\Carpeta nueva\JAO\build\web<br>
+        library-inclusion-in-archive:<br>
+        Copying 1 file to E:\Carpeta nueva\JAO\build\web\WEB-INF\lib<br>
+        Copying 1 file to E:\Carpeta nueva\JAO\build\web\WEB-INF\lib<br>
+        Copying 1 file to E:\Carpeta nueva\JAO\build\web\WEB-INF\lib<br>
+        Copying 1 file to E:\Carpeta nueva\JAO\build\web\WEB-INF\lib<br>
+        Copying 1 file to E:\Carpeta nueva\JAO\build\web\WEB-INF\lib<br>
+        Copying 1 file to E:\Carpeta nueva\JAO\build\web\WEB-INF\lib<br>
+        Copying 1 file to E:\Carpeta nueva\JAO\build\web\WEB-INF\lib<br>
+        Copying 1 file to E:\Carpeta nueva\JAO\build\web\WEB-INF\lib<br>
+        Copying 1 file to E:\Carpeta nueva\JAO\build\web\WEB-INF\lib<br>
+        Copying 1 file to E:\Carpeta nueva\JAO\build\web\WEB-INF\lib<br>
+        Copying 1 file to E:\Carpeta nueva\JAO\build\web\WEB-INF\lib<br>
+        Copying 1 file to E:\Carpeta nueva\JAO\build\web\WEB-INF\lib<br>
+        Copying 1 file to E:\Carpeta nueva\JAO\build\web\WEB-INF\lib<br>
+        Copying 1 file to E:\Carpeta nueva\JAO\build\web\WEB-INF\lib<br>
+        Copying 1 file to E:\Carpeta nueva\JAO\build\web\WEB-INF\lib<br>
+        Copying 1 file to E:\Carpeta nueva\JAO\build\web\WEB-INF\lib<br>
+        Copying 1 file to E:\Carpeta nueva\JAO\build\web\WEB-INF\lib<br>
+        Copying 1 file to E:\Carpeta nueva\JAO\build\web\WEB-INF\lib<br>
+        Copying 1 file to E:\Carpeta nueva\JAO\build\web\WEB-INF\lib<br>
+        library-inclusion-in-manifest:<br>
+        Created dir: E:\Carpeta nueva\JAO\build\empty<br>
+        Copying 1 file to E:\Carpeta nueva\JAO\build\web\WEB-INF\classes<br>
+        compile:<br>
+        compile-jsps:<br>
+        Building jar: E:\Carpeta nueva\JAO\dist\JAO.war<br>
+        do-dist:<br>
+        dist:<br>
+        GENERACI&Oacute;N CORRECTA (total time: 0 seconds)</p>
+      <p>Pues bien,arrancamos el Tomcat y ahora en la pesta&ntilde;a de &quot;Proyecto&quot;, 
+        desplegamos el proyecto web &quot;JAO&quot; y a su vez en &quot;Web Pages&quot;, 
+        seleccionamos bot&oacute;n derecho del rat&oacute;n sobre welcomeStruts.jsp 
+        y pulsamos sobre &quot;Run File&quot; nos ejecutar&aacute; esta jsp en 
+        el explorador mostrandonos su contenido, que no es mucho, pero es el comienzo:</p>
+      <p>Struts Applications in Netbeans!</p>
+      <p>It's easy to create Struts applications with NetBeans.</p>
+      <p><br>
+      </p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="86" height="21"></td>
+    <td width="346" height="21">&nbsp;</td>
+    <td width="150"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

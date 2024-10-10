@@ -1,0 +1,475 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Operadores</title>
+<META http-equiv=Content-Language content=es>
+<META content="Manual JSTL, ejemplos JSTL, codigos JSTL" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Manual JSTL, ejemplos JSTL, codigos JSTL">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2> Operadores</h2></td>
+  </tr>
+    <tr> 
+		
+    <td height="39" colspan="3"> <p>Los operadores y sus significados son los 
+        mismos que en otros lenguajes de programaci&oacute;n.
+      <table width="554" height="274" border=1 cellpadding=0 class=MsoNormalTable style='mso-cellspacing:1.5pt'>
+        <thead>
+
+  <tr style='mso-yfti-irow:0'>
+   <td style='padding:.75pt .75pt .75pt .75pt'>
+   <p class=MsoNormal align=center style='text-align:center'><b><span
+   style='font-size:10.0pt'>Operador</span><o:p></o:p></b></p>
+   </td>
+   <td style='padding:.75pt .75pt .75pt .75pt'>
+   <p class=MsoNormal align=center style='text-align:center'><b><span
+   style='font-size:10.0pt'>Descripción</span><o:p></o:p></b></p>
+   </td>
+  </tr>
+
+ </thead>
+ <tr style='mso-yfti-irow:1'>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><tt><span
+  style='font-size:10.0pt'>.</span></tt></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt'>Acceso a propiedad o
+  elemento de un </span><tt><span style='font-size:10.0pt'>Map</span></tt><span
+  style='font-size:10.0pt'>.</span></p>
+
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:2'>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><tt><span
+  style='font-size:10.0pt'>[]</span></tt></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt'>Acceso a elemento de un
+  array o de un </span><tt><span style='font-size:10.0pt'>List</span></tt><span
+  style='font-size:10.0pt'>.</span></p>
+
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:3'>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><tt><span
+  style='font-size:10.0pt'>()</span></tt></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt'>Agrupación de expresiones.</span></p>
+
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:4'>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><tt><span
+  style='font-size:10.0pt'>: ?</span></tt></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt'>Expresión condicional: </span><tt><span
+  style='font-size:10.0pt'>condición ? valorSiCierto : valorSiFalso</span></tt></p>
+
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:5'>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><tt><span
+  style='font-size:10.0pt'>+</span></tt><span style='font-size:10.0pt'>, </span><tt><span
+  style='font-size:10.0pt'>-</span></tt><span style='font-size:10.0pt'>, </span><tt><span
+  style='font-size:10.0pt'>*</span></tt><span style='font-size:10.0pt'>, </span><tt><span
+  style='font-size:10.0pt'>/</span></tt><span style='font-size:10.0pt'> (o </span><tt><span
+  style='font-size:10.0pt'>div</span></tt><span style='font-size:10.0pt'>), </span><tt><span
+  style='font-size:10.0pt'>%</span></tt><span style='font-size:10.0pt'> (o </span><tt><span
+  style='font-size:10.0pt'>mod</span></tt><span style='font-size:10.0pt'>)</span></p>
+
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt'>Suma, resta,
+  multiplicación, división, resto.</span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:6'>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><tt><span
+  style='font-size:10.0pt'>==</span></tt><span style='font-size:10.0pt'> (o </span><tt><span
+  style='font-size:10.0pt'>eq</span></tt><span style='font-size:10.0pt'>), </span><tt><span
+  style='font-size:10.0pt'>!=</span></tt><span style='font-size:10.0pt'> (o </span><tt><span
+  style='font-size:10.0pt'>ne</span></tt><span style='font-size:10.0pt'>), </span><tt><span
+  style='font-size:10.0pt'>&lt;</span></tt><span style='font-size:10.0pt'> (o </span><tt><span
+  style='font-size:10.0pt'>lt</span></tt><span style='font-size:10.0pt'>), </span><tt><span
+  style='font-size:10.0pt'>&gt;</span></tt><span style='font-size:10.0pt'> (o </span><tt><span
+  style='font-size:10.0pt'>gt</span></tt><span style='font-size:10.0pt'>), </span><tt><span
+  style='font-size:10.0pt'>&lt;=</span></tt><span style='font-size:10.0pt'> (o </span><tt><span
+  style='font-size:10.0pt'>le</span></tt><span style='font-size:10.0pt'>),
+  &gt;= (o </span><tt><span style='font-size:10.0pt'>ge</span></tt><span
+  style='font-size:10.0pt'>)</span></p>
+
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt'>Igualdad, desigualdad,
+  menor que, mayor, menor o igual que, mayor o igual que.</span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:7'>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><tt><span
+  style='font-size:10.0pt'>&amp;&amp;</span></tt><span style='font-size:10.0pt'>
+
+  (o </span><tt><span style='font-size:10.0pt'>and</span></tt><span
+  style='font-size:10.0pt'>), </span><tt><span style='font-size:10.0pt'>||</span></tt><span
+  style='font-size:10.0pt'> (o </span><tt><span style='font-size:10.0pt'>or</span></tt><span
+  style='font-size:10.0pt'>), </span><tt><span style='font-size:10.0pt'>!</span></tt><span
+  style='font-size:10.0pt'> (o </span><tt><span style='font-size:10.0pt'>not</span></tt><span
+  style='font-size:10.0pt'>)</span></p>
+  </td>
+
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt'>Operadores lógicos and, or,
+  y not.</span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:8'>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><tt><span
+  style='font-size:10.0pt'>empty</span></tt></p>
+  </td>
+
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt'>Comprueba si una colección
+  (array, </span><tt><span style='font-size:10.0pt'>Map</span></tt><span
+  style='font-size:10.0pt'>, </span><tt><span style='font-size:10.0pt'>Collection</span></tt><span
+  style='font-size:10.0pt'>) es </span><tt><span style='font-size:10.0pt'>null</span></tt><span
+  style='font-size:10.0pt'> o vacía.</span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:9;mso-yfti-lastrow:yes'>
+
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><tt><span
+  style='font-size:10.0pt'>función(argumentos)</span></tt></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt'>Llamada a una función.</span></p>
+  </td>
+ </tr>
+</table>
+ </p>
+      <h3>Acceso a datos:</h3>
+      <p><p class=sect3><span style='font-size:10.0pt'>El operador punto (</span><tt><span
+style='font-size:10.0pt'>.</span></tt><span style='font-size:10.0pt'>) permite
+recuperar la propiedad de un objeto por su nombre. Ejemplo:</span> <o:p></o:p></p>
+
+<pre>${libro.paginas}<o:p></o:p></pre>
+
+<p class=MsoNormal><span style='font-size:10.0pt'>Las propiedades se recuperan
+usando las convenciones de los JavaBeans. Por ejemplo, en el código anterior,
+invocábamos el método </span><tt><span style='font-size:10.0pt'>libro.getPaginas()</span></tt><span
+style='font-size:10.0pt'> del objeto </span><tt><span style='font-size:10.0pt'>libro</span></tt><span
+style='font-size:10.0pt'>. </span><o:p></o:p></p>
+
+<p class=sect3><span style='font-size:10.0pt'>El operador corchete (</span><tt><span
+style='font-size:10.0pt'>[]</span></tt><span style='font-size:10.0pt'>) permite
+recuperar una propiedad con nombre o indexada por número. Ejemplo:</span> <o:p></o:p></p>
+
+<pre>${libro[&quot;paginas&quot;]}<o:p></o:p></pre><pre>${libro[0]}<o:p></o:p></pre><pre>${header['User-Agent']}<o:p></o:p></pre>
+
+<p class=MsoNormal><span style='font-size:10.0pt'>Dentro del corchete puede
+haber una cadena literal, una variable, o una expresión. </span><o:p></o:p></p>
+
+      <h4><span lang=EN style='font-size:10.0pt;mso-ansi-language:
+EN'>Operadores aritméticos</span><span lang=EN style='mso-ansi-language:EN'><o:p></o:p></span><span lang=EN
+style='mso-ansi-language:EN'><o:p></o:p></span></h4>
+
+<table class=MsoNormalTable border=1 cellpadding=0 style='mso-cellspacing:1.5pt'>
+ <thead>
+  <tr style='mso-yfti-irow:0'>
+   <td style='padding:.75pt .75pt .75pt .75pt'>
+   <p class=MsoNormal align=center style='text-align:center'><b><span
+   style='font-size:10.0pt'>Operador</span><o:p></o:p></b></p>
+
+   </td>
+   <td style='padding:.75pt .75pt .75pt .75pt'>
+   <p class=MsoNormal align=center style='text-align:center'><b><span
+   style='font-size:10.0pt'>Descripción</span><o:p></o:p></b></p>
+   </td>
+  </tr>
+ </thead>
+ <tr style='mso-yfti-irow:1'>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+
+  <p class=MsoNormal align=center style='text-align:center'><tt><span
+  style='font-size:10.0pt'>+</span></tt></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt'>suma</span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:2'>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+
+  <p class=MsoNormal align=center style='text-align:center'><tt><span
+  style='font-size:10.0pt'>-</span></tt></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt'>resta</span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:3'>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+
+  <p class=MsoNormal align=center style='text-align:center'><tt><span
+  style='font-size:10.0pt'>*</span></tt></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt'>multiplicación</span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:4'>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+
+  <p class=MsoNormal align=center style='text-align:center'><tt><span
+  style='font-size:10.0pt'>/ div</span></tt></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt'>división</span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:5;mso-yfti-lastrow:yes'>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+
+  <p class=MsoNormal align=center style='text-align:center'><tt><span
+  style='font-size:10.0pt'>% mod</span></tt></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt'>resto</span></p>
+  </td>
+ </tr>
+</table>
+
+      <h3><span lang=EN style='font-size:10.0pt;mso-ansi-language:
+EN'>Operadores lógicos</span><span lang=EN style='mso-ansi-language:EN'><o:p></o:p></span><span lang=EN
+style='mso-ansi-language:EN'><o:p></o:p></span></h3>
+
+<table class=MsoNormalTable border=1 cellpadding=0 style='mso-cellspacing:1.5pt'>
+ <thead>
+  <tr style='mso-yfti-irow:0'>
+   <td style='padding:.75pt .75pt .75pt .75pt'>
+   <p class=MsoNormal align=center style='text-align:center'><b><span
+   style='font-size:10.0pt'>Operador</span><o:p></o:p></b></p>
+   </td>
+
+   <td style='padding:.75pt .75pt .75pt .75pt'>
+   <p class=MsoNormal align=center style='text-align:center'><b><span
+   style='font-size:10.0pt'>Descripción</span><o:p></o:p></b></p>
+   </td>
+  </tr>
+ </thead>
+ <tr style='mso-yfti-irow:1'>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><tt><span
+  style='font-size:10.0pt'>&amp;&amp; and</span></tt></p>
+
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><tt><span style='font-size:10.0pt'>true</span></tt><span
+  style='font-size:10.0pt'> si ambos lados son ciertos</span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:2'>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+
+  <p class=MsoNormal align=center style='text-align:center'><tt><span
+  style='font-size:10.0pt'>|| or</span></tt></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><tt><span style='font-size:10.0pt'>true</span></tt><span
+  style='font-size:10.0pt'> si alguno de los lados son ciertos</span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:3;mso-yfti-lastrow:yes'>
+
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><tt><span
+  style='font-size:10.0pt'>! not</span></tt></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><tt><span style='font-size:10.0pt'>true</span></tt><span
+  style='font-size:10.0pt'> si la expresión es falsa</span></p>
+
+  </td>
+ </tr>
+
+</table>
+
+      <h3><span lang=EN style='font-size:10.0pt;mso-ansi-language:
+EN'>Operadores relacionales</span><span lang=EN style='mso-ansi-language:EN'><o:p></o:p></span><span lang=EN
+style='mso-ansi-language:EN'><o:p></o:p></span></h3>
+
+<table class=MsoNormalTable border=1 cellpadding=0 style='mso-cellspacing:1.5pt'>
+ <thead>
+  <tr style='mso-yfti-irow:0'>
+   <td style='padding:.75pt .75pt .75pt .75pt'>
+   <p class=MsoNormal align=center style='text-align:center'><b><span
+   style='font-size:10.0pt'>Operador</span><o:p></o:p></b></p>
+
+   </td>
+   <td style='padding:.75pt .75pt .75pt .75pt'>
+   <p class=MsoNormal align=center style='text-align:center'><b><span
+   style='font-size:10.0pt'>Descripción</span><o:p></o:p></b></p>
+   </td>
+   <td style='padding:.75pt .75pt .75pt .75pt'>
+   <p class=MsoNormal align=center style='text-align:center'><b><span
+   style='font-size:10.0pt'>Ejemplo</span><o:p></o:p></b></p>
+   </td>
+   <td style='padding:.75pt .75pt .75pt .75pt'>
+
+   <p class=MsoNormal align=center style='text-align:center'><b><span
+   style='font-size:10.0pt'>Resultado</span><o:p></o:p></b></p>
+   </td>
+  </tr>
+ </thead>
+ <tr style='mso-yfti-irow:1'>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><tt><span
+  style='font-size:10.0pt'>== eq</span></tt></p>
+  </td>
+
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt'>comprobación de igualdad</span></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><tt><span style='font-size:10.0pt'>${5 == 5}</span></tt></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><tt><span style='font-size:10.0pt'>true</span></tt></p>
+
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:2'>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><tt><span
+  style='font-size:10.0pt'>!= ne</span></tt></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt'>comprobación de desigualdad</span></p>
+
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><tt><span style='font-size:10.0pt'>${5 != 5}</span></tt></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><tt><span style='font-size:10.0pt'>false</span></tt></p>
+  </td>
+ </tr>
+
+ <tr style='mso-yfti-irow:3'>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><tt><span
+  style='font-size:10.0pt'>&lt; lt</span></tt></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt'>menor que</span></p>
+  </td>
+
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><tt><span style='font-size:10.0pt'>${5 &lt; 7}</span></tt></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><tt><span style='font-size:10.0pt'>true</span></tt></p>
+  </td>
+ </tr>
+
+ <tr style='mso-yfti-irow:4'>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><tt><span
+  style='font-size:10.0pt'>&gt; gt </span></tt></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt'>mayor que</span></p>
+  </td>
+
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><tt><span style='font-size:10.0pt'>${5 &gt; 7}</span></tt></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><tt><span style='font-size:10.0pt'>false</span></tt></p>
+  </td>
+ </tr>
+
+ <tr style='mso-yfti-irow:5'>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><tt><span
+  style='font-size:10.0pt'>&lt;= le</span></tt></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt'>menor o igual que</span></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+
+  <p class=MsoNormal><tt><span style='font-size:10.0pt'>${5 le 5}</span></tt></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><tt><span style='font-size:10.0pt'>true</span></tt></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:6;mso-yfti-lastrow:yes'>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+
+  <p class=MsoNormal align=center style='text-align:center'><tt><span
+  style='font-size:10.0pt'>&gt;= ge</span></tt></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt'>mayor o igual que</span></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><tt><span style='font-size:10.0pt'>${5 ge 6}</span></tt></p>
+
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><tt><span style='font-size:10.0pt'>false</span></tt></p>
+  </td>
+ </tr>
+</table>
+
+      <h3><span lang=EN style='font-size:10.0pt;mso-ansi-language:
+EN'>Operador empty</span><span lang=EN style='mso-ansi-language:EN'><o:p></o:p></span></h3>
+
+<p class=sect3><span style='font-size:10.0pt'>El operador </span><tt><span
+style='font-size:10.0pt'>empty</span></tt><span style='font-size:10.0pt'>
+
+comprueba si una colección o cadena es vacía o nula. Ejemplo: </span><tt><span
+style='font-size:10.0pt'>${empty param.login}</span></tt><o:p></o:p></p>
+
+<p class=sect3><span style='font-size:10.0pt'>Otra manera de hacerlo es usando
+la palabra clave </span><tt><span style='font-size:10.0pt'>null</span></tt><span
+style='font-size:10.0pt'>: </span><tt><span style='font-size:10.0pt'>${param.login
+== null}</span></tt><o:p></o:p></p>
+</p>
+<p>
+      <h3><o:p></o:p></h3>
+
+<h1>
+</p></td>
+
+  </tr>
+  <tr> 
+    <td ></td>
+    <td >&nbsp;</td>
+    <td ><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+</body>
+</html>

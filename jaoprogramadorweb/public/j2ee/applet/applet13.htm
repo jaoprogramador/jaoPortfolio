@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Applets que tambi&eacute;n son aplicaciones</title>
+<META http-equiv=Content-Language content=es>
+<META content="Manual Applets, ejemplos Applets, codigos Applets" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Manual Applets, ejemplos Applets, codigos Applets">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td colspan="3"> <h2>Applets que tambi&eacute;n son aplicaciones </h2></td>
+  </tr>
+  <tr> 
+    <td colspan="3"> <p>Es muy interesante desarrollar aplicaciones que pueden 
+        funcionar tambi&eacute;n como applets y
+        viceversa. En concreto, para hacer que un applet pueda ejecutarse como 
+        aplicaci&oacute;n pueden seguirse
+        las siguientes instrucciones:
+      <p>
+        1. Se a&ntilde;ade un m&eacute;todo main() a la clase MiApplet (que deriva 
+        de Applet)
+      <p>
+        2. El m&eacute;todo main() debe crear un objeto de la clase MiApplet e 
+        introducirlo en un Frame.
+      <p>
+        3. El m&eacute;todo main() debe tambi&eacute;n ocuparse de hacer lo que 
+        har&iacute;a el browser, es decir, llamar a los m&eacute;todos init() 
+        y start() de la clase MiApplet.
+      <p> 4. Se puede a&ntilde;adir tambi&eacute;n una static inner class que 
+        derive de WindowAdapter y que gestione el evento de cerrar la ventana 
+        de la aplicaci&oacute;n definiendo el m&eacute;todo windowClosing(). Este 
+        m&eacute;todo llama al m&eacute;todo System.exit(0). Seg&uacute;n como 
+        sea el applet, el m&eacute;todo windowClosing() previamente deber&aacute; 
+        tambi&eacute;n llamar a los m&eacute;todos MiApplet.stop() y MiApplet.destroy(), 
+        cosa que para las applets se encarga de hacer el browser. En este caso 
+        conviene que el objeto de MiApplet creado por main() sea static, en lugar 
+        de una variable local. A continuaci&oacute;n se presenta un ejemplo: 
+      <p>public class MiApplet extends Applet {<br>
+        ...<br>
+        public void init() {...}<br>
+        ...<br>
+        // clase para cerrar la aplicaci&oacute;n<br>
+        static class WL extends WindowsAdapter {<br>
+        public void windowClosing(WindowEvent e) {<br>
+        MiApplet.stop();<br>
+        MiApplet.destroy();<br>
+        System.exit(0);<br>
+        }<br>
+        } // fin de WindowAdapter<br>
+        // programa principal<br>
+        public static void main(String[] args) {<br>
+        static MiApplet unApplet = new MiApplet();<br>
+        Frame unFrame = new Frame(&quot;MiApplet&quot;);<br>
+        unFrame.addWindowListener(new WL());<br>
+        unFrame.add(unapplet, BorderLayout.CENTER);<br>
+        unFrame.setSize(400,400);<br>
+        unApplet.init();<br>
+        unApplet.start();<br>
+        unFrame.setVisible(true);<br>
+        }<br>
+        } // fin de la clase MiApplet </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

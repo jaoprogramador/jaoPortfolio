@@ -1,0 +1,340 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Ejercicios MySQL</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="MySQL, sql, pl/sql, programacion MySQL, ejercicios MySQL, ejemplos MySQL, select">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2>A L T E R</h2></td>
+  </tr>
+  <tr> 
+    <td><h3>Sintaxis de ALTER DATABASE</h3>
+    	
+      <p>ALTER {DATABASE | SCHEMA} [db_name]<br>
+        alter_specification [, alter_specification] ...<br>
+        alter_specification:<br>
+        [DEFAULT] CHARACTER SET charset_name<br>
+        | [DEFAULT] COLLATE collation_name<br>
+        ALTER DATABASE le permite cambiar las caracter&iacute;sticas globales 
+        de una base de datos. Estas caracter&iacute;sticas se almacenan en el<br>
+        fichero db.opt en el directorio de la base de datos. Para usar ALTER DATABASE, 
+        necesita el permiso ALTER en la base de datos.<br>
+        La cl&aacute;usula CHARACTER SET cambia el conjunto de caracteres por 
+        defecto de la base de datos. La cl&aacute;usula COLLATE cambia la<br>
+        colaci&oacute;n por defecto de la base de datos. El conjunto de caracteres 
+        y la colaci&oacute;n se discuten en Cap&iacute;tulo 10, Soporte de conjuntos 
+        de<br>
+        caracteres.<br>
+        En MySQL 5.0, el nombre de base de datos puede omitirse. El comando se 
+        aplica a la base de datos por defecto. ALTER SCHEMA<br>
+        puede usarse desde MySQL 5.0.2.<br>
+        <h3>Sintaxis de ALTER TABLE</h3><br>
+        ALTER [IGNORE] TABLE tbl_name<br>
+        alter_specification [, alter_specification] ...<br>
+        alter_specification:<br>
+        ADD [COLUMN] column_definition [FIRST | AFTER col_name ]<br>
+        | ADD [COLUMN] (column_definition,...)<br>
+        | ADD INDEX [index_name] [index_type] (index_col_name,...)<br>
+        | ADD [CONSTRAINT [symbol]]<br>
+        PRIMARY KEY [index_type] (index_col_name,...)<br>
+        | ADD [CONSTRAINT [symbol]]<br>
+        UNIQUE [index_name] [index_type] (index_col_name,...)<br>
+        | ADD [FULLTEXT|SPATIAL] [index_name] (index_col_name,...)<br>
+        | ADD [CONSTRAINT [symbol]]<br>
+        FOREIGN KEY [index_name] (index_col_name,...)<br>
+        [reference_definition]<br>
+        | ALTER [COLUMN] col_name {SET DEFAULT literal | DROP DEFAULT}<br>
+        | CHANGE [COLUMN] old_col_name column_definition<br>
+        [FIRST|AFTER col_name]<br>
+        | MODIFY [COLUMN] column_definition [FIRST | AFTER col_name]<br>
+        | DROP [COLUMN] col_name<br>
+        | DROP PRIMARY KEY<br>
+        | DROP INDEX index_name<br>
+        | DROP FOREIGN KEY fk_symbol<br>
+        | DISABLE KEYS<br>
+        | ENABLE KEYS<br>
+        | RENAME [TO] new_tbl_name<br>
+        | ORDER BY col_name<br>
+        | CONVERT TO CHARACTER SET charset_name [COLLATE collation_name]<br>
+        | [DEFAULT] CHARACTER SET charset_name [COLLATE collation_name]<br>
+        | DISCARD TABLESPACE<br>
+        | IMPORT TABLESPACE<br>
+        | table_options<br>
+        ALTER TABLE le permite cambiar la estructura de una tabla existente. Por 
+        ejemplo, puede a&ntilde;adir o borrar columnas, crear o destruir<br>
+        &iacute;ndices, cambiar el tipo de columnas existentes, o renombrar columnas 
+        o la misma tabla. Puede cambiar el comentario de la tabla<br>
+        y su tipo.<br>
+        La sintaxis para varias de las alteraciones permitidas es similar a cl&aacute;usulas 
+        del comando CREATE TABLE. Esto incluye modificaciones<br>
+        table_options , para opciones tales como ENGINE, AUTO_INCREMENT, y AVG_ROW_LENGTH. 
+        Consulte Secci&oacute;n<br>
+        13.1.5, &#8220;Sintaxis de CREATE TABLE&#8221;.<br>
+        Algunas operaciones pueden producir advertencias si se intentan en una 
+        tabla para que el motor de almacenamiento no soporte la<br>
+        operaci&oacute;n. Estas advertencias pueden mostrarse con SHOW WARNINGS. 
+        Consulte Secci&oacute;n 13.5.4.22, &#8220;Sintaxis de SHOW WARNINGS&#8221;.<br>
+        Si usa ALTER TABLE para cambiar la especificaci&oacute;n de una columna 
+        pero DESCRIBE tbl_name indica que la columna no ha<br>
+        cambiado, es posible que MySQL haya ignorado las modificaciones por alguna 
+        de las razones descritas en Secci&oacute;n 13.1.5.1,<br>
+        &#8220;Cambios t&aacute;citos en la especificaci&oacute;n de columnas&#8221;. 
+        Por ejemplo, si intenta cambiar una columna VARCHAR a CHAR, MySQL usa<br>
+        VARCHAR si la tabla contiene otras columnas de longitud variable.<br>
+        ALTER TABLE funciona creando una copia temporal de la tabla original. 
+        La alteraci&oacute;n se realiza en la copia, luego la tabla original<br>
+        se borra y se renombra la nueva. Mientras se ejecuta ALTER TABLE la tabla 
+        original es legible por otros clientes. Las actualizaciones<br>
+        y escrituras en la tabla se esperan hasta que la nueva tabla est&eacute; 
+        lista, luego se redirigen autom&aacute;ticamente a la nueva tabla<br>
+        sin ninguna actualizaci&oacute;n fallida.<br>
+        Tenga en cuenta que si usa cualquier otra opci&oacute;n en ALTER TABLE 
+        distinta a RENAME, MySQL siempre crea una tabla temporal,<br>
+        incluso si los datos no necesitan ser copiados (tales como cuando cambia 
+        el nombre de una columna). Planeamos arreglar esto en el<br>
+        futuro, pero debido a que ALTER TABLE no es un comando que se use frecuentemente, 
+        no es un tema demasiado urgente. Para tablas<br>
+        MyISAM puede incrementar la velocidad de la operaci&oacute;n de recrear 
+        &iacute;ndices (que es la parte m&aacute;s lenta del proceso de alteraci&oacute;n)<br>
+        mediante la variable de sistema myisam_sort_buffer_size poniendo un valor 
+        alto.<br>
+        &#8226; Para usar ALTER TABLE, necesita ALTER, INSERT, y permisos CREATE 
+        para la tabla.<br>
+        &#8226; IGNORE es una extensi&oacute;n MySQL a SQL est&aacute;ndar. Controla 
+        c&oacute;mo funciona ALTER TABLE si hay duplicados en las claves<br>
+        primarias en la nueva tabla o si ocuren advertencias cuando est&aacute; 
+        activo el modo STRICT. Si no se especifica IGNORE la copia<br>
+        se aborta y no se ejecuta si hay errores de clave duplicada. Si se especifica 
+        IGNORE , entonces para duplicados con clave &uacute;nica,<br>
+        s&oacute;lo se usa el primer registro. El resto de registros conflicitivos 
+        se borran. Los valores err&oacute;neos se truncan al valor m&aacute;s 
+        cercano<br>
+        aceptable.<br>
+        &#8226; Puede ejecutar m&uacute;ltiples cl&aacute;usulas ADD, ALTER, DROP, 
+        y CHANGE en un &uacute;nico comando ALTER TABLE . Esta es una extensi&oacute;n<br>
+        MySQL al est&aacute;ndar SQL, que permite s&oacute;lo una de cada cl&aacute;usula 
+        por comando ALTER TABLE . Por ejemplo, para borrar<br>
+        m&uacute;ltiples columnas en un &uacute;nico comando:<br>
+        mysql&gt; ALTER TABLE t2 DROP COLUMN c, DROP COLUMN d;<br>
+        &#8226; CHANGE col_name, DROP col_name, y DROP INDEX son extensiones MySQL 
+        al est&aacute;ndar SQL.<br>
+        &#8226; MODIFY es una extensi&oacute;n de Oracle a ALTER TABLE.<br>
+        &#8226; La palabra COLUMN es opcional y puede omitirse.<br>
+        &#8226; Si usa ALTER TABLE tbl_name RENAME TO new_tbl_name sin ninguna 
+        otra opci&oacute;n, MySQL s&iacute;mplemente renombra<br>
+        cualquier fichero que se corresponda a la tabla tbl_name. No es necesario 
+        crear una tabla temporal. (Puede usar el comando<br>
+        RENAME TABLE para renombrar tablas. Consulte Secci&oacute;n 13.1.9, &#8220;Sintaxis 
+        de RENAME TABLE&#8221;.)<br>
+        &#8226; Las cl&aacute;usulas column_definition usan la misma sintaxis 
+        para ADD y CHANGE as&iacute; como CREATE TABLE. Tenga en<br>
+        cuenta que esta sintaxis incluye el nombre de la columna, no s&oacute;lo 
+        el tipo. Consulte Secci&oacute;n 13.1.5, &#8220;Sintaxis de CREATE TABLE&#8221;.<br>
+        &#8226; Puede renombrar una columna usando CHANGE old_col_name column_definition. 
+        Para ello, especifique el nombre<br>
+        de columna viejo y nuevo y el tipo de la columna actual. Por ejemplo, 
+        para renombrar una columna INTEGER de a a b, puede<br>
+        hacer:<br>
+        mysql&gt; ALTER TABLE t1 CHANGE a b INTEGER;<br>
+        Si quiere cambiar el tipo de una columna pero no el nombre, la sintaxis 
+        CHANGE necesita un nombre viejo y nuevo de columna,<br>
+        incluso si son iguales. Por ejemplo:<br>
+        mysql&gt; ALTER TABLE t1 CHANGE b b BIGINT NOT NULL;<br>
+        Puede usar MODIFY para cambiar el tipo de una columna sin renombrarla:<br>
+        mysql&gt; ALTER TABLE t1 MODIFY b BIGINT NOT NULL;<br>
+        &#8226; Si usa CHANGE o MODIFY para acortar una columna para la que existe 
+        un &iacute;ndice en la columna, y la longitud de la columna resultante<br>
+        es menor que la del &iacute;ndice, MySQL reduce el &iacute;ndice autom&aacute;ticamente.<br>
+        &#8226; Cuando cambia un tipo de columna usando CHANGE o MODIFY, MySQL 
+        intenta convertir valores de columna existentes al<br>
+        nuevo tipo lo mejor posible.<br>
+        &#8226; En MySQL 5.0, puede usar FIRST o AFTER col_name para a&ntilde;adir 
+        una columna a una posici&oacute;n espec&iacute;fica sin un registro de<br>
+        tabla. Por defecto se a&ntilde;ade al final. Puede usar FIRST y AFTER 
+        en operaciones CHANGE o MODIFY en MySQL 5.0.<br>
+        &#8226; ALTER COLUMN especifica un nuevo valor por defecto para una columna 
+        o borra el antiguo valor por defecto. Si el antiguo<br>
+        valor por defecto se borra y la columna puede ser NULL, el nuevo valor 
+        por defecto es NULL. Si la columna no puede ser<br>
+        NULL, MySQL asigna un valor por defecto, como se describe en Secci&oacute;n 
+        13.1.5, &#8220;Sintaxis de CREATE TABLE&#8221;.<br>
+        &#8226; DROP INDEX borra un &iacute;ndice. Es una extensi&oacute;n MySQL 
+        al est&aacute;ndar SQL. Consulte Secci&oacute;n 13.1.7, &#8220;Sintaxis 
+        de DROP INDEX&#8221;.<br>
+        &#8226; Si las columnas se borran de una tabla, las columnas tambi&eacute;n 
+        se borran de cualquier &iacute;ndice del que formaran parte. Si todas 
+        las<br>
+        columnas que crean un &iacute;ndice se borran, tambi&eacute;n se borra 
+        el &iacute;ndice.<br>
+        &#8226; Si una tabla contiene s&oacute;lo una columna, la columna no puede 
+        borrarse. Si lo que quiere es borrar la tabla, use DROP TABLE .<br>
+        &#8226;<br>
+        DROP PRIMARY KEY borra el &iacute;ndice primario. Nota: En versiones anteriores 
+        de MySQL, si no existe clave primaria, entonces<br>
+        DROP PRIMARY KEY borrar&iacute;a el primer &iacute;ndice UNIQUE de la 
+        tabla. Esto ya no es as&iacute; en MySQL 5.0, cuando trata de usar<br>
+        DROP PRIMARY KEY en una tabla sin clave primaria dar&iacute;a lugar a 
+        un error.<br>
+        Si a&ntilde;ade UNIQUE INDEX o PRIMARY KEY a una tabla, se almacena antes 
+        que cualquier &iacute;ndice no &uacute;nico para que MySQL<br>
+        pueda detactar claves duplicadas tan r&aacute;pido como sea posible.<br>
+        &#8226; ORDER BY le permite crear la nueva tabla con los registros en 
+        un orden espec&iacute;fico. Tenga en cuenta que la tabla no queda en<br>
+        este orden tras las inserciones y borrados. Esta opci&oacute;n es &uacute;til 
+        cuando sabe que normalmente consultar&aacute; los registros en el mismo<br>
+        orden; usando esta opci&oacute;n tras grandes cambios en la tabla, puede 
+        ser capaz de obtener un mejor rendimiento. En algunos casos,<br>
+        puede hacer la ordenaci&oacute;n m&aacute;s f&aacute;cil para MySQL si 
+        la tabla est&aacute; en el orden de la columna por la que quiere ordenar 
+        posteriormente.<br>
+        &#8226; Si usa ALTER TABLE en una tabla MyISAM , todos los &iacute;ndices 
+        no &uacute;nicos se crean en un batch separado (como para REPAIR<br>
+        TABLE). Esto debe hacer ALTER TABLE mucho m&aacute;s r&aacute;pido cuando 
+        tiene muchos &iacute;ndices.<br>
+        En MySQL 5.0, esta caracter&iacute;stica puede activarse expl&iacute;citamente 
+        ALTER TABLE ... DISABLE KEYS le dice a MySQL<br>
+        que pare de actualizar &iacute;ndices no &uacute;nicos para una tabla 
+        MyISAM . ALTER TABLE ... ENABLE KEYS debe usarse para recrear<br>
+        &iacute;ndices perdidos. MySQL lo hace con un algoritmo especial que es 
+        mucho m&aacute;s r&aacute;pido que insertar claves una a una, as&iacute;<br>
+        que deshabilitar claves antes de realizar operaciones de inserci&oacute;n 
+        masivas deber&iacute;a dar una mejora de velocidad. Usar ALTER<br>
+        TABLE ... DISABLE KEYS requiere del permiso INDEX adem&aacute;s de los 
+        permisos mencionados anteriormente.<br>
+        &#8226;<br>
+        Las cl&aacute;usulas FOREIGN KEY y REFERENCES son soportadas por el motor 
+        InnoDB, que implementa ADD [CONSTRAINT<br>
+        [symbol]] FOREIGN KEY (...) REFERENCES ... (...). Consulte Secci&oacute;n 
+        15.6.4, &#8220;Restricciones (constraints)<br>
+        FOREIGN KEY&#8221;. Para otros motores de almacenamiento, las cl&aacute;usulas 
+        se parsean pero se ignoran. La cl&aacute;usula CHECK se parsea<br>
+        pero se ignora por todos los motores de almacenamiento. Consulte Secci&oacute;n 
+        13.1.5, &#8220;Sintaxis de CREATE TABLE&#8221;. La raz&oacute;n<br>
+        para aceptar pero ignorar las cl&aacute;usulas es para compatibilidad, 
+        para hacer m&aacute;s f&aacute;cil portar c&oacute;digo de otros servidores 
+        SQL,<br>
+        y para ejecutar aplicaciones que crean tablas con referencias. Consulte 
+        Secci&oacute;n 1.7.5, &#8220;Diferencias en MySQL del est&aacute;ndar<br>
+        SQL&#8221;.<br>
+        &#8226;<br>
+        En MySQL 5.0, InnoDB soporta el uso de ALTER TABLE para borrar claves 
+        foranas:<br>
+        ALTER TABLE yourtablename DROP FOREIGN KEY fk_symbol;<br>
+        Para m&aacute;s informaci&oacute;n, consulte Secci&oacute;n 15.6.4, &#8220;Restricciones 
+        (constraints) FOREIGN KEY&#8221;.<br>
+        &#8226; ALTER TABLE ignora las opciones DATA DIRECTORY y INDEX DIRECTORY.<br>
+        &#8226;<br>
+        Si quiere cambiar el conjunto de caracteres por defecto de la tabla y 
+        todas las columnas de caracteres (CHAR, VARCHAR, TEXT)<br>
+        a un nuevo conjunto de caracteres, use un comando como:<br>
+        ALTER TABLE tbl_name CONVERT TO CHARACTER SET charset_name;<br>
+        Atenci&oacute;n: La operaci&oacute;n precedente convierte los valores 
+        de columnas entre conjuntos de caracteres. Esto no es lo que quiere<br>
+        hacer si tiene una columna en un conjunto de caracteres (como latin1) 
+        pero los valores almacenados realmente usan otro<br>
+        conjunto de caracteres incompatible (como utf8). En este caso, tiene que 
+        hacer lo siguiente para cada una de tales columnas:<br>
+        ALTER TABLE t1 CHANGE c1 c1 BLOB;<br>
+        ALTER TABLE t1 CHANGE c1 c1 TEXT CHARACTER SET utf8;<br>
+        La raz&oacute;n de que esto funcione es que no hay conversi&oacute;n cuando 
+        convierte desde o hacia columnas BLOB .<br>
+        Si especifica CONVERT TO CHARACTER SET binary, las columnas CHAR, VARCHAR, 
+        y TEXT se converten a sus cadenas<br>
+        de caracteres binarias (BINARY, VARBINARY, BLOB). Esto significa que las 
+        columnas no tendr&aacute;n un conjunto de car&aacute;cters<br>
+        y que siguientes operaciones CONVERT TO no se les aplicar&aacute;n.<br>
+        Para s&oacute;lo cambiar el conjunto de caracteres por defecto de una 
+        tabla, use este comando:<br>
+        ALTER TABLE tbl_name DEFAULT CHARACTER SET charset_name;<br>
+        La palabra DEFAULT es opcional. El conjunto de caracteres por defecto 
+        es el que se usa si no especifica uno para una nueva columna<br>
+        que a&ntilde;ada a la tabla (por ejemplo, con ALTER TABLE ... ADD column).<br>
+        Atenci&oacute;n: En MySQL 5.0, ALTER TABLE ... DEFAULT CHARACTER SET y 
+        ALTER TABLE ... CHARACTER<br>
+        SET son equivalentes y cambian s&oacute;lo el conjunto de caracteres por 
+        defecto de la tabla.<br>
+        &#8226;<br>
+        Para una tabla InnoDB creada con su propio espacio de tablas en un fichero 
+        .ibd, este fichero puede descartarse e importarse.<br>
+        Para descatar el fichero .ibd , use este comando:<br>
+        ALTER TABLE tbl_name DISCARD TABLESPACE;<br>
+        Esto borra el fichero .ibd actual, as&iacute; que aseg&uacute;rese que 
+        tiene primero una copia de seguridad. Tratar de acceder a la tabla<br>
+        mientras se descarta el fichero provoca un error.<br>
+        Para importar el fichero .ibd de la copia de seguridad de nuevo a la tabla, 
+        c&oacute;pielo en el directorio de la base de datos, luego<br>
+        realice el comando:<br>
+        ALTER TABLE tbl_name IMPORT TABLESPACE;<br>
+        Consulte Secci&oacute;n 15.6.6, &#8220;Usar un espacio de tablas para 
+        cada tabla&#8221;.<br>
+        &#8226;<br>
+        Con la funci&oacute;n mysql_info() de la API de C, puede consultar el 
+        n&uacute;mero de registros copiados, y (cuando se usa IGNORE )<br>
+        cu&aacute;ntos registros se borraron debido a duplicaci&oacute;n de valores 
+        de claves &uacute;nica. Consulte Secci&oacute;n 24.2.3.32, &#8220;mysql_info()&#8221;.<br>
+        Hay algunos ejemplos que muestran usos de ALTER TABLE. Comienza con una 
+        tabla t1 que se crea como se muestra:<br>
+        mysql&gt; CREATE TABLE t1 (a INTEGER,b CHAR(10));<br>
+        Para renombrar la tabla de t1 a t2:<br>
+        mysql&gt; ALTER TABLE t1 RENAME t2;<br>
+        Para cambiar la columna a desde INTEGER a TINYINT NOT NULL (dejando el 
+        mismo nombre), y para cambiar la columna b<br>
+        desde CHAR(10) a CHAR(20) as&iacute; como dejarla de b a c:<br>
+        mysql&gt; ALTER TABLE t2 MODIFY a TINYINT NOT NULL, CHANGE b c CHAR(20);<br>
+        Para a&ntilde;adir una nueva columna TIMESTAMP llamada d:<br>
+        mysql&gt; ALTER TABLE t2 ADD d TIMESTAMP;<br>
+        Para a&ntilde;adir &iacute;ndices en las columnas d y a:<br>
+        mysql&gt; ALTER TABLE t2 ADD INDEX (d), ADD INDEX (a);<br>
+        Para borrar la columna c:<br>
+        mysql&gt; ALTER TABLE t2 DROP COLUMN c;<br>
+        Para a&ntilde;adir una nueva columna entera AUTO_INCREMENT llamada c:<br>
+        mysql&gt; ALTER TABLE t2 ADD c INT UNSIGNED NOT NULL AUTO_INCREMENT,<br>
+        -&gt; ADD PRIMARY KEY (c);<br>
+        Tenga en cuenta que indexamos c (como PRIMARY KEY), ya que las columnas 
+        AUTO_INCREMENT deben indexarse, y tambi&eacute;n<br>
+        que declaramos c como NOT NULL, ya que las columnas de clave primara no 
+        pueden ser NULL.<br>
+        Cuando a&ntilde;ade una columna AUTO_INCREMENT los valores se rellenan 
+        con n&uacute;meros secuenciales autom&aacute;ticamente. Para tablas<br>
+        MyISAM puede asignar el primer n&uacute;mero de secuencia ejecutando SET 
+        INSERT_ID=value antes de ALTER TABLE o usando<br>
+        la opci&oacute;n de tabla AUTO_INCREMENT=value. Consulte Secci&oacute;n 
+        13.5.3, &#8220;Sintaxis de SET&#8221;.<br>
+        Desde MySQL 5.0.3, puede usar la opci&oacute;n de tabla ALTER TABLE ... 
+        AUTO_INCREMENT=value para InnoDB para asignar<br>
+        el n&uacute;mero de secuencia de nuevos registros si el valor es mayor 
+        que el m&aacute;ximo valor en la columna AUTO_INCREMENT . Si el<br>
+        valor es menor que el m&aacute;ximo actual en la columna, no se da ning&uacute;n 
+        mensaje de error y el valor de secuencia actual no se cambia.<br>
+        Con tablas MyISAM , si no cambia la columna AUTO_INCREMENT , el n&uacute;mero 
+        de secuencia no se ve afectado. Si elimina una columna<br>
+        AUTO_INCREMENT y luego a&ntilde;ade otra columna AUTO_INCREMENT los n&uacute;meros 
+        se resecuencian comenzando en 1.<br>
+        Consulte Secci&oacute;n A.7.1, &#8220;Problemas con ALTER TABLE&#8221;. 
+      </p>
+        </td>
+    <td>&nbsp;</td>
+    <td><a href="http://www.euskalnet.net/juanarana/oraclezip/Ejer3.rar"><img src="../../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td>
+<div align="right"><a href="http://www.euskalnet.net/juanarana/index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a>
+      </div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

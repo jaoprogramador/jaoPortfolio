@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Session</title>
+<META http-equiv=Content-Language content=es>
+<META content="Manual JSP, ejemplos JSP, codigos JSP" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Manual JSP, ejemplos JSP, codigos JSP">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> Session</h2></td>
+  </tr>
+  <tr> 
+    <td  colspan="3"> <p>En un sitio Web t&iacute;pico, un usuario puede visitar 
+        varias p&aacute;ginas y realizar varias interacciones.</p>
+      <p>Si est&aacute; programando el sitio, es muy &uacute;til para poder asociarse 
+        con algunos datos de cada visitante. Para ello, la &quot;session&quot; 
+        s puede ser utilizado en JSP.</p>
+      <p>Una sesi&oacute;n es un objeto relacionado con un visitante. Los datos 
+        pueden ser introducidos en la sesi&oacute;n y se recuperan de ella, como 
+        un Hashtable. Un conjunto diferente de los datos se mantienen para todos 
+        los visitantes del sitio.</p>
+      <p>Aqu&Atilde;&shy; hay un conjunto de p&aacute;ginas que poner el nombre 
+        de un usuario en la sesi&oacute;n, y mostrarlo en otros lugares. Pruebe 
+        la instalaci&oacute;n y uso de estos.</p>
+      <p>En primer lugar tenemos un formulario, llam&eacute;mosle GetName.html</p>
+      <p> &lt;HTML&gt; <br>
+        &lt;BODY&gt; <br>
+        &lt;FORM METHOD=POST ACTION=&quot;SaveName.jsp&quot;&gt; <br>
+        &iquest;Cual es tu nombre? &lt;INPUT TYPE=TEXT NAME=username SIZE=20&gt; 
+        <br>
+        &lt;P&gt;&lt;INPUT TYPE=SUBMIT&gt; <br>
+        &lt;/FORM&gt; <br>
+        &lt;/BODY&gt; <br>
+        &lt;/HTML&gt; </p>
+      <p>El objetivo de la forma es &quot;SaveName.jsp&quot;, que guarda el nombre 
+        del usuario en la sesi&oacute;n. Tenga en cuenta la variable de sesi&oacute;n. 
+        Esta es otra variable que se hace normalmente disponibles en las p&aacute;ginas 
+        JSP, al igual que las variables especiales. (En el directiva @ Page, que 
+        puede indicar que usted no necesita periodos de sesiones, en la que el 
+        &quot;periodo de caso&quot; variable no estar&aacute; disponible.)</p>
+      <p> &lt;%<br>
+        String name = request.getParameter ( &quot;username&quot;);<br>
+        session.setAttribute( &quot;theName&quot;, name ); <br>
+        %&gt; <br>
+        &lt;HTML&gt; <br>
+        &lt;BODY&gt; <br>
+        &lt;A HREF=&quot;NextPage.jsp&quot;&gt; Continuar &lt;/ A&gt;<br>
+        &lt;/BODY&gt; <br>
+        &lt;/HTML&gt; </p>
+      <p> El SaveName.jsp guarda el nombre del usuario en la sesi&oacute;n, y 
+        pone un enlace a otra p&aacute;gina, NextPage.jsp.</p>
+      <p> NextPage.jsp muestra como recuperar el nombre guardado.</p>
+      <p> &lt;HTML&gt;<br>
+        &lt;BODY&gt; <br>
+        Hello, &lt;%= session.getAttribute( &quot;theName&quot; ) %&gt; <br>
+        &lt;/BODY&gt; <br>
+        &lt;/HTML&gt; </p>
+      <p> Si usted trae dos navegadores diferentes (no diferentes de un mismo 
+        navegador), o ejecutar dos navegadores de dos m&aacute;quinas diferentes, 
+        usted puede poner un nombre en un navegador y otro nombre en otro navegador, 
+        y ambos nombres se mantendr&aacute; la pista.</p>
+      <p> La sesi&oacute;n se mantiene en torno a hasta un periodo de tiempo de 
+        espera. Luego, se supone que el usuario ya no es visitando el sitio, y 
+        la sesi&oacute;n se descarta. <br>
+      </p>
+      <p> </p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

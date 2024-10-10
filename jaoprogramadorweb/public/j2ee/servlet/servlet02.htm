@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Arquitectura del Paquete Servlet</title>
+<META http-equiv=Content-Language content=es>
+<META http-equiv=Content-Language content=es>
+<META content="Manual Servlet, ejemplos Servlet, codigos Servlet" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Manual Servlet, ejemplos Servlet, codigos Servlet">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2> Arquitectura del Paquete Servlet</h2></td>
+  </tr>
+  <tr> 
+    <td colspan="3"> <table width="472" border="0" >
+        <tr> 
+          <td width="21%"><h3>Contenido:</h3></td>
+          <td width="79%"></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="struts09.htm#Arqui">- Arquitectura del Paquete Servlet</a></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="struts09.htm#Inter">- El Interface Servlet</a></td>
+        </tr>
+		        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="struts09.htm#Clien">- Interaci&oacute;n con el Cliente</a></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="struts09.htm#Capa">- Capacidades Adicionales de los 
+            Servlets HTTP</a></td>
+        </tr>
+      </table>
+      <h3>Arquitectura del Paquete Servlet<a name="Arqui"></a></h3>
+      <p>El paquete javax.servlet proporciona clases e interfaces para escribir 
+        servlets. La arquitectura de este paquete se describe a continuaci&oacute;n. 
+      </p>
+      <h3>El Interface Servlet <a name="Inter"></a></h3>
+      <p>La abstraci&oacute;n central en el API Servlet es el interface Servlet. 
+        Todos los servlets implementan este interface, bien directamente o, m&aacute;s 
+        comunmente, extendiendo una clase que lo implemente como HttpServlet</p>
+      <p>El interface Servlet declara, pero no implementa, m&eacute;todos que 
+        manejan el Servlet y su comunicaci&oacute;n con los clientes. Los escritores 
+        de Servlets proporcionan algunos de esos m&eacute;todos cuando desarrollan 
+        un servlet.<h3>Interaci&oacute;n con el Cliente<a name="Clien"></a></h3>
+        <p>Cuando un servlet acepta una llamada de un cliente, recibe dos objetos.
+        Un ServletRequest, que encapsula la comunicaci&oacute;n desde el cliente 
+        al servidor. l 
+        Un ServletResponse, que encapsula la comunicaci&oacute;n de vuelta desde 
+        el servlet hacia el cliente. l 
+        ServletRequest y ServletResponse son interfaces definidos en el paquete 
+        javax.servlet.</p>
+        <h3>El Interface ServletRequest</h3>
+        <p>El Interface ServletRequest permite al servlet aceder a :
+        Informaci&oacute;n como los nombres de los par&aacute;metros pasados por 
+        el cliente, el protocolo (esquema) que
+        est&aacute; siendo utilizado por el cliente, y los nombres del host remote 
+        que ha realizado la petici&oacute;n y la del        server que la ha recibido.
+        l 
+        El stream de entrada, ServletInputStream. Los Servlets utilizan este stream 
+        para obtener los datos
+        desde los clientes que utilizan protocolos como los m&eacute;todos POST 
+        y PUT del HTTP.
+        l 
+        Los interfaces que extienden el interface ServletRequest permiten al servlet 
+        recibir m&aacute;s datos
+        espec&iacute;ficos del protocolo. Por ejemplo, el interface HttpServletRequest 
+        contiene m&eacute;todos para
+        acceder a informaci&oacute;n de cabecera espec&iacute;fica HTTP.
+        <h3>El Interface ServletResponse</h3>
+        
+      <p>El Interface ServletResponse le da al servlet los m&eacute;todos para 
+        responder al cliente. Permite al servlet seleccionar la longitud del contenido 
+        y el tipo MIME de la respuesta. l Proporciona un stream de salida, ServletOutputStream, 
+        y un Writer a trav&eacute;s del cual el servlet puede responder datos. 
+        l Los interfaces que extienden el interface ServletResponse le dan a los 
+        servlets m&aacute;s capacidades espec&iacute;ficas del protocolo. Por 
+        ejemplo, el interface HttpServletResponse contiene m&eacute;todos que 
+        permiten al servlet manipular informaci&oacute;n de cabecera espec&iacute;fica 
+        HTTP. <h3>Capacidades Adicionales de los Servlets HTTP<a name="Capa"></a></h3>
+        Las clases e interfaces descritos anteriormente construyen un servlet 
+        b&aacute;sico. Los servlets HTTP
+        tienen algunos objetos adicionales que proporcionan capacidades de seguimiento 
+        de sesi&oacute;n. El
+        escritor se servlets pueden utilizar esos APIs para mantener el estado 
+        entre el servlet y el cliente
+        persiste a trav&eacute;s de m&uacute;ltiples conexiones durante un periodo 
+        de tiempo. Los servlets HTTP tambi&eacute;n
+        tienen objetos que proporcionan cookies. El API cookie se utiliza para 
+        guardar datos dentro del
+        cliente y recuperar esos datos.</p>
+      
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

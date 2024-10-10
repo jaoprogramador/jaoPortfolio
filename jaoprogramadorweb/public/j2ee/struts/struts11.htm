@@ -1,0 +1,176 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Carga de documentos en el servidor</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación en Struts,Programas Struts,Aplicaciones en Struts,Ejercicios en Struts, Ejemplos de Struts,Tutoriales de Struts,Manuales Struts" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Struts, Manual Struts, tutorial Struts, Ejemplos Struts, ejercicios Struts">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2> Carga de documentos en el servidor</h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <table width="472" border="0" >
+        <tr> 
+          <td width="21%"><h3>Contenido:</h3></td>
+          <td width="79%"></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="struts11.htm#Intro">- Introducci&oacute;n</a></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="struts11.htm#Libre">- Librer&iacute;as</a></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="struts11.htm#Form">- JSP con Formulario multipart</a></td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td><a href="struts11.htm#Carg">- Cargar el documento</a></td>
+        </tr>
+      </table>
+      <p>&nbsp;</p>
+      <h3>Introducci&oacute;n:<a name="Intro" id="Intro"></a></h3>
+      <p>En este apartado, veremos como cargar un documento desde una jsp para 
+        almacenarlo en el servidor, en nuestro caso, un servidor Tomcat 5.5. Para 
+        ello no necesitaremos mas que una crear una JSP, con un formulario, y 
+        un Action.java que implementar&aacute; la carga del documento seleccionado 
+        desde el formulario de la JSP.</p>
+      <p>&nbsp;</p>
+      <h3>Librer&iacute;as:<a name="Libre" id="Libre"></a></h3>
+      <p>Para realizar esta tarea, se necesitan basicamente 2 librer&iacute;as:<br>
+        - commons-fileupload-1.2.1jar.<br>
+        - commons-io-1.4.jar.<br>
+        Aunque si que es cierto que hay distintas versiones de estas librer&iacute;as 
+        yo he utilizado para mi desarrollo estas dos. Podemos descargarlas de 
+        <a href="http://struts.apache.org/">struts.apache.org</a> de entre todas 
+        las versiones que dispone.</p>
+
+      <p>&nbsp;</p>
+      <h3>Formulario multipart:<a name="JSP"></a></h3>
+      <p>Pues bien, ahora nos dispondremos a implementar una simple JSP con un 
+        formulario multipart que contendr&aacute; un control INPUT del tipo FILE, 
+        que se engargar&aacute; de almacenar el documento seleccionado:</p>
+      <p>&lt;html&gt;<br>
+        &lt;head&gt;<br>
+        &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;multipart/form-data;&quot;&gt;<br>
+        &lt;title&gt;Cargar documento&lt;/title&gt;</p>
+      <p>&lt;/head&gt;<br>
+        &lt;body&gt;</p>
+      <p>&lt;form action=&quot;/JAO/SubirFicherosServidorAction.do&quot; method=&quot;post&quot; 
+        enctype=&quot;multipart/form-data&quot; &gt;<br>
+        Selecciona el documento de tipo pdf y pulsa Enviar para guardarlo en servidor<br>
+        &lt;input type=&quot;file&quot; name=&quot;theFile&quot; id=&quot;theFile&quot;/&gt;<br>
+        &lt;html:submit title=&quot;Enviar&quot; value=&quot;Enviar&quot;/&gt;</p>
+      <p><br>
+        &lt;/form&gt;<br>
+        &lt;/body&gt;<br>
+        &lt;/html&gt;</p>
+      <p>&nbsp;</p>
+      <p><br>
+      </p>
+	  <h3>Cargar documento</h3>
+	  <p>Para cargar el documento nos tendremos que generar un action, en nuestro 
+        caso SubirFicherosServidorAction.java y a&ntilde;adir en el controlador 
+        struts-config.xml estas lineas:</p>
+      <p>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</p>
+      <p>&lt;!DOCTYPE struts-config PUBLIC<br>
+        &quot;-//Apache Software Foundation//DTD Struts Configuration 1.3//EN&quot;<br>
+        &quot;http://jakarta.apache.org/struts/dtds/struts-config_1_3.dtd&quot;&gt;</p>
+      <p><br>
+        &lt;struts-config&gt;<br>
+        &lt;form-beans&gt; </p>
+      <p> &lt;/form-beans&gt;</p>
+      <p> &lt;global-exceptions&gt;</p>
+      <p> &lt;/global-exceptions&gt;</p>
+      <p> &lt;global-forwards&gt;<br>
+        &lt;forward name=&quot;welcome&quot; path=&quot;/Welcome.do&quot;/&gt;</p>
+      <p> &lt;/global-forwards&gt;</p>
+      <p> &lt;action-mappings&gt;<br>
+        &lt;action path=&quot;/SubirFicherosServidorAction&quot; type=&quot;com.jao.controladores.consultas.actions.SubirFicherosServidorAction&quot; 
+        <br>
+        scope=&quot;request&quot; validate=&quot;false&quot; &gt;<br>
+        &lt;forward name=&quot;success&quot; path=&quot;/JSPs/cargarDocumExito.jsp&quot; 
+        /&gt;<br>
+        &lt;forward name=&quot;error&quot; path=&quot;/JSPs/cargarDocumError.jsp&quot; 
+        /&gt;<br>
+        &lt;/action&gt;</p>
+      <p>.....</p>
+      <p>y en el action SubirFicherosServidorAction.java deberemos a&ntilde;adir 
+        lo siguiente:</p>
+      <p>package com.jao.controladores.consultas.actions;</p>
+      <p>import java.io.File;<br>
+        import java.util.List;<br>
+        import java.util.Iterator;<br>
+        import javax.servlet.http.HttpServletRequest;<br>
+        import javax.servlet.http.HttpServletResponse;<br>
+        import org.apache.struts.action.ActionForm;<br>
+        import org.apache.struts.action.ActionForward;<br>
+        import org.apache.struts.action.ActionMapping;<br>
+        import org.apache.commons.fileupload.*;</p>
+      <p>/*</p>
+      <p>* @author JAO</p>
+      <p>*/</p>
+      <p>public class SubirFicherosServidorAction extends org.apache.struts.action.Action 
+        {</p>
+      <p>private static final String SUCCESS = &quot;success&quot;;<br>
+        private static final String ERROR = &quot;error&quot;;</p>
+      <p><br>
+        public ActionForward execute(ActionMapping mapping, ActionForm form,<br>
+        HttpServletRequest request, HttpServletResponse response)<br>
+        throws Exception {<br>
+        <br>
+        String paginaRetorno=&quot;&quot;;</p>
+      <p></p>
+      <p><br>
+        try{<br>
+        String tempStore = System.getProperty(&quot;java.io.tmpdir&quot;);</p>
+      <p> int maxMemorySize = -1;<br>
+        FileUpload sfu = new FileUpload(new org.apache.commons.fileupload.disk.DiskFileItemFactory(maxMemorySize, 
+        new File(tempStore)));<br>
+        sfu.setSizeMax(maxMemorySize);<br>
+        <br>
+        List &lt;FileItem&gt;fileItems = sfu.parseRequest(request);</p>
+      <p> Iterator itr = fileItems.iterator();</p>
+      <p> while(itr.hasNext()) {<br>
+        FileItem fi = (FileItem)itr.next();<br>
+        if (!fi.isFormField()) {<br>
+        File file = new File(fi.getName());<br>
+        fi.write(file);<br>
+        paginaRetorno=SUCCESS;<br>
+        }<br>
+        }<br>
+        paginaRetorno=ERROR;</p>
+      <p> }catch(Exception e){<br>
+        e.printStackTrace();<br>
+        paginaRetorno=ERROR;<br>
+        }</p>
+      <p> return mapping.findForward(paginaRetorno);</p>
+      <p> }<br>
+      </p>
+      <p>}<br>
+      </p></td>
+  </tr>
+  <tr> 
+    <td width="86" height="21"></td>
+    <td width="346" height="21">&nbsp;</td>
+    <td width="150"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

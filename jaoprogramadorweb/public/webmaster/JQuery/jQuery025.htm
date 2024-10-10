@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Introducci&oacute;n a JQuery</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta name="keywords" content="Introduccion a JQuery, Manual JQuery, tutorial JQuery, Ejemplos JQuery, ejercicios JQuery">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos"><tr> 
+    <td height="39" colspan="3"> <h2>Cómo realizar una pila de ejecución de funciones</h2></td>
+  </tr>
+  <tr> 
+    <td height="268" colspan="3"> <p>Ahora que ya hemos visto uno de los casos 
+        en los que necesitar&iacute;amos ejecutar funciones en<br>
+        una pila, una despu&eacute;s de otra, esperando a que termine completamente 
+        la ejecuci&oacute;n de<br>
+        cualquier efecto o acci&oacute;n antes de comenzar con la siguiente. Vamos 
+        a ver c&oacute;mo hacerlo con<br>
+        jQuery.<br>
+        Simplemente tenemos que saber que todas las funciones o m&eacute;todos 
+        de jQuery pueden recibir<br>
+        un par&aacute;metro adicional con el nombre de la funci&oacute;n que se 
+        tiene que ejecutar despu&eacute;s que<br>
+        termine el procesamiento de la primera. Esa segunda funci&oacute;n que 
+        se ejecuta despu&eacute;s de la<br>
+        primera es la que se conoce en ingl&eacute;s por callback. Un ejemplo 
+        sencillo para entenderlo.<br>
+        miFuncion (&quot;parametros de la funci&oacute;n&quot;, funcionCallback);<br>
+        En ese esquema de llamada a miFuncion(), se le est&aacute;n pasando dos 
+        par&aacute;metros. El primero<br>
+        ser&iacute;a un supuesto par&aacute;metro que necesitase miFuncion() y 
+        el segundo, que es le que nos<br>
+        interesa en este caso, el nombre de la funci&oacute;n que se tiene que 
+        ejecutar despu&eacute;s que acabe.<br>
+        Con este c&oacute;digo, primero se ejecuta miFuncion() y cuando acaba 
+        completamente, se ejecuta<br>
+        funcionCallback(). Pero atenci&oacute;n que este ejemplo lo hemos simplificado 
+        para que se pueda<br>
+        entender f&aacute;cilmente y esta sintaxis s&oacute;lo valdr&aacute; si 
+        funcionCallback no recibe par&aacute;metros, porque<br>
+        no los podemos indicar con el nombre de la funci&oacute;n. Veamos entonces 
+        una forma de hacer este<br>
+        callback que funcione siempre:<br>
+        miFuncion (&quot;parametros de la funcion&quot;, function(){<br>
+        funcionCallback();<br>
+        });<br>
+        Con este c&oacute;digo, que funcionar&iacute;a igual que el anterior, 
+        lo bueno es que s&iacute; podemos indicar los<br>
+        par&aacute;metros que se necesiten para la llamada a funcionCallback().</p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

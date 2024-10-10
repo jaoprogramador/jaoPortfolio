@@ -1,0 +1,69 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Indice J2ME</title>
+<META http-equiv=Content-Language content=es>
+<META content="Manual J2ME, ejemplos J2ME, codigos J2ME" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Manual J2ME, ejemplos J2ME, codigos J2ME">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> Bajo Nivel</h2></td>
+  </tr>
+  <tr> 
+    <td colspan="3"><h3>Interfaces</h3>
+      <p>Una aplicaci&oacute;n de bajo nivel es aqu&eacute;lla que utiliza elementos 
+        gr&aacute;ficos dibujados p&iacute;xel a p&iacute;xel<br>
+        sobre la pantalla del dispositivo y recibir&aacute; del usuario eventos 
+        directos de teclado que<br>
+        provoquen un cambio sobre el redibujo de estos gr&aacute;ficos, por ejemplo, 
+        para el desarrollo de<br>
+        juegos.<br>
+        Con esta forma de trabajar tendremos un control preciso de lo que deseamos 
+        dibujar en<br>
+        pantalla, aunque ello suponga tener que dibujarlo todo &quot;a mano&quot;, 
+        con el trabajo extra que<br>
+        supone (por ejemplo, si deseamos un bot&oacute;n, debemos dibujar un rect&aacute;ngulo 
+        que lo<br>
+        represente). Por ello, debemos cuidar mucho la portabilidad de un dispositivo 
+        a otro, ya que,<br>
+        muchas de las caracter&iacute;sticas que manejaremos ser&aacute;n distintas 
+        de una pantalla a otra (por<br>
+        ejemplo, las dimensiones de &eacute;sta).<br>
+        La clase Canvas ser&aacute; la que representa la pantalla a su m&aacute;s 
+        bajo nivel y la que se utiliza<br>
+        para dibujar sobre ella. Asimismo, dispone de varios m&eacute;todos para 
+        captar los eventos<br>
+        directos de teclado que el usuario provoque y as&iacute; reaccionar convenientemente 
+        ante ellos.<br>
+        Normalmente, se crear&aacute; un elemento que extienda la clase Canvas 
+        y donde se<br>
+        sobreescriban el m&eacute;todo paint(), encargado de dibujarla, y los 
+        m&eacute;todos encargados de<br>
+        capturar eventos de teclado (keyPressed(), keyReleased(), etc.).<br>
+        Por otro lado, con la clase Graphics dispondremos de multitud de funciones 
+        de dibujo sobre<br>
+        la pantalla, m&eacute;todos para trazar l&iacute;neas, dibujar rect&aacute;ngulos, 
+        incluir im&aacute;genes, etc.</p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

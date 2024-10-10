@@ -1,0 +1,174 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Porqu&ccedil;e utilizar POI</title>
+<META http-equiv=Content-Language content=es>
+<META content="Manual POI, ejemplos POI, documento excel en java" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Manual POI, ejemplos POI, documento excel en java">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2>Generar documento excel con POI</h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <p>Este ejemplo est&aacute; desarrollado en 
+        un proyecto WEB con struts. Desde la clase action (generarInformeUsuariosAction)se 
+        llama a la clase utilidadesExcel que es la que recibe los parametros de 
+        un DAO y a su vez, genera el documento excel.</p>
+      <p>//clase generarInformeUsuariosAction</p>
+      <p>public class generarInformeUsuariosAction extends org.apache.struts.action.Action 
+        {<br>
+        <br>
+        public ActionForward execute(ActionMapping mapping, ActionForm form,<br>
+        HttpServletRequest request, HttpServletResponse response)<br>
+        throws Exception { <br>
+        <br>
+      </p>
+      <p> ArrayList arrL=new ArrayList();<br>
+        String []arrC={&quot;Informe Usuarios&quot;,&quot;Usuario&quot;,&quot;Clave&quot;,&quot;Edad&quot;,&quot;Fecha 
+        Nacimiento&quot;,&quot;Profesion&quot;,&quot;Id&quot;};</p>
+      <p><br>
+        response.setContentType(&quot;application/vnd.ms-excel&quot;);<br>
+        response.setHeader(&quot;Content-Disposition&quot;, &quot;attachment; 
+        filename=informe.xls&quot;);//Content-Disposition<br>
+        OutputStream out = response.getOutputStream();</p>
+      <p><br>
+        UtilidadesExcel documento =new UtilidadesExcel();</p>
+      <p><br>
+        usuarioDao usu=new usuarioDao();<br>
+        arrL=usu.vConsulta();<br>
+        if(arrL.size()&gt;0){<br>
+        documento.GenerarDocumento(arrL,arrC,out);</p>
+      <p> }</p>
+      <p> return mapping.findForward(&quot;&quot;);<br>
+        }</p>
+      <p>//clase UtilidadesExcel.java</p>
+      <p>package com.jao.utilidades;</p>
+      <p>import com.jao.controladores.consultas.forms.consultaUsuariosForm;<br>
+        import java.io.IOException;<br>
+        import java.io.OutputStream;<br>
+        import java.util.ArrayList;</p>
+      <p>import java.util.Iterator;<br>
+        import org.apache.poi.hssf.usermodel.HSSFCell;<br>
+        import org.apache.poi.hssf.usermodel.HSSFCellStyle;<br>
+        import org.apache.poi.hssf.usermodel.HSSFFont;<br>
+        import org.apache.poi.hssf.usermodel.HSSFRow;<br>
+        import org.apache.poi.hssf.usermodel.HSSFSheet;<br>
+        import org.apache.poi.hssf.usermodel.HSSFWorkbook;<br>
+        import org.apache.poi.hssf.util.HSSFColor;<br>
+        import org.apache.poi.hssf.util.Region;</p>
+      <p><br>
+        /**<br>
+        *<br>
+        * @author JAO<br>
+        */<br>
+        public class UtilidadesExcel {<br>
+        public void GenerarDocumento(ArrayList arrFilas,String [] arrColumnas,OutputStream 
+        out ) throws IOException{<br>
+        try {<br>
+        //generamos el documento<br>
+        HSSFWorkbook workBook = new HSSFWorkbook();<br>
+        //generamos la hoja de calculo<br>
+        HSSFSheet Hoja1 = workBook.createSheet();<br>
+        //creamos el titulo de cabecera del documento<br>
+        GenerarCabecera(arrColumnas,Hoja1, workBook );<br>
+        //creamos los titulos y el contenido del documento<br>
+        GenerarCuerpo( arrColumnas, arrFilas,Hoja1, workBook );</p>
+      <p> workBook.write(out);<br>
+        } catch (IOException ex) {<br>
+        ex.printStackTrace();<br>
+        }<br>
+        out.close();<br>
+        <br>
+        }<br>
+        public void GenerarCabecera(String [] arrColumnas,<br>HSSFSheet Hoja1,HSSFWorkbook 
+        workBook ) {<br>
+        HSSFRow headerRow = Hoja1.createRow((short) 0);<br>
+        Hoja1.addMergedRegion(new Region(0, (short) 0, 2,(short) 10));</p>
+      <p><br>
+        //create a style for this header columns<br>
+        HSSFCellStyle columnHeaderStyle = workBook.createCellStyle();</p>
+      <p> columnHeaderStyle.setFillBackgroundColor( HSSFColor.BLUE_GREY.index);</p>
+      <p><br>
+        columnHeaderStyle.setFillForegroundColor( HSSFColor.BLUE_GREY.index);</p>
+      <p> HSSFFont font = workBook.createFont();<br>
+        font.setColor(HSSFFont.COLOR_RED);<br>
+        font.setFontHeightInPoints((short)15);<br>
+        font.setBoldweight((short)15);<br>
+        columnHeaderStyle.setFont(font);</p>
+      <p><br>
+        HSSFRow columnHeaderRow=Hoja1.createRow((short)0);<br>
+        HSSFCell colHeading1 = columnHeaderRow.createCell((short) 0); </p>
+      <p> colHeading1.setCellStyle(columnHeaderStyle);<br>
+        colHeading1.setCellValue(arrColumnas[0]);<br>
+        }<br>
+        public void GenerarCuerpo(String [] arrColumnas,ArrayList arrFilas,<br>HSSFSheet 
+        Hoja1,HSSFWorkbook workBook ) {<br>
+        // Creo una fuente para las negritas.<br>
+        HSSFFont fuenteNegrita= workBook.createFont();<br>
+        fuenteNegrita.setFontHeightInPoints((short)8);<br>
+        fuenteNegrita.setFontName(&quot;Negrita&quot;);<br>
+        fuenteNegrita.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);</p>
+      <p> <br>
+        // La fuente se mete en un estilo para poder ser usada.<br>
+        HSSFCellStyle estiloNegrita = workBook.createCellStyle();<br>
+        estiloNegrita.setFont(fuenteNegrita);<br>
+      </p>
+      <p> //Creamos los titulos<br>
+        HSSFRow row = Hoja1.createRow((short)3);<br>
+        HSSFCell cell = row.createCell((short)3);</p>
+      <p> for (int i = 0; i &lt; arrColumnas.length; i++) {<br>
+        String strTituloColumna = arrColumnas[i];</p>
+      <p> cell.setCellValue(strTituloColumna);<br>
+        cell.setCellStyle(estiloNegrita);<br>
+        cell = row.createCell((short)i);</p>
+      <p><br>
+        HSSFRow rowContenido = null;<br>
+        HSSFCell cellContenidoUsu,cellContenidoCla,cellContenidoEda,<br>cellContenidoFec,cellContenidoPro,cellContenidoId 
+        = null;<br>
+        //creamos contenidos<br>
+        int k=0;<br>
+        for (Iterator it = arrFilas.iterator(); it.hasNext();) {<br>
+        rowContenido = Hoja1.createRow((short)k+4);<br>
+        cellContenidoUsu = rowContenido.createCell((short) ((short) 0));<br>
+        cellContenidoCla = rowContenido.createCell((short) ((short) 1));<br>
+        cellContenidoEda = rowContenido.createCell((short) ((short) 2));<br>
+        cellContenidoFec = rowContenido.createCell((short) ((short) 3));<br>
+        cellContenidoPro = rowContenido.createCell((short) ((short) 4));<br>
+        cellContenidoId = rowContenido.createCell((short) ((short) 5));<br>
+        consultaUsuariosForm usu = (consultaUsuariosForm) it.next();<br>
+        cellContenidoUsu.setCellValue(usu.getUsuario());<br>
+        cellContenidoCla.setCellValue(usu.getClave());<br>
+        cellContenidoEda.setCellValue(usu.getEdad());<br>
+        cellContenidoFec.setCellValue(usu.getFechanacimiento());<br>
+        cellContenidoPro.setCellValue(usu.getProfesion());<br>
+        cellContenidoId.setCellValue(usu.getId()+&quot;&quot;);<br>
+        k=k+1;<br>
+        }<br>
+        }<br>
+        }<br>
+        }<br>
+      </p>
+      <p><br>
+      </p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

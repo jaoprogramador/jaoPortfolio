@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>C&oacute;mo hacer una p&aacute;gina AJAX</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta name="keywords" content="Primera página AJAX, Como hacer una pagina AJAX, Manual AJAX, tutorial AJAX, Ejemplos AJAX, ejercicios AJAX">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2>Métodos y propiedades del objeto XMLHttpRequest</h2></td>
+  </tr>
+  <tr> 
+    <td height="394" colspan="3"> <h3>El Objeto XMLHttpRequest</h3>
+      
+      <p>El objeto XMLHttpRequest posee muchas otras propiedades y m&eacute;todos 
+        diferentes a las manejadas por la primera aplicaci&oacute;n de AJAX. A 
+        continuaci&oacute;n se incluye la lista completa de todas las propiedades 
+        y m&eacute;todos del objeto y todos los valores num&eacute;ricos de sus 
+        propiedades.<br>
+        Las propiedades definidas para el objeto XMLHttpRequest son:<br>
+        Propiedad Descripci&oacute;n<br>
+        readyState Valor num&eacute;rico (entero) que almacena el estado de la 
+        petici&oacute;n<br>
+        responseText El contenido de la respuesta del servidor en forma de cadena 
+        de texto<br>
+        responseXML<br>
+        El contenido de la respuesta del servidor en formato XML. El objeto devuelto 
+        se puede procesar como un objeto DOM<br>
+        status<br>
+        El c&oacute;digo de estado HTTP devuelto por el servidor (200 para una 
+        respuesta correcta, 404<br>
+        para &quot;No encontrado&quot;, 500 para un error de servidor, etc.)<br>
+        statusText<br>
+        El c&oacute;digo de estado HTTP devuelto por el servidor en forma de cadena 
+        de texto: &quot;OK&quot;, &quot;Not<br>
+        Found&quot;, &quot;Internal Server Error&quot;, etc.<br>
+        Los valores definidos para la propiedad readyState son los siguientes:<br>
+        Valor Descripci&oacute;n<br>
+        0 No inicializado (objeto creado, pero no se ha invocado el m&eacute;todo 
+        open)<br>
+        1 Cargando (objeto creado, pero no se ha invocado el m&eacute;todo send)<br>
+        2 Cargado (se ha invocado el m&eacute;todo send, pero el servidor a&uacute;n 
+        no ha respondido)<br>
+        3<br>
+        Interactivo (se han recibido algunos datos, aunque no se puede emplear 
+        la propiedad<br>
+        responseText)<br>
+        4 Completo (se han recibido todos los datos de la respuesta del servidor)<br>
+        Los m&eacute;todos disponibles para el objeto XMLHttpRequest son los siguientes:<br>
+        M&eacute;todo Descripci&oacute;n<br>
+        abort() Detiene la petici&oacute;n actual<br>
+        getAllResponseHeaders()<br>
+        Devuelve una cadena de texto con todas las cabeceras de la<br>
+        respuesta del servidor<br>
+        getResponseHeader(&quot;cabecera&quot;)<br>
+        Devuelve una cadena de texto con el contenido de la cabecera solicitada<br>
+        onreadystatechange<br>
+        Responsable de manejar los eventos que se producen. Se invoca<br>
+        cada vez que se produce un cambio en el estado de la petici&oacute;n HTTP.<br>
+        Normalmente es una referencia a una funci&oacute;n JavaScript<br>
+        open(&quot;metodo&quot;, &quot;url&quot;)<br>
+        Establece los par&aacute;metros de la petici&oacute;n que se realiza al 
+        servidor. Los<br>
+        par&aacute;metros necesarios son el m&eacute;todo HTTP empleado y la URL 
+        destino (puede indicarse de forma absoluta o relativa) send(contenido) 
+        Realiza la petici&oacute;n HTTP al servidor<br>
+        setRequestHeader(&quot;cabecera&quot;,<br>
+        &quot;valor&quot;)<br>
+        Permite establecer cabeceras personalizadas en la petici&oacute;n HTTP. 
+        Se<br>
+        debe invocar el m&eacute;todo open() antes que setRequestHeader()<br>
+        El m&eacute;todo open() requiere dos par&aacute;metros (m&eacute;todo 
+        HTTP y URL) y acepta de forma opcional<br>
+        otros tres par&aacute;metros. Definici&oacute;n formal del m&eacute;todo 
+        open():<br>
+        open(string metodo, string URL [,boolean asincrono, string usuario, string 
+        password]);</p>
+      <p>Por defecto, las peticiones realizadas son as&iacute;ncronas. Si se indica 
+        un valor false al tercer par&aacute;metro, la petici&oacute;n se realiza 
+        de forma s&iacute;ncrona, esto es, se detiene la ejecuci&oacute;n de la 
+        aplicaci&oacute;n hasta que se recibe de forma completa la respuesta del 
+        servidor.<br>
+        No obstante, las peticiones s&iacute;ncronas son justamente contrarias 
+        a la filosof&iacute;a de AJAX. El motivo es que una petici&oacute;n s&iacute;ncrona 
+        congela el navegador y no permite al usuario realizar ninguna acci&oacute;n 
+        hasta que no se haya recibido la respuesta completa del servidor. La sensaci&oacute;n 
+        que provoca es que el navegador se ha colgado por lo que no se recomienda 
+        el uso de peticiones s&iacute;ncronas salvo que sea imprescindible. Los 
+        &uacute;ltimos dos par&aacute;metros opcionales permiten indicar un nombre 
+        de usuario y una contrase&ntilde;a v&aacute;lidos para acceder al recurso 
+        solicitado.<br>
+        Por otra parte, el m&eacute;todo send() requiere de un par&aacute;metro 
+        que indica la informaci&oacute;n que se va a enviar al servidor junto 
+        con la petici&oacute;n HTTP. Si no se env&iacute;an datos, se debe indicar 
+        un valor igual a null. En otro caso, se puede indicar como par&aacute;metro 
+        una cadena de texto, un array de bytes o un objeto XML DOM.</p></td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

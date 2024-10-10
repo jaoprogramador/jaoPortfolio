@@ -1,0 +1,261 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Relaci&oacute;n objeto - tabla</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación en hibernate,Programas hibernate,Aplicaciones en hibernate,Ejercicios en hibernate, Ejemplos de hibernate,Tutoriales de hibernate,Manuales hibernate" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="hibernate, Manual hibernate, tutorial hibernate, Ejemplos hibernate, ejercicios hibernate">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> <strong>Relaci&oacute;n objeto - tabla</strong></h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <p>Cualquier persona que se dedique al desarrollo 
+        objetual se encontrar&aacute; con la problem&aacute;tica de implementar 
+        una persistencia de objetos en un soporte relacional. El problema es que 
+        hay un divorcio total entre la estructura relacional y la objetual. </p>
+      <p>Esto hace que el desarrollador opte con frecuencia por soluciones de 
+        compromiso que le hacen perder de vista el mundo objetual y la aplicaci&oacute;n 
+        acaba siendo un batiburrillo infumable con una pseudoarquitectura objetual 
+        que hace da&ntilde;o a la vista. </p>
+      <p>Pongamos un ejemplo. Intentemos dise&ntilde;ar una base de datos para 
+        una escuela. Por una parte, tendr&iacute;amos la lista de personas que 
+        pertenecen a la escuela. Cada persona tiene una sola categor&iacute;a: 
+        profesor, alumno, personal de administraci&oacute;n, etc. En la escuela, 
+        hay niveles: primero de EGB, segundo de EGB, etc. Adem&aacute;s, hay clases. 
+        Cada clase pertenece a un nivel y tiene un nombre. As&iacute;, es posible 
+        que haya tres clases de primero de EGB: A, B y C.</p>
+      <p> Pero una clase no es una clase sin alumnos y profesores. As&iacute; 
+        que tendremos que asignar personas a una clase. No entraremos aqu&iacute; 
+        en un dise&ntilde;o minucioso ni nos preocupar&aacute; si una persona 
+        est&aacute; en una o m&aacute;s clases. As&iacute;, podr&iacute;amos pensar 
+        en una definici&oacute;n de tablas similar a esta: </p>
+      <p>CREATE TABLE CATEGORIAS<br>
+        (<br>
+        ID INTEGER IDENTITY,<br>
+        CATEGORIA VARCHAR(50) NOT NULL<br>
+        );<br>
+        CREATE TABLE PERSONAS<br>
+        (ID INTEGER IDENTITY,<br>
+        NOMBRE VARCHAR(30) NOT NULL,<br>
+        APELLIDOS VARCHAR(100) NOT NULL,<br>
+        ID_CATEGORIA INTEGER NOT NULL<br>
+        );<br>
+        ALTER TABLE PERSONAS ADD CONSTRAINT FK_P2C<br>
+        FOREIGN KEY ( ID_CATEGORIA )<br>
+        REFERENCES CATEGORIAS ( ID );<br>
+        CREATE TABLE NIVELES<br>
+        (<br>
+        ID INTEGER IDENTITY,<br>
+        NIVEL VARCHAR(30) NOT NULL<br>
+        );<br>
+        CREATE TABLE CLASE<br>
+        (<br>
+        ID INTEGER IDENTITY,<br>
+        NOMBRE VARCHAR(20) NOT NULL,<br>
+        ID_NIVEL INTEGER NOT NULL<br>
+        );<br>
+        ALTER TABLE CLASE ADD CONSTRAINT FK_CLASE_NIVEL<br>
+        FOREIGN KEY ( ID_NIVEL )<br>
+        REFERENCES NIVELES ( ID );<br>
+        CREATE TABLE CLASSE_PERSONAS<br>
+        (<br>
+        ID_CLASE INTEGER NOT NULL,<br>
+        ID_PERSONA INTEGER NOT NULL,<br>
+        PRIMARY KEY (ID_CLASE,ID_PERSONA)<br>
+        );<br>
+        ALTER TABLE CLASE_PERSONAS ADD CONSTRAINT FK_CP_C<br>
+        FOREIGN KEY ( ID_CLASSE )<br>
+        REFERENCES CLASE ( ID );<br>
+        ALTER TABLE CLASE_PERSONAS ADD CONSTRAINT FK_CP_P<br>
+        FOREIGN KEY ( ID_PERSONA )<br>
+        REFERENCES PERSONAS ( ID );</p>
+      <p>Observemos algunos cambios en nuestro diagrama de clases:</p>
+      <p><br>
+        1. Los nombres de los objetos est&aacute;n en singular, mientras que los 
+        de las tablas est&aacute;n en plural. As&iacute;, entendemos que una instancia 
+        de un objeto se corresponde con un registro de una tabla. Una tabla es 
+        un conjunto de Personas. La clase persona representa una sola persona.<br>
+        2. La clase Persona no tiene un entero que apunte a la tabla Categorias. 
+        Tiene un objeto de tipo Categoria. As&iacute;, vemos que los tipos de 
+        las propiedades de un objeto no siempre se corresponden con los tipos 
+        de las columnas de las tablas. Un caso similar, lo encontrar&iacute;amos 
+        en el objeto Clase. La propiedad correspondiente a la columna ID_NIVEL 
+        INTEGER es del tipo Nivel, no int.<br>
+        3. En nuestro dise&ntilde;o del modelo relacional, tenemos la tabla CLASE_PERSONAS 
+        que es la encargada de almacenar las personas asociadas a cada clase. 
+        Desde el punto de vista objetual, el planteamiento es distinto. Cada clase 
+        tiene un conjunto, Set, de personas. No necesitamos crear un objeto puente 
+        que relacione clases y personas.<br>
+        Conclusi&oacute;n: el modelo relacional y el objectual no acaban de casar.<br>
+        Ahora bien, est&aacute; claro que tendremos que hacer casar los dos modelos 
+        si queremos trabajar con comodidad; y este es el papel de Hibernate: hacer 
+        de casamentero. Hibernate se encarga de casar los dos modelos de manera 
+        que nosotros trabajemos desde Java como corresponde. Usando el modelo<br>
+        objetual.<br>
+        Sin Hibernate, para a&ntilde;adir un registro a la tabla Categorias tendr&iacute;amos 
+        que escribir algo similar a esto:</p>
+      <p>Class.forName(&#8220;org.hsqldb.jdbcDriver&#8221;);<br>
+        String url = &#8220;jdbc:hsqldb:./Databases/ESCUELA&#8221;;<br>
+        Connection connection = DriverManager.getConnection(url, &#8220;sa&#8221;, 
+        &#8220;&#8221;);<br>
+        String ins = &#8220;INSERT INTO CATEGORIAS VALUES(NULL, 'Profesor')&#8221;;<br>
+        Statement stmt = null;<br>
+        stmt = connection.createStatement();<br>
+        stmt.executeUpdate(ins);</p>
+      <p>Con Hibernate, escribir&iacute;amos algo similar a esto:</p>
+      <p>Configuration conf = new Configuration();<br>
+        conf.addClass(Categoria.class);<br>
+        SessionFactory sessionFactory = conf.buildSessionFactory();<br>
+        Session session = sessionFactory.openSession();<br>
+        Categoria categ = new Categoria();<br>
+        categ.setCategoria(&#8220;Profesor&#8221;);<br>
+        session.save(categ);<br>
+        session.flush();<br>
+        session.close();<br>
+        [...]<br>
+        Y si nos interesase a&ntilde;adir otra:<br>
+        [...]<br>
+        session = sessionFactory.openSession();<br>
+        categ = new Categoria();<br>
+        categ.setCategoria(&#8220;Alumno&#8221;);<br>
+        session.save(categ);<br>
+        session.flush();<br>
+        session.close();</p>
+      <p>&iquest;Cu&aacute;l es la gran diferencia entre el c&oacute;digo tradicional 
+        JDBC y el c&oacute;digo que escribimos con Hibernate? &#8220;Ha desparecido 
+        el SQL&#8221;. Lo &uacute;nico que digo es que quiero &#8220;guardar&#8221; 
+        (save) un objeto. Si lo que queremos es ejecutar una consulta a la base 
+        de datos, tendremos que utilizar un lenguaje de interrogaci&oacute;n que 
+        &#8220;case&#8221; con el mundo objetual. Pedir una lista ordenada de 
+        profesores nos costar&iacute;a<br>
+        tan poco como esto:</p>
+      <p>session = sessionFactory.openSession();<br>
+        String qry = &#8220;FROM escuela.beans.Persona AS P<br>
+        WHERE P.categoria.categoria = 'Profesor'<br>
+        ORDER BY P.apellidos, P.nombre&#8221;;<br>
+        List profes = session.find(qry);<br>
+        session.close();<br>
+        for (int i = 0; i &lt; profes.size(); i++) {<br>
+        Persona p = (Persona)profes.get(i);<br>
+        System.out.println(p.getNombre() + &#8220; &#8220; + p.getApellidos() 
+        +<br>
+        p.getCategoria().getCategoria());<br>
+        }<br>
+        Observamos aqu&iacute; que la consulta se formula en base a objetos y 
+        que, una vez m&aacute;s, &#8220;ha desaparecido el SQL&#8221;. Del SQL, 
+        se ocupa Hibernate. &Eacute;l casa nuestro mundo objectual con el relacional. 
+        Pedimos objetos y expresamos las condiciones de la consulta objetualmente. 
+        Hibernate se encarga de transformar nuestra consulta al dialecto SQL que 
+        toque.</p>
+      <p>Hibernate soporta actualmente los siguientes dialectos:</p>
+      <table width="465" border="1">
+        <tr> 
+          <td><div align="center">RDBMS</div></td>
+          <td><div align="center">Clase del dialecto</div></td>
+        </tr>
+        <tr> 
+          <td>DB2</td>
+          <td>net.sf.hibernate.dialect.DB2Dialect</td>
+        </tr>
+        <tr> 
+          <td>DB2 AS/400</td>
+          <td>net.sf.hibernate.dialect.DB2400Dialect</td>
+        </tr>
+        <tr> 
+          <td>DB2 OS390</td>
+          <td>net.sf.hibernate.dialect.DB2390Dialect</td>
+        </tr>
+        <tr> 
+          <td>PostgreSQL</td>
+          <td>net.sf.hibernate.dialect.PostgreSQLDialect</td>
+        </tr>
+        <tr> 
+          <td>MySQL</td>
+          <td>net.sf.hibernate.dialect.MySQLDialect</td>
+        </tr>
+        <tr> 
+          <td>Oracle (cualquier versi&oacute;n)</td>
+          <td>net.sf.hibernate.dialect.OracleDialect</td>
+        </tr>
+        <tr> 
+          <td>Oracle 9/10g</td>
+          <td>net.sf.hibernate.dialect.Oracle9Dialect</td>
+        </tr>
+        <tr> 
+          <td>Sybase</td>
+          <td>net.sf.hibernate.dialect.SybaseDialect</td>
+        </tr>
+        <tr> 
+          <td>Sybase Anywhere</td>
+          <td>net.sf.hibernate.dialect.SybaseAnywhereDialect</td>
+        </tr>
+        <tr> 
+          <td>Microsoft SQL Server</td>
+          <td>net.sf.hibernate.dialect.SQLServerDialect</td>
+        </tr>
+        <tr> 
+          <td>SAP DB</td>
+          <td>net.sf.hibernate.dialect.SAPDBDialect</td>
+        </tr>
+        <tr> 
+          <td>Informix</td>
+          <td>net.sf.hibernate.dialect.InformixDialect</td>
+        </tr>
+        <tr> 
+          <td>HypersonicSQL (HSQLDB)</td>
+          <td>net.sf.hibernate.dialect.HSQLDialect</td>
+        </tr>
+        <tr> 
+          <td>Ingres</td>
+          <td>net.sf.hibernate.dialect.IngresDialect</td>
+        </tr>
+        <tr> 
+          <td>Progress</td>
+          <td>net.sf.hibernate.dialect.ProgressDialect</td>
+        </tr>
+        <tr>
+          <td>Mckoi SQL</td>
+          <td>net.sf.hibernate.dialect.MckoiDialect</td>
+        </tr>
+        <tr>
+          <td>Interbase</td>
+          <td>net.sf.hibernate.dialect.InterbaseDialect</td>
+        </tr>
+        <tr>
+          <td>Pointbase</td>
+          <td>net.sf.hibernate.dialect.PointbaseDialect</td>
+        </tr>
+        <tr>
+          <td>FrontBase</td>
+          <td>net.sf.hibernate.dialect.FrontbaseDialect</td>
+        </tr>
+        <tr>
+          <td>Firebird</td>
+          <td>net.sf.hibernate.dialect.FirebirdDialect</td>
+        </tr>
+      </table>
+      <p>&nbsp;</p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

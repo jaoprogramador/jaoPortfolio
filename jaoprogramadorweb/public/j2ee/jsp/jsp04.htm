@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Scriptlets</title>
+<META http-equiv=Content-Language content=es>
+<META content="Manual JSP, ejemplos JSP, codigos JSP" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Manual JSP, ejemplos JSP, codigos JSP">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> Scriptlets</h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> Ya hemos visto c&oacute;mo incrustar expresiones 
+      de Java en p&aacute;ginas JSP poni&eacute;ndolos entre el &lt;% = y%&gt; 
+      secuencias de caracteres. 
+      <p> Pero es dif&iacute;cil hacer la programaci&oacute;n mucho m&aacute;s 
+        s&oacute;lo por poner las expresiones de Java dentro de HTML.</p>
+      <p> JSP tambi&eacute;n le permite escribir bloques de c&oacute;digo Java 
+        dentro de los JSP. Para ello, colocar su c&oacute;digo de Java entre &lt;% 
+        y%&gt; personajes (al igual que las expresiones, pero sin el signo = al 
+        inicio de la secuencia).</p>
+      <p> Este bloque de c&oacute;digo es conocido como scriptlet un &quot;.&quot; 
+        Por s&iacute; misma, un scriptlet no contribuye nada de HTML (aunque puede, 
+        como veremos a continuaci&oacute;n). Un scriptlet contiene c&oacute;digo 
+        Java que se ejecuta cada vez que el JSP se invoca.</p>
+      <p> Esta es una versi&oacute;n modificada de nuestro JSP de la secci&oacute;n 
+        anterior, agregando en un scriptlet.</p>
+      <p>&lt;HTML&gt; <br>
+        &lt;BODY&gt; <br>
+        &lt;%java.util.Date date = new java.util.Date(); %&gt;<br>
+        &lt;%<br>
+        // Este scriptlet genera salida HTML<br>
+        out.println( String.valueOf( date ));<br>
+        %&gt;<br>
+        <br>
+        &lt;/BODY&gt;<br>
+        &lt;/HTML&gt;<br>
+        Aqu&iacute;, en lugar de usar una expresi&oacute;n, estamos generando 
+        el c&oacute;digo HTML directamente por la impresi&oacute;n de la &quot;salida&quot; 
+        variables. &quot;Fuera&quot; de la variable es javax.servlet.jsp.JspWriter 
+        tipo.</p>
+      <p>Otro librer&iacute;a muy importante es:</p>
+      <p>javax.servlet.http.HttpServletRequest</p>
+      <p> La&quot;petici&oacute;n&quot; de procesamiento de servidor se refiere 
+        a la transacci&oacute;n entre un navegador y el servidor. Cuando un usuario 
+        haga clic o entre en un URL, el navegador env&iacute;a una &quot;solicitud&quot; 
+        para el servidor de dicha URL, y muestra los datos devueltos. Como parte 
+        de esta petici&oacute;n &quot;, diversos datos est&aacute; disponible, 
+        incluyendo el archivo del navegador quiere desde el servidor, y si la 
+        solicitud proviene de pulsar un bot&oacute;n Enviar, la informaci&oacute;n 
+        que el usuario ha introducido en los campos del formulario.</p>
+      <p> La &quot;solicitud de JSP&quot; variable se utiliza para obtener informaci&oacute;n 
+        de la solicitud enviada por el navegador. Por ejemplo, usted puede averiguar 
+        el nombre de host del cliente (si est&aacute; disponible, de lo contrario 
+        la direcci&oacute;n IP ser&aacute; devuelto.) Vamos a modificar el c&oacute;digo 
+        como se muestra: <br>
+        &lt;HTML&gt;<br>
+        &lt;BODY&gt;<br>
+        &lt;% <br>
+        //Este scriptlet declara e inicializa &quot;fecha&quot;<br>
+        System.out.println ( &quot;La fecha de ahora es&quot;);<br>
+        java.util.Date fecha = new java.util.Date ();<br>
+        %&gt; </p>
+      <p>&lt;%<br>
+        out.println (fecha);&lt;br&gt;<br>
+        out.println ( &quot;&lt;BR&gt; direcci&Atilde;&sup3;n de su m&Atilde;&iexcl;quina 
+        es&quot;);<br>
+        out.println (request.getRemoteHost());<br>
+        %&gt; <br>
+        &lt;/BODY&gt; <br>
+        &lt;/HTML&gt; </p>
+      <p> Una variable similar es la &quot;respuesta&quot;. Esto puede ser usado 
+        para afectar la respuesta se env&iacute;a al navegador. Por ejemplo, usted 
+        puede llamar response.sendRedirect (anotherUrl); para enviar una respuesta 
+        al navegador que debe cargar una direcci&oacute;n URL diferente. Esta 
+        respuesta en realidad va todo el camino hasta el navegador. El navegador 
+        enviar&iacute;a una solicitud diferente, &quot;anotherUrl&quot;. Esto 
+        es un poco diferente de algunos otros mecanismos JSP nos encontraremos, 
+        para incluir a otra p&aacute;gina o reenviar el navegador otra p&aacute;gina.</p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

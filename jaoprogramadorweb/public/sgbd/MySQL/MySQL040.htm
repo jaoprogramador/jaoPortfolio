@@ -1,0 +1,350 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Ejercicios MySQL</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="MySQL, sql, pl/sql, programacion MySQL, ejercicios MySQL, ejemplos MySQL, select">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2>Sintaxis de subconsultas</h2>
+      <p>Una subconsulta es un comando SELECT dentro de otro comando.<br>
+        MySQL 5.0 soporta todas las formas de subconsultas y operaciones que requiere 
+        el est&aacute;ndar SQL, as&iacute; como algunas caracter&iacute;sticas<br>
+        espec&iacute;ficas de MySQL.<br>
+        Aqu&iacute; hay un ejemplo de subconsulta:<br>
+        SELECT * FROM t1 WHERE column1 = (SELECT column1 FROM t2);<br>
+        En este ejemplo, SELECT * FROM t1 ... es la consulta externa (o comando 
+        externo), y (SELECT column1 FROM t2)<br>
+        es la subconsulta. Decimos que la subconsulta est&aacute; anidada dentro 
+        de la consulta exterior, y de hecho, es posible anidar subconsultas<br>
+        dentro de otras subconsultas hasta una profundidad considerable. Una subconsulta 
+        debe siempre aparecer entre par&eacute;ntesis.<br>
+        Las principales ventajas de subconsultas son:<br>
+        &#8226; Permiten consultas estructuradas de forma que es posible aislar 
+        cada parte de un comando.<br>
+        &#8226; Proporcionan un modo alternativo de realizar operaciones que de 
+        otro modo necesitar&iacute;an joins y uniones complejos.<br>
+        &#8226; Son, en la opini&oacute;n de mucha gente, le&iacute;bles. De hecho, 
+        fue la innovaci&oacute;n de las subconsultas lo que dio a la gente la 
+        idea original<br>
+        de llamar a SQL &#8220;Structured Query Language.&#8221;<br>
+        Aqu&iacute; hay un comando de ejemplo que muestra los puntos principales 
+        de la sintaxis de subconsultas como especifica el est&aacute;ndar<br>
+        SQL y soporta MySQL:<br>
+        DELETE FROM t1<br>
+        WHERE s11 &gt; ANY<br>
+        (SELECT COUNT(*) /* no hint */ FROM t2<br>
+        WHERE NOT EXISTS<br>
+        (SELECT * FROM t3<br>
+        WHERE ROW(5*t2.s1,77)=<br>
+        (SELECT 50,11*s1 FROM t4 UNION SELECT 50,77 FROM<br>
+        (SELECT * FROM t5) AS t5)));<br>
+        Una subconsulta puede retornar un escalar (un valor &uacute;nico), un 
+        registro, una columna o una tabla (uno o m&aacute;s registros de una o 
+        m&aacute;s<br>
+        columnas). &Eacute;stas se llaman consultas de escalar, columna, registro 
+        y tabla. Las subconsultas que retornan una clase particular de resultado<br>
+        a menudo pueden usarse s&oacute;lo en ciertos contextos, como se describe 
+        en las siguientes secciones.<br>
+        Hay pocas restricciones sobre los tipos de comandos en que pueden usarse 
+        las subconsultas. Una subconsulta puede contener cualquiera<br>
+        de las palabras claves o cl&aacute;usulas que puede contener un SELECT 
+        ordinario: DISTINCT, GROUP BY, ORDER BY, LIMIT,<br>
+        joins, trucos de &iacute;ndices, constructores UNION , comentarios, funciones, 
+        y as&iacute;.<br>
+        Una restricci&oacute;n es que el comando exterior de una subconsulta debe 
+        ser: SELECT, INSERT, UPDATE, DELETE, SET, o DO. Otra<br>
+        restricci&oacute;n es que actualmente no puede modificar una tabla y seleccionar 
+        de la misma tabla en la subconsulta.<br>
+        <h3>La subconsulta, como un operador sobre valores escalares</h3><br>
+        En su forma m&aacute;s sencilla, una subconsulta es una subconsulta escalar 
+        que retorna un &uacute;nico valor. Una subconsulta escalar es un<br>
+        operando simple, y puede usarlo pr&aacute;cticamente en cualquier sitio 
+        en que un valor de columna o literal sea legal, y puede esperar<br>
+        que tenga las caracter&iacute;sticas que tienen todos los operandos: un 
+        tipo de datos, una longitud, una indicaci&oacute;n de si puede ser NULL,<br>
+        etc&eacute;tera. Por ejemplo:<br>
+        CREATE TABLE t1 (s1 INT, s2 CHAR(5) NOT NULL);<br>
+        INSERT INTO t1 VALUES(100, 'abcde');<br>
+        SELECT (SELECT s2 FROM t1);<br>
+        La subconsulta en este SELECT retorna un valor &uacute;nico ('abcde') 
+        que tiene un tipo de datos CHAR, una longitud de 5, un conjunto<br>
+        de caracteres y una colaci&oacute;n iguales a la que hab&iacute;a por 
+        defecto cuando se realiz&oacute; el CREATE TABLE , y una indicaci&oacute;n 
+        que el<br>
+        valor en la columna puede ser NULL. De hecho, casi todas las consultas 
+        pueden ser NULL. Si la tabla usada en este ejemplo estuviese<br>
+        vac&iacute;a, la tabla de la subconsulta ser&iacute;a NULL.<br>
+        Hay algunos contextos en que una subconsulta escalar no se puede usar. 
+        Si un comando permite s&oacute;lo un valor literal, no puede usar<br>
+        una subconsulta. Por ejemplo, LIMIT necesita argumentos enteros, y LOAD 
+        DATA necesita una cadena con un nombre de fichero.<br>
+        No puede usar subconsultas para proporcionar estos valores.<br>
+        Cuando vea los ejemplos en las siguientes secciones que contengan el constructor 
+        (SELECT column1 FROM t1), imagine que<br>
+        su pr&oacute;pio c&oacute;digo contiene construcciones mucho m&aacute;s 
+        diversas y complejas.<br>
+        Por ejemplo, suponga que hacemos dos tablas:<br>
+        CREATE TABLE t1 (s1 INT);<br>
+        INSERT INTO t1 VALUES (1);<br>
+        CREATE TABLE t2 (s1 INT);<br>
+        INSERT INTO t2 VALUES (2);<br>
+        Luego realice SELECT:<br>
+        SELECT (SELECT s1 FROM t2) FROM t1;<br>
+        El resultado es 2 ya que hay un registro en t2 que contiene una columna 
+        s1 con un valor de 2.<br>
+        Una subconsulta escalar puede ser parte de una expresi&oacute;n. No olvide 
+        los par&eacute;ntesis, incluso si la subconsulta es un operando que<br>
+        proporciona un argumento para una funci&oacute;n. Por ejemplo:<br>
+        SELECT UPPER((SELECT s1 FROM t1)) FROM t2;<br>
+        <h3>Uso de subconsultas en subconsultas</h3><br>
+        El uso m&aacute;s com&uacute;n de una subconsulta es de la forma:<br>
+        non_subquery_operand comparison_operator (subquery)<br>
+        Donde comparison_operator es uno de estos operadores:<br>
+        = &gt; &lt; &gt;= &lt;= &lt;&gt;<br>
+        Por ejemplo:<br>
+        ... 'a' = (SELECT column1 FROM t1)<br>
+        Tiempo atr&aacute;s el &uacute;nico sitio legal para una subconsulta era 
+        la parte derecha de la comparaci&oacute;n, y puede encontrar algunos SGBDs<br>
+        que insistan en ello.<br>
+        He aqu&iacute; un ejemplo de una comparaci&oacute;n com&uacute;n de subconsultas 
+        que no puede hacerse mediante un join. Encuentra todos los valores<br>
+        en la tabla t1 que son iguales a un valor m&aacute;ximo en la tabla t2:<br>
+        SELECT column1 FROM t1<br>
+        WHERE column1 = (SELECT MAX(column2) FROM t2);<br>
+        Aqu&iacute; hay otro ejemplo, que de nuevo es imposible de hacer con un 
+        join ya que involucra agregaci&oacute;n para una de las tablas. Encuentra<br>
+        todos los registros en la tabla t1 que contengan un valor que ocurre dos 
+        veces en una columna dada:<br>
+        SELECT * FROM t1 AS t<br>
+        WHERE 2 = (SELECT COUNT(*) FROM t1 WHERE t1.id = t.id);<br>
+        <h3>Subconsultas con ANY, IN y SOME</h3><br>
+        Sintaxis:<br>
+        operand comparison_operator ANY (subquery)<br>
+        operand IN (subquery)<br>
+        operand comparison_operator SOME (subquery)<br>
+        La palabra clave ANY , que debe seguir a un operador de comparaci&oacute;n, 
+        significa &#8220;return TRUE si la comparaci&oacute;n es TRUE para ANY<br>
+        (cualquiera) de los valores en la columna que retorna la subconsulta.&#8221; 
+        Por ejemplo:<br>
+        SELECT s1 FROM t1 WHERE s1 &gt; ANY (SELECT s1 FROM t2);<br>
+        Suponga que hay un registro en una tabla t1 que contiene (10). La expresi&oacute;n 
+        es TRUE si la tabla t2 contiene (21,14,7) ya<br>
+        que hay un valor 7 en t2 que es menor que 10. La expresi&oacute;n es FALSE 
+        si la tabla t2 contiene (20,10), o si la tabla t2 est&aacute; vac&iacute;a.<br>
+        La expresi&oacute;n es UNKNOWN si la tabla t2 contiene (NULL,NULL,NULL).<br>
+        La palabra IN es un alias para = ANY. Por lo tanto, estos dos comandos 
+        son lo mismo:<br>
+        SELECT s1 FROM t1 WHERE s1 = ANY (SELECT s1 FROM t2);<br>
+        SELECT s1 FROM t1 WHERE s1 IN (SELECT s1 FROM t2);<br>
+        Sin embargo, NOT IN no es un alias para &lt;&gt; ANY, sino para &lt;&gt; 
+        ALL. Consulte Secci&oacute;n 13.2.8.4, &#8220;Subconsultas con ALL&#8221;.<br>
+        La palabra SOME es un alias para ANY. Por lo tanto, estos dos comandos 
+        son el mismo:<br>
+        SELECT s1 FROM t1 WHERE s1 &lt;&gt; ANY (SELECT s1 FROM t2);<br>
+        SELECT s1 FROM t1 WHERE s1 &lt;&gt; SOME (SELECT s1 FROM t2);<br>
+        El uso de la palabra SOME es raro, pero este ejemplo muestra c&oacute;mo 
+        puede ser &uacute;til. Para la mayor&iacute;a de gente, la frase en ingl&eacute;s 
+        &#8220;a is<br>
+        not equal to any b&#8221; significa &#8220;there is no b which is equal 
+        to a,&#8221; pero eso no es lo que quiere decir la sintaxis SQL. La sintaxis 
+        significa<br>
+        &#8220;there is some b to which a is not equal.&#8221; Usando &lt;&gt; 
+        SOME en su lugar ayuda a asegurar que todo el mundo entiende el significado<br>
+        de la consulta.<br>
+        <h3>Subconsultas con ALL</h3><br>
+        Sintaxis:<br>
+        operand comparison_operator ALL (subquery)<br>
+        La palabra ALL, que debe seguir a un operador de comparaci&oacute;n, significa 
+        &#8220;return TRUE si la comparaci&oacute;n es TRUE para ALL todos<br>
+        los valores en la columna que retorna la subconsulta.&#8221; Por ejemplo:<br>
+        SELECT s1 FROM t1 WHERE s1 &gt; ALL (SELECT s1 FROM t2);<br>
+        Suponga que hay un registro en la tabla t1 que contiene (10). La expresi&oacute;n 
+        es TRUE si la tabla t2 contiene (-5,0,+5) ya que<br>
+        10 es mayor que los otros tres valores en t2. La expresi&oacute;n es FALSE 
+        si la tabla t2 contiene (12,6,NULL,-100) ya que hay un<br>
+        &uacute;nico valor 12 en la tabla t2 mayor que 10. La expresi&oacute;n 
+        es UNKNOWN si la tabla t2 contiene (0,NULL,1).<br>
+        Finalmente, si la tabla t2 est&aacute; vac&iacute;a, el resultado es TRUE. 
+        Puede pensar que el resultado deber&iacute;a ser UNKNOWN, pero lo sentimos,<br>
+        es TRUE. As&iacute;, aunque extra&ntilde;o, el siguiente comando es TRUE 
+        cuando la tabla t2 est&aacute; vac&iacute;a:<br>
+        SELECT * FROM t1 WHERE 1 &gt; ALL (SELECT s1 FROM t2);<br>
+        Pero este comando es UNKNOWN cuando la tabla t2 est&aacute; vac&iacute;a:<br>
+        SELECT * FROM t1 WHERE 1 &gt; (SELECT s1 FROM t2);<br>
+        Adem&aacute;s, el siguiente comando es UNKNOWN cuando la tabla t2 est&aacute; 
+        vac&iacute;a:<br>
+        SELECT * FROM t1 WHERE 1 &gt; ALL (SELECT MAX(s1) FROM t2);<br>
+        En general, las tablas con valores NULL y las tablas vac&iacute;as son 
+        casos extremos. Al escribir c&oacute;digo para subconsultas, siempre con-<br>
+        sidere si ha tenido en cuenta estas dos posibilidades.<br>
+        NOT IN es un alias para &lt;&gt; ALL. Por lo tanto, estos dos comandos 
+        son equivalentes:<br>
+        SELECT s1 FROM t1 WHERE s1 &lt;&gt; ALL (SELECT s1 FROM t2);<br>
+        SELECT s1 FROM t1 WHERE s1 NOT IN (SELECT s1 FROM t2);<br>
+        <h3>Subconsultas de registro</h3><br>
+        La discusi&oacute;n en este punto ha sido entre subconsultas escalares 
+        o de columnas, esto es, subcolumnas que retornan un &uacute;nico valor 
+        o<br>
+        una columna de valores. Una subconsulta de registro es una variante de 
+        subconsulta que retorna un &uacute;nico registro y por lo tanto retorna<br>
+        m&aacute;s de un valor de columna. Aqu&iacute; hay dos ejemplos:<br>
+        SELECT * FROM t1 WHERE (1,2) = (SELECT column1, column2 FROM t2);<br>
+        SELECT * FROM t1 WHERE ROW(1,2) = (SELECT column1, column2 FROM t2);<br>
+        Las consultas aqu&iacute; son ambas TRUE si la tabla t2 tiene un registro 
+        en que column1 = 1 y column2 = 2.<br>
+        Las expresiones (1,2) y ROW(1,2) a veces se llaman constructores de registros. 
+        Ambos son equivalentes. Tambi&eacute;n son legales<br>
+        en otros contextos. Por ejemplo, los siguientes dos comandos son sem&aacute;nticamente 
+        equivalentes (aunque actualmente s&oacute;lo puede optimizarse<br>
+        el segundo):<br>
+        SELECT * FROM t1 WHERE (column1,column2) = (1,1);<br>
+        SELECT * FROM t1 WHERE column1 = 1 AND column2 = 1;<br>
+        El uso normal de constructores de registros, sin embargo, es para comparaciones 
+        con subconsultas que retornan dos o m&aacute;s columnas.<br>
+        Por ejemplo, la siguiente consulta responde a la petici&oacute;n, &#8220;encuentra 
+        todos los registros en la tabla t1 que tambi&eacute;n existen en<br>
+        la tabla t2&#8221;:<br>
+        SELECT column1,column2,column3<br>
+        FROM t1<br>
+        WHERE (column1,column2,column3) IN<br>
+        (SELECT column1,column2,column3 FROM t2);<br>
+        <h3>EXISTS y NOT EXISTS</h3><br>
+        Si una subconsulta retorna alg&uacute;n registro, entonces EXISTS subquery 
+        es TRUE, y NOT EXISTS subquery es FALSE. Por<br>
+        ejemplo:<br>
+        SELECT column1 FROM t1 WHERE EXISTS (SELECT * FROM t2);<br>
+        Tradicionalmente, una subconsulta EXISTS comienza con SELECT *, pero puede 
+        comenzar con SELECT 5 o SELECT col1 o<br>
+        nada. MySQL ignora la lista SELECT en tales subconsultas, as&iacute; que 
+        no hace distinci&oacute;n.<br>
+        Para el ejemplo precedente, si t2 contiene alg&uacute;n registro, incluso 
+        registros s&oacute;lo con valores NULL entonces la condici&oacute;n EXISTS<br>
+        es TRUE. Este es un ejemplo poco probable, ya que pr&aacute;cticamente 
+        siempre una subconsulta [NOT] EXISTS contiene correlaciones.<br>
+        Aqu&iacute; hay algunos ejemplos m&aacute;s realistas:<br>
+        &#8226; &iquest;Qu&eacute; clase de tienda hay en una o m&aacute;s ciudades?<br>
+        SELECT DISTINCT store_type FROM Stores<br>
+        WHERE EXISTS (SELECT * FROM Cities_Stores<br>
+        WHERE Cities_Stores.store_type = Stores.store_type);<br>
+        &#8226; &iquest;Qu&eacute; clase de tienda no hay en ninguna ciudad?<br>
+        SELECT DISTINCT store_type FROM Stores<br>
+        WHERE NOT EXISTS (SELECT * FROM Cities_Stores<br>
+        WHERE Cities_Stores.store_type = Stores.store_type);<br>
+        &#8226; &iquest;Qu&eacute; clase de tienda hay en todas las ciudades?<br>
+        SELECT DISTINCT store_type FROM Stores S1<br>
+        WHERE NOT EXISTS (<br>
+        SELECT * FROM Cities WHERE NOT EXISTS (<br>
+        SELECT * FROM Cities_Stores<br>
+        WHERE Cities_Stores.city = Cities.city<br>
+        AND Cities_Stores.store_type = Stores.store_type));<br>
+        El &uacute;ltimo ejemplo es un doblemente anidado NOT EXISTS . Esto es, 
+        tiene una cl&aacute;usula NOT EXISTS dentro de otra NOT<br>
+        EXISTS. Formalmente, responde a la pregunta &#8220;&iquest;existe una 
+        ciudad con una tienda que no est&eacute; en Stores?&#8221; Sin embargo, 
+        es m&aacute;s<br>
+        f&aacute;cil decir que un NOT EXISTS responde a la pregunta &#8220;&iquest;es 
+        x TRUE para todo y?&#8221;<br>
+        <h3>Subconsultas correlacionadas</h3><br>
+        Una subconsulta correlacionada es una subconsulta que contiene una referencia 
+        a una tabla que tambi&eacute;n aparece en la consulta exterior.<br>
+        Por ejemplo:<br>
+        SELECT * FROM t1 WHERE column1 = ANY<br>
+        (SELECT column1 FROM t2 WHERE t2.column2 = t1.column2);<br>
+        Tenga en cuenta que la subconsulta contiene una referencia a una columna 
+        de t1, incluso aunque la cl&aacute;usula FROM de la subconsulta<br>
+        no menciona una tabla t1. Por lo tanto, MySQL busca fuera de la subconsulta 
+        y encuentra t1 en la consulta externa.<br>
+        Suponga que la tabla t1 contiene un registro en que column1 = 5 y column2 
+        = 6; mientras, la tabla t2 contiene un registro<br>
+        en que column1 = 5 y column2 = 7. La expresi&oacute;n ... WHERE column1 
+        = ANY (SELECT column1 FROM t2)<br>
+        ser&iacute;a TRUE, pero en este ejemplo, la cl&aacute;usula WHERE dentro 
+        de la subconsulta es FALSE (ya que (5,6) no es igual a (5,7)), as&iacute;<br>
+        que la subconsulta como un todo es FALSE.<br>
+        Regla de visibilidad: MySQL eval&uacute;a desde dentro hacia fuera. Por 
+        ejemplo:<br>
+        SELECT column1 FROM t1 AS x<br>
+        WHERE x.column1 = (SELECT column1 FROM t2 AS x<br>
+        WHERE x.column1 = (SELECT column1 FROM t3<br>
+        WHERE x.column2 = t3.column1));<br>
+        En este comando, x.column2 debe ser una columna en la tabla t2 ya que 
+        SELECT column1 FROM t2 AS x ... renombra<br>
+        t2. No hay una columna en la tabla t1 porque SELECT column1 FROM t1 ... 
+        es una consulta externa que est&aacute; demasiado<br>
+        afuera.<br>
+        Para subconsultas en cl&aacute;usulas HAVING u ORDER BY , MySQL busca 
+        nombres de columna en la lista de selecci&oacute;n exterior.<br>
+        Para ciertos casos, una subconsulta correlacionada es &oacute;ptima. Por 
+        ejemplo:<br>
+        val IN (SELECT key_val FROM tbl_name WHERE correlated_condition)<br>
+        De otro modo, son ineficientes y lentas. Reescribir la consulta como un 
+        join puede mejorar el rendimiento.<br>
+        Las subconsultas correlacionadas no pueden referirse a los resultados 
+        de funciones agregadas de la consulta exterior.<br>
+        <h3>Subconsultas en la cl&aacute;usula FROM</h3><br>
+        Las subconsultas son legales en la cl&aacute;usula FROM de un comando 
+        SELECT. La sintaxis que ver&iacute;a es:<br>
+        SELECT ... FROM (subquery) [AS] name ...<br>
+        La cl&aacute;usula [AS] name es obligatoria, ya que cada tabla en la cl&aacute;usula 
+        FROM debe tener un nombre. Cualquier columna en la lista<br>
+        selecta de la subquery debe tener nombre &uacute;nico. Puede encontrar 
+        esta sintaxis descrita en este manual, d&oacute;nde se usa el t&eacute;rmino<br>
+        &#8220;tablas derivadas.&#8221;<br>
+        Asuma que tiene la tabla:<br>
+        CREATE TABLE t1 (s1 INT, s2 CHAR(5), s3 FLOAT);<br>
+        Aqu&iacute; se muestra c&oacute;mo usar una subconsulta en la cl&aacute;usula 
+        FROM usando la tabla de ejemplo:<br>
+        INSERT INTO t1 VALUES (1,'1',1.0);<br>
+        INSERT INTO t1 VALUES (2,'2',2.0);<br>
+        SELECT sb1,sb2,sb3<br>
+        FROM (SELECT s1 AS sb1, s2 AS sb2, s3*2 AS sb3 FROM t1) AS sb<br>
+        WHERE sb1 &gt; 1;<br>
+        Resultado: 2, '2', 4.0.<br>
+        Aqu&iacute; hay otro ejemplo: suponga que quiere conocer la media de un 
+        conjunto de sumas para una tabla agrupada. Esto no funcionar&iacute;a:<br>
+        SELECT AVG(SUM(column1)) FROM t1 GROUP BY column1;<br>
+        Sin embargo, esta consulta proporciona la informaci&oacute;n deseada:<br>
+        SELECT AVG(sum_column1)<br>
+        FROM (SELECT SUM(column1) AS sum_column1<br>
+        FROM t1 GROUP BY column1) AS t1;<br>
+        Tenga en cuenta que el nombre de columna usado dentro de la subconsultas 
+        (sum_column1) se reconoce en la consulta exterior.<br>
+        Las subconsultas en la cl&aacute;usula FROM pueden retornar un escalar, 
+        columna, registro o tabla. De momento, las subconsultas en la<br>
+        cl&aacute;usula FROM no pueden ser subconsultas correladas.<br>
+        Las subconsultas en la cl&aacute;usula FROM se ejecutan incluso para el 
+        comando EXPLAIN (esto es, se construyen las tablas temporales<br>
+        derivadas). Esto ocurre porque las consultas de niveles superiores necesitan 
+        informaci&oacute;n acerca de todas las tablas durante la fase<br>
+        de optimizaci&oacute;n.</p>
+    	<p>
+
+
+
+      </p>
+        </td>
+    <td>&nbsp;</td>
+    <td><a href="http://www.euskalnet.net/juanarana/oraclezip/Ejer3.rar"><img src="../../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td>
+<div align="right"><a href="http://www.euskalnet.net/juanarana/index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a>
+      </div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

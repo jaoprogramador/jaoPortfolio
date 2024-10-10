@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>SQL Conforme</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación en JDBC,Programas JDBC,Aplicaciones en JDBC,Ejercicios en JDBC, Ejemplos de JDBC,Tutoriales de JDBC,Manuales JDBC" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="JDBC, Manual JDBC, tutorial JDBC, Ejemplos JDBC, ejercicios JDBC">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> SQL Conforme</h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <p>SQL es el lenguaje est&aacute;ndar para el 
+        acceso a las bases de datos relacionales. Una de las &aacute;reas de dificultad 
+        es que aunque muchas DBMS&#8217;s (Data Base Management Systems) usan 
+        un formato est&aacute;ndar de SQL para la funcionalidad b&aacute;sica, 
+        estos no conforman la sintaxis m&aacute;s recientemente definidas o sem&aacute;nticas 
+        para funcionalidades m&aacute;s avanzadas. Por ejemplo, no todas las bases 
+        de datos soportan procedimientos almacenados o joins de salida, y aquellas 
+        que lo hacen no son consistentes con otras. Es de esperar que la porci&oacute;n 
+        de SQL que es verdaderamente est&aacute;ndar se expandir&aacute; para 
+        incluir m&aacute;s y m&aacute;s funcionalidad. Entretanto, de cualquier 
+        modo, el API de JDBC debe soportar SQL tal como es.</p>
+      <p>Una forma en que el API JDBC trata este problema es permitir que cualquier 
+        cadena de b&uacute;squeda se pase al driver subyacente del DBMS. Esto 
+        quiere decir que una aplicaci&oacute;n es libre de usar la sentencia SQL 
+        tal como quiera, pero se corre el riesgo de recibir un error en el DBMS. 
+        De hecho una consulta de una aplicaci&oacute;n incluso no tiene por que 
+        ser SQL, o puede ser una derivaci&oacute;n especializada de SQL<br>
+        <br>
+        dise&ntilde;ada para especificas DBMS (para consultas a im&aacute;genes 
+        o documentos por ejemplo).</p>
+      <p>Una segunda forma en que JDBC trata este problema es proveer cl&aacute;usulas 
+        de escape al estilo de ODBC , que se discutir&aacute;n en el 4.1.5. &#8221;Sintaxis 
+        de escape en Sentencias Objetos&#8221;.</p>
+      <p>La sintaxis de escape provee una sintaxis JDBC est&aacute;ndar para varias 
+        de las &aacute;reas m&aacute;s comunes de divergencia SQL. Por ejemplo, 
+        ah&iacute; escapes para literales de fecha o procedimientos almacenados.</p>
+      <p>Para aplicaciones complejas, JDBC trata la conformidad SQL de una tercera 
+        manera. Y es proveer informaci&oacute;n descriptiva sobre el DBMS por 
+        medio de la interfase DatabaseMetaData por la que las aplicaciones pueden 
+        adaptarse a los requerimientos y posibilidades de cada DBMS:</p>
+      <p>Como el API JDBC se usar&aacute; como base para el desarrollo de herramientas 
+        de acceso y API&#8217;s de alto nivel , direccionar&aacute; el problema 
+        de la conformidad a cualquiera de estas. La designaci&oacute;n &#8220;JDBC 
+        COMPLIANT&#8221; se cre&oacute; para situar un nivel est&aacute;ndar de 
+        funcionalidad JDBC en la que los usuarios puedan confiar. En orden a usar 
+        esta designaci&oacute;n, un driver debe soportar al menos el nivel de 
+        entrada ANSI SQL-2 Entry Level. Los desarrolladores de drivers pueden 
+        cerciorarse que sus drivers cumplan estas especificaciones mediante la 
+        suite de test disponible en el API JDBC.</p>
+      <p>La designaci&oacute;n &#8220;JDBC COMPLIANT&#8221; indica que la implementaci&oacute;n 
+        JDBC de un vendedor ha pasado los tests de conformidad suministrados por 
+        JavaSoft. Estas pruebas de conformidad chequean la existencia de todas 
+        las clases y m&eacute;todos definidos en el API JDBC, y chequean tanto 
+        como es posible que la funcionalidad SQL Entry Level est&eacute; disponible. 
+        Tales tests no son exhaustivos, por supuesto, y JavaSoft no esta distribuyendo 
+        implementaciones de vendedores, pero esta definici&oacute;n de compliance 
+        tiene alg&uacute;n grado de seguridad en una implementaci&oacute;n JDBC. 
+        Con la mayor aceptaci&oacute;n de JDBC por parte de vendedores de bases 
+        de datos, de servicios de Internet y desarrolladores, JDBC se est&aacute; 
+        convirtiendo en el est&aacute;ndar de acceso a bases de datos.<br>
+      </p>
+      <p><br>
+      </p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Indice J2ME</title>
+<META http-equiv=Content-Language content=es>
+<META content="Manual J2ME, ejemplos J2ME, codigos J2ME" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Manual J2ME, ejemplos J2ME, codigos J2ME">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2>abstract GameCanvas extends Canvas</h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <p>Como Canvas que es, representar&aacute; la 
+        superficie de dibujo donde plasmaremos los<br>
+        componentes de nuestro juego.<br>
+        Esta clase provee los conceptos b&aacute;sicos para manejar la interface 
+        del juego, ya que, aparte<br>
+        de lo heredado de Canvas (comandos, eventos, etc.), ofrece un buffer gr&aacute;fico 
+        oculto<br>
+        asociado a la superficie de dibujo y adem&aacute;s funcionalidad para 
+        el acceso inmediato al estado<br>
+        de las teclas f&iacute;sicas del dispositivo MIDP.</p>
+      <p>Con estas dos aportaciones es posible refrescar el contenido gr&aacute;fico 
+        de la pantalla con el<br>
+        contenido del buffer gr&aacute;fico y responder a la interacci&oacute;n 
+        por teclado del usuario que<br>
+        capturamos de forma inmediata, todo ello en el propio bucle del juego, 
+        sin necesitar de las<br>
+        tareas externas de repintado y control de teclado que deb&iacute;amos 
+        usar con Canvas si no<br>
+        dispusi&eacute;ramos del API de juegos. Con esto, podremos hacer que una 
+        &uacute;nica tarea o hilo se<br>
+        encargue de la ejecuci&oacute;n del bucle de juego al completo (Game Loop), 
+        ganando en velocidad<br>
+        de forma patente.<br>
+        La clase GameCanvas presenta las siguientes constantes, todas ellas orientadas 
+        a un<br>
+        control del teclado mucho m&aacute;s fino del que ten&iacute;amos en Canvas:</p>
+      <table width="522" border="1" align="center">
+        <tr> 
+          <td><div align="center">CONSTANTE</div></td>
+          <td><div align="center">VALOR INDICADO</div></td>
+        </tr>
+        <tr> 
+          <td>static int DOWN_PRESSED</td>
+          <td>Presi&oacute;n de la tecla DOWN</td>
+        </tr>
+        <tr> 
+          <td>static int FIRE_PRESSED</td>
+          <td>Presi&oacute;n de la tecla FIRE</td>
+        </tr>
+        <tr> 
+          <td>static int GAME_A_PRESSED</td>
+          <td>Presi&oacute;n de la tecla GAME_A*</td>
+        </tr>
+        <tr> 
+          <td>static int GAME_B_PRESSED</td>
+          <td>Presi&oacute;n de la tecla GAME_B*</td>
+        </tr>
+        <tr> 
+          <td>static int GAME_C_PRESSED</td>
+          <td>Presi&oacute;n de la tecla GAME_C*</td>
+        </tr>
+        <tr> 
+          <td>static int GAME_D_PRESSED</td>
+          <td>Presi&oacute;n de la tecla GAME_D*</td>
+        </tr>
+        <tr> 
+          <td>static int LEFT_PRESSED</td>
+          <td>Presi&oacute;n de la tecla LEFT</td>
+        </tr>
+        <tr> 
+          <td>static int RIGHT_PRESSED</td>
+          <td>Presi&oacute;n de la tecla RIGHT</td>
+        </tr>
+        <tr> 
+          <td>static int UP_PRESSED</td>
+          <td>Presi&oacute;n de la tecla UP</td>
+        </tr>
+      </table>
+      <p>(*) No tienen por qu&eacute; tenerla todos los dispositivos.</p>
+      <p>Los siguientes son los m&eacute;todos que oferta la clase, siendo el 
+        primero de ellos el<br>
+        constructor que ofrece:<br>
+        - protected GameCanvas(boolean suppressKeyEvents): constructor de GameCanvas 
+        que recibe como par&aacute;metro un booleano indicando si suprimimos el 
+        mecanismo de eventos natural para las teclas de juego (los eventos para 
+        las dem&aacute;s teclas s&iacute; seguir&aacute;n activos) mientras el 
+        GameCanvas sea mostrado. Es decir, la supresi&oacute;n comienza cuando 
+        el m&eacute;todo showNotify() es llamado y termina con la invocaci&oacute;n 
+        a hideNotify() (m&eacute;todos heredados de Canvas).<br>
+        De este modo, nos limitar&iacute;amos al uso del m&eacute;todo getKeyStates() 
+        para tratar con el teclado, evitando llamadas ya innecesarias del sistema 
+        a m&eacute;todos como keyPressed(), keyRepeated() o keyReleased() y su 
+        tratamiento por nuestra parte. El buffer oculto antes comentado es tambi&eacute;n 
+        creado al invocar a este constructor formado por p&iacute;xeles blancos 
+        por defecto.</p>
+      <p>- void flushGraphics(). Refresca la pantalla con el contenido del buffer 
+        oculto, sin variar &eacute;ste. El tama&ntilde;o del &aacute;rea refrescada 
+        ser&aacute; el del GameCanvas, si &eacute;ste es visible actualmente (si 
+        no, no se hace nada).<br>
+        - void flushGraphics(int x, int y, int width, int height). Refresca la 
+        pantalla con el contenido del buffer oculto sin variar &eacute;ste, en 
+        este caso, s&oacute;lo con la porci&oacute;n delimitada por los par&aacute;metros 
+        de entrada. El contenido actualmente visible del GameCanvas en ese rect&aacute;ngulo 
+        ser&aacute; machacado con el correspondiente contenido del buffer oculto. 
+        Si la regi&oacute;n especificada excede los l&iacute;mites del GameCanvas, 
+        s&oacute;lo el &aacute;rea v&aacute;lida en la intersecci&oacute;n ser&aacute; 
+        refrescada.<br>
+        - protected Graphics getGraphics(). Obtiene un objeto Graphics que representa 
+        el contenido del buffer oculto asociado al GameCanvas. En este Graphics 
+        podremos dibujar p&iacute;xeles, Layers, Sprites, etc., los cuales no 
+        ser&aacute;n presentados en pantalla hasta que un flushGraphics() sea 
+        invocado. Un nuevo objeto Graphics es devuelto cada vez que este m&eacute;todo 
+        es llamado, aunque para la misma instancia de GameCanvas, los objetos 
+        Graphics devueltos siempre representar&aacute;n el mismo buffer oculto. 
+        Debemos recordar que el refresco no var&iacute;a el contenido de este 
+        buffer.<br>
+        - int getKeyStates(). Nos permite saber de una forma &oacute;ptima e inmediata 
+        qu&eacute; tecla ha sido pulsada sobre el GameCanvas actual, siempre que 
+        hayan sido pulsadas estando &eacute;ste visible.<br>
+        El m&eacute;todo devuelve un int en el cual cada uno de sus bits representa 
+        una tecla del dispositivo. Por ello, usando el operador AND l&oacute;gico 
+        con cada una de las teclas que deseemos comprobar, sabremos si &eacute;sta 
+        ha sido pulsada o no. Un bit de estos ser&aacute; 1 si la tecla que representa 
+        est&aacute; actualmente pulsada o ha sido pulsada al menos una vez desde 
+        la &uacute;ltima llamada a este m&eacute;todo. Lo usaremos as&iacute;, 
+        por ejemplo:</p>
+      <p>int keyState = getKeyStates();<br>
+        if ( ( keyState &amp; LEFT_KEY ) != 0 ) positionX--;<br>
+        else if ( ( keyState &amp; RIGHT_KEY ) != 0 ) positionX++;</p>
+      <p>- void paint(Graphics g). Utiliza el objeto Graphics par&aacute;metro 
+        para pintar en pantalla el contenido del buffer oculto del GameCanvas 
+        actual, en la posici&oacute;n (0,0). Estar&aacute; sujeto al &aacute;rea 
+        de Clipping y el origen de translaci&oacute;n del objeto Graphics.</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp; </p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

@@ -1,0 +1,2130 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Ejercicios MySQL</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="MySQL, sql, pl/sql, programacion MySQL, ejercicios MySQL, ejemplos MySQL, select">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2>F U N C I O N E S</h2></td>
+  </tr>
+  <tr> 
+    <td><h3>Funciones y operadores</h3>
+      <p>Las expresiones pueden usarse en varios puntos de los comandos SQL, tales 
+        como en las cl&aacute;usulas ORDER BY o HAVING de los<br>
+        comandos SELECT , en la cl&aacute;usula WHERE de los comandos SELECT, 
+        DELETE, o UPDATE o en comandos, SET . Las expresiones<br>
+        pueden escribirse usando valores literales, valores de columnas, NULL, 
+        funciones y operadores. Este cap&iacute;tulo describe las funciones<br>
+        y operadores permitidos para escribir expresiones en MySQL.<br>
+        Una expresi&oacute;n que contiene NULL siempre produce un valor NULL a 
+        no ser que se indique de otro modo en la documentaci&oacute;n para<br>
+        una funci&oacute;n u operador particular.<br>
+        Nota: Por defecto, no deben haber espacios en blanco entre un nombre de 
+        funci&oacute;n y los par&eacute;ntesis que lo siguen. Esto ayuda al parser<br>
+        de MySQL a distinguir entre llamadas a funciones y referencias a tablas 
+        o columnas que tengan el mismo nombre que una funci&oacute;n.<br>
+        Sin embargo, se permiten espacios antre los argumentos de las funciones.<br>
+        Puede decirle a MySQL server que acepte espacios tras los nombres de funciones 
+        arrancando con la opci&oacute;n -<br>
+        -sql-mode=IGNORE_SPACE. Los programas cliente pueden pedir este comportamiento 
+        usando la opci&oacute;n<br>
+        CLIENT_IGNORE_SPACE para mysql_real_connect(). En cualquier caso, todos 
+        los nombres de funci&oacute;n son palabras reservadas.<br>
+        Consulte Secci&oacute;n 5.3.2, &#8220;El modo SQL del servidor&#8221;.<br>
+        Para una mayor brevedad, la mayor&iacute;a de ejemplos de este cap&iacute;tulo 
+        muestran la salida del programa mysql de forma abreviada. En<br>
+        lugar de mostrar ejemplos en este formato:<br>
+        mysql&gt; SELECT MOD(29,9);<br>
+        +-----------+<br>
+        | mod(29,9) |<br>
+        +-----------+<br>
+        | 2 |<br>
+        +-----------+<br>
+        1 rows in set (0.00 sec)<br>
+        Se usa este otro:<br>
+        mysql&gt; SELECT MOD(29,9);<br>
+        -&gt; 2<br>
+        <h3>Precedencias de los operadores</h3><br>
+        La precedencia de operadores se muestra en la siguiente lista, de menor 
+        a mayor precedencia. Los operadores que se muestran juntos<br>
+        en una l&iacute;nea tienen la misma precedencia.<br>
+        :=<br>
+        ||, OR, XOR<br>
+        &amp;&amp;, AND<br>
+        NOT<br>
+        BETWEEN, CASE, WHEN, THEN, ELSE<br>
+        =, &lt;=&gt;, &gt;=, &gt;, &lt;=, &lt;, &lt;&gt;, !=, IS, LIKE, REGEXP, 
+        IN<br>
+        |&amp;<br>
+        &lt;&lt;, &gt;&gt;<br>
+        -, +<br>
+        *, /, DIV, %, MOD<br>
+        ^-<br>
+        (resta unaria), ~ (inversi&oacute;n de bit unaria)<br>
+        !<br>
+        BINARY, COLLATE<br>
+        La precedencia mostrada para NOT es desde MySQL 5.0.2. En versiones anteriores, 
+        o desde 5.0.2 si el modo<br>
+        HIGH_NOT_PRECEDENCE est&aacute; activo, la precedencia de NOT es la misma 
+        que la del operador !<br>
+        <h3>Par&eacute;ntesis</h3><br>
+        &#8226; ( ... )<br>
+        Use par&eacute;ntesis para forzar el orden de evaluaci&oacute;n en una 
+        expresi&oacute;n. Por ejemplo:<br>
+        mysql&gt; SELECT 1+2*3;<br>
+        -&gt; 7<br>
+        mysql&gt; SELECT (1+2)*3;<br>
+        -&gt; 9<br>
+        <h3>Funciones y operadores de comparaci&oacute;n</h3><br>
+        Las operaciones de comparaci&oacute;n dan un valor de 1 (CIERTO), 0 (FALSO), 
+        o NULL. Estas operaciones funcionan tanto para n&uacute;meros<br>
+        como para cadenas de caracteres. Las cadenas de caracteres se convierten 
+        autom&aacute;ticamente en n&uacute;meros y los n&uacute;meros en cadenas<br>
+        cuando es necesario.<br>
+        Algunas de las funciones de esta secci&oacute;n (tales como LEAST() y 
+        GREATEST()) retornan valores distintos a 1 (CIERTO), 0<br>
+        (FALSO), o NULL. Sin embargo, el valor que retornan se basa en operaciones 
+        de comparaci&oacute;n realizadas como describen las siguientes<br>
+        reglas.<br>
+        MySQL compara valores usando las siguientes reglas:<br>
+        &#8226; Si uno o ambos argumentos son NULL, el resultado de la comparaci&oacute;n 
+        es NULL, excepto para el operador de comparaci&oacute;n<br>
+        NULL-safe &lt;=&gt; .<br>
+        &#8226; Si ambos argumentos en una operaci&oacute;n de comparaci&oacute;n 
+        son cadenas, se comparan como cadenas.<br>
+        &#8226; Si ambos argumentos son enteros, se comparan como enteros.<br>
+        &#8226; Los valores hexadecimales se tratan como cadenas binarias si no 
+        se comparan con un n&uacute;mero.<br>
+        &#8226;<br>
+        Si uno de los argumentos es una columna TIMESTAMP o DATETIME y el otro 
+        argumento es una constante, la constante se convierte<br>
+        en timestamp antes de realizar la comparaci&oacute;n. Esto se hace para 
+        acercarse al comportamiento de ODBC. Esto no se hace<br>
+        para argumentos en IN()! Para estar seguro, siempre use cadenas completas 
+        de fechas/horas al hacer comparaciones.<br>
+        &#8226; En todos los otros casos, los argumentos se comparan como n&uacute;meros 
+        con punto flotante (reales).<br>
+        Por defecto, la comparaci&oacute;n de cadenas no es sensible a may&uacute;sculas 
+        y usa el conjunto de caracteres actual (ISO-8859-1 Latin1 por<br>
+        defecto, que siempre funciona bien para ingl&eacute;s).<br>
+        Par convertir un valor a un tipo espec&iacute;fico para una comparaci&oacute;n, 
+        puede usar la funci&oacute;n CAST() . Los valores de cadenas de caracteres<br>
+        pueden convertirse a un conjunto de caracteres distinto usando CONVERT(). 
+        Consulte Secci&oacute;n 12.8, &#8220;Funciones y operadores<br>
+        de cast&#8221;.<br>
+        Los siguientes ejemplos ilustran conversi&oacute;n de cadenas a n&uacute;meros 
+        para operaciones de comparaci&oacute;n:<br>
+        mysql&gt; SELECT 1 &gt; '6x';<br>
+        -&gt; 0<br>
+        mysql&gt; SELECT 7 &gt; '6x';<br>
+        -&gt; 1<br>
+        mysql&gt; SELECT 0 &gt; 'x6';<br>
+        -&gt; 0<br>
+        mysql&gt; SELECT 0 = 'x6';<br>
+        -&gt; 1<br>
+        Tenga en cuanta que cuando compara una columna de cadenas de caracteres 
+        con un n&uacute;mero, MySQL no puede usar el &iacute;ndice de la<br>
+        columna para buscar r&aacute;pidamente le valor. Si str_col es una columna 
+        de cadenas indexada, el &iacute;ndice no puede usarse al realizar<br>
+        la b&uacute;squeda en el siguiente comando:<br>
+        SELECT * FROM tbl_name WHERE str_col=1;<br>
+        La raz&oacute;n es que hay diferentes cadenas que pueden convertirse al 
+        valor 1: '1', ' 1', '1a', ...<br>
+        &#8226; =<br>
+        Igual:<br>
+        mysql&gt; SELECT 1 = 0;<br>
+        -&gt; 0<br>
+        mysql&gt; SELECT '0' = 0;<br>
+        -&gt; 1<br>
+        mysql&gt; SELECT '0.0' = 0;<br>
+        -&gt; 1<br>
+        mysql&gt; SELECT '0.01' = 0;<br>
+        -&gt; 0<br>
+        mysql&gt; SELECT '.01' = 0.01;<br>
+        -&gt; 1<br>
+        &#8226; &lt;=&gt;<br>
+        NULL-safe equal. Este operador realiza una comparaci&oacute;n de igualdad 
+        como el operador =, pero retorna 1 en lugar de NULL si<br>
+        ambos operandos son NULL, y 0 en lugar de NULL si un operando es NULL.<br>
+        mysql&gt; SELECT 1 &lt;=&gt; 1, NULL &lt;=&gt; NULL, 1 &lt;=&gt; NULL;<br>
+        -&gt; 1, 1, 0<br>
+        mysql&gt; SELECT 1 = 1, NULL = NULL, 1 = NULL;<br>
+        -&gt; 1, NULL, NULL<br>
+        &#8226; &lt;&gt;, !=<br>
+        Diferente:<br>
+        mysql&gt; SELECT '.01' &lt;&gt; '0.01';<br>
+        -&gt; 1<br>
+        mysql&gt; SELECT .01 &lt;&gt; '0.01';<br>
+        -&gt; 0<br>
+        mysql&gt; SELECT 'zapp' &lt;&gt; 'zappp';<br>
+        -&gt; 1<br>
+        &#8226; &lt;=<br>
+        Menor que o igual:<br>
+        mysql&gt; SELECT 0.1 &lt;= 2;<br>
+        -&gt; 1<br>
+        &#8226; &lt;<br>
+        Menor que:<br>
+        mysql&gt; SELECT 2 &lt; 2;<br>
+        -&gt; 0<br>
+        &#8226; &gt;=<br>
+        Mayor que o igual:<br>
+        mysql&gt; SELECT 2 &gt;= 2;<br>
+        -&gt; 1<br>
+        &#8226; &gt;<br>
+        Mayor que:<br>
+        mysql&gt; SELECT 2 &gt; 2;<br>
+        -&gt; 0<br>
+        &#8226; IS valor booleano, IS NOT valor booleano<br>
+        Comprueba si un valor contra un valor booleano, donde boolean_value puede 
+        ser TRUE, FALSE, o UNKNOWN.<br>
+        mysql&gt; SELECT 1 IS TRUE, 0 IS FALSE, NULL IS UNKNOWN;<br>
+        -&gt; 1, 1, 1<br>
+        mysql&gt; SELECT 1 IS NOT UNKNOWN, 0 IS NOT UNKNOWN, NULL IS NOT UNKNOWN;<br>
+        -&gt; 1, 1, 0<br>
+        IS [NOT] valor booleano sintaxis se a&ntilde;adi&oacute; en MySQL 5.0.2.<br>
+        &#8226; IS NULL, IS NOT NULL<br>
+        Testea si un valor es o no NULL.<br>
+        mysql&gt; SELECT 1 IS NULL, 0 IS NULL, NULL IS NULL;<br>
+        -&gt; 0, 0, 1<br>
+        mysql&gt; SELECT 1 IS NOT NULL, 0 IS NOT NULL, NULL IS NOT NULL;<br>
+        -&gt; 1, 1, 0<br>
+        Para poder trabajar con programas ODBC, MySQL soporta las siguientes caracter&iacute;sticas 
+        extra al usar IS NULL:<br>
+        &#8226; Puede encontrar el registro que contiene el valor AUTO_INCREMENT 
+        m&aacute;s reciente realizando un comando de la siguiente<br>
+        forma inmediatamente tras generar el valor:<br>
+        SELECT * FROM tbl_name WHERE auto_col IS NULL<br>
+        Este comportamiento puede desactivarse asignando SQL_AUTO_IS_NULL=0. Consulte 
+        Secci&oacute;n 13.5.3, &#8220;Sintaxis de<br>
+        SET&#8221;.<br>
+        &#8226; Para columnas DATE y DATETIME que se declaran como NOT NULL, puede 
+        encontrar la fecha especial '0000-00-00'<br>
+        con un comando como este:<br>
+        SELECT * FROM tbl_name WHERE date_column IS NULL<br>
+        Esto es necesario para algunas aplicaciones ODBC, ya que ODBC no soporta 
+        un valor de fecha '0000-00-00' .<br>
+        &#8226; expr BETWEEN min AND max<br>
+        Si expr es mayor o igual que min y expr es menor o igual a max, BETWEEN 
+        retorna 1, de otro modo retorna 0. Esto es equivalente<br>
+        a la expresi&oacute;n (min &lt;= expr AND expr &lt;= max) si todos los 
+        argumentos son del mismo tipo. De otro modo la<br>
+        conversi&oacute;n de tipos tiene lugar seg&uacute;n las reglas descritas 
+        al principio de la secci&oacute;n, pero aplicadas a todos los argumentos.<br>
+        mysql&gt; SELECT 1 BETWEEN 2 AND 3;<br>
+        -&gt; 0<br>
+        mysql&gt; SELECT 'b' BETWEEN 'a' AND 'c';<br>
+        -&gt; 1<br>
+        mysql&gt; SELECT 2 BETWEEN 2 AND '3';<br>
+        -&gt; 1<br>
+        mysql&gt; SELECT 2 BETWEEN 2 AND 'x-3';<br>
+        -&gt; 0<br>
+        &#8226; expr NOT BETWEEN min AND max<br>
+        Esto es lo mismo que NOT (expr BETWEEN min AND max).<br>
+        &#8226; COALESCE(value,...)<br>
+        Retorna el primer valore no NULL de la lista.<br>
+        mysql&gt; SELECT COALESCE(NULL,1);<br>
+        -&gt; 1<br>
+        mysql&gt; SELECT COALESCE(NULL,NULL,NULL);<br>
+        -&gt; NULL<br>
+        &#8226; GREATEST(value1,value2,...)<br>
+        Con dos o m&aacute;s argumentos, retorna el argumento mayor (con valor 
+        mayor). Los argumentos se comparan usando las mismas reglas<br>
+        que para LEAST().<br>
+        mysql&gt; SELECT GREATEST(2,0);<br>
+        -&gt; 2<br>
+        mysql&gt; SELECT GREATEST(34.0,3.0,5.0,767.0);<br>
+        -&gt; 767.0<br>
+        mysql&gt; SELECT GREATEST('B','A','C');<br>
+        -&gt; 'C'<br>
+        &#8226; expr IN (value,...)<br>
+        Retorna 1 si expr es uno de los valores en la lista IN , de lo contrario 
+        retorna 0. Si todos los valores son constantes, se eval&uacute;an<br>
+        seg&uacute;n el tipo y ordenaci&oacute;n de expr . La b&uacute;squeda 
+        para el elemento se hace usando b&uacute;squeda binaria. Esto significa 
+        que IN es<br>
+        muy r&aacute;pido si la lista IN consiste enteramente en constantes. Si 
+        expr es una expresi&oacute;n de cadenas de caracteres sensible a may&uacute;sculas,<br>
+        la comparaci&oacute;n de cadenas se realiza sensible a may&uacute;sculas.<br>
+        mysql&gt; SELECT 2 IN (0,3,5,'wefwf');<br>
+        -&gt; 0<br>
+        mysql&gt; SELECT 'wefwf' IN (0,3,5,'wefwf');<br>
+        -&gt; 1<br>
+        El n&uacute;mero de valores en la lista IN s&oacute;lo est&aacute; limitado 
+        por el valor max_allowed_packet.<br>
+        En MySQL 5.0, para cumplir el est&aacute;ndar SQL IN retorna NULL no s&oacute;lo 
+        si la expresi&oacute;n de la parte izquierda es NULL, tambi&eacute;n<br>
+        si no encuentra coincidencias en la lista y una de las expresiones en 
+        la lista es NULL.<br>
+        La sintaxis de IN() puede usarse para escribir algunas subconsultas. Consulte 
+        Secci&oacute;n 13.2.8.3, &#8220;Subconsultas con ANY, IN y<br>
+        SOME&#8221;.<br>
+        &#8226; expr NOT IN (value,...)<br>
+        Esto es lo mismo que NOT (expr IN (value,...)).<br>
+        &#8226; ISNULL(expr)<br>
+        Si expr es NULL, ISNULL() retorna 1, sino retorna 0.<br>
+        mysql&gt; SELECT ISNULL(1+1);<br>
+        -&gt; 0<br>
+        mysql&gt; SELECT ISNULL(1/0);<br>
+        -&gt; 1<br>
+        Una comparaci&oacute;n de valores NULL usando = siempre es falsa.<br>
+        La funci&oacute;n ISNULL() comparte algunos comportamientos especiales 
+        con el operador de comparaci&oacute;n IS NULL, consulte la<br>
+        descripci&oacute;n de IS NULL en Secci&oacute;n 12.1.3, &#8220;Funciones 
+        y operadores de comparaci&oacute;n&#8221;.<br>
+        &#8226; INTERVAL(N,N1,N2,N3,...)<br>
+        Retorna 0 if N &lt; N1, 1 si N &lt; N2 y as&iacute; o -1 si N es NULL. 
+        Todos los argumentos se tratan como enteros. Esto requiere que N1 &lt;<br>
+        N2 &lt; N3 &lt; ... &lt; Nn para que la funci&oacute;n funcione correctamente. 
+        Esto es porque se usa una b&uacute;squeda binaria (muy r&aacute;pida).<br>
+        mysql&gt; SELECT INTERVAL(23, 1, 15, 17, 30, 44, 200);<br>
+        -&gt; 3<br>
+        mysql&gt; SELECT INTERVAL(10, 1, 10, 100, 1000);<br>
+        -&gt; 2<br>
+        mysql&gt; SELECT INTERVAL(22, 23, 30, 44, 200);<br>
+        -&gt; 0<br>
+        &#8226; LEAST(value1,value2,...)<br>
+        Con dos o m&aacute;s argumentos, retorna el argumento menor (con un valor 
+        menor). Los argumentos se comparan usando las siguientes<br>
+        reglas:<br>
+        &#8226; Si el valor retornado se usan en un contexto INTEGER o todos los 
+        argumentos son enteros, se comparan como enteros.<br>
+        &#8226; Si el valor retornado se usa en un contexto REAL o todos los argumentos 
+        son reales, se comparan como reales.<br>
+        &#8226; Si alg&uacute;n argumento es una cadena de caracteres sensible 
+        a may&uacute;sculas, los argumentos se comparan como cadenas sensibles<br>
+        a may&uacute;sculas.<br>
+        &#8226; En cualquier otro caso, los argumentos se comparan como cadenas 
+        no sensibles a may&uacute;sculas.<br>
+        mysql&gt; SELECT LEAST(2,0);<br>
+        -&gt; 0<br>
+        mysql&gt; SELECT LEAST(34.0,3.0,5.0,767.0);<br>
+        -&gt; 3.0<br>
+        mysql&gt; SELECT LEAST('B','A','C');<br>
+        -&gt; 'A'<br>
+        Tenga en cuenta que las reglas de conversi&oacute;n precedentes pueden 
+        producir resultados extra&ntilde;os en algunos casos extremos:<br>
+        mysql&gt; SELECT CAST(LEAST(3600, 9223372036854775808.0) as SIGNED);<br>
+        -&gt; -9223372036854775808<br>
+        Esto ocurre porque MySQL lee 9223372036854775808.0 en un contexto entero. 
+        La representaci&oacute;n entera no es lo bastante<br>
+        buena para tratar el valor, as&iacute; que lo cambia a entero con signo.<br>
+        <h3>Operadores l&oacute;gicos</h3><br>
+        En SQL, todos los operadores l&oacute;gicos se eval&uacute;an a TRUE, 
+        FALSE, o NULL (UNKNOWN). En MySQL, se implementan como 1<br>
+        (TRUE), 0 (FALSE), y NULL. La mayor&iacute;a de esto es com&uacute;n en 
+        diferentes servidores de bases de datos SQL aunque algunos servidores<br>
+        pueden retornar cualquier valor distinto a cero para TRUE.<br>
+        &#8226; NOT, !<br>
+        NOT l&oacute;gica. Se eval&uacute;a a 1 si el operando es 0, a 0 si el 
+        operando es diferente a cero, y NOT NULL retorna NULL.<br>
+        mysql&gt; SELECT NOT 10;<br>
+        -&gt; 0<br>
+        mysql&gt; SELECT NOT 0;<br>
+        -&gt; 1<br>
+        mysql&gt; SELECT NOT NULL;<br>
+        -&gt; NULL<br>
+        mysql&gt; SELECT ! (1+1);<br>
+        -&gt; 0<br>
+        mysql&gt; SELECT ! 1+1;<br>
+        -&gt; 1<br>
+        El &uacute;ltimo ejemplo produce 1 porque la expresi&oacute;n se eval&uacute;a 
+        igual que (!1)+1.<br>
+        &#8226; AND, &amp;&amp;<br>
+        AND l&oacute;gica. Se eval&uacute;a a 1 si todos los operandos son distintos 
+        a cero y no NULL, a 0 si uno o m&aacute;s operandos son 0, de otro<br>
+        modo retorna NULL.<br>
+        mysql&gt; SELECT 1 &amp;&amp; 1;<br>
+        -&gt; 1<br>
+        mysql&gt; SELECT 1 &amp;&amp; 0;<br>
+        -&gt; 0<br>
+        mysql&gt; SELECT 1 &amp;&amp; NULL;<br>
+        -&gt; NULL<br>
+        mysql&gt; SELECT 0 &amp;&amp; NULL;<br>
+        -&gt; 0<br>
+        mysql&gt; SELECT NULL &amp;&amp; 0;<br>
+        -&gt; 0<br>
+        &#8226; OR, ||<br>
+        OR l&oacute;gica. Cuando ambos ooperandos son no NULL, el resultado es 
+        1 si alg&uacute;n operando es diferente a cero, y 0 de otro modo.<br>
+        Con un operando NULL el resultado es 1 si el otro operando no es cero, 
+        y NULL de otro modo. Si ambos operandos son NULL,<br>
+        el resultado es NULL.<br>
+        mysql&gt; SELECT 1 || 1;<br>
+        -&gt; 1<br>
+        mysql&gt; SELECT 1 || 0;<br>
+        -&gt; 1<br>
+        mysql&gt; SELECT 0 || 0;<br>
+        -&gt; 0<br>
+        mysql&gt; SELECT 0 || NULL;<br>
+        -&gt; NULL<br>
+        mysql&gt; SELECT 1 || NULL;<br>
+        -&gt; 1<br>
+        &#8226; XOR<br>
+        XOR l&oacute;gica. Retorna NULL si alg&uacute;n operando es NULL. Para 
+        operandos no NULL , eval&uacute;a a 1 si un n&uacute;mero par de operandos 
+        es<br>
+        distinto a cero, sino retorna 0.<br>
+        mysql&gt; SELECT 1 XOR 1;<br>
+        -&gt; 0<br>
+        mysql&gt; SELECT 1 XOR 0;<br>
+        -&gt; 1<br>
+        mysql&gt; SELECT 1 XOR NULL;<br>
+        -&gt; NULL<br>
+        mysql&gt; SELECT 1 XOR 1 XOR 1;<br>
+        -&gt; 1<br>
+        a XOR b es matem&aacute;ticamente igual a (a AND (NOT b)) OR ((NOT a) 
+        and b).<br>
+        <h3>Funciones de control de flujo</h3><br>
+        &#8226; CASE value WHEN [compare-value] THEN result [WHEN [compare-value] 
+        THEN result ...]<br>
+        [ELSE result] END, CASE WHEN [condition] THEN result [WHEN [condition] 
+        THEN result<br>
+        ...] [ELSE result] END<br>
+        La primera versi&oacute;n retorna result donde value=compare-value. La 
+        segunda versi&oacute;n retorna el resultado para la primera<br>
+        condici&oacute;n que es cierta. Si no hay ning&uacute;n resultado coincidente, 
+        el resultado tras ELSE se retorna, o NULL si no hay parte<br>
+        ELSE.<br>
+        mysql&gt; SELECT CASE 1 WHEN 1 THEN 'one'<br>
+        -&gt; WHEN 2 THEN 'two' ELSE 'more' END;<br>
+        -&gt; 'one'<br>
+        mysql&gt; SELECT CASE WHEN 1&gt;0 THEN 'true' ELSE 'false' END;<br>
+        -&gt; 'true'<br>
+        mysql&gt; SELECT CASE BINARY 'B'<br>
+        -&gt; WHEN 'a' THEN 1 WHEN 'b' THEN 2 END;<br>
+        -&gt; NULL<br>
+        El tipo de retorno por defecto de una expresi&oacute;n CASE es el tipo 
+        agregado compatible de todos los valores de retorno, pero tambi&eacute;n<br>
+        depende del contexto en el que se usa. Si se usa en un entorno de cadenas 
+        de caracteres, el resultado se retorna como cadena<br>
+        de caracteres. Si se usa en un contexto num&eacute;rico, el resultado 
+        se retorna como valor decimal, real o entero.<br>
+        &#8226; IF(expr1,expr2,expr3)<br>
+        Si expr1 es TRUE (expr1 &lt;&gt; 0 and expr1 &lt;&gt; NULL) entonces IF() 
+        retorna expr2; de otro modo retorna expr3.<br>
+        IF() retorna un valor num&eacute;rico o cadena de caracteres, en funci&oacute;n 
+        del contexto en que se usa.<br>
+        mysql&gt; SELECT IF(1&gt;2,2,3);<br>
+        -&gt; 3<br>
+        mysql&gt; SELECT IF(1&lt;2,'yes','no');<br>
+        -&gt; 'yes'<br>
+        mysql&gt; SELECT IF(STRCMP('test','test1'),'no','yes');<br>
+        -&gt; 'no'<br>
+        Si s&oacute;lo una de expr2 o expr3 es expl&iacute;citamente NULL, el 
+        tipo del resultado de la funci&oacute;n IF() es el mismo tipo que la expresi&oacute;n<br>
+        no NULL .<br>
+        expr1 se eval&uacute;a como un valor entero, que significa que si esta 
+        testeando valores de punto flotante o cadenas de caracteres,<br>
+        debe hacerlo mediante operaciones de comparaci&oacute;n.<br>
+        mysql&gt; SELECT IF(0.1,1,0);<br>
+        -&gt; 0<br>
+        mysql&gt; SELECT IF(0.1&lt;&gt;0,1,0);<br>
+        -&gt; 1<br>
+        En el primer caso mostrado, IF(0.1) retorna 0 ya que 0.1 se convierte 
+        a un valor entero, resultando en un test de IF(0).<br>
+        Puede que esto no ea lo que espera. En el segundo caso, la comparaci&oacute;n 
+        testea el valor de coma flotante para comprobar que no<br>
+        es cero. El resultado de la comparaci&oacute;n se usa como entero.<br>
+        El tipo de retorno de IF() (que puede ocurrir cuando se almacena en una 
+        tabla temporal) se calcula como sigue:<br>
+        Expresi&oacute;n Valor Retornado<br>
+        expr2 o expr3 retorna una cadena cadena de caracteres<br>
+        expr2 o expr3 retorna un valor de coma flotante coma flotante<br>
+        expr2 o expr3 retorna un entero entero<br>
+        Si expr2 y expr3 son cadenas de caracteres, el resultado es sensible a 
+        may&uacute;sculas si alguna de las cadenas lo es.<br>
+        &#8226; IFNULL(expr1,expr2)<br>
+        Si expr1 no es NULL, IFNULL() retorna expr1, de otro modo retorna expr2. 
+        IFNULL() retorna un valor num&eacute;rico o de<br>
+        cadena de caracteres, en funci&oacute;n del contexto en que se usa.<br>
+        mysql&gt; SELECT IFNULL(1,0);<br>
+        -&gt; 1<br>
+        mysql&gt; SELECT IFNULL(NULL,10);<br>
+        -&gt; 10<br>
+        mysql&gt; SELECT IFNULL(1/0,10);<br>
+        -&gt; 10<br>
+        mysql&gt; SELECT IFNULL(1/0,'yes');<br>
+        -&gt; 'yes'<br>
+        El valor por defecto de retorno de IFNULL(expr1,expr2) es el m&aacute;s 
+        &#8220;general&#8221; de las dos expresiones, en el orden<br>
+        STRING, REAL, o INTEGER. Considere el caso de una tabla basada en expresiones 
+        o donde MySQL debe almacenar internamente<br>
+        un valor retornado por IFNULL() en una tabla temporal:<br>
+        mysql&gt; CREATE TABLE tmp SELECT IFNULL(1,'test') AS test;<br>
+        mysql&gt; DESCRIBE tmp;<br>
+        +-------+--------------+------+-----+---------+-------+<br>
+        | Field | Type | Null | Key | Default | Extra |<br>
+        +-------+--------------+------+-----+---------+-------+<br>
+        | test | varbinary(4) | NO | | | |<br>
+        +-------+--------------+------+-----+---------+-------+<br>
+        En este ejemplo, el tipo de la columnatest es VARBINARY(4).<br>
+        &#8226; NULLIF(expr1,expr2)<br>
+        Retorna NULL si expr1 = expr2 es cierto, de otro modo retorna expr1. Es 
+        lo mismo que CASE WHEN expr1 =<br>
+        expr2 THEN NULL ELSE expr1 END.<br>
+        mysql&gt; SELECT NULLIF(1,1);<br>
+        -&gt; NULL<br>
+        mysql&gt; SELECT NULLIF(1,2);<br>
+        -&gt; 1<br>
+        Tenga en cuenta que MySQL eval&uacute;a expr1 dos veces si los argumentos 
+        no son iguales.<br>
+        <h3>Funciones para cadenas de caracteres</h3><br>
+        Las funciones de cadenas de caracteres retornan NULL si la longitud del 
+        resultado es mayor que el valor de la variable de sistema<br>
+        max_allowed_packet . Consulte Secci&oacute;n 7.5.2, &#8220;Afinar par&aacute;metros 
+        del servidor&#8221;.<br>
+        Para funciones que operan en posiciones de cadenas de caracteres, la primera 
+        posici&oacute;n es la 1.<br>
+        &#8226; ASCII(str)<br>
+        Retorna el valor num&eacute;rico del car&aacute;cter m&aacute;s a la izquierda 
+        de la cadena de caracteres str. Retorna 0 si str es la cadena vac&iacute;a.<br>
+        Retorna NULL si str es NULL. ASCII() funciona para caracteres con valores 
+        num&eacute;ricos de 0 a 255.<br>
+        mysql&gt; SELECT ASCII('2');<br>
+        -&gt; 50<br>
+        mysql&gt; SELECT ASCII(2);<br>
+        -&gt; 50<br>
+        mysql&gt; SELECT ASCII('dx');<br>
+        -&gt; 100<br>
+        Consulte la funci&oacute;n ORD() .<br>
+        &#8226; BIN(N)<br>
+        Retorna una representaci&oacute;n de cadena de caracteres del valor binario 
+        de N, donde N es un n&uacute;mero muy largo (BIGINT) . Esto<br>
+        es equivalente a CONV(N,10,2). Retorna NULL si N es NULL.<br>
+        mysql&gt; SELECT BIN(12);<br>
+        -&gt; '1100'<br>
+        &#8226; BIT_LENGTH(str)<br>
+        Retorna la longitud de la cadena de caracteres str en bits.<br>
+        mysql&gt; SELECT BIT_LENGTH('text');<br>
+        -&gt; 32<br>
+        &#8226; CHAR(N,...)<br>
+        CHAR() interpreta los argumentos como enteros y retorna la cadena de caracteres 
+        que consiste en los caracteres dados por los<br>
+        c&oacute;digos de tales enteros. Los valores NULL no se tienen en cuenta.<br>
+        mysql&gt; SELECT CHAR(77,121,83,81,'76');<br>
+        -&gt; 'MySQL'<br>
+        mysql&gt; SELECT CHAR(77,77.3,'77.3');<br>
+        -&gt; 'MMM'<br>
+        &#8226; CHAR_LENGTH(str)<br>
+        Retorna la longitud de la cadena de caracteres str, medida en caracteres. 
+        Un car&aacute;cter de m&uacute;ltiples bytes cuenta como un s&oacute;lo<br>
+        car&aacute;cter. Esto significa que para una cadena de caracteres que 
+        contiene cinco caracteres de dos bytes, LENGTH() retorna 10,<br>
+        mientras CHAR_LENGTH() returna 5.<br>
+        &#8226; CHARACTER_LENGTH(str)<br>
+        CHARACTER_LENGTH() es sin&oacute;nimo de CHAR_LENGTH().<br>
+        &#8226; COMPRESS(string_to_compress)<br>
+        Comprime una cadena de caracteres. Esta funci&oacute;n necesita que MySQL 
+        se compile con una biblioteca de compresi&oacute;n como<br>
+        zlib. De otro modo, el valor retornado siempre es NULL. La cadena comprimida 
+        puede descomprimirse con<br>
+        UNCOMPRESS().<br>
+        mysql&gt; SELECT LENGTH(COMPRESS(REPEAT('a',1000)));<br>
+        -&gt; 21<br>
+        mysql&gt; SELECT LENGTH(COMPRESS(''));<br>
+        -&gt; 0<br>
+        mysql&gt; SELECT LENGTH(COMPRESS('a'));<br>
+        -&gt; 13<br>
+        mysql&gt; SELECT LENGTH(COMPRESS(REPEAT('a',16)));<br>
+        -&gt; 15<br>
+        Los contenidos comprimidos se almacenan de la siguiente forma:<br>
+        &#8226; Cadenas vac&iacute;as se almacenan como cadenas vac&iacute;as.<br>
+        &#8226; Cadenas no vac&iacute;as se almacenan como longitud de cuatros 
+        bytes de la cadena descomprimida (los bytes m&aacute;s bajos primero),<br>
+        seguido de la cadena comprimida. Si la cadena acaba con un espacio, se 
+        a&ntilde;ade un car&aacute;cter '.' para evitar problemas con eliminaci&oacute;n<br>
+        de espacios finales al almacenar en una columna CHAR o VARCHAR . (El uso 
+        de CHAR o VARCHAR para almacenar<br>
+        cadenas comprimidas no se recomienda. Es mejor usar una columna BLOB .)<br>
+        &#8226; CONCAT(str1,str2,...)<br>
+        Retorna la cadena resultado de concatenar los argumentos. Retorna NULL 
+        si alg&uacute;na argumento es NULL. Puede tener uno o m&aacute;s<br>
+        argumentos. Si todos los argumentos son cadenas no binarias, el resultado 
+        es una cadena no binaria. Si los argumentos incluyen<br>
+        cualquier cadena binaria, el resultado es una cadena binaria. Un argumento 
+        num&eacute;rico se convierte a su forma de cadena binaria<br>
+        equivalente; si quiere evitarlo puede usar conversi&oacute;n de tipos 
+        expl&iacute;cita, como en este ejemplo: SELECT CONCAT(<br>
+        CAST(int_col AS CHAR), char_col)<br>
+        mysql&gt; SELECT CONCAT('My', 'S', 'QL');<br>
+        -&gt; 'MySQL'<br>
+        mysql&gt; SELECT CONCAT('My', NULL, 'QL');<br>
+        -&gt; NULL<br>
+        mysql&gt; SELECT CONCAT(14.3);<br>
+        -&gt; '14.3'<br>
+        &#8226; CONCAT_WS(separator,str1,str2,...)<br>
+        CONCAT_WS() significa CONCAT With Separator (CONCAT con separador) y es 
+        una forma especial de CONCAT(). El primer<br>
+        argumento es el separador para el resto de argumentos. El separador se 
+        a&ntilde;ade entre las cadenas a concatenar. El separador<br>
+        puede ser una cadena como el resto de argumentos. Si el separador es NULL, 
+        el resultado es NULL. La funci&oacute;n evita valores<br>
+        NULL tras el argumento separador.<br>
+        mysql&gt; SELECT CONCAT_WS(',','First name','Second name','Last Name');<br>
+        -&gt; 'First name,Second name,Last Name'<br>
+        mysql&gt; SELECT CONCAT_WS(',','First name',NULL,'Last Name');<br>
+        -&gt; 'First name,Last Name'<br>
+        En MySQL 5.0, CONCAT_WS() no evita cadenas vac&iacute;as. (Sin embargo, 
+        evita NULLs.)<br>
+        &#8226; CONV(N,from_base,to_base)<br>
+        Convierte n&uacute;meros entre diferentes bases num&eacute;ricas. Retorna 
+        una representaci&oacute;n de cadena de car&aacute;cters para el n&uacute;mero 
+        N, convertido<br>
+        de base from_base a base to_base. Retorna NULL si alg&uacute;n argumento 
+        es NULL. El argumento N se interpreta como<br>
+        entero, pero puede especificarse como un entero o cadena. La base m&iacute;nima 
+        es 2 y la m&aacute;xima es 36. Su to_base es un n&uacute;mero<br>
+        negativo, N se trata como un n&uacute;mero con signo. De otro modo, N 
+        se trata como sin signo. CONV() funciona con precisi&oacute;n de<br>
+        64-bit.<br>
+        mysql&gt; SELECT CONV('a',16,2);<br>
+        -&gt; '1010'<br>
+        mysql&gt; SELECT CONV('6E',18,8);<br>
+        -&gt; '172'<br>
+        mysql&gt; SELECT CONV(-17,10,-18);<br>
+        -&gt; '-H'<br>
+        mysql&gt; SELECT CONV(10+'10'+'10'+0xa,10,10);<br>
+        -&gt; '40'<br>
+        &#8226; ELT(N,str1,str2,str3,...)<br>
+        Retorna str1 si N = 1, str2 if N = 2, y as&iacute;. Retorna NULL si N 
+        es menor que 1 o mayor que el n&uacute;mero de argumentos.<br>
+        ELT() es el complemento de FIELD().<br>
+        mysql&gt; SELECT ELT(1, 'ej', 'Heja', 'hej', 'foo');<br>
+        -&gt; 'ej'<br>
+        mysql&gt; SELECT ELT(4, 'ej', 'Heja', 'hej', 'foo');<br>
+        -&gt; 'foo'<br>
+        &#8226; EXPORT_SET(bits,on,off[,separator[,number_of_bits]])<br>
+        Retorna una cadena en que para cada bit del valor bits, puede obtener 
+        una cadena on y para cada bit reasignado obtiene una<br>
+        cadena off . Los bits en bits se examinan de derecha a izquierda (de bits 
+        menores a mayores). Las cadenas se a&ntilde;aden al resultado<br>
+        de izquierda a derecha, separados por la cadena separator (siendo el car&aacute;cter 
+        por defecto la coma ','). El n&uacute;mero de<br>
+        bits examinados se obtiene por number_of_bits (por defecto 64).<br>
+        mysql&gt; SELECT EXPORT_SET(5,'Y','N',',',4);<br>
+        -&gt; 'Y,N,Y,N'<br>
+        mysql&gt; SELECT EXPORT_SET(6,'1','0',',',10);<br>
+        -&gt; '0,1,1,0,0,0,0,0,0,0'<br>
+        &#8226; FIELD(str,str1,str2,str3,...)<br>
+        Retorna el &iacute;ndice de str en la lista str1, str2, str3, ... . Retorna 
+        0 si no se encuentra str.<br>
+        Si todos los argumentos de FIELD() son cadenas, todos los argumentos se 
+        comparan como cadenas. Si todos los argumentos<br>
+        son n&uacute;meros, se comparan como n&uacute;meros. De otro modo, los 
+        argumentos se comparan como n&uacute;meros con doble precisi&oacute;n.<br>
+        Si str es NULL, el valor retornado es 0 porque NULL falla en comparaciones 
+        de comparaci&oacute;n con cualquier valor. FIELD()<br>
+        es el complemento de ELT().<br>
+        mysql&gt; SELECT FIELD('ej', 'Hej', 'ej', 'Heja', 'hej', 'foo');<br>
+        -&gt; 2<br>
+        mysql&gt; SELECT FIELD('fo', 'Hej', 'ej', 'Heja', 'hej', 'foo');<br>
+        -&gt; 0<br>
+        &#8226; FIND_IN_SET(str,strlist)<br>
+        Retorna un valor en el rango de 1 a N si la cadena str est&aacute; en 
+        la lista de cadenas strlist consistente de N subcadenas. Una<br>
+        lista de cadenas es una cadena compuesta de subcadenas separadas por caracteres 
+        ',' . Si el primer argumento es una cadena<br>
+        constante y el segundo es una columna de tipo SET, la funci&oacute;n FIND_IN_SET() 
+        est&aacute; optimizada para usar aritm&eacute;tica de bit.<br>
+        Retorna 0 si str no est&aacute; en strlist o si strlist es la cadena vac&iacute;a. 
+        Retorna NULL si alg&uacute;n argumento es NULL. Esta funci&oacute;n<br>
+        no funciona apropiadamente si el primer argumento contiene un car&aacute;cter 
+        de coma (',') .<br>
+        mysql&gt; SELECT FIND_IN_SET('b','a,b,c,d');<br>
+        -&gt; 2<br>
+        &#8226; HEX(N_or_S)<br>
+        Si N_OR_S es un n&uacute;mero, retorna una cadena representaci&oacute;n 
+        del valor hexadecimal de N, donde N es un n&uacute;mero muy grande<br>
+        (BIGINT) . Esto es equivalente a CONV(N,10,16).<br>
+        Si N_OR_S es una cadena, esta funci&oacute;n retorna una cadena hexadecimal 
+        de N_OR_S caracteres, donde cada car&aacute;cter en<br>
+        N_OR_S se convierte a dos d&iacute;gitos hexadecimales.<br>
+        mysql&gt; SELECT HEX(255);<br>
+        -&gt; 'FF'<br>
+        mysql&gt; SELECT 0x616263;<br>
+        -&gt; 'abc'<br>
+        mysql&gt; SELECT HEX('abc');<br>
+        -&gt; 616263<br>
+        &#8226; INSERT(str,pos,len,newstr)<br>
+        Retorna la cadena str, con la subcadena comenzando en la posici&oacute;n 
+        pos y len caracteres reemplazados por la cadena<br>
+        newstr. Retorna la cadena original si pos no est&aacute; entre la longitud 
+        de la cadena. Replaza el resto de la cadena a partir de la<br>
+        posici&oacute;n pos si len no est&aacute; dentro de la longitud del resto 
+        de la cadena. Retorna NULL si cualquier argumento es nulo.<br>
+        mysql&gt; SELECT INSERT('Quadratic', 3, 4, 'What');<br>
+        -&gt; 'QuWhattic'<br>
+        mysql&gt; SELECT INSERT('Quadratic', -1, 4, 'What');<br>
+        -&gt; 'Quadratic'<br>
+        mysql&gt; SELECT INSERT('Quadratic', 3, 100, 'What');<br>
+        -&gt; 'QuWhat'<br>
+        Esta funci&oacute;n est&aacute; preparada para funcionar con m&uacute;ltiples 
+        bytes.<br>
+        &#8226; INSTR(str,substr)<br>
+        Retorna la posici&oacute;n de la primera ocurrencia de la subcadena substr 
+        en la cadena str. Es lo mismo que la forma de dos argumentos<br>
+        de LOCATE(), excepto que el orden de los argumentos es inverso.<br>
+        mysql&gt; SELECT INSTR('foobarbar', 'bar');<br>
+        -&gt; 4<br>
+        mysql&gt; SELECT INSTR('xbar', 'foobar');<br>
+        -&gt; 0<br>
+        Esta funci&oacute;n puede trabajar con m&uacute;ltiples bytes. En MySQL 
+        5.0, s&oacute;lo es sensible a may&uacute;sculas si uno de los argumentos 
+        es una<br>
+        cadena binaria.<br>
+        &#8226; LCASE(str)<br>
+        LCASE() es sin&oacute;nimo de LOWER().<br>
+        &#8226; LEFT(str,len)<br>
+        Retorna los len caracteres empezando por la izquierda de la cadena str.<br>
+        mysql&gt; SELECT LEFT('foobarbar', 5);<br>
+        -&gt; 'fooba'<br>
+        &#8226; LENGTH(str)<br>
+        Retorna la longitud de la cadena str, medida en bytes.Un car&aacute;cter 
+        multi-byte cuenta como m&uacute;ltiples bytes. Esto significa que<br>
+        para cadenas que contengan cinco caracteres de dos bytes, LENGTH() retorna 
+        10, mientras que CHAR_LENGTH() retorna 5.<br>
+        mysql&gt; SELECT LENGTH('text');<br>
+        -&gt; 4<br>
+        &#8226; LOAD_FILE(file_name)<br>
+        Lee el fichero y retorna el contenido como cadena de caracteres. El fichero 
+        debe estar localizado en el servidor, debe especificar<br>
+        la ruta completa al fichero, y debe tener el privilegio FILE . El fichero 
+        debe ser legible por todo el mundo y su tama&ntilde;o menor a<br>
+        max_allowed_packet bytes.<br>
+        Si el fichero no existe o no puede ser le&iacute;do debido a que una de 
+        las anteriores condiciones no se cumple, la funci&oacute;n retorna<br>
+        NULL.<br>
+        mysql&gt; UPDATE tbl_name<br>
+        SET blob_column=LOAD_FILE('/tmp/picture')<br>
+        WHERE id=1;<br>
+        &#8226; LOCATE(substr,str) , LOCATE(substr,str,pos)<br>
+        La primera sintaxis retorna la posici&oacute;n de la primera ocurrencia 
+        de la subcadena substr en la cadena str. La segunda sintaxis<br>
+        retorna la posici&oacute;n de la primera ocurrencia de la subcadena substr 
+        en la cadena str, comanzando en la posici&oacute;n pos.<br>
+        Retorna 0 si substr no est&aacute; en str.<br>
+        mysql&gt; SELECT LOCATE('bar', 'foobarbar');<br>
+        -&gt; 4<br>
+        mysql&gt; SELECT LOCATE('xbar', 'foobar');<br>
+        -&gt; 0<br>
+        mysql&gt; SELECT LOCATE('bar', 'foobarbar',5);<br>
+        -&gt; 7<br>
+        Esta funci&oacute;n trabaja con m&uacute;ltiples bytes. En MySQL 5.0, 
+        es sensible a may&uacute;sculas s&oacute;lo si alg&uacute;n argumento 
+        es una cadena binaria.<br>
+        &#8226; LOWER(str)<br>
+        Retorna la cadena str con todos los caracteres cambiados a min&uacute;sculas 
+        seg&uacute;n el mapeo del conjunto de caracteres actual (por<br>
+        defecto es ISO-8859-1 Latin1).<br>
+        mysql&gt; SELECT LOWER('QUADRATICALLY');<br>
+        -&gt; 'quadratically'<br>
+        Esta funci&oacute;n funciona con m&uacute;ltiples bytes.<br>
+        &#8226; LPAD(str,len,padstr)<br>
+        Retorna la cadena str, alineado a la izquierda con la cadena padstr a 
+        una longitud de len caracteres. Si str es mayor que<br>
+        len, el valor retornado se acorta a len caracteres.<br>
+        mysql&gt; SELECT LPAD('hi',4,'??');<br>
+        -&gt; '??hi'<br>
+        mysql&gt; SELECT LPAD('hi',1,'??');<br>
+        -&gt; 'h'<br>
+        &#8226; LTRIM(str)<br>
+        Retorna la cadena str con los caracteres en blanco iniciales eliminados.<br>
+        mysql&gt; SELECT LTRIM(' barbar');<br>
+        -&gt; 'barbar'<br>
+        Esta funci&oacute;n trabaja con m&uacute;ltiples bytes.<br>
+        &#8226; MAKE_SET(bits,str1,str2,...)<br>
+        Retorna un conjunto de valores (una cadena conteniendo subcadenas separadas 
+        por caracteres ',' ) consistiendo en cadenas que<br>
+        tienen el bit correspondiente en bits asignado. str1 se corresponde al 
+        bit 0, str2 al bit 1, y as&iacute;. Los valores NULL en<br>
+        str1, str2, ... no se a&ntilde;aden al resultado.<br>
+        mysql&gt; SELECT MAKE_SET(1,'a','b','c');<br>
+        -&gt; 'a'<br>
+        mysql&gt; SELECT MAKE_SET(1 | 4,'hello','nice','world');<br>
+        -&gt; 'hello,world'<br>
+        mysql&gt; SELECT MAKE_SET(1 | 4,'hello','nice',NULL,'world');<br>
+        -&gt; 'hello'<br>
+        mysql&gt; SELECT MAKE_SET(0,'a','b','c');<br>
+        -&gt; ''<br>
+        &#8226; MID(str,pos,len)<br>
+        MID(str,pos,len) es sin&oacute;nimo de SUBSTRING(str,pos,len).<br>
+        &#8226; OCT(N)<br>
+        Retorna una representaci&oacute;n en cadena del valor octal de N, donde 
+        N es un n&uacute;mero largo (BIGINT). Es equivalente a<br>
+        CONV(N,10,8). Retorna NULL si N es NULL.<br>
+        mysql&gt; SELECT OCT(12);<br>
+        -&gt; '14'<br>
+        &#8226; OCTET_LENGTH(str)<br>
+        OCTET_LENGTH() es sin&oacute;nimo de LENGTH().<br>
+        &#8226; ORD(str)<br>
+        Si el car&aacute;cter m&aacute;s a la izquierda de la cadena str es un 
+        car&aacute;cter multi-byte , retorna el c&oacute;digo de ese car&aacute;cter, 
+        calculado a partir<br>
+        del valor num&eacute;rico de sus bytes usando esta f&oacute;rmula:<br>
+        (1st byte code)<br>
+        + (2nd byte code * 256)<br>
+        + (3rd byte code * 256^2) ...<br>
+        Si el car&aacute;ctar m&aacute;s a la izquierda no es multi-byte , ORD() 
+        retorna el mismo valor que la funci&oacute;n ASCII() .<br>
+        mysql&gt; SELECT ORD('2');<br>
+        -&gt; 50<br>
+        &#8226; POSITION(substr IN str)<br>
+        POSITION(substr IN str) es sin&oacute;nimo de LOCATE(substr,str).<br>
+        &#8226; QUOTE(str)<br>
+        Acota una cadena para producir un resultado que puede usarse como un valor 
+        con caracteres de escape en un comando SQL. La<br>
+        cadena se retorna rodeado por comillas sencillas y con cada instancia 
+        de comilla sencilla ('''), antibarra ('\'), ASCII NUL, y<br>
+        Control-Z predecidos por una antibarra. Si el argumento es NULL, el valor 
+        de retorno es la palabra &#8220;NULL&#8221; sin comillas alrededor.<br>
+        mysql&gt; SELECT QUOTE('Don\'t!');<br>
+        -&gt; 'Don\'t!'<br>
+        mysql&gt; SELECT QUOTE(NULL);<br>
+        -&gt; NULL<br>
+        &#8226; REPEAT(str,count)<br>
+        Retorna una cadena consistente de la cadena str repetida count veces. 
+        Si count &lt;= 0, retorna una cadena vac&iacute;a. Retorna<br>
+        NULL si str o count son NULL.<br>
+        mysql&gt; SELECT REPEAT('MySQL', 3);<br>
+        -&gt; 'MySQLMySQLMySQL'<br>
+        &#8226; REPLACE(str,from_str,to_str)<br>
+        Retorna la cadena str con todas las ocurrencias de la cadena from_str 
+        reemplazadas con la cadena to_str.<br>
+        mysql&gt; SELECT REPLACE('www.mysql.com', 'w', 'Ww');<br>
+        -&gt; 'WwWwWw.mysql.com'<br>
+        Esta funci&oacute;n trabaja con m&uacute;ltiples bytes.<br>
+        &#8226; REVERSE(str)<br>
+        Retorna la cadena str con el orden de los caracteres invertido.<br>
+        mysql&gt; SELECT REVERSE('abc');<br>
+        -&gt; 'cba'<br>
+        Esta funci&oacute;n trabaja con m&uacute;ltiples bytes.<br>
+        &#8226; RIGHT(str,len)<br>
+        Retorna los len caracteres de la derecha de la cadena str.<br>
+        mysql&gt; SELECT RIGHT('foobarbar', 4);<br>
+        -&gt; 'rbar'<br>
+        Esta funci&oacute;n trabaja con m&uacute;ltiples bytes.<br>
+        &#8226; RPAD(str,len,padstr)<br>
+        Retorna la cadena str, alineada a la derecha con la cadena padstr con 
+        una longitud de len caracteres. Si str es mayor que<br>
+        len, el valor de retorno se corta a len caracteres.<br>
+        mysql&gt; SELECT RPAD('hi',5,'?');<br>
+        -&gt; 'hi???'<br>
+        mysql&gt; SELECT RPAD('hi',1,'?');<br>
+        -&gt; 'h'<br>
+        Esta funci&oacute;n trabaja con m&uacute;ltiples bytes.<br>
+        &#8226; RTRIM(str)<br>
+        Retorna la cadena str con los espacios precedentes eliminados.<br>
+        mysql&gt; SELECT RTRIM('barbar ');<br>
+        -&gt; 'barbar'<br>
+        Esta funci&oacute;n trabaja con m&uacute;ltiples bytes.<br>
+        &#8226; SOUNDEX(str)<br>
+        Retorna una cadena soudex de str. Dos cadenas que suenen igual deben tener 
+        cadenas soundex id&eacute;nticas. Una cadena soundex<br>
+        est&aacute;ndar tiene cuatro caracteres de longitud, pero la funci&oacute;n 
+        SOUNDEX() retorna una cadena arbitr&aacute;riamente larga. Puede usar<br>
+        SUBSTRING() en el resultado para obtener una cadena soundex est&aacute;ndar. 
+        Todos los caracteres no alfab&eacute;ticos en str se ignoran.<br>
+        Todos los caracteres alfab&eacute;ticos internacionales fuera del rango 
+        A-Z se tratan como vocales.<br>
+        mysql&gt; SELECT SOUNDEX('Hello');<br>
+        -&gt; 'H400'<br>
+        mysql&gt; SELECT SOUNDEX('Quadratically');<br>
+        -&gt; 'Q36324'<br>
+        Nota: Esta funci&oacute;n implementa el algoritmo Soundex original, no 
+        la versi&oacute;n m&aacute;s popular (descrita por D. Hnuth). La diferencia<br>
+        es que la versi&oacute;n original descarta vocales primero y luego duplicados, 
+        mientras que la versi&oacute;n mejorada descarta primero los<br>
+        duplicados y luego las vocales.<br>
+        &#8226; expr1 SOUNDS LIKE expr2<br>
+        Es lo mismo que SOUNDEX(expr1) = SOUNDEX(expr2).<br>
+        &#8226; SPACE(N)<br>
+        Retorna la cadena consistente en N caracteres blancos.<br>
+        mysql&gt; SELECT SPACE(6);<br>
+        -&gt; ' '<br>
+        &#8226; SUBSTRING(str,pos) , SUBSTRING(str FROM pos), SUBSTRING(str,pos,len) 
+        , SUBSTRING(str FROM<br>
+        pos FOR len)<br>
+        Las formas sin el arguemnto len retornan una subcadena de la cadena str 
+        comenzando en la posici&oacute;n pos. Las formas con el<br>
+        argumento len retornan una subcadena de longitud len a partir de la cadena 
+        str, comenzando en la posici&oacute;n pos.Las formas<br>
+        que usan FROM son sintaxis SQL est&aacute;ndard. En MySQL 5.0, es posible 
+        usar valores negativos para pos. En este caso, el<br>
+        inicio de la subcadena son pos caracteres a partir del final de la cadena, 
+        en lugar del principio. Un valor negativo puede usarse<br>
+        para pos en cualquier de las formas de esta funci&oacute;n.<br>
+        mysql&gt; SELECT SUBSTRING('Quadratically',5);<br>
+        -&gt; 'ratically'<br>
+        mysql&gt; SELECT SUBSTRING('foobarbar' FROM 4);<br>
+        -&gt; 'barbar'<br>
+        mysql&gt; SELECT SUBSTRING('Quadratically',5,6);<br>
+        -&gt; 'ratica'<br>
+        mysql&gt; SELECT SUBSTRING('Sakila', -3);<br>
+        -&gt; 'ila'<br>
+        mysql&gt; SELECT SUBSTRING('Sakila', -5, 3);<br>
+        -&gt; 'aki'<br>
+        mysql&gt; SELECT SUBSTRING('Sakila' FROM -4 FOR 2);<br>
+        -&gt; 'ki'<br>
+        Esta funci&oacute;n trabaja con m&uacute;ltiples bytes.<br>
+        Tenga en cuenta que si usa un valor menor a 1 para len, el resultado siempre 
+        es una cadena vac&iacute;a.<br>
+        SUBSTR() es sin&oacute;nimo de SUBSTRING().<br>
+        &#8226; SUBSTRING_INDEX(str,delim,count)<br>
+        Retorna la subcadena de la cadena str antes de count ocurrencias del delimitador 
+        delim. Si count es positivo, todo a la<br>
+        izquierda del delimitador final (contando desde la izquierda) se retorna. 
+        Si count es negativo, todo a la derecha del delimitador<br>
+        final (contando desde la derecha) se retorna.<br>
+        mysql&gt; SELECT SUBSTRING_INDEX('www.mysql.com', '.', 2);<br>
+        -&gt; 'www.mysql'<br>
+        mysql&gt; SELECT SUBSTRING_INDEX('www.mysql.com', '.', -2);<br>
+        -&gt; 'mysql.com'<br>
+        Esta funci&oacute;n trabaja con m&uacute;ltiples bytes.<br>
+        &#8226; TRIM([{BOTH | LEADING | TRAILING} [remstr] FROM] str), TRIM(remstr 
+        FROM] str)<br>
+        Retorna la cadena str con todos los prefijos y/o sufijos remstr eliminados. 
+        Si ninguno de los especificadores BOTH, LEADING,<br>
+        o se daTRAILING, BOTH se asumen. Si remstr es opcional y no se especifica, 
+        los espacios se eliminan.<br>
+        mysql&gt; SELECT TRIM(' bar ');<br>
+        -&gt; 'bar'<br>
+        mysql&gt; SELECT TRIM(LEADING 'x' FROM 'xxxbarxxx');<br>
+        -&gt; 'barxxx'<br>
+        mysql&gt; SELECT TRIM(BOTH 'x' FROM 'xxxbarxxx');<br>
+        -&gt; 'bar'<br>
+        mysql&gt; SELECT TRIM(TRAILING 'xyz' FROM 'barxxyz');<br>
+        -&gt; 'barx'<br>
+        Esta funci&oacute;n trabaja con m&uacute;ltiples bytes.<br>
+        &#8226; UCASE(str)<br>
+        UCASE() es sin&oacute;nimo de UPPER().<br>
+        &#8226; UNCOMPRESS(string_to_uncompress)<br>
+        Descomprime una cadena comprimida con la funci&oacute;n COMPRESS() . Si 
+        el argumento no es un valor comprimido, el resultado<br>
+        es NULL. Esta funci&oacute;n necesita que MySQL se compile con una biblioteca 
+        de compresi&oacute;n tal como zlib. De otro modo, el valor<br>
+        de retorno siempre es NULL.<br>
+        mysql&gt; SELECT UNCOMPRESS(COMPRESS('any string'));<br>
+        -&gt; 'any string'<br>
+        mysql&gt; SELECT UNCOMPRESS('any string');<br>
+        -&gt; NULL<br>
+        &#8226; UNCOMPRESSED_LENGTH(compressed_string)<br>
+        Retorna la longitud de una cadena comprimida antes de la compresi&oacute;n.<br>
+        mysql&gt; SELECT UNCOMPRESSED_LENGTH(COMPRESS(REPEAT('a',30)));<br>
+        -&gt; 30<br>
+        &#8226; UNHEX(str)<br>
+        Realiza la operaci&oacute;n opuesta a HEX(str). Esto es, interpreta cada 
+        par de d&iacute;gitos hexadecimales en el argumento como n&uacute;meros<br>
+        y los convierte al car&aacute;cter representado por el n&uacute;mero. 
+        El caracteres resultantes se retornan como cadena binaria.<br>
+        mysql&gt; SELECT UNHEX('4D7953514C');<br>
+        -&gt; 'MySQL'<br>
+        mysql&gt; SELECT 0x4D7953514C;<br>
+        -&gt; 'MySQL'<br>
+        mysql&gt; SELECT UNHEX(HEX('string'));<br>
+        -&gt; 'string'<br>
+        mysql&gt; SELECT HEX(UNHEX('1267'));<br>
+        -&gt; '1267'<br>
+        &#8226; UPPER(str)<br>
+        Retorna la cadena str con todos los caracteres cambiados a may&uacute;sculas 
+        seg&uacute;n el mapeo del conjunto de caracteres actual (por<br>
+        defecto es ISO-8859-1 Latin1).<br>
+        mysql&gt; SELECT UPPER('Hej');<br>
+        -&gt; 'HEJ'<br>
+        Esta funci&oacute;n trabaja con m&uacute;ltiples bytes.<br>
+        <h3>Funciones de comparaci&oacute;n de cadenas de caracteres</h3><br>
+        MySQL convierte autom&aacute;ticamente n&uacute;meros a cadenas seg&uacute;n 
+        es necesario y viceversa.<br>
+        mysql&gt; SELECT 1+'1';<br>
+        -&gt; 2<br>
+        mysql&gt; SELECT CONCAT(2,' test');<br>
+        -&gt; '2 test'<br>
+        Si quiere convertir un n&uacute;mero a cadena expl&iacute;citamente, use 
+        la funci&oacute;n CAST() :<br>
+        mysql&gt; SELECT 38.8, CAST(38.8 AS CHAR);<br>
+        -&gt; 38.8, '38.8'<br>
+        Si una funci&oacute;n de cadenas da una cadena binaria como argumento, 
+        la cadena resultante tambi&eacute;n es binaria. Un n&uacute;mero convertido 
+        a<br>
+        cadena se trata como cadena binaria (esto es, es sensible a may&uacute;sculas 
+        en comparaciones). Esto afecta s&oacute;lo a comparaciones.<br>
+        Normalmente, si una expresi&oacute;n en una comparaci&oacute;n de cadenas 
+        es sensible a may&uacute;sculas, la comparaci&oacute;n se realiza con 
+        sensibilidad<br>
+        a may&uacute;sculas.<br>
+        &#8226; expr LIKE pat [ESCAPE 'escape-char']<br>
+        Coincidencia de patrones usando comparaci&oacute;n mediante expresiones 
+        regulares SQL. Retorna 1 (TRUE) o 0 (FALSE). Si expr<br>
+        o pat es NULL, el resultado es NULL.<br>
+        El patr&oacute;n no puede ser una cadena literal. Por ejemplo, puede especificarse 
+        como expresi&oacute;n de cadena o columna.<br>
+        Con LIKE puede usar los siguientes dos caracteres comod&iacute;n en el 
+        patr&oacute;n:<br>
+        Car&aacute;cter Descrici&oacute;n<br>
+        % Coincidencia de cualquier n&uacute;mero de caracteres, incluso cero 
+        caracteres<br>
+        _ Coincide exactemente un car&aacute;cter<br>
+        mysql&gt; SELECT 'David!' LIKE 'David_';<br>
+        -&gt; 1<br>
+        mysql&gt; SELECT 'David!' LIKE '%D%v%';<br>
+        -&gt; 1<br>
+        Para testear instancias literales de un car&aacute;cter comod&iacute;n, 
+        preceda el car&aacute;cter con el car&aacute;cter de escape. Si no especifica 
+        el car&aacute;cter<br>
+        ESCAPE , se asume '\' .<br>
+        Cadena Descrici&oacute;n<br>
+        \% Coincide un car&aacute;cter '%'<br>
+        \_ Coincide un car&aacute;cter '_'<br>
+        mysql&gt; SELECT 'David!' LIKE 'David\_';<br>
+        -&gt; 0<br>
+        mysql&gt; SELECT 'David_' LIKE 'David\_';<br>
+        -&gt; 1<br>
+        Para especificar un car&aacute;cter de escape distinto, use la cl&aacute;usula 
+        ESCAPE :<br>
+        mysql&gt; SELECT 'David_' LIKE 'David|_' ESCAPE '|';<br>
+        -&gt; 1<br>
+        Los siguientes dos comandos ilustran que la comparaci&oacute;n de cadenas 
+        no son sensibles a may&uacute;sculas a no ser que uno de los<br>
+        operandos sea una cadena binaria:<br>
+        mysql&gt; SELECT 'abc' LIKE 'ABC';<br>
+        -&gt; 1<br>
+        mysql&gt; SELECT 'abc' LIKE BINARY 'ABC';<br>
+        -&gt; 0<br>
+        En MySQL, LIKE se permite en expresiones num&eacute;ricas. (Esta es una 
+        extensi&oacute;n del SQL est&aacute;ndar LIKE.)<br>
+        mysql&gt; SELECT 10 LIKE '1%';<br>
+        -&gt; 1<br>
+        Nota: Debido a que MySQL usa sintaxis de escape C en cadenas (por ejemplo, 
+        '\n' para representar car&aacute;cter de nueva l&iacute;nea),<br>
+        debe doblar cualquier '\' que use en cadenas LIKE . Por ejemplo, para 
+        buscar '\n', especif&iacute;quelo como '\\n'. Para buscar '\',<br>
+        especif&iacute;quelo como '\\\\'; esto es debido a que las antibarras 
+        se eliminan una vez por el parser y otra vez cuando la coincidencia<br>
+        con el patr&oacute;n se realiza, dejando una &uacute;nica antibarra para 
+        comparar.<br>
+        &#8226; expr NOT LIKE pat [ESCAPE 'escape-char']<br>
+        Es lo mismo que NOT (expr LIKE pat [ESCAPE 'escape-char']).<br>
+        &#8226; expr NOT REGEXP pat, expr NOT RLIKE pat<br>
+        Es lo mismo que NOT (expr REGEXP pat).<br>
+        &#8226; expr REGEXP pat, expr RLIKE pat<br>
+        Realiza una comparaci&oacute;n de patrones de una expresi&oacute;n de 
+        cadena de caracteres expr contra un patr&oacute;n pat. El patr&oacute;n 
+        puede<br>
+        ser una expresi&oacute;n regular extendida. La sintaxis para expresiones 
+        regulares se discute en Ap&eacute;ndice F, Expresiones regulares en<br>
+        MySQL. Retorna 1 si expr coincide con pat, de otro modo retorna 0. Si 
+        expr o pat es NULL, el resultado es NULL. RLIKE<br>
+        es un sin&oacute;nimo de REGEXP, debido a compatibilidad con mSQL.<br>
+        El patr&oacute;n no necesita ser una cadena literal. Por ejemplo, puede 
+        especificarse como una expresi&oacute;n de cadena o columna.<br>
+        Nota: Debido a que MySQL usa la sintaxis de escape de C en cadenas (por 
+        ejemplo, '\n' para representar una nueva l&iacute;nea), de<br>
+        doblar cualquier '\' que use en sus cadenas REGEXP .<br>
+        REGEXP no es sensible a may&uacute;sculas, excepto cuando se usa con cadenas 
+        binarias.<br>
+        mysql&gt; SELECT 'Monty!' REGEXP 'm%y%%';<br>
+        -&gt; 0<br>
+        mysql&gt; SELECT 'Monty!' REGEXP '.*';<br>
+        -&gt; 1<br>
+        mysql&gt; SELECT 'new*\n*line' REGEXP 'new\\*.\\*line';<br>
+        mysql&gt; SELECT 'a' REGEXP 'A', 'a' REGEXP BINARY 'A';<br>
+        -&gt; 1 0<br>
+        mysql&gt; SELECT 'a' REGEXP '^[a-d]';<br>
+        -&gt; 1<br>
+        REGEXP y RLIKE usan el conjunto de caracteres actual (ISO-8859-1 Latin1 
+        por defecto) al decidir el tipo de un car&aacute;cter.<br>
+        Atenci&oacute;n: Estos operadores no pueden trabajar con m&uacute;ltiples 
+        bytes.<br>
+        &#8226; STRCMP(expr1,expr2)<br>
+        STRCMP() retorna 0 si las cadenas son id&eacute;nticas, -1 si el primer 
+        argumento es menor que el segundo seg&uacute;n el orden actual, y 1<br>
+        en cualquier otro caso.<br>
+        mysql&gt; SELECT STRCMP('text', 'text2');<br>
+        -&gt; -1<br>
+        mysql&gt; SELECT STRCMP('text2', 'text');<br>
+        -&gt; 1<br>
+        mysql&gt; SELECT STRCMP('text', 'text');<br>
+        -&gt; 0<br>
+        En MySQL 5.0, STRCMP() usa el conjunto de caracteres actual cuando realizac 
+        comparaciones. Esto hace el comportamiento<br>
+        de comparaciones por defecto insensible a may&uacute;sculas a no ser que 
+        alguno de los operandos sea una cadena binaria.<br>
+        <h3>Funciones num&eacute;ricas.Operadores aritmeticos</h3><br>
+        Los operadores aritm&eacute;ticos usuales est&aacute;n disponibles. Tenga 
+        en cuenta que en el caso de -, +, y *, el resultado se calcula con precisi&oacute;n<br>
+        BIGINT (64-bit) si ambos argumentos son enteros. Si uno de los argumentos 
+        es un entero sin signo, y los otros argumentos<br>
+        son tambi&eacute;n enteros, el resultado es un entero sin signo. Consulte 
+        Secci&oacute;n 12.8, &#8220;Funciones y operadores de cast&#8221;.<br>
+        &#8226; +<br>
+        Suma:<br>
+        mysql&gt; SELECT 3+5;<br>
+        -&gt; 8<br>
+        &#8226; -<br>
+        Resta:<br>
+        mysql&gt; SELECT 3-5;<br>
+        -&gt; -2<br>
+        &#8226; -<br>
+        Menos unario. Cambia el signo del argumento.<br>
+        mysql&gt; SELECT - 2;<br>
+        -&gt; -2<br>
+        Nota: Si este operador se usa con BIGINT, el valor de retorno es tambi&eacute;n 
+        BIGINT. Esto significa que debe eliminar usar -<br>
+        con enteros que pueden ser iguales o menores a -2^63.<br>
+        &#8226; *<br>
+        Multiplicaci&oacute;n:<br>
+        mysql&gt; SELECT 3*5;<br>
+        -&gt; 15<br>
+        mysql&gt; SELECT 18014398509481984*18014398509481984.0;<br>
+        -&gt; 324518553658426726783156020576256.0<br>
+        mysql&gt; SELECT 18014398509481984*18014398509481984;<br>
+        -&gt; 0<br>
+        El resultado de la &uacute;ltima expresi&oacute;n es incorrecto ya que 
+        el resultado de la multiplicaci&oacute;n entera excede el rango de 64-bit 
+        de c&aacute;lculos<br>
+        BIGINT. (Consulte Secci&oacute;n 11.2, &#8220;Tipos num&eacute;ricos&#8221;.)<br>
+        &#8226; /<br>
+        Divisi&oacute;n:<br>
+        mysql&gt; SELECT 3/5;<br>
+        -&gt; 0.60<br>
+        Divisi&oacute;n por cero produce un resultado NULL:<br>
+        mysql&gt; SELECT 102/(1-1);<br>
+        -&gt; NULL<br>
+        Una divisi&oacute;n se calcula con aritm&eacute;tica BIGINT s&oacute;lo 
+        en un contexto donde el resultado se convierte a entero.<br>
+        &#8226; DIV<br>
+        Divisi&oacute;n entera. Similar aFLOOR() pero funciona con valores BIGINT.<br>
+        mysql&gt; SELECT 5 DIV 2;<br>
+        -&gt; 2<br>
+        <h3>Funciones matem&aacute;ticas</h3><br>
+        Todas las funciones matem&aacute;ticas retornan NULL en caso de error.<br>
+        &#8226; ABS(X)<br>
+        Retorna el valor absoluto de X.<br>
+        mysql&gt; SELECT ABS(2);<br>
+        -&gt; 2<br>
+        mysql&gt; SELECT ABS(-32);<br>
+        -&gt; 32<br>
+        Esta funci&oacute;n puede usar valores BIGINT.<br>
+        &#8226; ACOS(X)<br>
+        Retorna el arcocoseno de X, esto es, el valor cuyo coseno es X. Retorna 
+        NULL si X no est&aacute; en el rango -1 a 1.<br>
+        mysql&gt; SELECT ACOS(1);<br>
+        -&gt; 0<br>
+        mysql&gt; SELECT ACOS(1.0001);<br>
+        -&gt; NULL<br>
+        mysql&gt; SELECT ACOS(0);<br>
+        -&gt; 1.5707963267949<br>
+        &#8226; ASIN(X)<br>
+        Retorna el arcoseno de X, esto es, el valor cuyo seno es X. Retorna NULL 
+        si X no est&aacute; en el rango de -1 a 1.<br>
+        mysql&gt; SELECT ASIN(0.2);<br>
+        -&gt; 0.20135792079033<br>
+        mysql&gt; SELECT ASIN('foo');<br>
+        -&gt; 0<br>
+        &#8226; ATAN(X)<br>
+        Retorna la arcotangente de X, esto es, el valor cuya tangente es X.<br>
+        mysql&gt; SELECT ATAN(2);<br>
+        -&gt; 1.1071487177941<br>
+        mysql&gt; SELECT ATAN(-2);<br>
+        -&gt; -1.1071487177941<br>
+        &#8226; ATAN(Y,X) , ATAN2(Y,X)<br>
+        Retorna la arcotangente de las variables X y Y. Es similar a calcular 
+        la arcotangente de Y / X, excepto que los signos de ambos<br>
+        argumentos se usan para determinar el cuadrante del resultado.<br>
+        mysql&gt; SELECT ATAN(-2,2);<br>
+        -&gt; -0.78539816339745<br>
+        mysql&gt; SELECT ATAN2(PI(),0);<br>
+        -&gt; 1.5707963267949<br>
+        &#8226; CEILING(X), CEIL(X)<br>
+        Retorna el entero m&aacute;s peque&ntilde;o no menor a X.<br>
+        mysql&gt; SELECT CEILING(1.23);<br>
+        -&gt; 2<br>
+        mysql&gt; SELECT CEIL(-1.23);<br>
+        -&gt; -1<br>
+        Estas dos funciones son sin&oacute;nimos. Tenga en cuenta que el valor 
+        retornado se convierte a BIGINT.<br>
+        &#8226; COS(X)<br>
+        Retorna el coseno de X, donde X se da en radianes.<br>
+        mysql&gt; SELECT COS(PI());<br>
+        -&gt; -1<br>
+        &#8226; COT(X)<br>
+        Retorna la cotangente de X.<br>
+        mysql&gt; SELECT COT(12);<br>
+        -&gt; -1.5726734063977<br>
+        mysql&gt; SELECT COT(0);<br>
+        -&gt; NULL<br>
+        &#8226; CRC32(expr)<br>
+        Computa un valor de redundancia c&iacute;clica y retorna el valor sin 
+        signo de 32 bits. El resultado es NULL si el argumento es NULL.<br>
+        Se espera que el argumento sea una cadena y (si es posible) se trata como 
+        una si no lo es.<br>
+        mysql&gt; SELECT CRC32('MySQL');<br>
+        -&gt; 3259397556<br>
+        mysql&gt; SELECT CRC32('mysql');<br>
+        -&gt; 2501908538<br>
+        &#8226; DEGREES(X)<br>
+        Retorna el argumento X, convertido de radianes a grados.<br>
+        mysql&gt; SELECT DEGREES(PI());<br>
+        -&gt; 180<br>
+        mysql&gt; SELECT DEGREES(PI() / 2);<br>
+        -&gt; 90<br>
+        &#8226; EXP(X)<br>
+        Retorna el valor de e (la base del logaritmo natural) a la potencia de 
+        X.<br>
+        mysql&gt; SELECT EXP(2);<br>
+        -&gt; 7.3890560989307<br>
+        mysql&gt; SELECT EXP(-2);<br>
+        -&gt; 0.13533528323661<br>
+        &#8226; FLOOR(X)<br>
+        Retorna el valor entero m&aacute;s grande pero no mayor a X.<br>
+        mysql&gt; SELECT FLOOR(1.23);<br>
+        -&gt; 1<br>
+        mysql&gt; SELECT FLOOR(-1.23);<br>
+        -&gt; -2<br>
+        Tenga en cuenta que el valor devuelto se convierte a BIGINT.<br>
+        &#8226; LN(X)<br>
+        Retorna el logaritmo natural de X, esto es, el logaritmo de X base e.<br>
+        mysql&gt; SELECT LN(2);<br>
+        -&gt; 0.69314718055995<br>
+        mysql&gt; SELECT LN(-2);<br>
+        -&gt; NULL<br>
+        Esta funci&oacute;n es sin&oacute;nimo a LOG(X).<br>
+        &#8226; LOG(X), LOG(B,X)<br>
+        Si se llama con un par&aacute;metro, esta funci&oacute;n retorna el logaritmo 
+        natural de X.<br>
+        mysql&gt; SELECT LOG(2);<br>
+        -&gt; 0.69314718055995<br>
+        mysql&gt; SELECT LOG(-2);<br>
+        -&gt; NULL<br>
+        Si se llama con dos par&aacute;metros, esta funci&oacute;n retorna el 
+        logaritmo de X para una base arbitr&aacute;ria B.<br>
+        mysql&gt; SELECT LOG(2,65536);<br>
+        -&gt; 16<br>
+        mysql&gt; SELECT LOG(10,100);<br>
+        -&gt; 2<br>
+        LOG(B,X) es equivalente a LOG(X) / LOG(B).<br>
+        &#8226; LOG2(X)<br>
+        Retorna el logaritmo en base 2 de X.<br>
+        mysql&gt; SELECT LOG2(65536);<br>
+        -&gt; 16<br>
+        mysql&gt; SELECT LOG2(-100);<br>
+        -&gt; NULL<br>
+        LOG2() es &uacute;til para encontrar cu&aacute;ntos bits necesita un n&uacute;mero 
+        para almacenamiento. Esta funci&oacute;n es equivalente a la expresi&oacute;n<br>
+        LOG(X) / LOG(2).<br>
+        &#8226; LOG10(X)<br>
+        Retorna el logaritmo en base 10 de X.<br>
+        mysql&gt; SELECT LOG10(2);<br>
+        -&gt; 0.30102999566398<br>
+        mysql&gt; SELECT LOG10(100);<br>
+        -&gt; 2<br>
+        mysql&gt; SELECT LOG10(-100);<br>
+        -&gt; NULL<br>
+        LOG10(X) es equivalente a LOG(10,X).<br>
+        &#8226; MOD(N,M) , N % M, N MOD M<br>
+        Operaci&oacute;n de m&oacute;dulo. Retorna el resto de N dividido por 
+        M.<br>
+        mysql&gt; SELECT MOD(234, 10);<br>
+        -&gt; 4<br>
+        mysql&gt; SELECT 253 % 7;<br>
+        -&gt; 1<br>
+        mysql&gt; SELECT MOD(29,9);<br>
+        -&gt; 2<br>
+        mysql&gt; SELECT 29 MOD 9;<br>
+        -&gt; 2<br>
+        Esta funci&oacute;n puede usar valores BIGINT.<br>
+        MOD() tambi&eacute;n funciona con valores con una parte fraccional y retorna 
+        el resto exacto tras la divisi&oacute;n:<br>
+        mysql&gt; SELECT MOD(34.5,3);<br>
+        -&gt; 1.5<br>
+        &#8226; PI()<br>
+        Retorna el valor de ?? (pi). El n&uacute;mero de decimales que se muestra 
+        por defecto es siete, pero MySQL usa internamente el valor<br>
+        de doble precisi&oacute;n entero.<br>
+        mysql&gt; SELECT PI();<br>
+        -&gt; 3.141593<br>
+        mysql&gt; SELECT PI()+0.000000000000000000;<br>
+        -&gt; 3.141592653589793116<br>
+        &#8226; POW(X,Y) , POWER(X,Y)<br>
+        Retorna el valor de X a la potencia de Y.<br>
+        mysql&gt; SELECT POW(2,2);<br>
+        -&gt; 4<br>
+        mysql&gt; SELECT POW(2,-2);<br>
+        -&gt; 0.25<br>
+        &#8226; RADIANS(X)<br>
+        Retorna el argumento X, convertido de grados a radianes. (Tenga en cuenta 
+        que ?? radianes son 180 grados.)<br>
+        mysql&gt; SELECT RADIANS(90);<br>
+        -&gt; 1.5707963267949<br>
+        &#8226; RAND(), RAND(N)<br>
+        Retorna un valor aleatorio en coma flotante del rango de 0 a 1.0. Si se 
+        especifica un argumento entero N, es usa como semilla,<br>
+        que produce una secuencia repetible.<br>
+        mysql&gt; SELECT RAND();<br>
+        -&gt; 0.9233482386203<br>
+        mysql&gt; SELECT RAND(20);<br>
+        -&gt; 0.15888261251047<br>
+        mysql&gt; SELECT RAND();<br>
+        -&gt; 0.63553050033332<br>
+        mysql&gt; SELECT RAND();<br>
+        -&gt; 0.70100469486881<br>
+        mysql&gt; SELECT RAND(20);<br>
+        -&gt; 0.15888261251047<br>
+        Puede usar esta funci&oacute;n para recibir registros de forma aleatoria 
+        como se muestra aqu&iacute;:<br>
+        mysql&gt; SELECT * FROM tbl_name ORDER BY RAND();<br>
+        ORDER BY RAND() combinado con LIMIT es &uacute;til para seleccionar una 
+        muestra aleatoria de una conjunto de registros:<br>
+        mysql&gt; SELECT * FROM table1, table2 WHERE a=b AND c&lt;d<br>
+        -&gt; ORDER BY RAND() LIMIT 1000;<br>
+        Tenga en cuenta que RAND() en una cl&aacute;usula WHERE se re-eval&uacute;a 
+        cada vez que se ejecuta el WHERE.<br>
+        RAND() no pretende ser un generador de n&uacute;meros aleatorios perfecto, 
+        pero es una forma r&aacute;pida de generar n&uacute;meros aleatorios<br>
+        ad hoc portable entre plataformas para la misma versi&oacute;n de MySQL.<br>
+        &#8226; ROUND(X), ROUND(X,D)<br>
+        Retorna el argumento X, redondeado al entero m&aacute;s cercano. Con dos 
+        argumentos, retorna X redondeado a D decimales. D puede<br>
+        ser negativo para redondear D d&iacute;gitos a la izquierda del punto 
+        decimal del valor X.<br>
+        mysql&gt; SELECT ROUND(-1.23);<br>
+        -&gt; -1<br>
+        mysql&gt; SELECT ROUND(-1.58);<br>
+        -&gt; -2<br>
+        mysql&gt; SELECT ROUND(1.58);<br>
+        -&gt; 2<br>
+        mysql&gt; SELECT ROUND(1.298, 1);<br>
+        -&gt; 1.3<br>
+        mysql&gt; SELECT ROUND(1.298, 0);<br>
+        -&gt; 1<br>
+        mysql&gt; SELECT ROUND(23.298, -1);<br>
+        -&gt; 20<br>
+        El tipo de retorno es el mismo tipo que el del primer argumento (asumiendo 
+        que sea un entero, doble o decimal). Esto significa<br>
+        que para un argumento entero, el resultado es un entero (sin decimales).<br>
+        Antes de MySQL 5.0.3, el comportamiento de ROUND() cuando el argumento 
+        se encuentra a medias entre dos enteros depende<br>
+        de la implementaci&oacute;n de la biblioteca C. Implementaciones distintas 
+        redondean al n&uacute;mero par m&aacute;s pr&oacute;ximo, siempre arriba,<br>
+        siempre abajo, o siempre hacia cero. Si necesita un tipo de redondeo, 
+        debe usar una funci&oacute;n bien definida como TRUNCATE()<br>
+        o FLOOR() en su lugar.<br>
+        Desde MySQL 5.0.3, ROUND() usa la biblioteca de matem&aacute;tica precisa 
+        para valores exactos cuando el primer argumento es un<br>
+        valor con decimales:<br>
+        &#8226; Para n&uacute;meros exactos, ROUND() usa la regla de &quot;redondea 
+        la mitad hacia arriba&quot;: Un valor con una parte fracional de .5 o<br>
+        mayor se redondea arriba al siguiente entero si es positivo o hacia abajo 
+        si el siguiente entero es negativo. (En otras palabras,<br>
+        se redondea en direcci&oacute;n contraria al cero.) Un valor con una parte 
+        fraccional menor a .5 se redondea hacia abajo al siguiente<br>
+        entero si es positivo o hacia arriba si el siguiente entero es negativo.<br>
+        &#8226; Para n&uacute;meros aproximados, el resultado depende de la biblioteca 
+        C. En muchos sistemas, esto significa que ROUND() usa<br>
+        la regla de &quot;redondeo al n&uacute;mero par m&aacute;s cercano&quot;: 
+        Un valor con una parte fraccional se redondea al entero m&aacute;s cercano.<br>
+        El siguiente ejemplo muestra c&oacute;mo el redondeo difiere para valores 
+        exactos y aproximados:<br>
+        mysql&gt; SELECT ROUND(2.5), ROUND(25E-1);<br>
+        +------------+--------------+<br>
+        | ROUND(2.5) | ROUND(25E-1) |<br>
+        +------------+--------------+<br>
+        | 3 | 2 |<br>
+        +------------+--------------+<br>
+        Para m&aacute;s informaci&oacute;n, consulte Cap&iacute;tulo 23, Matem&aacute;ticas 
+        de precisi&oacute;n.<br>
+        &#8226; SIGN(X)<br>
+        Retorna el signo del argumento como -1, 0, o 1, en funci&oacute;n de si 
+        X es negativo, cero o positivo.<br>
+        mysql&gt; SELECT SIGN(-32);<br>
+        -&gt; -1<br>
+        mysql&gt; SELECT SIGN(0);<br>
+        -&gt; 0<br>
+        mysql&gt; SELECT SIGN(234);<br>
+        -&gt; 1<br>
+        &#8226; SIN(X)<br>
+        Retorna el seno de X, donde X se da en radianes.<br>
+        mysql&gt; SELECT SIN(PI());<br>
+        -&gt; 1.2246063538224e-16<br>
+        mysql&gt; SELECT ROUND(SIN(PI()));<br>
+        -&gt; 0<br>
+        &#8226; SQRT(X)<br>
+        Retorna la ra&iacute;z cuadrada de un n&uacute;mero no negativo. X.<br>
+        mysql&gt; SELECT SQRT(4);<br>
+        -&gt; 2<br>
+        mysql&gt; SELECT SQRT(20);<br>
+        -&gt; 4.4721359549996<br>
+        mysql&gt; SELECT SQRT(-16);<br>
+        -&gt; NULL<br>
+        &#8226; TAN(X)<br>
+        Retorna la tangente de X, donde X se da en radianes.<br>
+        mysql&gt; SELECT TAN(PI());<br>
+        -&gt; -1.2246063538224e-16<br>
+        mysql&gt; SELECT TAN(PI()+1);<br>
+        -&gt; 1.5574077246549<br>
+        &#8226; TRUNCATE(X,D)<br>
+        Retorna el n&uacute;mero X, truncado a D decimales. Si D es 0, el resultado 
+        no tiene punto decimal o parte fraccional. D puede ser negativo<br>
+        para truncar (hacer cero) D d&iacute;gitos a la izquierda del punto decimal 
+        del valor X.<br>
+        mysql&gt; SELECT TRUNCATE(1.223,1);<br>
+        -&gt; 1.2<br>
+        mysql&gt; SELECT TRUNCATE(1.999,1);<br>
+        -&gt; 1.9<br>
+        mysql&gt; SELECT TRUNCATE(1.999,0);<br>
+        -&gt; 1<br>
+        mysql&gt; SELECT TRUNCATE(-1.999,1);<br>
+        -&gt; -1.9<br>
+        mysql&gt; SELECT TRUNCATE(122,-2);<br>
+        -&gt; 100<br>
+        Todos los n&uacute;meros se redondean hacia cero.<br>
+        <h3>Funciones de fecha y hora</h3><br>
+        Esta secci&oacute;n describe las funciones que pueden usarse para manipular 
+        valores temporales. Consulte Secci&oacute;n 11.3, &#8220;Tipos de fecha 
+        y<br>
+        hora&#8221; para una descripci&oacute;n del rango de los valores que tiene 
+        cada fecha y hora y los formatos v&aacute;lidos en que se puedene especificar<br>
+        los valores.<br>
+        Aqu&iacute; hay un ejemplo que usa funciones de fecha. La siguiente consulta 
+        selecciona todos los registros con un valor date_col dentro<br>
+        de los &uacute;ltimos 30 d&iacute;as:<br>
+        mysql&gt; SELECT something FROM tbl_name<br>
+        -&gt; WHERE DATE_SUB(CURDATE(),INTERVAL 30 DAY) &lt;= date_col;<br>
+        Tenga en cuenta que la consulta tambi&eacute;n selecciona registros con 
+        fechas futuras.<br>
+        Las funciones que esperan valores de fecha usualmente aceptan valores 
+        de fecha y hora e ignoran la parte de hora. Las funciones<br>
+        que esperan valores de hora usualmente aceptan valores de fecha y hora 
+        e ignoran la parte de fecha.<br>
+        Las funciones que retornan la fecha u hora actuales se eval&uacute;an 
+        s&oacute;lo una vez por consulta al principio de la ejecuci&oacute;n de 
+        consulta.<br>
+        Esto significa que las referencias m&uacute;ltiples a una funci&oacute;n 
+        tales como NOW() en una misma consulta siempre producen el mismo resultado.<br>
+        Este principio tambi&eacute;n se aplica a CURDATE(), CURTIME(), UTC_DATE(), 
+        UTC_TIME(), UTC_TIMESTAMP(), y a<br>
+        cualquiera de sus sin&oacute;nimos.<br>
+        En MySQL 5.0, las funciones CURRENT_TIMESTAMP(), CURRENT_TIME(), CURRENT_DATE(), 
+        y FROM_UNIXTIME()<br>
+        retornan valores en la zona horaria de la conexi&oacute;n, que est&aacute; 
+        disponible como valor de la variable de sistema time_zone . Adem&aacute;s,<br>
+        UNIX_TIMESTAMP() asume que su argumento es un valor de fecha y hora en 
+        la zona horaria actual. Consulte Secci&oacute;n<br>
+        5.9.8, &#8220;Soporte de zonas horarias en el servidor MySQL&#8221;.<br>
+        Los rango de retorno en las siguientes descripciones de funciones se aplican 
+        en fechas completas. Si la fecha es un valor &#8220;cero&#8221; o<br>
+        una fecha incompleta como '2001-11-00', las funciones que extraen una 
+        parte de la fecha pueden retornar 0. Por ejemplo DAYOFMONTH('<br>
+        2001-11-00') retorna 0.<br>
+        &#8226; ADDDATE(date,INTERVAL expr type), ADDDATE(expr,days)<br>
+        Cuando se invoca con la forma INTERVAL del segundo argumento, ADDDATE() 
+        es sin&oacute;nimo de DATE_ADD(). La funci&oacute;n<br>
+        relacionada SUBDATE() es sin&oacute;nimo de DATE_SUB(). Para informaci&oacute;n 
+        del argumento INTERVAL , consulte la discusi&oacute;n<br>
+        de DATE_ADD().<br>
+        mysql&gt; SELECT DATE_ADD('1998-01-02', INTERVAL 31 DAY);<br>
+        -&gt; '1998-02-02'<br>
+        mysql&gt; SELECT ADDDATE('1998-01-02', INTERVAL 31 DAY);<br>
+        -&gt; '1998-02-02'<br>
+        Si el argumento days es simplemente un valor entero, entonces MySQL 5.0 
+        lo trata como el n&uacute;mero de d&iacute;as a a&ntilde;adir a expr.<br>
+        mysql&gt; SELECT ADDDATE('1998-01-02', 31);<br>
+        -&gt; '1998-02-02'<br>
+        &#8226; ADDTIME(expr,expr2)<br>
+        ADDTIME() a&ntilde;ade expr2 a expr y retorna el resultado. expr es una 
+        expresi&oacute;n de fecha u hora y fecha, y expr2 es una expresi&oacute;n<br>
+        temporal.<br>
+        mysql&gt; SELECT ADDTIME('1997-12-31 23:59:59.999999',<br>
+        -&gt; '1 1:1:1.000002');<br>
+        -&gt; '1998-01-02 01:01:01.000001'<br>
+        mysql&gt; SELECT ADDTIME('01:00:00.999999', '02:00:00.999998');<br>
+        -&gt; '03:00:01.999997'<br>
+        &#8226; CONVERT_TZ(dt,from_tz,to_tz)<br>
+        CONVERT_TZ() convierte un valor datetime dt de la zona horaria dada por 
+        from_tz a la zona horaria dada por to_tz y<br>
+        retorna el valor resultante. Las zonas horarias pueden especificarse como 
+        se describe en Secci&oacute;n 5.9.8, &#8220;Soporte de zonas horarias<br>
+        en el servidor MySQL&#8221;. Esta funci&oacute;n retorna NULL si los argumentos 
+        son inv&aacute;lidos.<br>
+        Si el valor se sale del rango soportado por el tipo TIMESTAMP al convertirse 
+        de from_tz a UTC, no se realiza ninguna conversi&oacute;n.<br>
+        El rango TIMESTAMP se describe en Secci&oacute;n 11.1.2, &#8220;Panor&aacute;mica 
+        de tipos de fechas y hora&#8221;.<br>
+        mysql&gt; SELECT CONVERT_TZ('2004-01-01 12:00:00','GMT','MET');<br>
+        -&gt; '2004-01-01 13:00:00'<br>
+        mysql&gt; SELECT CONVERT_TZ('2004-01-01 12:00:00','+00:00','+10:00');<br>
+        -&gt; '2004-01-01 22:00:00'<br>
+        Nota: Para usar zonas horarias con nombres tales como 'MET' o 'Europe/Moscow', 
+        las tabas de zona horaria deben estar<br>
+        actualizadas correctamente. Consulte Secci&oacute;n 5.9.8, &#8220;Soporte 
+        de zonas horarias en el servidor MySQL&#8221; para instrucciones.<br>
+        &#8226; CURDATE()<br>
+        Retorna la fecha horaria como valor en formato 'YYYY-MM-DD' o YYYYMMDD, 
+        dependiendo de si la fucni&oacute;n se usa en un<br>
+        contexto num&eacute;rico o de cadena de caracteres.<br>
+        mysql&gt; SELECT CURDATE();<br>
+        -&gt; '1997-12-15'<br>
+        mysql&gt; SELECT CURDATE() + 0;<br>
+        -&gt; 19971215<br>
+        &#8226; CURRENT_DATE, CURRENT_DATE()<br>
+        CURRENT_DATE y CURRENT_DATE() son sin&oacute;nimos de CURDATE().<br>
+        &#8226; CURTIME()<br>
+        Retorna la hora actual como valor en formato 'HH:MM:SS' o HHMMSS dependiendo 
+        de si la fucni&oacute;n se usa en un contexto num&eacute;rico<br>
+        o de cadena de caracteres.<br>
+        mysql&gt; SELECT CURTIME();<br>
+        -&gt; '23:50:26'<br>
+        mysql&gt; SELECT CURTIME() + 0;<br>
+        -&gt; 235026<br>
+        &#8226; CURRENT_TIME, CURRENT_TIME()<br>
+        CURRENT_TIME y CURRENT_TIME() son sin&oacute;nimos de CURTIME().<br>
+        &#8226; CURRENT_TIMESTAMP, CURRENT_TIMESTAMP()<br>
+        CURRENT_TIMESTAMP() son sin&oacute;nimos de NOW().<br>
+        &#8226; DATE(expr)<br>
+        Extrae la parte de fecha de la expresi&oacute;n de fecha o fecha y hora 
+        expr.<br>
+        mysql&gt; SELECT DATE('2003-12-31 01:02:03');<br>
+        -&gt; '2003-12-31'<br>
+        &#8226; DATEDIFF(expr,expr2)<br>
+        DATEDIFF() retorna el n&uacute;mero de d&iacute;as entre la fecha inicial 
+        expr y la fecha final expr2. expr y expr2 son expresiones<br>
+        de fecha o de fecha y hora. S&oacute;lo las partes de fecha de los valores 
+        se usan en los c&aacute;lculos.<br>
+        mysql&gt; SELECT DATEDIFF('1997-12-31 23:59:59','1997-12-30');<br>
+        -&gt; 1<br>
+        mysql&gt; SELECT DATEDIFF('1997-11-30 23:59:59','1997-12-31');<br>
+        -&gt; -31<br>
+        &#8226; DATE_ADD(date,INTERVAL expr type), DATE_SUB(date,INTERVAL expr 
+        type)<br>
+        Estas funciones realizan operaciones aritm&eacute;ticas de fechas. date 
+        es un valor DATETIME o DATE especificando la fecha de inicio.<br>
+        expr es una expresi&oacute;n que especifica el intervalo a a&ntilde;adir 
+        o borrar de la fecha de inicio. expr es una cadena; puede comenzar<br>
+        con un '-' para intervalos negativos. type es una palabra clave que indica 
+        c&oacute;mo debe interpretarse la expresi&oacute;n.<br>
+        La palabra clave INTERVAL y el especificador type no son sensibles a may&uacute;sculas.<br>
+        La siguiente tabla muestra c&oacute;mo se relacionan los argumentos type 
+        y expr :<br>
+        type Value Expected expr Format<br>
+        MICROSECOND MICROSECONDS<br>
+        SECOND SECONDS<br>
+        MINUTE MINUTES<br>
+        HOUR HOURS<br>
+        DAY DAYS<br>
+        WEEK WEEKS<br>
+        MONTH MONTHS<br>
+        QUARTER QUARTERS<br>
+        YEAR YEARS<br>
+        SECOND_MICROSECOND 'SECONDS.MICROSECONDS'<br>
+        MINUTE_MICROSECOND 'MINUTES.MICROSECONDS'<br>
+        MINUTE_SECOND 'MINUTES:SECONDS'<br>
+        HOUR_MICROSECOND 'HOURS.MICROSECONDS'<br>
+        HOUR_SECOND 'HOURS:MINUTES:SECONDS'<br>
+        HOUR_MINUTE 'HOURS:MINUTES'<br>
+        DAY_MICROSECOND 'DAYS.MICROSECONDS'<br>
+        DAY_SECOND 'DAYS HOURS:MINUTES:SECONDS'<br>
+        DAY_MINUTE 'DAYS HOURS:MINUTES'<br>
+        DAY_HOUR 'DAYS HOURS'<br>
+        YEAR_MONTH 'YEARS-MONTHS'<br>
+        Los valores QUARTER y WEEK est&aacute;n disponibles a partir de MySQL 
+        5.0.0.<br>
+        MySQL permite cualquier delimitador en el formato expr . Los mostrados 
+        en la tabla son sugerencias. Si el argumento date<br>
+        es un valora DATE y sus c&aacute;lculos involucar&aacute;n s&oacute;lo 
+        partes YEAR, MONTH, y DAY (esto es, sin partes de hora), el resultado 
+        es un<br>
+        valor DATE . De otro modo, el resultado es un valor DATETIME .<br>
+        INTERVAL expr type se permite en cualquier lado del operador + si la expresi&oacute;n 
+        en el otro lado es una fecha o fecha y hora.<br>
+        Para el operador - , INTERVAL expr type se permite s&oacute;lo en la parte 
+        derecha, ya que no tiene sentido restar una fecha<br>
+        de un intervalo. (Consulte los ejemplos a continuaci&oacute;n.)<br>
+        mysql&gt; SELECT '1997-12-31 23:59:59' + INTERVAL 1 SECOND;<br>
+        -&gt; '1998-01-01 00:00:00'<br>
+        mysql&gt; SELECT INTERVAL 1 DAY + '1997-12-31';<br>
+        -&gt; '1998-01-01'<br>
+        mysql&gt; SELECT '1998-01-01' - INTERVAL 1 SECOND;<br>
+        -&gt; '1997-12-31 23:59:59'<br>
+        mysql&gt; SELECT DATE_ADD('1997-12-31 23:59:59',<br>
+        -&gt; INTERVAL 1 SECOND);<br>
+        -&gt; '1998-01-01 00:00:00'<br>
+        mysql&gt; SELECT DATE_ADD('1997-12-31 23:59:59',<br>
+        -&gt; INTERVAL 1 DAY);<br>
+        -&gt; '1998-01-01 23:59:59'<br>
+        mysql&gt; SELECT DATE_ADD('1997-12-31 23:59:59',<br>
+        -&gt; INTERVAL '1:1' MINUTE_SECOND);<br>
+        -&gt; '1998-01-01 00:01:00'<br>
+        mysql&gt; SELECT DATE_SUB('1998-01-01 00:00:00',<br>
+        -&gt; INTERVAL '1 1:1:1' DAY_SECOND);<br>
+        -&gt; '1997-12-30 22:58:59'<br>
+        mysql&gt; SELECT DATE_ADD('1998-01-01 00:00:00',<br>
+        -&gt; INTERVAL '-1 10' DAY_HOUR);<br>
+        -&gt; '1997-12-30 14:00:00'<br>
+        mysql&gt; SELECT DATE_SUB('1998-01-02', INTERVAL 31 DAY);<br>
+        -&gt; '1997-12-02'<br>
+        mysql&gt; SELECT DATE_ADD('1992-12-31 23:59:59.000002',<br>
+        -&gt; INTERVAL '1.999999' SECOND_MICROSECOND);<br>
+        -&gt; '1993-01-01 00:00:01.000001'<br>
+        Si especifica un intervalo demasiado peque&ntilde;o (no incluye todas 
+        las partes de intervalo que se esperar&iacute;an de la palabra clave<br>
+        type ), MySQL asume que ha dejado la parte m&aacute;s a la izquierda del 
+        valor del intervalo. Por ejemplo, si especifica un type de<br>
+        DAY_SECOND, se espera que el valor de expr tenga d&iacute;as, horas, minutos 
+        y segundos. Si especifica un valor como '1:10',<br>
+        MySQL asume que las partes de d&iacute;a y hora no se encuentran disponibles 
+        y que el valor representa minutos y segundos. En otras<br>
+        palabras, '1:10' DAY_SECOND se interpreta de forma que es equivalente 
+        a '1:10' MINUTE_SECOND. Esto es an&aacute;logo a<br>
+        la forma en que MySQL interpreta valores TIME como representando tiempo 
+        transcurrido en lugar de la hora del d&iacute;a.<br>
+        Si suma o borra de un valor de fecha algo que contenga una parte de fora, 
+        el resultado se convierte autom&aacute;ticamente a valor fecha/<br>
+        hora:<br>
+        mysql&gt; SELECT DATE_ADD('1999-01-01', INTERVAL 1 DAY);<br>
+        -&gt; '1999-01-02'<br>
+        mysql&gt; SELECT DATE_ADD('1999-01-01', INTERVAL 1 HOUR);<br>
+        -&gt; '1999-01-01 01:00:00'<br>
+        Si usa fechas muy mal formadas, el resultado es NULL. Si suma MONTH, YEAR_MONTH, 
+        o YEAR y la fecha resultante tiene un<br>
+        d&iacute;a mayor que el d&iacute;a m&aacute;ximo para el nuevo mes, el 
+        d&iacute;a se ajusta al n&uacute;mero m&aacute;ximo del nuevo mes:<br>
+        mysql&gt; SELECT DATE_ADD('1998-01-30', INTERVAL 1 MONTH);<br>
+        -&gt; '1998-02-28'<br>
+        &#8226; DATE_FORMAT(date,format)<br>
+        Formatea el valor date seg&uacute;n la cadena format . Los siguientes 
+        especificadores pueden usarse en la cadena format :<br>
+        Especificador Descripci&oacute;n<br>
+        %a D&iacute;a de semana abreviado (Sun..Sat)<br>
+        %b Mes abreviado (Jan..Dec)<br>
+        %c Mes, num&eacute;rico (0..12)<br>
+        %D D&iacute;a del mes con sufijo ingl&eacute;s (0th, 1st, 2nd, 3rd, ...)<br>
+        %d D&iacute;a del mes num&eacute;rico (00..31)<br>
+        %e D&iacute;a del mes num&eacute;rico (0..31)<br>
+        %f Microsegundos (000000..999999)<br>
+        %H Hora (00..23)<br>
+        %h Hora (01..12)<br>
+        %I Hora (01..12)<br>
+        %i Minutos, num&eacute;rico (00..59)<br>
+        %j D&iacute;a del a&ntilde;o (001..366)<br>
+        %k Hora (0..23)<br>
+        %l Hora (1..12)<br>
+        %M Nombre mes (January..December)<br>
+        %m Mes, num&eacute;rico (00..12)<br>
+        %p AM o PM<br>
+        %r Hora, 12 horas (hh:mm:ss seguido de AM o PM)<br>
+        %S Segundos (00..59)<br>
+        %s Segundos (00..59)<br>
+        %T Hora, 24 horas (hh:mm:ss)<br>
+        %U Semana (00..53), donde domingo es el primer d&iacute;a de la semana<br>
+        %u Semana (00..53), donde lunes es el primer d&iacute;a de la semana<br>
+        %V Semana (01..53), donde domingo es el primer d&iacute;a de la semana; 
+        usado con %X<br>
+        %v Semana (01..53), donde lunes es el primer d&iacute;a de la semana; 
+        usado con %x<br>
+        %W Nombre d&iacute;a semana (Sunday..Saturday)<br>
+        %w D&iacute;a de la semana (0=Sunday..6=Saturday)<br>
+        %X A&ntilde;o para la semana donde domingo es el primer d&iacute;a de 
+        la semana, num&eacute;rico, cuatro d&iacute;gitos; usado<br>
+        con %V<br>
+        %x A&ntilde;o para la semana, donde lunes es el primer d&iacute;a de la 
+        semana, num&eacute;rico, cuatro d&iacute;gitos; usado con<br>
+        %v<br>
+        %Y A&ntilde;o, num&eacute;rico, cuatro d&iacute;gitos<br>
+        %y A&ntilde;o, num&eacute;rico (dos d&iacute;gitos)<br>
+        %% Car&aacute;cter '%' literal<br>
+        Todos los otros caracteres se copian al resultado sin interpretaci&oacute;n.<br>
+        Tenga en cuenta que el car&aacute;cter '%' se necesita antes de caracteres 
+        especificadores de formato.<br>
+        Los rangos para los especificadores de mes y d&iacute;a comienzan en cero 
+        debido a que MySQL permite almacenar fechas incompletas<br>
+        tales como '2004-00-00'.<br>
+        mysql&gt; SELECT DATE_FORMAT('1997-10-04 22:23:00', '%W %M %Y');<br>
+        -&gt; 'Saturday October 1997'<br>
+        mysql&gt; SELECT DATE_FORMAT('1997-10-04 22:23:00', '%H:%i:%s');<br>
+        -&gt; '22:23:00'<br>
+        mysql&gt; SELECT DATE_FORMAT('1997-10-04 22:23:00',<br>
+        '%D %y %a %d %m %b %j');<br>
+        -&gt; '4th 97 Sat 04 10 Oct 277'<br>
+        mysql&gt; SELECT DATE_FORMAT('1997-10-04 22:23:00',<br>
+        '%H %k %I %r %T %S %w');<br>
+        -&gt; '22 22 10 10:23:00 PM 22:23:00 00 6'<br>
+        mysql&gt; SELECT DATE_FORMAT('1999-01-01', '%X %V');<br>
+        -&gt; '1998 52'<br>
+        &#8226; DAY(date)<br>
+        DAY() es sin&oacute;nimo de DAYOFMONTH().<br>
+        &#8226; DAYNAME(date)<br>
+        Retorna el nombre del d&iacute;a de la semana para date.<br>
+        mysql&gt; SELECT DAYNAME('1998-02-05');<br>
+        -&gt; 'Thursday'<br>
+        &#8226; DAYOFMONTH(date)<br>
+        Retorna el d&iacute;a del mes para date, en el rango 1 a 31.<br>
+        mysql&gt; SELECT DAYOFMONTH('1998-02-03');<br>
+        -&gt; 3<br>
+        &#8226; DAYOFWEEK(date)<br>
+        Retorna el &iacute;ndice del d&iacute;a de la semana para date (1 = domingo, 
+        2 = lunes, ..., 7 = s&aacute;bado). Estos valores del &iacute;ndice se 
+        corresponden<br>
+        con el est&aacute;ndar ODBC.<br>
+        mysql&gt; SELECT DAYOFWEEK('1998-02-03');<br>
+        -&gt; 3<br>
+        &#8226; DAYOFYEAR(date)<br>
+        Retorna el d&iacute;a del a&ntilde;o para date, en el rango 1 a 366.<br>
+        mysql&gt; SELECT DAYOFYEAR('1998-02-03');<br>
+        -&gt; 34<br>
+        &#8226; EXTRACT(type FROM date)<br>
+        La funci&oacute;n EXTRACT() usa la misma clase de especificadores de tipo 
+        que DATE_ADD() o DATE_SUB(), pero extrae partes<br>
+        de la fecha en lugar de realizar aritm&eacute;tica de fecha.<br>
+        mysql&gt; SELECT EXTRACT(YEAR FROM '1999-07-02');<br>
+        -&gt; 1999<br>
+        mysql&gt; SELECT EXTRACT(YEAR_MONTH FROM '1999-07-02 01:02:03');<br>
+        -&gt; 199907<br>
+        mysql&gt; SELECT EXTRACT(DAY_MINUTE FROM '1999-07-02 01:02:03');<br>
+        -&gt; 20102<br>
+        mysql&gt; SELECT EXTRACT(MICROSECOND<br>
+        -&gt; FROM '2003-01-02 10:30:00.000123');<br>
+        -&gt; 123<br>
+        &#8226; FROM_DAYS(N)<br>
+        Dado un n&uacute;mero de d&iacute;a N, retorna un valor DATE .<br>
+        mysql&gt; SELECT FROM_DAYS(729669);<br>
+        -&gt; '1997-10-07'<br>
+        Use FROM_DAYS() con precauci&oacute;n en fechas viejas. No se pretende 
+        que se use con valores que precedan el calendario Gregoriano<br>
+        (1582). Consulte Secci&oacute;n 12.6, &#8220;Qu&eacute; calendario utiliza 
+        MySQL&#8221;.<br>
+        &#8226; FROM_UNIXTIME(unix_timestamp) , FROM_UNIXTIME(unix_timestamp,format)<br>
+        Retorna una representaci&oacute;n del argumento unix_timestamp como un 
+        valor en formato 'YYYY-MM-DD HH:MM:SS' o<br>
+        YYYYMMDDHHMMSS , dependiendo de si la funci&oacute;n se usa en un formato 
+        num&eacute;rico o de cadena de caracteres.<br>
+        mysql&gt; SELECT FROM_UNIXTIME(875996580);<br>
+        -&gt; '1997-10-04 22:23:00'<br>
+        mysql&gt; SELECT FROM_UNIXTIME(875996580) + 0;<br>
+        -&gt; 19971004222300<br>
+        Si se da format, el resultado se formatea seg&uacute;n la cadena format. 
+        format puede contener los mismos especificadores que<br>
+        los listados en la entrada para la funci&oacute;n DATE_FORMAT() .<br>
+        mysql&gt; SELECT FROM_UNIXTIME(UNIX_TIMESTAMP(),<br>
+        -&gt; '%Y %D %M %h:%i:%s %x');<br>
+        -&gt; '2003 6th August 06:22:58 2003'<br>
+        &#8226; GET_FORMAT(DATE|TIME|DATETIME, 'EUR'|'USA'|'JIS'|'ISO'|'INTERNAL')<br>
+        Retorna una cadena de formato. Esta funci&oacute;n es &uacute;til en combinaci&oacute;n 
+        con las funciones DATE_FORMAT() y<br>
+        STR_TO_DATE() .<br>
+        Los tres valores posibles para el primer argumento y los cinco posibles 
+        valores para el segundo argumento resultan en 15 posibles<br>
+        cadenas de formato (para los especificadores usados, consulte la tabla 
+        en la descripci&oacute;n de la funci&oacute;n DATE_FORMAT() ).<br>
+        LLamad a funci&oacute;n Resultado<br>
+        GET_FORMAT(DATE,'USA') '%m.%d.%Y'<br>
+        GET_FORMAT(DATE,'JIS') '%Y-%m-%d'<br>
+        GET_FORMAT(DATE,'ISO') '%Y-%m-%d'<br>
+        GET_FORMAT(DATE,'EUR') '%d.%m.%Y'<br>
+        GET_FORMAT(DATE,'INTERNAL') '%Y%m%d'<br>
+        GET_FORMAT(DATETIME,'USA') '%Y-%m-%d-%H.%i.%s'<br>
+        GET_FORMAT(DATETIME,'JIS') '%Y-%m-%d %H:%i:%s'<br>
+        GET_FORMAT(DATETIME,'ISO') '%Y-%m-%d %H:%i:%s'<br>
+        GET_FORMAT(DATETIME,'EUR') '%Y-%m-%d-%H.%i.%s'<br>
+        GET_FORMAT(DATETIME,'INTERNAL') '%Y%m%d%H%i%s'<br>
+        GET_FORMAT(TIME,'USA') '%h:%i:%s %p'<br>
+        GET_FORMAT(TIME,'JIS') '%H:%i:%s'<br>
+        GET_FORMAT(TIME,'ISO') '%H:%i:%s'<br>
+        GET_FORMAT(TIME,'EUR') '%H.%i.%S'<br>
+        GET_FORMAT(TIME,'INTERNAL') '%H%i%s'<br>
+        El formato ISO es ISO 9075, no ISO 8601.<br>
+        En MySQL 5.0, TIMESTAMP puede usarse; GET_FORMAT() retorna los mismos 
+        valores que para DATETIME.<br>
+        mysql&gt; SELECT DATE_FORMAT('2003-10-03',GET_FORMAT(DATE,'EUR'));<br>
+        -&gt; '03.10.2003'<br>
+        mysql&gt; SELECT STR_TO_DATE('10.31.2003',GET_FORMAT(DATE,'USA'));<br>
+        -&gt; '2003-10-31'<br>
+        Consulte Secci&oacute;n 13.5.3, &#8220;Sintaxis de SET&#8221;.<br>
+        &#8226; HOUR(time)<br>
+        Retorna la hora para time. El rango del valor de retorno es 0 a 23 para 
+        valores de horas del d&iacute;a.<br>
+        mysql&gt; SELECT HOUR('10:05:03');<br>
+        -&gt; 10<br>
+        Adem&aacute;s, el rango de los valores TIME es mucho mayor, as&iacute; 
+        que HOUR puede retornar valores mayores que 23.<br>
+        mysql&gt; SELECT HOUR('272:59:59');<br>
+        -&gt; 272<br>
+        &#8226; LAST_DAY(date)<br>
+        Toma una fecha o fecha/hora y retorna el valor correspondiente para el 
+        &uacute;ltimo d&iacute;a del mes. Retorna NULL si el argumento es inv&aacute;lido.<br>
+        mysql&gt; SELECT LAST_DAY('2003-02-05');<br>
+        -&gt; '2003-02-28'<br>
+        mysql&gt; SELECT LAST_DAY('2004-02-05');<br>
+        -&gt; '2004-02-29'<br>
+        mysql&gt; SELECT LAST_DAY('2004-01-01 01:01:01');<br>
+        -&gt; '2004-01-31'<br>
+        mysql&gt; SELECT LAST_DAY('2003-03-32');<br>
+        -&gt; NULL<br>
+        &#8226; LOCALTIME, LOCALTIME()<br>
+        LOCALTIME y LOCALTIME() son sin&oacute;nimos de NOW().<br>
+        &#8226; LOCALTIMESTAMP, LOCALTIMESTAMP()<br>
+        LOCALTIMESTAMP y LOCALTIMESTAMP() son sin&oacute;nimos de NOW().<br>
+        &#8226; MAKEDATE(year,dayofyear)<br>
+        Retorna una fecha, dado un a&ntilde;o y d&iacute;a del a&ntilde;o. dayofyear 
+        debe ser mayor a 0 o el resultado es NULL.<br>
+        mysql&gt; SELECT MAKEDATE(2001,31), MAKEDATE(2001,32);<br>
+        -&gt; '2001-01-31', '2001-02-01'<br>
+        mysql&gt; SELECT MAKEDATE(2001,365), MAKEDATE(2004,365);<br>
+        -&gt; '2001-12-31', '2004-12-30'<br>
+        mysql&gt; SELECT MAKEDATE(2001,0);<br>
+        -&gt; NULL<br>
+        &#8226; MAKETIME(hour,minute,second)<br>
+        Retorna un valor horario calculado a partir de los argumentos hour, minute, 
+        y second .<br>
+        mysql&gt; SELECT MAKETIME(12,15,30);<br>
+        -&gt; '12:15:30'<br>
+        &#8226; MICROSECOND(expr)<br>
+        Retorna los microsegundos a partir del a expresi&oacute;n de hora o fecha/hora 
+        expr como n&uacute;mero en el rango de 0 a 999999.<br>
+        mysql&gt; SELECT MICROSECOND('12:00:00.123456');<br>
+        -&gt; 123456<br>
+        mysql&gt; SELECT MICROSECOND('1997-12-31 23:59:59.000010');<br>
+        -&gt; 10<br>
+        &#8226; MINUTE(time)<br>
+        Retorna el minuto de time, en el rango 0 a 59.<br>
+        mysql&gt; SELECT MINUTE('98-02-03 10:05:03');<br>
+        -&gt; 5<br>
+        &#8226; MONTH(date)<br>
+        Retorna el mes para date, en el rango 1 a 12.<br>
+        mysql&gt; SELECT MONTH('1998-02-03');<br>
+        -&gt; 2<br>
+        &#8226; MONTHNAME(date)<br>
+        Retorna el nombre completo del mes para date.<br>
+        mysql&gt; SELECT MONTHNAME('1998-02-05');<br>
+        -&gt; 'February'<br>
+        &#8226; NOW()<br>
+        Retorna la fecha y hora actual como valor en formato 'YYYY-MM-DD HH:MM:SS' 
+        o YYYYMMDDHHMMSS , dependiendo de<br>
+        si la funci&oacute;n se usa en contexto num&eacute;rico o de cadena de 
+        caracteres.<br>
+        mysql&gt; SELECT NOW();<br>
+        -&gt; '1997-12-15 23:50:26'<br>
+        mysql&gt; SELECT NOW() + 0;<br>
+        -&gt; 19971215235026<br>
+        &#8226; PERIOD_ADD(P,N)<br>
+        A&ntilde;ade N meses al periodo P (en el formato YYMM o YYYYMM). Retorna 
+        un valor en el formato YYYYMM. Tenga en cuenta que el<br>
+        argumento del periodo P no es una fecha.<br>
+        mysql&gt; SELECT PERIOD_ADD(9801,2);<br>
+        -&gt; 199803<br>
+        &#8226; PERIOD_DIFF(P1,P2)<br>
+        Retorna el n&uacute;mero de meses entre periodos P1 y P2. P1 y P2 deben 
+        estar en el formato YYMM o YYYYMM. Tenga en cuenta que<br>
+        los argumentos del periodo P1 y P2 no son fechas.<br>
+        mysql&gt; SELECT PERIOD_DIFF(9802,199703);<br>
+        -&gt; 11<br>
+        &#8226; QUARTER(date)<br>
+        Retorna el cuarto del a&ntilde;o para date, en el rango 1 a 4.<br>
+        mysql&gt; SELECT QUARTER('98-04-01');<br>
+        -&gt; 2<br>
+        &#8226; SECOND(time)<br>
+        Retorna el segundo para time, en el rango 0 a 59.<br>
+        mysql&gt; SELECT SECOND('10:05:03');<br>
+        -&gt; 3<br>
+        &#8226; SEC_TO_TIME(seconds)<br>
+        Retorna el argumento seconds , convertido a horas, minutos y segundos, 
+        como un valor en formato 'HH:MM:SS' o<br>
+        HHMMSS, dependiendo de si la funci&oacute;n se usa en contexto num&eacute;rico 
+        o de cadena de caracteres.<br>
+        mysql&gt; SELECT SEC_TO_TIME(2378);<br>
+        -&gt; '00:39:38'<br>
+        mysql&gt; SELECT SEC_TO_TIME(2378) + 0;<br>
+        -&gt; 3938<br>
+        &#8226; STR_TO_DATE(str,format)<br>
+        &#8226; Esta es la inversa de la funci&oacute;n DATE_FORMAT(). Toma la 
+        cadena str y la cadena de formato format. STR_TO_DATE()<br>
+        retorna un valor DATETIME si la cadena de formato contiene parte de fecha 
+        y hora, o un valor DATE o TIME si la cadena contiene<br>
+        s&oacute;lo parte de fecha o hora.<br>
+        Los valores fecha, hora o fecha/hora contenidos en str deben ser dados 
+        en el formato indicado por format. Para los especificadores<br>
+        que pueden usarse en format, consulte la tabla en la descripci&oacute;n 
+        de la funci&oacute;n DATE_FORMAT() . Todos los otros<br>
+        caracteres no se interpretan. Si str contiene un valor fecha, hora o fecha/hora 
+        ilegal, STR_TO_DATE() retorna NULL. A partir<br>
+        de MySQL 5.0.3, un valor ilegal tambi&eacute;n produce una advertencia.<br>
+        mysql&gt; SELECT STR_TO_DATE('03.10.2003 09.20','%d.%m.%Y %H.%i');<br>
+        -&gt; '2003-10-03 09:20:00'<br>
+        mysql&gt; SELECT STR_TO_DATE('10arp', '%carp');<br>
+        -&gt; '0000-10-00 00:00:00'<br>
+        mysql&gt; SELECT STR_TO_DATE('2003-15-10 00:00:00','%Y-%m-%d %H:%i:%s');<br>
+        -&gt; NULL<br>
+        El chequeo de rango en las partes de los valores de fecha se describe 
+        en Secci&oacute;n 11.3.1, &#8220;Los tipos de datos DATETIME, DATE<br>
+        y TIMESTAMP&#8221;. Esto significa, por ejemplo, que una fecha con una 
+        parte de d&iacute;a mayor que el n&uacute;mero de d&iacute;as en un mes 
+        se per-<br>
+        mite mientras la parte del d&iacute;a est&eacute; en el rango de 1 a 31. 
+        Tambi&eacute;n, fechas &#8220;cero&#8221; o fechas con partes de 0 se 
+        permiten.<br>
+        mysql&gt; SELECT STR_TO_DATE('00/00/0000', '%m/%d/%Y');<br>
+        -&gt; '0000-00-00'<br>
+        mysql&gt; SELECT STR_TO_DATE('04/31/2004', '%m/%d/%Y');<br>
+        -&gt; '2004-04-31'<br>
+        &#8226; SUBDATE(date,INTERVAL expr type), SUBDATE(expr,days)<br>
+        Cuando se invoca con la forma INTERVAL del segundo argumento, SUBDATE() 
+        es sin&oacute;nimo de DATE_SUB(). Para informaci&oacute;n<br>
+        del argumento INTERVAL , consulte la discusi&oacute;n para DATE_ADD().<br>
+        mysql&gt; SELECT DATE_SUB('1998-01-02', INTERVAL 31 DAY);<br>
+        -&gt; '1997-12-02'<br>
+        mysql&gt; SELECT SUBDATE('1998-01-02', INTERVAL 31 DAY);<br>
+        -&gt; '1997-12-02'<br>
+        La siguiente forma permite el uso de un valor entero para days. En tales 
+        casos, es el n&uacute;mero de d&iacute;as a ser borrados de la expresi&oacute;n<br>
+        fecha o fecha/hora expr.<br>
+        mysql&gt; SELECT SUBDATE('1998-01-02 12:00:00', 31);<br>
+        -&gt; '1997-12-02 12:00:00'<br>
+        Nota no puede usar formato &quot;%X%V&quot; para convertir una cadena 
+        a&ntilde;o-semana en fecha ya que la combinaci&oacute;n de un a&ntilde;o 
+        y semana<br>
+        no identific un&iacute;vocamente un a&ntilde;o y semana si la semana atraviesa 
+        la forntera de un mes. Para convertir un a&ntilde;o-semana a fecha,<br>
+        debe especificar el d&iacute;a de la semana:<br>
+        mysql&gt; select str_to_date('200442 Monday', '%X%V %W');<br>
+        -&gt; 2004-10-18<br>
+        &#8226; SUBTIME(expr,expr2)<br>
+        SUBTIME() resta expr2 de expr y retorna el resultado. expr es una expresi&oacute;n 
+        de hora o fecha/hora, y expr2 es una expresi&oacute;n<br>
+        de hora.<br>
+        mysql&gt; SELECT SUBTIME('1997-12-31 23:59:59.999999','1 1:1:1.000002');<br>
+        -&gt; '1997-12-30 22:58:58.999997'<br>
+        mysql&gt; SELECT SUBTIME('01:00:00.999999', '02:00:00.999998');<br>
+        -&gt; '-00:59:59.999999'<br>
+        &#8226; SYSDATE()<br>
+        SYSDATE() es sin&oacute;nimo de NOW().<br>
+        &#8226; TIME(expr)<br>
+        Extrae la parte de hora de la expresi&oacute;n hora o fecha/hora expr.<br>
+        mysql&gt; SELECT TIME('2003-12-31 01:02:03');<br>
+        -&gt; '01:02:03'<br>
+        mysql&gt; SELECT TIME('2003-12-31 01:02:03.000123');<br>
+        -&gt; '01:02:03.000123'<br>
+        &#8226; TIMEDIFF(expr,expr2)<br>
+        TIMEDIFF() retorna el tiempo entre la hora de inicio expr y la hora final 
+        expr2. expr y expr2 son expresiones de hora o<br>
+        de fecha/hora, pero ambas deben ser del mismo tipo.<br>
+        mysql&gt; SELECT TIMEDIFF('2000:01:01 00:00:00',<br>
+        -&gt; '2000:01:01 00:00:00.000001');<br>
+        -&gt; '-00:00:00.000001'<br>
+        mysql&gt; SELECT TIMEDIFF('1997-12-31 23:59:59.000001',<br>
+        -&gt; '1997-12-30 01:01:01.000002');<br>
+        -&gt; '46:58:57.999999'<br>
+        &#8226; TIMESTAMP(expr) , TIMESTAMP(expr,expr2)<br>
+        Con un &uacute;nico argumento, esta funci&oacute;n retorna la expresi&oacute;n 
+        de fecha o fecha/hora expr como valor fecha/hora. Con dos argu-<br>
+        mentos, suma la expresi&oacute;n de hora expr2 a la expresi&oacute;n de 
+        fecha o de fecha/hora expr y retorna el resultado como valor fecha/<br>
+        hora.<br>
+        mysql&gt; SELECT TIMESTAMP('2003-12-31');<br>
+        -&gt; '2003-12-31 00:00:00'<br>
+        mysql&gt; SELECT TIMESTAMP('2003-12-31 12:00:00','12:00:00');<br>
+        -&gt; '2004-01-01 00:00:00'<br>
+        &#8226; TIMESTAMPADD(interval,int_expr,datetime_expr)<br>
+        Suma la expresi&oacute;n entera int_expr a la expresi&oacute;n de fecha 
+        o de fecha/hora datetime_expr. La unidad for int_expr la<br>
+        da el argumento interval , que debe ser uno de los siguientes valores: 
+        FRAC_SECOND, SECOND, MINUTE, HOUR, DAY,<br>
+        WEEK, MONTH, QUARTER, o YEAR.<br>
+        El valor interval puede especificarse usando una de las palabras claves 
+        que se muestran, o con un prefijo de SQL_TSI_.<br>
+        Por ejemplo, DAY o SQL_TSI_DAY son legales.<br>
+        mysql&gt; SELECT TIMESTAMPADD(MINUTE,1,'2003-01-02');<br>
+        -&gt; '2003-01-02 00:01:00'<br>
+        mysql&gt; SELECT TIMESTAMPADD(WEEK,1,'2003-01-02');<br>
+        -&gt; '2003-01-09'<br>
+        TIMESTAMPADD() est&aacute; disponible desde MySQL 5.0.0.<br>
+        &#8226; TIMESTAMPDIFF(interval,datetime_expr1,datetime_expr2)<br>
+        Retorna la diferencia entera entre las expresiones de fecha o de fecha/hora 
+        datetime_expr1 y datetime_expr2. La unidad<br>
+        del resultado se da en el argumento interval. Los valores legales para 
+        interval son los mismos que los listados en la<br>
+        descripci&oacute;n de la funci&oacute;n TIMESTAMPADD() .<br>
+        mysql&gt; SELECT TIMESTAMPDIFF(MONTH,'2003-02-01','2003-05-01');<br>
+        -&gt; 3<br>
+        mysql&gt; SELECT TIMESTAMPDIFF(YEAR,'2002-05-01','2001-01-01');<br>
+        -&gt; -1<br>
+        TIMESTAMPDIFF() est&aacute; disponible desde MySQL 5.0.0.<br>
+        &#8226; TIME_FORMAT(time,format)<br>
+        Se usa como la funci&oacute;n DATE_FORMAT() pero la cadena format puede 
+        contener s&oacute;lo los especificadores de formato que tratan<br>
+        horas, minutos y segundos. Otros especificadores producen un valor NULL 
+        o 0.<br>
+        Si el valor time contiene una parte horaria mayor que 23, los especificadores 
+        de formato horario %H y %k producen un valor<br>
+        mayor que el rango usual de 0..23. Los otros especificadores de hora producen 
+        la hora modulo 12.<br>
+        mysql&gt; SELECT TIME_FORMAT('100:00:00', '%H %k %h %I %l');<br>
+        -&gt; '100 100 04 04 4'<br>
+        &#8226; TIME_TO_SEC(time)<br>
+        Retorna el argumento time convertido en segundos.<br>
+        mysql&gt; SELECT TIME_TO_SEC('22:23:00');<br>
+        -&gt; 80580<br>
+        mysql&gt; SELECT TIME_TO_SEC('00:39:38');<br>
+        -&gt; 2378<br>
+        &#8226; TO_DAYS(date)<br>
+        Dada la fecha date, retorna un n&uacute;mero de d&iacute;a (el n&uacute;mero 
+        de dias desde el a&ntilde;o 0).<br>
+        mysql&gt; SELECT TO_DAYS(950501);<br>
+        -&gt; 728779<br>
+        mysql&gt; SELECT TO_DAYS('1997-10-07');<br>
+        -&gt; 729669<br>
+        TO_DAYS() no est&aacute; pensado para usarse con valores anteriores al 
+        calendario Gregoriano (1582), ya que no tiene en cuenta los<br>
+        d&iacute;as perdidos cuando se cambi&oacute; el calendario.<br>
+        Recuerde que MySQL convierte a&ntilde;os de dos d&iacute;gitos en fechas 
+        de cuatro d&iacute;gitos usando las reglas en Secci&oacute;n 11.3, &#8220;Tipos 
+        de fecha<br>
+        y hora&#8221;. Por ejemplo, '1997-10-07' y '97-10-07' se consideran fechas 
+        id&eacute;nticas:<br>
+        mysql&gt; SELECT TO_DAYS('1997-10-07'), TO_DAYS('97-10-07');<br>
+        -&gt; 729669, 729669<br>
+        Para fechas anteriores a 1582 (y posiblemente un a&ntilde;o posterior 
+        en otras localizaciones), los resultados de esta funci&oacute;n no son<br>
+        fiables. Consulte Secci&oacute;n 12.6, &#8220;Qu&eacute; calendario utiliza 
+        MySQL&#8221; para m&aacute;s detalles.<br>
+        &#8226; UNIX_TIMESTAMP(), UNIX_TIMESTAMP(date)<br>
+        Si se llama sin argumentos, retorna el timestamp de Unix (segundos desde 
+        '1970-01-01 00:00:00' GMT) como entero<br>
+        sin signo. Si se llama a UNIX_TIMESTAMP() con un argumento date , retorna 
+        el valor del argumento como segundos desde<br>
+        '1970-01-01 00:00:00' GMT. date puede ser una cadena DATE , una cadena 
+        DATETIME , un TIMESTAMP, o un n&uacute;mero<br>
+        en el formato YYMMDD o YYYYMMDD en hora local.<br>
+        mysql&gt; SELECT UNIX_TIMESTAMP();<br>
+        -&gt; 882226357<br>
+        mysql&gt; SELECT UNIX_TIMESTAMP('1997-10-04 22:23:00');<br>
+        -&gt; 875996580<br>
+        Cuando se usa UNIX_TIMESTAMP en una columna TIMESTAMP , la funci&oacute;n 
+        retorna el valor del timestamp interno directamente,<br>
+        sin conversi&oacute;n impl&iacute;cita &#8220;string-to-Unix-timestamp&#8221; 
+        . Si pasa una fecha fuera de rango a UNIX_TIMESTAMP(), retorna<br>
+        0, pero tenga en cuenta que s&oacute;lo se hace un chequeo de rango b&aacute;sico 
+        (a&ntilde;o de 1970 a 2037, mes de 01 a 12, d&iacute;a de 01 a<br>
+        31).<br>
+        Si quiere restar columnas UNIX_TIMESTAMP() puede querer convertir el resultado 
+        a enteros sin signo. Consulte Secci&oacute;n<br>
+        12.8, &#8220;Funciones y operadores de cast&#8221;.<br>
+        &#8226; UTC_DATE, UTC_DATE()<br>
+        Retorna la fecha UTC actual como valor en formato 'YYYY-MM-DD' o YYYYMMDD, 
+        dependiendo si la funci&oacute;n se usa en un<br>
+        contexto num&eacute;rico o de cadenas de caracteres.<br>
+        mysql&gt; SELECT UTC_DATE(), UTC_DATE() + 0;<br>
+        -&gt; '2003-08-14', 20030814<br>
+        &#8226; UTC_TIME, UTC_TIME()<br>
+        Retorna la hora UTC actual como valor en formato 'HH:MM:SS' or HHMMSS 
+        dependiendo si la funci&oacute;n se usa en un contexto<br>
+        num&eacute;rico o de cadenas de caracteres.<br>
+        mysql&gt; SELECT UTC_TIME(), UTC_TIME() + 0;<br>
+        -&gt; '18:07:53', 180753<br>
+        &#8226; UTC_TIMESTAMP, UTC_TIMESTAMP()<br>
+        Retorna la fecha y hora UTC actual como valor en formato 'YYYY-MM-DD HH:MM:SS' 
+        o YYYYMMDDHHMMSS dependiendo<br>
+        si la funci&oacute;n se usa en un contexto num&eacute;rico o de cadenas 
+        de caracteres.<br>
+        mysql&gt; SELECT UTC_TIMESTAMP(), UTC_TIMESTAMP() + 0;<br>
+        -&gt; '2003-08-14 18:08:04', 20030814180804<br>
+        &#8226; WEEK(date[,mode])<br>
+        Esta funci&oacute;n retorna el n&uacute;mero de semana para date. La forma 
+        de dos argumentos de WEEK() le permite especificar si la semana<br>
+        comienza en lunes o domingo y si el valor de retorno debe estar en el 
+        rango de 0 a 53 o de 1 a 53. Si el argumento mode<br>
+        se omite en MySQL 5.0, el valor de la variable de sistema default_week_format 
+        se usa. Consulte Secci&oacute;n 5.3.3,<br>
+        &#8220;Variables de sistema del servidor&#8221;.<br>
+        La siguiente tabla describe c&oacute;mo funciona el argumento mode :<br>
+        Primer d&iacute;a<br>
+        Modo de semana Rango Semana 1 es la primera semana...<br>
+        0 Domingo 0-53 con un domingo en este a&ntilde;o<br>
+        1 Lunes 0-53 con m&aacute;s de 3 d&iacute;as este a&ntilde;o<br>
+        2 Domingo 1-53 con un domingo este a&ntilde;o<br>
+        3 Lunes 1-53 con m&aacute;s de 3 d&iacute;as este a&ntilde;o<br>
+        4 Domingo 0-53 con m&aacute;s de 3 d&iacute;as este a&ntilde;o<br>
+        5 Lunes 0-53 con un lunes en este a&ntilde;o<br>
+        6 Domingo 1-53 con m&aacute;s de 3 d&iacute;as este a&ntilde;o<br>
+        7 Lunes 1-53 con un lunes en este a&ntilde;o<br>
+        mysql&gt; SELECT WEEK('1998-02-20');<br>
+        -&gt; 7<br>
+        mysql&gt; SELECT WEEK('1998-02-20',0);<br>
+        -&gt; 7<br>
+        mysql&gt; SELECT WEEK('1998-02-20',1);<br>
+        -&gt; 8<br>
+        mysql&gt; SELECT WEEK('1998-12-31',1);<br>
+        -&gt; 53<br>
+        Tenga en cuenta que si una fecha cae en la &uacute;ltima semana del a&ntilde;o 
+        pr&eacute;vio, MySQL retorna 0 si no usa 2, 3, 6, o 7 con el argumento<br>
+        opcional mode :<br>
+        mysql&gt; SELECT YEAR('2000-01-01'), WEEK('2000-01-01',0);<br>
+        -&gt; 2000, 0<br>
+        Se podr&iacute;a argumentar que MySQL deber&iacute;a retornar 52 para 
+        la funci&oacute;n WEEK() , ya que la fecha dada ocurre en la 52a semana<br>
+        de 1999. Decidimos retornar 0 en su lugar porque quer&iacute;amos que 
+        la funci&oacute;n devolviera &#8220;el n&uacute;mero de semana en el a&ntilde;o 
+        dado.&#8221;<br>
+        Esta hace uso de la funci&oacute;n WEEK() fiable combinada con otras funciones 
+        que extraen una parte de fecha de una fecha.<br>
+        Si prefiere que el resultado a ser evaluado respecto al a&ntilde;o que 
+        contiene el primer d&iacute;a de la semana para la fecha dada, debe usar<br>
+        0, 2, 5, o 7 como el argumento mode opcional.<br>
+        mysql&gt; SELECT WEEK('2000-01-01',2);<br>
+        -&gt; 52<br>
+        Alternativamente, use la funci&oacute;n YEARWEEK():<br>
+        mysql&gt; SELECT YEARWEEK('2000-01-01');<br>
+        -&gt; 199952<br>
+        mysql&gt; SELECT MID(YEARWEEK('2000-01-01'),5,2);<br>
+        -&gt; '52'<br>
+        &#8226; WEEKDAY(date)<br>
+        Retorna el &iacute;ndice de d&iacute;as de la semana para date (0 = lunes, 
+        1 = martes, ... 6 = domingo).<br>
+        mysql&gt; SELECT WEEKDAY('1998-02-03 22:23:00');<br>
+        -&gt; 1<br>
+        mysql&gt; SELECT WEEKDAY('1997-11-05');<br>
+        -&gt; 2<br>
+        &#8226; WEEKOFYEAR(date)<br>
+        Retorna la semana de la fecha como n&uacute;mero del rango 1 a 53. Esta 
+        es una funci&oacute;n de compatibilidad equivalente a WEEK(date,<br>
+        3).<br>
+        mysql&gt; SELECT WEEKOFYEAR('1998-02-20');<br>
+        -&gt; 8<br>
+        &#8226; YEAR(date)<br>
+        Retorna el a&ntilde;o para date, en el rango 1000 a 9999.<br>
+        mysql&gt; SELECT YEAR('98-02-03');<br>
+        -&gt; 1998<br>
+        &#8226; YEARWEEK(date), YEARWEEK(date,start)<br>
+        Retorna a&ntilde;o y semana para una fecha. El argumento start funciona 
+        exactamente como el argumento start de WEEK(). El<br>
+        a&ntilde;o en el resultado puede ser diferente del a&ntilde;o en el argumento 
+        fecha para la primera y &uacute;ltima semana del a&ntilde;o.<br>
+        mysql&gt; SELECT YEARWEEK('1987-01-01');<br>
+        -&gt; 198653<br>
+        Tenga en cuenta que el n&uacute;mero de semana es diferente de lo que 
+        la funci&oacute;n WEEK() retornar&iacute;a (0) para argumentos opcionales<br>
+        0 o 1, como WEEK() retorna la semana en el contexto del a&ntilde;o dado. 
+      </p>
+        </td>
+    <td>&nbsp;</td>
+    <td><a href="http://www.euskalnet.net/juanarana/oraclezip/Ejer3.rar"><img src="../../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td>
+<div align="right"><a href="http://www.euskalnet.net/juanarana/index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a>
+      </div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

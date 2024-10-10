@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>LIntroducci&amp;oacute;n a Servlets</title>
+<META http-equiv=Content-Language content=es>
+<META content="Manual Servlet, ejemplos Servlet, codigos Servlet" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Manual Servlet, ejemplos Servlet, codigos Servlet">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2> <strong>Introducci&oacute;n a Servlets</strong></h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <table width="472" border="0" >
+        <tr> 
+          <td width="21%"><h3>Contenido:</h3></td>
+          <td width="79%"></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="struts09.htm#Intro">- Introducci&oacute;n a los Servlets</a></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="struts09.htm#Utilizar">- Utilizar Servlets en lugar de 
+            Scripts CGI!</a></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="struts09.htm#Otros">- </a>Otros usos de los Servlets</td>
+        </tr>
+      </table>
+      <h3>Introducci&oacute;n a los Servlets<a name="Intro"></a></h3>
+      <p>Los Servlets son m&oacute;dulos que extienden los servidores orientados 
+        a petici&oacute;n-respuesta, como los
+        servidores web compatibles con Java. Por ejemplo, un servlet podr&iacute;a 
+        ser responsable de tomar los
+        datos de un formulario de entrada de pedidos en HTML y aplicarle la l&oacute;gica 
+        de negocios utilizada
+        para actualizar la base de datos de pedidos de la compa&ntilde;ia.</p>
+      <p>Los Servlets son para los servidores lo que los applets son para los 
+        navegadores. Sin embargo, al
+        contrario que los applets, los servlets no tienen interface gr&aacute;fico 
+        de usuario.
+        Los servelts pueden ser incluidos en muchos servidores diferentes porque 
+        el API Servlet, el que se
+        utiliza para escribir Servlets, no asume nada sobre el entorno o protocolo 
+        del servidor. Los servlets
+        se est&aacute;n utilizando ampliamente dentro de servidores HTTP; muchos 
+        servidores Web soportan el API
+        Servlet.</p>
+            
+      <h3>Utilizar Servlets en lugar de Scripts CGI!<a name="Utilizar"></a> </h3>
+      <p>Los Servlets son un reemplazo efectivo para los scripts CGI. Proporcionan 
+        una forma de generar
+        documentos din&aacute;micos que son f&aacute;ciles de escribir y r&aacute;pidos 
+        en ejecutarse. Los Servlets tambi&eacute;n
+        solucionan el problema de hacer la programaci&oacute;n del lado del servidor 
+        con APIs espec&iacute;ficos de la
+        plataforma: est&aacute;n desarrollados con el API Java Servlet, una extensi&oacute;n 
+        est&aacute;ndard de Java.
+        Por eso se utilizan los servlets para manejar peticiones de cliente HTTP. 
+        Por ejemplo, tener un
+        servlet procesando datos POSTeados sobre HTTP utilizando un formulario 
+        HTML, incluyendo datos
+        del pedido o de la tarjeta de cr&eacute;dito. Un servlet como este podr&iacute;a 
+        ser parte de un sistema de
+        procesamiento de pedidos, trabajando con bases de datos de productos e 
+        inventarios, y quizas un
+        sistema de pago on-line.
+      </p>
+	  <h3>Otros usos de los servlets<a name="Otros"></a> </h3>
+      <p> - Permitir la colaboraci&oacute;n entre la gente. Un servlet puede manejar 
+        m&uacute;ltiples peticiones concurrentes, y puede sincronizarlas. Esto 
+        permite a los servlets soportar sistemas como conferencias on-line. </p>
+      <p>-Reenviar peticiones. Los Servlets pueden reenviar peticiones a otros 
+        servidores y servlets. Con esto los servlets pueden ser utilizados para 
+        cargar balances desde varios servidores que reflejan el mismo contenido, 
+        y para particionar un &uacute;nico servicio l&oacute;gico en varios servidores, 
+        de acuerdo con los tipos de tareas o la organizaci&oacute;n compartida.<br>
+      </p></td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

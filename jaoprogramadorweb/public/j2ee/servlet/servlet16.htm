@@ -1,0 +1,248 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Utilizar Cookies</title>
+<META http-equiv=Content-Language content=es>
+<META content="Manual Servlet, ejemplos Servlet, codigos Servlet" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Manual Servlet, ejemplos Servlet, codigos Servlet">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2> Utilizar Cookies</h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <p>Las Cookies son una forma para que un servidor 
+        (o un servlet, como parte de un servidor) env&iacute;e informaci&oacute;n 
+        al cliente para almacenarla, y para que el servidor pueda posteriormente 
+        recuperar esos datos desde el cliente. Los servlet env&iacute;an cookies 
+        al cliente a&ntilde;adiendo campos a las cabeceras de respuesta HTTP. 
+        Los clientes devuelven las cookies autom&aacute;ticamente a&ntilde;adiendo 
+        campos a las cabeceras de peticiones HTTP. </p>
+      <p>Cada cabecera de petici&oacute;n o respuesta HTTP es nombrada como un 
+        s&oacute;lo valor. Por ejemplo, una cookie podr&iacute;a tener un nombre 
+        de cabecera BookToBuy con un valor 304qty1, indicando a la aplicaci&oacute;n 
+        llamante que el usuario quiere comprar una copia del libro con el n&uacute;mero 
+        304 en el inventario. (Las cookies y sus valores son espec&iacute;ficos 
+        de la aplicaci&oacute;n). Varias cookies pueden tener el mismo nombre. 
+        Por ejemplo, un servlet podr&iacute;a enviar dos cabeceras llamadas BookToBuy; 
+        una podr&iacute;a tener el valor anterior, 304qty1, mientras que la otra 
+        podr&iacute;a tener el valor 301qty3. Estas cookies podr&iacute;an indicar 
+        que el usuario quiere comprar una copia del libro con el n&uacute;mero 
+        304 en el inventario y tres copias del libro con el n&uacute;mero 301del 
+        inventario. Adem&aacute;s de un nombre y un valor, tambi&eacute;n se pueden 
+        proporcionar atributos opcionales como comentarios.</p>
+      <p> Los navegadores actuales no siempre tratan correctamente a los atributos 
+        opcionales, por eso ten cuidado con ellos. Un servidor puede proporcionar 
+        una o m&aacute;s cookies a un cliente. El software del cliente, como un 
+        navegador, se espera que pueda soportar veinte cookies por host de al 
+        menos 4 kb cada una. Cuando se env&iacute;a una cookie al cliente, el 
+        est&aacute;ndard HTTP/1.0 captura la p&aacute;gina que no est&aacute; 
+        en la cach&eacute;. Actualmente, el javax.servlet.http.Cookie no soporta 
+        los controles de cach&eacute; del HTTP/1.1. </p>
+      <p>Las cookies que un cliente almacena para un servidor s&oacute;lo pueden 
+        ser devueltas a ese mismo servidor. Un servidor puede contener m&uacute;ltiples 
+        servlets; el ejemplo Duke's Bookstore est&aacute; compuesto por varios 
+        servlets ejecut&aacute;ndose en un s&oacute;lo servidor. Como las cookies 
+        son devueltas al servidor, los servlets que se ejecutan dentro de un servidor 
+        comparten las cookies. Los ejemplos de esta p&aacute;gina ilustran esto 
+        mostrando como los servletsCatalogServlet y ShowCart trabajan con los 
+        mismos cookies.</p>
+      <p><br>
+        Nota:<br>
+        Esta p&aacute;gina tiene c&oacute;digo que no forma parte del ejemplo 
+        Duke's Bookstore. Duke's Bookstore utilizar&iacute;a c&oacute;digo como 
+        el de esta p&aacute;gina si utilizar&aacute; cookies en vez de seguimiento 
+        de sesi&oacute;n para los pedidos de los clientes. C&oacute;mo las cookies 
+        no forman parte de Duke's Bookstore, piensa en los ejemplos de esta p&aacute;gina 
+        como pseudo-c&oacute;digo. Para enviar una cookie: Ejemplariza un objeto 
+        Cookie. 1. Selecciona cualquier atributo. 2. Envia el cookie 3. Para obtener 
+        informaci&oacute;n de un cookie: Recupera todos los cookies de la petici&oacute;n 
+        del usuario. 1. Busca el cookie o cookies con el nombre que te interesa, 
+        utiliza las t&eacute;cnicas de programaci&oacute;n est&aacute;ndard. 2. 
+        Obt&eacute;n los balores de las cookies que hayas encontrado. 3. Crear 
+        un Cookie El constructor de la clase javax.servlet.http.Cookie crea un 
+        cookie con un nombre inicial y un valor. Se puede cambiar el valor posteriormente 
+        utilizando el m&eacute;todo setValue. El nombre del cookie debe ser un 
+        token HTTP/1.1. Los tokens son strings que contienen uno de los caracteres 
+        especiales liestados en RFC 2068. (Strings alfanum&eacute;ricos cualificados 
+        como tokens.) Adem&aacute;s, los nombres que empiezan con el car&aacute;cter 
+        dollar (&quot;$&quot;) est&aacute;n reservados por RFC 2109. El valor 
+        del cookie puede ser cualquier string, aunque no est&aacute; garantizado 
+        que los valores null funcionen en todos los navegadores. Adem&aacute;s, 
+        si enviamos una cookie que cumpla con las especificaciones originales 
+        de las cookies de Netscape, no se deben utilizar car&aacute;cteres blancos 
+        ni ninguno de estos caracteres. [ ] ( ) = , &quot;&quot; / ? @ : ; Si 
+        nuestro servlet devuelve una respuesta al usuario con un Writer, debemos 
+        crear la cookie antes de acceder a Writer. (Porque las cookies se env&iacute;an 
+        al cliente como una cabecera, y las cabeceras deben escribirse antes de 
+        acceder al Writer.) Si el CatalogServlet utilizar&aacute; cookies para 
+        seguir la pista de una hoja de pedido, el servlet podr&iacute;a crear 
+        las cookies de esta forma.<br>
+        public void doGet (HttpServletRequest request,<br>
+        HttpServletResponse response)<br>
+        throws ServletException, IOException<br>
+        {<br>
+        BookDBServlet database = (BookDBServlet)<br>
+        getServletConfig().getServletContext().getServlet(&quot;bookdb&quot;);<br>
+        // Check for pending adds to the shopping cart<br>
+        String bookId = request.getParameter(&quot;Buy&quot;);<br>
+        //If the user wants to add a book, remember it by adding a cookie<br>
+        if (bookId != null) {<br>
+        Cookie getBook = new Cookie(&quot;Buy&quot;, bookId);<br>
+        ...<br>
+        }<br>
+        // set content-type header before accessing the Writer<br>
+        response.setContentType(&quot;text/html&quot;);<br>
+        // now get the writer and write the data of the response<br>
+        PrintWriter out = response.getWriter();<br>
+        out.println(&quot;&lt;html&gt;&quot; +<br>
+        &quot;&lt;head&gt;&lt;title&gt; Book Catalog &lt;/title&gt;&lt;/head&gt;&quot; 
+        + ...);<br>
+        ...<br>
+        }<br>
+        Seleccionar los Atributos de un Cookie<br>
+        La clase Cookie proporciona varios m&eacute;todos para seleccionar los 
+        valores del cookie y sus atributos. La utilizaci&oacute;n de estos m&eacute;todos 
+        es correcta, est&aacute;n explicados en el javadoc para la clase Cookie. 
+        El siguiente ejemplo selecciona el campo comment del cookie CatalogServlet. 
+        Este campo describe el prop&oacute;sito del cookie.<br>
+        public void doGet (HttpServletRequest request,<br>
+        HttpServletResponse response)<br>
+        throws ServletException, IOException<br>
+        {<br>
+        ...<br>
+        //If the user wants to add a book, remember it by adding a cookie<br>
+        if (values != null) {<br>
+        bookId = values[0];<br>
+        Cookie getBook = new Cookie(&quot;Buy&quot;, bookId);<br>
+        getBook.setComment(&quot;User wants to buy this book &quot; +<br>
+        &quot;from the bookstore.&quot;);<br>
+        }<br>
+        ...<br>
+        }<br>
+        Tambi&eacute;n se puede seleccionar la caducidad del cookie. Este atributo 
+        es &uacute;til, por ejemplo, para borrar un cookie. De nuevo, si Duke's 
+        Bookstore utilizar&aacute; cookies para su hoja de pedidos, el ejemplo 
+        podr&iacute;a utilizar este atributo para borrar un libro de la hoja de 
+        pedido. El usuario borra un libro de la hoja de pedidos en el ShowCartServlet; 
+        su c&oacute;digo se podr&iacute;a parecer a esto.<br>
+        public void doGet (HttpServletRequest request,<br>
+        HttpServletResponse response)<br>
+        throws ServletException, IOException<br>
+        {<br>
+        ...<br>
+        /* Handle any pending deletes from the shopping cart */<br>
+        String bookId = request.getParameter(&quot;Remove&quot;);<br>
+        ...<br>
+        if (bookId != null) {<br>
+        // Find the cookie that pertains to the book to remove<br>
+        ...<br>
+        // Delete the cookie by setting its maximum age to zero<br>
+        thisCookie.setMaxAge(0);<br>
+        ...<br>
+        }<br>
+        // also set content type header before accessing the Writer<br>
+        response.setContentType(&quot;text/html&quot;);<br>
+        PrintWriter out = response.getWriter();<br>
+        //Print out the response<br>
+        out.println(&quot;&lt;html&gt; &lt;head&gt;&quot; +<br>
+        &quot;&lt;title&gt;Your Shopping Cart&lt;/title&gt;&quot; + ...);<br>
+        Enviar Cookies<br>
+        Las cookies se env&iacute;an como cabeceras en la respuesta al cliente, 
+        se a&ntilde;aden con el m&eacute;todo addCookie de la clase HttpServletResponse. 
+        Si estamos utilizando un Writer para devolver texto, debemos llamar a 
+        addCookie antes de llamar al m&eacute;todo getWriter de HttpServletResponse. 
+        Continuando con el ejemplo de CatalogServlet, aqu&iacute; est&aacute; 
+        el c&oacute;digo para enviar la cookie.<br>
+        public void doGet (HttpServletRequest request,<br>
+        HttpServletResponse response)<br>
+        throws ServletException, IOException<br>
+        {<br>
+        ...<br>
+        //If the user wants to add a book, remember it by adding a cookie<br>
+        if (values != null) {<br>
+        bookId = values[0];<br>
+        Cookie getBook = new Cookie(&quot;Buy&quot;, bookId);<br>
+        getBook.setComment(&quot;User has indicated a desire &quot; +<br>
+        &quot;to buy this book from the bookstore.&quot;);<br>
+        response.addCookie(getBook);<br>
+        }<br>
+        ...<br>
+        }<br>
+        Recuperar Cookies<br>
+        Los clientes devuelven las cookies como campos a&ntilde;adidos a las cabeceras 
+        de petici&oacute;n HTTP. Para recuperar una cookie, debemos recuperar 
+        todas las cookies utilizando el m&eacute;todo getCookies de la clase HttpServletRequest. 
+        El m&eacute;todo getCookies devuelve un array de objetos Cookie, en el 
+        que podemos buscar la cookie o cookies que querramos. (Recuerda que distintas 
+        cookies pueden tener el mismo nombre, para obtener el nombre de una cookie, 
+        utiliza su m&eacute;todo getName.) Para continuar con el ejemplo ShowCartServlet. 
+        public void doGet (HttpServletRequest request, HttpServletResponse response)<br>
+        throws ServletException, IOException<br>
+        {<br>
+        ...<br>
+        /* Handle any pending deletes from the shopping cart */<br>
+        String bookId = request.getParameter(&quot;Remove&quot;);<br>
+        ...<br>
+        if (bookId != null) {<br>
+        // Find the cookie that pertains to the book to remove<br>
+        Cookie[] cookies = request.getCookies();<br>
+        ...<br>
+        // Delete the book's cookie by setting its maximum age to zero<br>
+        thisCookie.setMaxAge(0);<br>
+        }<br>
+        // also set content type header before accessing the Writer<br>
+        response.setContentType(&quot;text/html&quot;);<br>
+        PrintWriter out = response.getWriter();<br>
+        //Print out the response<br>
+        out.println(&quot;&lt;html&gt; &lt;head&gt;&quot; +<br>
+        &quot;&lt;title&gt;Your Shopping Cart&lt;/title&gt;&quot; + ...);<br>
+        Obtener el valor de una Cookie<br>
+        Para obtener el valor de una cookie, se utiliza el m&eacute;todo getValue.<br>
+        public void doGet (HttpServletRequest request,<br>
+        HttpServletResponse response)<br>
+        throws ServletException, IOException<br>
+        {<br>
+        ...<br>
+        /* Handle any pending deletes from the shopping cart */<br>
+        String bookId = request.getParameter(&quot;Remove&quot;);<br>
+        ...<br>
+        if (bookId != null) {<br>
+        // Find the cookie that pertains to that book<br>
+        Cookie[] cookies = request.getCookies();<br>
+        for(i=0; i &lt; cookies.length; i++) {<br>
+        Cookie thisCookie = cookie[i];<br>
+        if (thisCookie.getName().equals(&quot;Buy&quot;) &amp;&amp;<br>
+        thisCookie.getValue().equals(bookId)) {<br>
+        // Delete the cookie by setting its maximum age to zero<br>
+        thisCookie.setMaxAge(0);<br>
+        }<br>
+        }<br>
+        }<br>
+        // also set content type header before accessing the Writer<br>
+        response.setContentType(&quot;text/html&quot;);<br>
+        PrintWriter out = response.getWriter();<br>
+        //Print out the response<br>
+        out.println(&quot;&lt;html&gt; &lt;head&gt;&quot; +<br>
+        &quot;&lt;title&gt;Your Shopping Cart&lt;/title&gt;&quot; + ...); </p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

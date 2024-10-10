@@ -1,0 +1,149 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Comentarios, PI, Secciones CDATA, Entidades</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación en CSS,Programas CSS,Aplicaciones en CSS,Ejercicios en CSS, Ejemplos de CSS,Tutoriales de CSS,Manuales CSS" name=description>
+<meta name="keywords" content="CSS, Manual CSS, tutorial CSS, Ejemplos CSS, ejercicios CSS, Cascading Style Sheet">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos"><tr> 
+    <td height="39" colspan="3"> <h2> Ejemplos XML</h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <p>1.- Ejercicio 1:</p>
+      <p>//Documento XML:Ej1.xml</p>
+      <p>&lt;?xml version=&quot;1.0&quot;?&gt;<br>
+        &lt;!DOCTYPE Informe SYSTEM &quot;Ej1.dtd&quot;&gt;<br>
+        &lt;bookmark&gt;<br>
+        &lt;metainfo&gt;<br>
+        &lt;titulo&gt;Programacion Java&lt;/titulo&gt;<br>
+        &lt;autor&gt;Juantxu&lt;/autor&gt;<br>
+        &lt;resumen&gt;web de programaci&oacute;n en Java&lt;/resumen&gt;<br>
+        &lt;/metainfo&gt;<br>
+        &lt;titulo&gt;Programacion Java&lt;/titulo&gt;<br>
+        &lt;descripcion&gt;web de programaci&oacute;n en Java&lt;/descripcion&gt;<br>
+        &lt;direcciones&gt;http://www.euskalnet.net/jaoprogramador&lt;/direcciones&gt;<br>
+        &lt;grupo&gt;<br>
+        &lt;titulo&gt;Programacion &lt;/titulo&gt;<br>
+        &lt;id&gt;1&lt;/id&gt;<br>
+        &lt;direcciones&gt;<br>
+        &lt;url&gt;http://www.euskalnet.net/jaoprogramador&lt;/url&gt;<br>
+        &lt;titulo&gt;JAO&lt;/titulo&gt;<br>
+        &lt;direccion&gt;C/ Perez Galdos&lt;/direccion&gt;<br>
+        &lt;idioma&gt;castellano&lt;/idioma&gt;<br>
+        &lt;valoracion&gt;5&lt;/valoracion&gt;<br>
+        &lt;/direcciones&gt;<br>
+        &lt;/grupo&gt;<br>
+        &lt;/bookmark&gt;</p>
+      <p>//Documento DTD:Ej1.dtd</p>
+      <p>&lt;!ELEMENT bookmark (metainfo, titulo, descripcion?, (direcciones?|grupo))&gt;<br>
+        &lt;!ELEMENT metainfo (titulo, autor, resumen?)&gt;<br>
+        &lt;!ELEMENT titulo (#PCDATA)&gt;<br>
+        &lt;!ELEMENT autor (#PCDATA)&gt;<br>
+        &lt;!ELEMENT resumen (#PCDATA)&gt;<br>
+        &lt;!ELEMENT titulo (#PCDATA)&gt;<br>
+        &lt;!ELEMENT direcciones (#PCDATA)&gt;<br>
+        &lt;!ELEMENT grupo (titulo, id, direcciones)&gt;<br>
+        &lt;!ELEMENT titulo (#PCDATA)&gt;<br>
+        &lt;!ELEMENT id (#PCDATA)&gt;<br>
+        &lt;!ELEMENT direcciones (url,titulo,direccion?,idioma,valoracion)&gt;<br>
+        &lt;!ELEMENT url (#PCDATA)&gt;<br>
+        &lt;!ELEMENT titulo (#PCDATA)&gt;<br>
+        &lt;!ELEMENT direccion (#PCDATA)&gt;<br>
+        &lt;!ELEMENT idioma (castellano|ingles) #REQUIRED&gt;<br>
+        &lt;!ELEMENT valoracion (1|2|3|4|5) #REQUIRED&gt;<br>
+      </p>
+      <p>2.-Ejercicio 2:</p>
+      <p>//Documento XML</p>
+      <p>&lt;?xml version=&quot;1.0&quot;?&gt;<br>
+        &lt;!DOCTYPE Informe SYSTEM &quot;dtd.dtd&quot;&gt;<br>
+        &lt;libreria&gt;<br>
+        &lt;libros&gt;<br>
+        &lt;titulo&gt;Don Quijote&lt;/titulo&gt;<br>
+        &lt;autor&gt;Cervantes&lt;/autor&gt;<br>
+        &lt;editorial&gt;Alvawara&lt;/editorial&gt;<br>
+        &lt;paginas&gt;2345&lt;/paginas&gt;<br>
+        &lt;precio&gt;1200&lt;/precio&gt;<br>
+        &lt;descripcion&gt;Chapa&lt;/descripcion&gt;<br>
+        &lt;/libros&gt;<br>
+        &lt;libros&gt;<br>
+        &lt;titulo&gt;POO&lt;/titulo&gt;<br>
+        &lt;autor&gt;Juan Arana&lt;/autor&gt;<br>
+        &lt;editorial&gt;JAO&lt;/editorial&gt;<br>
+        &lt;paginas&gt;500&lt;/paginas&gt;<br>
+        &lt;precio&gt;1200&lt;/precio&gt;<br>
+        &lt;descripcion&gt;POO&lt;/descripcion&gt;<br>
+        &lt;/libros&gt;<br>
+        &lt;/libreria&gt;</p>
+      <p>//Documento DTD</p>
+      <p>&lt;!ELEMENT libreria (#PCDATA)&gt;<br>
+        &lt;!ELEMENT libros (titulo,autor,editorial,paginas,precio,descripcion)&gt;<br>
+        &lt;!ELEMENT titulo (#PCDATA)&gt;<br>
+        &lt;!ELEMENT autor (#PCDATA)&gt;<br>
+        &lt;!ELEMENT editorial (#PCDATA)&gt;<br>
+        &lt;!ELEMENT paginas (#PCDATA)&gt;<br>
+        &lt;!ELEMENT precio (#PCDATA)&gt;<br>
+        &lt;!ELEMENT descripcion (#PCDATA)&gt;</p>
+      <p>3.- Ejercicio 3:</p>
+      <p>//Documento XML:Ej5.xml</p>
+      <p>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;<br>
+        &lt;?xml-stylesheet type=&quot;text/css&quot; href=&quot;estilo.css&quot;?&gt;<br>
+        &lt;empresa&gt;<br>
+        &lt;cliente&gt;<br>
+        &lt;nombre&gt; Roberto &lt;/nombre&gt;<br>
+        &lt;apellido&gt; Movilla &lt;/apellido&gt;<br>
+        &lt;direccionpago&gt; General Ricardos, 56 &lt;/direccionpago&gt;<br>
+        &lt;ciudadpago&gt; Madrid &lt;/ciudadpago&gt;<br>
+        &lt;CPpago&gt; 28055 &lt;/CPpago&gt;<br>
+        &lt;empleado&gt; Juantxu &lt;/empleado&gt;<br>
+        &lt;/cliente&gt;<br>
+        &lt;remitente&gt;<br>
+        &lt;nombre&gt; Alicia &lt;/nombre&gt;<br>
+        &lt;apellido&gt; Abad &lt;/apellido&gt;<br>
+        &lt;direccionenvio&gt; Plaza Duquesa n&ordm; 12 &lt;/direccionenvio&gt;<br>
+        &lt;ciudadenvio&gt; Albacete &lt;/ciudadenvio&gt;<br>
+        &lt;CPenvio&gt; 05020 &lt;/CPenvio&gt; <br>
+        &lt;/remitente&gt;<br>
+        &lt;pedido&gt;<br>
+        &lt;fechapedido&gt; 20 Octubre 99 &lt;/fechapedido&gt;<br>
+        &lt;codigoproducto&gt; 872-AA &lt;/codigoproducto&gt;<br>
+        <br>
+        &lt;cantidad&gt;1&lt;/cantidad&gt;<br>
+        &lt;precio&gt; 148.95&lt;/precio&gt;<br>
+        &lt;complementos&gt;<br>
+        &lt;codigoproducto&gt; 926-FH &lt;/codigoproducto&gt;<br>
+        &lt;cantidad&gt;3&lt;/cantidad&gt;<br>
+        &lt;precio&gt; 7.98&lt;/precio&gt;<br>
+        &lt;/complementos&gt;<br>
+        <br>
+        &lt;/pedido&gt;<br>
+        &lt;/empresa&gt;</p>
+      <p>//Documento CSS:estilo.css</p>
+      <p>cliente {display:block;background:blue;font-family:arial;margin:1cm;font-weight:bold}<br>
+        remitente {display:block;background:#222222;font-size:larger;font-weight:bold<br>
+        ;color:yellow;font-family:arial;border:#FF0000;border-style:double;margin:1cm}<br>
+        pedido {display:block;background:#444444;font-family:arial;border:#FF0010;border-style:double}<br>
+      </p>
+      <p><br>
+      </p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

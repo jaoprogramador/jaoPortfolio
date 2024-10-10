@@ -1,0 +1,351 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Ejercicios MySQL</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="MySQL, sql, pl/sql, programacion MySQL, ejercicios MySQL, ejemplos MySQL, select">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2>S E L E C T</h2></td>
+  </tr>
+  <tr> 
+    <td><h3>Sintaxis de SELECT</h3>
+      <p>SELECT<br>
+        [ALL | DISTINCT | DISTINCTROW ]<br>
+        [HIGH_PRIORITY]<br>
+        [STRAIGHT_JOIN]<br>
+        [SQL_SMALL_RESULT] [SQL_BIG_RESULT] [SQL_BUFFER_RESULT]<br>
+        [SQL_CACHE | SQL_NO_CACHE] [SQL_CALC_FOUND_ROWS]<br>
+        select_expr, ...<br>
+        [INTO OUTFILE 'file_name' export_options<br>
+        | INTO DUMPFILE 'file_name']<br>
+        [FROM table_references<br>
+        [WHERE where_definition]<br>
+        [GROUP BY {col_name | expr | position}<br>
+        [ASC | DESC], ... [WITH ROLLUP]]<br>
+        [HAVING where_definition]<br>
+        [ORDER BY {col_name | expr | position}<br>
+        [ASC | DESC] , ...]<br>
+        [LIMIT {[offset,] row_count | row_count OFFSET offset}]<br>
+        [PROCEDURE procedure_name(argument_list)]<br>
+        [FOR UPDATE | LOCK IN SHARE MODE]]<br>
+        SELECT se usa para recibir registros seleccionados desde una o m&aacute;s 
+        tablas. MySQL 5.0 incluye soporte para comandos UNION y<br>
+        subconsultas. Consulte Secci&oacute;n 13.2.7.2, &#8220;Sintaxis de UNION&#8221; 
+        y Secci&oacute;n 13.2.8, &#8220;Sintaxis de subconsultas&#8221;.<br>
+        &#8226; Cada select_expr indicata una columna que quiere recibir.<br>
+        &#8226; table_references indicata la tabla o tablas desde la que recibir 
+        registros. Su sintaxis se describe en Secci&oacute;n 13.2.7.1,<br>
+        &#8220;Sintaxis de JOIN&#8221;.<br>
+        &#8226; where_definition consiste en la palabra clave WHERE seguida por 
+        una expresi&oacute;n que indica la condici&oacute;n o condiciones<br>
+        que deben satisfacer los registros para ser seleccionados.<br>
+        SELECT tambi&eacute;n puede usarse para recuperar registros computados 
+        sin referencia a ninguna tabla.<br>
+        Por ejemplo:<br>
+        mysql&gt; SELECT 1 + 1;<br>
+        -&gt; 2<br>
+        Todas las cl&aacute;usulas usadas deben darse exactamente en el orden 
+        mostrado en la descripci&oacute;n de la sintaxis. Por ejemplo, una cl&aacute;usula<br>
+        HAVING debe ir tras cualquier cl&aacute;usula GROUP BY y antes de cualquier 
+        cl&aacute;usula ORDER BY .<br>
+        &#8226;<br>
+        Una select_expr puede tener un alias usando AS alias_name. El alias se 
+        usa como el nombre de columna de la expresi&oacute;n<br>
+        y puede usarse en cl&aacute;usulas GROUP BY, ORDER BY, o HAVING . Por 
+        ejemplo:<br>
+        mysql&gt; SELECT CONCAT(last_name,', ',first_name) AS full_name<br>
+        -&gt; FROM mytable ORDER BY full_name;<br>
+        La palabra clave AS es opcional cuando se usa un alias para select_expr. 
+        El ejemplo precedente podr&iacute;a haberse escrito como:<br>
+        mysql&gt; SELECT CONCAT(last_name,', ',first_name) full_name<br>
+        -&gt; FROM mytable ORDER BY full_name;<br>
+        Como AS es opcional, puede ocurrir un sutil problema si olvida la coma 
+        entre dos expresiones select_expr : MySQL interpreta<br>
+        el segundo como un nombre de alias. Por ejemplo, en el siguiente comando, 
+        columnb se tata como un nombre de alias:<br>
+        mysql&gt; SELECT columna columnb FROM mytable;<br>
+        Por esta raz&oacute;n, es una buena pr&aacute;ctica poner los alias de 
+        columnas usando AS.<br>
+        &#8226; No se permite usar un alias de columna en una cl&aacute;usula 
+        WHERE, ya que el valor de columna puede no estar determinado cuando<br>
+        se ejecuta la cl&aacute;usula WHERE . Consulte Secci&oacute;n A.5.4, &#8220;Problemas 
+        con alias de columnas&#8221;.<br>
+        &#8226; La cl&aacute;usula FROM table_references indica la tabla desde 
+        la que recibir registros. Si nombra m&aacute;s de una tabla, est&aacute; 
+        realizando<br>
+        un join, Para informaci&oacute;n sobre la sintaxis de join, consulte Secci&oacute;n 
+        13.2.7.1, &#8220;Sintaxis de JOIN&#8221;. Para cada tabla especificada,<br>
+        puede opcionalmente especificar un alias.<br>
+        tbl_name [[AS] alias]<br>
+        [[USE INDEX (key_list)]<br>
+        | [IGNORE INDEX (key_list)]<br>
+        | [FORCE INDEX (key_list)]]<br>
+        El uso de USE INDEX, IGNORE INDEX, FORCE INDEX para dar al optimizador 
+        pistas acerca de c&oacute;mo escoger los indices<br>
+        se describe en Secci&oacute;n 13.2.7.1, &#8220;Sintaxis de JOIN&#8221;.<br>
+        En MySQL 5.0, puede usar SET max_seeks_for_key=value como alternativa 
+        para forzar a MySQL a que realice escaneos<br>
+        de claves en lugar de escaneos de tabla.<br>
+        &#8226; Puede referirse a una tabla dentro de la base de datos actual 
+        como tbl_name (dentro de la base de datos actual) , o como<br>
+        db_name.tbl_name para referirse a una base de datos expl&iacute;citamente. 
+        Puede referirse a una columna como col_name,<br>
+        tbl_name.col_name, o db_name.tbl_name.col_name. No necesita especificar 
+        un prefijo tbl_name o<br>
+        db_name.tbl_name para una referencia de columna a no ser que la referencia 
+        fuese amb&iacute;gua. Consulte Secci&oacute;n 9.2,<br>
+        &#8220;Nombres de bases de datos, tablas, &iacute;ndices, columnas y alias&#8221; 
+        para ejemplos de ambig&uuml;edad que requieran las formas de referencia<br>
+        de columna m&aacute;s expl&iacute;citas.<br>
+        &#8226; En MySQL 5.0, puede especificar DUAL como nombre de tabla falso 
+        en siguaciones donde no se referencian tablas:<br>
+        mysql&gt; SELECT 1 + 1 FROM DUAL;<br>
+        -&gt; 2<br>
+        DUAL es una caracter&iacute;stica puramente de compatibilidad. Otros servidores 
+        requieren esta sintaxis.<br>
+        &#8226; Una referencia de tabla puede tener un alias usando tbl_name AS 
+        alias_name o tbl_name alias_name:<br>
+        mysql&gt; SELECT t1.name, t2.salary FROM employee AS t1, info AS t2<br>
+        -&gt; WHERE t1.name = t2.name;<br>
+        mysql&gt; SELECT t1.name, t2.salary FROM employee t1, info t2<br>
+        -&gt; WHERE t1.name = t2.name;<br>
+        &#8226; En la cl&aacute;usula WHERE , puede usar cualquiera de las funciones 
+        que soporta MySQL, escepto para funciones agregadas<br>
+        (resumen). Consulte Cap&iacute;tulo 12, Funciones y operadores.<br>
+        &#8226; Las columnas seleccionadas para la salida pueden ser referidas 
+        en cl&aacute;usulas ORDER BY y GROUP BY usando nombres de columnas,<br>
+        alias, o posiciones. Las posiciones de columnas son enteros y comienzan 
+        con 1:<br>
+        mysql&gt; SELECT college, region, seed FROM tournament<br>
+        -&gt; ORDER BY region, seed;<br>
+        mysql&gt; SELECT college, region AS r, seed AS s FROM tournament<br>
+        -&gt; ORDER BY r, s;<br>
+        mysql&gt; SELECT college, region, seed FROM tournament<br>
+        -&gt; ORDER BY 2, 3;<br>
+        Para ordenar en orden inverso, a&ntilde;ada la palabra clave DESC (descendiente) 
+        al nombre de la columna en la cl&aacute;usula ORDER BY<br>
+        por la que est&aacute; ordenando. Por defecto es orden ascendente; puede 
+        especificarse expl&iacute;citamente usando la palabra clave ASC.<br>
+        El uso de posiciones de columna est&aacute; obsoleto ya que la sintaxis 
+        se ha eliminado del est&aacute;ndar SQL.<br>
+        &#8226; Si usa GROUP BY, los registros de salida se ordenan seg&uacute;n 
+        las columnas GROUP BY como si tuviera un ORDER BY para las<br>
+        mismas columnas. MySQL 5.0 extiende la cl&aacute;usula GROUP BY para que 
+        pueda especificar ASC y DESC tras las columnas<br>
+        nombradas en la cl&aacute;usula:<br>
+        SELECT a, COUNT(b) FROM test_table GROUP BY a DESC<br>
+        &#8226; MySQL extiende el uso de GROUP BY para permitir seleccionar campos 
+        que no se mencionan en la cl&aacute;usula GROUP BY . Si<br>
+        no obtiene los resultados que espera de la consulta, por favor lea la 
+        descripci&oacute;n de GROUP BY en Secci&oacute;n 12.10, &#8220;Funciones 
+        y<br>
+        modificadores para cl&aacute;usulas GROUP BY&#8221;.<br>
+        &#8226; En MySQL 5.0, GROUP BY permite un modificador WITH ROLLUP . Consulte 
+        Secci&oacute;n 12.10.2, &#8220;Modificadores de GROUP<br>
+        BY&#8221;.<br>
+        &#8226; La cl&aacute;usula HAVING se aplica casi al final, justo antes 
+        de que los elementos se env&iacute;en al cliente, sin optimizaci&oacute;n. 
+        (LIMIT se<br>
+        aplica tras HAVING.)<br>
+        Antes de MySQL 5.0.2, una cl&aacute;usula HAVING pod&iacute;a referirse 
+        a cualquier columna o alias nombrado en una select_expr en<br>
+        la lista SELECT o en subconsultas externas, y para funciones agregadas. 
+        Sin embargo, el est&aacute;ndar SQL requiere que HAVING<br>
+        debe referirse s&oacute;lo a columnas en la cl&aacute;usula GROUP BY o 
+        columnas usadas en funciones agregadas. Para acomodar ambos est&aacute;ndars<br>
+        SQL y el comportamiento espec&iacute;fico de MySQL en que es capaz de 
+        referirse a columnas en la lista SELECT , MySQL<br>
+        5.0.2 y posteior permite a HAVING referirse a columnas en la lista SELECT 
+        , en la cl&aacute;usula GROUP BY , en subconsultas externas<br>
+        y en funciones agregadas.<br>
+        Por ejemplo, el siguiente comando funciona en MySQL 5.0.2 pero produce 
+        un error en versiones aneriores:<br>
+        mysql&gt; SELECT COUNT(*) FROM t GROUP BY col1 HAVING col1 = 2;<br>
+        Si la cl&aacute;usula HAVING se refiere a una columna amb&iacute;gua, 
+        se muestra una advertencia. En el siguiente comando, col2 es amb&iacute;guo<br>
+        porque se usa tanto para un alias como para un nombre de columna:<br>
+        mysql&gt; SELECT COUNT(col1) AS col2 FROM t GROUP BY col2 HAVING col2 
+        = 2;<br>
+        Se da preferencia al comportamiento SQL est&aacute;ndar, as&iacute; que 
+        si un nombre de columna HAVING se usa en un GROUP BY y co-<br>
+        mo alias de columna en la lista de columnas de salida, se da preferencia 
+        a la columna en GROUP BY .<br>
+        &#8226; No use HAVING para elementos que deban estar en la cl&aacute;usula 
+        WHERE . Por ejemplo, no escriba lo siguiente:<br>
+        mysql&gt; SELECT col_name FROM tbl_name HAVING col_name &gt; 0;<br>
+        Escriba esto en su lugar:<br>
+        mysql&gt; SELECT col_name FROM tbl_name WHERE col_name &gt; 0;<br>
+        &#8226; La cl&aacute;usula HAVING puede referirse a funciones de agregaci&oacute;n, 
+        algo que no puede hacer la cl&aacute;usula WHERE:<br>
+        mysql&gt; SELECT user, MAX(salary) FROM users<br>
+        -&gt; GROUP BY user HAVING MAX(salary)&gt;10;<br>
+        (Esto no funciona en versiones antiguas de MySQL.)<br>
+        &#8226; La cl&aacute;usula LIMIT puede usarse para restringir el n&uacute;mero 
+        de registros retornados por el comando SELECT. LIMIT tiene uno o<br>
+        dos argumentos num&eacute;ricos, que deben ser enteros positivos (incluyendo 
+        cero).<br>
+        Con dos argumentos, el primer argumento especifica el desplazamiento del 
+        primer registro a retornar. El desplazamiento del registro<br>
+        inicial es 0 (no 1):<br>
+        mysql&gt; SELECT * FROM table LIMIT 5,10; # Retrieve rows 6-15<br>
+        Por compatibilidad con PostgreSQL, MySQL tambi&eacute;n soporta la sintaxis 
+        LIMIT row_count OFFSET offset.<br>
+        Para recibir todos los registros de un desplazamiento hasta el final del 
+        conjunto de resultados, puede usar alg&uacute;n n&uacute;mero grande<br>
+        para el segundo par&aacute;metro. Ete comando recibe todos los registros 
+        desde el 96th hasta el &uacute;ltimo:<br>
+        mysql&gt; SELECT * FROM table LIMIT 95,18446744073709551615;<br>
+        Con un argumento, el valor especifica el n&uacute;mero de registros a 
+        retornar desde el comienzo del conjunto de resultados:<br>
+        mysql&gt; SELECT * FROM table LIMIT 5; # Retrieve first 5 rows<br>
+        En otras palabras, LIMIT n es equivalente a LIMIT 0,n.<br>
+        &#8226; La forma SELECT ... INTO OUTFILE 'file_name' de SELECT escribe 
+        los registros seleccionados en un fichero. El<br>
+        fichero se crea en el equipo servidor, as&iacute; que debe tener el permiso 
+        FILE para usar esta sintaxis. El fichero no puede existir,<br>
+        que entre otras cosas evita destruir ficheros cruciales tales como /etc/passwd 
+        y tablas de la base de datos.<br>
+        El comando SELECT ... INTO OUTFILE existe principalmente para dejarle 
+        volcar una tabla r&aacute;pidamente en la m&aacute;quina<br>
+        servidor. Si quiere crear el fichero resultante en un equipo cliente distinto 
+        al equipo servidor, no puede usar SELECT ...<br>
+        INTO OUTFILE. En tal caso, deber&iacute;a usar alg&uacute;n comando como 
+        mysql -e &quot;SELECT ...&quot; &gt; file_name en el equipo<br>
+        cliente para generar el fichero.<br>
+        SELECT ... INTO OUTFILE es el complemento de LOAD DATA INFILE; la sintaxis 
+        para la parte export_options<br>
+        del comando consiste en las mismas cl&aacute;usulas FIELDS y LINES usadas 
+        con el comando LOAD DATA INFILE . Consulte<br>
+        Secci&oacute;n 13.2.5, &#8220;Sintaxis de LOAD DATA INFILE&#8221;.<br>
+        FIELDS ESCAPED BY controla c&oacute;mo escribir caracteres especiales. 
+        Si el car&aacute;cter FIELDS ESCAPED BY no est&aacute; vac&iacute;o, se<br>
+        usa como prefijo para los siguientes caracteres en la salida:<br>
+        &#8226; El car&aacute;cter FIELDS ESCAPED BY<br>
+        &#8226; El car&aacute;cter FIELDS [OPTIONALLY] ENCLOSED BY<br>
+        &#8226; El primer car&aacute;cter de FIELDS TERMINATED BY y LINES TERMINATED 
+        BY<br>
+        &#8226; ASCII 0 (que se escribe siguiendo el car&aacute;cter de escape 
+        ASCII '0', no un byte con valor cero)<br>
+        Si el car&aacute;cter FIELDS ESCAPED BY est&aacute; vac&iacute;o, no hay 
+        ning&uacute;n car&aacute;cter de escape y NULL se muestra por salida como 
+        NULL,<br>
+        no \N. Probablemente no es buena idea especificar un car&aacute;cter de 
+        escape vac&iacute;o, particularmente si los valores de los campos de<br>
+        sus datos contienen cualqiuera de los caracteres en la lista dada.<br>
+        La raz&oacute;n de lo anterior es que debe escapar cualquier car&aacute;cter 
+        FIELDS TERMINATED BY, ENCLOSED BY, ESCAPED BY,<br>
+        o LINES TERMINATED BY para ser capaz de volver a leer el fichero correctamente. 
+        ASCII NUL se escapa para hacer m&aacute;s f&aacute;cil<br>
+        visualizarlo con algunos visores.<br>
+        El fichero resultante no tiene que estar conforme a la sintaxis SQL, as&iacute; 
+        que nada m&aacute;s debe escaparse.<br>
+        Este es un ejemplo que produce un fichero en formato de valores separados 
+        por comas usado por varios programas:<br>
+        SELECT a,b,a+b INTO OUTFILE '/tmp/result.text'<br>
+        FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '&quot;'<br>
+        LINES TERMINATED BY '\n'<br>
+        FROM test_table;<br>
+        &#8226; Si usa INTO DUMPFILE en lugar de INTO OUTFILE, MySQL escribe s&oacute;lo 
+        un registro en el fichero, sin ninguna terminaci&oacute;n<br>
+        de l&iacute;nea o columna y sin realizar ning&uacute;n proceso de escape. 
+        Esto es &uacute;til si quiere almacenar un valor BLOB en un fichero.<br>
+        &#8226; Nota: Cualquier fichero creado por INTO OUTFILE o INTO DUMPFILE 
+        es modificable por todos los usuarios en el equipo<br>
+        servidor. La raz&oacute;n es que el servidor MySQL no puede crear un fichero 
+        con un propietario distinto al usuario que est&aacute; en ejecuci&oacute;n<br>
+        (nunca debe ejecutar mysqld como root por esta y otras razones). El fichero 
+        debe ser modificable por todo el mundo<br>
+        para que pueda maminpular sus contenidos.<br>
+        &#8226; Una cl&aacute;usula PROCEDURE nombra a un procedimiento que debe 
+        procesar los datos en el conjunto de resultados. Para un ejemplo,<br>
+        consulte Secci&oacute;n 27.3.1, &#8220;Procedimiento Analyse&#8221;.<br>
+        &#8226; Si usa FOR UPDATE en un motor de almacenamiento que usa bloqueo 
+        de p&aacute;ginas o registros, los registros examinados por la<br>
+        consulta se bloquean para escritura hasta el final de la transacci&oacute;n 
+        actual. Usar LOCK IN SHARE MODE crea un bloqueo<br>
+        compartido que evita a otras transacciones actualizar o borrar los registros 
+        examinados. Consulte Secci&oacute;n 15.10.5, &#8220;Bloquear<br>
+        lecturas SELECT ... FOR UPDATE y SELECT ... LOCK IN SHARE MODE&#8221;.<br>
+        Tras la palabra clave SELECT , puede usar un n&uacute;mero de opciones 
+        que afectan la operaci&oacute;n del comando.<br>
+        Las opciones ALL, DISTINCT, and DISTINCTROW especifican si deben retornarse 
+        los registros duplicados. Si no se da ninguna<br>
+        de estas opciones, por defecto es ALL (se retornan todos los registros 
+        coincidentes). DISTINCT y DISTINCTROW son sin&oacute;nimos<br>
+        y especifican que los registros duplicados en el conjunto de resultados 
+        deben borrarse.<br>
+        HIGH_PRIORITY, STRAIGHT_JOIN, y opciones que comiencen con SQL_ son extensiones 
+        de MySQL al est&aacute;ndar SQL.<br>
+        &#8226; HIGH_PRIORITY da a SELECT prioridad m&aacute;s alta que un comando 
+        que actualice una tabla. Debe usar esto s&oacute;lo para consultas<br>
+        que son muy r&aacute;pidas y deben realizarse una vez. Una consulta SELECT 
+        HIGH_PRIORITY que se realiza mientras la tabla<br>
+        est&aacute; bloqueada para lectura se ejectua incluso si hay un comando 
+        de actualizaci&oacute;n esperando a que se libere la tabla.<br>
+        HIGH_PRIORITY no puede usarse con comandos SELECT que sean parte de una 
+        UNION.<br>
+        &#8226; STRAIGHT_JOIN fuerza al optimizador a hacer un join de las tablas 
+        en el orden en que se listan en la cl&aacute;usula FROM . Puede<br>
+        usarlo para acelerar una consulta si el optimizador hace un join con las 
+        tablas en orden no &oacute;ptimo. Consulte Secci&oacute;n 7.2.1,<br>
+        &#8220;Sintaxis de EXPLAIN (Obtener informaci&oacute;n acerca de un SELECT)&#8221;. 
+        STRAIGHT_JOIN tambi&eacute;n puede usarse en la lista<br>
+        table_references . Consulte Secci&oacute;n 13.2.7.1, &#8220;Sintaxis de 
+        JOIN&#8221;.<br>
+        &#8226; SQL_BIG_RESULT puede usarse con GROUP BY o DISTINCT para decir 
+        al optimizador que el conjunto de resultados tiene<br>
+        muchos registros. En este caso, MySQL usa directamente tablas temporales 
+        en disco si son necesarias con una clave en los elementos<br>
+        GROUP BY .<br>
+        &#8226; SQL_BUFFER_RESULT fuerza a que el resultado se ponga en una tabla 
+        temporal . Esto ayuda a MySQL a liberar los bloqueos<br>
+        de tabla r&aacute;pidamente y ayuda en casos en que tarda mucho tiempo 
+        en enviar el resultado al cliente.<br>
+        &#8226; SQL_SMALL_RESULT puede usarse con GROUP BY o DISTINCT para decir 
+        al optimizador que el conjunto de resultados es<br>
+        peque&ntilde;o. En este caso, MySQL usa tablas temporales r&aacute;pidas 
+        para almacenar la tabla resultante en lugar de usar ordenaci&oacute;n. 
+        En<br>
+        MySQL 5.0, esto no har&aacute; falta normalmente.<br>
+        &#8226; SQL_CALC_FOUND_ROWS le dice a MySQL que calcule cu&aacute;ntos 
+        registros habr&aacute;n en el conjunto de resultados, sin tener en<br>
+        cuenta ninguna cl&aacute;usula LIMIT. El n&uacute;mero de registros pueden 
+        encontrarse con SELECT FOUND_ROWS(). Consulte Secci&oacute;n<br>
+        12.9.3, &#8220;Funciones de informaci&oacute;n&#8221;.<br>
+        &#8226; SQL_CACHE le dice a MySQL que almacene el resultado de la consulta 
+        en la cach&eacute; de consultas si est&aacute; usando un valor de<br>
+        query_cache_type de 2 o DEMAND. Para una consulta que use UNION o subconsultas, 
+        esta opci&oacute;n afecta a cualquier SELECT<br>
+        en la consulta. Consulte Secci&oacute;n 5.12, &#8220;La cach&eacute; de 
+        consultas de MySQL&#8221;.<br>
+        &#8226; SQL_NO_CACHE le dice a MySQL que no almacene los resultados de 
+        consulta en la cach&eacute; de consultas. Consulte Secci&oacute;n<br>
+        5.12, &#8220;La cach&eacute; de consultas de MySQL&#8221;. Para una consulta 
+        que use UNION o subconsultas esta opci&oacute;n afecta a cualquier<br>
+        SELECT en la consulta. </p>
+        </td>
+    <td>&nbsp;</td>
+    <td><a href="http://www.euskalnet.net/juanarana/oraclezip/Ejer3.rar"><img src="../../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td>
+<div align="right"><a href="http://www.euskalnet.net/juanarana/index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a>
+      </div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

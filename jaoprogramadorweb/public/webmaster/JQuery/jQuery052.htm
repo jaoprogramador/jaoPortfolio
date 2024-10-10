@@ -1,0 +1,214 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Introducci&oacute;n a JQuery</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta name="keywords" content="Introduccion a JQuery, Manual JQuery, tutorial JQuery, Ejemplos JQuery, ejercicios JQuery">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos"><tr> 
+    <td height="39" colspan="3"> <h2>Consideraciones interesantes de data() y removeData()</h2></td>
+  </tr>
+  <tr> 
+    <td height="268" colspan="3"> 
+      <h3>Introducci&oacute;n</h3>
+      <p>Existen algunos puntos que debemos conocer sobre el funcionamiento de 
+        estos m&eacute;todos que<br>
+        no hemos explicado todav&iacute;a en el art&iacute;culo anterior, en el 
+        que se comenz&oacute; a tratar acerca de<br>
+        data() y removeData(). Veamos a continuaci&oacute;n una serie de consideraciones:<br>
+        Admite cualquier tipo de dato: Podemos guardar lo que deseemos por medio 
+        del m&eacute;todo<br>
+        data(). Los ejemplos anteriores hemos guardado simplemente cadenas de 
+        texto, pero<br>
+        soportar&iacute;a cualquier tipo de variable, num&eacute;rica, un array 
+        o incluso un objeto Javascript o<br>
+        jQuery.<br>
+        Se guarda un dato por cada elemento del objeto jQuery selecionado: En 
+        caso que en el<br>
+        objeto jQuery sobre el que estemos almacenando cosas con data() haya referencias 
+        a varios<br>
+        elementos de la p&aacute;gina, el dato se almacena en todos los elementos. 
+        (recordemos que, seg&uacute;n<br>
+        lo explicado anteriormente , un objeto jQuery puede tener seleccionados<br>
+        varios elementos de la p&aacute;gina, como todos los enlaces presentes, 
+        los elementos de una<br>
+        determinada clase CSS, etc. dependiendo del selector escogido al hacer 
+        uso de la funci&oacute;n<br>
+        d&oacute;lar)<br>
+        Los objetos se almacenan por referencia: En el caso que estemos almacenando 
+        un objeto<br>
+        Javascript con data() sobre uno o varios elementos, no se copia el objeto, 
+        sino que se asigna<br>
+        por referencia. Esto quiere decir que no se har&iacute;an copias independientes 
+        del objeto a guardar,<br>
+        sino que permanecer&iacute;a tal cual y lo que se asignar&iacute;a como 
+        dato es una referencia a ese &uacute;nico<br>
+        objeto.<br>
+        Ahora, para investigar un poco sobre estas posibilidades, hemos creado 
+        un par de ejemplos un<br>
+        poco m&aacute;s complejos que hacen uso de los m&eacute;todos data() y 
+        removeData(). Son ejemplos m&aacute;s<br>
+        avanzados, que hacen uso de algunas cosas que no hemos explicado todav&iacute;a 
+        en este manual<br>
+        de jQuery. No obstante, vendr&aacute; bien verlos para aprender algunos 
+        usos de estas<br>
+        funcionalidades.<br>
+        Para empezar, quiero mostrar una p&aacute;gina de ejemplo donde existen 
+        tres enlaces y dos<br>
+        botones. Al pulsar cualquiera de los enlaces mostraremos el contenido 
+        de un dato almacenado<br>
+        en ellos con data(). Los botones, por su parte, servir&aacute;n para almacenar 
+        contenidos en datos<br>
+        sobre esos enlaces. Adem&aacute;s tendremos una capa con id=&quot;mensaje&quot; 
+        que nos servir&aacute; para<br>
+        mostrar cosas por pantalla.<br>
+        Podemos ver el ejemplo en marcha en una p&aacute;gina aparte.<br>
+        El c&oacute;digo de los elementos HTML ser&aacute; el siguiente:<br>
+        &lt;a href=&quot;#&quot; id=&quot;enlace1&quot;&gt;Enlace 1&lt;/a&gt;<br>
+        &lt;br&gt;<br>
+        &lt;a href=&quot;#&quot; id=&quot;enlace2&quot;&gt;Enlace 2&lt;/a&gt;<br>
+        &lt;br&gt;<br>
+        &lt;a href=&quot;#&quot; id=&quot;enlace3&quot;&gt;Enlace 3&lt;/a&gt;<br>
+        &lt;br&gt;<br>
+        &lt;br&gt;<br>
+        &lt;div id=&quot;mensaje&quot;&gt;<br>
+        Mensaje...<br>
+        &lt;/div&gt;<br>
+        &lt;br&gt;<br>
+        &lt;button id=&quot;guardar&quot;&gt;guardar &quot;midato&quot; con valor 
+        &quot;mivalor&quot; en todos los enlaces&lt;/button&gt;<br>
+        &lt;br&gt;<br>
+        &lt;button id=&quot;guardarenlace1&quot;&gt;guardar &quot;midato&quot; 
+        con valor &quot;otro valor&quot; en el enlace 1&lt;/button&gt;<br>
+        Ahora veamos c&oacute;mo aplicar eventos a los elementos de la p&aacute;gina, 
+        para almacenar datos y<br>
+        mostrarlos.<br>
+        Comencemos por el c&oacute;digo de los eventos de los botones.<br>
+        $(&quot;#guardar&quot;).click(function(evento){<br>
+        $(&quot;a&quot;).data(&quot;midato&quot;,&quot;mivalor&quot;);<br>
+        $(&quot;#mensaje&quot;).html('He guardado en todos los enlaces un dato 
+        llamado &quot;midato&quot; con el valor &quot;mivalor&quot;');<br>
+        });<br>
+        Con este c&oacute;digo estamos almacenando datos en todos los enlaces. 
+        Cabe fijarse que con la<br>
+        funci&oacute;n jQuery $(&quot;a&quot;) obtenemos un objeto jQuery donde 
+        est&aacute;n todos los enlaces de la p&aacute;gina.<br>
+        Luego, al invocar data() sobre ese objeto, estamos almacenado ese dato 
+        en todos los enlaces<br>
+        existentes.<br>
+        $(&quot;#guardarenlace1&quot;).click(function(evento){<br>
+        $(&quot;#enlace1&quot;).data(&quot;midato&quot;,&quot;otro valor&quot;);<br>
+        $(&quot;#mensaje&quot;).html('He guardado en el enlace1 un dato llamado 
+        &quot;midato&quot; con el valor &quot;otro valor&quot;');<br>
+        });<br>
+        En este otro c&oacute;digo del evento click para el segundo bot&oacute;n, 
+        almacenamos &quot;otro valor&quot; sobre el<br>
+        dato de antes, pero s&oacute;lo lo hacemos sobre el enlace 1, dado que 
+        hemos utilizado el selector $<br>
+        (&quot;#enlace1&quot;), con el identificador &uacute;nico del primer enlace.<br>
+        Y ahora podr&iacute;amos ver el c&oacute;digo para asignar un evento a 
+        todos los enlaces, para que al<br>
+        pulsarlos nos muestre lo que haya en el dato almacenado con data(), si 
+        es que hay algo.<br>
+        $(&quot;a&quot;).click(function(evento){<br>
+        evento.preventDefault();<br>
+        valorAlmacenado = $(this).data(&quot;midato&quot;);<br>
+        $(&quot;#mensaje&quot;).html(&quot;En el enlace &lt;b&gt;&quot; + $(this).attr(&quot;id&quot;) 
+        + &quot;&lt;/b&gt; tiene el dato 'midato' como &quot; +<br>
+        valorAlmacenado);<br>
+        });<br>
+        Como se puede ver, estamos creando un evento click, pero lo estamos haciendo 
+        sobre los tres<br>
+        enlaces que hay en la p&aacute;gina a la vez, dado el selector utilizado 
+        en la funci&oacute;n jQuery $(&quot;a&quot;).<br>
+        Luego el c&oacute;digo del evento ser&aacute; el mismo para los tres enlaces.<br>
+        Lo primero que se hace es un evento.preventDefault() que permite que el 
+        enlace no tenga el<br>
+        comportamiento t&iacute;pico (ir a la URL del href). A continuaci&oacute;n 
+        hacemos:<br>
+        valorAlmacenado = $(this).data(&quot;midato&quot;);<br>
+        Como se puede ver, se est&aacute; extrayendo el valor almacenado en el 
+        enlace actual, que recibe el<br>
+        evento. Con $(this) obtenemos el objeto jQuery del elemento que ha recibido 
+        el evento, que es<br>
+        el enlace sobre el que se ha pulsado y no todos los enlaces. Con el m&eacute;todo 
+        data(&quot;midato&quot;),<br>
+        invocado sobre $(this), obtenemos el valor del dato &quot;midato&quot; 
+        almacenado en el enlace que fue<br>
+        pulsado solamente.<br>
+        Luego se muestra un mensaje para indicar el valor que hab&iacute;a en 
+        el dato. Pero claro, este<br>
+        c&oacute;digo, como es com&uacute;n para todos los enlaces, tiene que 
+        acceder tambi&eacute;n a $(this) para saber<br>
+        qu&eacute; enlace en concreto fue el que se puls&oacute;. Para identificar 
+        el enlace se hace $(this).attr(&quot;id&quot;),<br>
+        que devuelve el atributo &quot;id&quot; del enlace sobre el que se hizo 
+        clic.<br>
+        A continuaci&oacute;n se puede ver el c&oacute;digo completo de esta p&aacute;gina.<br>
+        &lt;html&gt;<br>
+        &lt;head&gt;<br>
+        &lt;title&gt;Ejemplos de uso de la funci&oacute;n data del core de jQuery&lt;/title&gt;<br>
+        &lt;script src=&quot;../jquery-1.3.2.min.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;<br>
+        &lt;script&gt;<br>
+        $(document).ready(function(){<br>
+        $(&quot;a&quot;).click(function(evento){<br>
+        evento.preventDefault();<br>
+        valorAlmacenado = $(this).data(&quot;midato&quot;);<br>
+        $(&quot;#mensaje&quot;).html(&quot;En el enlace &lt;b&gt;&quot; + $(this).attr(&quot;id&quot;) 
+        + &quot;&lt;/b&gt; tiene el dato 'midato' como &quot; +<br>
+        valorAlmacenado);<br>
+        });<br>
+        $(&quot;#guardar&quot;).click(function(evento){<br>
+        $(&quot;a&quot;).data(&quot;midato&quot;,&quot;mivalor&quot;);<br>
+        $(&quot;#mensaje&quot;).html('He guardado en todos los enlaces un dato 
+        llamado &quot;midato&quot; con el valor &quot;mivalor&quot;');<br>
+        });<br>
+        $(&quot;#guardarenlace1&quot;).click(function(evento){<br>
+        $(&quot;#enlace1&quot;).data(&quot;midato&quot;,&quot;otro valor&quot;);<br>
+        $(&quot;#mensaje&quot;).html('He guardado en el enlace1 un dato llamado 
+        &quot;midato&quot; con el valor &quot;otro valor&quot;');<br>
+        });<br>
+        });<br>
+        &lt;/script&gt;<br>
+        &lt;/head&gt;<br>
+        &lt;body&gt;<br>
+        &lt;a href=&quot;#&quot; id=&quot;enlace1&quot;&gt;Enlace 1&lt;/a&gt;<br>
+        &lt;br&gt;<br>
+        &lt;a href=&quot;#&quot; id=&quot;enlace2&quot;&gt;Enlace 2&lt;/a&gt;<br>
+        &lt;br&gt;<br>
+        &lt;a href=&quot;#&quot; id=&quot;enlace3&quot;&gt;Enlace 3&lt;/a&gt;<br>
+        &lt;br&gt;<br>
+        &lt;br&gt;<br>
+        &lt;div id=&quot;mensaje&quot;&gt;<br>
+        Mensaje...<br>
+        &lt;/div&gt;<br>
+        &lt;br&gt;<br>
+        &lt;button id=&quot;guardar&quot;&gt;guardar &quot;midato&quot; con valor 
+        &quot;mivalor&quot; en todos los enlaces&lt;/button&gt;<br>
+        &lt;br&gt;<br>
+        &lt;button id=&quot;guardarenlace1&quot;&gt;guardar &quot;midato&quot; 
+        con valor &quot;otro valor&quot; en el enlace 1&lt;/button&gt;<br>
+        &lt;/body&gt;<br>
+        &lt;/html&gt;</p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

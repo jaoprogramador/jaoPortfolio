@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Manejar Peticiones GET y POST</title>
+<META http-equiv=Content-Language content=es>
+<META content="Manual Servlet, ejemplos Servlet, codigos Servlet" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Manual Servlet, ejemplos Servlet, codigos Servlet">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2> Manejar Peticiones GET y POST</h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <p>
+        Para manejar peticiones HTTP en un servlet, extendemos la clase HttpServlet 
+        y sobreescribimos los m&eacute;todos del
+        servlet que manejan las peticiones HTTP que queremos soportar. Esta p&aacute;gina 
+        ilustra el manejo de peticiones GET
+        y POST. Los m&eacute;todos que manejan estas peticiones son doGet y doPost.</p>
+        <p>Manejar Peticiones GET</p>
+        <p>Manejar peticiones GET implica sobreescribir el m&eacute;todo doGet. El 
+        siguiente ejemplo muestra a BookDetailServlet<br>
+        haciendo esto. Los m&eacute;todos explicados en Peticiones y Respuestas 
+        se muestran en negrita.<br>
+        public class BookDetailServlet extends HttpServlet {<br>
+        public void doGet (HttpServletRequest request,<br>
+        HttpServletResponse response)<br>
+        throws ServletException, IOException<br>
+        {<br>
+        ...<br>
+        // selecciona el tipo de contenido en la cabecera antes de acceder a Writer<br>
+        response.setContentType(&quot;text/html&quot;);<br>
+        PrintWriter out = response.getWriter();<br>
+        // Luego escribe la respuesta<br>
+        out.println(&quot;&lt;html&gt;&quot; +<br>
+        &quot;&lt;head&gt;&lt;title&gt;Book Description&lt;/title&gt;&lt;/head&gt;&quot; 
+        +<br>
+        ...);<br>
+        //Obtiene el identificador del libro a mostrar<br>
+        String bookId = request.getParameter(&quot;bookId&quot;);<br>
+        if (bookId != null) {<br>
+        // Y la informaci&oacute;n sobre el libro y la imprime<br>
+        ...<br>
+        }<br>
+        out.println(&quot;&lt;/body&gt;&lt;/html&gt;&quot;);<br>
+        out.close();<br>
+        }<br>
+        ...<br>
+        }<br>
+        El servlet extiende la clase HttpServlet y sobreescribe el m&eacute;todo 
+        doGet. Dentro del m&eacute;todo doGet, el m&eacute;todo
+        getParameter obtiene los argumentos esperados por el servlet.
+        Para responder al cliente, el m&eacute;todo doGet utiliza un Writer del 
+        objeto HttpServletResponse para devolver
+        datos en formato texto al cliente. Antes de acceder al writer, el ejemplo 
+        selecciona la cabecera del tipo del
+        contenido. Al final del m&eacute;todo doGet, despu&eacute;s de haber enviado 
+        la respuesta, el Writer se cierra.</p>
+        <p>Manejar Peticiones POST</p>
+		
+        <p>Manejar peticiones POST implica sobreescribir el m&eacute;todo doPost. 
+        El siguiente ejemplo muestra a ReceiptServlet
+        haciendo esto. De nuevo, los m&eacute;todos explicados en Peticiones y 
+        Respuestas se muestran en negrita.<br>
+        public class ReceiptServlet extends HttpServlet {<br>
+        public void doPost(HttpServletRequest request,<br>
+        HttpServletResponse response)<br>
+        throws ServletException, IOException<br>
+        {<br>
+        ...<br>
+        // selecciona la cabecera de tipo de contenido antes de acceder a Writer<br>
+        response.setContentType(&quot;text/html&quot;);<br>
+        PrintWriter out = response.getWriter();<br>
+        // Luego escribe la respuesta<br>
+        out.println(&quot;&lt;html&gt;&quot; +<br>
+        &quot;&lt;head&gt;&lt;title&gt; Receipt &lt;/title&gt;&quot; +<br>
+        ...);<br>
+        out.println(&quot;&lt;h3&gt;Thank you for purchasing your books from us 
+        &quot; +<br>
+        request.getParameter(&quot;cardname&quot;) +<br>
+        ...);<br>
+        out.close();<br>
+        }<br>
+        ...<br>
+        }<br>
+        El servlet extiende la clase HttpServlet y sobreescribe el m&eacute;todo 
+        doPost. Dentro del m&eacute;todo doPost, el m&eacute;todo
+        getParameter obtiene los argumentos esperados por el servlet.
+        Para responder al cliente, el m&eacute;todo doPost utiliza un Writer del 
+        objeto HttpServletResponse para devolver
+        datos en formato texto al cliente. Antes de acceder al writer, el ejemplo 
+        selecciona la cabecera del tipo de
+        contenido. Al final del m&eacute;todo doPost, despu&eacute;s de haber 
+        enviado la respuesta, el Writer se cierra. </p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

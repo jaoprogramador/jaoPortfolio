@@ -1,0 +1,505 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Ejercicios Oracle</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Oracle, sql, pl/sql, programacion oracle, ejercicios, ejemplos">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="52" colspan="3"> <h2>E 
+        J E R C I C I O S</h2></td>
+  </tr>
+  <tr> 
+    <td ><h3>CREATE 
+        OR REPLACE PACKAGE...</h3><p>
+        1.- Ejemplo de como crear un paquete.</p>
+        <p>6) Escribir un paquete completo para gestionar los departamentos. El paquete se llamar&aacute; gest_depart y deber&aacute; incluir, al menos, los siguientes subprogramas:<br>
+          - insertar_nuevo_depart: permite insertar un departamento nuevo. El procedimiento recibe el nombre y la localidad del nuevo departamento. Crear&aacute; el nuevo departamento comprobando que el nombre no se duplique y le asignar&aacute; como n&uacute;mero de departamento la decena siguiente al &uacute;ltimo n&uacute;mero de departamento utilizado.<br>
+          - borrar_depart: permite borrar un departamento. El procedimiento recibir&aacute; dos n&uacute;meros de departamento de los cuales el primero corresponde al departamento que queremos borrar y el segundo al departamento al que pasar&aacute;n los empleados del departamento que se va eliminar. El procedimiento se encargar&aacute; de realizar los cambios oportunos en los n&uacute;meros de departamento de los empleados correspondientes. <br>
+          - modificar_loc_depart: modifica la localidad del departamento. El procedimiento recibir&aacute; el n&uacute;mero del departamento a modificar y la nueva localidad, y realizar&aacute; el cambio solicitado.<br>
+          - visualizar_datos_depart: visualizar&aacute; los datos de un departamento cuyo n&uacute;mero se pasar&aacute; en la llamada. Adem&aacute;s de los datos relativos al departamento, se visualizar&aacute; el n&uacute;mero de empleados que pertenecen actualmente al departamento. <br>
+          - visualizar_datos_depart: versi&oacute;n sobrecargada del procedimiento anterior que, en lugar del n&uacute;mero del departamento, recibir&aacute; el nombre del departamento. Realizar&aacute; una llamada a la funci&oacute;n buscar_depart_por_nombre que se indica en el apartado siguiente.<br>
+        - buscar_depart_por_nombre: funci&oacute;n local al paquete. Recibe el nombre de un departamento y devuelve el n&uacute;mero del mismo.</p>
+        <p>/************* Cabecera o especificaci&oacute;n del paquete **********/<br>
+          CREATE OR REPLACE PACKAGE gest_depart AS<br>
+  PROCEDURE insert_depart<br>
+  (v_nom_dep VARCHAR2,<br>
+  v_loc VARCHAR2);<br>
+  PROCEDURE borrar_depar<br>
+  (v_dep_borrar NUMBER,<br>
+  v_dep_nue NUMBER);<br>
+  PROCEDURE cambiar_localidad<br>
+  (v_num_dep NUMBER,<br>
+  v_loc VARCHAR2);<br>
+  PROCEDURE visualizar_datos_depart<br>
+  (v_num_dep NUMBER);<br>
+  PROCEDURE visualizar_datos_depart<br>
+  (v_nom_dep VARCHAR2);<br>
+  END gest_depart;<br>
+  /</p>
+        <p>/******************* Cuerpo del paquete **********************/<br>
+          CREATE OR REPLACE PACKAGE BODY gest_depart AS<br>
+  FUNCTION buscar_depart_por_nombre /* Funci&oacute;n privada */<br>
+  (v_nom_dep VARCHAR2)<br>
+  RETURN NUMBER;<br>
+  /*************************************************************/</p>
+        <p> PROCEDURE insert_depart(<br>
+  v_nom_dep VARCHAR2,<br>
+  v_loc VARCHAR2)<br>
+  AS<br>
+  ultimo_dep DEPART.DEPT_NO%TYPE;<br>
+  nombre_repetido EXCEPTION;<br>
+  BEGIN</p>
+        <p>/*Comprobar dpt repetido(Puede levantar NO_DATA_FOUND)*/<br>
+  DECLARE <br>
+  nom_dep depart.DNOMBRE%TYPE; <br>
+  nombre_repetido EXCEPTION;<br>
+  BEGIN<br>
+  SELECT dnombre INTO nom_dep FROM depart<br>
+  WHERE dnombre = v_nom_dep;<br>
+  RAISE insert_depart.nombre_repetido; <br>
+  EXCEPTION<br>
+  WHEN NO_DATA_FOUND THEN<br>
+  NULL;<br>
+  WHEN TOO_MANY_ROWS THEN<br>
+  RAISE insert_Depart.nombre_repetido;<br>
+  END; /* Fin del bloque de comprobaci&oacute;n <br>
+  de departamento repetido */</p>
+        <p>/* Calcular el n&uacute;mero de departamento e insertar */ <br>
+  SELECT MAX(DEPT_NO) INTO ultimo_dep FROM DEPART;<br>
+  INSERT INTO DEPART VALUES ((TRUNC(ultimo_dep, -1) +10), <br>
+  v_nom_dep,v_loc);<br>
+  EXCEPTION<br>
+  WHEN nombre_repetido THEN<br>
+  DBMS_OUTPUT.PUT_LINE<br>
+  ('Err. Nombre de departamento duplicado');<br>
+  WHEN NO_DATA_FOUND THEN /* Si no hab&iacute;a ning&uacute;n departamento */<br>
+  INSERT INTO DEPART VALUES (10,v_nom_dep,v_loc);<br>
+  END insert_depart;<br>
+  /**************************************************************/</p>
+        <p>PROCEDURE borrar_depar<br>
+  (v_dep_borrar NUMBER,<br>
+  v_dep_nue NUMBER)<br>
+  AS<br>
+  BEGIN <br>
+  UPDATE emple SET dept_no = v_dep_nue<br>
+  WHERE DEPT_NO=v_dep_borrar;<br>
+  DELETE FROM depart WHERE dept_no = v_dep_borrar;<br>
+  END borrar_depar; <br>
+  /*************************************************************/</p>
+        <p>PROCEDURE visualizar_datos_depart<br>
+  (v_num_dep NUMBER)<br>
+  AS<br>
+  vr_dep depart%ROWTYPE;<br>
+  v_num_empleados NUMBER(4); <br>
+  BEGIN<br>
+  SELECT * INTO vr_dep FROM depart<br>
+  WHERE DEPT_NO=v_num_dep;<br>
+  SELECT COUNT(*) INTO v_num_empleados FROM <br>
+  EMPLE WHERE DEPT_NO=v_num_dep;<br>
+  <br>
+  DBMS_OUTPUT.PUT_LINE<br>
+  ('N&uacute;mero de departamento: '||vr_dep.dept_no); <br>
+  DBMS_OUTPUT.PUT_LINE<br>
+  ('Nombre del departamento: '||vr_dep.dnombre);<br>
+  DBMS_OUTPUT.PUT_LINE<br>
+  ('Localidad : '||vr_dep.loc);<br>
+  DBMS_OUTPUT.PUT_LINE<br>
+  ('Numero de empleados : '||v_num_empleados);<br>
+  EXCEPTION<br>
+  WHEN NO_DATA_FOUND THEN<br>
+  DBMS_OUTPUT.PUT_LINE('Err departamento no encontrado');<br>
+  END visualizar_datos_depart;<br>
+  /*************************************************************/</p>
+        <p> PROCEDURE visualizar_datos_depart /* Versi&oacute;n sobrecargada */<br>
+  (v_nom_dep VARCHAR2)<br>
+  AS<br>
+  v_num_dep depart.dept_no%TYPE;<br>
+  vr_dep depart%ROWTYPE;<br>
+  v_num_empleados NUMBER(4); <br>
+  BEGIN<br>
+  v_num_dep:=buscar_depart_por_nombre(v_nom_dep);<br>
+  SELECT * INTO vr_dep FROM depart <br>
+  WHERE dept_no=v_num_dep;<br>
+  SELECT COUNT(*) INTO v_num_empleados FROM EMPLE <br>
+  WHERE dept_no=v_num_dep;</p>
+        <p>DBMS_OUTPUT.PUT_LINE<br>
+          ('N&uacute;mero de departamento: '||vr_dep.dept_no); <br>
+  DBMS_OUTPUT.PUT_LINE<br>
+  ('Nombre del departamento: '||vr_dep.dnombre);<br>
+  DBMS_OUTPUT.PUT_LINE<br>
+  ('Localidad : '||vr_dep.loc);<br>
+  DBMS_OUTPUT.PUT_LINE<br>
+  ('Numero de empleados : '||v_num_empleados);<br>
+  <br>
+  EXCEPTION<br>
+  WHEN NO_DATA_FOUND THEN<br>
+  DBMS_OUTPUT.PUT_LINE('Err departamento no encontrado');<br>
+  END visualizar_datos_depart; <br>
+  /*************************************************************/</p>
+        <p> FUNCTION buscar_depart_por_nombre<br>
+  (v_nom_dep VARCHAR2)<br>
+  RETURN NUMBER<br>
+  AS<br>
+  v_num_dep depart.dept_no%TYPE;<br>
+  BEGIN<br>
+  SELECT dept_no INTO v_num_dep FROM depart<br>
+  WHERE DNOMBRE = v_nom_dep;<br>
+  RETURN v_num_dep;<br>
+  EXCEPTION<br>
+  WHEN NO_DATA_FOUND THEN<br>
+  DBMS_OUTPUT.PUT_LINE('Err departamento no encontrado');<br>
+  END buscar_depart_por_nombre;<br>
+  /*************************************************************/</p>
+        <p> PROCEDURE cambiar_localidad(<br>
+  v_num_dep NUMBER,<br>
+  v_loc VARCHAR2)<br>
+  AS<br>
+  BEGIN<br>
+  UPDATE depart<br>
+  SET LOC=v_loc<br>
+  WHERE dept_no=v_num_dep;<br>
+  EXCEPTION<br>
+  WHEN NO_DATA_FOUND THEN<br>
+  DBMS_OUTPUT.PUT_LINE('Err departamento no encontrado');<br>
+  END cambiar_localidad;<br>
+  END gest_depart;</p></td>
+    <td>&nbsp;</td>
+    <td><a href="http://www.euskalnet.net/juanarana/oraclezip/Ejer44.rar"><img src="../../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>CREATE 
+      OR REPLACE PACKAGE BODY....</h3><p>
+      2 .- Ejemplo de como crear un paquete.</p>
+      <p>7) Escribir un paquete completo para gestionar los empleados. El paquete se llamar&aacute; gest_emple e incluir&aacute;, al menos los siguientes subprogramas:<br>
+        - insertar_nuevo_emple<br>
+        - borrar_emple. Cuando se borra un empleado todos los empleados que depend&iacute;an de &eacute;l pasar&aacute;n a depender del director del empleado borrado.<br>
+        - modificar_oficio_emple<br>
+        - modificar_dept_emple<br>
+        - modificar_dir_emple<br>
+        - modificar_salario_emple<br>
+        - modificar_comision_emple<br>
+        - visualizar_datos_emple. Tambi&eacute;n se incluir&aacute; una versi&oacute;n sobrecargada del procedimiento que recibir&aacute; el nombre del empleado.<br>
+      - buscar_emple_por_dnombre. Funci&oacute;n local que recibe el nombre y devuelve el n&uacute;mero.</p>
+      <p>Todos los procedimientos recibir&aacute;n el n&uacute;mero del empleado seguido de los dem&aacute;s datos necesarios. Tambi&eacute;n se incluir&aacute;n en el paquete cursores y declaraciones de tipo registro, as&iacute; como siguientes procedimientos que afectar&aacute;n a todos los empleados:<br>
+        - subida_salario_pct: incrementar&aacute; el salario de todos los empleados el porcentaje indicado en la llamada que no podr&aacute; ser superior al 25%.<br>
+        - subida_salario_imp: sumar&aacute; al salario de todos los empleados el importe indicado en la llamada. Antes de proceder a la incrementar los salarios se comprobar&aacute; que el importe indicado no supera el 25% del salario medio. </p>
+      <p>/****************** Cabecera del paquete *********************/<br>
+        CREATE OR REPLACE PACKAGE gest_emple AS</p>
+      <p> CURSOR c_sal RETURN EMPLE%ROWTYPE;</p>
+      <p> PROCEDURE insertar_nuevo_emple(<br>
+  v_num_emp EMPLE.EMP_NO%TYPE,<br>
+  v_apell EMPLE.APELLIDO%TYPE,<br>
+  v_oficio EMPLE.OFICIO%TYPE,<br>
+  v_dir EMPLE.DIR%TYPE,<br>
+  v_fecha_al EMPLE.FECHA_ALT%TYPE,<br>
+  v_sal EMPLE.SALARIO%TYPE,<br>
+  v_comision EMPLE.COMISION%TYPE DEFAULT NULL,<br>
+  v_num_dep EMPLE.DEPT_NO%TYPE);</p>
+      <p> PROCEDURE borrar_emple(<br>
+  v_num_emple NUMBER);</p>
+      <p> PROCEDURE modificar_oficio_emple(<br>
+  v_num_emp EMPLE.EMP_NO%TYPE,<br>
+  v_oficio EMPLE.OFICIO%TYPE);</p>
+      <p> PROCEDURE modificar_dept_emple(<br>
+  v_num_emp EMPLE.EMP_NO%TYPE,<br>
+  v_dept EMPLE.DEPT_NO%TYPE);</p>
+      <p> PROCEDURE modificar_dir_emple(<br>
+  v_num_emp EMPLE.EMP_NO%TYPE,<br>
+  v_direccion EMPLE.DIR%TYPE);</p>
+      <p> PROCEDURE modificar_salario_emple(<br>
+  v_num_emp EMPLE.EMP_NO%TYPE,<br>
+  v_salario EMPLE.SALARIO%TYPE);</p>
+      <p> PROCEDURE modificar_comision_emple(<br>
+  v_num_emp EMPLE.EMP_NO%TYPE,<br>
+  v_comis EMPLE.COMISION%TYPE);</p>
+      <p> PROCEDURE visualizar_datos_emple(<br>
+  v_num_emp EMPLE.EMP_NO%TYPE);</p>
+      <p> PROCEDURE visualizar_datos_emple(<br>
+  v_nombre_emp EMPLE.APELLIDO%TYPE);</p>
+      <p> PROCEDURE subida_salario_pct(<br>
+  v_pct_subida NUMBER);</p>
+      <p> PROCEDURE subida_salario_imp(<br>
+  v_imp_subida NUMBER);<br>
+  END gest_emple;</p>
+      <p>/******************** Cuerpo del paquete *********************/</p>
+      <p>CREATE OR REPLACE PACKAGE BODY gest_emple AS</p>
+      <p> CURSOR c_sal RETURN EMPLE%ROWTYPE<br>
+  IS SELECT * FROM EMPLE;</p>
+      <p> FUNCTION buscar_emple_por_nombre<br>
+  (n_emp VARCHAR2)<br>
+  RETURN NUMBER;<br>
+  /*************************************************************/<br>
+  PROCEDURE insertar_nuevo_emple(<br>
+  v_num_emp EMPLE.EMP_NO%TYPE,<br>
+  v_apell EMPLE.APELLIDO%TYPE,<br>
+  v_oficio EMPLE.OFICIO%TYPE,<br>
+  v_dir EMPLE.DIR%TYPE,<br>
+  v_fecha_al EMPLE.FECHA_ALT%TYPE,<br>
+  v_sal EMPLE.SALARIO%TYPE,<br>
+  v_comision EMPLE.COMISION%TYPE DEFAULT NULL,<br>
+  v_num_dep EMPLE.DEPT_NO%TYPE)<br>
+  IS<br>
+  dir_no_existe EXCEPTION;<br>
+  BEGIN<br>
+  DECLARE<br>
+  v_num_emple EMPLE.EMP_NO%TYPE;<br>
+  BEGIN<br>
+  SELECT EMP_NO INTO v_num_emple FROM EMPLE<br>
+  WHERE EMP_NO=v_dir;<br>
+  EXCEPTION<br>
+  WHEN NO_DATA_FOUND THEN<br>
+  RAISE insertar_nuevo_emple.dir_no_existe;<br>
+  END;<br>
+  INSERT INTO EMPLE VALUES (v_num_emp, v_apell, v_oficio,<br>
+  v_dir, v_fecha_al, v_sal, v_comision, v_num_dep);<br>
+  EXCEPTION<br>
+  WHEN DUP_VAL_ON_INDEX THEN<br>
+  DBMS_OUTPUT.PUT_LINE('Err. N&uacute;mero de empleado duplicado');<br>
+  WHEN dir_no_existe THEN<br>
+  DBMS_OUTPUT.PUT_LINE('Err. No existe el director');<br>
+  END insertar_nuevo_emple;</p>
+      <p>/*************************************************************/ <br>
+        PROCEDURE borrar_emple(<br>
+  v_num_emple NUMBER)<br>
+  IS<br>
+  emp_dir EMPLE.DIR%TYPE;<br>
+  BEGIN<br>
+  SELECT DIR INTO emp_dir FROM EMPLE<br>
+  WHERE EMP_NO = v_num_emple;<br>
+  DELETE FROM EMPLE WHERE EMP_NO = v_num_emple;<br>
+  UPDATE EMPLE SET DIR = emp_dir WHERE DIR = v_num_emple;<br>
+  END borrar_emple; </p>
+      <p>/*************************************************************/<br>
+        PROCEDURE modificar_oficio_emple(<br>
+  v_num_emp EMPLE.EMP_NO%TYPE,<br>
+  v_oficio EMPLE.OFICIO%TYPE)<br>
+  IS<br>
+  BEGIN<br>
+  UPDATE EMPLE SET OFICIO = v_oficio <br>
+  WHERE EMP_NO = v_num_emp;<br>
+  END modificar_oficio_emple;</p>
+      <p>/*************************************************************/<br>
+        PROCEDURE modificar_dept_emple(<br>
+  v_num_emp EMPLE.EMP_NO%TYPE,<br>
+  v_dept EMPLE.DEPT_NO%TYPE)<br>
+  IS<br>
+  BEGIN<br>
+  UPDATE EMPLE SET DEPT_NO = v_dept WHERE EMP_NO = v_num_emp;<br>
+  END modificar_dept_emple;</p>
+      <p>/*************************************************************/<br>
+        PROCEDURE modificar_dir_emple(<br>
+  v_num_emp EMPLE.EMP_NO%TYPE,<br>
+  v_direccion EMPLE.DIR%TYPE)<br>
+  IS<br>
+  BEGIN<br>
+  UPDATE EMPLE SET DIR = v_direccion WHERE EMP_NO = v_num_emp;<br>
+  END modificar_dir_emple;</p>
+      <p>/*************************************************************/<br>
+        PROCEDURE modificar_salario_emple(<br>
+  v_num_emp EMPLE.EMP_NO%TYPE,<br>
+  v_salario EMPLE.SALARIO%TYPE)<br>
+  IS<br>
+  BEGIN<br>
+  UPDATE EMPLE SET SALARIO = v_salario WHERE EMP_NO = v_num_emp;<br>
+  END modificar_salario_emple;</p>
+      <p>/*************************************************************/<br>
+        PROCEDURE modificar_comision_emple(<br>
+  v_num_emp EMPLE.EMP_NO%TYPE,<br>
+  v_comis EMPLE.COMISION%TYPE)<br>
+  IS<br>
+  BEGIN<br>
+  UPDATE EMPLE SET COMISION = v_comis WHERE EMP_NO = v_num_emp;<br>
+  END modificar_comision_emple;<br>
+  /*************************************************************/</p>
+      <p> PROCEDURE visualizar_datos_emple(<br>
+  v_num_emp EMPLE.EMP_NO%TYPE)<br>
+  IS<br>
+  reg_emple EMPLE%ROWTYPE;<br>
+  BEGIN<br>
+  SELECT * INTO reg_emple FROM EMPLE WHERE EMP_NO = v_num_emp;<br>
+  DBMS_OUTPUT.PUT_LINE('NUMERO EMPLEADO: '||reg_emple.EMP_NO);<br>
+  DBMS_OUTPUT.PUT_LINE('APELLIDO: '||reg_emple.APELLIDO);<br>
+  DBMS_OUTPUT.PUT_LINE('OFICIO: '||reg_emple.OFICIO);<br>
+  DBMS_OUTPUT.PUT_LINE('DIRECTOR: '||reg_emple.DIR);<br>
+  DBMS_OUTPUT.PUT_LINE('FECHA ALTA): '||reg_emple.FECHA_ALT);<br>
+  DBMS_OUTPUT.PUT_LINE('SALARIO: '||reg_emple.SALARIO);<br>
+  DBMS_OUTPUT.PUT_LINE('COMISION: '||reg_emple.COMISION);<br>
+  DBMS_OUTPUT.PUT_LINE('NUMERO DEPARTAMENTO: '||reg_emple.DEPT_NO);<br>
+  END visualizar_datos_emple;<br>
+  /*************************************************************/</p>
+      <p> PROCEDURE visualizar_datos_emple(<br>
+  v_nombre_emp EMPLE.APELLIDO%TYPE)<br>
+  IS<br>
+  v_num_emp EMPLE.EMP_NO%TYPE;<br>
+  reg_emple EMPLE%ROWTYPE;<br>
+  BEGIN<br>
+  v_num_emp:=buscar_emple_por_nombre(v_nombre_emp);<br>
+  SELECT * INTO reg_emple FROM EMPLE WHERE EMP_NO = v_num_emp;<br>
+  DBMS_OUTPUT.PUT_LINE('NUMERO EMPLEADO: '||reg_emple.EMP_NO);<br>
+  DBMS_OUTPUT.PUT_LINE('APELLIDO : '||reg_emple.APELLIDO);<br>
+  DBMS_OUTPUT.PUT_LINE('OFICIO : '||reg_emple.OFICIO);<br>
+  DBMS_OUTPUT.PUT_LINE('DIRECTOR : '||reg_emple.DIR);<br>
+  DBMS_OUTPUT.PUT_LINE('FECHA ALTA: '||reg_emple.FECHA_ALT);<br>
+  DBMS_OUTPUT.PUT_LINE('SALARIO : '||reg_emple.SALARIO);<br>
+  DBMS_OUTPUT.PUT_LINE('COMISION : '||reg_emple.COMISION);<br>
+  DBMS_OUTPUT.PUT_LINE('NUM DEPART: '||reg_emple.DEPT_NO);<br>
+  END visualizar_datos_emple;<br>
+  /*************************************************************/</p>
+      <p> FUNCTION buscar_emple_por_nombre(<br>
+  n_emp VARCHAR2)<br>
+  RETURN NUMBER<br>
+  IS<br>
+  numero EMPLE.EMP_NO%TYPE;<br>
+  BEGIN<br>
+  SELECT EMP_NO INTO numero FROM EMPLE WHERE APELLIDO = n_emp; <br>
+  RETURN numero;<br>
+  END buscar_emple_por_nombre;<br>
+  /*************************************************************/</p>
+      <p>PROCEDURE subida_salario_pct(<br>
+  v_pct_subida NUMBER)<br>
+  IS<br>
+  subida_mayor EXCEPTION;<br>
+  BEGIN<br>
+  IF v_pct_subida &gt; 25 THEN<br>
+  RAISE subida_mayor;<br>
+  END IF; <br>
+  FOR vr_c_sal IN c_sal LOOP<br>
+  UPDATE EMPLE SET SALARIO = SALARIO + <br>
+  (SALARIO * v_pct_subida / 100) <br>
+  WHERE EMP_NO = vr_c_sal.emp_no;<br>
+  END LOOP;<br>
+  EXCEPTION<br>
+  WHEN subida_mayor THEN<br>
+  DBMS_OUTPUT.PUT_LINE('Subida superior a la permitida');<br>
+  END subida_salario_pct;<br>
+  /*************************************************************/</p>
+      <p> PROCEDURE subida_salario_imp(<br>
+  v_imp_subida NUMBER) <br>
+  IS<br>
+  subida_mayor EXCEPTION;<br>
+  sueldo_medio NUMBER(10);<br>
+  BEGIN<br>
+  SELECT AVG(SALARIO) INTO sueldo_medio FROM EMPLE;<br>
+  IF v_imp_subida&gt;sueldo_medio THEN<br>
+  RAISE subida_mayor; <br>
+  END IF;<br>
+  FOR vr_c_sal in c_sal LOOP <br>
+  UPDATE EMPLE SET SALARIO = SALARIO + v_imp_subida <br>
+  WHERE EMP_NO = vr_c_sal.emp_no;<br>
+  END LOOP;<br>
+  EXCEPTION<br>
+  WHEN subida_mayor THEN<br>
+  DBMS_OUTPUT.PUT_LINE('Subida superior a la permitida');<br>
+  END subida_salario_imp;<br>
+  END gest_emple;<br>
+      </p></td>
+    <td>&nbsp;</td>
+    <td><a href="http://www.euskalnet.net/juanarana/oraclezip/Ejer45.rar"><img src="../../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3> CREATE OR REPLACE PACKAGE...</h3> <p>
+      3 .- Ejemplo de como crear un paquete.</p>
+      <p>8) Crear el procedimiento ejsqldin indicado al comienzo del ep&iacute;grafe 5, y realizar con &eacute;l distintas operaciones de definici&oacute;n de datos, observar los resultados y solucionar los problemas que puedan plantearse.</p>
+      <p>CREATE OR REPLACE PROCEDURE ejsqldin<br>
+  (instruccion VARCHAR2)<br>
+  AS<br>
+  id_cursor INTEGER;<br>
+  v_dummy INTEGER; <br>
+  BEGIN<br>
+  id_cursor := DBMS_SQL.OPEN_CURSOR; <br>
+  DBMS_SQL.PARSE(id_cursor, instruccion, DBMS_SQL.V7);<br>
+  v_dummy := DBMS_SQL.EXECUTE(id_cursor); <br>
+  DBMS_SQL.CLOSE_CURSOR(id_cursor); <br>
+  EXCEPTION<br>
+  WHEN OTHERS THEN<br>
+  DBMS_SQL.CLOSE_CURSOR(id_cursor); <br>
+  RAISE;<br>
+  END ejsqldin;<br>
+  / </p>
+      <p>/* Ejemplos de definici&oacute;n de datos con ejsqldin */</p>
+      <p>SQL&gt; EXECUTE EJSQLDIN('CREATE USER DUMM1 IDENTIFIED BY DUMM1')<br>
+        begin EJSQLDIN('CREATE USER DUMM1 IDENTIFIED BY DUMM1'); end;<br>
+        *<br>
+        ERROR en l&iacute;nea 1:<br>
+        ORA-01031: privilegios insuficientes<br>
+        ORA-06512: en &quot;SYSTEM.EJSQLDIN&quot;, l&iacute;nea 14<br>
+        ORA-06512: en l&iacute;nea 1<br>
+        SQL&gt; GRANT CREATE USER TO SYSTEM;<br>
+        Concesi&oacute;n terminada con &eacute;xito.</p>
+      <p>SQL&gt; EXECUTE EJSQLDIN('CREATE USER DUMM1 IDENTIFIED BY DUMM1')<br>
+        Procedimiento PL/SQL terminado con &eacute;xito.</p>
+      <p>SQL&gt; EXECUTE EJSQLDIN('CREATE TABLE PR1 (C1 CHAR)');<br>
+        Procedimiento PL/SQL terminado con &eacute;xito.</p>
+      <p>SQL&gt; EXECUTE EJSQLDIN('ALTER TABLE PR1 ADD COMENTARIO VARCHAR2(20)')<br>
+        Procedimiento PL/SQL terminado con &eacute;xito.</p>
+      <p>SQL&gt; DESCRIBE PR1<br>
+  Name Null? Type<br>
+  ------------------------------- -------- ----<br>
+  C1 CHAR(1)<br>
+  COMENTARIO VARCHAR2(20)<br>
+      </p>
+      <p>9.- Crear un procedimiento que permita consultar todos los datos de la tabla depart a partir de una condici&oacute;n que se indicar&aacute; en la llamada al procedimiento.</p>
+      <p>CREATE OR REPLACE PROCEDURE consultar_depart<br>
+  (condicion VARCHAR2,<br>
+  valor VARCHAR2)<br>
+  AS<br>
+  id_cursor INTEGER;<br>
+  v_comando VARCHAR2(2000);<br>
+  v_dummy NUMBER; <br>
+  v_dept_no depart.dept_no%TYPE;<br>
+  v_dnombre depart.dnombre%TYPE;<br>
+  v_loc depart.loc%TYPE; <br>
+  BEGIN<br>
+  id_cursor := DBMS_SQL.OPEN_CURSOR;<br>
+  v_comando := &lsquo; SELECT dept_no, dnombre, loc <br>
+  FROM depart<br>
+  WHERE &lsquo; || condicion || &lsquo;:val_1&rsquo;;<br>
+  DBMS_OUTPUT.PUT_LINE(v_comando);<br>
+  DBMS_SQL.PARSE(id_cursor, v_comando, DBMS_SQL.V7);<br>
+  DBMS_SQL.BIND_VARIABLE(id_cursor, &lsquo;:val_1&rsquo;, valor);<br>
+  /* A continuaci&oacute;n se especifican las variables que recibir&aacute;n los valores de la selecci&oacute;n*/<br>
+  DBMS_SQL.DEFINE_COLUMN(id_cursor, 1, v_dept_no);<br>
+  DBMS_SQL.DEFINE_COLUMN(id_cursor, 2, v_dnombre,14);<br>
+  DBMS_SQL.DEFINE_COLUMN(id_cursor, 3, v_loc, 14);<br>
+  v_dummy := DBMS_SQL.EXECUTE(id_cursor);<br>
+  /* La funci&oacute;n FETCH_ROWS recupera filas y retorna el n&uacute;mero de filas que quedan */<br>
+  WHILE DBMS_SQL.FETCH_ROWS(id_cursor)&gt;0 LOOP<br>
+  /* A continuaci&oacute;n se depositar&aacute;n los valores recuperados en las variables PL/SQL */<br>
+  DBMS_SQL.COLUMN_VALUE(id_cursor, 1, v_dept_no);<br>
+  DBMS_SQL.COLUMN_VALUE(id_cursor, 2, v_dnombre);<br>
+  DBMS_SQL.COLUMN_VALUE(id_cursor, 3, v_loc);<br>
+  DBMS_OUTPUT.PUT_LINE(v_dept_no || &rsquo;*&rsquo; || v_dnombre <br>
+  || &rsquo;*&rsquo; || v_loc);<br>
+  END LOOP; <br>
+  DBMS_SQL.CLOSE_CURSOR(id_cursor);<br>
+  EXCEPTION<br>
+  WHEN OTHERS THEN<br>
+  DBMS_SQL.CLOSE_CURSOR(id_cursor);<br>
+  RAISE;<br>
+  END consultar_depart;</p></td>
+    <td>&nbsp;</td>
+    <td><a href="http://www.euskalnet.net/juanarana/oraclezip/Ejer46.rar"><img src="../../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td>
+<div align="right"><a href="http://www.euskalnet.net/juanarana/index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a> </div>
+      
+      </td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

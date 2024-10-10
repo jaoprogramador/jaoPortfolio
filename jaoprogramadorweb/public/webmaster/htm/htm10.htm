@@ -1,0 +1,182 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Im&amp;aacute;genes </title><META http-equiv=Content-Language content=es><META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Imagenes, Html, Lenguaje Html, Manual Html, Tutorial, ejercicios Html">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+  <link href="../../styles/estilos.css" rel="stylesheet" type="text/css"></head>
+  
+<body>
+<table class="tablaContenidos">  <tr> 
+    <td height="38" colspan="2"><h2>Im&aacute;genes 
+        I</h2></td>
+  </tr>
+  <tr> 
+    <td height="143" colspan="2"> <table width="75%">
+        <tr> 
+          <td width="27%"  ><h3>Contenidos:</h3></td>
+          <td width="73%">&nbsp;</td>
+        </tr>
+        <tr> 
+          <td height="178">&nbsp;</td>
+          <td><pre  >- <a href="htm10.htm#introduccion">Introducci&oacute;n</a>
+- <a href="htm10.htm#Insercion">Inserci&oacute;n de im&aacute;genes&lt;IMG&gt;</a>
+- <a href="htm10.htm#ALIGN">Alineaci&oacute;n de im&aacute;genes. El atributo ALIGN</a>
+- <a href="htm10.htm#Netscape">Extensiones del Netscape para la alineaci&oacute;n de im&aacute;genes</a>
+- <a href="htm10.htm#BODY">Im&aacute;genes como fondo de p&aacute;gina &lt;BODY&gt;</a>
+- <a href="htm10.htm#lista">Im&aacute;genes como marca de una lista &lt;IMG&gt;
+&lt;DL&gt;</a>
+-<a href="htm10.htm#Animacion">Animaciones</a>
+</pre></td>
+        </tr>
+      </table>
+
+        
+        
+         <h3> Introducci&oacute;n    <a name="introduccion" id="introduccion"></a></h3>
+       <p>Insertar im&aacute;genes en un documento permite 
+        crear p&aacute;ginas mucho m&aacute;s atractivas. Seg&uacute;n el tipo 
+        de gr&aacute;fico utilizado se pueden crear efectos muy sorprendentes. 
+        Existen dos formas de crear una mostrar una imagen en una p&aacute;gina 
+        HTML, la primera es mostrar la imagen en l&iacute;nea, es decir, la imagen 
+        se visualiza autom&aacute;ticamente al cargar la p&aacute;gina; la segunda 
+        es mediante la activaci&oacute;n de un enlace hipertexto que provoque 
+        la visualizaci&oacute;n de la imagen.</p>
+       <p>Existen diversos formatos de im&aacute;genes. Los 
+        formatos GIF y JPEG son interpretados directamente por el visualizados. 
+        Se puede usar otro formato como MPG (v&iacute;deo), pero en este caso 
+        el visualizados llamar&aacute; a un programa auxiliar, que previamente 
+        se habr&aacute; definido, para que sea &eacute;ste el que visualice el 
+        fichero. La desventaja de las im&aacute;genes en formatos no tratados 
+        por el propio visualizador es que no se ver&aacute; el texto junto con 
+        la imagen y por lo tanto no se podr&aacute; ver la p&aacute;gina compuesta.</p>
+       <p>Para que todos los browser puedan comprender el formato 
+        en el que est&aacute; codificado la imagen, se ha hecho una normalizaci&oacute;n 
+        con el est&aacute;ndar GIF (Graphics Interchange Format). se trata de 
+        un formato comprimido, pensado para optimizar el tiempo de descarga que 
+        permite el tratamiento de im&aacute;genes en color (256 como m&aacute;ximo) 
+        o niveles de gris.</p>
+       <h3>  IMG  <a name="Insercion"></a></h3>
+       <p>Este elemento permite incluir una imagen en un documento. 
+        Vendr&aacute; siempre acompa&ntilde;ado por el atributo SRC que indica 
+        la direcci&oacute;n del fichero gr&aacute;fico que contiene la imagen:</p>
+       <p>&lt;IMG SRC=&quot;direcci&oacute;n_URL_del_fichero_gr&aacute;fico&quot;&gt;</p>
+       <p>Ejemplos:</p>
+       <p>Imagen situada en un fichero local:</p>
+       <p>&lt;IMG SRC=&quot;Im&aacute;genes/wmelon.gif&quot;&gt;</p>
+       <p>Imagen residente en un servidor:</p>
+       <p>&lt;IMG SRC=&quot;http://www.jaoprogramado.com/img/log.gif&quot;&gt;</p>
+       <p>Esta &uacute;ltima opci&oacute;n de insertar una 
+        imagen de un servidor exterior en un texto no es muy recomendable ya que 
+        ralentiza mucho la carga de la p&aacute;gina y adem&aacute;s no se asegura 
+        que la imagen sea siempre accesible. Realmente el resultado del ejemplo 
+        ser&iacute;a ver directamente la imagen, no un enlace a esta pero como 
+        se ha dicho anteriormente esto puede dar problemas al cargar la p&aacute;gina. 
+        Esta opci&oacute;n, por tanto, se utiliza s&oacute;lo en casos excepcionales 
+        de im&aacute;genes que son actualizadas peri&oacute;dicamente (p.e: un 
+        mapa meteorol&oacute;gico).</p>
+       <p>Si el fichero indicado no es encontrado, el browser 
+        mostrar&aacute; un s&iacute;mbolo en lugar en lugar de la imagen, indicando 
+        el error. Por ejemplo:</p>
+       <p>&lt;IMG SRC=&quot;directorio/imagen.gif&quot;&gt;</p>
+       <p>En os documentos HTML se suelen insertar diversos 
+        iconos con significados impl&iacute;citos, como es el caso de &quot;p&aacute;gina 
+        en construcci&oacute;n&quot;</p>
+       <p>Este elemento permite adem&aacute;s los siguientes 
+        atributos:</p>
+      <p> 
+      <blockquote> 
+         <p>- ALT: Define un texto alternativo que sustituir&aacute; 
+          a la imagen en caso de que el browser no sea capaz de tratar im&aacute;genes. 
+          Esto es importante sobre todo cuando la imagen soporta un enlace. Por 
+          ejemplo: &lt;IMG SRC=&quot;imagenes/logo.gif ALT=&quot;Logotipo de la 
+          empresa&quot;&quot;&gt; </p>
+         <p>- ALIGN: Sit&uacute;a la imagen en la posici&oacute;n 
+          que se le indique respecto a la l&iacute;nea de texto en la que est&aacute;. 
+          Este atributo se explica con mayor detalle en el apartado que viene 
+          a continuaci&oacute;n.</p>
+      </blockquote>
+       <h3>  El atributo ALIGN  <a name="ALIGN"></a></h3>
+       <p>Alinea la imagen, seg&uacute;n la posici&oacute;n 
+        que se indique, respecto a la l&iacute;nea de texto en la que est&aacute;. 
+        Puede tomar los siguientes valores: 
+      <blockquote  > 
+        <p>- TOP, alinea la parte superior de la imagen con la l&iacute;nea actual.
+          - MIDDLE, alinea el centro de la imagen con la l&iacute;nea actual.
+          - BOTTON, alinea la base de la imagen con la l&iacute;nea actual.</p>
+      </blockquote>
+        
+       <h3>  Extensiones del Netscape  <a name="Netscape"></a></h3>
+       <p>Estas extensiones no son reconocidas por HTML 2, 
+        sin embargo son utilizadas por mucho programadores de HTML.</p>
+       <p>Adem&aacute;s el valor mencionado anteriormente ALIGN, 
+        el Netscape permite la utilizaci&oacute;n de dos nuevos valores. Estos 
+        permitir&aacute;n que el texto fluya alrededor de una imagen con con una 
+        regulaci&oacute;n del espacio vertical (atributo VSPACE) y del espacio 
+        horizontal (atributo hspace). 
+      <blockquote  >- WIDTH: Redefine el ancho de la imagen.
+        - HEIGHT: Redefine el alto de la imagen.
+        - BORDER: Dibuja un marco alrededor de la imagen.
+        - VSPACE: Define el margen vertical a dejar entre la imagen y el texto.
+        - HSPACE: Define el margen horizontal a dejar entre la imagen y el texto.</blockquote>
+       <p>Para poder saltar la imagen y que el texto contin&uacute;e 
+        debajo de &eacute;sta se ha definido el atributo CLEAR para el elemento 
+        del salto de l&iacute;nea &lt;BR&gt;: &lt;BR CLEAR&gt;.</p>
+       <p>A continuaci&oacute;n mostraremos el siguiente ejemplo 
+        para mostrar su funcionamiento:</p>
+       <p>&lt;IMG SRC=&quot;img/logotipo_empresa.jpg&quot; 
+        ALIGN=&quot;right&quot; HSPACE=20 VSPACE=20 WIDTH=30 HEIGHT=30&gt;Texto....</p>
+       <h3>  Im&aacute;genes como fondo  <a name="BODY"></a></h3>
+       <p>Mediante el elemento &lt;BODY&gt; y el elemento BLACKGROUND 
+        se permite utilizar una imagen residente en el servidor, o en un fichero 
+        local, como fondo de p&aacute;gina. El valor que deber&aacute; tomar dichoo 
+        atributo es la direcci&oacute;n donde donde se encuentra el fichero que 
+        contiene la imagen. La sintaxis ser&aacute;:</p>
+       <p>&lt;BODY BACKGROUND=&quot;direcci&oacute;n_del_fichero_gr&aacute;fico&quot;&gt;</p>
+       <p>Ejemplo:</p>
+       <p>&lt;BODY BACKGROUND=&quot;img/logotipo_empresa.jpg&quot;&gt;</p>
+       <h3>  Im&aacute;genes como marcas de una lista  <a name="lista"></a></h3>
+       <p>Para obtener una lista adornada con alg&uacute;n 
+        tipo de icono se podr&aacute;n utilizar las listas de definici&oacute;n 
+        de la siguiente forma:</p>
+      <p>  &lt;DL&gt; &lt;DT&gt;&lt;IMG SRC=&quot;img/bolaroja.gif&quot;&gt;L&iacute;nea 
+        de texto 
+        &lt;DT&gt;&lt;IMG SRC=&quot;img/bolaroja.gif&quot;&gt;L&iacute;nea de 
+        texto 
+        &lt;/DL&gt;
+          </p>
+       <h3>  Animaciones  <a name="Animacion"></a></h3>
+       <p>Una nueva posibilidad de los algunos browsers es 
+        la posibilidad de presentar gr&aacute;ficos con animaci&oacute;n. Los 
+        gr&aacute;ficos animados en el formato GIF permiten almacenar secuencias 
+        de im&aacute;genes en un solo fichero, las cuales forman animaciones que 
+        pueden ser visualizadas que pueden ser visualizadas directamente por el 
+        browser. No hay que confundir estos gr&aacute;ficos con con los v&iacute;deos 
+        en formato MPG que no son tratados por el browser sino por una herramienta 
+        auxiliar.</p>
+       <p>La forma de introducir estas animaciones en un documento 
+        es la misma que para una imagen fija, como se muestra en el siguiente 
+        ejemplo:</p>
+       <p>&lt;IMG SRC=&quot;imagenes/imagen.gif&quot;&gt;</p>
+       <p>Pulsando sobre el bot&oacute;n de Stop del browser 
+        la animaci&oacute;n la imagen se detendr&aacute; en la imagen de la secuencia 
+        en la que est&eacute;. Los visualizadores que no soportan este efecto 
+        representar&aacute;n solamente la primera o la &uacute;ltima de las im&aacute;genes 
+        de la secuencia. Por esto es conveniente no comenzar o terminar las secuencias 
+        con una imagen vac&iacute;a.</p>
+      <p>&nbsp;</p></td>
+  </tr>
+  <tr> 
+    <td width="70" height="36">&nbsp;</td>
+    <td height="36"> <div align="right">  <a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a> </div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

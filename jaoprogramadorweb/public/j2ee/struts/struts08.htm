@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>&iquest;C&oacute;mo pongo en funcionamiento Struts?</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación en Struts,Programas Struts,Aplicaciones en Struts,Ejercicios en Struts, Ejemplos de Struts,Tutoriales de Struts,Manuales Struts" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Struts, Manual Struts, tutorial Struts, Ejemplos Struts, ejercicios Struts">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2> &iquest;C&oacute;mo pongo en funcionamiento 
+        Struts?</h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <p>Como todo framework, Struts consiste en una 
+        librer&iacute;a de clases y una serie de configuraciones por lo que su 
+        instalaci&oacute;n es muy similar en todos los servidores de aplicaciones 
+        que provean (o puedan agreg&aacute;rsele) soporte de:</p>
+      <p> * Java Development Kit (version 1.2 or posterior)<br>
+        * Servlet Container (version 2.2 or posterior)<br>
+        * JavaServer Pages (JSP) (version 1.1 o posterior)<br>
+        * XML Parser compatible con Java API for XML Parsing (JAXP) specification, 
+        1.1 o posterior<br>
+        * JDBC 2.0 Optional Package Classes</p>
+      <p>La instalaci&oacute;n consiste en:</p>
+      <p> 1. Obtener la distribuci&oacute;n binaria desde http://jakarta.apache.org/struts/index.html#Acquiring 
+        y descomprimirla<br>
+        2. Copiar lib/commons-*.jar (clases comunes de Jakarta), lib/struts.jar 
+        (JAR de las clases Struts) y lib/struts-*.tld (Tag Library Descriptors 
+        de los Tags de Struts) en el directorio WEB-INF/lib de la aplicaci&oacute;n<br>
+        3. Modificar el WEB-INF/web.xml de la aplicaci&oacute;n para incluir un 
+        elemento &quot;&lt;servlet&gt;&quot; que define el Servlet del Controller 
+        y un &quot;&lt;servlet-mapping&gt;&quot; que establezca las peticiones 
+        que &eacute;ste atiende. Por ejemplo:</p>
+      <p> &lt;web-app&gt;<br>
+        ... <br>
+        &lt;servlet&gt;<br>
+        &lt;servlet-name&gt;action&lt;/servlet-name&gt;<br>
+        &lt;servlet-class&gt;org.apache.struts.action.ActionServlet&lt;/servlet-class&gt;<br>
+        &lt;init-param&gt;<br>
+        &lt;param-name&gt;application&lt;/param-name&gt;<br>
+        &lt;param-value&gt;com.empresa.aplicacion.ApplicationResources&lt;/param-value&gt;<br>
+        &lt;/init-param&gt;<br>
+        &lt;init-param&gt;<br>
+        &lt;param-name&gt;config&lt;/param-name&gt;<br>
+        &lt;param-value&gt;/WEB-INF/struts-config.xml&lt;/param-value&gt;<br>
+        &lt;/init-param&gt;<br>
+        &lt;init-param&gt;<br>
+        &lt;param-name&gt;debug&lt;/param-name&gt;<br>
+        &lt;param-value&gt;2&lt;/param-value&gt;<br>
+        &lt;/init-param&gt;<br>
+        &lt;init-param&gt;<br>
+        &lt;param-name&gt;detail&lt;/param-name&gt;<br>
+        &lt;param-value&gt;2&lt;/param-value&gt;<br>
+        &lt;/init-param&gt;<br>
+        &lt;init-param&gt;<br>
+        &lt;param-name&gt;validate&lt;/param-name&gt;<br>
+        &lt;param-value&gt;true&lt;/param-value&gt;<br>
+        &lt;/init-param&gt;<br>
+        &lt;load-on-startup&gt;2&lt;/load-on-startup&gt;<br>
+        &lt;/servlet&gt;<br>
+        ...<br>
+        &lt;servlet-mapping&gt;<br>
+        &lt;servlet-name&gt;action&lt;/servlet-name&gt;<br>
+        &lt;url-pattern&gt;*.do&lt;/url-pattern&gt;<br>
+        &lt;/servlet-mapping&gt;<br>
+        ...<br>
+        &lt;/web-app&gt;</p>
+      <p> Nota: com.empresa.aplicacion.ApplicationResources es la localizaci&oacute;n 
+        del archivo &quot;.properties&quot; del idioma principal de la aplicaci&oacute;n<br>
+        4. Modificar el WEB-INF/web.xml de la aplicaci&oacute;n para incluir la 
+        definici&oacute;n de los TagLibraries. Por ejemplo:</p>
+      <p> &lt;web-app&gt;<br>
+        ... <br>
+        &lt;taglib&gt;<br>
+        &lt;taglib-uri&gt;strutsBean&lt;/taglib-uri&gt;<br>
+        &lt;taglib-location&gt;/WEB-INF/struts-bean.tld&lt;/taglib-location&gt;<br>
+        &lt;/taglib&gt;</p>
+      <p> &lt;taglib&gt;<br>
+        &lt;taglib-uri&gt;strutsHtml&lt;/taglib-uri&gt;<br>
+        &lt;taglib-location&gt;/WEB-INF/struts-html.tld&lt;/taglib-location&gt;<br>
+        &lt;/taglib&gt;</p>
+      <p> &lt;taglib&gt;<br>
+        &lt;taglib-uri&gt;strutsLogic &lt;/taglib-uri&gt;<br>
+        &lt;taglib-location&gt;/WEB-INF/struts-logic.tld&lt;/taglib-location&gt;<br>
+        &lt;/taglib&gt;</p>
+      <p> &lt;display-name&gt;&lt;/display-name&gt;<br>
+        <br>
+        &lt;description&gt;&lt;/description&gt;<br>
+        ...<br>
+        &lt;/web-app&gt;</p>
+      <p> 5. Agregar la definici&oacute;n de las TagLibraries en las JSPs que 
+        se utilicen. Ejemplo:</p>
+      <p> &lt;%@ taglib uri=&quot;strutsBean&quot; prefix=&quot;bean&quot; %&gt;<br>
+        &lt;%@ taglib uri=&quot;strutsHtml&quot; prefix=&quot;html&quot; %&gt;<br>
+        &lt;%@ taglib uri=&quot;strutsLogic&quot; prefix=&quot;logic&quot; %&gt;</p>
+      <p> 6. Crear un struts-config.xml donde se configure el Controller seg&uacute;n 
+        se describi&oacute; en las secciones anteriores.</p>
+      <p>Si bien est&aacute;n comenzando a surgir aplicaciones que gestionan la 
+        configuraci&oacute;n de Struts en forma visual (Camino, StrutsConsole, 
+        etc.) es muy recomendable familiarizarse primero con la configuraci&oacute;n 
+        manual antes de utilizar estas herramientas</p>
+      <p>&nbsp; </p>
+      <p><br>
+      </p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

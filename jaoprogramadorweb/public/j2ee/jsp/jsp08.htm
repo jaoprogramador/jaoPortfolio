@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Etiquetas JSP</title>
+<META http-equiv=Content-Language content=es>
+<META content="Manual JSP, ejemplos JSP, codigos JSP" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Manual JSP, ejemplos JSP, codigos JSP">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> Etiquetas JSP</h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <p>Otro elemento importante de la sintaxis son 
+        las etiquetas JSP. Etiquetas JSP no use &lt;%, pero s&oacute;lo el car&aacute;cter 
+        &lt;. Una etiqueta de JSP es algo as&iacute;&shy; como una etiqueta HTML. 
+        Etiquetas JSP puede tener una &quot;etiqueta de inicio&quot;, un &quot;organismo 
+        de etiqueta&quot; y una &quot;etiqueta de cierre&quot;. La etiqueta de 
+        inicio y final tanto el uso del nombre de etiqueta, dentro de caracteres 
+        &lt;y&gt;. El final comienza con el car&aacute;cter de un / despu&eacute;s 
+        de que el car&aacute;cter &lt;. Los nombres de las etiquetas tienen un 
+        car&aacute;cter integrado de colon: en ellos, la parte antes de los dos 
+        puntos se describe el tipo de la etiqueta. Por ejemplo:</p>
+      <p> &lt;some:tag&gt; <br>
+        cuerpo<br>
+        &lt;/some:tag&gt; </p>
+      <p> Si la etiqueta no necesita un cuerpo, el inicio y el final puede ser 
+        convenientemente fusionado, como</p>
+      <p> &lt;some:tag/&gt; </p>
+      <p> A continuaci&oacute;n el cierre de la etiqueta de apertura con /&gt; 
+        en lugar de car&aacute;cter&gt;, estamos terminando la etiqueta de inmediato, 
+        y sin cuerpo. (Esta convenci&oacute;n es la sintaxis de la misma como 
+        XML.)</p>
+      <p>Etiquetas pueden ser de dos tipos: carga de una biblioteca de etiquetas 
+        externas, o etiquetas predefinidas. Etiquetas predefinidas empezar con 
+        jsp: caracteres. Por ejemplo, jsp: include es una etiqueta predefinida 
+        que se utiliza para incluir otras p&aacute;ginas.</p>
+      <p>Ya hemos visto la directiva include. Jsp: include es similar. Pero en 
+        lugar de cargar el texto del archivo incluido en el archivo original, 
+        se llama al objetivo que figuran en tiempo de ejecuci&oacute;n (la forma 
+        de un navegador llamar&aacute; el objetivo incluido. En la pr&aacute;ctica, 
+        esto es en realidad una petici&oacute;n de simulaci&oacute;n en lugar 
+        de una ronda completa-ida y vuelta entre el navegador y el servidor). 
+        El siguiente es un ejemplo de jsp: incluyen el uso de</p>
+      <p> &lt;HTML&gt; <br>
+        &lt;BODY&gt; <br>
+        &lt;BR&gt; Va a incluir hello.jsp ... &lt;BR&gt;<br>
+        &lt;jsp:include page=&quot;hello.jsp&quot;/&gt;<br>
+        &lt;/BODY&gt; <br>
+        &lt;/HTML&gt; </p>
+      <p>Pruebelo y vea lo que hay. Ahora cambie la &quot;jsp: include&quot; a 
+        &quot;jsp: forward&quot; y ver cual es la diferencia. Estas dos etiquetas 
+        predefinidas son con frecuencia muy &uacute;til.<br>
+      </p>
+      <p> </p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>LIntroducci&amp;oacute;n a EJB 2.1</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación en EJB 2.1,Programas EJB 2.1,Aplicaciones en EJB 2.1,Ejercicios en EJB 2.1, Ejemplos de EJB 2.1,Tutorial de EJB 2.1,Manual EJB 2.1" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="EJB 2.1, Manual EJB 2.1, tutorial EJB 2.1, Ejemplos EJB 2.1, ejercicios EJB 2.1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+
+  <tr> 
+    <td height="39" colspan="3"> <h2> <strong>El Bean (implementa EntityBean)</strong></h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <p>
+    	•	Los datos que nos interesan de la base de datos aparecen como atributos (id, nombre, balance, 
+    	etc.). Además suele tener atributos no asociados directamente con la base de datos.
+
+•	Puesto que implementa el interfaz EntityBean debe definir los métodos de dicho interfaz: load(), etc.
+
+•	Define los métodos de negocio, como por ejemplo, los que definen la forma de calcular el balance: debit(), credit(), etc.
+
+•	En este ejemplo el bean es el responsable de la persistencia, por ello accede por medio de JDBC a la base de datos.
+
+•	Observar la implementación de otra regla de negocio: si se trata de crear un objeto que tiene un balance negativo, no se llega a realizar la instancia y se lanza una excepción.
+
+import java.sql.*;
+import javax.sql.*;
+import java.util.*;
+import javax.ejb.*;
+import javax.naming.*;
+
+public class AccountEJB implements EntityBean {
+
+    private String id;
+    private String firstName;
+    private String lastName;
+    private double balance;
+    private Connection con;
+    private String dbName = "java:comp/env/jdbc/AccountDB";
+
+    public void debit(double amount) 
+       throws InsufficientBalanceException {
+
+       if (balance - amount < 0) {
+           throw new InsufficientBalanceException();
+       }
+       balance -= amount;
+    }
+
+    public void credit(double amount) {
+
+       balance += amount;
+    }
+    
+    public double getBalance() {
+
+       return balance;
+    }
+
+    public String ejbCreate(String id, String firstName, 
+       String lastName, double balance)
+       throws CreateException {
+
+       if (balance < 0.00) {
+          throw new CreateException
+             ("A negative initial balance is not allowed.");
+       }
+
+       try {
+          insertRow(id, firstName, lastName, balance);
+       } catch (Exception ex) {
+           throw new EJBException("ejbCreate: " + 
+              ex.getMessage());
+       }
+
+       this.id = id;
+       this.firstName = firstName;
+       this.lastName = lastName;
+       this.balance = balance;
+
+       return id;
+    }
+	....
+<br>
+      </p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

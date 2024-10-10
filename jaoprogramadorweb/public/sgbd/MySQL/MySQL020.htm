@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Ejercicios MySQL</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="MySQL, sql, pl/sql, programacion MySQL, ejercicios MySQL, ejemplos MySQL, select">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table class="tablaContenidos">
+  <tr> 
+    <td height="39" colspan="3"> <h2>AUTO_INCREMENT</h2></td>
+  </tr>
+  <tr> 
+    <td><h3>Utilización de AUTO_INCREMENT</h3>
+      <p>El atributo AUTO_INCREMENT puede utilizarse para generar un identificador 
+        &uacute;nico para cada nueva fila:<br>
+        CREATE TABLE animals (<br>
+        id MEDIUMINT NOT NULL AUTO_INCREMENT,<br>
+        name CHAR(30) NOT NULL,<br>
+        PRIMARY KEY (id)<br>
+        );<br>
+        INSERT INTO animals (name) VALUES ('dog'),('cat'),('penguin'),<br>
+        ('lax'),('whale'),('ostrich');<br>
+        SELECT * FROM animals;<br>
+        Lo cual devuelve:<br>
+        +----+---------+<br>
+        | id | name |<br>
+        +----+---------+<br>
+        | 1 | dog |<br>
+        | 2 | cat |<br>
+        | 3 | penguin |<br>
+        | 4 | lax |<br>
+        | 5 | whale |<br>
+        | 6 | ostrich |<br>
+        +----+---------+<br>
+        Para obtener el valor AUTO_INCREMENT m&aacute;s recientemente generado 
+        se puede utilizar la funcion SQL LAST_INSERT_ID() o<br>
+        la funci&oacute;n del API de C mysql_insert_id(). Estas funciones son 
+        espec&iacute;ficas de cada conexi&oacute;n, de modo que su valor de retorno<br>
+        no es afectado por las inserciones realizadas a trav&eacute;s de otras 
+        conexiones.<br>
+        Nota: Para una inserci&oacute;n de m&uacute;ltiples filas, LAST_INSERT_ID()/mysql_insert_id() 
+        retornan el valor AUTO_<br>
+        INCREMENT de la primera de las filas insertadas. Esto permite que las 
+        inserciones de m&uacute;ltiples filas sean reproducidas correctamente<br>
+        en otros servidores en una configuraci&oacute;n de replicaci&oacute;n.<br>
+        Para tablas MyISAM y BDB se puede especificar AUTO_INCREMENT sobre una 
+        columna secundaria en un &iacute;ndice de m&uacute;ltiples columnas.<br>
+        En este caso, el valor generado para la columna AUTO_INCREMENT es calculado 
+        como<br>
+        MAX(auto_increment_column)+1 WHERE prefix=given-prefix. Esto es &uacute;til 
+        cuando se desea colocar datos en grupos<br>
+        ordenados.<br>
+        CREATE TABLE animals (<br>
+        grp ENUM('fish','mammal','bird') NOT NULL,<br>
+        id MEDIUMINT NOT NULL AUTO_INCREMENT,<br>
+        name CHAR(30) NOT NULL,<br>
+        PRIMARY KEY (grp,id)<br>
+        );<br>
+        INSERT INTO animals (grp,name) VALUES('mammal','dog'),('mammal','cat'),<br>
+        ('bird','penguin'),('fish','lax'),('mammal','whale'),<br>
+        ('bird','ostrich');<br>
+        SELECT * FROM animals ORDER BY grp,id;<br>
+        Lo cual devuelve:<br>
+        +--------+----+---------+<br>
+        | grp | id | name |<br>
+        +--------+----+---------+<br>
+        | fish | 1 | lax |<br>
+        | mammal | 1 | dog |<br>
+        | mammal | 2 | cat |<br>
+        | mammal | 3 | whale |<br>
+        | bird | 1 | penguin |<br>
+        | bird | 2 | ostrich |<br>
+        +--------+----+---------+<br>
+        N&oacute;tese que en este caso (cuando la columna AUTO_INCREMENT es parte 
+        de un &iacute;ndice de m&uacute;ltiples columnas), los valores AUTO_<br>
+        INCREMENT son reutilizados si se elimina la fila con el valor AUTO_INCREMENT 
+        m&aacute;s alto en cualquier grupo. Esto ocurre<br>
+        incluso para tablas MyISAM, en las que los valores AUTO_INCREMENT normalmente 
+        no son reutilizados<br>
+        Si la columna AUTO_INCREMENT es parte de varios &iacute;ndices, MySQL 
+        generar&aacute; valores secuenciales empleando el &iacute;ndice que comienza<br>
+        con la columna AUTO_INCREMENT, si hay uno. Por ejemplo, si la tabla animals 
+        contiene los &iacute;ndices PRIMARY KEY<br>
+        (grp, id) e INDEX (id), MySQL ignorar&iacute;a el &iacute;ndice PRIMARY 
+        KEY al generar valores secuenciales. Como resultado, la tabla<br>
+        contendr&iacute;a una secuencia simple, sin considerar el valor grp.</p>
+    
+        </td>
+    <td>&nbsp;</td>
+    <td><a href="http://www.euskalnet.net/juanarana/oraclezip/Ejer3.rar"><img src="../../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td>
+<div align="right"><a href="http://www.euskalnet.net/juanarana/index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a>
+      </div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>
