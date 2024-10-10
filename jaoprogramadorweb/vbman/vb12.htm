@@ -1,0 +1,131 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Menus</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Menus, Manual Visual Basic,Tutorial Visual Basic, Ejemplos Visual Basic">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+
+<body>
+<table width="555" height="228" align="left" background="../imagenes/fondologo.jpg" >
+  <tr> 
+    <td height="39" colspan="2"> <h2>Men&uacute;s</h2></td>
+  </tr>
+  <tr> 
+    <td height="144" colspan="2">
+<table width="75%">
+        <tr> 
+          <td><h3>Contenido</h3></td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="vb12.htm#intro">- Introducci&oacute;n</a></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="vb12.htm#diseno">- Dise&ntilde;o de un men&uacute;</a></td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td><a href="vb12.htm#propiedades">- Propiedades de un men&uacute;</a></td>
+        </tr>
+      </table>
+      
+      <h3>Intoducci&oacute;n<a name="intro"></a></h3>
+      <p>
+      Muchas aplicaciones simples tienen un formulario y varios controles, pero 
+      no cabe duda de que su aspecto puede ser mejorado utilizando men&uacute;s. 
+      En este cap&iacute;tulo, aprenderemos a crear men&uacute;s y a utilizarlos 
+      en una aplicaci&oacute;n. Un men&uacute; es una forma de proporcionar al 
+      usuario un conjunto de ordenes, l&oacute;gicamente relacionadas, agrupadas 
+      bajo un mismo t&iacute;tulo. El conjunto de todos los t&iacute;tulos correspondientes 
+      a los men&uacute;s dise&ntilde;ados aparecer&aacute; en la barra de men&uacute;s 
+      situada debajo del t&iacute;tulo del formulario.</p>
+      <p>
+      Cuando el usuario haga click en un t&iacute;tulo de un men&uacute; , se 
+      desplegar&aacute; una lista visualizando los elementos que contiene el men&uacute;, 
+      o si no contiene elementos, se ejecutar&aacute; directamente una acci&oacute;n. 
+      Los elementos de un men&uacute; pueden ser &oacute;rdenes , submen&uacute;s, 
+      y separadores. Cuando se hace click en una orden, o se selecciona y se pulsa 
+      Entrar, se ejecuta una acci&oacute;n o se despliega una acci&oacute;n de 
+      dialogo. Por convenio, una orden seguida de tres puntos (...) indica que 
+      se ejecutar&aacute; una caja de dialogo. Cuando se hace click en un sumen&uacute; 
+      se despliega una nueva lista de elementos. Un separador tiene como finalidad 
+      separar grupos de &oacute;rdenes de un mismo men&uacute; en funci&oacute;n 
+      de su actividad.</p>
+      <h3>Dise&ntilde;o de un men&uacute;<a name="diseno" id="diseno"></a></h3>
+	  <p>
+      Para dise&ntilde;ar un men&uacute; utilizaremos el editor de men&uacute;s 
+      que se encuentra entre las distintas herramientas de Visual Basic:<br>
+	  <br>
+      Para crear un men&uacute;, los pasos a ejecutar son los siguientes:<br>
+      </p><p>
+      1.- Abrir el editor de men&uacute;s. Para ello, seleccione el formulario 
+      para el que desea crear el men&uacute; y a continuaci&oacute;n ejecute la 
+      orden Editor de men&uacute;s del men&uacute; Herramientas, o bien haga click 
+      en el boton dispuesto para tal fin en la barra de herramientas est&aacute;ndar.</p>
+      <p>
+      2.- Introducir el t&iacute;tulo del men&uacute;. Escriba en la caja de texto 
+      Caption el t&iacute;tulo del men&uacute; que se desea crear el cual aparecer&aacute; 
+      en la barra de men&uacute;. Inserte un ampersand (&amp;) antes de la letra 
+      que da acceso al directorio al men&uacute; para que aparezca subrayada. 
+      Escriba en la caja de texto Name el nombre utilizado en el c&oacute;digo 
+      para referirse al men&uacute;. A continuaci&oacute;n, haga click en el bot&oacute;n 
+      Next o pulse Entrar.</p>
+      <p>
+      3.- Introducir los elementos que componen el men&uacute;. Escriba en la 
+      caja de texto Caption el t&iacute;tulo del elemento del men&uacute; y en 
+      la caja de texto Name el c&oacute;digo utilizado en el c&oacute;digo para 
+      referirse a dicho elemento. Por ejemplo, en la figura anterior Abrir... 
+      es una orden.Por convenio, un elemento de un men&uacute; seguido de tres 
+      puntos significa que cuando se haga click sobre &eacute;lse desplegar&aacute; 
+      una caja de dialogo.</p>
+      <p>
+      4.- Para diferenciar un elemento de un men&uacute; del propio men&uacute;, 
+      hay que sangrar el t&iacute;tulo del elemento. Para ello , seleccionelo 
+      y haga click en el bot&oacute;n flecha hacia la derecha(--&gt;).<br>
+      </p><p>
+      5.- A&ntilde;adir un separador. Utilizando separadores puede agrupar las 
+      &oacute;rdenes en funci&oacute;n de su actividad. Para insertar un separador, 
+      escriba un &uacute;nico gui&oacute;n (-) en la caja Caption del editor de 
+      men&uacute;s. Tiene que especificar tambi&eacute;n un nombre cualquier (Name). 
+      Por ejemplo, En la figura anterior puede ver un separador antes de la orden 
+      Salir.</p>
+      <p>
+      6.- Cerrar el editor de men&uacute;s. Una vez que haya finalizado el dise&ntilde;o, 
+      pulse la tecla Aceptar y observe c&oacute;mo c&oacute;mo en la barra de 
+      men&uacute;s del formulario aparecen los men&uacute;s dise&ntilde;ados.</p>
+      <p>
+      Como ejercicio intente construir los men&uacute;s mostrados en las figuras 
+      anteriores. Despu&eacute;s, guarde la aplicaci&oacute;n y compruebe c&oacute;mo 
+      haciendo click sobre cualquier men&uacute; &eacute;ste se despliega mostrando 
+      sus elementos.</p>
+      <p>
+      Las &oacute;rdenes de un men&uacute; s&oacute;lo responden al evento Click.</p>
+      
+      <h3>Propiedades de un men&uacute;<a name="propiedades"></a></h3>
+      <p>
+      Las propiedades de un men&uacute; que pueden seleccionarse en el editor 
+      de men&uacute;s para un elemento de un men&uacute; son Index, Shortcut, 
+      HelpContextID, NegotiatePosition, Checked, Enabled, Visible, y WindowList. 
+      </p></td>
+  </tr>
+  <tr> 
+    <td></td>
+    <td> <div align="right"><a href="../index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

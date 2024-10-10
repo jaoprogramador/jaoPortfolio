@@ -1,0 +1,44 @@
+
+
+
+ BODY {
+  	scrollbar-arrow-color:#0000FF;
+  	scrollbar-shadow-color:#0000FF;
+  	scrollbar-face-color:#FFFFFF;
+  	scrollbar-highlight-color:#0000FF;
+  	scrollbar-darkshadow-color:#0000FF;
+  	scrollbar-3dlight-color:#0000FF;
+ }
+
+ p,pre,em,blockquote,td{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-style: normal;
+	font-weight: bold;
+	color: #0000FF;
+ }
+
+ h2{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	color: #0000FF;
+	text-align:center;
+
+ }
+ h3{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	
+	font-style: italic;
+	font-weight: bold;
+	color: #0000CC;
+	text-decoration: underline;
+ }
+ a{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-style: normal;
+	font-weight: bold;
+	color: #0000FF;
+	text-align:center;	
+	text-decoration:none;
+	
+ }

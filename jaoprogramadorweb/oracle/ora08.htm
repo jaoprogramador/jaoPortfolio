@@ -1,0 +1,168 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Ejercicios Oracle</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="listados, Oracle, sql, pl/sql, programacion oracle, ejercicios, ejemplos">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table width="555" height="264" align="left" background="../imagenes/fondologo.jpg">
+  <tr> 
+    <td height="39" colspan="3"> <h2>E 
+        J E R C I C I O S</h2></td>
+  </tr>
+  <tr> 
+    <td> <h3>LISTADOS</h3><p>
+        1.- Ejemplos de creaci&oacute;n informes.</p>
+      <p>1&ordm;) a partir de las tablas emple y depart, hacer un listado en el que se produzca una suma de salarios por localidad y dentro de la localidad una suma de salarios por oficios.<br>
+        - el titulo superios de la lista es: LISTADO DE LOS EMPLEADOS DE LA TABLA EMPLE<br>
+        - El titulo inferior del listado es:Con ruptura por departamento y por oficio calculando totales<br>
+      - La cabecera estara formada por los siguientes titulos: Localidad, apellidos, N&ordm; de empleado, oficio, salario y comisi&oacute;n.</p>
+      <p>ALTER SESSION SET NLS_NUMERIC_CHARACTERS=',.';<br>
+        REM Nombre : LISTADO3.SQL<br>
+        REM Descripci&oacute;n: Listado de Empleados.</p>
+      <p>TTITLE 'LISTADO DE LOS EMPLEADOS DE LA TABLA EMPLE' skip 2<br>
+        BTITLE 'Con ruptura por departamento y por oficio calculando totales' skip 2</p>
+      <p>COLUMN LOC HEADING 'Localidad' <br>
+        COLUMN APELLIDO HEADING 'Apellidos'<br>
+        COLUMN EMP_NO HEADING 'N&ordm; de empleado' <br>
+        COLUMN OFICIO HEADING 'Oficio' <br>
+        COLUMN SALARIO HEADING 'Salario' FORMAT 9G999G999<br>
+        COLUMN COMISION HEADING 'Comisi&oacute;n' FORMAT 9G999G999</p>
+      <p>BREAK ON LOC SKIP 2 ON OFICIO SKIP 1<br>
+        COMPUTE SUM LABEL'Suma por loc.' OF SALARIO ON LOC <br>
+        COMPUTE SUM LABEL'Sum por ofi.' OF SALARIO ON oficio </p>
+      <p>SET LINESIZE 79<br>
+        SET PAGESIZE 45 <br>
+        SET NEWPAGE 0</p>
+      <p>SPOOL LISTADO3.LST</p>
+      <p>SELECT LOC, APELLIDO, EMP_NO, OFICIO, SALARIO, COMISION<br>
+        FROM EMPLE, DEPART<br>
+        WHERE EMPLE.DEPT_NO=DEPART.DEPT_NO<br>
+        ORDER BY LOC, OFICIO;</p>
+      <p>TTITLE OFF<br>
+        BTITLE OFF<br>
+        CLEAR BREAKS<br>
+        CLEAR COMPUTES<br>
+        CLEAR COLUMNS<br>
+        SPOOL OFF</p></td>
+    <td>&nbsp;</td>
+    <td><a href="http://es.geocities.com/juantxu28/oraclezip/Ejer26.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>FORMATEAR 
+      LISTADOS </h3><p>
+      2 .- Ejemplos de creaci&oacute;n de informes dando formatos.</p>
+      <p>3&ordm;) Realizar un informe en el que aparezca por cada departamento el <br>
+        salario maximo, el minimo, el total junto con la media y el numero <br>
+        de empleados.<br>
+      - el titulo superios de la lista es: RESUMEN DEPARTAMENTAL</p>
+      <p>&nbsp;</p>
+      <p>REM Nombre : LISTADO5.SQL<br>
+        REM Descripci&oacute;n: RESUMEN DEPARTAMENTAL</p>
+      <p>SET HEADSEP |<br>
+        TTITLE CENTER 'RESUMEN DEPARTAMENTAL' skip 2</p>
+      <p>COLUMN DNOMBRE HEADING 'Nombre|Departamento'<br>
+        COLUMN MAXIMO HEADING 'M&aacute;ximo|Salario' FORMAT 9,999,999<br>
+        COLUMN MINIMO HEADING 'M&iacute;nimo|Salario' FORMAT 9,999,999<br>
+        COLUMN SUMA HEADING 'Suma|Salarios' FORMAT 9,999,999<br>
+        COLUMN MEDIO HEADING 'Salario|Medio' FORMAT 9,999,999<br>
+        COLUMN CUENTA HEADING 'N&uacute;mero|Empleados' FORMAT 9,999</p>
+      <p>SET LINESIZE 79<br>
+        SET PAGESIZE 60 <br>
+        SET NEWPAGE 0</p>
+      <p>SPOOL LISTADO5.LST</p>
+      <p>SELECT DNOMBRE, max(salario) MAXIMO, min(salario) MINIMO, sum(salario) SUMA, avg(salario) MEDIO, count(*) CUENTA<br>
+        FROM EMPLE, DEPART<br>
+        WHERE EMPLE.DEPT_NO=DEPART.DEPT_NO<br>
+        GROUP BY DNOMBRE;</p>
+      <p>TTITLE OFF<br>
+        BTITLE OFF<br>
+        CLEAR BREAKS<br>
+        CLEAR COMPUTES<br>
+        CLEAR COLUMNS<br>
+        SPOOL OFF</p></td>
+    <td>&nbsp;</td>
+    <td><a href="http://es.geocities.com/juantxu28/oraclezip/Ejer27.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>ACCEPT...PROMPT</h3><p>
+      3 .- Ejemplosde 
+      creaci&oacute;n de informes introduciendo par&aacute;metros de entrada para 
+      generar el informe</p>
+      <p>4&ordm;) Obtener el listado anterior formateando las salidas numericas de <br>
+      tal forma que el punto represente los miles y la coma los decimales.</p>
+      <p>ALTER SESSION SET NLS_NUMERIC_CHARACTERS=',.';</p>
+      <p>REM Nombre : LISTADO6.SQL<br>
+        REM Descripci&oacute;n: RESUMEN DEPARTAMENTAL</p>
+      <p>SET HEADSEP |<br>
+        TTITLE CENTER 'RESUMEN DEPARTAMENTAL' skip 2</p>
+      <p>COLUMN DNOMBRE HEADING 'Nombre|Departamento'<br>
+        COLUMN MAXIMO HEADING 'M&aacute;ximo|Salario' FORMAT 9G999G999D99<br>
+        COLUMN MINIMO HEADING 'M&iacute;nimo|Salario' FORMAT 9G999G999D99<br>
+        COLUMN SUMA HEADING 'Suma|Salarios' FORMAT 9G999G999D99<br>
+        COLUMN MEDIO HEADING 'Salario|Medio' FORMAT 9G999G999D99<br>
+        COLUMN CUENTA HEADING 'N&uacute;mero|Empleados' FORMAT 9G999<br>
+        SET LINESIZE 90<br>
+        SET PAGESIZE 60 <br>
+        SET NEWPAGE 0<br>
+        SPOOL LISTADO6.LST<br>
+        SELECT DNOMBRE, max(salario) MAXIMO, min(salario) MINIMO, sum(salario) SUMA, avg(salario) MEDIO, count(*) CUENTA<br>
+        FROM EMPLE, DEPART<br>
+        WHERE EMPLE.DEPT_NO=DEPART.DEPT_NO<br>
+        GROUP BY DNOMBRE;</p>
+      <p>TTITLE OFF<br>
+        BTITLE OFF<br>
+        CLEAR COMPUTES<br>
+        CLEAR COLUMNS<br>
+        SPOOL OFF</p>
+      <p>5&ordm;) Hacer el mismo informe que se pide en el ejercicio 2, con la diferencia <br>
+        que nos pida introducir por teclado el nombre del departamento que se va a listar.<br>
+      No se han de obtener los calculos por report ni imprimir el titulo inferior.</p>
+      <p>REM Nombre : LISTADO7.SQL<br>
+        REM Descripci&oacute;n: Listado de SALARIOS - INTRODUCIMOS DEPARTAMENTO<br>
+        SET HEADSEP |<br>
+        TTITLE CENTER 'LISTADO DE LOS SALARIOS DE LOS EMPLEADOS' skip 2<br>
+        COLUMN DNOMBRE HEADING 'Nombre|Departamento'<br>
+        COLUMN APELLIDO HEADING 'Apellido'<br>
+        COLUMN SALARIO HEADING 'Salario' FORMAT 9,999,999</p>
+      <p>BREAK ON DNOMBRE SKIP 1<br>
+        COMPUTE SUM MAX MIN AVG OF SALARIO ON DNOMBRE<br>
+        SET LINESIZE 79<br>
+        SET PAGESIZE 30 <br>
+        SET NEWPAGE 0<br>
+        SPOOL LISTADO7.LST</p>
+      <p>ACCEPT NOM PROMPT &quot;Nombre de departamento a listar:&quot;<br>
+        SELECT DNOMBRE, APELLIDO, SALARIO FROM EMPLE, DEPART<br>
+        WHERE EMPLE.DEPT_NO=DEPART.DEPT_NO AND DNOMBRE='&amp;NOM' <br>
+        ORDER BY DNOMBRE;</p>
+      <p>TTITLE OFF<br>
+        BTITLE OFF<br>
+        CLEAR BREAKS<br>
+        CLEAR COMPUTES<br>
+        CLEAR COLUMNS<br>
+        SPOOL OFF</p>
+      <p>&nbsp;</p></td>
+    <td>&nbsp;</td>
+    <td><a href="http://es.geocities.com/juantxu28/oraclezip/Ejer28.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td>
+<div align="right"><a href="http://es.geocities.com/juantxu28/index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a>
+      </div>
+      </td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

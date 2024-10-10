@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Estructura de un documento</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Estructura de un documento Html, Html, Lenguaje Html, Manual Html, Tutorial, ejercicios Html">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+  <link href="../styles/estilos.css" rel="stylesheet" type="text/css"></head>
+
+ 
+<body>
+<table width="555" height="267" align="left" background="../imagenes/fondologo.jpg">
+  <tr> 
+    <td height="38" colspan="2"><h2>   Estructura 
+        de un documento</h2> </td>
+  </tr>
+  <tr> 
+    <td height="183" colspan="2">  <p>Opcionalmente los documentos 
+        escritos en HTML empezar&aacute;n por la marca &lt;HTML&gt; y finalizar&aacute;n 
+        con la marca &lt;/HTML&gt;. Esta marca solo sirve como identificador del 
+        contenido del fichero para ciertos programas que realizan cambios masivos 
+        en muchas p&aacute;ginas a la vez.</p>
+       <p>Los documentos escritos en HTML est&aacute;n estructurados 
+        en dos partes diferenciadas: la cabecera (&lt;HEAD&gt;) y el cuerpo (&lt;BODY&gt;).</p>
+       <p>Entre las marcas del elemento (&lt;HEAD&gt;) se podr&aacute;n 
+        utilizar los siguientes elementos:</p>
+       <p>&lt;TITLE&gt; para dar nombre al documento.</p>
+       <p>&lt;META&gt; para formar a la p&aacute;gina activa 
+        a ser cargada cada cierto tiempo.</p>
+       <p>&lt;BASE&gt; para prefijar la direcci&oacute;n base 
+        de los documentos referenciados mediante un URL relativo.</p>
+       <p>El fichero fuente de un documento HTML podr&aacute; 
+        contener comentarios explicativos que ser&aacute;n ignorados por el browser.</p>
+      <p>&nbsp;</p>
+      <p align="left"  >  HEAD, TITLE, META, BASE  </p>
+       <p>La cabecera se emplea para facilitar informaci&oacute;n 
+        acerca del documento y est&aacute; delimitada por &lt;HEAD&gt; pr&oacute;logo&lt;/HEAD&gt;. 
+        Normalmente esta informaci&oacute;n no se ve cuando se navega por el documento.</p>
+       <p>Dentro de la cabecera no se podr&aacute; definir 
+        una breve descripci&oacute;n que identifica el documento mediante las 
+        marcas &lt;TITLE&gt; Y &lt;/TITLE&gt;. El uso de TITLE es obligatorio 
+        ya que adem&aacute;s de un caracteres informativo tiene otras razones 
+        para existir:</p>
+       <p>- Es el texto que el browser almacenar&aacute; en 
+        el fichero hotlist o brookmark.</p>
+       <p>- Es lo que indica en la lista que aparece en la 
+        orden Go de la barra de men&uacute;.</p>
+       <p>- Es lo que aparece en la esquina superior izquierda 
+        cuando se imprime en documento.</p>
+       <p>- En un contexto Xwindow, cuando se minimiza la ventana, 
+        el t&iacute;tulo ser&aacute; tomado como nombre por el icono.</p>
+       <p>A continuaci&oacute;n se muestra un ejemplo del formato 
+        m&iacute;nimo de la cabecera.</p>
+       <p>&lt;HTML&gt; </p>
+      <p>   &nbsp;&nbsp;&nbsp;&nbsp;&lt;HEAD&gt;  </p>
+       <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;TITLE&gt; 
+        aqu&iacute; va el nombre del documento &lt;/TITLE&gt;</p>
+       <p>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/HEAD&gt;</p>
+       <p>Cuerpo del documento</p>
+       <p>...</p>
+       <p>&lt;/HTML&gt; </p>
+       <p>En la cabecera puede utilizarse tambi&eacute;n el 
+        elemento &lt;META&gt; que puede forzar a que la p&aacute;gina activa se 
+        cargue cada cierto tiempo (indicado en segundos mediante el atributo CONTENT).</p>
+       <p>&lt;HEAD&gt;</p>
+       <p>&nbsp;&nbsp;&nbsp;&nbsp;&lt;TITLE&gt;T&iacute;tulo 
+        de la p&aacute;gina&lt;/TITLE&gt;</p>
+       <p>&nbsp;&nbsp;&nbsp;&nbsp;&lt;META HTTP-EQUIV=&quot;Refresh&quot; 
+        CONTENT=&quot;10&quot;&gt;</p>
+       <p>&lt;/HEAD&gt;</p>
+       <p>Este ejemplo hace que el browser cargue la p&aacute;gina 
+        cada 10 segundos. Tambi&eacute;n puede hacerse a un servidor, as&iacute;:</p>
+       <p>&lt;HEAD&gt;</p>
+       <p>&nbsp;&nbsp;&nbsp;&nbsp;&lt;TITLE&gt;T&iacute;tulo 
+        de la p&aacute;gina&lt;/TITLE&gt;</p>
+       <p>&nbsp;&nbsp;&nbsp;&nbsp;&lt;META HTTP-EQUIV=&quot;Refresh&quot; 
+        CONTENT=&quot;10; URL=http://miservidor/mipagina.htm&quot;&gt;</p>
+       <p>&lt;/HEAD&gt;</p>
+       <p>Esto ha de ser utilizado con mucha precauci&oacute;n 
+        ya que podr&aacute; sobrecargar el servidor. Si el contenido de la p&aacute;gina 
+        no va a cambiares in&uacute;til hacerlo, de hecho, solo tendr&aacute; 
+        utilidad en casos muy especiales.</p>
+       <p>El elemento &lt;BASE HREF=&quot;URL&quot;&gt; define 
+        la informaci&oacute;n a prefijar a todo URL incompleto en el documento. 
+        Por ejemplo, el URL relativo &quot;/html/test.html&quot; corresponder&aacute; 
+        de hecho a &quot;URL/html/test.html&quot;.</p>
+       <p>  BODY  </p>
+       <p>El resto del documento, es decir, todo aquello que 
+        no pertenezca a la cabecera, residir&aacute; entre &lt;BODY&gt; y &lt;/BODY&gt;. 
+        Esta es la estructura m&iacute;nima que debe poseer todo documento HTML.</p>
+       <p>&lt;HTML&gt; </p>
+      <p>   &nbsp;&nbsp;&nbsp;&nbsp;&lt;HEAD&gt;  </p>
+       <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;TITLE&gt; 
+        T&iacute;tulo p&aacute;gina &lt;/TITLE&gt;</p>
+       <p>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/HEAD&gt;</p>
+       <p>&nbsp;&nbsp;&nbsp;&nbsp;&lt;BODY&gt; </p>
+       <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cuerpo 
+        p&aacute;gina ...</p>
+       <p>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/BODY&gt;</p>
+       <p>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/HTML&gt;</p>
+      <p>&nbsp;</p>
+       <p>  COMENTARIOS  </p>
+      <p>  En el c&oacute;digo fuente de una p&aacute;gina 
+        HTML, los comentarios se introducir&aacute;n sobre las marcas: &lt;!--y 
+        --&gt;. Todo texto situado entre dichas marcas ser&aacute; ignorado por 
+        el browser, y por lo tanto no ser&aacute; visible  .</p>
+       <p>  Ejemplo:  </p>
+       <p>&lt;!-- Esto es una l&iacute;nea de comentarios--&gt;</p></td>
+  </tr>
+  <tr> 
+    <td width="70" height="36"> </td>
+    <td height="36"> <div align="right">  <a href="../index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a>  </div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

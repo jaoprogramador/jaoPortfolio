@@ -1,0 +1,566 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Ejercicios Java</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Descargar Ejercicios de Java, Ejemplos de java, Aplicaciones  de java, JBuilder, J Builder, codigo java">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table width="555" height="8016" align="left" background="../imagenes/fondologo.jpg">
+  <tr> 
+    <td height="39" colspan="3"> <h2>E 
+        J E R C I C I O S</h2></td>
+  </tr>
+  <TR>
+  <TD>
+  <h3>La Clase String</h3>
+      <p>pClaseString.- Ejemplo que nos muestra los distintos metodos del objeto 
+        String. </p>
+      <p>package pclasestring;</p>
+      <p>import java.io.BufferedReader;<br>
+        import java.io.InputStreamReader;<br>
+        import java.io.IOException;</p>
+      <p>public class string {<br>
+        private static BufferedReader stdin= new BufferedReader (new InputStreamReader(System.in));<br>
+        public static void main(String[] args) throws IOException,<br>
+        NumberFormatException {<br>
+        short eleccion;<br>
+        String cadena=null;<br>
+        do{<br>
+        System.out.println(&quot;ELIGE UNA OPCI&Oacute;N: &quot;);<br>
+        System.out.println(&quot;================== &quot;);<br>
+        System.out.println(&quot;1.- Inicializar cadena String: &quot;);<br>
+        System.out.println(&quot;2.- Convertimos el String a array de caracteres 
+        primitivo&quot;);<br>
+        System.out.println(&quot;3.- Buscar cadena en la cadena String: &quot;);<br>
+        System.out.println(&quot;4.- Comparaciones: &quot;);<br>
+        System.out.println(&quot;5.- Salir: &quot;);<br>
+        eleccion=Short.parseShort(stdin.readLine());<br>
+        switch (eleccion){</p>
+      <p> case 1:<br>
+        System.out.println(&quot;Introduce una cadena de caracteres: &quot;);<br>
+        cadena = new String(stdin.readLine());<br>
+        System.out.println(&quot;La longitud de tu cadena &quot;+cadena+&quot; 
+        es de &quot;+cadena.length()+&quot; caracteres&quot; );<br>
+        System.out.println(&quot;El segundo caracter de la cadena: &quot;+cadena+&quot; 
+        es &quot;+cadena.charAt(1));<br>
+        System.out.println(&quot;Los caracteres de la cadena &quot;+cadena+&quot; 
+        de la posicion 1 a la 4 son &quot;+cadena.substring(0,3));<br>
+        System.out.println(&quot;La cadena de caracteres &quot;+cadena+&quot; 
+        en may&uacute;sculas es &quot;+cadena.toUpperCase());<br>
+        break;<br>
+        case 2:<br>
+        char []vectorcadena= cadena.toCharArray();<br>
+        for (int i=0;i&lt;vectorcadena.length;i++) System.out.println(&quot;La 
+        posicion: &quot;+i+&quot; contiene &quot;+vectorcadena[i]);<br>
+        break;<br>
+        case 3:<br>
+        System.out.println(&quot;Introduce la cadena a buscar en la cadena: &quot;+cadena);<br>
+        String cadBus= new String(stdin.readLine());<br>
+        System.out.println(&quot;la cadena &quot;+cadBus+&quot; aparece en la 
+        posici&oacute;n &quot;+cadena.indexOf(cadBus));<br>
+        break;<br>
+        case 4:<br>
+        String cadena2 = new String(&quot;juantxu&quot;);<br>
+        if (cadena.compareTo(cadena2)==0)<br>
+        System.out.println(&quot;La cadena &quot;+cadena+&quot; es igual a la 
+        cadena2 &quot;+cadena2);<br>
+        else<br>
+        System.out.println(&quot;La cadena &quot;+cadena+&quot; es distinta a 
+        la cadena2 &quot;+cadena2);<br>
+        break;<br>
+        }<br>
+        }while(eleccion!=5);</p>
+      <p><br>
+        }<br>
+        }</p></TD>
+		<td></td>
+    <td><a href="http://es.geocities.com/juantxu28/JBuilderZip/pClaseString.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </TR>
+  <tr> 
+    <td height="858" > 
+      <h3>Vectores</h3>
+      <p> 46.- plibro. Aplicacion que mediante vectores nos permite mostrar dos 
+        libros junto con su precio. </p>
+      <p>//en la clase vetor.java</p>
+      <p>package plibro;<br>
+        <br>
+        import java.util.*;<br>
+        public class vector {<br>
+        public static void main(String[] args) {<br>
+        Vector vLibros = new Vector ();<br>
+        vLibros.addElement(new libro(&quot;El Quijote&quot;,2));<br>
+        vLibros.addElement(new libro(&quot;El Camino&quot;,3));<br>
+        vLibros.addElement(new libro(&quot;El Codigo Davincy&quot;,12));<br>
+        libro L1=(libro) vLibros.elementAt(2);<br>
+        System.out.println(&quot;El t&iacute;tulo del libro mas comercial &quot;+L1.getTitulo()+&quot; 
+        precio: &quot;+L1.getCantidad()+&quot; euros&quot;);<br>
+        System.out.println(&quot;Lista de libros &quot;);<br>
+        for(int i=0;i&lt;vLibros.size();i++){<br>
+        libro LTOT= (libro) vLibros.elementAt(i);<br>
+        System.out.println(&quot;El t&iacute;tulo del libro es &quot;+LTOT.getTitulo()+&quot; 
+        precio: &quot;+LTOT.getCantidad()+&quot; euros&quot;);<br>
+        }</p>
+      <p>}<br>
+        }</p>
+      <p>//en la clase libro.java</p>
+      <p>package plibro;<br>
+        <br>
+        import java.io.*;<br>
+        public class libro {<br>
+        private static BufferedReader stdin=new BufferedReader(new InputStreamReader(System.in));<br>
+        String nombre;<br>
+        int cantidad;<br>
+        libro(String tit,int cant){//CONSTRUCTOR<br>
+        nombre=tit;<br>
+        cantidad=cant;<br>
+        }<br>
+        String getTitulo(){<br>
+        return nombre;<br>
+        }<br>
+        int getCantidad(){<br>
+        return cantidad;<br>
+        }<br>
+        <br>
+        }<br>
+      </p></td>
+    <td>&nbsp;</td>
+    <td><a href="http://es.geocities.com/juantxu28/JBuilderZip/46.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>CLASE STRINGTOKENIZER</h3>
+      <p> 47.- pverpalabras.Aplicaci&oacute;n que nos cuenta las cadenas de caracteres 
+        separadas por espacios de una cadena de caracteres. </p>
+      <p>package pverpalabras;</p>
+      <p> import java.util.*;<br>
+        import java.io.*;<br>
+        public class verpalabras {<br>
+        private static java.io.BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));<br>
+        public static void main(String[] args) {</p>
+      <p> try {<br>
+        System.out.println(&quot;Escriba una frese: &quot;);<br>
+        String frase = stdin.readLine();<br>
+        StringTokenizer cadena = new StringTokenizer(frase);<br>
+        int npalabras=cadena.countTokens();<br>
+        System.out.println(npalabras+&quot; palabras &quot;);<br>
+        while(cadena.hasMoreTokens())<br>
+        System.out.print(cadena.nextToken()+&quot;+&quot;);<br>
+        }<br>
+        catch (IOException e) {<br>
+        System.out.println(e.getMessage());<br>
+        }<br>
+        }<br>
+        }</p></td>
+    <td>&nbsp;</td>
+    <td><a href="http://es.geocities.com/juantxu28/JBuilderZip/47.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>CLASE RANDOM</h3>
+      <p> 48.- penterosaleatoris. Aplicacion que nos genera numeros aleatoris 
+        comprendidos entre 0 y 9. </p>
+      <p>package penterosaleatorios;<br>
+        <br>
+        import java.lang.*;<br>
+        import java.util.*;<br>
+        public class EnterosAleatorios {<br>
+        public static void main(String[] args) {<br>
+        Random aleatorios = new Random();<br>
+        System.out.println(&quot;Diez n&ordm; aleatorios: &quot;);<br>
+        System.out.println(&quot;====================&quot;);<br>
+        for(int i=0;i&lt;10;++i)<br>
+        System.out.println(aleatorios.nextInt());<br>
+        }<br>
+        }<br>
+      </p></td>
+    <td>&nbsp;</td>
+    <td><a href="http://es.geocities.com/juantxu28/JBuilderZip/48.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>CLASE RANDOM Y ARRAYS</h3>
+      <p> 49.- pprimitiva. Aplicacion que simula un juego de la primitiva tras 
+        introducir 3 numeros y compararlos con los aleatorios generados nos cice 
+        los aciertos. </p>
+      <p>package pprimitiva;</p>
+      <p><br>
+        import java.lang.*;<br>
+        import java.util.*;<br>
+        import java.io.*;<br>
+        public class primitiva {<br>
+        private static BufferedReader stdin=new BufferedReader(new InputStreamReader(System.in));<br>
+        public static void main(String[] args) throws IOException,<br>
+        NumberFormatException {<br>
+        Random aleatorios = new Random();<br>
+        int []rand=new int[3];<br>
+        int []num_usu=new int[3];<br>
+        int []num_aci=new int[3];<br>
+        int cont=0;<br>
+        for (int i=0;i&lt;3;i++){<br>
+        System.out.println(&quot;Introduce el valor para el &quot; + i + &quot;&ordm; 
+        numero&quot;);<br>
+        num_usu[i]=Integer.parseInt(stdin.readLine());<br>
+        }<br>
+        System.out.println(&quot;Los 3 numeros de la primitiva son: &quot;);<br>
+        System.out.println(&quot;===================================&quot;);<br>
+        for (int i=0;i&lt;3;i++){<br>
+        rand[i] = aleatorios.nextInt(10);<br>
+        System.out.println(rand[i]);<br>
+        }<br>
+        System.out.println(&quot;Haciertos &quot;);<br>
+        System.out.println(&quot;===========&quot;);<br>
+        for (int i=0;i&lt;3;i++)<br>
+        if (rand[i]==num_usu[i]){<br>
+        cont = cont + 1;<br>
+        num_aci[i]=cont;<br>
+        }<br>
+        for (int i=0;i&lt;3;i++)<br>
+        System.out.println(&quot;El numero &quot; + num_usu[i] + &quot; se repite 
+        &quot;+ num_aci[i]+ &quot; veces&quot;);<br>
+        }<br>
+        }<br>
+      </p>
+      <p>&nbsp;</p></td>
+    <td>&nbsp;</td>
+    <td><a href="http://es.geocities.com/juantxu28/JBuilderZip/49.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td height="605">
+<h3>CLASE RANDOM con arrays bidimensionales</h3>
+      <p> 50.- pprimitiva. Aplicacion que simula un juego de la primitiva tras 
+        introducir 3 numeros y compararlos con los aleatorios generados nos cice 
+        los aciertos. </p>
+      <p>package penterosaleatorios;</p>
+      <p> import java.lang.*;<br>
+        import java.util.*;<br>
+        import java.io.*;<br>
+        public class enterosaleatorios {<br>
+        private static java.io.BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));<br>
+        public static void main(String[] args) throws IOException,<br>
+        NumberFormatException {<br>
+        Random aleatorios = new Random();<br>
+        int [][]rand=new int[2][3];<br>
+        int asiertos=0;<br>
+        for(int i=0; i&lt;3;i++){</p>
+      <p> rand[0][i]=aleatorios.nextInt(10);<br>
+        System.out.println(&quot;Introduce un numero: &quot;);<br>
+        rand[1][i] =Integer.parseInt(stdin.readLine());<br>
+        }<br>
+        System.out.println(&quot;---------------------------------------------------&quot;);<br>
+        for(int i=0; i&lt;3;i++){<br>
+        for(int j=0; j&lt;3;j++){<br>
+        if(rand[1][i]==rand[0][j]){<br>
+        asiertos = asiertos + 1;<br>
+        }<br>
+        }<br>
+        }<br>
+        if(asiertos==0)<br>
+        System.out.println(&quot;No has acertado ninguno&quot;);<br>
+        else<br>
+        System.out.println(&quot;Has aceptado &quot;+asiertos+&quot; veces&quot;);<br>
+        }<br>
+        }<br>
+      </p></td>
+    <td>&nbsp;</td>
+    <td><a href="http://es.geocities.com/juantxu28/JBuilderZip/50.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr>
+  <td> <h3> 51.- EL OBJETO STACK</h3>
+      <P>51.- Ejemplo que nos muestra como utilizar el objeto stack </p>
+      <P>package proyecto5;</p>
+      <p>import java.io.BufferedReader;<br>
+        import java.io.InputStreamReader;<br>
+        import java.io.IOException;<br>
+        import java.util.Stack;</p>
+      <p>public class Pila {<br>
+        public Stack Pilas = new Stack();<br>
+        public void anadir(String cadena){<br>
+        Pilas.push(cadena);//va a&ntilde;adiendo y pasa el puntero al siguiente<br>
+        }<br>
+        public void sacar(){<br>
+        System.out.println(&quot;**********----------**********&quot;);<br>
+        System.out.println(Pilas.pop());//borra de la pila en donde hemos dejado 
+        el puntero<br>
+        System.out.println(&quot;**********----------**********&quot;);<br>
+        }<br>
+        public void ver(){<br>
+        int i = 0;<br>
+        if (Pilas.isEmpty() != true) {//si la pila esta bac&iacute;a<br>
+        System.out.println(&quot;Primer Elemento: &quot; + Pilas.peek());//peek<br>
+        for (i = Pilas.size()-1; i &gt;= 0; i--) {//rcorremos todos los elementos 
+        de la pila desde el ultimo al primero<br>
+        System.out.println(&quot;Pilas[&quot; + i + &quot;]: &quot; + Pilas.elementAt(i));<br>
+        System.out.println(&quot;**********----------**********&quot;);<br>
+        }<br>
+        }else{<br>
+        System.out.print(&quot;No se han encontrado elementos&quot;);<br>
+        }<br>
+        }<br>
+        public void insertarEnIndice(String cadena, int indice){<br>
+        if(indice &lt;Pilas.size()){<br>
+        Pilas.add(indice, cadena);//a&ntilde;ade un elemento nuevo en la posicion 
+        q deseemos de la pila<br>
+        }<br>
+        }<br>
+        public void borrar(String cadena){<br>
+        Pilas.remove(cadena);//borra un elemento de la pila<br>
+        }<br>
+        public Pila() {<br>
+        }<br>
+        public static void main(String[] args) throws IOException,<br>
+        NumberFormatException {<br>
+        Pila pi = new Pila();<br>
+        int op;<br>
+        String cadena;<br>
+        int indices;<br>
+        do {<br>
+        System.out.println();<br>
+        System.out.println(&quot;1- A&ntilde;adir a Pila &quot;);<br>
+        System.out.println(&quot;2- Sacar de Pila&quot;);<br>
+        System.out.println(&quot;3- Ver Todo&quot;);<br>
+        System.out.println(&quot;4- Insertar en posici&oacute;n concreta Pila&quot;);<br>
+        System.out.println(&quot;5- Borrar Pila(s)&quot;);<br>
+        System.out.println(&quot;0- Salir&quot;);<br>
+        System.out.println(&quot;Elija opcion:&quot;);<br>
+        BufferedReader car = new BufferedReader(new InputStreamReader(System.in));<br>
+        op = Integer.parseInt(car.readLine());<br>
+        switch (op) {<br>
+        case 1:<br>
+        System.out.println();<br>
+        System.out.println(&quot;*_ 1 _*** A&ntilde;adir a Pila *****&quot;);<br>
+        System.out.println();<br>
+        System.out.println(&quot;Introduce el nombre:&quot;);<br>
+        cadena = car.readLine();<br>
+        pi.anadir(cadena);<br>
+        break;<br>
+        case 2:<br>
+        System.out.println();<br>
+        System.out.println(&quot;*_ 2 _**** Sacar de Pila *****&quot;);<br>
+        System.out.println();<br>
+        pi.sacar();<br>
+        break;<br>
+        case 3:<br>
+        System.out.println();<br>
+        System.out.println(&quot;*_ 3 _**** Ver Todo *****&quot;);<br>
+        System.out.println();<br>
+        pi.ver();<br>
+        break;<br>
+        case 4:<br>
+        System.out.println();<br>
+        System.out.println(&quot;*_ 4 _**** Insertar en una posicion concreta 
+        Pila *****&quot;);<br>
+        System.out.println();<br>
+        System.out.println(&quot;Introduce el nombre:&quot;);<br>
+        cadena = car.readLine();<br>
+        System.out.println(&quot;Introduce el indice:&quot;);<br>
+        indices = Integer.parseInt(car.readLine());<br>
+        pi.insertarEnIndice(cadena,indices);<br>
+        break;<br>
+        case 5:<br>
+        System.out.println();<br>
+        System.out.println(&quot;*_ 5 _**** Borrar Pilas *****&quot;);<br>
+        System.out.println();<br>
+        System.out.println(&quot;Introduce el nombre:&quot;);<br>
+        cadena = car.readLine();<br>
+        pi.borrar(cadena);<br>
+        break;<br>
+        case 0:<br>
+        System.out.println();<br>
+        System.out.println(&quot;*_ 0 _**** Salir *****&quot;);<br>
+        System.out.println();<br>
+        break;<br>
+        }<br>
+        }<br>
+        while (op != 0);<br>
+        }<br>
+        }<br>
+      </p>
+      </td><td></td>
+    <td><a href="http://es.geocities.com/juantxu28/JBuilderZip/51.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+	  
+
+  </tr>
+  <tr>
+	  <td>
+		<h3>La clase ArrayList </h3>
+      <p>52.- Ejemplo que nos muestra como utilizar los ArrayList junto con los 
+        m&eacute;todos que tiene.</p>
+      <p>package parraylist1;<br>
+        <br>
+        import java.util.*;<br>
+        import java.io.*;<br>
+        public class arraylist {<br>
+        private static java.io.BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));<br>
+        public static void main(String[] args) throws IOException {<br>
+        String dato;<br>
+        ArrayList jaoAL = new ArrayList();<br>
+        int i=0;<br>
+        //do{<br>
+        //System.out.println(&quot;Introduce valores para el Arraylist: &quot;);<br>
+        //dato= stdin.readLine();<br>
+        jaoAL.add(&quot;juantxu&quot;);<br>
+        jaoAL.add(&quot;jon&quot;);<br>
+        jaoAL.add(&quot;alex&quot;);<br>
+        jaoAL.add(3,&quot;&quot;);<br>
+        jaoAL.add(&quot;manu&quot;);<br>
+        jaoAL.add(&quot;kike&quot;);<br>
+        //i++;<br>
+        //}while(i&lt;3);<br>
+        System.out.println(&quot;Los valores del arraylist son &quot;);<br>
+        for(i=0;i&lt;jaoAL.size();i++)System.out.println(jaoAL.get(i));<br>
+        System.out.println(&quot;El nombre del arraylist con la posicion 2 es: 
+        &quot;+jaoAL.get(2));<br>
+        jaoAL.remove(2);<br>
+        System.out.println(&quot;Borramos el elemento 2 (alex) y el elemento 2 
+        pasa a ser : &quot;+jaoAL.get(2));<br>
+        jaoAL.add(0,&quot;txus&quot;);<br>
+        System.out.println(&quot;introducimos en la posicion 0 a : &quot;+jaoAL.get(0));<br>
+        jaoAL.set(0,&quot;txusillo&quot;);<br>
+        System.out.println(&quot;Sobrescribimos el elemento 0(txus) por : &quot;+jaoAL.get(0));<br>
+        System.out.println(&quot;Printeamos con for y el metodo get&quot;);<br>
+        for(i=0;i&lt;jaoAL.size();i++)System.out.println(jaoAL.get(i));<br>
+        //recorremos el arraylist con iterator<br>
+        System.out.println(&quot;Printeamos con iterator&quot;);<br>
+        Iterator ite= jaoAL.iterator();<br>
+        while(ite.hasNext()){<br>
+        System.out.println(&quot;&quot;+ite.next().toString());<br>
+        }<br>
+        jaoAL.clear();<br>
+        if(jaoAL.isEmpty())<br>
+        System.out.println(&quot;La lista esta bac&iacute;a&quot;);<br>
+        String jaoS;<br>
+        }<br>
+        }</p>
+		  </td><td></td>
+    <td><a href="http://es.geocities.com/juantxu28/JBuilderZip/50.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+	  </tr>
+	  
+	  	
+    <td height="1738"> 
+      <h3> La clase HasTable</h3>
+      <p>pHashTable.- Ejemplo de como utilizar el array hasTable con un ejercicio 
+        pr&aacute;ctico viendo los m&eacute;todos que posee.</p>
+      <p>//En la clase hashtable</p>
+      <p>package phashtable;</p>
+      <p>import java.io.*;<br>
+        import java.util.*;</p>
+      <p>public class hashtable {<br>
+        private static BufferedReader stdin= new BufferedReader (new InputStreamReader(System.in));<br>
+        public static short muestraMenu() throws IOException {<br>
+        short opcion;<br>
+        System.out.println(&quot;MENU&quot;);<br>
+        System.out.println(&quot;======&quot;);<br>
+        System.out.println(&quot;1.Insertar jugador&quot;);<br>
+        System.out.println(&quot;2.Borrar jugador&quot;);<br>
+        System.out.println(&quot;3.Listar jugadores&quot;);<br>
+        System.out.println(&quot;4.Salir&quot;);<br>
+        System.out.println(&quot;Elige una opci&oacute;n: &quot;);<br>
+        opcion = Short.parseShort(stdin.readLine());<br>
+        return opcion;<br>
+        }<br>
+        public static jugador dameDatosJugador() throws IOException {<br>
+        System.out.print(&quot;Introduce el nombre del jugador &quot;);<br>
+        String nombre=stdin.readLine();<br>
+        System.out.print(&quot;Introduce el dorsal del &quot;+nombre+&quot;: &quot;);<br>
+        String dorsal=stdin.readLine();<br>
+        System.out.print(&quot;Introduce la posicion del jugador &quot;+nombre+&quot;: 
+        &quot;);<br>
+        String posicion=stdin.readLine();<br>
+        return new jugador(nombre ,dorsal ,posicion);</p>
+      <p> }<br>
+        public static void main(String[] args) throws IOException {<br>
+        Hashtable tabla = new Hashtable();<br>
+        short opcion=0;<br>
+        do{<br>
+        opcion=muestraMenu();<br>
+        switch(opcion){<br>
+        case 1:<br>
+        jugador jug = dameDatosJugador();<br>
+        DORSAL clave= new DORSAL(jug.getDorsal());<br>
+        if(tabla.put(clave,jug)!=null){<br>
+        System.out.println(&quot;E R R O R al introducir a &quot;+jug.getJugador());<br>
+        }</p>
+      <p> break;<br>
+        case 2:<br>
+        System.out.println(&quot;Introduce el dorsal del jugador a borrar: &quot;);<br>
+        String dorsal= stdin.readLine();<br>
+        DORSAL clave1= new DORSAL(dorsal);<br>
+        if(tabla.remove(clave1)==null)<br>
+        System.out.println(&quot;No existe el jugador con el dorsal: &quot;+dorsal);<br>
+        break;<br>
+        case 3:<br>
+        Enumeration lista= tabla.elements();<br>
+        while(lista.hasMoreElements())<br>
+        System.out.println(((jugador)lista.nextElement()).getJugador());<br>
+        break;<br>
+        default:<br>
+        break;<br>
+        }<br>
+        }while(opcion!=4);<br>
+        }<br>
+        }<br>
+        class DORSAL{<br>
+        private String dorsal;<br>
+        public DORSAL(String dorsal) {<br>
+        this.dorsal=dorsal;<br>
+        }<br>
+        public int hashCode(){<br>
+        int valor=0;<br>
+        int nDigitos=dorsal.length();<br>
+        for(int i=0;i&lt;3;i++){<br>
+        int temp;<br>
+        if(i&lt;nDigitos)<br>
+        temp=(int)dorsal.charAt(i);<br>
+        else<br>
+        temp=0;<br>
+        valor=valor+temp*10;<br>
+        }<br>
+        return valor;<br>
+        }<br>
+        public boolean equals(Object Obj){<br>
+        DORSAL aux=(DORSAL)Obj;<br>
+        return dorsal.equals(aux.dorsal);<br>
+        }</p>
+      <p></p>
+      <p>}</p>
+      <p>//En la clase jugador jugador</p>
+      <p>package phashtable;</p>
+      <p>public class jugador {<br>
+        public String nombre;<br>
+        public String dorsal;<br>
+        public String posicion;<br>
+        jugador(String nombre, String dorsal, String posicion){<br>
+        this.nombre=nombre;<br>
+        this.dorsal=dorsal;<br>
+        this.posicion=posicion;<br>
+        }<br>
+        public String getJugador(){<br>
+        return nombre+&quot; &quot;+posicion+&quot; n &quot;+dorsal;<br>
+        }<br>
+        public String getDorsal(){<br>
+        return dorsal;<br>
+        }<br>
+        public String getPosicion(){<br>
+        return posicion;<br>
+        }</p>
+      <p></p>
+      <p>}</p></td>
+	  	<td> </td>
+		
+    <td><a href="http://es.geocities.com/juantxu28/JBuilderZip/pHashTable.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+	  </tr>
+  <tr> 
+    <td>
+<div align="right"><a href="http://es.geocities.com/juantxu28/index3.htm" target="_parent">&lt;&lt;Menu Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

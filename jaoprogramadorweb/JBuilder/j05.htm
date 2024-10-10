@@ -1,0 +1,224 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Ejercicios Java</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Descargar Ejercicios de Java, Ejemplos de java, Aplicaciones  de java, JBuilder, J Builder, codigo java">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table width="555" height="2955" align="left" background="../imagenes/fondologo.jpg">
+  <tr> 
+    <td height="39" colspan="3"> <h2>E 
+        J E R C I C I O S</h2></td>
+  </tr>
+  <tr> 
+    <td ><h3>Odenaci&oacute;n</h3>
+      <p> 25.- pordenar: Aplicaci&oacute;n que muestra como ordenar un array de 
+        n&uacute;meros.</p>
+      <p>package pordenar;<br>
+        <br>
+        import java.util.*;<br>
+        public class ordena {<br>
+        public static void main(String[] args) {<br>
+        double numeros []={32.0,45.5,5,12.2,28.4,76.3,2.1,53.0,31.4,29.5};<br>
+        System.out.println(&quot;Antes de la ordenaci&oacute;n: &quot;);<br>
+        System.out.println(&quot;=======================&quot;);<br>
+        for(int i=0;i&lt;numeros.length;i++)<br>
+        System.out.println(&quot;numero: &quot;+i+&quot; &quot;+numeros[i]);<br>
+        Arrays.sort(numeros);//la funcion sort muestra los elementos de un array 
+        de menor a mayor<br>
+        System.out.println(&quot; &quot;);<br>
+        System.out.println(&quot;Despu&eacute;s de la ordenaci&oacute;n: &quot;);<br>
+        System.out.println(&quot;=========================&quot;);<br>
+        for(int i=0;i&lt;numeros.length;i++)<br>
+        System.out.println(&quot;numero: &quot;+i+&quot; &quot;+numeros[i]);<br>
+        }<br>
+        }</p>
+      <p><br>
+      </p></td>
+    <td>&nbsp;</td>
+    <td><a href="http://es.geocities.com/juantxu28/JBuilderZip/25.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td height="728" > 
+      <h3>M&eacute;todos 
+      de ordenaci&oacute;n</h3>
+      <p> 26.- pordenar: Aplicaci&oacute;n que muestra como ordenar un array de 
+        numeros mediante el metodo de la burbuja.</p>
+      <p>//en la clase ordenar.java</p>
+      <p>package pordenar;<br>
+        <br>
+        import java.util.*;<br>
+        public class ordenar {<br>
+        public static void main(String[] args) {<br>
+        double numeros []={32.0,45.5,5,12.2,28.4,76.3,2.1,53.0,31.4,29.5};<br>
+        System.out.println(&quot;Antes de la ordenaci&oacute;n: &quot;);<br>
+        System.out.println(&quot;=======================&quot;);<br>
+        for(int i=0;i&lt;numeros.length;i++)<br>
+        System.out.println(&quot;numero: &quot;+i+&quot; &quot;+numeros[i]);<br>
+        //Arrays.sort(numeros);//la funcion sort muestra los elementos de un array 
+        de menor a mayor<br>
+        burbuja.Burbuja1(numeros); //llamamos a la funcion<br>
+        System.out.println(&quot; &quot;);<br>
+        System.out.println(&quot;Despu&eacute;s de la ordenaci&oacute;n: &quot;);<br>
+        System.out.println(&quot;=========================&quot;);<br>
+        for(int i=0;i&lt;numeros.length;i++)<br>
+        System.out.println(&quot;numero: &quot;+i+&quot; &quot;+numeros[i]);<br>
+        }<br>
+        }</p>
+      <p>//en la clase burbuja.java</p>
+      <p>package pordenar;<br>
+        <br>
+        public class burbuja {<br>
+        static public void Burbuja1(double []numeros){<br>
+        double aux=0.0;<br>
+        for (int j=0;j&lt;numeros.length;j++){<br>
+        for (int i=0; i&lt;numeros.length-1;i++){<br>
+        if(numeros[i]&gt;numeros[i+1]){<br>
+        aux=numeros[i];<br>
+        numeros[i]=numeros[i+1];<br>
+        numeros[i+1]=aux;<br>
+        }<br>
+        }<br>
+        }<br>
+        <br>
+        }<br>
+        }<br>
+        <br>
+      </p></td>
+    <td>&nbsp;</td>
+    <td><a href="http://es.geocities.com/juantxu28/JBuilderZip/26.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td height="797" > 
+      <h3>Metodo 
+      de ordenaci&oacute;n</h3>
+      <p> 27.- pordenar: Aplicaci&oacute;n que muestra como ordenar un array de 
+        n&uacute;meros mediante el m&eacute;todo de la burbuja sin utilizar variables 
+        est&aacute;ticas en la funci&oacute;n main.</p>
+      <p>//en la clase ordenar.java</p>
+      <p>package pordenar;<br>
+        <br>
+        import java.util.*;<br>
+        public class ordenar {<br>
+        public void main(String[] args) {<br>
+        /* */<br>
+        double numeros []={32.0,45.5,5,12.2,28.4,76.3,2.1,53.0,31.4,29.5};<br>
+        System.out.println(&quot;Antes de la ordenaci&oacute;n: &quot;);<br>
+        System.out.println(&quot;=======================&quot;);<br>
+        for(int i=0;i&lt;numeros.length;i++)<br>
+        System.out.println(&quot;numero: &quot;+i+&quot; &quot;+numeros[i]);<br>
+        //Arrays.sort(numeros);//la funcion sort muestra los elementos de un array 
+        de menor a mayor<br>
+        burbuja.Burbuja1(numeros); //llamamos a la funcion<br>
+        System.out.println(&quot; &quot;);<br>
+        System.out.println(&quot;Despu&eacute;s de la ordenaci&oacute;n: &quot;);<br>
+        System.out.println(&quot;=========================&quot;);<br>
+        for(int i=0;i&lt;numeros.length;i++)<br>
+        System.out.println(&quot;numero: &quot;+i+&quot; &quot;+numeros[i]);<br>
+        }<br>
+        }</p>
+      <p>//en la clase burbuja.java</p>
+      <p>package pordenar;<br>
+        <br>
+        public class burbuja {<br>
+        static public void Burbuja1(double []numeros){<br>
+        burbuja b = new burbuja();<br>
+        double aux=0.0;<br>
+        for (int j=0;j&lt;numeros.length;j++){<br>
+        for (int i=0; i&lt;numeros.length-1;i++){<br>
+        if(numeros[i]&gt;numeros[i+1]){<br>
+        aux=numeros[i];<br>
+        numeros[i]=numeros[i+1];<br>
+        numeros[i+1]=aux;<br>
+        }<br>
+        }<br>
+        }<br>
+        <br>
+        }<br>
+        }</p></td>
+    <td>&nbsp;</td>
+    <td><a href="http://es.geocities.com/juantxu28/JBuilderZip/27.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td height="965" > 
+      <h3>M&eacute;todo 
+      de ordenaci&oacute;n</h3>
+      <p> 28.- pordenar: Aplicaci&oacute;n que muestra como ordenar un array de 
+        n&uacute;meros mediante otro m&eacute;todo.</p>
+      <p>//en la clase ordenar.java</p>
+      <p>package pordenar;</p>
+      <p><br>
+        import java.util.*;</p>
+      <p>public class ordenar {<br>
+        public static void main(String[] args) {<br>
+        Burbuja b= new Burbuja();<br>
+        double numeros[] = {32.0,45.5,12.2,28.4, 76.3, 2.1, 53.0, 31.4, 29.5};<br>
+        System.out.println(&quot;Antes de la ordenacion&quot;);<br>
+        for(int i=0;i&lt; numeros.length;i++)<br>
+        System.out.println(&quot;numero : &quot;+i+&quot; &quot;+ numeros[i]);<br>
+        // Arrays.sort(numeros);<br>
+        //b.Burbuja1(numeros);<br>
+        Burbuja.ordenacionDirecta(numeros);<br>
+        System.out.println(&quot;\ndespues de la ordenacion&quot;);<br>
+        for(int i=0;i&lt; numeros.length;i++){<br>
+        System.out.println(&quot;numero : &quot; + i + &quot; &quot; + numeros[i]);<br>
+        }<br>
+        }</p>
+      <p>}<br>
+      </p>
+      <p>//en la clase burbuja.java</p>
+      <p>package pordenar;</p>
+      <p>public class Burbuja {<br>
+        public void Burbuja1(double []numeros) {<br>
+        double aux=0;<br>
+        for(int j=0;j &lt; numeros.length;j++){<br>
+        for (int i = 0; i &lt; numeros.length-1; i++) {<br>
+        if (numeros[i] &gt; numeros[i + 1]) {<br>
+        aux = numeros[i];<br>
+        numeros[i] = numeros[i + 1];<br>
+        numeros[i + 1] = aux;<br>
+        }<br>
+        }<br>
+        }<br>
+        }<br>
+        static public void ordenacionDirecta(double []numeros) {<br>
+        double aux;<br>
+        int index=0;<br>
+        double aux1=0;<br>
+        for(int j=0;j&lt; numeros.length;j++){<br>
+        index=j;<br>
+        for (int i = j; i &lt; numeros.length; i++) {<br>
+        if (numeros[i] &lt; numeros[index]) {<br>
+        index=i;<br>
+        }<br>
+        }<br>
+        aux1 = numeros[j];<br>
+        numeros[j] = numeros[index];<br>
+        numeros[index] = aux1;<br>
+        }<br>
+        }<br>
+        }<br>
+      </p>
+      </td>
+    <td>&nbsp;</td>
+    <td><a href="http://es.geocities.com/juantxu28/JBuilderZip/28.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td height="35"> 
+      <div align="right"><a href="http://es.geocities.com/juantxu28/index3.htm" target="_parent">&lt;&lt;Menu 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

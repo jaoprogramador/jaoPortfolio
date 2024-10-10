@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Ejercicios de C para Windows</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Declaración de punteros, función gotoxy, función RND, Descargar Ejercicios de C para Windows, Ejemplos de C para Windows, Aplicaciones  de C para Windows">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../styles/estilos.css" rel="stylesheet" type="text/css"></head>
+
+<body>
+<table width="555" height="549" align="left" background="../imagenes/fondologo.jpg">
+  <tr> 
+    <td height="38" colspan="3"> <h2>E 
+        J E R C I C I O S</h2></td>
+  </tr>
+  <tr> 
+    <td > <h3>Declaraci&oacute;n 
+        de punteros</h3><p>
+        EJER67.- Aplicaci&oacute;n que nos pretende ense&ntilde;ar la diferencia 
+        entre direcci&oacute;n de memoria, contenido del puntero...
+      </p></td>
+    <td>&nbsp;</td>
+    <td><a href="../czip/EJER67.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>Introducci&oacute;n 
+      de datos en puntero impresi&oacute;n en pantalla</h3><p>
+      EJER68.- Aplicaci&oacute;n que utilizando punteros y sin utilizar contadores 
+      de longitud
+      escribe una frase no mayor de 70 caracteres y transforma todas las bocales 
+      en &quot;oes&quot; (=o)</p></td>
+    <td>&nbsp;</td>
+    <td><a href="../czip/EJER68.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>Presentaci&oacute;n de 
+      datos con gotoxy</h3><p>
+      EJER69.- Aplicaci&oacute;n que nos muestra en dos columnas los contenidos 
+      de un array al que apunta un puntero de a atr&aacute;s adelante y de delante 
+      a atr&aacute;s</p></td>
+    <td>&nbsp;</td>
+    <td><a href="../czip/EJER69.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>Partiendo 
+      de los elementos de un array mostrar su contenido</h3><p>
+      EJER70.- Aplicaci&oacute;n que nos muestra en una columna lo siguiente:10 
+      2 13 22 14 13 13</p></td>
+    <td>&nbsp;</td>
+    <td><a href="../czip/EJER70.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td> <h3>Recorrido y presentaci&oacute;n 
+        de un puntero</h3>
+        <p>EJER71.- Aplicaci&oacute;n que nos presentarlos 
+        al reves de como los emos metido una cadena de caracteres</p> </td>
+    <td>&nbsp;</td>
+    <td><a href="../czip/EJER71.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>Liberar la memoria de 
+      un puntero</h3> 
+      <p>EJER72.- Aplicaci&oacute;n que nos muestra la 
+      memoria del sistema y como liberarla esa memoria tras utilizarla</p></td>
+    <td>&nbsp;</td>
+    <td><a href="../czip/EJER72.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td> <h3>Controlar los caracteres 
+        introducidos</h3>
+        <p>EJER73.- Aplicaci&oacute;n que discrimine frases 
+        de n&uacute;meros. Y la frase escrita y el n&uacute;mero escrito nos diga 
+        si es un n&uacute;mero capic&uacute;a o la frase acaba por el mismo que 
+        acaba.
+      </p></td>
+    <td>&nbsp;</td>
+    <td><a href="../czip/EJER73.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>Punteros y RND</h3> <p>EJER74.- 
+      Aplicaci&oacute;n que nos pida longitud de un array y nos lo rellene aleatoriamente 
+      con n&uacute;meros</p></td>
+    <td>&nbsp;</td>
+    <td><a href="../czip/EJER74.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td>
+<div align="right"><a href="../index3.htm" target="_parent">&lt;&lt;Menu Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

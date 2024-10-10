@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Ejercicios de C para Windows</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Funciones, ficheros, Descargar Ejercicios de C para Windows, Ejemplos de C para Windows, Aplicaciones  de C para Windows">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table width="555" height="486" align="left" background="../imagenes/fondologo.jpg">
+  <tr> 
+    <td height="39" colspan="3"><h2>E 
+        J E R C I C I O S</h2></td>
+  </tr>
+  <tr> 
+    <td> <p><h3>Funciones</h3><p>
+        1fa.- sacar el resultado de la divisi&oacute;n y el resto.</p>
+    </td>
+    <td>&nbsp;</td>
+    <td><a href="../TurboCZip/1fa.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>Funciones</h3>
+      2fa.- Aplicacion que nos pide que metamos una cadena para luego introducir 
+      otra cadena y nos avisa hasta tres oportunidades si la acertamos o no.</p></td>
+    <td>&nbsp;</td>
+    <td><a href="../TurboCZip/2fa.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>Funciones</h3>
+      4fa.- Aplicacion que genera numeros aleatorios y nos pide que los adivinemos 
+      diciendonos los hacertados o no.</p></td>
+    <td>&nbsp;</td>
+    <td><a href="../TurboCZip/6fa.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>Funciones</h3>
+      6fa.- funci&oacute;n que va ha devolver los segundos que tiene el n&ordm; 
+      de d&iacute;as introducido.</p></td>
+    <td>&nbsp;</td>
+    <td><a href="../cBuilderZip/p19.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>Funciones</h3><p>
+      7fa.- funci&oacute;n sacar el n&ordm; obtenido multiplicado por si mismo.</p></td>
+    <td>&nbsp;</td>
+    <td><a href="../TurboCZip/7fa.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>Funciones</h3><p>
+      8fa.- Aplicaci&oacute;n que nos pide que introduzcamos n&uacute;meros para 
+      un array para que a trav&eacute;s de un men&uacute; podamos imprimirlo ordenado, 
+      sumarlo , calcular el factorial, mostrar los repetidos, mostralo invertido 
+      y ver los pares e impares.</p></td>
+    <td>&nbsp;</td>
+    <td><a href="../cBuilderZip/p19.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  
+  
+  
+  <tr> 
+    <td> <div align="right"><a href="../index3.htm" target="_parent">&lt;&lt;Menu 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

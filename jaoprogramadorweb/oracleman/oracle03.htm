@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Ingreso de datos Oracle</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Manual Oracle, Tutorial Oracle, Manual SQL, Tutorial SQL, Ejercicios Oracle">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table width="555" height="575" align="left" background="../imagenes/fondologo.jpg">
+  <tr> 
+    <td height="39" colspan="2"> <h2>Ingreso 
+        de datos</h2></td>
+  </tr>
+  <tr> 
+    <td height="506" colspan="2"> 
+      <p>Una vez creadas las tablas, 
+        &iacute;ndices y secuencias, estamos en condiciones de ingresar datos 
+        en la tabla.
+        El ingreso, modificaci&oacute;n y eliminaci&oacute;n de registros se realiza 
+        fundamentalmente con el dise&ntilde;o de pantallas (formularios)desde 
+        el modulo SQLFORMS. No obstante, en &eacute;ste solo veremos el uso de 
+        los mandatos INSERT, UPDATE Y DELETE.
+        Para realizar un ingreso en la tabla deberemos insertar:</p>
+      <table width="75%" border="0">
+        <tr  > 
+          <td width="72%">Nombre de la tabla (acciones)</td>
+          <td width="28%">Columnas</td>
+        </tr>
+        <tr> 
+          <td><pre >INSERT INTO CLIENTES 
+VALUES(
+   codigo_clientes.NEXTVAL),
+   'PINTURERIAS PROPIOS',
+   '67876098',
+   TO_DATE('10/03/03','DD/MM/YY'),
+   'Gipuzkoa nº 30',
+   'Librer&iacute;a'
+);</pre></td>
+          <td><pre >codigo=secuencia
+
+Nombre
+
+Tel&eacute;fono
+
+Fecha
+
+Direcci&oacute;n
+
+Anotaci&oacute;n</pre></td>
+        </tr>
+      </table>
+      <p>Como se podr&aacute; observar, en este ejemplo no 
+        se especific&oacute; la lista de columnas a insertar, lo que indica que 
+        se van a insertar datos en todas las columnas. Por lo tanto, los valores 
+        para cada columna se tienen que ingresar en el orden en que est&aacute;n 
+        definidos en la tabla. Adem&aacute;s es de destacar que la palabra reservada 
+        VALUES indica la lista de valores a ingresar; que los datos tipo car&aacute;cter 
+        van entre comillas; que la fecha se registra como una cadena de caracteres 
+        usando la funci&oacute;n TO_DATE (encargada de transforma la cadena de 
+        caracteres 10/03/03 en fecha, a partir de un formato de fecha espec&iacute;fico: 
+        DD/MM/YY).
+        Tambi&eacute;n observamos que a la columna c&oacute;digo se le asigno 
+        el siguiente valor de la secuencia codigo_cliente.NEXTVAL.
+        En el caso de que solo se asignar&aacute;n valores a algunas columnas 
+        se debe dar la lista de columnas como se muestra a continuaci&oacute;n:</p>
+      <pre >INSERT INTO CLIENTES (codigo, nombre, telefono, fecha) VALUES
+(codigo_cliente.NEXTVAL, 'Casa Julen Gerrero', '8888888',
+TO_DATE('15/04/05','DD/MM/YY'));</pre></td>
+  </tr>
+  <tr> 
+    <td width="70" height="21"></td>
+    <td height="21"> <div align="right"><a href="../index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

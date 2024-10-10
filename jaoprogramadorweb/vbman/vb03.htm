@@ -1,0 +1,174 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Sentencias de control Visual Basic</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Sentencias de control en Visual Basic, Manual Visual Basic,Tutorial Visual Basic, Ejemplos Visual Basic">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+
+<body>
+<table width="555" height="1041" align="left" background="../imagenes/fondologo.jpg">
+  <tr> 
+    <td height="39" colspan="2"> <h2>Sentencias 
+        </h2></td>
+  </tr>
+  <tr> 
+    <td height="144" colspan="2"> <table width="75%" border="0">
+        <tr> 
+          <td><h3>Contenidos</h3></td>
+          <td width="75%">&nbsp;</td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><blockquote>- <a href="vb03.htm#tipos">Tipos de sentencias de control</a><br>
+              - <a href="vb03.htm#if">Sentencia If</a><br>
+              -<a href="vb03.htm#select"> Sentencia SELECT</a><br>
+              - <a href="vb03.htm#for">Sentencia For... NexT</a> <br>
+              - <a href="vb03.htm#while">Sentencia While... Wend</a><br>
+              - <a href="vb03.htm#do">Sentencia Do... Loop</a><br>
+              - <a href="vb03.htm#goto">Sentencia Goto</a> </blockquote></td>
+        </tr>
+      </table>
+
+      <h3>Tipos de sentencias de control<a name="tipos"></a></h3>
+      <p>Las sentencias de control, denominadas tambi&eacute;n 
+        estructuras de control, permiten tomar decisiones y realizar un proceso 
+        repetidas veces. Visual Basic dispone de las siguientes estructuras:  
+      </p>
+      <blockquote> 
+        <p>- If...Then<br>
+          - If...Then...Else<br>
+          - Select case<br>
+          - For... Next<br>
+          - While...Wend<br>
+          - Do...loop<br>
+          - Goto<br>
+        </p>
+      </blockquote>
+      <h3>Sentencia If<a name="if"></a></h3>
+      <p>Permite tomar una decisi&oacute;n referente al camino 
+        a seguir o acci&oacute;n a ejecutar en un proceso bas&aacute;ndose en 
+        el resultado (verdadero o falso) de una condici&oacute;n. Su sintaxis 
+        es: If condici&oacute;n then acci&oacute;n1 [else acci&oacute;n2] 
+        donde condici&oacute;n debe ser una expresi&oacute;n num&eacute;rica, 
+        relacional o l&oacute;gica. Si la condici&oacute;n es verdadera se ejecuta 
+        la acci&oacute;n1 y si es falsa se ejecutar&aacute; la acci&oacute;n2.</p>
+      <h3>Sentencia SELECT<a name="select"></a></h3>
+      <p>Esta expresi&oacute;n permite ejecutar una de varias 
+        acciones en funci&oacute;n del valor de una expresi&oacute;n. Es una alternativa 
+        a If... Then ... ElseIf cuando lo que se necesita es comprobar 
+        es la misma expresi&oacute;n con diferentes valores. Su sintaxis es: 
+      <blockquote> selec case 
+        expresion<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;case lista1<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sentencias<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;case lista2 <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sentencias<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;case else<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sentencias n<br>
+        end select</blockquote>
+      </p> donde expresi&oacute;n es una expresi&oacute;n 
+      num&eacute;rica o alfanum&eacute;rica, y lista1 y lista2.... 
+      representan una lista que puede tener cualquiera de las formas siguientes: 
+       <blockquote>expresi&oacute;n[,expresi&oacute;n]...<br>
+        expresi&oacute;n to expresi&oacute;n<br>
+        Is operador-de-relaci&oacute;n expresi&oacute;n<br>
+        combinaci&oacute;n de las anteriores separadas por comas</blockquote>
+      <h3>Sentencia For... NexT <a name="for"></a></h3>
+      <p>La sentencia for da lugar a un bucle que 
+        permite ejecutar un conjunto de sentencias cierto n&uacute;mero de veces. 
+        Su sintaxis es: 
+      <blockquote> for variable = expresion1 to expresion2[Step 
+        expresion3]<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[sentencias]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Exit for]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[sentencias]<br>
+        Next [variable[,variable...]]</blockquote>
+      <p>&nbsp;</p>
+      Cuando se ejecuta una sentencia For en la que el valor de la expresi&oacute;n3 
+      es positivo o no se ha especificado, primero se ha asigna el valor de la 
+      expresi&oacute;n1 a la variable y a continuaci&oacute;n 
+      se comprueba si la variable es mayor que la expresi&oacute;n 
+      2,  en cuyo caso se salta el cuerpo del bucle y se contin&uacute;a 
+      en la l&iacute;nea que &eacute;ste a continuaci&oacute;n de la sentencia 
+      Next.  En otro caso, se ejecutan las l&iacute;nea sde programa 
+      que haya entre la sentencia For y la sentencia Next. Por 
+      &uacute;ltimo, la variable, se incrementa en el valor de la expresi&oacute;n3, 
+      o en 1 si Step no se especifica, volvi&eacute;ndose 
+      a efectuar la comparaci&oacute;n entre la variable y la expresi&oacute;n2, 
+      y as&iacute; sucesivamente. La sentencia exit for permite salir 
+      del bucle for... next antes de que este finalice.</p> <h3>Sentencia 
+        While... Wend<a name="while"></a></h3>
+      <p>Un bucle While repite la ejecuci&oacute;n de un conjunto de 
+        sentencias mientras una condici&oacute;n dada sea cierta. La condici&oacute;n 
+        se verifica antes de ejecutarse el conjunto de sentencias. 
+      <blockquote>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;While condicion<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[sentencias]<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wend</blockquote></p> 
+      Donde condici&oacute;n es cualquier expresi&oacute;n num&eacute;rica, relacional 
+      o l&oacute;gica. La ejecuci&oacute;n de la sentencia While sucede 
+      as&iacute;: 
+      <blockquote> 
+        <p>1.- Se eval&uacute;a la condici&oacute;n.<br>
+          2.- Si el resultado de la evaluaci&oacute;n es falso, las sentencias 
+          que forman el cuerpo de While no se ejecutan y se pasa el control 
+          a la siguiente sentencia en el c&oacute;digo a Wend.<br>
+          3.- Si el resultado de la evaluación es verdadero, se ejecutan las sentencias 
+          que forman el cuerpo de While y el proceso descrito se repite 
+          desde el punto 1. </p>
+      </blockquote>
+      <h3>Sentencia Do... Loop<a name="do"></a></h3>
+
+      <p>Un Loop(bucle) repite la ejecuci&oacute;n de un conjunto de sentencias 
+        mientras una condici&oacute;n dada sea cierta, o basta que una condici&oacute;n 
+        dada sea cierta. La condici&oacute;n puede ser verificada antes o despu&eacute;s 
+        de ejecutarse el conjunto de sentencias:<br>
+      </p>
+      <table width="75%" border="0">
+        <tr> 
+          <td>Formato1</td>
+          <td>Formato2</td>
+        </tr>
+        <tr> 
+          <td>Do<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[{While|Until}condici&oacute;n]<br> 
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[sentencias] <br> 
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Exit do] <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[sentencias] 
+            <br>
+            Loop </td>
+          <td>Do <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[sentencias]<br> 
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Exit do]<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[sentencias] 
+            <br>
+            Loop[{While|Until}condici&oacute;n]</td>
+        </tr>
+      </table>
+      <p>Donde condici&oacute;n es cualquier expresi&oacute;n que se 
+        eval&uacute;e a True o a False.</p>
+      <h3>Sentencia Goto<a name="goto"></a></h3>
+      <p>Transmite el control a una l&iacute;nea espec&iacute;fica del c&oacute;digo, 
+        identificada por una etiqueta o por un n&uacute;mero de l&iacute;nea. 
+        Su sintaxis es:<br>
+        Goto {etiqueta/n&ordm; de l&iacute;nea} <br>
+        Si la l&iacute;nea a la que se transfiere el control es una sentencia 
+        ejecutable, se ejecuta esa sentencia y las que le siguen. Si no es ejecutable, 
+        la ejecuci&oacute;n se inicia en la primera sentencia ejecutable que se 
+        encuentra tras dicha l&iacute;nea. Por ejemplo, el siguiente procedimeinto 
+        calcula e imprime el &aacute;rea de uno o m&aacute;s c&iacute;rculos</p></td>
+  </tr>
+  <tr> 
+    <td></td>
+    <td height="21"> <div align="right"><a href="../index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

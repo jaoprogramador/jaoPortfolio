@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Comentarios, PI, Secciones CDATA, Entidades</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación en CSS,Programas CSS,Aplicaciones en CSS,Ejercicios en CSS, Ejemplos de CSS,Tutoriales de CSS,Manuales CSS" name=description>
+<meta name="keywords" content="CSS, Manual CSS, tutorial CSS, Ejemplos CSS, ejercicios CSS, Cascading Style Sheet">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table width="555" height="329" align="left" background="../imagenes/fondologo.jpg">
+  <tr> 
+    <td height="39" colspan="3"> <h2> Comentarios, PI, Secciones CDATA, Entidades</h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> 
+      <p>Para hacer comentarios en XML se pone el texto entre las marcas : &lt;!-- y --&gt;. Por ejemplo: &lt;!-- Esto es un comentario --&gt; </p>
+      <p>Las instrucciones de proceso o Pis indican al procesador como tiene que interpretar la sentencias. Van entre las marcas &lt;? Y ?&gt; </p>
+      <p>Un ejemplo: &lt;?xml version=”1.0”encoding=”ISO-8859- 1” ?&gt; </p>
+      <p>Dentro de las secciones CDATA ir&aacute;n todos ellos caracteres que no queramos que interprete el procesador. </p>
+      <p>&iquest;Nosotros podr&iacute;amos poner &lt;temperatura&gt;&lt;0&lt;/temperatura&gt;? Pues no, porque el valor del elemento contiene uno de los caracteres reservados (en este caso &lt;). Otras entidades predefinidas son: </p>
+      <table align="center" cellpadding="0" cellspacing="0">
+        <tr>
+          <td width="122" valign="top"><p>&lt; &nbsp; </p></td>
+          <td width="122" valign="top"><p>&amp;lt; </p></td>
+        </tr>
+        <tr>
+          <td width="122" valign="top"><p>&gt; &nbsp; </p></td>
+          <td width="122" valign="top"><p>&amp;gt; </p></td>
+        </tr>
+        <tr>
+          <td width="122" valign="top"><p>&amp; </p></td>
+          <td width="122" valign="top"><p>&amp;amp; </p></td>
+        </tr>
+        <tr>
+          <td width="122" valign="top"><p>‘ </p></td>
+          <td width="122" valign="top"><p>&amp;apos; </p></td>
+        </tr>
+        <tr>
+          <td width="122" valign="top"><p>˜ </p></td>
+          <td width="122" valign="top"><p>&amp;quot; </p></td>
+        </tr>
+      </table>
+      <p>&nbsp;</p>
+      <p>El ejemplo anterior ser&iacute;a: &lt;temperatura&gt;&lt;![CDATA[&lt;0]]&gt;&lt;/temperatura&gt;, ya que el interior de la seccion CDATA, el parser lo interpreta como una cadena de caracteres y lo trata como tal. </p>
+      <p>Tambi&eacute;n se podr&iacute;a haber puesto&lt;temperatura&gt;&amp;lt;0&lt;/temperatura&gt;, pero de esta forma hay que ir transformando todos los caracteres reservados para ser correcto, mientras que con el CDATA no importa que caracteres tiene el elemento. </p>
+      <p>&#149;&nbsp; Uso de entidades </p>
+      <p>Existen dos tipos de entidades de usuario : de sustituci&oacute;n y de definici&oacute;n y ambas se definen dentro de la DTD. </p>
+      <p>La entidad de sustituci&oacute;n se declara &lt;!ENTITY nombre valor&gt;. Donde nombre es la entidad que esta definiendo y valor puede ser una cadena de texto o el contenido de un fichero (utilizando SYSTEM): </p>
+      <p>&lt;!ENTITY cov “COVERLINK”&gt; </p>
+      <p>&lt;!ENTITY covtext SYSTEM <a href="http://www.coverlink.com/kepa.txt">http://www.coverlink.com/kepa.txt </a> &gt; </p>
+      <p>Cuando queramos referenciar estas entidades escribimos &amp;nombre;, y se sustituir&aacute; cuando se represente el documento XML: </p>
+      <p>&lt;texto&gt;&amp;cov; est&aacute; orgulloso de anunciar …&amp;covtext;&lt;/text&gt; </p>
+      <p>Esto es v&aacute;lido porque las considera cadenas de texto. Ejemplo: </p>
+      <p>&nbsp; </p>
+      <p>&lt;?xml version=” 1.0” encoding=”ISO-8859- 1” ?&gt; </p>
+      <p>&lt;! DOCTYPE orden-pedido [ </p>
+      <p>&lt;!ENTITY cabecera SYSTEM “SeccionCabecera.xml”&gt; </p>
+      <p>&lt;!ENTITY PosisionPC SYSTEM “Posici&oacute;n/PC1.xml”&gt; </p>
+      <p>&lt;!ENTITY PosisionMonitor SYSTEM “http://monitores.de/m2.xml”&gt; </p>
+      <p>]&gt; </p>
+      <p>&lt;orden-pedido&gt; </p>
+      <p>&lt;datos-cliente&gt; &amp;Cabecera;&lt;datos-cliente&gt; </p>
+      <p>&lt;orden&gt; </p>
+      <p>&lt;posicion&gt;&amp;PosicionPC&lt;/posicion&gt; </p>
+      <p>&lt;posicion&gt;&amp;PosicionMonitor&lt;/posicion&gt; </p>
+      <p>&lt;/orden&gt; </p>
+      <p>&lt;/orden-pedido&gt; </p>
+      <p>La entidad de definici&oacute;n se declara &lt;!ENTITY % nombre valor&gt;. Estas entidades no son cadenas de textos, sino definiciones, por lo que no se referencian los XML como las entidades de sustituci&oacute;n, sino dentro de la DTD. </p>
+      <p>Se referencia con %nombre; </p>
+      <p>&lt;!DOCTYPE ejemplo </p>
+      <p>[ </p>
+      <p>&lt;!ENTITY % entidad-ejemplo “&lt;!ELEMENT </p>
+      <p>Ejemplo(#PCDATA)&gt;”&gt; </p>
+      <p>%entidad-ejemplo; </p>
+      <p>]&gt; </p>
+      <p>&lt;ejemplo&gt; </p>
+      <p>Aqu&iacute; viene cualquier cosa </p>
+      <p>&lt;/ejemplo&gt; </p>
+      <p>Las entidades de definici&oacute;n pueden tener par&aacute;metros internos y externos: </p>
+      <p>&#149;&nbsp; Par&aacute;metros internos de las entidades: Aqu&iacute; definimos la entidad bloque que puede ser parrafo o listado o imagen. Posteriormente se referencia en la definici&oacute;n de otros elementos de la DTD. </p>
+      <p>&lt;!ELEMENT libro (capitulo+)&gt; </p>
+      <p>&lt;!ELEMENT capitulo (titulo, (%bloque;)*,seccion+)&gt; </p>
+      <p>&lt;!ELEMENT seccion(titulo,(%bloque;)*,subseleccion*)&gt; </p>
+      <p>&lt;!ELEMENT subseleccion (titulo,(%bloque;)+)&gt; </p>
+      <p>&lt;!ELEMENT parrafo (#PCDATA)&gt; </p>
+      <p>…. </p>
+      <p>&#149;&nbsp; Par&aacute;metros externos de las entidades. Estamos referenciando desde lesta DTD a otra externa(tabla-modelo.dtd). Es decir, todo lo que haya en esa DTD externa lo voy a tener disponible. </p>
+      <p>&lt;!ENTITY % tabla-modelo SYSTEM “tabla-modelo.dtd”&gt; </p>
+      <p>&nbsp; </p>
+      <p>%tabla-modelo; </p>
+      <p>&nbsp; </p>
+      <p>&lt;!ENTITY % bloque “parrafo|listado|imagen|tabla”&gt; </p>
+      <p>&lt;!ELEMENT libro(capitulo+)&gt; </p>
+      <p>&lt;!ELEMENT capitulo(titulo, (%bloque;)*seccion+)&gt; </p>
+      <p>…… </p>
+      <p>Otra de las caracter&iacute;sticas del uso de entidades es la integraci&oacute;n de datos no XML. Esto se entiende mejor con un ejemplo: </p>
+      <p>Primero definimos un elemento logo que estar&aacute; vac&iacute;o pero con un atributo imagen que es de tipo ENTITY y es obligatorio. Con NOTATION le defino un nombre (GIF) para que sea interpretado con un ejecutable(gifmagic.exe). Definimos la entidad kepalogo, le decimos donde est&aacute;(con SYSTEM) y con NDATA le indicamos con que ejecutable queremos que lo interprete. </p>
+      <p>&lt;!ELEMENT logo EMPTY&gt; </p>
+      <p>&lt;!ATTLIST logo imagen ENTITY #REQUIRED&gt; </p>
+      <p>&lt;!NOTATION GIF SYSTEM ”gifmagic.exe”&gt; </p>
+      <p>&lt;!ENTITY kepalogo SYSTEM “ <a href="xml08_logo1.gif">http://coverlink.com/logo1.gif </a>” NDATA GIF&gt; </p>
+      <p>….. </p>
+    <p>&lt;logo imagen=”&amp;kepalogo;”/&gt; </p></td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

@@ -1,0 +1,195 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Variables en php</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Manual php, tutorial php, Ejemplos php, ejercicios php">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table width="555" height="1700" align="left" background="../imagenes/fondologo.jpg">
+  <tr> 
+    <td height="39" colspan="3"> <h2> 
+        Variables</h2></td>
+  </tr>
+  <tr> 
+    <td height="1630" colspan="3"> 
+      <table width="51%" border="0" >
+        <tr> 
+          <td><h3>Contenido:</h3></td>
+          <td><a href="php04.htm#intro">- Introducci&oacute;n</a></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="php04.htm#incremento">- Incremento y decremento</a></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="php04.htm#variables">- Variables num&eacute;ricas</a></td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td><a href="php04.htm#funciones">- Funciones matem&aacute;ticas</a></td>
+        </tr>
+      </table>
+      <h3>Introducci&oacute;n<a name="intro"></a></h3>
+      <p > El indicativo de variable es siempre el signo de 
+        d&oacute;lar $</p>
+      <p > php admite variables num&eacute;ricas, de cadena 
+        y arrays. Para crearlas basta teclear el nombre de la variable seguida 
+        de su valor:
+        $num = 12;
+        $cad = &#8220;texto&#8221;;</p>
+      <p > Las variables num&eacute;ricas pueden ser enteras; 
+        de punto flotante o dobles, de punto flotante o no. El tipo se va a adaptar 
+        al valor que introduzcamos.
+        $num = 6; --&gt; Crea una variable entera
+        $deci = 1.0; --&gt; Crea una variable de punto flotante</p>
+      <p > Tambi&eacute;n podemos declarar las variables indicando 
+        su tipo pero es m&aacute;s una p&eacute;rdida de tiempo que otra cosa
+        $numero = (integer) 5;
+        $cadena = (string) &#8220;Soy una cadena&#8221;;</p>
+      <h3>Incremento y decremento<a name="incremento"></a></h3>
+      <p >Veamos un ejemplo con variables:
+        &lt;?php
+        $num=17;
+        echo $num,&quot; Muestra valor de &quot;, &quot;$&quot;,&quot;num&quot;, 
+        &quot;\n&quot;;
+        echo $num++,&quot; Muestra el n&ordm; e incrementa en 1\n&quot;;
+        echo $num,&quot; Muestra n&ordm; incrementado\n&quot;;
+        echo ++$num, &quot; Incrementa en 1 y muestra el numero\n&quot;;
+        print ( &quot; print tambi&eacute;n sirve para mostrar cosas\n&quot;);
+        ?&gt;
+        Tambi&eacute;n existen operadores de decremento ($var--) y predecremento 
+        (--$var) que funcionan del mismo modo que los de incremento y preincremento.</p>
+      <h3>Variables num&eacute;ricas<a name="variables"></a></h3>
+      <p> Como ejemplo vamos a crear un srcip que calcule 
+        el coste de una compra de x unidades a la que le aplican un descuento 
+        del n%. Este script nos devolver&aacute; tanto el coste total como el 
+        importe de cada mensualidad si decidimos pagarlo en 12 meses.</p>
+      <p >
+        &lt;HTML&gt;
+        &lt;HEAD&gt;
+        &lt;TITLE&gt;Una de n&uacute;meros&lt;/TITLE&gt;
+        &lt;/HEAD&gt;
+        &lt;BODY&gt;
+        &lt;?php</p>
+      <p >/* $Cantidad se debe pasar a esta p&aacute;gina mediante 
+        un formulario o en la URL
+        $Descuento es opcional. */
+        $Coste = 2000.00;
+        $Impuesto = 0.06 //El impuesto ser&aacute; un 6%
+        $TotalCoste = $Coste * $Cantidad;
+        $Impuesto = $Impuesto + 1; // $Impuesto ser&aacute; ahora 1.06.
+        $TotalCoste = $TotalCoste - $Descuento;
+        $TotalCoste = $TotalCoste * $Impuesto;
+        $Plazos = $TotalCoste / 12;
+        // Imprime los resultados
+        print (&quot;Has comprado un total de $Cantidad unidades at \$$Coste cada 
+        uno.\n&lt;P&gt;&quot;);
+        print (&quot;El total con impuestos menos \$$Descuento de descuento, supone 
+        \$$TotalCoste.\n&lt;P&gt;&quot;);
+        print (&quot;Puedes hacer el pago en 12 mensualidades de \$$Plazos cada 
+        una.\n&lt;P&gt;&quot;);
+        ?&gt;
+        &lt;/BODY&gt;
+        &lt;/HTML&gt;</p>
+      <p > Para comprobar el script a&ntilde;adiremos al URL 
+        los valores para las variables Coste y Descuento.</p>
+      <p >El aspecto no es muy bueno. Para mejorarlo podemos 
+        utilizar la funci&oacute;n printf() que nos formatear&aacute; la salida 
+        a nuestro gusto:</p>
+      <p >&lt;HTML&gt;
+        &lt;HEAD&gt;
+        &lt;TITLE&gt;Otra de n&uacute;meros&lt;/TITLE&gt;
+        &lt;/HEAD&gt;
+        &lt;BODY&gt;
+        &lt;?php
+        /* $Cantidad se debe pasar a esta p&aacute;gina mediante un formulario 
+        o en la URL
+        $Descuento es opcional. */
+        $Coste = 2000.00;
+        $Impuesto = 0.06; //El impuesto ser&aacute; un 6%
+        $TotalCoste = $Coste * $Cantidad;
+        $Impuesto = $Impuesto + 1; // $Impuesto ser&aacute; ahora 1.06.
+        $TotalCoste = $TotalCoste - $Descuento;
+        $TotalCoste = $TotalCoste * $Impuesto;
+        $Plazos = $TotalCoste / 12;
+        // Imprime los resultados.
+        print (&quot;Has comprado un total de $Cantidad unidades at \$$Coste cada 
+        uno.\n&lt;P&gt;&quot;);
+        print (&quot;El total con impuestos menos \$$Descuento de descuento, supone 
+        $&quot;);
+        printf (&quot;%01.2f&quot;,$TotalCoste);
+        print (&quot;. \n&lt;p&gt;Puedes hacer el pago en 12 mensualidades de 
+        $&quot;);
+        printf (&quot;%01.2f&quot;,$Plazos);
+        print (&quot; cada una.\n&lt;P&gt;&quot;);
+        ?&gt;
+        &lt;/BODY&gt;
+        &lt;/HTML&gt;</p>
+      <p > La l&iacute;nea printf (&quot;%01.2f&quot;,$TotalCoste); 
+        formatea la salida de manera que muestre un n&uacute;mero de punto flotante, 
+        con al menos un d&iacute;gito para la parte entera y dos para la decimal; 
+        el 0 inicial indica que rellene con ceros los espacios extra.</p>
+      <p >Tambi&eacute;n podr&iacute;amos haber utilizado sprintf() 
+        que no env&iacute;a los resultados al navegador sino que cambia la variable 
+        sin imprimirla. Para ello deber&iacute;amos sustituir las l&iacute;neas:
+        print (&quot;. \n&lt;p&gt;Puedes hacer el pago en 12 mensualidades de 
+        $&quot;);
+        printf (&quot;%01.2f&quot;,$Plazos);
+        por:
+        $Plazos = sprintf (&quot;%01.2f&quot;, $Plazos);
+        print (&quot;. \n&lt;p&gt;Puedes hacer el pago en 12 mensualidades de 
+        \$$Plazos cada una.\n&lt;P&gt;&quot;);</p>
+      <p > Para poder operar directamente con el valor del 
+        impuesto utilizamos $Impuesto = $Impuesto + 1; 
+        Otra forma de hacer lo mismo es $Impuesto++ con lo cual incrementaremos 
+        en un entero su valor. Como ya vimos anteriormente, si quisieramos disminuir 
+        su valor utilizar&iacute;amos $Impuesto--</p>
+      <p > En cuanto a la prioridad de las operaciones aritm&eacute;ticas 
+        decir que lo m&aacute;s recomendable es utilizar par&eacute;ntesis para 
+        evitar resultados inesperados. Las l&iacute;neas:
+        $TotalCoste = $TotalCoste - $Descuento;
+        $TotalCoste = $TotalCoste * $Impuesto;
+        pueden sustituirse por:
+        $TotalCoste = ($TotalCoste - $Descuento) * $Impuesto; . De esta forma 
+        garantizamos la prioridad de las operaciones.</p>
+      <h3>Funciones matem&aacute;ticas<a name="funciones"></a></h3>
+      <p >Otras funciones matem&aacute;ticas son 
+        round () --&gt; Redondea al entero m&aacute;s pr&oacute;ximo --&gt; $n 
+        = round (22.34) // $n vale 22
+        --&gt; $n = round (22.34, 1) // $n vale 22.3
+        ceil () --&gt; Redondea al al entero superior
+        floor () --&gt; Redondea al entero inferior</p>
+      <p >abs () --&gt; Devuelve el valor absoluto --&gt; $n 
+        = abs (-33) // $n vale 33
+        rand () --&gt; Devuelve un n&ordm; al azar
+        Para poder utilizarla es necesario inicializarla previamente. Para hacerlo 
+        se utiliza srand(). Seg&uacute;n el manual de php la forma de conseguir 
+        n&uacute;meros lo m&aacute;s aleatorios posible se debe utilizar el siguiente 
+        c&oacute;digo:
+        srand ((double) microtime () * 1000000);
+        $Naleatorio = rand();</p>
+      <p >Si queremos obtener un n&ordm; limitado a un intervalo 
+        determinado, por ejemplo de 0 a 10:
+        $Naleatorio = rand(0, 10);</p></td>
+  </tr>
+  <tr> 
+    <td></td>
+    <td>&nbsp;</td>
+    <td><div align="right"><a href="../index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

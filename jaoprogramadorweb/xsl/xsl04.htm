@@ -1,0 +1,54 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>XPATH</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación en CSS,Programas CSS,Aplicaciones en CSS,Ejercicios en CSS, Ejemplos de CSS,Tutoriales de CSS,Manuales CSS" name=description>
+<meta name="keywords" content="CSS, Manual CSS, tutorial CSS, Ejemplos CSS, ejercicios CSS, Cascading Style Sheet">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table width="555" height="329" align="left" background="../imagenes/fondologo.jpg">
+  <tr> 
+    <td height="39" colspan="3"> <h2> <strong>XPATH</strong> </h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> 
+      <p>Siempre que nos movemos por el documento utilizamos XPATH, ya que es el identificador de caminos y podemos utilizar esas expresiones en muchas sentencias del documento: </p>
+      <table cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="288" valign="top"><p>&lt;xsl:template match=”/catalogo/crucero”/&gt; </p></td>
+          <td width="288" valign="top"><p>Con esta sentencia nos situamos en crucero(dentro de catalogo y dentro de/) </p></td>
+        </tr>
+        <tr>
+          <td width="288" valign="top"><p>&lt;xsl:value-of select=”precio”/&gt; </p></td>
+          <td width="288" valign="top"><p>Al no ponerle nada delante del nombre del elemento le indicamosque busque por debajo del elemento actual. </p></td>
+        </tr>
+        <tr>
+          <td width="288" valign="top"><p>&lt;xsl:apply-templates select=”ruta/puerto”/&gt; </p></td>
+          <td width="288" valign="top"><p>Le decimos que plantillas tiene que aplicar(puerto que est&aacute; dentro de ruta hijo del elemento actual) </p></td>
+        </tr>
+        <tr>
+          <td width="288" valign="top"><p>&lt;/xsl:template&gt; </p></td>
+          <td width="288" valign="top"><p>&nbsp; </p></td>
+        </tr>
+      </table>
+    <p>La identificaci&oacute;n del camino pueden ser absoluta o relativa, es decir en base al raiz o en base al nodo actual(Es una direcci&oacute;n absoluta si empieza por “/”, y relativa cuando no sea as&iacute;) </p></td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

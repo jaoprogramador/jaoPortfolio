@@ -1,0 +1,262 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Cadenas de caracteres en php</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta name="keywords" content="Manual php, tutorial php, Ejemplos php, ejercicios php">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table width="555" height="2639" align="left" background="../imagenes/fondologo.jpg">
+  <tr> 
+    <td height="39" colspan="3"> <h2>Cadenas 
+        de caracteres</h2></td>
+  </tr>
+  <tr> 
+    <td height="2565"  colspan="3"> 
+      <table width="41%" border="0">
+        <tr> 
+          <td><h3>Contenido:</h3></h3></td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="php05.htm#intro">- Introducci&oacute;n</a></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="php05.htm#html">- html</a></td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td><a href="php05.htm#funciones">- Funciones</a></td>
+        </tr>
+      </table>
+      <h3>Introducci&oacute;n<a name="intro"></a></h3>
+      <p>Hay dos tipos de operadores de cadena de caracteres:</p>
+      <p>. Operador de concatenaci&oacute;n: Une dos cadenas 
+        de caracteres
+        .= Operador de concatenaci&oacute;n y asignaci&oacute;n: une dos cadenas 
+        de caracteres y las asigna a la primera de ellas.</p>
+      <p>&lt;?php
+        $var1 = &quot;1&ordf; parte&quot;;
+        $var2 = &quot;2&ordf; parte&quot;;</p>
+      <p>$num = 5;
+        $concatenadas = $var1 . $var2;
+        echo &quot;concatenadas: &quot;, $concatenadas, &quot;\n&quot;;
+        $var1 .= $var2;
+        echo &quot;var1 concatenada con var2: &quot;, $var1, &quot;\n&quot;;
+        ?&gt;</p>
+      <p>&lt;?php
+        //Mezcla de caracteres y n&uacute;meros:
+        $amarraco = &quot;35piedras&quot; + 5; //suma porque ambas comienzan por 
+        valor num&eacute;rico
+        echo &quot;Esto es un amarraco: $amarraco piedras, &quot;\n&quot;;
+        $envite = &quot;piedras35&quot; + 2;
+        echo &quot;Un envite son,$envite piedras&quot;, &quot;\n&quot;;
+        echo $var1. $num, &quot;\n&quot;; //&quot;Esto ser&aacute; 1&ordf; parte2&ordf;parte5
+        $var2 .= $num; //Crea la cadena &quot;2&ordf; parte5 que asigna a $var2
+        echo $var2, &quot;\n&quot;;
+        ?&gt;</p>
+      <p> Hay una diferencia entre comillas dobles y simples: 
+        Las simples consideran su contenido como un literal, mientras que las 
+        dobles obtienen los valores de los elementos que contenga:
+        echo 'El valor de $amarraco es un amarraco: ', $amarraco, piedras, &quot;\n&quot;; 
+        --&gt; Esto mostrar&aacute;: El valor de $amarraco es un amarraco: 40 
+        piedras</p>
+      <p>echo &quot;Esto es un amarraco: $amarraco piedras 
+        \n&quot;; --&gt; Esto mostrar&aacute;: Esto es un amarraco: 40 piedras</p>
+      <p>
+        <h3>html<a name="html"></a></h3>
+      <p> Los navegadores s&oacute;lo (m&aacute;s o menos) 
+        entienden c&oacute;digo html. La raz&oacute;n por la que podemos trabajar 
+        con php es que el servidor va a ser capaz de traducir los programas php 
+        y enviarlos en formato html a los navegadores.</p>
+      <p> Si quisieramos ver el ejemplo en una p&aacute;gina 
+        anterior en una p&aacute;gina web deber&iacute;amos formatearlo a&ntilde;adiendo 
+        las etiquetas html necesarias</p>
+      <p>&lt;?php
+        print (&#8220;&lt;html&gt; &lt;title&gt; Una p&aacute;gina php con variables 
+        &lt;/title&gt; &lt;boody&gt;&#8221;);
+        $var1 = &quot;1&ordf; parte&quot;;
+        $var2 = &quot;2&ordf; parte&quot;;
+        $num = 5;
+        $concatenadas = $var1 . $var2;
+        print (&quot;&lt;p&gt; concatenadas: &quot;);
+        print (&quot; $concatenadas &lt;br&gt;&lt;/br&gt;\n&quot;);
+        $var1 .= $var2;
+        print (&quot;&lt;p&gt; var1: $var1, &lt;/p&gt; \n&quot;);
+        ?&gt;
+        &lt;/body&gt;
+        &lt;html&gt;</p>
+      <p> Hemos a&ntilde;adido las etiquetas html necesarias 
+        utilizando print. Dentro de ella aparece el car&aacute;cter \n que env&iacute;a 
+        un retorno de carro dentro del c&oacute;digo html. OJO: No es lo mismo 
+        que &lt;br&gt; que indica al navegador que inicie una nueva l&iacute;nea.</p>
+      <p>Una cadena de caracteres est&aacute; formada por 
+        una sucesi&oacute;n de letras, n&uacute;meros, caracteres especiales o 
+        una mezcla de ellas.</p>
+      <h3>Funciones<a name="funciones"></a></h3> 
+      </p>
+      <p>Para manejar cadenas php dispone de una serie 
+        de funciones</p>
+      <p>trim() Elimina los espacios en blanco al principio 
+        y al final de la cadena. OJO no en medio.
+        $cadena = trim (&#8220; caracteres &#8220;); --&gt; Devuelve &#8220;caracteres&#8221;
+        Existen otras dos funciones complementarias que son ltrim() y rtrim() 
+        que eliminan los caracteres de la Izquierda y dececha respectivamente.</p>
+      <p> Cuando vemos en el navegador una cadena creada con 
+        varios caracteres en blanco comprobamos que aparece con un s&oacute;lo 
+        car&aacute;cter. La raz&oacute;n de la existencia de las funciones trim() 
+        no es evitar m&uacute;ltiples espacios al ver la p&aacute;gina en el navegador 
+        sino (por ahora) en el c&oacute;digo html que env&iacute;a. Antes de continuar 
+        con esto veremos el operador de concatenaci&oacute;n.</p>
+      <p>. Permite concatenar (unir) cadenas de caracteres 
+        
+        Dadas las caracter&iacute;sticas de php teclear $cadena = &#8220;$cadena1 
+        $cadena2&#8221;; hace que el valor de $cadena sea la uni&oacute;n de los 
+        valores de las otras dos variables. No obstante es m&aacute;s recomendable 
+        utilizar el operador de concatenaci&oacute;n. 
+        $cadena = $cadena1 . $cadena2; --&gt;$cadena contendr&aacute; el valor 
+        de $cadean1 seguido de $cadena2
+        Veamos un ejemplo:
+        &lt;HTML&gt;
+        &lt;HEAD&gt;
+        &lt;/HEAD&gt;
+        &lt;BODY&gt;
+        &lt;?php
+        $cadena1 = &quot;con espacios a la dch &quot;;
+        $cadena2 = &quot; con espacios a la izq&quot;;
+        $cadena = $cadena1 . $cadena2;
+        print (&quot; Aqu&iacute; una cadena con espacios: $cadena &lt;br&gt;\n&quot;);
+        $cadena = rtrim($cadena1) . ltrim ($cadena2);
+        print (&quot;Aqu&iacute; la misma cadena sin espacios: $cadena \n&quot;);
+        ?&gt;
+        &lt;/BODY&gt;
+        &lt;/HTML&gt;
+        Cuando veamos esto en el navegador nos daremos cuenta de que el valor 
+        de $cadena aparecer&aacute; exactamente igual las dos veces. &iquest;Donde 
+        est&aacute; la diferencia? Al ver el c&oacute;digo html que manda al navegador. 
+        F&iacute;jate en las dos l&iacute;neas de abajo marcadas con ***</p>
+      <p>&lt;html&gt;
+        &lt;head&gt;
+        &lt;/head&gt;
+        &lt;body&gt;
+        *** Aqu&iacute; una cadena con espacios: con espacios a la dch con espacios 
+        a la izq &lt;br&gt;
+        *** Aqu&iacute; la misma cadena sin espacios: con espacios a la dchcon 
+        espacios a la izq 
+        &lt;/body&gt;
+        &lt;/html&gt;</p>
+      <p>urlencode()
+        
+        
+        Ya hemos visto que para enviar datos que contienen espacios como parte 
+        de un URL se deben sustituir estos por el signo + 
+        Esta funci&oacute;n hace autom&aacute;ticamente el cambio de estos y otros 
+        caracteres que pueden dar problemas
+        $sinespacios = urlencode ($cadena);</p>
+      <p>urldecode()
+        Hace lo contrariode urlencode(), es decir lo decodifica. Solo ser&aacute; 
+        necesaria en el caso de haber utilizado antes urlencode() puesto que los 
+        datos enviados desde un formulario son codificados autom&aacute;ticamente 
+        antes de ser enviados y decodificados al llegar al script receptor (Ver 
+        el primer y segundo script del apartado Formularios)</p>
+      <p>crypt (cadena, 
+        semilla)</p>
+      <p>
+        Encripta datos. El resultado cambiar&aacute; si cambia la cadena o la 
+        semilla, que debe ser de dos caracteres.</p>
+      <p>Existe otra funci&oacute;n para el mismo cometido 
+        que es md5 (), que genera cadenas de 32 caracteres . En el ejemplo siguiente 
+        veremos el uso de crypt():</p>
+      <p>&lt;?php
+        print (&quot;&lt;HTML&gt;&lt;HEAD&gt;&lt;TITLE&gt;Ejemplo de encriptado&lt;/TITLE&gt;&lt;/HEAD&gt;&lt;BODY&gt;\n&quot;);
+        $Nombre = &quot;Antonio&quot;;
+        $Apellido = &quot;Aguirre&quot;;
+        print (&quot;Tu nombre es $Nombre, \n&quot;);
+        print (&quot;te apellidas $Apellido.&lt;BR&gt;\n&quot;);
+        $Nombre .= &quot; &quot; . $Apellido;
+        print (&quot;Tu nombre completo es $Nombre &lt;br&gt;\n&quot;);
+        $Encriptado = crypt ($Nombre, &#8220;lc&#8221;);</p>
+      <p>print (&quot;Ese mismo nombre encriptado con crypt 
+        (): $Encriptado &lt;br&gt;\n&quot;);
+        print (&quot;&lt;/BODY&gt;&lt;/HTML&gt;&quot;);
+        ?&gt;</p>
+      <p> En este script utilizamos los dos operadores de 
+        concatenaci&oacute;n . y .= para formar el nombre completo. La funci&oacute;n 
+        crypt() encripta estos datos como medida de seguridad en caso de que queramos 
+        enviarlos por la red.</p>
+      <p> Una cadena encriptada con crypt () no se puede desencriptar. 
+        S&oacute;lo podremos compararla con otra instancia de esa misma cadena 
+        tambi&eacute;n encriptada.</p>
+      <p> Existen otras funciones como encrypt () que s&iacute; 
+        permite el decodificado con decrypt () pero s&oacute;lo funciona en aquellos 
+        servidores que tienen instalada la extensi&oacute;n cypt.</p>
+      <p> Es importante recordar la diferencia entre codificar 
+        y encriptar: El codificado &uacute;nicamente sustituye ciertos caracteres 
+        que pueden resultar problem&aacute;ticos mientras que el encriptado cambia 
+        todo el texto por razones de seguridad.</p>
+      <p>strtok ()
+        
+        
+        Crea una subcadena , llamada muestra, a partir de otra m&aacute;s larga.
+        $nombreDePila = strtok ($Nombre, &#8220; &#8220;); La nueva variable contendr&aacute; 
+        el valor de la primera hasta encontrar un espacio en blanco. La variable 
+        $Nombre del ejemplo anterior separa nombre y apellido con un espacio. 
+        Al hacer esto obtendremos el nombre de pila. Por supuesto el car&aacute;cter 
+        de b&uacute;squeda puede ser cualquiera.</p>
+      <p>substr (cadena, inicio, fin)</strong></p>
+      <p> Obtiene de la cadena inicial la subcadena de fin 
+        caracteres contados a partir del car&aacute;cter inicio.
+        $Sub = substr(&#8220;123456789&#8221;, 2, 5); --&gt; $Sub valdr&aacute; 
+        34567
+      </p>
+      <p>strelen ()</p>
+      <p> Calcula el n&ordm; de caractrertes de una cadena
+        $e = strlen (&quot;123456789&quot;); --&gt; $e valdr&aacute; 9</p>
+      <p>Utilizando algunas de estas funciones vamos a crear 
+        un script que genere claves aleatorias (Aunque no muy seguras):</p>
+      <p>&lt;HTML&gt;
+        &lt;HEAD&gt;
+        &lt;TITLE&gt;Generator de claves&lt;/TITLE&gt;
+        &lt;/HEAD&gt;
+        &lt;BODY&gt;
+        &lt;?php
+        $cadena = &quot;Este texto ser&aacute; encriptado para crear claves&quot;;
+        $longitud = 8; // Esta ser&aacute; la longitud de la clave. M&aacute;ximo 
+        32 caracteres.
+        $cadena = md5($cadena); //encripta la cadena
+        print (&quot;$cadena &lt;br&gt;\n&quot;);
+        $longitudCadena = strlen($cadena); //n&ordm; caracteres de cadena
+        srand ((double) microtime() * 1000000); //inicializa rand(). Imprescindible 
+        para utilizarla
+        $inicio = rand(0,($longitudCadena-$longitud-1)); /* Toma un punto de inicio 
+        arbitrario
+        entre 0 (primer caracter) y la longitud de la cadena la longitud de la 
+        clave -1.*/
+        $clave = substr($cadena, $inicio, $longitud); //Subcadena deseada
+        print (&quot;La clave generada es:&lt;P&gt;&lt;BIG&gt;$clave&lt;/BIG&gt;\n&quot;);
+        ?&gt;
+        &lt;/BODY&gt;
+        &lt;/HTML&gt;</p>
+      </td>
+  </tr>
+  <tr> 
+    <td ></td>
+    <td >&nbsp;</td>
+    <td><div align="right"><a href="../index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

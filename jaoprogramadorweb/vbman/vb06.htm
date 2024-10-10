@@ -1,0 +1,256 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Normas de programaci&amp;oacute;n Visual Basic</title>
+<META http-equiv=Content-Language content=es><META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Normas de programación en Visual Basic,Manual Visual Basic,Tutorial Visual Basic, Ejemplos Visual Basic">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+
+<body>
+<table width="555" height="228" align="left" background="../imagenes/fondologo.jpg">
+  <tr> 
+    <td height="39" colspan="2"> <h2>Normas 
+        de programaci&oacute;n</h2></td>
+  </tr>
+  <tr> 
+    <td height="144" colspan="2"><table width="100%" border="0">
+        <tr>
+          <td width="23%"><h3>Contenido:</h3></td>
+          <td width="77%">&nbsp;</td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td><a href="vb06.htm#codificacion">- Codificaci&oacute;n</a></td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td><a href="vb06.htm#grafico">- Entorno gr&aacute;fico</a></td>
+        </tr>
+      </table>
+      <br>
+        <h3>Codificaci&oacute;n<a name="codificacion"></a></h3>
+      <p>a) Utiliza tabulaciones (sandr&iacute;as) para dar claridad al programa 
+        fuente. Aplica una nueva tabulaci&oacute;n en cada procedimiento y funci&oacute;n, 
+        en cada bucle y en cada estructura condicional.</p>
+        <p>
+        b) Asigna nombres descriptivos a todos los los elementos que utilices: 
+        formularios, procedimientos, funciones, controles, variables, constantes, 
+        etc.</p>
+        <p>
+        &nbsp;&nbsp;&nbsp;&nbsp;- En los nombres escribe el 1&ordm; car&aacute;cter 
+        en may&uacute;sculas y el resto en min&uacute;sculas. Si est&aacute; formado 
+        por varias palabras, no dejes espacios ni utilices caracteres para unirlas, 
+        simplemente escribe el 1&ordm; car&aacute;cter de cada palabra en may&uacute;sculas 
+        y el resto en min&uacute;sculas. Ejemplo: CantidadMediaAnual.</p>
+        <p>
+        &nbsp;&nbsp;&nbsp;&nbsp;- Escribe el nombre de las constantes en may&uacute;sculas.
+        </p><p>
+        &nbsp;&nbsp;&nbsp;&nbsp;- Precede el nombre de cada control con el prefijo 
+        (3 caracteres) correspondiente. Ejemplo: frmVerDatos (Formulario), cmdAceptar 
+        (bot&oacute;n de comando), lblCantidadTotal (label).
+      </p>
+      <table>
+        <tr> 
+          <td>Barra de desplazamiento 
+            Horizontal </td>
+          <td>hsb</td>
+          <td>Cuadro de lista</td>
+          <td>lst</td>
+          <td>Forma</td>
+          <td>shp</td>
+        </tr>
+        <tr> 
+          <td>Barra de desplazamiento Vertical</td>
+          <td>vsb</td>
+          <td>Cuadro de lista de archivos</td>
+          <td>fil</td>
+          <td>Formulario</td>
+          <td>frm</td>
+        </tr>
+        <tr> 
+          <td>Bot&oacute;n de opci&oacute;n</td>
+          <td>opt</td>
+          <td>Cuadro de lista de directorios</td>
+          <td>dir</td>
+          <td>Gr&aacute;fico</td>
+          <td>gra</td>
+        </tr>
+        <tr> 
+          <td>Botones de comando</td>
+          <td>cmd</td>
+          <td>Cuadro de lista de unidades</td>
+          <td>drv</td>
+          <td>Imagen</td>
+          <td>img</td>
+        </tr>
+        <tr> 
+          <td>Casilla de verificaci&oacute;n</td>
+          <td>cgk</td>
+          <td>Cuadro de textos</td>
+          <td>txt</td>
+          <td>Informaci&oacute;n del sistema</td>
+          <td>sys</td>
+        </tr>
+        <tr> 
+          <td>Contenedor OLE</td>
+          <td>ole</td>
+          <td>Datos</td>
+          <td>dat</td>
+          <td>L&iacute;nea</td>
+          <td>lin</td>
+        </tr>
+        <tr> 
+          <td>Cron&oacute;metro</td>
+          <td>tmr</td>
+          <td>Di&aacute;logo com&uacute;n</td>
+          <td>dlg</td>
+          <td>Marco</td>
+          <td>fra</td>
+        </tr>
+        <tr> 
+          <td>Cuadro combinado de datos</td>
+          <td>dbc</td>
+          <td>Etiqueta</td>
+          <td>lbl</td>
+          <td>MCI</td>
+          <td>mci</td>
+        </tr>
+        <tr> 
+          <td>Cuadro combinado, cuadro de lista 
+            desplegable</td>
+          <td>cbo</td>
+          <td>Fichas</td>
+          <td>tab</td>
+          <td>Men&uacute;</td>
+          <td>mnu</td>
+        </tr>
+        <tr> 
+          <td>Cuadro de imagen</td>
+          <td>pic</td>
+          <td>Hierachical FlexGrid</td>
+          <td>flex</td>
+          <td>RichTextBox</td>
+          <td>rtf</td>
+        </tr>
+      </table>
+      <p>&nbsp;&nbsp;&nbsp;&nbsp;- Precede el nombre de cada variable con el prefijo 
+        (1 o 2 caracteres) correspondiente a su tipo. Ejemplo: iIndice, sMedia, 
+        stMensaje, dFechaActual.<>
+        &nbsp;&nbsp;&nbsp;&nbsp;</p>
+      <table width="100%" border="0">
+        <tr> 
+          <td>i:</td>
+          <td>Integer</td>
+          <td>s:</td>
+          <td>Single</td>
+          <td>c:</td>
+          <td>Currency</td>
+          <td>b:</td>
+          <td>Boolean</td>
+          <td>d:</td>
+          <td>Date</td>
+        </tr>
+        <tr> 
+          <td>L:</td>
+          <td>Long</td>
+          <td>d:</td>
+          <td>Double</td>
+          <td>by:</td>
+          <td>Byte</td>
+          <td>st:</td>
+          <td>String</td>
+          <td>v:</td>
+          <td>Variant</td>
+        </tr>
+      </table>
+      <p>
+        c) No utilices comentarios de forma masiva. Puedes comentar cada procedimeinto 
+        y funci&oacute;n antes de su codificaci&oacute;n, la misi&oacute;n de 
+        cada variable en su declaraci&oacute;n y aquellos fragmentos de c&oacute;digo 
+        especialmente complejos.</p>
+        <p>
+        d) Escribe una instrucci&oacute;n en cada l&iacute;nea, y si es necesario 
+        utiliza el car&aacute;cter de continuaci&oacute;n de l&iacute;nea &quot;_&quot; 
+        para instrucciones muy largas (para mejorar la legibilidad).</p>
+        <p>
+        e) Organiza y divide cuando puedas el c&oacute;digo en procedimientos 
+        y funciones, almacen&aacute;ndolos en m&oacute;dulos est&aacute;ndar (.BAS) 
+        cuando se utilicen en m&aacute;s de un formulario.</p>
+        <p>
+        f) Hay que sea obligatorio declarar todas las variables antes de usarlas 
+        (Option Explicit)y utiliza en cada caso el tipo m&aacute;s sencillo que 
+        represente correctamente el contenido de la variable.</p>
+        <p>
+        g) Piensa detenidamente el &aacute;mbito de cada variable, y utiliza solo 
+        variables globales cuando sea imprescindible.</p>
+        <p>
+        h) Cuando sea posible y l&oacute;gico utiliza arrays de variables, y en 
+        el caso de que no se conozca con antelaci&oacute;n su tama&ntilde;o, utiliza 
+        arrays din&aacute;micos para utilizar solo la memoria necesaria.</p>
+        <p>
+        i)Cuando haya varios controles del mismo tipo y con funciones similares 
+        utiliza Arrays de Controles.</p>
+        <p>
+        h) Utiliza las estructuras repetitivas y condicionales m&aacute;s adecuadas 
+        en cada caso y siempre que tengas oportunidad.</p>
+      <h3>Entorno gr&aacute;fico<a name="grafico"></a></h3>
+      <p>a) Crea formularios sencillos, con colores suaves, que se comporten del 
+        mismo modo que todas las aplicaciones de Windows, que sean intuitivos, 
+        f&aacute;ciles de entender y usar, y c&oacute;modos para el usuario.</p>
+        <p>
+        b) Organiza y ordena los controles y la informaci&oacute;n en los distintos 
+        formularios (si es necesario) y dentro de cada formulario.</p>
+        <p>
+        c) Sit&uacute;a en enfoque en el control que previsiblemente vasta a usar 
+        el usuario en ese documento.</p>
+        <p>
+        d) Limita los controles con los que el usuario puede interactuar en cada 
+        momento a solamente los necesarios.</p>
+        <p>
+        e) En cada aplicaci&oacute;n el usuario debe tener la oportunidad de consultar 
+        una ayuda que le sirva de apoyo. Pon por lo menos un men&uacute; o un 
+        bot&oacute;n que muestre una ayuda general. Utiliza la propiedad ToolTipText 
+        de los controles para mostrar una ayuda breve al situar el cursor en el 
+        control.</p>
+        <p>
+        f) En cada formulario permite acceder a los men&uacute;s y botones mediante 
+        el teclado:</p>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Men&uacute;s: mediante teclas de acceso 
+        r&aacute;pido (ALT + tecla) y teclas de m&eacute;todo abreviado (shortcut).</p>
+        <p>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Botones:</p>
+        <p>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1&ordm;.- 
+        Mediante teclas de acceso r&aacute;pido (ALT + tecla).</p><p>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2&ordm;.- 
+        Define un orden l&oacute;gico de navegaci&oacute;n con la tecla TAB (propiedad 
+        Tabindex).</p><p>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3&ordm;.- 
+        Define el bot&oacute;n de comando por defecto al pulsar ENTER (propiedad 
+        Default).</p><p>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4&ordm;.- 
+        Define el bot&oacute;n de comando por defecto al pulsar ESCAPE (propiedad 
+        Cancel).</p>
+        <p>
+        g) En los controles en los que el usuario introduce informaci&oacute;n, 
+        realiza las validaciones necesarias para asegurar que estos datos est&aacute;n 
+        en el rango de los datos v&aacute;lidos.
+      </p></td>
+  </tr>
+  <tr> 
+    <td></td>
+    <td> <div align="right"><a href="../index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

@@ -1,0 +1,388 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Procedimientos</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta name="keywords" content="Procedimientos, Manual Visual Basic,Tutorial Visual Basic, Ejemplos Visual Basic">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+
+<body>
+<table width="555" height="228" align="left" background="../imagenes/fondologo.jpg" >
+  <tr> 
+    <td height="39" colspan="2"><h2> Procedimientos</h2></td>
+  </tr>
+  <tr> 
+    <td height="144" colspan="2"> 
+	<table width="96%">
+        <tr> 
+          <td><h3>Contenido</h3></td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="vb09.htm#intro">- Introducci&oacute;n</a></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="vb09.htm#tipos">- Tipos de podrecimientos</a></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="vb09.htm#intrinseco">- Procedimientos 
+            Intr&iacute;nsecos</a></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td ><a href="vb09.htm#cadenas">- Procedimientos 
+            de cadenas de caracteres</a></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="vb09.htm#procedi">- Descripci&oacute;n de Procedimientos 
+            para cadenas de caracteres</a></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="vb09.htm#nume">- Procedimientos para expresiones num&eacute;ricas</a></td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td><a href="vb09.htm#conver">- Funciones de conversi&oacute;n</a></td>
+        </tr>
+      </table>
+	  
+      
+      <h3>Introducci&oacute;n<a name="intro"></a></h3>
+	  <p>
+      Una aplicaci&oacute;n no es m&aacute;s que un conjunto de sentencias destinadas 
+      a resolver un problema determinado. La forma en la que se organiza estas 
+      sentencias y el orden en que se ejecutan dan lugar a la estructura de la 
+      aplicaci&oacute;n. </p> <p>
+      Puesto que una aplicaci&oacute;n Visual Basic consta de objetos, la estructura 
+      de su c&oacute;digo se aproxima mucho a una ventana de Windows con una serie 
+      de controles y otro apartado con el c&oacute;digo. Por ejemplo, un formulario 
+      no es mas que una representaci&oacute;n de las propiedades que definen su 
+      apariencia y su comportamiento intr&iacute;nseco. Apariencia y comportamiento 
+      est&aacute; regidos por un c&oacute;digo contenido en lo que hemos denominado 
+      m&oacute;dulo de formulario.</p><p>
+      Cada m&oacute;dulo de formulario contiene procedimientos conducidos por 
+      eventos; esto es, procedimientos que responden a los eventos que se produzcan 
+      en relaci&oacute;n con el formulario; bien sobre el propio formulario, o 
+      bien sobre sus controles.</p> <p>
+      Adem&aacute;s de procedimientos conducidos por eventos, los m&oacute;dulos 
+      de formulario pueden contener procedimientos generales que se ejecutan como 
+      respuesta a una llamada desde cualquier procedimiento conducido por un evento. 
+      Estos procedimientos se pueden colocar en el propio m&oacute;dulo del formulario, 
+      aunque lo m&aacute;s com&uacute;n es colocarlos en el propio m&oacute;dulo 
+      de formulario, aunque lo m&aacute;s com&uacute;n es colocar en un m&oacute;dulo 
+      est&aacute;ndar; entre otras cosas, para ponerlos en disposici&oacute;n 
+      de otros formularios.</p> <p>
+      Cuando sea necesario crear objetos que se puedan llamar desde los procedimientos 
+      de la aplicaci&oacute;n, se utilizar&aacute; un m&oacute;dulo de clase.</p> 
+      <p>
+      La programaci&oacute;n con procedimientos tiene dos ventajas importantes:</p> 
+      <p> - Los procedimientos permiten dividir la programaci&oacute;n 
+        de una aplicaci&oacute;n en unidades de c&oacute;digo l&oacute;gicas separadas, 
+        lo que facilita su depuraci&oacute;n y mantenimiento.</p><p>
+        - Los procedimientos utilizados en un programa pueden actuar como bloques 
+        b&aacute;sicos en otros programas, normalmente con una m&iacute;nima modificaci&oacute;n 
+        o incluso sin cambios.</p>
+      <h3>
+      Tipos de podrecimientos<a name="tipos"></a></h3>
+      <p>
+      En Visual Basic se utilizan varios tipos de podrecimientos: </p>
+      <blockquote>- Los procedimientos Sub que no devuelven ning&uacute;n valor.<br>
+        - Los procedimientos Function que devuelven un valor.<br>
+        - Los procedimientos Property que permiten crear propiedades para una 
+        clase.</blockquote>
+      <p>Si ha observado en los desarrollos realizados hasta ahora, los procedimientos 
+      conducidos por eventos son Sub. </p>
+      A su vez podemos clasificar los procedimientos en: 
+      <blockquote>- Procedimientos intr&iacute;nsecos. Son los procedimientos 
+        predefinidos en Visual Basic. En este cap&iacute;tulo estudiaremos los 
+        m&aacute;s comunes dentro del tratamiento de cadenas de caracteres y expresiones 
+        num&eacute;ricas.<br>
+        <br>
+        - Procedimientos extr&iacute;nsecos. Son los procedimientos definidos 
+        por el usuario. </blockquote>
+      <h3>
+        Procedimientos Intr&iacute;nsecos<a name="intrinseco"></a></h3>
+      <p>Los procedimientos intr&iacute;nsecos los podemos clasificar en: 
+      <blockquote>- Procedimientos para manipular cadenas de caracteres.<br>
+        - Procedimientos para manipular expresiones num&eacute;ricas.<br>
+        - Procedimientos varios.</blockquote>
+      <h3>
+        Procedimientos para cadenas de caracteres<a name="cadenas"></a></h3>
+      <p>Una cadena de caracteres es sin&oacute;nimo de constante de caracteres 
+        (se denomina tambi&eacute;n literal) y es simplemente una secuencia de 
+        caracteres ANSI encerrados entre comillas. Por ejemplo:<br>
+        <br>
+        &quot;Introducir valor&quot; <br>
+        &quot;AFIOO8G-79&quot; <br>
+        <br>
+        Una cadena de caracteres puede ser manipulada directamente o a trav&eacute;s 
+        de una variable de caracteres o variable alfanum&eacute;rica en la que 
+        se haya almacenada previamente. Por ejemplo:<br>
+        <br>
+        Dim etiqueta As String<br>
+        etiqueta = InputBox(&quot;Etiqueta&quot;)<br>
+        etiqueta = etiqueta &amp; &quot;01&quot;<br>
+        <br>
+        Utilizando el operador de concatenaci&oacute;n (&amp;) y los procedimientos 
+        de cadenas de caracteres, podemos agrupar las variables y las constantes 
+        de caracteres para formar una expresi&oacute;n de caracteres.<br>
+        <br>
+        As&iacute; mismo, utilizando los operadores de relaci&oacute;n podemos 
+        comparar cadenas de caracteres. Por ejemplo:<br>
+        <br>
+        Dim cad1 As String, cad2 As String<br>
+        ...<br>
+        If cad1 &gt; cad2 Then...<br>
+        <br>
+        Decir que una cadena es menor, igual o mayor que otra, significa indicar 
+        si est&aacute; antes por orden alfab&eacute;tico, si tienen exactamente 
+        los mismos caracteres o si est&aacute; despu&eacute;s por orden alfab&eacute;tico, 
+        respectivamente.<br>
+        <h3>
+        Descripci&oacute;n de Procedimientos 
+        para cadenas de caracteres<a name="procedi"></a></h3>
+      <p>A continuaci&oacute;n vamos a ver procedimientos que nos permiten manipular 
+        cadenas de caracteres:<br>
+        <br>
+        Función Len <br>
+        <br>
+        Da como resultado el n&uacute;mero de caracteres de una cadena. Su sintaxis 
+        es: <br>
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nombre_variable=Len(expresi&oacute;n_cadena) 
+        <br>
+        <br>
+        Ejemplo:<br>
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Text3.Text = Left(texto, 2) <br>
+        <br>
+        Funci&oacute;n Left<br>
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Da como resultado el n&uacute;mero de caracteres 
+        de la expresi&oacute;n_de_cadena situados m&aacute;s a la izquierda. Su 
+        sintaxis es:<br>
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nombre_variable=Left(expresi&oacute;n_cadena, 
+        n)<br>
+        <br>
+        Ejemplo:<br>
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Text3.Text = Left(texto, 2) <br>
+        <br>
+        donde expresi&oacute;n_de_cadena es cualquier expresi&oacute;n de cadenas 
+        de caracteres y n es una expresi&oacute;n num&eacute;rica.<br>
+        <br>
+        Si n es mayor que Len (expresi&oacute;n_de_cadena), el resaltado es la 
+        cadena de caracteres completa. Si n es igual a 0, el resultado es una 
+        cadena de caracteres completa. <br>
+        <br>
+        Funci&oacute;n Rigth<br>
+        <br>
+        Muestra los dos &uacute;ltimos caracteres de la cadena texto y su sintaxis 
+        es: <br>
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nombre_variable=Rigth(expresi&oacute;n_cadena, 
+        n) <br>
+        <br>
+        Ejemplo:<br>
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Text3.Text = Right(texto, 2) <br>
+        <br>
+        Funci&oacute;n Mid<br>
+        <br>
+        Muestra la cadena texto empezando por el primer car&aacute;cter y con 
+        la longitud de la cadena texto y su sintaxis es:<br>
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; nombre_variable= Mid(expresi&oacute;n_cadena, 
+        n[,m])<br>
+        <br>
+        Ejemplo:<br>
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Text3.Text = Mid(texto, 1, Len(texto))<br>
+        <br>
+        Funci&oacute;n Instr<br>
+        <br>
+        Compara dos cadenas de caracteres a partir de una posici&oacute;n num&eacute;rica 
+        en la cadena devolviendo un 0 o un 1 en funci&oacute;n de si son iguales 
+        o no y su sintaxis es:<br>
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pos= Instr([n,]cadena,cadena_buscada)<br>
+        <br>
+        Ejemplo:<br>
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Text5.Text = InStr(2, texto, texto)<br>
+        <br>
+        Funci&oacute;n String<br>
+        <br>
+        Devuelve una cadena de caracteres a partir de un numero(por el que estar&aacute; 
+        formada la cadena resultante) y una cadena que compararemos, y su sintaxis 
+        es:<br>
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cadena = String(n,caracter)<br>
+        <br>
+        Ejemplo:<br>
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Text6.Text = String(1, &quot;a&quot;)<br>
+        <br>
+        Funci&oacute;n Str<br>
+        <br>
+        Convierte una expresi&oacute;n num&eacute;rica en en una expresi&oacute;n 
+        de caracteres y su sintaxis es:<br>
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cadena = Str(n)<br>
+        <br>
+        Ejemplo:<br>
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Text7.Text = Str(7) <br>
+        <br>
+        Funci&oacute;n Val<br>
+        <br>
+        Devuelve el valor num&eacute;rico de una cadena de caracteres y su sintaxis 
+        es:<br>
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;numero = Val(expresi&oacute;n_de_cadena)<br>
+        <br>
+        Ejemplo:<br>
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Text8.Text = Val(texto)<br>
+        <br>
+        Funci&oacute;n Chr<br>
+        <br>
+        Devuelve el asci a un car&aacute;cter introducido y su sintaxis es<br>
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; nombre_variable = Chr(codigo_caracter)<br>
+        <br>
+        Ejemplo:<br>
+        &nbsp;&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Text9.Text = Chr(7) <br>
+        <br>
+        Funci&oacute;n Asc<br>
+        <br>
+        Devuelve el c&oacute;digo de caracter de la primera letra y su sintaxis 
+        es:<br>
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;codigo_caracter =Asc(expresi&oacute;n_de_cadena)<br>
+        <br>
+        Ejemplo:<br>
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Text10.Text = Asc(&quot;j&quot;)<br>
+        <br>
+        Funci&oacute;n Space<br>
+        <br>
+        Devuelve un numero de espacios y su sintaxis es:<br>
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Cadena =space(numero)<br>
+        <br>
+        Ejemplo:<br>
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Text11.Text = Space(4) <br>
+        <br>
+        Variable Date<br>
+        <br>
+        Devuelve la fecha del sistema y la guarda en una variable y su sintaxis 
+        es:<br>
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cadena = Date<br>
+        <br>
+        Ejemplo: <br>
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;texto = Date <br>
+        <br>
+        Sentencia Time<br>
+        <br>
+        Devuelve la hora del sistema y su sintaxis es: <br>
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cadena = Time<br>
+        <br>
+        Ejemplo: <br>
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;texto = Time<br>
+        <br>
+        Funci&oacute;n UCase y LCase <br>
+        <br>
+        Convierte una cadena de caracteres a may&uacute;sculas y a min&uacute;sculas 
+        respectivamente, y su sintaxis es:<br>
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cadena=LCase(expresion_de_cadena) 
+        <br>
+        <br>
+        Ejemplo:<br>
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Text15.Text = LCase(texto) <br>
+        <h3>
+        Procedimientos para expresiones num&eacute;ricas<a name="nume"></a></h3>
+        <br>
+        Una expresi&oacute;n num&eacute;rica puede ser una constante, una variable, 
+        una funci&oacute;n o un conjunto de constantes, variables y funciones 
+        unidas por operadores.<br>
+        <br>
+        Funciones trigonometricas<br>
+        <br>
+        Las siguientes funciones dan como resultado los valores del seno, coseno, 
+        tangente y arco tangente, respectivamente. Su sintaxis es:<br>
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; valor = Sin (angulo)<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; valor = Cos (angulo)<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; valor = Tan(angulo) <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; valor = Ant(angulo) <br>
+        <br>
+        Funciones logar&iacute;tmicas y exponencial<br>
+        <br>
+        Log da como resultado el logaritmo neperiano (base e) y Exp da como resultado 
+        el valor del n&uacute;mero e elevado a la expresi&oacute;n. Su sintaxis 
+        es:<br>
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;variable = Log(Expresi&oacute;n)<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;variable = Exp(Expresi&oacute;n) <br>
+        <h3>
+        Funciones de Conversi&oacute;n 
+        <a name="conver"></a></h3>
+        <br>
+        Visual Basic proporciona las funciones de conversi&oacute;n siguientes. 
+        Cada funci&oacute;n convierte una expresi&oacute;n a un tipo de datos 
+        espec&iacute;fico.<br>
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp; CBool(expresi&oacute;n) ---&gt; conversi&oacute;n 
+        a un valor de tipo Boolean<br>
+        &nbsp;&nbsp;&nbsp;&nbsp; CByte(expresi&oacute;n) ---&gt; conversi&oacute;n 
+        a un valor de tipo Byte<br>
+        &nbsp;&nbsp;&nbsp;&nbsp; CCur(expresi&oacute;n) ---&gt; conversi&oacute;n 
+        a un valor de tipo Currency<br>
+        &nbsp;&nbsp;&nbsp;&nbsp; CDate(expresi&oacute;n) ---&gt; conversi&oacute;n 
+        a un valor de tipo Date<br>
+        &nbsp;&nbsp;&nbsp;&nbsp; CDbl(expresi&oacute;n) ---&gt; conversi&oacute;n 
+        a un valor de tipo Double<br>
+        &nbsp;&nbsp;&nbsp;&nbsp; CDec(expresi&oacute;n) ---&gt; conversi&oacute;n 
+        a un valor de tipo Decimal<br>
+        &nbsp;&nbsp;&nbsp;&nbsp; CInt(expresi&oacute;n) ---&gt; conversi&oacute;n 
+        a un valor de tipo Integer<br>
+        &nbsp;&nbsp;&nbsp;&nbsp; CLng(expresi&oacute;n) ---&gt; conversi&oacute;n 
+        a un valor de tipo Long<br>
+        &nbsp;&nbsp;&nbsp;&nbsp; CSng(expresi&oacute;n) ---&gt; conversi&oacute;n 
+        a un valor de tipo Single<br>
+        &nbsp;&nbsp;&nbsp;&nbsp; CVar(expresi&oacute;n) ---&gt; conversi&oacute;n 
+        a un valor de tipo Variant</p></td>
+  </tr>
+  <tr> 
+    <td></td>
+    <td> <div align="right"><a href="../index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

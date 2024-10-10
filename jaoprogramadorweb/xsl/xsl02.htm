@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>&iquest;Qu&eacute; es SGML?</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación en CSS,Programas CSS,Aplicaciones en CSS,Ejercicios en CSS, Ejemplos de CSS,Tutoriales de CSS,Manuales CSS" name=description>
+<meta name="keywords" content="CSS, Manual CSS, tutorial CSS, Ejemplos CSS, ejercicios CSS, Cascading Style Sheet">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table width="555" height="329" align="left" background="../imagenes/fondologo.jpg">
+  <tr> 
+    <td height="39" colspan="3"> <h2> <strong>Templates</strong> </h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> 
+      <p>A traves de templates o plantillas puedo obtener el documento resultante a partir de la fuente, para ello selecciona la informaci&oacute;n con patrones de b&uacute;squeda (filtro) y alicando reglas de proceso. </p>
+      <p>Las reglas template tienen la siguiente estructura general: </p>
+      <p>&lt;xsl:template match=”patron”&gt; </p>
+      <p>Accion </p>
+      <p>&lt;/xsl:tempalte&gt; </p>
+      <p>Ejemplo: </p>
+      <p>&lt;xsl:template match=crucero&gt; </p>
+      <p>El precio es: </p>
+      <p>&lt;xsl:value-of select=”precio”/&gt; </p>
+      <p>&lt;xsl:apply-templates/&gt; </p>
+      <p>&lt;/xsl:template&gt; </p>
+      <p>Donde patron es el identificador de los elementos a los que queremos aplicar el template. Es decir, es el recorrido por el &aacute;rbol del documento cuando encuentre un nodo que coincida con el patr&oacute;n del template aplica la plantilla. </p>
+      <p>As&iacute; un documento XSL tendr&aacute; el siguiente esquema: </p>
+      <p>&lt;?xml version=” 1.0” ?&gt; </p>
+      <p>&lt;xsl:stylesheet version=” 1.0” xmlns:xsl=”http://www.w3.org/1999/XSL/Transform”&gt; </p>
+      <p>&lt;xsl:template match=“/“&gt; </p>
+      <p>[accion 1] </p>
+      <p>&lt;/xsl:template&gt; </p>
+      <p>&lt;xsl:template match=“patron1“&gt; </p>
+      <p>[accion 2] </p>
+      <p>&lt;/xsl:template&gt; </p>
+      <p>&lt;xsl:template match=“patron2“&gt; </p>
+      <p>[accion 3] </p>
+      <p>&lt;/xsl:template&gt; </p>
+      <p>….. </p>
+      <p>&lt;/xsl:stylesheet&gt; </p>
+      <p>&nbsp; </p>
+      <p>Como vemos la hoja de estilo est&aacute; definida entre las etiquetas &lt;xsl:stylesheet&gt; y &lt;/xsl:stylesheet&gt;, y debemos indicarle el namespace que se utiliza a trav&eacute;s del atributo xmlns:xsl. Por tanto, lo primero que necesita un fichero XSL es identificar el namespace xml que nos permite validar todos los elementos y m&eacute;todos disponibles en la versi&oacute;n XSL que se utiliza. De esta forma , el namespace reconoce los atributos y elementos XSL del documento que le da el formato de salida al XSL. </p>
+      <p>&nbsp; </p>
+      <p>En el esquema anterior hemos utilizado el namespace que utiliza la recomendaci&oacute;n del W3C de diciembre de 1998 es “http:www.w3.org/XSL/Transform/1.0” </p>
+      <p>Si tuvi&eacute;semos esos patrones : </p>
+      <p>&nbsp; </p>
+      <p>&lt;?xml version=” 1.0” ?&gt; </p>
+      <p>&lt;xsl:stylesheet version=” 1.0” xmlns:xsl=”http://www.w3.org/1999/XSL/Transform”&gt; </p>
+      <p>&lt;xsl:template match=“/“&gt; </p>
+      <p>[accion 1] </p>
+      <p>&lt;/xsl:template&gt; </p>
+      <p>&lt;xsl:template match=“catalogo“&gt; </p>
+      <p>[accion 2] </p>
+      <p>&lt;/xsl:template&gt; </p>
+      <p>&lt;xsl:template match=“crucero“&gt; </p>
+      <p>[accion 3] </p>
+      <p>&lt;/xsl:template&gt; </p>
+      <p>&lt;xsl:template match=“yate“&gt; </p>
+      <p>[accion 3] </p>
+      <p>&lt;/xsl:template&gt; </p>
+      <p>&lt;/xsl:stylesheet&gt; </p>
+      <p>&nbsp; </p>
+      <p>Cuando el procesador identifique al elemento raiz hace action 1, cuando identifique el elemento catalogo hace action2 y as&iacute; hasta que recorre el arbol… </p>
+      <p>A los templates les puedo dar un nombre y despu&eacute;s llamarlo con &lt;xsl:call-template name=”[nombre]”&gt; </p>
+      <p>&lt;xsl:template name=“nombre“&gt; </p>
+      <p>accion </p>
+    <p>&lt;/xsl:template&gt; </p></td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

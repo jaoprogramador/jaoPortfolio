@@ -1,0 +1,309 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Ejercicios Oracle</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Oracle, sql, pl/sql, programacion oracle, ejercicios, ejemplos, crear tablas, create table">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table width="555" height="350" align="left" background="../imagenes/fondologo.jpg">
+  <tr> 
+    <td height="39" colspan="3"> <h2>E 
+        J E R C I C I O S</h2></td>
+  </tr>
+  <tr> 
+    <td><h3>CREATE 
+        TABLE...</h3>
+    <p>
+        a) Creaci&oacute;n de tablas depart y emple.</p>
+        <p>REM ******** TABLA DEPART: ***********</p>
+        <p>DROP TABLE DEPART cascade constraints; </p>
+        <p>CREATE TABLE DEPART (<br>
+  DEPT_NO NUMBER(2) NOT NULL,<br>
+  DNOMBRE VARCHAR2(14), <br>
+  LOC VARCHAR2(14) ) ;</p>
+        <p>&nbsp;</p>
+        <p>REM ******** TABLA EMPLE: *************</p>
+        <p>ALTER SESSION SET NLS_DATE_FORMAT='DD/MM/YYYY';</p>
+        <p>DROP TABLE EMPLE cascade constraints; </p>
+        <p>CREATE TABLE EMPLE (<br>
+  EMP_NO NUMBER(4) NOT NULL,<br>
+  APELLIDO VARCHAR2(10) ,<br>
+  OFICIO VARCHAR2(10) ,<br>
+  DIR NUMBER(4) ,<br>
+  FECHA_ALT DATE ,<br>
+  SALARIO NUMBER(10),<br>
+  COMISION NUMBER(10),<br>
+  DEPT_NO NUMBER(2) NOT NULL) ;</p>
+        <p>COMMIT;</p></td>
+    <td>&nbsp;</td>
+    <td><a href="http://es.geocities.com/juantxu28/oraclezip/Ejer14.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>CREATE 
+      TABLE...</h3>
+    <p>
+      b) Creaci&oacute;n de tablas alumnos, asignaturas y notas.</p>
+    <p>REM ******** TABLA NOTAS_ALUMNOS: ***********</p>
+    <p>Drop table notas_alumnos cascade constraints;</p>
+    <p>create table notas_alumnos<br>
+  (<br>
+  NOMBRE_ALUMNO VARCHAR2(25) NOT NULL ,<br>
+  nota1 number(2),<br>
+  nota2 number(2),<br>
+  nota3 number(2)<br>
+  ) ;<br>
+    </p>
+    <p>REM ******** TABLA LIBRERIA: *************</p>
+    <p>Drop table LIBRERIA cascade constraints;</p>
+    <p>create table LIBRERIA<br>
+  (TEMA CHAR(15) NOT NULL ,<br>
+  ESTANTE CHAR(1),<br>
+  EJEMPLARES NUMBER(2)<br>
+  ) ;</p>
+    <p>&nbsp;</p>
+    <p>REM ******** TABLAS ALUMNOS, ASIGNATURAS, NOTAS: ***********</p>
+    <p>DROP TABLE ALUMNOS cascade constraints;</p>
+    <p>CREATE TABLE ALUMNOS<br>
+      (<br>
+  DNI VARCHAR2(10) NOT NULL,<br>
+  APENOM VARCHAR2(30),<br>
+  DIREC VARCHAR2(30),<br>
+  POBLA VARCHAR2(15),<br>
+  TELEF VARCHAR2(10) <br>
+  ) ;</p>
+    <p>DROP TABLE ASIGNATURAS cascade constraints;</p>
+    <p>CREATE TABLE ASIGNATURAS<br>
+      (<br>
+  COD NUMBER(2) NOT NULL,<br>
+  NOMBRE VARCHAR2(25)<br>
+  ) ;</p>
+    <p>DROP TABLE NOTAS cascade constraints;</p>
+    <p>CREATE TABLE NOTAS<br>
+      (<br>
+  DNI VARCHAR2(10) NOT NULL,<br>
+  COD NUMBER(2) NOT NULL,<br>
+  NOTA NUMBER(2)<br>
+  ) ;</p>
+    <p>commit;<br>
+    </p></td>
+    <td>&nbsp;</td>
+    <td><a href="http://es.geocities.com/juantxu28/oraclezip/Ejer15.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3> CREATE TABLE...</h3>
+    <p>c) Creaci&oacute;n de tablas nombres, mistextos, libros y nacimientos.</p>
+    <p>REM ********** TABLA NOMBRES: ***********</p>
+    <p>DROP TABLE NOMBRES cascade constraints; <br>
+      CREATE TABLE NOMBRES<br>
+      (<br>
+  NOMBRE VARCHAR2(15),<br>
+  EDAD NUMBER(2)<br>
+  ) ;</p>
+    <p>COMMIT;</p>
+    <p>REM ********** TABLA MISTEXTOS: *************</p>
+    <p>DROP TABLE MISTEXTOS cascade constraints; </p>
+    <p>CREATE TABLE MISTEXTOS (<br>
+  TITULO VARCHAR2(32),<br>
+  AUTOR VARCHAR2(22),<br>
+  EDITORIAL VARCHAR2(15), <br>
+  PAGINA NUMBER(3)<br>
+  ) ;<br>
+    </p>
+    <p>COMMIT;<br>
+    </p>
+    <p>REM ********** TABLA LIBROS: *************</p>
+    <p>DROP TABLE LIBROS cascade constraints; </p>
+    <p>CREATE TABLE LIBROS (<br>
+  TITULO VARCHAR2(32),<br>
+  AUTOR VARCHAR2(22),<br>
+  EDITORIAL VARCHAR2(15), <br>
+  PAGINA NUMBER(3)<br>
+  ) ;</p>
+    <p>REM ********** TABLA NACIMIENTOS:******************</p>
+    <p>DROP TABLE NACIMIENTOS cascade constraints; </p>
+    <p>ALTER SESSION SET NLS_DATE_FORMAT='DD/MM/YYYY';</p>
+    <p>CREATE TABLE NACIMIENTOS (<br>
+  NOMBRE CHAR(15),<br>
+  APELLIDO CHAR(15),<br>
+  FECHANAC DATE,<br>
+  EDAD NUMBER<br>
+  ) ;</p>
+    <p>COMMIT;<br>
+    </p></td>
+    <td>&nbsp;</td>
+    <td><a href="http://es.geocities.com/juantxu28/oraclezip/Ejer16.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>CREATE 
+      TABLE...</h3>
+    <p>
+      d) Creaci&oacute;n de tablas paraleer y leidos, 
+      alum, nuevos y antiguos, personal profesores y centros.</p>
+    <p>REM ************ TABLAS PARALEER Y LEIDOS **************</p>
+    <p>DROP TABLE PARALEER cascade constraints; </p>
+    <p>CREATE TABLE PARALEER<br>
+      (<br>
+  COD_LIBRO NUMBER(3),<br>
+  NOMBRE_LIBRO VARCHAR2(40)<br>
+  ) ;</p>
+    <p>DROP TABLE LEIDOS cascade constraints; </p>
+    <p>ALTER SESSION SET NLS_DATE_FORMAT='DD/MM/YYYY';</p>
+    <p>CREATE TABLE LEIDOS<br>
+      (<br>
+  COD_LIBRO NUMBER(3),<br>
+  FECHA DATE<br>
+  );</p>
+    <p>COMMIT;</p>
+    <p>REM ************ TABLA ALUM, NUEVOS, ANTIGUOS ************</p>
+    <p>DROP TABLE ALUM cascade constraints;<br>
+      DROP TABLE NUEVOS cascade constraints;<br>
+      DROP TABLE ANTIGUOS cascade constraints;</p>
+    <p>Create TABLE ALUM<br>
+      (<br>
+  NOMBRE VARCHAR2(20),<br>
+  EDAD NUMBER(2),<br>
+  LOCALIDAD VARCHAR2(15)<br>
+  );</p>
+    <p>Create TABLE NUEVOS<br>
+      (<br>
+  NOMBRE VARCHAR2(20),<br>
+  EDAD NUMBER(2),<br>
+  LOCALIDAD VARCHAR2(15)<br>
+  );</p>
+    <p>Create TABLE ANTIGUOS<br>
+      (<br>
+  NOMBRE VARCHAR2(20),<br>
+  EDAD NUMBER(2),<br>
+  LOCALIDAD VARCHAR2(15)<br>
+  );</p>
+    <p>COMMIT;</p>
+    <p>REM ************ TABLA PERSONAL, PROFESORES, CENTROS ***********</p>
+    <p>DROP TABLE PERSONAL cascade constraints; </p>
+    <p>CREATE TABLE PERSONAL (<br>
+  COD_CENTRO NUMBER(4) NOT NULL,<br>
+  DNI NUMBER(10),<br>
+  APELLIDOS VARCHAR2(30),<br>
+  FUNCION VARCHAR2(15),<br>
+  SALARIO NUMBER (10) <br>
+  );<br>
+    </p>
+    <p>DROP TABLE PROFESORES cascade constraints; </p>
+    <p>CREATE TABLE PROFESORES (<br>
+  COD_CENTRO NUMBER(4) NOT NULL,<br>
+  DNI NUMBER(10),<br>
+  APELLIDOS VARCHAR2(30),<br>
+  ESPECIALIDAD VARCHAR2(16) <br>
+  );</p>
+    <p>&nbsp;</p>
+    <p>DROP TABLE CENTROS cascade constraints; </p>
+    <p>CREATE TABLE CENTROS (<br>
+  COD_CENTRO NUMBER(4) NOT NULL,<br>
+  TIPO_CENTRO CHAR(1),<br>
+  NOMBRE VARCHAR2(30),<br>
+  DIRECCION VARCHAR2(26),<br>
+  TELEFONO VARCHAR2(10),<br>
+  NUM_PLAZAS NUMBER(4)<br>
+  );<br>
+    </p>
+    <p>commit;</p>
+    <p>REM ************ FIN ****************</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p></p></td>
+    <td>&nbsp;</td>
+    <td><a href="http://es.geocities.com/juantxu28/oraclezip/Ejer17.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3> CREATE 
+      TABLE...</h3>
+    <p>
+      e) Creaci&oacute;n de tablas emple30 
+      y coches, art&iacute;culos, tiendas, fabricantes, pedidos y ventas.</p>
+    <p>REM *************** TABLA EMPLE30: **************</p>
+    <p>DROP TABLE EMPLE30 cascade constraints; </p>
+    <p>CREATE TABLE EMPLE30 (<br>
+  EMP_NO NUMBER(4) NOT NULL,<br>
+  APELLIDO VARCHAR(10) ,<br>
+  OFICIO VARCHAR(10) ,<br>
+  DIR NUMBER(4) ,<br>
+  FECHA_ALT DATE ,<br>
+  SALARIO NUMBER(10),<br>
+  COMISION NUMBER(10),<br>
+  DEPT_NO NUMBER(2) NOT NULL) ;</p>
+    <p>REM *************** TABLA COCHES: *************</p>
+    <p>DROP TABLE COCHES cascade constraints; </p>
+    <p>CREATE TABLE COCHES (NOMBRE VARCHAR2(15)) TABLESPACE USER_DATA;</p>
+    <p>INSERT INTO COCHES VALUES('SEAT');</p>
+    <p>COMMIT;</p>
+    <p>REM *************** TABLAS ARTICULOS, TIENDAS, FABRICANTES, PEDIDOS y VENTAS:********</p>
+    <p>DROP TABLE ARTICULOS cascade constraints; <br>
+      DROP TABLE TIENDAS cascade constraints; <br>
+      DROP TABLE FABRICANTES cascade constraints; <br>
+      DROP TABLE PEDIDOS cascade constraints; <br>
+      DROP TABLE VENTAS cascade constraints; </p>
+    <p>CREATE TABLE ARTICULOS(<br>
+      ARTICULO VARCHAR2(20)NOT NULL,<br>
+      COD_FABRICANTE NUMBER(3) NOT NULL,<br>
+      PESO NUMBER(3) NOT NULL ,<br>
+      CATEGORIA VARCHAR2(10) NOT NULL,<br>
+      PRECIO_VENTA NUMBER (4),<br>
+      PRECIO_COSTO NUMBER (4),<br>
+      EXISTENCIAS NUMBER (5) );</p>
+    <p>&nbsp;</p>
+    <p>CREATE TABLE FABRICANTES(<br>
+      COD_FABRICANTE NUMBER(3) NOT NULL,<br>
+      NOMBRE VARCHAR2(15), <br>
+      PAIS VARCHAR2(15)) ;</p>
+    <p>CREATE TABLE TIENDAS(<br>
+      NIF VARCHAR2(10) NOT NULL,<br>
+      NOMBRE VARCHAR2(20),<br>
+      DIRECCI&Oacute;N VARCHAR2(20),<br>
+      POBLACI&Oacute;N VARCHAR2(20),<br>
+      PROVINCIA VARCHAR2(20),<br>
+      CODPOSTAL NUMBER(5) ) ;<br>
+    </p>
+    <p>CREATE TABLE PEDIDOS(<br>
+      NIF VARCHAR2(10) NOT NULL,<br>
+      ARTICULO VARCHAR2(20) NOT NULL,<br>
+      COD_FABRICANTE NUMBER(3) NOT NULL,<br>
+      PESO NUMBER(3) NOT NULL,<br>
+      CATEGORIA VARCHAR2(10) NOT NULL,<br>
+      FECHA_PEDIDO DATE NOT NULL,<br>
+      UNIDADES_PEDIDAS NUMBER(4)<br>
+      ) ;</p>
+    <p>ALTER SESSION SET NLS_DATE_FORMAT='DD/MM/YYYY';</p>
+    <p>&nbsp;</p>
+    <p>CREATE TABLE VENTAS(<br>
+      NIF VARCHAR2(10) NOT NULL,<br>
+      ARTICULO VARCHAR2(20) NOT NULL,<br>
+      COD_FABRICANTE NUMBER(3) NOT NULL,<br>
+      PESO NUMBER(3) NOT NULL,<br>
+      CATEGORIA VARCHAR2(10) NOT NULL,<br>
+      FECHA_VENTA DATE NOT NULL,<br>
+      UNIDADES_VENDIDAS NUMBER(4)<br>
+      ) ;</p>
+    <p>&nbsp;</p>
+    <p>commit;</p>
+    <p>REM *************** FIN *************************</p></td>
+    <td>&nbsp;</td>
+    <td><a href="http://es.geocities.com/juantxu28/oraclezip/Ejer18.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td>
+<div align="right"><a href="http://es.geocities.com/juantxu28/index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Ejercicios de ActiveX</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta name="keywords" content="COM,DCOM, OCX, ocx, ejemplos de ocx, introducción a ocx, Activex, Hacer ActiveX, como hacer un ocx, ActiveX, como hacer activex,descargar activex">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table width="555" height="613" align="left" background="../imagenes/fondologo.jpg">
+  <tr> 
+    <td height="39" colspan="3"><h2>E 
+        J E R C I C I O S</h2></td>
+  </tr>
+  <tr> 
+    <td> 
+      <h3>ActiveX</h3>
+      <p> Ej1.- Aplicaci&oacute;n que nos muestra como crear un control ActiveX 
+        que nos muestra un msgBox al pulsar en un boton para a&ntilde;adirlo a 
+        un formulario.</p></td>
+    <td>&nbsp;</td>
+    <td><a href="../OCXZip/Ej1.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>ActiveX</h3>
+      <p> Ej2.- Aplicaci&oacute;n que nos muestra como crear un control ActiveX 
+        que contiene 4 options buttons y un boton dentro de un frame. Al pulsar 
+        en un option y luego en el boton nos mostrara la un msgbox con el mensaje 
+        que hace referencia a la opcion seleccionada.</p></td>
+    <td>&nbsp;</td>
+    <td><a href="../OCXZip/Ej2.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>ActiveX</h3>
+      <p> Ej3.- Aplicaci&oacute;n que nos muestra como crear un control ActiveX 
+        que contiene una etiqueta y dos cajas de texto. en una caja introduciremos 
+        los numeros del dni y al cambier el foco de la caja nos mostrara la letra 
+        del dni. Este control lo agregaremos a otro formulario en donde podemos 
+        meter el nombre y el apellido</p></td>
+    <td>&nbsp;</td>
+    <td><a href="../OCXZip/Ej3.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>ActiveX</h3>
+      <p> Ej4.- Aplicaci&oacute;n que nos muestra como crear un control ActiveX 
+        que contiene una caja de texto y nos detecta solo si pulsamos n&uacute;meros 
+        o el la tecla de borrar haciendonos saber lo que hemos pulsado mostrandonoslo 
+        en un msgbox</p></td>
+    <td>&nbsp;</td>
+    <td><a href="../OCXZip/Ej4.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>ActiveX</h3>
+      <p> Ej5.- Aplicaci&oacute;n que nos muestra como crear un control ActiveX 
+        a partir del Browser que nos proporciona VB pero a&ntilde;adiendo nuestra 
+        propia hoja de propiedades y programando las nuestras propias</p></td>
+    <td>&nbsp;</td>
+    <td><a href="../OCXZip/Ej5.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>ActiveX</h3>
+      <p> Ej6.- Aplicaci&oacute;n que nos muestra como crear un control ActiveX 
+        a partir del Calendar que nos proporciona VB pero a&ntilde;adiendo nuestra 
+        propia hoja de propiedades y programando las nuestras propias</p></td>
+    <td>&nbsp;</td>
+    <td><a href="../OCXZip/Ej6.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td height="16"> 
+      <div align="right"><a href="../index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Ejercicios Oracle</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Oracle, sql, pl/sql, programacion oracle, ejercicios, ejemplos, funciones">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table width="555" height="315" align="left" background="../imagenes/fondologo.jpg">
+  <tr> 
+    <td height="39" colspan="3"> <h2>E 
+        J E R C I C I O S</h2></td>
+  </tr>
+  <tr> 
+    <td> <h3>SELECT 
+        ... FROM WHERE...FUNCION</h3>    <p>
+        a) Ejemplos de consultas con funciones num&eacute;ricas y de caracteres.</p>
+        <p>2.- A partir de la tabla emple, visualizar cuantos apellidos de los empleados empiezan por la letra &lsquo;A&rsquo;<br>
+        SELECT COUNT (APELLIDO) EMPLE WHERE APELLIDO LIKE &lsquo;A%&rsquo;;</p>
+        <p>3.- Dada la tabla emple, obtener el sueldo medio, el n&uacute;mero de comisiones no nulas , el m&aacute;ximo sueldo y el minimo sueldo de los empleados del departamento 30.Emplear el formato adecuado para la salida y las cantidades adecuadas.<br>
+          SELECT AVG(SALARIO), COUNT(COMISION), MAX(SALARIO), MIN(SALARIO) FROM EMPLE WHERE DEPT_NO= 30;</p>
+        <p>4.- Contar las filas de librer&iacute;a cuyo tema tenga por lo menos una &lsquo;A&rsquo;.<br>
+  SELECT COUNT (TEMA) FROM LIBRER&Iacute;A WHERE TEMA LIKE &lsquo;%A%&rsquo; ;</p>
+        <p>5.- Visualizar los temas con mayor n&uacute;mero de ejemplares de la tabla librer&iacute;a y que tengan al menos una &lsquo;E&rsquo; (pueden ser un tema o varios).<br>
+  SELECT TEMA FROM LIBRERIA WHERE EJEMPLARES =(SELECT MAX(EJEMPLARES) FROM LIBRER&Iacute;A )AND TEMA LIKE (&lsquo;%E%&rsquo;);</p>
+        <p>6.- Visualizar el n&uacute;mero de estantes diferentes que hay en la tabla librer&iacute;a.<br>
+  SELECT COUNT (DISTINCT ESTANTE ) FROM LIBRER&Iacute;A;</p>
+        <p>7.- Visualizar el n&uacute;mero de estantes distintos que hay en la tabla librer&iacute;a de aquellos temas que contienen al menos una &lsquo;E&rsquo;.<br>
+          SELECT COUNT (DISTINCT ESTANTE ) FROM LIBRERIA WHERE TEMA LIKE (&lsquo;%E%&rsquo;);</p>
+        <p>8.- &iquest;Qu&eacute; sentencia select se debe ejecutar para tener el siguiente resultado?</p>
+        <p> SELECT RPAD(LTRIM (RTRIM(TITULO,&rsquo;.&rsquo;),&rsquo;&rdquo;&rsquo;),45,&rsquo;-1&rsquo;)FROM LIBROS;</p>
+        <p>9.- Visualizar los titulos de la tabla MISTEXTOS sin los caracteres punto y comillas, y en minusculas de dos formas conocidas.<br>
+          SELECT LOWER (LTRIM (RTRIM(TITULO,&rsquo;.&rdquo;&rsquo;),&rsquo;&rdquo;&rsquo;) FROM MISTEXTOS;</p>
+        <p>10.- Escribir una sentencia select que visualice dos columnas, una con el autor y otra con el apellido del autor.<br>
+  SELECT AUTOR,SUBSTR(AUTOR,0,INSTR(AUTOR,',',1)-1) FROM LIBROS;</p>
+        <p>11.- Escribir la sentencia select que visualice las columnas de autor y otra columna con el nombre del autor (sin el apellido) de la tabla libros.<br>
+          SELECT AUTOR,SUBSTR(AUTOR,INSTR(AUTOR,',',1)+1) FROM LIBROS;<br>
+        </p></td>
+    <td>&nbsp;</td>
+    <td><a href="../oraclezip/Ejer10.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>SELECT 
+      ... FROM WHERE...FUNCION</h3>
+    <p>
+      b) Ejemplos de consultas con funciones num&eacute;ricas y de caracteres.</p>
+    <p>12.- A partir de la tabla libros, realizar una sentencia select que visualice en una columna, primero el nombre del autor y luego el apellido.<br>
+SELECT SUBSTR(AUTOR,INSTR(AUTOR,',',1)+1), SUBSTR(AUTOR,0,INSTR(AUTOR,',',1)-1) FROM LIBROS;</p>
+    <p>13.- A partir de la tabla libros , realizar una sentecia select que visualice los titulos ordenados por su numero de caracteres.<br>
+  SELECT TITULO FROM LIBROS ORDER BY LENGTH(TITULO);</p>
+    <p>14.- Realizar una select que obtenga el siguiente resultado:<br>
+      SELECT NOMBRE ,FECHANAC, TO_CHAR(FECHANAC, &lsquo;&rdquo;Nacio el&rdquo;dd&rdquo; de &rdquo;month&rdquo; de &rdquo;yyyy&rsquo;) from nacimientos;</p>
+    <p>15.- Dada la tabla librer&iacute;a, hacer una sentencia select que visualice el tema, el ultimo car&aacute;cter del tema que no sea blanco y el n&uacute;mero de caracteres de tema (sin contar los blancos de la derecha) ordenados por tema.<br>
+      Select tema ,substr(tema,instr(tema,&rsquo; &rsquo;)-1),instr(tema,&rsquo; &rsquo;)-1 from libreria order by tema;</p>
+    <p>16.- a partir de la tabla nacimientos, visualizar en una columna el nombre seguido de su fecha de nacimiento formateada (quitar blancos del nombre).<br>
+      SELECT NOMBRE,TO_CHAR(FECHANAC,&rsquo;DAY,DD MONTH YYYY&rsquo;) FROM NACIMIENTOS;</p>
+    <p>17.- Convertir la cadena &lsquo;01051998&rsquo; a fecha y visualizar su nombre de mes en may&uacute;sculas.<br>
+      SELECT UPPER(TO_CHAR(TO_DATE(&lsquo;01051998&rsquo;),&rsquo;MONTH&rsquo;)) FROM DUAL;</p>
+    <p>18.- Visualizar aquellos temas de la tabla librer&iacute;a cuyos ejemplares sean 7 con el nombre de tema &lsquo;SEVEN&rsquo;; el resto de temas que no tengan 7 ejemplares se visualizar&aacute;n como est&aacute;n.<br>
+    </p>
+    <p>19.- A partir de la tabla emple, obtener el apellido de los empleados que lleven mas de 19 a&ntilde;os trabajando.<br>
+      SELECT APELLIDO FROM EMPLE WHERE 2004 &ndash; TO_NUMBER(TO_CHAR(FECHA_ALT,&rsquo;YYYY&rsquo;))&gt;19;</p>
+    <p>20.- Seleccionar el apellido de los empleados de la tabla emple que lleven mas de 18 a&ntilde;os trabajando en el en el departamento &lsquo;ventas&rsquo;.<br>
+      SELECT APELLIDO FROM EMPLE WHERE 2004 &ndash; TO_NUMBER (TO_CHAR (FECHA_ALT,&rsquo;YYYY&rsquo;))&gt;19 AND DEPT_NO = (SELECT DEPT_NO FROM DEPART WHERE DNOMBRE = &lsquo;VENTAS&rsquo;);</p>
+    <p>21.- Visualizar el apellido, el salario y el n&uacute;mero de departamento de aquellos empleados de la tabla emple cuyo salario sea el mayor de su departamento.<br>
+      SELECT APELLIDO, SALARIO , DEPT_NO FROM EMPLE E WHERE SALARIO IN (SELECT MAX(SALARIO) FROM EMPLE DEPT_NO=E.DEPT_NO);</p>
+    <p>22.- Visualizar el apellido, el salario y el n&uacute;mero de departamento de aquellos empleados de la tabla emple cuyo salario supere a la media en su departamento.<br>
+      SELECT APELLIDO,SALARIO,DEPT_NO FROM EMPLE E WHERE SALARIO&gt;(SELECT AVG(SALARIO) FROM EMPLE WHERE DEPT_NO=E.DEPT_NO);</p>
+    <p></p></td>
+    <td>&nbsp;</td>
+    <td><a href="../oraclezip/Ejer11.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td> <h3>SELECT ... FROM WHERE...FUNCION</h3>
+    <p> 
+      c) Ejemplos de consultas con funciones num&eacute;ricas 
+      y de caracteres.</p>
+    <p>1.- visualizar los departamentos con mayor numero de empleados y que tengan un salario mayor que 200000.<br>
+select dnombre from depart where dept_no = (select dept_no from emple where emp_no = (select max(emp_no) from emple where salario = (select salario from emple where salario &gt; 200000 )));</p>
+    <p>2.- visualizar los titulos de la tabla libros entre los caracteres * y en minuscula.Ejemplo: *la colmena*<br>
+      select lower (concat ('*',concat (titulo,'*'))) from libros;</p>
+    <p>3.- visualizar los empleados que hayan nacido entre el 8/9/81 y el 10/11/83</p>
+    <p>4.- visualizar los libros que comiencen por 'L' y sean de la editorial 'Planeta'.<br>
+      select titulo from libros where titulo like 'L%' and editorial = 'PLANETA';</p>
+    <p>5.- Si hoy es 18/10/04 del lunes que dia sera el lunes de la semana que viene<br>
+  select next_day (sysdate,'S&Aacute;BADO') from dual;</p>
+    <p>6.- Visualizar los autores que no sean de la editorial 'planeta' <br>
+  select autor from libros where editorial not in 'PLANETA';</p>
+    <p>7.- a partir de la tabla mis textos realizar una select para que aparezcan los autores ordenados por el numero de caracteres de la columna titulo.<br>
+  select autor from mis textos order by lenght (titulo);</p>
+    <p>8.- seleccionar los empleados que hayan trabajado mas de 5 a&ntilde;os y sumarles 10000 pts a su salario.<br>
+  select apellido, salario + 10000 from emple where months_between (sysdate, fecha_alt)/12&gt;5;</p>
+    <p>9.- obtener la fecha de hoy con el siguiente formato(en mayusculas)hoy es dieciocho de 0ctubre del dosmilcuatro.<br>
+  select to_char (sysdate, &quot;HOY ES&quot; DAY, DD &quot;DE&quot; MONTHS &quot;DE&quot; YEAR) from dual; </p>
+    <p>10.- escribir una consultilla que visualice en una sola columna el nombre y apellido de las personas de la tabla nacimiento y la fecha de nacimiento en un formato especifico.<br>
+  select concat (concat(nombre,apellido), to_char (fechanac, 'DAY dd MONTH yy')) from nacimiento;</p></td>
+    <td>&nbsp;</td>
+    <td><a href="../oraclezip/Ejer12.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>SELECT 
+      ... FROM WHERE...FUNCION</h3>
+    <p>
+      d) Ejemplos de consultas con funciones de fechas.</p>
+    <p>63.- Dada la tabla emple, sumar dos meses a la fecha de alta.<br>
+select add_months(fecha_alt,2) from emple;</p>
+    <p>64.- Dada la tabla emple, restar dos meses a la fecha de alta.<br>
+  select months_between(fecha_alt,fecha_alt-2) from emple;</p>
+    <p>65.- Obtener de la tabla emple el ultimo dia del mes para cada uno de las fechas de alta.<br>
+  select last_day(fecha_alt) from emple;</p>
+    <p>66.- Obtener la diferencia de meses que hay entre la fecha 5/5/200 y la fecha 1/1/2000.<br>
+  select months_between(5/5/200 * 1/1/2000) from dual;</p>
+    <p>67.- Calcular vuestra edad.<br>
+  select months_between(17/5/1981,sysdate)/12 from dual;</p>
+    <p>68.- Si hoy es domingo 25 de julio de 1999 (fecha del sistema &quot;sysdate&quot;). &iquest;Qu&eacute; fecha ser&aacute; el proximo jueves?<br>
+  select newt_day(sysdate,'jueves')from dual;</p>
+    <p>69.- A partir de la tabla emple, obtener la fecha de alta (columna FECHA_ALT) fromateada, de manera que aparezca <br>
+      el nombre del mes con todas sus letras (month), el numero del dia del mes(dd) y el a&ntilde;o (yyyy).<br>
+  select to_char(fecha_alt,'month,ddyyyy') from emple;</p>
+    <p>70.- A partid de la tabla emple, obtener la fecha de lata de forma que aparezca el nombre del mes con tres<br>
+  letras (month), el numero del dia del a&ntilde;o (ddd), el ultimo digito del a&ntilde;o(y)y los tres digitos ultimos del a&ntilde;o(yyy).<br>
+  select to_char(secha_alt,'mon ddd y yyy')from emple;</p>
+    <p>71.- Obtener la fecha de hoy con el siguiente fromato: Hoy es NOMBRE_DIA,DIA_MES de NOMBRE_MES de A&Ntilde;O.<br>
+  select to_char(sysdate,'&quot;Hoy es &quot; day &quot;,&quot; dd &quot;de&quot; month &quot;de&quot; yyyy') from dual;</p>
+    <p>72.- Visualizar la suma de salarios de la tabla emple de manera formateada, tal que aparezca el simbolo de la moneda lical,<br>
+      el punto para los miles y la coma para los decimales.<br>
+  select to_char(sum(salario),'L9,999,999.99') from emple;</p>
+    <p>75.- Convertir la cadena 01012001 a tipo date.<br>
+  select to_date('01012001')from dual;</p>
+    <p>76.- Obtener el nombre del mes a partir de la cadena '01012001'. Antes hay que convertir la cadena a tipo fecha.<br>
+  select to_char(to_date('01012001'),month) from dual;</p>
+    <p>77.- Obtener el nombre del dia, el nombre del me, el dia y el a&ntilde;o en ingles a partir de la fecha '12121997'<br>
+  select to_char(to_date('12121997')),'day,month dd yyyy'from dual;</p></td>
+    <td>&nbsp;</td>
+    <td><a href="../oraclezip/Ejer13.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td>
+<div align="right"><a href="../index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

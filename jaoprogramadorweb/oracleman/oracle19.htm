@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>&amp;Iacute;ndices Oracle</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta name="keywords" content="Manual Oracle, Tutorial Oracle, Manual SQL, Tutorial SQL, Ejercicios Oracle">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table width="555" height="268" align="left" background="../imagenes/fondologo.jpg" >
+  <tr> 
+    <td height="38" colspan="2"> <h2>&Iacute;ndices</h2></td>
+  </tr>
+  <tr> 
+    <td height="197" colspan="2"><p>El &iacute;ndice es un instrumento que aumenta 
+        la velocidad de respuesta de la consulta, mejorando su rendimiento y optimizando 
+        su respuesta. El manejo de los &iacute;ndices en ORACLE, se realiza de 
+        forma inteligente, donde el programador s&oacute;lo crea los &iacute;ndices 
+        sin tener que especificar, expl&iacute;citamente c&uacute;al es el &iacute;ndice 
+        que va a utilizar . Es el propio sistema, al analizar la condici&oacute;n 
+        de la consulta, quien decide qu&eacute; &iacute;ndice se necesita. Por 
+        ejemplo, cuando en una consulta se relacionan dos tablas por una columna, 
+        si &eacute;sta tiene un &iacute;ndice se activa, como en el caso cuando 
+        relacionamos la tabla clientes y ventas por la columna c&oacute;digo para 
+        identificar al cliente (WHERE clientes.codigo=ventas.codigo).</p>
+      <p>La identificaci&oacute;n del &iacute;ndice a usar est&aacute; relacionada 
+        con las columnas que participan en las condiciones de la orden WHERE. 
+        Si la columna que forma el &iacute;ndice est&aacute; presente en alguna 
+        de las condiciones &eacute;ste se activa. No obstante hay caso en los 
+        que la presencia de la columna no garantiza el uso de su &iacute;ndice, 
+        ya que estros son ignorados, como en las siguientes situaciones cuando 
+        la columna indexada es:</p>
+      <p>Evaluada con el uso de los operadores IS NULL o IS NOT NULL.</p>
+      <p>
+      <blockquote>SELECT nombre,articulo,valor 
+        FROM clientes,ventas 
+        WHERE nombre IS NOT NULL;</blockquote>
+      &nbsp;</p>Finalmente debemos aclarar que los registros cuyo valor es NULL 
+      para la columna indexada, no forman parte del &iacute;ndice. Por lo tanto, 
+      cuando el &iacute;ndice se activa estos registros no se muestran como resultado 
+      de la consulta.</td>
+  </tr>
+  <tr> 
+    <td width="70" height="21"></td>
+    <td height="21"> <div align="right"><a href="../index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Ficheros</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Ficheros, Manual Visual Basic,Tutorial Visual Basic, Ejemplos Visual Basic">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+
+<body>
+<table width="555" height="228" align="left" background="../imagenes/fondologo.jpg">
+  <tr> 
+    <td height="39" colspan="2"> <h2>Ficheros</h2></td>
+  </tr>
+  <tr> 
+    <td height="144" colspan="2">
+<table width="75%">
+        <tr> 
+          <td><h3>Contenido</h3></td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="vb14.htm#intro">- Introducci&oacute;n</a></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="vb14.htm#secuencial">- Ficheros de acceso secuencial</a></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="vb14.htm#aleatorio">- Ficheros de acceso aleatorio</a></td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td><a href="vb14.htm#binario">- Ficheros de acceso binario</a></td>
+        </tr>
+      </table>
+
+      <h3>Introducci&oacute;n<a name="intro"></a></h3> 
+	  <p>
+      Visual Basic permite utilizar tres tipos de diferentes acceso a ficheros 
+      de datos: secuencial, aleatorio y binario.</p>
+      <br>
+      1.- Acceso Secuencial. Es el tipo de acceso m&aacute;s simple a un fichero 
+      de datos. Un fichero abierto para acceso secuencial, es un fichero que puede 
+      almacenar registros de cualquier longitud. Se puede utilizar con ficheros 
+      de texto, en los que se escribe toda la informaci&oacute;n desde el principio 
+      hasta el final, y se lee de la misma forma. <br>
+      <br>
+      2.- Acceso aleatorio. Un fichero abierto para acceso aleatorio es asumido 
+      como un conjunto de registros de la misma longitud, los cuales pueden ser 
+      accedidos en cualquier secuencia. Se suele utilizar para agilizar el tratamiento 
+      de bases de datos.<br>
+      <br>
+      3.- Acceso binario. En el acceso binario a un fichero.<br>
+      <br>
+      <h3>
+      Ficheros secuenciales<a name="secuencial"></a></h3>
+      <p>
+      Sentencias:<br>
+      <br>
+      1.- Open, y su sintaxis es:<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- open nombre_fichero for output 
+      as [#]n Fichero 'abrimos como escritura<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - open nombre_fichero for append as 
+      [#]n Fichero ' abrimos como escritura a&ntilde;adida<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- open nombre_fichero for input 
+      as [#]n Fichero ' abrimos como lectura<br>
+      <br>
+      2.- Print, graba datos secuenciales en un fichero, y su sintaxis es:<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Print #numero, x$; &quot;, &quot;; 
+      y$ <br>
+      <br>
+      3.- Close, cierra un fichero secuencial y su sintaxis es:<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; close #nFichero<br>
+      <br>
+      4.- EOF(nFichero), Nos indica si hemos llegado al final del fichero.</p>
+
+      <h3>Fichero de acceso aleatorio<a name="aleatorio"></a></h3>
+      <p>
+      Sentencias:<br>
+      <br>
+      1.- Open, y su sintaxis es: <br>
+      <br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Open NombreFich [For Random] As [#] 
+      nFichero [Len=LongReg]<br>
+      <br>
+      2.- Put, permite grabar un registro en un fichero abierto para acceso aleatorio 
+      y su sintaxis es: <br>
+      <br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Put[#] nFichero [,[nRegistro][,variable]]<br>
+      <br>
+      3.- Get, Lee un registro procedente de un fichero abierto para acceso aleatorio, 
+      almacenando los datos en la variable especificada, y su sintaxis es:<br>
+      <br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get[#] nFichero[,[nRegistro][,variable]]<br>
+      <br>
+      4.- Funci&oacute;n LOF, devuelve como resultado el n&uacute;mero de bytes 
+      (caracteres) que ocupa un determinado fichero abierto con Open. Esto es, 
+      nos devuelve el tama&ntilde;o en bytes del fichero. Para obtener la longitud 
+      de un fichero que no est&aacute; abierto , utilice la fujnci&oacute;n FileLen, 
+      su sintaxis:<br>
+      <br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;V = LOF (nFichero)</p>
+      
+      <h3>Fichero de acceso binario<a name="binario"></a></h3>
+      <p>
+      Sentencias:<br>
+      <br>
+      1.- Open y su sintaxis es: <br>
+      <br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Open NombreFich For Binary As [#]nFichero<br>
+      <br>
+      2.- Funciones Get y Put, la sentencia Get lee tantos bytes como quepan en 
+      una variable y la sentencia Put escribe tantos bytes como haya en la variable.<br>
+      <br>
+      3.- Funci&oacute;n EOF, cuando se utiliza con un fichero binario se obtiene 
+      un resultado True si una sentencia Get intenta leer y no puede porque se 
+      ha llegado al final del fichero.<br>
+      <br>
+      4.- Funciones Loc, si el fichero es binario , loca da un resultado la posici&oacute;n 
+      del &uacute;ltimo byte le&iacute;do o escrito.<br>
+      <br>
+      5.- Sentencia Seek, permite situar la posici&oacute;n de lectura o de escritura 
+      en una posici&oacute;n determinada del fichero.</p></td>
+  </tr>
+  <tr> 
+    <td></td>
+    <td> <div align="right"><a href="../index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

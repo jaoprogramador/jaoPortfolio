@@ -1,0 +1,385 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Ejercicios Oracle</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Oracle, sql, pl/sql, programacion oracle, ejercicios, ejemplos, insertar valores, insert into values">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table width="555" height="315" align="left" background="../imagenes/fondologo.jpg">
+  <tr> 
+    <td height="39" colspan="3"> <h2>E 
+        J E R C I C I O S</h2></td>
+  </tr>
+  <tr> 
+    <td> <h3>INSERT 
+        INTO .... VALUES....</h3>
+    <p>
+        a) Ejemplos de inserci&oacute;n de datos en tablas.</p>
+    <p>INSERT INTO DEPART VALUES (10,'CONTABILIDAD','SEVILLA');<br>
+      INSERT INTO DEPART VALUES (20,'INVESTIGACI&Oacute;ON','MADRID');<br>
+      INSERT INTO DEPART VALUES (30,'VENTAS','BARCELONA');<br>
+      INSERT INTO DEPART VALUES (40,'PRODUCCI&Oacute;N','BILBAO');</p>
+    <p>INSERT INTO EMPLE VALUES (7369,'S&Aacute;NCHEZ','EMPLEADO',7902,'17/12/1980',<br>
+  104000,NULL,20);<br>
+  INSERT INTO EMPLE VALUES (7499,'ARROYO','VENDEDOR',7698,'20/02/1980',<br>
+  208000,39000,30);<br>
+  INSERT INTO EMPLE VALUES (7521,'SALA','VENDEDOR',7698,'22/02/1981',<br>
+  162500,65000,30);<br>
+  INSERT INTO EMPLE VALUES (7566,'JIM&Eacute;NEZ','DIRECTOR',7839,'02/04/1981',<br>
+  386750,NULL,20);</p>
+    <p>insert into NOTAS_ALUMNOS VALUES ('Alcalde Garc&iacute;a, M. Luisa',5,5,5);<br>
+      insert into NOTAS_ALUMNOS VALUES ('Benito Mart&iacute;n, Luis',7,6,8);<br>
+      insert into NOTAS_ALUMNOS VALUES ('Casas Mart&iacute;nez, Manuel',7,5,5);<br>
+      insert into NOTAS_ALUMNOS VALUES ('Corregidor S&aacute;nchez, Ana',6,9,8);<br>
+      insert into NOTAS_ALUMNOS VALUES ('D&iacute;az S&aacute;nchez, Mar&iacute;a',NULL,NULL,7);</p>
+    <p>INSERT INTO ASIGNATURAS VALUES (1,'Prog. Leng. Estr.');<br>
+      INSERT INTO ASIGNATURAS VALUES (2,'Sist. Inform&aacute;ticos');<br>
+      INSERT INTO ASIGNATURAS VALUES (3,'An&aacute;lisis');<br>
+    INSERT INTO ASIGNATURAS VALUES (4,'FOL');</p>
+    <p>INSERT INTO ALUMNOS VALUES<br>
+      ('12344345','Alcalde Garc&iacute;a, Elena', 'C/Las Matas, 24','Madrid','917766545');</p>
+    <p>INSERT INTO ALUMNOS VALUES<br>
+      ('4448242','Cerrato Vela, Luis', 'C/Mina 28 - 3A', 'Madrid','916566545');</p>
+    <p>INSERT INTO ALUMNOS VALUES<br>
+      ('56882942','D&iacute;az Fern&aacute;ndez, Mar&iacute;a', 'C/Luis Vives 25', 'M&oacute;stoles','915577545');</p>
+    <p>INSERT INTO NOTAS VALUES('12344345', 1,6);<br>
+      INSERT INTO NOTAS VALUES('12344345', 2,5);<br>
+    INSERT INTO NOTAS VALUES('12344345', 3,6);</p>
+    <p>INSERT INTO NOMBRES VALUES('PEDRO', 17);<br>
+      INSERT INTO NOMBRES VALUES('JUAN', 17);<br>
+    INSERT INTO NOMBRES VALUES('MAR&Iacute;A', 16);</p></td>
+    <td>&nbsp;</td>
+    <td><a href="http://es.geocities.com/juantxu28/oraclezip/Ejer19.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>DROP 
+      TABLE... CASCADE CONSTRAINTS</h3>
+    <p>
+      b) Ejemplos de eliminaci&oacute;n de tablas.</p>
+    <p>REM*** EJEMPLOS DE ELIMINACION DE TABLAS<br>
+      REM=====================================</p>
+    <p>DROP TABLE DEPART cascade constraints; <br>
+      DROP TABLE EMPLE cascade constraints; <br>
+    </p>
+    <p>Drop table notas_alumnos cascade constraints;<br>
+      Drop table LIBRERIA cascade constraints;<br>
+      DROP TABLE ALUMNOS cascade constraints;<br>
+      DROP TABLE ASIGNATURAS cascade constraints;<br>
+      DROP TABLE NOTAS cascade constraints;<br>
+    </p>
+    <p>DROP TABLE NOMBRES cascade constraints;<br>
+      DROP TABLE MISTEXTOS cascade constraints;<br>
+      DROP TABLE LIBROS cascade constraints; <br>
+      DROP TABLE NACIMIENTOS cascade constraints;</p>
+    <p>DROP TABLE PARALEER cascade constraints;<br>
+      DROP TABLE LEIDOS cascade constraints; </p>
+    <p>DROP TABLE ALUM cascade constraints;<br>
+      DROP TABLE NUEVOS cascade constraints;<br>
+      DROP TABLE ANTIGUOS cascade constraints;</p>
+    <p>DROP TABLE PERSONAL cascade constraints;<br>
+      DROP TABLE PROFESORES cascade constraints; <br>
+      DROP TABLE CENTROS cascade constraints;</p>
+    <p>DROP TABLE EMPLE30 cascade constraints; <br>
+      DROP TABLE COCHES cascade constraints;</p></td>
+    <td>&nbsp;</td>
+    <td><a href="http://es.geocities.com/juantxu28/oraclezip/Ejer20.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>INSERT, DROP Y UPDATE 
+      MEDIANTE SELECT</h3> 
+    <p>
+      c) Ejemplos de Inserci&oacute;n, eliminaci&oacute;n 
+      y actualizaci&oacute;n mediante consultas.</p>
+    <p>1- Dadas las tablas ALUM y NUEVOS, insertar en la tabla ALUM los nuevos alumnos.</p>
+    <p> insert into alum (select * from nuevos minus select * from alum);</p>
+    <p>2- Borrar de la tabla ALUM los ANTIGUOS alumnos.</p>
+    <p> delete from alum where nombre in (select nombre from antiguos);</p>
+    <p>3- Insertar a un empleado de apellido 'SAAVEDRA' con n&uacute;mero 2000. La fecha de alta ser&aacute; la actual, <br>
+  el SALARIO ser&aacute; el mismo salario de 'SALA' mas el 20 por 100 y el resto de datos ser&aacute;n los mismos que los datos de 'SALA'.</p>
+    <p> insert into emple (select 2000,'SAAVEDRA',oficio,dir,SYSDATE,salario + salario*0.2,comision,dept_no from emple where <br>
+  apellido like 'SALA');</p>
+    <p>4- Modificar el n&uacute;mero de departamentos de 'SAAVEDRA'. El nuevo departamento ser&aacute; el departamento donde hay m&aacute;s empleados <br>
+  cuyo oficio sea 'EMPLEADO'</p>
+    <p> update emple set dept_no = (select dept_no from emple where oficio like 'EMPLEADO' group by dept_no having count (*)<br>
+  = (select max(count(*)) from emple where oficio like 'EMPLEADO' group by dept_no)) where apellido like 'SAAVEDRA';</p>
+    <p>5- Borrar todos los departamentos de la tabla DEPART para los cuales no existan empleados en emple.</p>
+    <p> delete from depart where dept_no in (select dept_no from depart minus select dept_no from emple);</p>
+    <p>6- Modificar el n&uacute;mero de plazas con un valor igual a la mitad en aquellos centros con menos de dos profesores.</p>
+    <p> update centros set num_plazas = num_plazas/2 where cod_centro in (select cod_centro from profesores group by cod_centro<br>
+  having count(*)&lt;2); </p>
+    <p>7- Eliminar los centros que no tengan personal.</p>
+    <p> delete centros where cod_centro in (select cod_centro from centros minus select cod_centro from personal);</p>
+    <p>8- A&ntilde;adir un nuevo profesor en el centro o en los centros cuyo n&uacute;mero de administrativos sea 2en la especialidad de 'IDIOMA',<br>
+  con DNI 8790055 y de nombre 'Clara Salas'.</p>
+    <p> insert into profesores select distinct cod_centro, 8790055,'Salas,Clara','IDIOMA' from personal where cod_centro in <br>
+  (select cod_centro from personal where funcion = 'ADMINISTRATIVO' group by cod_centro having count(*) = 1);</p>
+    <p>9- Borrar al personal que est&eacute; en centros de menos de 300 plazas y con menos de dos profesores.</p>
+    <p> delete personal where cod_centro in (select cod_centro from centros where num_plazas&lt;300) and cod_centro in <br>
+  (select cod_centro from profesores group by cod_centro having count(*)&lt;2);</p>
+    <p>10- Borrar a los profesores que est&eacute;n en la tabla PROFESORES y que no est&eacute;n en la tabal PERSONAL.</p>
+    <p> delete profesores where dni not in (select dni from personal);</p>
+    <p>11- Dar de alta un nuevo art&iacute;culo de 'Primera' categor&iacute;a para los fabricantes de 'Francia' y abastecer con 5 unidades de ese <br>
+  art&iacute;culo a todas las tiendas y en la fecha de hoy.</p>
+    <p> insert into articulos select 'Yogur Fresa', cod_fabricante, 4, 'Primera', 120,100,190 from fabricantes <br>
+  where pais = 'FRANCIA'; <br>
+  <br>
+  select nif, 'Yogur Fresa', cod_fabricante, 4, 'Primera', sysdate, 5 from tiendas, fabricantes where pais like 'FRANCIA'; </p>
+    <p>12- Insertar un pedido de 20 unidades en la tienda '111-A' con el art&iacute;culo que mayor n&uacute;mero de ventas haya realizado.<br>
+        <br>
+  insert into pedidos select distinct '1111-A', articulo, cod_fabricante, peso, categoria, sysdate, 20 from ventas where<br>
+  (articulo, cod_fabricante,peso,categoria) in (select articulo,cod_fabricante,peso,categoria from ventas group by <br>
+  articulo, cod_fabricante, peso, categoria having count (*) = (select max(count(*)) from ventas group by articulo,<br>
+  cod_fabricante, peso, categoria));<br>
+    </p>
+    <p>13- Dar de alta una tienda en la provincia de 'MADRID' y abasteerla con 20 unidades de cada uno de los art&iacute;culos existentes.</p>
+    <p> insert into tiendas values ('1010-C', 'La Cesta', 'C/Juan Mazo 30', 'Alcala','MADRID',28809); </p>
+    <p> insert into pedidos select '1010-C',articulo, cod_fabricante, peso, categoria, sysdate, 20 from articulos; <br>
+      14- Dar de alta dos tiendas en la provincia de 'SEVILLA' y abastecerlas con 30 unidades de art&iacute;culos de la marca 'GALLO'</p>
+    <p> insert into tiendas values('4501-B','La Econ&oacute;mica','C\Sevillanas 130','Dos hemanas','SEVILLA',44003);</p>
+    <p> insert into tiendas values('4501-B','Cometibles Peter','C\Sevillanas 130','Dos hemanas','SEVILLA',44009);</p>
+    <p> insert into pedidos select nif,articulo,a.cod_fabricante,peso,categoria,sysdate,30 from tiendas,articulos a, fabricantes f<br>
+  where provincia='SEVILLA' and f.nombre='GALLO' and a.cod_fabricante=f.cod_fabricante;</p>
+    <p>15- Realizar una venta para todas las tiendas de 'TOLEDO' de 10 unidades en los art&iacute;culos de 'Primera' categor&iacute;a.</p>
+    <p> insert into ventas select nif,articulo,cod_fabricante,peso,categoria,sysdate,10 from tiendas ,articulos <br>
+  where provincia='TOLEDO' AND categoria='Primera'; </p>
+    <p>16- Para aquellos art&iacute;culos de los que se hayan vendido m&aacute;s de 30 unidades, realizar un pedido de 10 unidades para la tienda<br>
+  con NIF '5555-B' con la fecha actual.</p>
+    <p> insert into pedidos select distinct '5555-B',articulo,cod_fabricante,peso,categoria,sysdate,10from ventas where <br>
+  (articulo,cod_fabricante,peso,categoria)in (select articulo,cod_fabricante,peso,categoria from ventas group by articulo, <br>
+  cod_fabricante,peso,categoria having sum(unidades_vendidas)&lt;30);</p>
+    <p>17- Cambiar los datos de la tienda con NIF '1111-A' igualandolos a los de la tienda NIF '2222-A'.</p>
+    <p> update tiendas set(nombre,direcci&oacute;n,poblaci&oacute;n,provincia,codpostal)=(select nombre,direcci&oacute;n,poblaci&oacute;n,provincia,<br>
+  codpostal from tiendas where pais='ITALIA');<br>
+    </p>
+    <p>=====================0</p>
+    <p>18- Cambiar todos los art&iacute;culos de 'Primera' categoria a 'Segunda' categoria del pais 'ITALIA'.<br>
+  UPDATE ARTICULOS SET CATEGORIA='Segunda'<br>
+  WHERE CATEGORIA='Primera'<br>
+  AND COD_FABRICANTE = (SELECT COD_FABRICANTE FROM FABRICANTES <br>
+  WHERE PAIS='ITALIA');</p>
+    <p>&nbsp;</p>
+    <p>19- Modificar aquellos pedidos en los que la cantidad pedida sea superior a las existencias del art&iacute;culo, asignando el 20%<br>
+  de las existencias a la cantidad que se ha pedido.<br>
+  UPDATE PEDIDOS P<br>
+  SET UNIDADES_PEDIDAS=<br>
+  (SELECT EXISTENCIAS*0.2 FROM ARTICULOS WHERE<br>
+  ARTICULO=P. ARTICULO AND<br>
+  COD_FABRICANTE=P. COD_FABRICANTE AND<br>
+  PESO=P. PESO AND<br>
+  CATEGORIA=P. CATEGORIA )<br>
+  WHERE UNIDADES_PEDIDAS &gt;<br>
+  (SELECT EXISTENCIAS FROM ARTICULOS WHERE<br>
+  ARTICULO=P. ARTICULO AND<br>
+  COD_FABRICANTE=P. COD_FABRICANTE AND<br>
+  PESO=P. PESO AND<br>
+  CATEGORIA=P. CATEGORIA);</p>
+    <p>&nbsp;</p>
+    <p>20- Eliminar aquellas tiendas que no han realizado ventas.<br>
+  DELETE TIENDAS<br>
+  WHERE NIF NOT IN (SELECT DISTINCT NIF FROM VENTAS);</p>
+    <p>&nbsp;</p>
+    <p>21- Eliminar los art&iacute;culos que no hayan tenido ni compras ni ventas.<br>
+  DELETE ARTICULOS<br>
+  WHERE (ARTICULO, COD_FABRICANTE, PESO, CATEGORIA)<br>
+  NOT IN (SELECT DISTINCT ARTICULO, COD_FABRICANTE, PESO, <br>
+  CATEGORIA FROM VENTAS)<br>
+  AND (ARTICULO, COD_FABRICANTE, PESO, CATEGORIA)<br>
+  NOT IN (SELECT DISTINCT ARTICULO, COD_FABRICANTE, PESO, <br>
+  CATEGORIA FROM PEDIDOS);</p>
+    <p>&nbsp;</p>
+    <p>22- Borrar los pedidos de 'Primera' categoria cuyo pais de procedencia sea 'BELGICA'.<br>
+  DELETE PEDIDOS<br>
+  WHERE (ARTICULO, COD_FABRICANTE, PESO, CATEGORIA)<br>
+  IN<br>
+  (SELECT ARTICULO, COD_FABRICANTE, PESO, CATEGORIA <br>
+  FROM ARTICULOS WHERE COD_FABRICANTE=<br>
+  (SELECT COD_FABRICANTE FROM FABRICANTES WHERE PAIS ='BELGICA'))<br>
+  AND CATEGORIA='Primera';</p>
+    <p>&nbsp;</p>
+    <p>23- Borrar los pedidos que no tengan tienda.<br>
+  delete pedidos where nif not in(select nif from tiendas);</p>
+    <p>&nbsp;</p>
+    <p>24- Restar uno a las unidades de los &uacute;ltimos pedidos de la tienda con NIF '5555-B'.<br>
+  UPDATE PEDIDOS<br>
+  SET UNIDADES_PEDIDAS=UNIDADES_PEDIDAS-1<br>
+  WHERE NIF='5555-B' AND<br>
+  FECHA_PEDIDO=<br>
+  (SELECT MAX(FECHA_PEDIDO) FROM PEDIDOS WHERE NIF='5555-B');</p></td>
+    <td>&nbsp;</td>
+    <td><a href="http://es.geocities.com/juantxu28/oraclezip/Ejer21.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>CREATE 
+      TABLE...,ALTER TABLE...</h3>
+    <p>d) Ejemplos de creaci&oacute;n 
+      de tablas y modificaci&oacute;n de las tablas.</p>
+    <p>1&ordm;)<br>
+      Crear la tabla fabricantes con las siguientes condiciones:<br>
+      - la clave primaria es cod_fabricante<br>
+      - las columnas nombre y pais han de almacenarse en mayuculas</p>
+    <p>CREATE TABLE FABRICANTES(<br>
+      COD_FABRICANTE NUMBER(3) CONSTRAINT PK_FA PRIMARY KEY,<br>
+      NOMBRE VARCHAR2(15) <br>
+  CONSTRAINT CK_NO CHECK(NOMBRE=UPPER(NOMBRE)), <br>
+  PAIS VARCHAR2(15)<br>
+  CONSTRAINT CK_PA CHECK(PAIS=UPPER(PAIS)) <br>
+  );</p>
+    <p>Crear la tabla articulos con las siguientes condiciones:<br>
+      - la clave primaria esta formada por las columnas: articulo, cod_fabricante,pero y categoria.<br>
+      - cod_fabricante es clave ajena que referencia a la tabla fabricantes.<br>
+      - precio_venta, precio_costo han de ser &gt;0.<br>
+      - categoria ha de ser 'primera','segunda ' o 'tercera'.</p>
+    <p>CREATE TABLE ARTICULOS(<br>
+      ARTICULO VARCHAR2(20)NOT NULL,<br>
+      COD_FABRICANTE NUMBER(3) NOT NULL,<br>
+      PESO NUMBER(3) NOT NULL <br>
+  CONSTRAINT CK1_AR CHECK (PESO&gt;0),<br>
+  CATEGORIA VARCHAR2(10) NOT NULL,<br>
+  PRECIO_VENTA NUMBER (4) <br>
+  CONSTRAINT CK2_AR CHECK (PRECIO_VENTA&gt;0),<br>
+  PRECIO_COSTO NUMBER (4) <br>
+  CONSTRAINT CK3_AR CHECK (PRECIO_COSTO&gt;0),<br>
+  EXISTENCIAS NUMBER (5),<br>
+  CONSTRAINT PK_ART PRIMARY KEY<br>
+  (ARTICULO, COD_FABRICANTE, PESO, CATEGORIA),<br>
+  CONSTRAINT FK_ARFA FOREIGN KEY (COD_FABRICANTE) REFERENCES FABRICANTES,<br>
+  CONSTRAINT CK_CAT CHECK(CATEGORIA IN('Primera','Segunda', 'Tercera'))<br>
+  ); </p>
+    <p>Crear la tabla tiendas con las siguientes condiciones:<br>
+      - la clave primaria es NIF<br>
+      - provincia ha de almacenarse en mayuculas.</p>
+    <p>CREATE TABLE TIENDAS(<br>
+      NIF VARCHAR2(10) NOT NULL CONSTRAINT PK_TI PRIMARY KEY,<br>
+      NOMBRE VARCHAR2(20),<br>
+      DIRECCI&Oacute;N VARCHAR2(20),<br>
+      POBLACI&Oacute;N VARCHAR2(20),<br>
+      PROVINCIA VARCHAR2(20)<br>
+      CONSTRAINT CK_PRO CHECK(PROVINCIA=UPPER(PROVINCIA)), <br>
+      CODPOSTAL NUMBER(5)<br>
+      );</p>
+    <p>Crear la tabla pedidos con las siguientes condiciones:<br>
+      - la clave primaria esta formada por las columnas:NIF, articulo,cod_fabricante,peso,categoria y fecha de pedido.<br>
+      - cod_febricante es clave ajena que referencia a la tabla fabricantes.<br>
+      - unidades pedidas ha de ser: &gt;0<br>
+      - categoria ha de ser 'primera','segunda ' o 'tercera'.<br>
+      - las columnas articulo, cod_fabricante, peso y categoria son clave ajena y referencia a la tabla articulos.Realizar un borrado en cascada.<br>
+      - NIf es clave ajena y refencia a la tabla tiendas.<br>
+      CREATE TABLE PEDIDOS(<br>
+      NIF VARCHAR2(10) NOT NULL<br>
+  CONSTRAINT FK_PETI REFERENCES TIENDAS,<br>
+  ARTICULO VARCHAR2(20) NOT NULL,<br>
+  COD_FABRICANTE NUMBER(3) NOT NULL<br>
+  CONSTRAINT FK_PEFA REFERENCES FABRICANTES,<br>
+  PESO NUMBER(3) NOT NULL,<br>
+  CATEGORIA VARCHAR2(10) NOT NULL,<br>
+  FECHA_PEDIDO DATE NOT NULL,<br>
+  UNIDADES_PEDIDAS NUMBER(4)<br>
+  CONSTRAINT CK_PEUP CHECK (UNIDADES_PEDIDAS&gt;0),<br>
+  CONSTRAINT PK_PED PRIMARY KEY<br>
+  (NIF,ARTICULO, COD_FABRICANTE, PESO, CATEGORIA, FECHA_PEDIDO),<br>
+  CONSTRAINT CK_CATPE CHECK(CATEGORIA IN('Primera','Segunda','Tercera')),<br>
+  CONSTRAINT FK_PEAR FOREIGN KEY<br>
+  (ARTICULO, COD_FABRICANTE, PESO, CATEGORIA) REFERENCES ARTICULOS<br>
+  ON DELETE CASCADE<br>
+  );</p>
+    <p>Crear la tabla ventas con las siguientes condiciones:<br>
+      - la clave primaria esta formada por la por las columnas: nif, articulo,cod_fabricantepeso,categoria y fecha venta.<br>
+      - cod fabricante es clave ajena que referencia a la tabla fabricantes.<br>
+      - unidades_vendidas ha de ser &gt;0<br>
+      - categoria ha de ser 'primera','segunda ' o 'tercera'.<br>
+      - Las columnas articulo, cod_fabricante, peso, y categoria son clave ajena y referencia de la tabla articulos. Realizar un borrado en cascada.<br>
+      - NIF es clave ajena y referencia a la tabla tiendas</p>
+    <p>CREATE TABLE VENTAS(<br>
+      NIF VARCHAR2(10) NOT NULL<br>
+  CONSTRAINT FK_VETI REFERENCES TIENDAS,<br>
+  ARTICULO VARCHAR2(20) NOT NULL,<br>
+  COD_FABRICANTE NUMBER(3) NOT NULL<br>
+  CONSTRAINT FK_VEFA REFERENCES FABRICANTES,<br>
+  PESO NUMBER(3) NOT NULL,<br>
+  CATEGORIA VARCHAR2(10) NOT NULL<br>
+  CONSTRAINT CK_CATVE <br>
+  CHECK(CATEGORIA IN('Primera','Segunda','Tercera')),<br>
+  FECHA_VENTA DATE NOT NULL,<br>
+  UNIDADES_VENDIDAS NUMBER(4)<br>
+  CONSTRAINT CK_VEUV CHECK (UNIDADES_VENDIDAS&gt;0),<br>
+  CONSTRAINT PK_VEN PRIMARY KEY<br>
+  (NIF,ARTICULO, COD_FABRICANTE, PESO, CATEGORIA, FECHA_VENTA),<br>
+  CONSTRAINT FK_VEAR FOREIGN KEY<br>
+  (ARTICULO, COD_FABRICANTE, PESO, CATEGORIA) REFERENCES ARTICULOS<br>
+  ON DELETE CASCADE<br>
+  );</p>
+    <p>2&ordm;) A&ntilde;adir una restricci&oacute;n a la tabla tiendas para que el nombre de la tienda sea de tipo t&iacute;tulo</p>
+    <p> ALTER TABLE TIENDAS ADD CONSTRAINT <br>
+  NOMBRETITU CHECK (NOMBRE=INITCAP(NOMBRE));</p>
+    <p>3&ordm;) Visualizar las constraint definidas para las tablas anteriores.<br>
+  SELECT TABLE_NAME, CONSTRAINT_NAME FROM USER_CONSTRAINTS<br>
+  WHERE TABLE_NAME IN('ARTICULOS','TIENDAS', 'FABRICANTES', 'PEDIDOS' <br>
+  ,'VENTAS');<br>
+    </p>
+    4&ordm;) Modificar las columnas de las tablas pedidos y ventas para que las unidades vendidas y las unidades pedidas puedan almacenar cantidades numericas de 6 d&iacute;gitos.<br>
+ALTER TABLE PEDIDOS MODIFY (UNIDADES_PEDIDAS NUMBER(6));
+<p>&nbsp;</p>
+<p> ALTER TABLE VENTAS MODIFY (UNIDADES_VENDIDAS NUMBER(6));</p>
+<p>&nbsp;</p>
+<p>5&ordm;) Impedir que se den mas den de alta mas tiendas en la provindia de toledo.<br>
+  ALTER TABLE TIENDAS ADD CONSTRAINT CK_TIENTO<br>
+  CHECK (PROVINCIA !='TOLEDO');</p>
+<p>&nbsp;</p>
+<p>6&ordm;) A&ntilde;adir a las tablas pedidos y ventas una nueva columna para que almacenen el lpvp dep articulo.<br>
+  ALTER TABLE PEDIDOS ADD(PVP NUMBER(4));<br>
+</p>
+<p> ALTER TABLE VENTAS ADD(PVP NUMBER(4));<br>
+</p>
+<p>TABLAS PERSONAL, PROFESORES y CENTROS:</p>
+<p>&nbsp;</p>
+<p>9&ordm;) A&ntilde;adir a la tabla profesores una colum,na llamada cod_asig cos dos posiciones numericas.<br>
+  ALTER TABLE PROFESORES ADD(COD_ASIG NUMBER(2));</p>
+<p>&nbsp;</p>
+<p>10&ordm;) Crear la tabla tasig con las siguientes columnas: cod_asig numerico, 2 posiciones y nom_asig cadena de 20 caracteres.<br>
+  CREATE TABLE TASIG (<br>
+  COD_ASIG NUMBER(2),<br>
+  NOM_ASIG VARCHAR2(20) );<br>
+</p>
+<p>11&ordm;) A&ntilde;adir la restricci&oacute;n de clave primaria a la columna cod_asig de la tabla tasig.<br>
+  ALTER TABLE TASIG<br>
+  ADD CONSTRAINT PK_TASIG PRIMARY KEY (COD_ASIG);</p>
+<p>&nbsp;</p>
+<p>12&ordm;) A&ntilde;adir la restricci&oacute;n de la clave ajena a la columna cod_asig de la tabla profesores.<br>
+  ALTER TABLE PROFESORES<br>
+  ADD CONSTRAINT FK_TASIG FOREIGN KEY (COD_ASIG) REFERENCES TASIG;<br>
+</p>
+<p>13&ordm;) Visualizar los nombres de las constraint y las columnas afectadas de las tablas tasig y profesores.<br>
+  SELECT TABLE_NAME, CONSTRAINT_NAME, COLUMN_NAME<br>
+  FROM USER_CONS_COLUMNS WHERE TABLE_NAME IN('TASIG','PROFESORES');</p>
+<p>14&ordm;) Cambiar los nombres de las tablas profesores y llamar las profes<br>
+RENAME PROFESORES TO PROFES;<br>
+</p>
+<p>15&ordm;) Borrar la tabla tasig<br>
+  DROP TABLE TASIG CASCADE CONSTRAINTS;<br>
+</p>
+<p>16&ordm;) Devolver la tabla profesores a su situaci&oacute;n inicial<br>
+  CREATE TABLE PROFESORES AS<br>
+  SELECT COD_CENTRO, DNI, APELLIDOS, ESPECIALIDAD<br>
+  FROM PROFES;</p></td>
+    <td>&nbsp;</td>
+    <td><a href="http://es.geocities.com/juantxu28/oraclezip/Ejer22.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td>
+<div align="right"><a href="http://es.geocities.com/juantxu28/index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

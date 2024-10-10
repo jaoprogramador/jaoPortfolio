@@ -1,0 +1,62 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Introducci&amp;oacute;n a ASP con BD</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta name="keywords" content="Conectar el ODBC en ASP, Conectar con BDs en ASP, Manual ASP, tutorial ASP, Ejemplos ASP, ejercicios ASP">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<table width="555" height="296" align="left" background="../imagenes/fondologo.jpg">
+  <tr> 
+    <td height="39" colspan="3"> <h2>Introducci&oacute;n a ASP con BD</h2></td>
+  </tr>
+  <tr> 
+    <td height="223" colspan="3"> 
+      <h3>Introducci&oacute;n a Bases de Datos con ASP</h3>
+  
+      <p>ASP nos permite conectarnos a sistemas gestores de bases de datos, como 
+        Oracle, SQL Server para interactuar entre las p&aacute;ginas y la base 
+        de datos pudiendo hacer todas las operaciones que nos dejan hacer las 
+        bases de datos: inserci&oacute;n, eliminaci&oacute;n, actualizado y consulta 
+        de registros.</p>
+      <p>Como nosostros una introducci&oacute;n trabajaremos con bases de datos 
+        sencillas de Microsoft Access, aunque si a nuestras p&aacute;ginas accediesen 
+        numerosos usuarios que trabajasen simultaneamente contra la base de datos, 
+        deberiamos de tener un sistema gestor de base de datos mas potente como 
+        pudiesen ser Oracle u Microsoft SQL Server.</p>
+      <p>Para conectarse con las bases de datos y a&ntilde;adir y extraer datos 
+        se utilizan los objetos ADO. Debe estar ODBC instalado en el sistema Lo 
+        primero es conectarse a la basa de datos: objeto connection <br>
+        Set con = server.createobject(ADODB.CONNECTION)<br>
+        con es la referencia al objeto de conexi&oacute;n con la base de datos 
+        <br>
+        metodos del objeto conexi&oacute;n<br>
+        Con.open(&#8220;cadena DSN&#8221;)<br>
+        <br>
+        Con.open(&#8220;Driver ={Microsoft Access Driver (*.mdb)}; DBQ=&#8221;&amp;server.mappath(&#8220;db/NombreBaseDatos.mdb&#8221;))<br>
+        Para asociar una base de datos utilizando herramientas administrativas 
+        del panel de control.<br>
+        Con.close() para cerrar la conexi&oacute;n con la base de datos <br>
+        Al final liberamos los objetos<br>
+      <br> Set con=nothing<br>
+      </p>
+      </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

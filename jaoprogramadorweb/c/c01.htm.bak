@@ -1,0 +1,212 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Documento sin t&iacute;tulo</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="tipos de variables, ejercicios de tipos de variables, aplicaciones de tipos de variables">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+ <link href="../styles/estilos.css" rel="stylesheet" type="text/css"></head>
+
+<body>
+<table width="555" height="1359" align="left" background="../imagenes/fondologo.jpg">
+  <tr> 
+    <td height="38" colspan="3"> <h2>E 
+        J E R C I C I O S</h2></td>
+  </tr>
+  <tr> 
+    <td> <h3>Utilizaci&oacute;n 
+        de cout, endl y de setw</h3>
+        <p>EJER1.-Aplicaci&oacute;n que presenta el valor de dos variables, su suma 
+        y su diferencia.
+      </p></td>
+    <td>&nbsp;</td>
+    <td><a href="../czip/ejer1.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>Utilizaci&oacute;n 
+      de variables con cin</h3> <p>
+      EJER2.-Aplicaci&oacute;n que muestra los valores de 2 variables introducidas 
+      por teclado as&iacute; como su suma y su diferencia.</p></td>
+    <td>&nbsp;</td>
+    <td><a href="../czip/ejer2.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>Utilizaci&oacute;n de 
+      printf y scanf</h3><p>
+      EJER3.- Aplicaci&oacute;n que intercambia el valor de dos n&uacute;meros 
+      introducidos por teclado.</p></td>
+    <td>&nbsp;</td>
+    <td><a href="../czip/ejer3.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>Manipulaci&oacute;n 
+      y presentaci&oacute;n de variables</h3><p>
+      EJER4.- Aplicaci&oacute;n que presenta la tabla de multiplicar de un n&uacute;mero.<p></td>
+    <td>&nbsp;</td>
+    <td><a href="../czip/ejer4.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td> <h3>Manipulaci&oacute;n 
+        y presentaci&oacute;n de variables</h3>
+        <p> EJER5.- Aplicaci&oacute;n que presenta la tabla 
+        de multiplicar de un n&uacute;mero.
+      </p></td>
+    <td>&nbsp;</td>
+    <td><a href="../czip/ejer5.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>Manipulaci&oacute;n y 
+      presentaci&oacute;n de variables</h3> <p>EJER6.- Aplicaci&oacute;n 
+      que muestra el cuadrado y el cubo de un n&uacute;mero introducido. </p></td>
+    <td>&nbsp;</td>
+    <td><a href="../czip/ejer6.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td> <h3>Declaraci&oacute;n 
+        de variables int y float</h3>
+        <p>EJER7.- Aplicaci&oacute;n que halla la media 
+        de cinco valores introducidos por teclado.</p></td>
+    <td>&nbsp;</td>
+    <td><a href="../czip/ejer7.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>Superficie de un rect&aacute;ngulo</h3> 
+      <p> EJER8.- Aplicaci&oacute;n que halla la superficie 
+      de un rect&aacute;ngulo introduciendo el valor de los lados</p></td>
+    <td>&nbsp;</td>
+    <td><a href="../czip/ejer8.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>Declaraci&oacute;n de 
+      variables int y float</h3> <p>EJER9.- Aplicaci&oacute;n 
+      que halla el &aacute;rea de un c&iacute;rculo y la longitud de una circunferencia</p></td>
+    <td>&nbsp;</td>
+    <td><a href="../czip/ejer9.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>Declaraci&oacute;n de 
+      variables int y float</h3> <p>EJER10.- Aplicaci&oacute;n 
+      que pasa un &aacute;ngulo dado en grados, minutos y segundos a radianes.</p></td>
+    <td>&nbsp;</td>
+    <td><a href="../czip/ejer10.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>Declaraci&oacute;n de 
+      variables int y float</h3> <p>EJER11.- Aplicaci&oacute;n 
+      que pasa un &aacute;ngulo en radianes a grados, minutos y segundos que muestra 
+      la tabla de sumar y de multiplicar de un n&uacute;mero introducido por teclado.</p></td>
+    <td>&nbsp;</td>
+    <td><a href="../czip/ejer11.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>Manipulaci&oacute;n y 
+      presentaci&oacute;n de variables</h3> <p>EJER12.- Aplicaci&oacute;n 
+      que muestra la tabla de sumar y de multiplicar de un n&uacute;mero introducido 
+      por teclado</p></td>
+    <td>&nbsp;</td>
+    <td><a href="../czip/ejer12.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>Declaraci&oacute;n de 
+      variables int y float</h3> <p>EJER13.- Aplicaci&oacute;n 
+      que realiza la operaci&oacute;n (A/B)+(C/A)-(B/C)</p></td>
+    <td>&nbsp;</td>
+    <td><a href="../czip/ejer13.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>Manipulaci&oacute;n y 
+      presentaci&oacute;n de variables</h3> <p>EJER14.- Aplicaci&oacute;n 
+      que desglosa un numero en Mm,Km,Hm,Dm y m</p></td>
+    <td>&nbsp;</td>
+    <td><a href="../czip/ejer14.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>Declaraci&oacute;n 
+        de variables int y float</h3>
+        <p>EJER15.- Aplicaci&oacute;n que desglosa una 
+        cantidad decimal en Mm,Km,Hm... </p></td>
+    <td>&nbsp;</td>
+    <td><a href="../czip/ejer15.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>Declaraci&oacute;n de 
+      variables int y float</h3> <p>EJER16.- Aplicaci&oacute;n 
+      que transforma un valor en pesetas a euros y dice el n&uacute;mero de monedas 
+      que hay</p></td>
+    <td>&nbsp;</td>
+    <td><a href="../czip/ejer16.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>Declaraci&oacute;n de 
+      variables int y float</h3> <p>EJER17.- Aplicaci&oacute;n 
+      que cambia un valor en pesetas a euros, dice las monedas que hay y comprueba 
+      el cambio</p></td>
+    <td>&nbsp;</td>
+    <td><a href="../czip/ejer17.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>Declaraci&oacute;n de 
+      variables int y float</h3> <p>EJER18.- Aplicaci&oacute;n 
+      que desglosa una cantidad decimal en Mm, Km, Hm... con una sola variable</p></td>
+    <td>&nbsp;</td>
+    <td><a href="../czip/ejer18.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>Manipulaci&oacute;n 
+      y presentaci&oacute;n de variables</h3> <p>EJER19.- Aplicaci&oacute;n 
+      que realiza la suma y la resta de 2 n&uacute;meros introducidos por teclado</p></td>
+    <td>&nbsp;</td>
+    <td><a href="../czip/ejer19.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>Declaraci&oacute;n de 
+      variables int y long</h3> <p>EJER20.- Aplicaci&oacute;n 
+      que realiza la multiplicaci&oacute;n de 2 n&uacute;meros introducidos por 
+      teclado</p></td>
+    <td>&nbsp;</td>
+    <td><a href="../czip/ejer20.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>Declaraci&oacute;n de 
+      variables int y long</h3> <p>EJER21.- Aplicaci&oacute;n 
+      que realiza la operaci&oacute;n de multiplicar de 2 n&uacute;meros introducidos 
+      por teclado</p></td>
+    <td>&nbsp;</td>
+    <td><a href="../czip/ejer21.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>Manipulaci&oacute;n y 
+      presentaci&oacute;n de variables</h3> <p>EJER22.- Aplicaci&oacute;n 
+      que pasa una cantidad en euros a diferentes monedas</p></td>
+    <td>&nbsp;</td>
+    <td><a href="../czip/ejer22.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>Manipulaci&oacute;n y 
+      presentaci&oacute;n de variables</h3><p>EJER23.- Aplicaci&oacute;n 
+      que determina el precio del litro de gasolina Eurosuper</p></td>
+    <td>&nbsp;</td>
+    <td><a href="../czip/ejer23.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>Manipulaci&oacute;n y 
+      presentaci&oacute;n de variables</h3> <p>EJER24.- Aplicaci&oacute;n 
+      que muestra una lista de 10 alumnos (nota, altura)</p></td>
+    <td>&nbsp;</td>
+    <td><a href="../czip/ejer24.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td> 
+      <div align="right"><a href="../index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

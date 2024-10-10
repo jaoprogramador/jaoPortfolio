@@ -1,0 +1,190 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Ejercicios Java</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Descargar Ejercicios de Java, Ejemplos de java, Aplicaciones  de java, JBuilder, J Builder, codigo java">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table width="555" height="265" align="left" background="../imagenes/fondologo.jpg">
+  <tr> 
+    <td height="39" colspan="3"> <h2>E 
+        J E R C I C I O S</h2></td>
+  </tr>
+  <tr> 
+    <td > 
+      <h3>Herencias</h3>
+      <p> 45.- pherenciasImplements.- Aplicacion que mediantre herencias nos muestra 
+        el &aacute;rea a trav&eacute;s del radio </p>
+      <p>//en la clase figura.java</p>
+      <p>package pherenciasimplements;</p>
+      <p>import java.io.IOException;</p>
+      <p>public class Figura {<br>
+        public static void main(String[] args) throws NumberFormatException,<br>
+        IOException {<br>
+        Figura f=new Figura();<br>
+        f.inicia();<br>
+        }<br>
+        private void inicia() throws NumberFormatException, IOException {<br>
+        Circulo c1=new Circulo();<br>
+        Cilindro cl1=new Cilindro();<br>
+        c1.dameDatos();<br>
+        // c1.area();<br>
+        c1.verDatos();<br>
+        cl1.dameDatos();<br>
+        cl1.verDatos();<br>
+        }<br>
+        }</p>
+      <p>//en la clase cilindro.java</p>
+      <p>package pherenciasimplements;</p>
+      <p>import java.io.BufferedReader;<br>
+        import java.io.InputStreamReader;<br>
+        import java.io.IOException;</p>
+      <p>public class Circulo implements EntradaSalida,Geometria{<br>
+        private double res;<br>
+        private double radio=0;<br>
+        public void area(){<br>
+        res=radio*radio*pi;<br>
+        }</p>
+      <p> /**<br>
+        * dameDatos<br>
+        */<br>
+        public void dameDatos() throws IOException, NumberFormatException {<br>
+        BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));<br>
+        System.out.print(&quot;\nIntroduce el radio --&gt; &quot;);<br>
+        radio=Double.parseDouble(teclado.readLine());<br>
+        }</p>
+      <p> /**<br>
+        * verDatos<br>
+        */<br>
+        public void verDatos() {<br>
+        // System.out.print(&quot;\nEl area es &quot; + res);<br>
+        System.out.print(&quot;\nEl area es &quot; + Area(radio));<br>
+        }</p>
+      <p> /**<br>
+        * Area<br>
+        *<br>
+        * @param radio double<br>
+        * @return double<br>
+        */<br>
+        public double Area(double radio) {<br>
+        this.radio=radio;<br>
+        return radio*radio*pi;<br>
+        }</p>
+      <p> /**<br>
+        * Area<br>
+        *<br>
+        * @param radio double<br>
+        * @param longitud double<br>
+        * @return double<br>
+        */<br>
+        public double Area(double radio, double longitud) {<br>
+        return 0.0;<br>
+        }</p>
+      <p> /**<br>
+        * volumen<br>
+        *<br>
+        * @param radio double<br>
+        * @param longitud double<br>
+        * @return double<br>
+        */<br>
+        public double volumen(double radio, double longitud) {<br>
+        return 0.0;<br>
+        }<br>
+        }<br>
+      </p>
+      <p>//en la clase circulo.java</p>
+      <p>package pherenciasimplements;</p>
+      <p>import java.io.BufferedReader;<br>
+        import java.io.InputStreamReader;<br>
+        import java.io.IOException;</p>
+      <p>public class Circulo implements EntradaSalida,Geometria{<br>
+        private double res;<br>
+        private double radio=0;<br>
+        public void area(){<br>
+        res=radio*radio*pi;<br>
+        }</p>
+      <p> /**<br>
+        * dameDatos<br>
+        */<br>
+        public void dameDatos() throws IOException, NumberFormatException {<br>
+        BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));<br>
+        System.out.print(&quot;\nIntroduce el radio --&gt; &quot;);<br>
+        radio=Double.parseDouble(teclado.readLine());<br>
+        }</p>
+      <p> /**<br>
+        * verDatos<br>
+        */<br>
+        public void verDatos() {<br>
+        // System.out.print(&quot;\nEl area es &quot; + res);<br>
+        System.out.print(&quot;\nEl area es &quot; + Area(radio));<br>
+        }</p>
+      <p> /**<br>
+        * Area<br>
+        *<br>
+        * @param radio double<br>
+        * @return double<br>
+        */<br>
+        public double Area(double radio) {<br>
+        this.radio=radio;<br>
+        return radio*radio*pi;<br>
+        }</p>
+      <p> /**<br>
+        * Area<br>
+        *<br>
+        * @param radio double<br>
+        * @param longitud double<br>
+        * @return double<br>
+        */<br>
+        public double Area(double radio, double longitud) {<br>
+        return 0.0;<br>
+        }</p>
+      <p> /**<br>
+        * volumen<br>
+        *<br>
+        * @param radio double<br>
+        * @param longitud double<br>
+        * @return double<br>
+        */<br>
+        public double volumen(double radio, double longitud) {<br>
+        return 0.0;<br>
+        }<br>
+        }<br>
+      </p>
+      <p>//en la clase entradaSalida.java</p>
+      <p>package pherenciasimplements;</p>
+      <p>import java.io.IOException;</p>
+      <p>public interface EntradaSalida {<br>
+        // public double radio=0;<br>
+        public void dameDatos()throws IOException, NumberFormatException;<br>
+        public void verDatos();<br>
+        }<br>
+      </p>
+      <p>//en la clase geometria.java</p>
+      <p>package pherenciasimplements;</p>
+      <p>public interface Geometria {<br>
+        public final double pi=3.1416;<br>
+        public double Area(double radio);<br>
+        public double Area(double radio,double longitud);<br>
+        public double volumen(double radio,double longitud);</p>
+      <p>&nbsp;</p></td>
+    <td>&nbsp;</td>
+    <td><a href="http://es.geocities.com/juantxu28/JBuilderZip/45.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td> <div align="right"><a href="http://es.geocities.com/juantxu28/index3.htm" target="_parent">&lt;&lt;Menu 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

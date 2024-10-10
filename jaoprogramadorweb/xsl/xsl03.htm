@@ -1,0 +1,64 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Creaci&amp;oacute;n de una hoja de estilo</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación en CSS,Programas CSS,Aplicaciones en CSS,Ejercicios en CSS, Ejemplos de CSS,Tutoriales de CSS,Manuales CSS" name=description>
+<meta name="keywords" content="CSS, Manual CSS, tutorial CSS, Ejemplos CSS, ejercicios CSS, Cascading Style Sheet">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table width="555" height="329" align="left" background="../imagenes/fondologo.jpg">
+  <tr> 
+    <td height="39" colspan="3"> <h2> <strong>Creaci&oacute;n de una hoja de estilo </strong> </h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> 
+      <p>Antes de nada tenemos que conocer la estructura del &aacute;rbol, y despu&eacute;s construir la cabecera y el cuerpo del documento html incrust&aacute;ndolos en alguna template (normalmente es en el ra&iacute;z): </p>
+      <p>&lt;xsl:template match=“/“&gt; </p>
+      <p>&lt;html&gt; </p>
+      <p>&lt;head&gt; </p>
+      <p>&lt;title&gt;El titulo&lt;/title&gt; </p>
+      <p>&lt;/head&gt; </p>
+      <p>&lt;body&gt; </p>
+      <p>&lt;xsl:apply-templates/&gt; </p>
+      <p>&lt;/body&gt; </p>
+      <p>&lt;/html&gt; </p>
+      <p>&lt;/xsl:template&gt; </p>
+      <p>Con este ejemplo genera c&oacute;digo html, incrustado dentro de &lt;body&gt; el resultado de la sentencia &lt;xsl:apply-templates/&gt;. &Eacute;sta procesada todos los nodos de formarecursiva, y si encuentra alguna otra plantilladentro del documento XSL con &lt;xsl:template match=…&gt; emparejada al nodo que se est&aacute; procesando, le aplica dicha plantilla. </p>
+      <p>Por &uacute;ltimo, para la creaci&oacute;n de una hoja de estilo escribiremos una regla template por cada nodo a&ntilde;adiendo las instrucciones de proceso necesarias, sabiendo que sentencias XSL provocan desplazamiento por el &aacute;rbol (xsl:template, xsl:for..)y cuales no (xsl:if, xsl:value-of…).Ejemplo </p>
+      <p>&nbsp; </p>
+      <p>&lt;xsl:template match=“/“&gt; </p>
+      <p>&lt;xsl:apply-templates/&gt; </p>
+      <p>&lt;/xsl:template&gt; </p>
+      <p>&lt;xsl:template match=“catalogo“&gt; </p>
+      <p>&lt;xsl:apply-templates/&gt; </p>
+      <p>&lt;/xsl:template&gt; </p>
+      <p>&lt;xsl:template match=“crucero“&gt; </p>
+      <p>El Precio es </p>
+      <p>&lt;b&gt;&lt;xsl:template match=“precio“&gt;&lt;/b&gt; </p>
+      <p>&lt;br&gt; </p>
+      <p>&lt;xsl:apply-templates/&gt; </p>
+      <p>&lt;/xsl:template&gt; </p>
+      <p>En el tercer template voy recorriendo todos los nodos crucero, y en cada uno de ellos con la sentencia &lt;xsl:value-of… voy mostrando el valor del nodo precio, este lo busca por debajo de crucero, si no existe el elemento precio no muestra nada(si queremos que muestre el contenido de crucero, es decir del nodo en el que nos encontramos tendremos que escribir &lt;xsl:value-of select=”.”/&gt;). La peculiaridad de este template es la incrustaci&oacute;n de c&oacute;digo HTML, ya que se le a&ntilde;aden las instrucciones necesarias para obtener los resultados como deseemos. As&iacute;, obtendremos el valor de precio en negrita seguido de un &lt;br&gt; que si nos fijamos al tener que ser un documento bien formado debe estar cerrado. </p>
+      <p>&nbsp; </p>
+      <p>Si estamos situado en un nodo cualquiera, para acceder a los nodos hijos en el &aacute;rbol se ponen los nodos de estos, si queremos conseguir el contenido del propio nodo en el que nos encontramos lo referenciamos con ”.”, y si queremos retroceder , con “..”. Para acceder a cualquier otro nodo del &aacute;rbol, podemos ir moviendonos por el &aacute;rbol con sentencias XSL o ir directamente a trav&eacute;s de rutas (Ej.”//descripcion” lo busca desde el raiz independientemente donde estemos situado, “crucero/descripcion” accede a descripci&oacute;n pero debemos estar situado en cat&aacute;logo que es anterior a crucero) </p>
+    <h3>&nbsp;</h3>    </td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

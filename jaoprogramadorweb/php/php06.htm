@@ -1,0 +1,854 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Estructuras de control en php</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta name="keywords" content="Manual php, tutorial php, Ejemplos php, ejercicios php">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table width="555" height="1000" align="left" background="../imagenes/fondologo.jpg" >
+  <tr> 
+    <td height="39" colspan="3"><h2> Estructuras 
+        de control</h2></td>
+  </tr>
+  <tr> 
+    <td height="9747" colspan="3">
+<table width="75%">
+        <tr> 
+          <td><h3>Contenidos:</h3></td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><pre >
+-<a href="php06.htm#intro">Introducci&oacute;n
+</a>
+-<a href="php06.htm#switch">Estructura Switch</a><a href="htm11.htm#imgenlace">
+</a>
+-<a href="php06.htm#while">Estructuras While/Do while
+</a>
+-<a href="php06.htm#for">Estructuras For</a>
+
+- <a href="php06.htm#array">Arrays</a>
+
+- <a href="php06.htm#cadenas">Arrays y cadenas</a>
+
+-<a href="php06.htm#expresiones">Expresiones regulares</a></pre></td>
+        </tr>
+      </table>
+      
+      <h3>Introducci&oacute;n<a name="intro"></a></h3>
+      <p> En php disponemos de cuatro condicionales 
+        diferentes: if, switch, do... while y for. Las dos primeras permiten ejecutar 
+        una serie de instrucciones una s&oacute;la vez en funci&oacute;n de ciertos 
+        valores; y las dos &uacute;ltimas permiten crear bucles.</p>
+      <p >Como ejemplo de if vamos a modificar el script utilizado 
+        en el apartado &#8220;Variable num&eacute;ricas&#8221;</p>
+      <p > En la la l&iacute;nea 10 creamos un if que cerramos 
+        en la 34. Este if sirve para comprobar si hemos a&ntilde;adido a la url 
+        cantidad=n&ordm;., en cuyo caso existir&aacute; la variable $cantidad. 
+        El if comprueba si existe esta variable, si es as&iacute; ejecuta las 
+        instrucciones que se encuentran entre las llaves. En caso contrario salta 
+        hasta la l&iacute;nea 32. Aqu&iacute; ejecuta el c&oacute;digo incluido 
+        entre las llaves del else pidiendo que introduzcamos el n&uacute;mero 
+        de unidades. 
+        El if termina en la l&iacute;nea 34.</p>
+      <p >1.&lt;HTML&gt; <br>
+        2.&lt;HEAD&gt; <br>
+        3.&lt;TITLE&gt;Using Numbers&lt;/TITLE&gt; <br>
+        4.&lt;/HEAD&gt; <br>
+        5.&lt;BODY&gt; <br>
+        6.&lt;?php <br>
+        7./* $cantidad debe formar parte del URL. $descuento is opcional. */ <br>
+        8.$coste = 200.00; <br>
+        9.$impuesto = 0.06; <br>
+        10.if ($cantidad){ <br>
+        11. $cantidad = abs($cantidad); <br>
+        12. $descuento = abs($descuento); <br>
+        13. $impuesto++; // $impuesto es ahora 1.06. <br>
+        14. $total = ($coste * $cantidad); <br>
+        15. if (total &gt;= 500 ) { //Si el importe es &gt;=500 habr&aacute; descuento 
+        <br>
+        16. $total = $total - $descuento; <br>
+        17. } <br>
+        18. $total = $total * $impuesto; <br>
+        19. $pagos = round ($total, 2) / 12; 20. <br>
+        // Imprimir resultados. <br>
+        21. print (&quot;Has comprado un total de $cantidad unidades at \$$coste 
+        cada uno.\n&lt;P&gt;&quot;); <br>
+        22. if ($total &gt;= 500 ) { //Si el importe es &gt;50 habr&aacute; descuento 
+        y lo anunciaremos <br>
+        23. print (&quot;El total con impuestos menos \$$descuento de descuento, 
+        supone $&quot;); 24. printf (&quot;%01.2f&quot;,$total); <br>
+        25. } else { <br>
+        26. print (&quot;El total con impuestos y sin derecho a descuento, supone 
+        $&quot;); <br>
+        27. printf (&quot;%01.2f&quot;,$total); <br>
+        28. } <br>
+        29. print (&quot;. \n&lt;p&gt;Puedes hacer el pago en 12 mensualidades 
+        de $&quot;); <br>
+        30. printf (&quot;%01.2f&quot;,$pagos); <br>
+        31. print (&quot; cada una.\n&lt;P&gt;&quot;); <br>
+        32.} else { <br>
+        33. print (&quot;Por favor, introduzca el n&ordm; de unidades en la URL&quot;); 
+        <br>
+        34.} <br>
+        35.?&gt; <br>
+        36.&lt;/BODY&gt; <br>
+        37.&lt;/HTML&gt;</p>
+      <p > El 2&ordm; if comprueba si el importe alcanza los 
+        500$ (l15) Si lo hace se aplica el descuento indicado en la url (l16)
+        En la l&iacute;nea 22 aparece otro if con la misma condici&oacute;n del 
+        anterior. Esta vez se utiliza para imprimir un texto coherente. Adem&aacute;s 
+        utilizamos else (l25) de forma que si no se cumple la condici&oacute;n 
+        del if avisa de que no habr&aacute; descuento.</p>
+      <p > El siguiente script saluda al usuario de forma distinta 
+        en funci&oacute;n de la hora del d&iacute;a. Como el anterior comprueba 
+        si hemos introducido alg&uacute;n nombre de usuario (l7) en cuyo caso 
+        ejecuta el c&oacute;digo; de lo contrario salta al else (l18)</p>
+      <p > 1.&lt;HTML&gt; <br>
+        2.&lt;HEAD&gt; <br>
+        3.&lt;TITLE&gt;If-elseif&lt;/TITLE&gt; <br>
+        4.&lt;/HEAD&gt; <br>
+        5.&lt;BODY&gt; <br>
+        6.&lt;?php <br>
+        7.if ($usuario) { <br>
+        8. print (&quot;&iexcl;Hola, &quot;); <br>
+        9. if (date(&quot;A&quot;) == &quot;AM&quot;) { <br>
+        10. print (&quot;buenos d&iacute;as, &quot;); <br>
+        11. } elseif ( ( date(&quot;H&quot;) &gt;= 12 ) and ( date(&quot;H&quot;) 
+        &lt; 18 ) ) { <br>
+        12. print (&quot;buenas tardes, &quot;); <br>
+        13. } else { <br>
+        14. print (&quot;buenas noches, &quot;); <br>
+        15. } // Close the date if. <br>
+        16. print (&quot;$usuario&quot;); <br>
+        17. print (&quot;!\n&quot;); <br>
+        18.} else { <br>
+        19. print (&quot;Por favor introduce tu nombre como valor de usuario en 
+        la url.\n&quot;); 20.} <br>
+        21.?&gt; <br>
+        22.&lt;/BODY&gt; <br>
+        23.&lt;/HTML&gt; 
+      <p> En este script utilizaremos la funci&oacute;n date () que devuelve valores 
+        relativos a la fecha <br>
+        El primer if (l7) escribe &#8220;&iexcl;Hola&#8221; y el 2&ordm; (l9) 
+        comprueba si la funci&oacute;n date (A) devuelve &#8220;AM&#8221; (tambi&eacute;n 
+        puede devolver &#8220;PM&#8221; <br>
+        Si el if no se cumple, comprobamos si la hora es mayor que 12 y menor 
+        que 18 (l11). <br>
+        Si tampoco se cumple el else (l13) ayudar&aacute; a que nos de las buenas 
+        noches. </p>
+      <h3>Estructuras switch <a name="switch"></a></h3>
+      <p >Estas estructuras son &uacute;tiles en el caso de 
+        tener varios if &#8230;elseif&#8230; else
+        switch($variable){
+        case &#8220;valor1&#8221;:
+        instrucciones1;
+        break;
+        case &#8220;valor2&#8221;:
+        instrucciones2;
+        break;
+        &#8230;&#8230;&#8230;&#8230;&#8230;&#8230;&#8230;&#8230;&#8230;..
+        &#8230;&#8230;&#8230;&#8230;&#8230;&#8230;
+        default:
+        instrucciones3;
+        break;
+        }
+        switch va comparando el valor de la variable con cada uno de los valores 
+        indicados . Cuando coincide con alguno de ellos contin&uacute;a ejecutando 
+        las instrucciones que le siguen hasta que encuentra la llave cerrada } 
+        o la instrucci&oacute;n break.
+        Esto significa que, si lo utilizamos break al final de cada case, a partir 
+        de la primera coincidencia se ejecutar&aacute;n consecutivamete todas 
+        las instrucciones, incluidas las del default, es opcional pero si se usa 
+        debe ir en &uacute;ltimo lugar.
+        Como ejemplo vamos a crear tres scripts: el primero es simplemente un 
+        formulario en html dentro de una tabla, creado en starOffice, que nos 
+        piede unos datos personales y la forma de contactar. Utilizaremos el valor 
+        de este campo en los dos scripts siguientes que contiene una estructura 
+        switch.
+        Aunque no es de los peores, el starOffice tambi&eacute;n genera basura 
+        al crear p&aacute;ginas html. Por ese motivo es conveniente crear utilizar 
+        estos programas con cierta cautela y revisar el c&oacute;digo generado.</p>
+      <p >&lt;HTML&gt; <br>
+        &lt;HEAD&gt; <br>
+        &lt;TITLE&gt;Formulario html: contacto html&lt;/TITLE&gt; <br>
+        &lt;META NAME=&#8221;GENERADOR&#8221;CONTENT=&#8221;StarOffice/5.2(Linux)&#8221;&gt; 
+        <br>
+        &lt;/HEAD&gt; <br>
+        &lt;BODY&gt; <br>
+        &lt;FORM ACTION=&#8221;recibircontacto.php&#8221;METHOD=&#8221;POST&#8221;&gt; 
+        <br>
+        &lt;TABLE WIDTH=70% BORDER=2 CELLPADDING=2 CELLSPACING=2&gt; <br>
+        &lt;TR VALIGN=TOP&gt; <br>
+        &lt;TD WIDTH=50%&gt; <br>
+        &lt;P ALIGN=RIGTH&gt;Escriba su nombre&lt;/P&gt; &lt;/TD&gt; <br>
+        &lt;TD WIDTH=50%&gt; <br>
+        &lt;P &gt;&lt;INPUT TYPE=TEXT NAME=&#8221;nombre&#8221;SIZE=20&gt; &lt;/P&gt; 
+        &lt;/TD&gt; &lt;/TR&gt; <br>
+        &lt;TR VALIGN=TOP&gt; <br>
+        &lt;TD WIDTH=50%&gt; <br>
+        &lt;P ALIGN=RIGTH&gt;Indique como quiere contactar&lt;/P&gt; &lt;/TD&gt; 
+        <br>
+        &lt;TD WIDTH=50%&gt; <br>
+        &lt;P &gt;&lt;SELECT NAME =&#8221;modo&#8221;&gt; <br>
+        &lt;OPTION VALUE=&#8221;&#8221;SELECTED&gt;Elija una opci&amp;oacuote;n: 
+        <br>
+        &lt;OPTION VALUE= &#8221;telefono&#8221;&gt;Telefono <br>
+        &lt;OPTION VALUE= &#8221;correo&#8221;&gt; Correo postal <br>
+        &lt;OPTION VALUE= &#8221;emilio&#8221;&gt;Mail <br>
+        &lt;OPTION VALUE= &#8221;fax&#8221;&gt; Fax &lt;/OPTION&gt; &lt;/SELECT&gt; 
+        &lt;/P&gt; &lt;/TD&gt; &lt;/TR&gt; <br>
+        &lt;TR VALIGN=TOP&gt; <br>
+        &lt;TD WIDTH=50%&gt; <br>
+        &lt;P ALIGN=RIGTH&gt;Comentarios&lt;/P&gt; &lt;/TD&gt; <br>
+        &lt;TD WIDTH=50%&gt;<br>
+        &lt;P &gt;<br>
+        &lt;TEXTAREA NAME= &#8221;comentarios&#8221; ROWS=5 COLS=40&gt;&lt;/TEXTAREA&gt;&lt;/P&gt; 
+        &lt;/TD&gt; &lt;/TR&gt; <br>
+        &lt;TR VALIGN=TOP&gt; <br>
+        &lt;TD WIDTH=50%&gt;<br>
+        &lt;P &gt;&lt;BR&gt;&lt;/P&gt; &lt;/TD&gt; <br>
+        &lt;TD WIDTH=50%&gt; <br>
+        &lt;DIV ALIGN=CENTER&gt; <br>
+        &lt;P &gt;<br>
+        &lt;INPUT TYPE=SUBMIT NAME=&#8221;SUBMIT&#8221;VALUE=&#8221;Enviar&#8221;&gt; 
+        &lt;/P&gt;&lt;/DIV&gt; &lt;/TD&gt; &lt;/TR&gt; <br>
+        &lt;/TABLE&gt;<br>
+        &lt;/FORM&gt;<br>
+        &lt;/BODY&gt;<br>
+        &lt;/HTML&gt;</p>
+      <p >El segundo script comienza con un nuevo formulario 
+        que recibe los datos del primer sript y los guarda en campos ocultos (L9-12) 
+        que, a su vez enviar&aacute; el tercero. Para hacer este env&iacute;o 
+        creamos una estructura switch que comprueba el valor de la variable $modo 
+        (esta variable guarda el medio de contacto).</p>
+      <p >Este formulario termina con otro campo que tendr&aacute; 
+        de nombre el valor de $modo: Si &amp;modo es tel&eacute;fono crea el campo 
+        tel&eacute;fono, si es mail, el campo mail,etc&#8230; que enviar&aacute; 
+        (con las variables L9 q L12) al tercer script recibircontacto2.php
+        Si $modo es un valor previsto pide volver a la pantalla.</p>
+      <p >&lt;HTML&gt;<br>
+        &lt;HEAD&gt; <br>
+        &lt;TITLE&gt;Recepci&oacute;n de contacto: recibircontacto: recibir contacto.php&lt;/TITLE&gt; 
+        &lt;/HEAD&gt; <br>
+        &lt;BODY&gt; <br>
+        &lt;FORM ACTION=&#8221;recibircontacto2.php&#8221;METHOD=&#8221;POST&#8221;&gt; 
+        <br>
+        &lt;?php //Transmite los valores recibidos de contacto.html usando tipos 
+        HIDDEN INPUT print(&#8220;&lt;INPUT TYPE=HIDDEN NAME=\&#8221;nombre\&#8221;VALUE=\&#8221;$nombre\&#8221;&gt;\n&#8221;); 
+        <br>
+        print(&#8220;&lt;INPUT TYPE=HIDDEN NAME=\&#8221;apellidos\&#8221;VALUE=\&#8221;$apellidos\&#8221;&gt;\n&#8221;);<br>
+        print(&#8220;&lt;INPUT TYPE=HIDDEN NAME=\&#8221;comentarios \&#8221;VALUE=\&#8221;$comentarios\&#8221;&gt;\n&#8221;);<br>
+        print(&#8220;&lt;INPUT TYPE=HIDDEN NAME=\&#8221;modo\&#8221;VALUE=\&#8221;$modo\&#8221;&gt;\n&#8221;);<br>
+        <br>
+        switch($modo){<br>
+        case &#8220;telefono&#8221;: <br>
+        print(&#8220;&lt;B&gt;Por favor introduzca su tel&eacute;fono&lt;/B&gt;&lt;BR&gt;\n&#8221;); 
+        <br>
+        print(&#8220;&lt;INPUT TYPE=TEXT NAME=\&#8221;telefono\&#8221; SIZE=10&gt;&lt;BR&gt;\n&#8221;);	
+        print(&#8220;&lt;INPUT TYPE=SUBMIT NAME=&#8221;SUBMIT&#8221;VALUE=&#8221;Continuar&#8221;&gt;&lt;BR&gt;\n&#8221;);<br>
+        break; <br>
+        case &#8220;correo&#8221;: <br>
+        print(&#8220;&lt;B&gt;Por favor introduzca sus datos personales&lt;/B&gt;&lt;BR&gt;<br>
+        &lt;/TEXTAREA&gt;\n&#8221;);<br>
+        print(&#8220;&lt;TEXTAREA NAME= \&#8221;correo\&#8221; ROWS=5 COLS=40&lt;BR&gt;\n&#8221;);<br>
+        print(&#8220;&lt;INPUT TYPE=SUBMIT NAME=&#8221;SUBMIT&#8221;VALUE=&#8221;Continuar&#8221;&gt;&lt;BR&gt;\n&#8221;);<br>
+        break;<br>
+        case &#8220;emilio&#8221;: <br>
+        print(&#8220;&lt;B&gt;Por favor introduzca su email&lt;/B&gt;&lt;BR&gt;\n&#8221;); 
+        <br>
+        print(&#8220;&gt;&lt;INPUT TYPE=TEXT NAME=\&#8221;emilio\&#8221; SIZE=40&gt;&lt;BR&gt;\n&#8221;); 
+        print(&#8220;&lt;INPUT TYPE=SUBMIT NAME=&#8221;SUBMIT&#8221;VALUE=&#8221;Continuar&#8221;&gt;&lt;BR&gt;\n&#8221;);<br>
+        break; <br>
+        case &#8220;fax&#8221;: <br>
+        print(&#8220;&lt;B&gt;Por favor introduzca su n&ordm; de fax&lt;/B&gt;&lt;BR&gt;\n&#8221;); 
+        <br>
+        print(&#8220;&gt;&lt;INPUT TYPE=TEXT NAME=\&#8221;fax\&#8221; SIZE=10&gt;&lt;BR&gt;\n&#8221;); 
+        <br>
+        print(&#8220;&lt;INPUT TYPE=SUBMIT NAME=&#8221;SUBMIT&#8221;VALUE=&#8221;Continuar&#8221;&gt;&lt;BR&gt;\n&#8221;); 
+        break; <br>
+        default:<br>
+        print(&#8220;&lt;B&gt;Por favor vuelva atr&aacute;s e indique el modo 
+        de contacto&lt;/B&gt;&lt;BR&gt;\n&#8221;); print(&#8220;&lt;BR&gt;\n&#8221;); 
+        <br>
+        break; <br>
+        } <br>
+        ?&gt; <br>
+        &lt;/FORM&gt; <br>
+        &lt;/BODY&gt;<br>
+        &lt;/HTML&gt;</p>
+      <p >
+        El tercer script recibe los datos del segundo y escribe los datos personales 
+        que hemos introducido. El switch, tambi&eacute;n en funci&oacute;n del 
+        valor de $modo escribe el tel&eacute;fono, mail, etc.</p>
+      <p >&lt;HTML&gt;<br>
+        &lt;HEAD&gt; <br>
+        &lt;TITLE&gt;Recepci&oacute;n de recibircontacto.php recibircontacto2.php<br>
+        &lt;/TITLE&gt; <br>
+        &lt;/HEAD&gt; <br>
+        &lt;BODY&gt; <br>
+        &lt;?php //Transmite los valores recibidos de contacto.html usando tipos 
+        HIDDEN INPUT print(&#8220;&lt;P&gt;&lt;BR&gt;Hola. Ha quedado registrado 
+        como $nombre $apellidos\n&#8221;);<br>
+        print(&#8220;&lt;br&gt;Tendremos muy en cuenta su opini&oacute;n cuando 
+        dice que $comentarios&lt;br&gt;\n&#8221;); <br>
+        switch($modo){<br>
+        case &#8220;telefono&#8221;: <br>
+        print(&#8220;&lt;B&gt;Le llamaremos al tel&eacute;fono $telefono &lt;/B&gt;&lt;BR&gt;\n&#8221;); 
+        &#8221;); <br>
+        break; <br>
+        case &#8220;correo&#8221;: <br>
+        print(&#8220;&lt;B&gt;Recibir&aacute; una carta en $correo&lt;/B&gt;&lt;BR&gt;&lt;/TEXTAREA&gt;\n&#8221;); 
+        &#8221;); <br>
+        break; case &#8220;emilio&#8221;: <br>
+        print(&#8220;&lt;B&gt;En unos instantes recibir&aacute; un mail en $emilio&lt;/B&gt;&lt;BR&gt;\n&#8221;); 
+        break; case &#8220;fax&#8221;: <br>
+        print(&#8220;&lt;B&gt;Le enviaremos un fax al n&ordm; de fax $fax&lt;/B&gt;&lt;BR&gt;\n&#8221;);<br>
+        break; <br>
+        default: <br>
+        print(&#8220;&lt;B&gt;Por favor vuelva atr&aacute;s e indique el modo 
+        de contacto&lt;/B&gt;&lt;BR&gt;\n&#8221;); print(&#8220;&lt;BR&gt;\n&#8221;); 
+        <br>
+        break; }</p>
+      <p >?&gt;<br>
+        &lt;/FORM&gt;<br>
+        &lt;/BODY&gt; <br>
+        &lt;/HTML&gt;</p>
+      <p >
+        <h3>Estructuras While/Do while<a name="while"></a></h3>
+      <p >Los bucles While se ejecutar&aacute;n mientras se cumple la condici&oacute;n 
+        dada. La diferencia con IF es que &eacute;stos se ejecutan una sola vez. 
+        Hay dos tipos de bucles while: while y do while. Se diferencian en que 
+        el segundo ejecuta las instrucciones que contiene el bucle y comprueba 
+        si se sigue cumpliendo para volver a ejecutarlas, mientras que el primero 
+        comprueba la condici&oacute;n y s&oacute;lo si se cumple ejecuta las instrucciones. 
+        Dicho de otra forma, do while se ejecuta al menos una vez mientras que 
+        while no. <br>
+        While(condici&oacute;n){<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;Instrucciones; <br>
+        }<br>
+        Do{ <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Instrucciones; <br>
+        }While(condici&oacute;n);</p>
+      <p >Como ejemplo vamos a crear un script que se sirve 
+        de dos while para crear sendos men&uacute;s desplegables en un formulario. 
+        
+        Lo primero que hace el script (L7) es tomar el a&ntilde;o de la fecha 
+        actual mediante la funci&oacute;n date(&#8220;Y&#8221;). Esta funci&oacute;n, 
+        que se utiliza para dar formato a la fecha/hora local, admite varios argumentos;</p>
+      <p >A-&#8220;AM&#8221; o &#8220;PM&#8221;<br>
+        d- d&iacute;a del mes, dos d&iacute;gitos con cero a la izquierda; es 
+        decir, de &#8220;01&#8221; a &#8220;31&#8221; <br>
+        D &#8211; d&iacute;a de la semana, en texto, con tres letras; por ejemplo, 
+        &#8220;Fri&#8221; <br>
+        H &#8211; hora, de &#8220;00&#8221; a &#8220;23&#8221; i &#8211; minutos; 
+        de &#8220;00&#8221; a &#8220;59&#8221; <br>
+        m &#8211; mes; de &#8220;01&#8221; a &#8220;12&#8221; s &#8211; segundos; 
+        de &#8220;01&#8221; a &#8220;59&#8221; <br>
+        w &#8211; dia de la semana, en n&uacute;mero, de &#8220;0&#8221; (domingo) 
+        a &#8220;6&#8221; (s&aacute;bado) <br>
+        Y &#8211; a&ntilde;o, cuatro cifras; por ejemplo, &#8220;1999&#8221; <br>
+        Y &#8211; a&ntilde;o, dos cifras; por ejemplo, &#8220;99&#8221; <br>
+        Z &#8211; d&iacute;a del a&ntilde;o; de &#8220;0&#8221; a &#8220;365&#8221;</p>
+      <p >El formulario env&iacute;a los datos al archivo en 
+        el que se encuentra el script (por hacer algo) sirviendose de la variable 
+        PHP_SELF (L9). Esta variable del sistema guarda el nombre del fichero 
+        que contiene el script que se est&aacute; ejecutando, este nombre incluye 
+        la ruta relativa desde el directorio ra&iacute;z de los documentos hasta 
+        el archivo: print (&#8220;&lt;FORM ACTION=\&#8221;$PHP_SELFT\&#8221;METHOD=POST&gt;\n&#8221;);</p>
+      <p >&lt;HTML&gt; <br>
+        &lt;HEAD&gt; <br>
+        &lt;TITLE&gt;Men&uacute; con While &lt;/TITLE&gt; <br>
+        &lt;/HEAD&gt; <br>
+        &lt;BODY&gt; <br>
+        &lt;?php $a&ntilde;o=date(&#8220;Y&#8221;); //Creaci&oacute;n del FORM 
+        <br>
+        print (&#8220;&lt;FORM ACTION=\&#8221;$PHP_SELFT\&#8221;METHOD=POST&gt;\n&#8221;); 
+        //Creaci&oacute;n del men&uacute; meses <br>
+        print(&#8220;Selecciona el mes:&lt;br&gt;\n&#8221;); <br>
+        print(&#8220;&lt;SELECT NAME =&#8221;meses&#8221;&gt;<br>
+        &lt;OPTION&gt;Elija una opci&amp;oacuote;n: &lt;/OPTION&gt;\n&#8221;);<br>
+        print(&#8220;OPTION VALUE= &#8221;enero&#8221;&gt;Enero&lt;/OPTION&gt;\n&#8221;);<br>
+        print(&#8220;OPTION VALUE= &#8221;febrero&#8221;&gt;Febrero&lt;/OPTION&gt;\n&#8221;);<br>
+        print(&#8220;OPTION VALUE= &#8221;marzo&#8221;&gt;Marzo&lt;/OPTION&gt;\n&#8221;);<br>
+        print(&#8220;OPTION VALUE= &#8221;abril&#8221;&gt;Abril&lt;/OPTION&gt;\n&#8221;);<br>
+        print(&#8220;OPTION VALUE= &#8221;mayo&#8221;&gt;Mayo&lt;/OPTION&gt;\n&#8221;); 
+        <br>
+        print(&#8220;OPTION VALUE= &#8221;junio&#8221;&gt;Junio&lt;/OPTION&gt;\n&#8221;);<br>
+        print(&#8220;OPTION VALUE= &#8221;julio&#8221;&gt; Julio &lt;/OPTION&gt;\n&#8221;); 
+        <br>
+        print(&#8220;OPTION VALUE= &#8221; agosto&#8221;&gt;Agosto&lt;/OPTION&gt;\n&#8221;); 
+        <br>
+        print(&#8220;OPTION VALUE= &#8221;septiembre&#8221;&gt; Septiembre &lt;/OPTION&gt;\n&#8221;); 
+        print(&#8220;OPTION VALUE= &#8221; octubre&#8221;&gt;Octubre&lt;/OPTION&gt;\n&#8221;);<br>
+        print(&#8220;OPTION VALUE= &#8221;noviembre&#8221;&gt;Noviembre&lt;/OPTION&gt;\n&#8221;); 
+        print(&#8220;OPTION VALUE= &#8221; diciembre&#8221;&gt;Diciembre&lt;/OPTION&gt;\n&#8221;); 
+        print(&#8220;&lt;/SELECT&gt;\n&#8221;); //Creaci&oacute;n del men&uacute; 
+        desplegable de los d&iacute;as print(&#8220;Selecciona el d&iacute;a:&lt;br&gt;\n&#8221;); 
+        <br>
+        print(&#8220;&lt;SELECT NAME =&#8221;dia&#8221;&gt;<br>
+        &lt;OPTION&gt;Elija una opci&amp;oacuote;n: &lt;/OPTION&gt;\n&#8221;); 
+        <br>
+        $dia=1; <br>
+        while($dia&lt;=31){ <br>
+        print(&#8220;OPTION VALUE= $dia&gt;$dia &lt;/OPTION&gt;\n&#8221;); <br>
+        $dia++; } print(&#8220;&lt;/SELECT&gt;\n&#8221;); //Creaci&oacute;n de 
+        men&uacute;s de a&ntilde;os print(&#8220;Selecciona el a&ntilde;o:&lt;br&gt;\n&#8221;);<br>
+        print(&#8220;&lt;SELECT NAME =&#8221;a&ntilde;o&#8221;&gt;<br>
+        &lt;OPTION&gt;Elija uno: &lt;/OPTION&gt;\n&#8221;); <br>
+        $a&ntilde;ofinal=$a&ntilde;o + 10; <br>
+        while($dia&lt;=$a&ntilde;ofinal){ <br>
+        print(&#8220;OPTION VALUE= $a&ntilde;o&gt;$a&ntilde;o &lt;/OPTION&gt;\n&#8221;);<br>
+        $a&ntilde;o++; <br>
+        } <br>
+        print(&#8220;&lt;/SELECT&gt;\n&#8221;); <br>
+        print(&#8220;&lt;INPUT TYPE=SUBMIT NAME=&#8221;SUBMIT&#8221;VALUE=&#8221;Enviar&#8221;&gt;&lt;BR&gt;\n&#8221;); 
+        <br>
+        ?&gt; <br>
+        &lt;/FORM&gt; <br>
+        &lt;/BODY&gt; <br>
+        &lt;/HTML&gt;</p>
+      <p >
+        Para crear los men&uacute;s de d&iacute;as y a&ntilde;os utilizamos sendos 
+        while (L30-33 y 39-41) el de los d&iacute;as se ejecutar&aacute; 31 veces 
+        y el de los a&ntilde;os 10.</p>
+      <h3>Estructuras For<a name="for"></a></h3>
+      <p >La diferencia entre while y for es que esta se ejecuta 
+        un n&uacute;mero determinado de veces, mientras que while lo hace hasta 
+        que la condici&oacute;n es false.
+        Unbucle while puede funcionar en la pr&aacute;ctica de forma an&aacute;loga 
+        a un for, aqu&iacute; aparecen estructuras equivalentes.</p>
+      <p >For($var=n;condici&oacute;; incrementon){
+        Instrucciones;
+        } $var=n;
+        while(condici&oacute;n){
+        instrucciones;
+        incremento;
+        }</p>
+      <p >El for comienza inicializando la variable; a continuaci&oacute;n 
+        comprueba si se cumple la condici&oacute;n, en cuyo caso ejecuta las instrucciones 
+        una vez ; incrementa el valor de la variable y vuelve a comprobar si la 
+        condici&oacute;n es cierta.
+        Este script calcula los n&uacute;meros primos menores de 1000;</p>
+      <p >&lt;?php <br>
+        print(&#8220;&lt;html&gt;<br>
+        &lt;head&gt;&lt;title&gt;C&aacute;lculo de n&uacute;meros primos &lt;/title&gt;<br>
+        &lt;/head&gt; &lt;body&gt;\n&#8221;);<br>
+        for ($n=1;$&lt;=1000;$n++){<br>
+        &nbsp;&nbsp;&nbsp;$d=$n-1;<br>
+        &nbsp;&nbsp;&nbsp;if($d==0){<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $d=1;<br>
+        &nbsp;&nbsp;&nbsp; } <br>
+        while($n%$d&lt;&gt;0){ <br>
+        &nbsp;&nbsp;&nbsp; $d--;<br>
+        if($d==1){ <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf(&#8220;%03d&#8221;,$n);<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; print(&#8220;,\n&#8221;); } } }<br>
+        ?&gt; <br>
+        &lt;/body&gt;<br>
+        &lt;/html&gt;</p>
+      <p >1.- $n comienza valiendo 1. El bucle se ejecutar&aacute; 
+        mientras no valga m&aacute;s de 1000.
+        2.- Creamos $d como $n-1 y comprobamos si es 0, en cuyo caso la hacemos 
+        igual a 1. Esto es &uacute;nicamente para evitar una divisi&oacute;n entre 
+        0 en la l&iacute;nea 6.
+        3.-Mientras el resto de dividir $n entre $d (que tomar&aacute; el valor 
+        de todos los n&uacute;meros naturales menores que &eacute;l) no sea 0. 
+        
+        Cuando deje de ocurrir esto significar&aacute; que el n&uacute;mero no 
+        es primo.
+        4.- Disminuye el valor de $d en uno y comprueba si vale 1, en cuyo caso 
+        $n ser&aacute; primo y lo escribir&aacute;.
+        Cuando sale del while por una u otra raz&oacute;n devuelva el control 
+        al for que contin&uacute;a con el n&uacute;mero siguiente.</p>
+      <h3>Arrays<a name="array"></a></h3>
+      <p >$semana = array(&#8220;lunes&#8221;,&#8221;martes&#8221;,&#8221;mi&eacute;rcoles&#8221;);-? 
+        Crea un array $semana que contiene 3 elementos.</p>
+      <p >Para crear un array se debe utilizar $nombre=array(); o $nombre array(&#8220;valor1&#8221;,&#8221;valor2&#8221;,&#8230;,&#8221;valorn&#8221;);Para 
+        a&ntilde;adir elementos al array basta con teclear el nombre[] y el valor 
+        del nuevo elemento: $semana[]=&#8221;jueves&#8221;; De esta forma el nuevo 
+        elemento se a&ntilde;adir&aacute; al final del array(no a&ntilde;adir&aacute; 
+        sino que borrar&aacute;) por el nuevo valor. Tambien podemos a&ntilde;adir 
+        un elemento en un lugar determinado del array: $semana[2]&#8221;fiesta&#8221;; 
+        Har&aacute; que desaparezca el martes. <br>
+        &lt;HTML&gt;<br>
+        &lt;HEAD&gt;<br>
+        &lt;TITLE&gt;Uso de Arrays &lt;/TITLE&gt; <br>
+        &lt;/HEAD&gt; <br>
+        &lt;BODY&gt;<br>
+        &lt;?php <br>
+        $examenes1=array( &#8220;lunes&#8221;=&gt;&#8221;Formaci&oacute;n y orientaci&oacute;n 
+        laboral&#8221;, &#8220;martes&#8221;=&gt;&#8221;Redes de &Aacute;rea local&#8221;, 
+        &#8220;miercoles&#8221;=&gt;&#8221;Fundamentos de programaci&oacute;n&#8221;);<br>
+        $cuantos1=count($examenes);<br>
+        print(&#8220;El array \$examenes contiene $cuantos1 elementos.&lt;P&gt;\n&#8221;); 
+        $examenes2=array( &#8220;jueves&#8221;=&gt;&#8221;Desarrollo de funciones&#8221;, 
+        &#8220;viernes&#8221;=&gt;&#8221;Implantaci&oacute;n de aplicaciones&#8221;); 
+        <br>
+        $duantos2=count($examenes2);<br>
+        $examenes2=count($examenes); <br>
+        $examenes2[&#8220;sabado&#8221;]=&#8221;FCT&#8221;; <br>
+        print(&#8220;El array \$examenes2 contiene $cuantos2 elementos\n&#8221;);<br>
+        $examenes=array_merge (examenes1,&amp;examees&#8221;);<br>
+        $cuantos=count($examenes);<br>
+        print(&#8220;El array \$examenes contiene $cuantos elementos.\n&#8221;); 
+        <br>
+        ?&gt; <br>
+        &lt;/BODY&gt; <br>
+        &lt;/HTML&gt; Este script crea dos arrays (L7-10 y 13-15) de 3 a 2 elementos. 
+        Al segundo array le a&ntilde;ade un nuevo elemento en L17. La funci&oacute;n 
+        array_merge (L7) convierte ambos arrays en uno s&oacute;lo.</p>
+      <p >El siguiente script obtiene los elementos de dos 
+        arrays por dos m&eacute;todos distintos:
+        En L7 creamos un array de 5 elementos. Aqu&iacute; tendremos &uacute;nicamente 
+        el valor del &iacute;ndice para distinguir el valor de sus elementos. 
+        Esto significa que para acceder a ellos bastar&aacute; con utilizar ese 
+        valor.</p>
+      <p >En L12 &#8211; 17 creamos el array ex&aacute;menes 
+        asignando un nombre a cada uno de los elementos que contiene. Hacerlo 
+        as&iacute; supone que tendremos que definirlos a ellos mediante dicho 
+        nombre. Si por alguna raz&oacute;n no deseamos utilizar su nombre podremos 
+        servirnos de la funci&oacute;n each() que va obteniedo cada uno de los 
+        valores de los elementos del array.</p>
+      <p >&lt;HTML&gt;<br>
+        &lt;HEAD&gt;<br>
+        &lt;TITLE&gt;Obtenci&oacute;n de elementos de un array &lt;/TITLE&gt; 
+        <br>
+        &lt;/HEAD&gt; <br>
+        &lt;BODY&gt; <br>
+        &lt;?php<br>
+        $semana=array(&#8220;lunes,&#8221;,&#8221;martes&#8221;,&#8221;miercoles&#8221;,&#8221;jueves&#8221;,&#8221;viernes&#8221;); 
+        for($n=0;$n&lt;count($semana);$n++){ <br>
+        &nbsp;&nbsp;&nbsp;print(&#8220;$semana[$n]&#8221;); <br>
+        } <br>
+        $examenes=array(&#8220;lunes&#8221;=&gt;&#8221;Formaci&oacute;n y orientaci&oacute;n 
+        laboral&#8221;, &#8220;martes&#8221;=&gt;&#8221;Redes de &Aacute;rea local&#8221;, 
+        &#8220;miercoles&#8221;=&gt;&#8221;Fundamentos de programaci&oacute;n&#8221;, 
+        &#8220;jueves&#8221;=&gt;&#8221;Desarrollo de funciones&#8221;, &#8220;viernes&#8221;=&gt;&#8221;Implantaci&oacute;n 
+        de aplicaciones&#8221;);<br>
+        for($n=0;$n&lt;count($examenes);$n++){ <br>
+        &nbsp;&nbsp;&nbsp;$elemento=each($examenes); <br>
+        print(&#8220;El $elemento [key] tenemos $elemento[value]&lt;p&gt;\n&#8221;); 
+        <br>
+        } <br>
+        ?&gt; <br>
+        &lt;/BODY&gt;<br>
+        &lt;/HTML&gt; <br>
+        <br>
+        Cuando llamamos a each () por primera vez el puntero se encuentra sobre 
+        el primer elemento y asignar&aacute; los valores [key] y [value] el array 
+        que hayamos indicado (en este caso $elemento[0]?lunes&#8230;.) </p>
+      <p >El proximo script ordena los elementos de un array mediante las funciones 
+        asort(), que ordena los valores y ksort(), que ordena las claves. <br>
+        &lt;HTML&gt; <br>
+        &lt;HEAD&gt; <br>
+        &lt;TITLE&gt;Obtenci&oacute;n de elementos de un array &lt;/TITLE&gt; 
+        <br>
+        &lt;/HEAD&gt; <br>
+        &lt;BODY&gt; <br>
+        &lt;?php <br>
+        $nombres=array( &#8220;Ricardo&#8221;=&gt;&#8221;9&#8221;, &#8220;Sara&#8221;=&gt;&#8221;8&#8221;, 
+        &#8220;Teresa&#8221;=&gt;&#8221;8&#8221;, &#8220;Francisco&#8221;=&gt;&#8221;7&#8221;, 
+        &#8220;Manuel&#8221;=&gt;&#8221;4&#8221;, &#8220;Ram&oacute;n&#8221;=&gt;&#8221;5&#8221;, 
+        ); <br>
+        for($n=0;$n&lt;count($nombres);$n++){<br>
+        &nbsp;&nbsp;&nbsp;$elemento=each($nombres); <br>
+        &nbsp;&nbsp;&nbsp;print(&#8220;La nota de $elemento [key] es $elemento[value]&lt;br&gt;\n&#8221;); 
+        <br>
+        } <br>
+        arsort($nombres); <br>
+        reset($nombres); print(&#8221;&lt;p&gt;Tras ordenar el array por valores 
+        mediante arsort():&lt;br&gt;&#8221;); <br>
+        for($n=0;$n&lt;count($nombres);$n++){<br>
+        &nbsp;&nbsp;&nbsp;$elemento=each($nombres);<br>
+        &nbsp;&nbsp;&nbsp;print(&#8220;La nota de $elemento [key] es $elemento[value]&lt;br&gt;\n&#8221;); 
+        <br>
+        } <br>
+        krsort($nombres); <br>
+        reset($nombres); <br>
+        print(&#8221;&lt;p&gt;El aray ordenado por claves con ksort() queda:&lt;br&gt;&#8221;); 
+        <br>
+        for($n=0;$n&lt;count($nombres);$n++){ <br>
+        &nbsp;&nbsp;&nbsp;$elemento=each($nombres); <br>
+        &nbsp;&nbsp;&nbsp;print(&#8220;La nota de $elemento [key] es $elemento[value]&lt;br&gt;\n&#8221;); 
+        <br>
+        } <br>
+        ?&gt; <br>
+        &lt;/BODY&gt;<br>
+        &lt;/HTML&gt;</p>
+      <p >
+        Despu&eacute;s de cada for utilizamos la funci&oacute;n reset() que vuelve 
+        a utilizar el puntero en el primer elemento puesto que el for lo habr&aacute; 
+        dejado al final del array.
+        Existen otras funciones de ordenaci&oacute;n como krsort(), que hace lo 
+        mismo que ksort() pero en orden inverso o la equivalente inversa de asort() 
+        que es arsort(). Ambas funciones respetan tanto las claves como sus valores.
+        Otras funciones son sort() y su inversa rsort() que reemplazan las claves 
+        por un &iacute;ndice num&eacute;rico. Si con el array $nombres anterior 
+        hicieramos sort($nombres); el resultado del for ser&iacute;a:</p>
+      <p >La nota de 0 es 4.
+        La nota de 1 es 5.
+        La nota de 2 es 7.
+        La nota de 3 es 87.
+        La nota de 4 es 8.
+        La nota de 5 es 9.</p>
+      <h3>Arrays y cadenas <a name="cadenas"></a></h3>
+      <p >En ocasiones es conveniente pasar los valores de 
+        una cadena a un array o viceversa. Para hacer estos cambios disponemos 
+        de dos funciones.
+        $array=explode($separador,$cadena);
+        convierte en una cadena en un array. Para diferenciar un elemento de otro 
+        le indicamos cual ser&aacute; el car&aacute;cter indicando el $separador:
+        $array=explode(&#8220; &#8221;,$cadena);?Cada elemento del array termina 
+        al encontrar un espacio en blanco.
+        $array=explode(&#8220;;&#8221;,$cadena);? Cada elemento del array termina 
+        al encontrar un punto y coma.</p>
+      <p >$array=implode($separador,$array);
+        Convierte un array en una cadena. Para diferenciar un elemento de otro 
+        le indicamos cual ser&aacute; el car&aacute;cter indicando el $separador:
+        $cadena=implode(&#8220; &#8221;,$array);? En la cadena aparecer&aacute;n 
+        todos los elementos separados por un espacio.
+        $separador=&#8221;,&#8221;;
+        $cadena=implode($separador,$array);? En la cadena aparecer&aacute;n todos 
+        los elementos separados por una coma.</p>
+      <p >Como ejemplo vamos a crear un formulario que pida 
+        introducir varias palabras separadas por espacios en blanco. El texto 
+        ser&aacute; enviado al script &#8220;recibircadena1.php&#8221; por el 
+        m&eacute;todo post</p>
+      <p>&lt;HTML&gt; <br>
+        &lt;HEAD&gt;<br>
+        &lt;TITLE&gt;Formulario &lt;/TITLE&gt;<br>
+        &lt;/HEAD&gt; <br>
+        &lt;BODY&gt;<br>
+        &lt;FORM ACTION=&#8221; recibircadena1.php&#8221;METHOD=POST&gt; Teclea 
+        un valor separado pro espacios en blanco:&lt;br&gt; <br>
+        &lt;INPUT TYPE=TEXT NAME=&#8221;lista&#8221; SIZE=80&gt;&lt;br&gt; <br>
+        &lt;INPUT TYPE=SUBMIT NAME=&#8221;boton&#8221;VALUE=&#8221;Enviar&#8221;&gt; 
+        <br>
+        &lt;/FORM&gt; <br>
+        &lt;/BODY&gt;<br>
+        &lt;/HTML&gt; <br>
+        <br>
+        El segundo script recibe los datos d una variable de cadena $lista que 
+        convierte en array por medio de la funci&oacute;n explode(). En L9 ordena 
+        el array, utilizando sort() porque en este caso no importan las claves. 
+        Una vez ordenado el array volvemos a convertirlo en una cadena de caracteres 
+        con los elementos separados por el c&iacute;digo de l&iacute;nea nueva 
+        para imprimir cada uno de ellos en una nueva l&iacute;nea.</p>
+      <p >&lt;HTML&gt; <br>
+        &lt;HEAD&gt; <br>
+        &lt;TITLE&gt; Recepci&oacute;n Formulario &lt;/TITLE&gt; <br>
+        &lt;/HEAD&gt; <br>
+        &lt;BODY&gt; <br>
+        &lt;?php //Esta p&aacute;gina convierte en array los datos recividos del 
+        formulario enviarcadena1.html <br>
+        $array=xplode(&#8221;&#8221;,$lista); <br>
+        sort($array); <br>
+        $lista2=imlode(&#8220;&lt;BR&#8221;,$array) ;<br>
+        print(&#8220;La lista ordenada alfabeticamente es:&lt;br&gt;$lista2&#8221;); 
+        <br>
+        ?&gt; <br>
+        &lt;/BODY&gt; <br>
+        &lt;/HTML&gt;</p>
+      <p >Sobre explode(), como con implode() podemos utilizar 
+        m&aacute;s de un car&aacute;cter como delimitador: en lugar del espacio 
+        en blanco podiamos haber separado &#8220;,&#8221;,&#8221;--&#8221; o cualquier 
+        otro grupo de caracteres.</p>
+      <p >Tambi&eacute;n podemos crear un array directamente 
+        desde un formulario:</p>
+      <p > &lt;HTML&gt; <br>
+        &lt;HEAD&gt;<br>
+        &lt;TITLE&gt;Formulario con array arryform.html &lt;/TITLE&gt;<br>
+        &lt;/HEAD&gt; <br>
+        &lt;BODY&gt; <br>
+        &lt;FORM ACTION=&#8221; recibircarrayform.php&#8221;METHOD=POST&gt; <br>
+        Nombre:&lt;INPUT TYPE=TEXT NAME=&#8221;array[nombre]&#8221; SIZE=80&gt;&lt;br&gt; 
+        Apellidos:&lt;INPUT TYPE=TEXT NAME=&#8221;array[apellido]&#8221; SIZE=80&gt;&lt;br&gt; 
+        Emilio: &lt;INPUT TYPE=TEXT NAME=&#8221;array[email]&#8221; SIZE=80&gt;&lt;br&gt; 
+        Comentarios: &gt;<br>
+        &lt;TEXTAREA NAME= &#8221;array[comentarios]&#8221; ROWS=5 COLS=40&gt;<br>
+        &lt;/TEXTAREA&gt; <br>
+        &lt;INPUT TYPE=SUBMIT NAME=&#8221;SUBMIT&#8221;VALUE=&#8221;Enviar&#8221;&gt; 
+        <br>
+        &lt;/FORM&gt; <br>
+        &lt;/BODY&gt;<br>
+        &lt;/HTML&gt;</p>
+      <p >Cuando &#8220;recibirarray.php&#8221;le lleguen los 
+        datos lo har&aacute;n en la forma $array[nombre], $array[apellido], &#8230;por 
+        la misma raz&oacute;n que a partir de un campo &#8220;dado&#8221; obtenemos 
+        la variable &#8220;$dato&#8221;.</p>
+      <p >&lt;HTML&gt; <br>
+        &lt;HEAD&gt; <br>
+        &lt;TITLE&gt;Formulario con array arryform.html &lt;/TITLE&gt; <br>
+        &lt;/HEAD&gt; <br>
+        &lt;BODY&gt; <br>
+        &lt;?php //Esta p&aacute;gina recibe los datos generados por &#8220;arrayform.html&#8221;. 
+        $array[&#8220;nombre&#8221;]= $array[&#8220;nombre&#8221;.&#8221; &#8221; 
+        $array[&#8220;apellido&#8221;]; <br>
+        print(&#8220;Tu nombre completo es $array[nombre].&lt;br &gt;\n); <br>
+        ?&gt;<br>
+        &lt;/BODY&gt; <br>
+        &lt;/HTML&gt;</p>
+      <p >
+        En L8 modificamos el elemento $array[nombre] por su valor concatenado 
+        a $array[apellido] que imprimimos en la l&iacute;nea siguiente. La referencia 
+        a cada elemento del array podemos hacerla con o sin comillas.</p>
+      <p >En php tambi&eacute;n se pueden crear arrays multidimiendionales, 
+        para ello basta con hacer que cada elemento de un array tenga como valor 
+        otro array. Adem&aacute;s tienen la ventaja de que no deben de ser homog&eacute;neos. 
+        El primer elemento puede contener otro array, el segundo una cadena, el 
+        tercero un valor num&eacute;rico.</p>
+      <h3>Expresiones regulares<a name="expresiones"></a></h3>
+      <table width="75%" border="0" align="center" >
+        <tr> 
+          <td><div align="center">.</div></td>
+          <td><div align="center">Cualquier car&aacute;cter</div></td>
+        </tr>
+        <tr> 
+          <td><div align="center">&#710;a</div></td>
+          <td><div align="center">Empieza por a</div></td>
+        </tr>
+        <tr> 
+          <td><div align="center">a$</div></td>
+          <td><div align="center">Termina por a</div></td>
+        </tr>
+        <tr> 
+          <td><div align="center">a+</div></td>
+          <td><div align="center">Al menos una a</div></td>
+        </tr>
+        <tr> 
+          <td><div align="center">a?</div></td>
+          <td><div align="center">Ninguna o una a</div></td>
+        </tr>
+        <tr> 
+          <td><div align="center">\n</div></td>
+          <td><div align="center">L&iacute;nea nueva</div></td>
+        </tr>
+        <tr> 
+          <td><div align="center">\t</div></td>
+          <td><div align="center">Tabulador</div></td>
+        </tr>
+        <tr> 
+          <td><div align="center">\</div></td>
+          <td><div align="center">Secuencia de escape</div></td>
+        </tr>
+        <tr> 
+          <td><div align="center">(ab)</div></td>
+          <td><div align="center">&#8220;ab&#8221; agrupadas</div></td>
+        </tr>
+        <tr> 
+          <td><div align="center">a|b</div></td>
+          <td><div align="center">a o b</div></td>
+        </tr>
+        <tr> 
+          <td><div align="center">a{2}</div></td>
+          <td><div align="center">aa</div></td>
+        </tr>
+        <tr> 
+          <td><div align="center">a{1,}</div></td>
+          <td><div align="center">Una o m&aacute;s a</div></td>
+        </tr>
+        <tr> 
+          <td><div align="center">a{1,3}</div></td>
+          <td><div align="center">De una a 3 a</div></td>
+        </tr>
+        <tr> 
+          <td><div align="center">[a-z]</div></td>
+          <td><div align="center">Cualquier min&uacute;scula</div></td>
+        </tr>
+        <tr> 
+          <td><div align="center">[A-Z]</div></td>
+          <td><div align="center">Cualquier may&uacute;scula</div></td>
+        </tr>
+        <tr> 
+          <td><div align="center">[0-9]</div></td>
+          <td><div align="center">Cualquier d&iacute;gito</div></td>
+        </tr>
+      </table>
+      <p>Las expresiones regulares permiten crear patrones de coincidencia para 
+        b&uacute;squedas y sustituciones. Para definir un patr&oacute;n de coincidencia 
+        contamos con una serie de reglas, algunas de las cuales aparecen aqu&iacute;. 
+        Como norma general los patrones ir&aacute;n entre comillas dobles&#8221;&#8221;. 
+        Para comprobar un patr&oacute;n con una cadena tenemos las funciones ereg() 
+        y eregi(). La diferencia entre ellas es que la primera distingue entre 
+        may&uacute;sculas y min&uacute;sculas mientras que la segunda no lo hace. 
+        Para buscar y sustituir disponemos de eregi_replace()</p>
+      <p>Para ilustrar el funcionamiento de las expresiones regulares vamos a 
+        crear dos scripts: El primero es un viejo conocido que crea un formulario 
+        cuyos datos son enviados a &#8220;regular.php&#8221; en forma de array. 
+        <br>
+        &lt;HTML&gt; <br>
+        &lt;HEAD&gt; <br>
+        &lt;TITLE&gt;Formulario para comparaci&oacute;n &lt;/TITLE&gt; <br>
+        &lt;/HEAD&gt;<br>
+        &lt;BODY&gt; <br>
+        &lt;FORM ACTION=&#8221; regular1.php&#8221;METHOD=POST&gt; <br>
+        Nombre: &lt;INPUT TYPE=TEXT NAME=&#8221;array[nombre]&#8221; SIZE=20&gt;&lt;br&gt; 
+        <br>
+        Apellidos: &lt;INPUT TYPE=TEXT NAME=&#8221;array[apellidos&#8221; SIZE=40&gt;&lt;br&gt; 
+        <br>
+        E-mail: &lt;INPUT TYPE=TEXT NAME=&#8221;array[mail]&#8221; SIZE=60&gt;&lt;br&gt; 
+        <br>
+        Comentarios: &gt;<br>
+        &lt;TEXTAREA NAME= &#8221;array[comentarios]&#8221; ROWS=5 COLS=40&gt;<br>
+        &lt;/TEXTAREA&gt;&lt;br&gt; <br>
+        &lt;INPUT TYPE=SUBMIT NAME=&#8221;boton&#8221;VALUE=&#8221;Enviar&#8221;&gt; 
+        <br>
+        &lt;/FORM&gt; <br>
+        &lt;/BODY&gt; <br>
+        &lt;/HTML&gt; <br>
+        <br>
+        Este segundo script recibe los datos, comprueba si hemos introducido nombre 
+        y apellidos y si falta alguno de ellos muestra un mensaje. <br>
+        <br>
+        &lt;HTML&gt; <br>
+        &lt;HEAD&gt; <br>
+        &lt;TITLE&gt;Utilizando expresiones regulares &lt;/TITLE&gt; <br>
+        &lt;/HEAD&gt; <br>
+        &lt;BODY&gt; <br>
+        &lt;?php //esta p&aacute;gina recibe los nombres del formulario if(($array[&#8220;nombre&#8221;])AND($array[&#8220;apellido&#8221;])){ 
+        <br>
+        &nbsp;&nbsp;&nbsp;$array[&#8220;nombre&#8221;]= $array[&#8220;nombre&#8221;].&#8221;&#8221;. 
+        <br>
+        &nbsp;&nbsp;&nbsp;$array[&#8220;apellido&#8221;]; <br>
+        }else{<br>
+        &nbsp;&nbsp;&nbsp;print(&#8220;Teclea nombre y a apellidos&lt;br&gt;\n&#8221;); 
+        <br>
+        } <br>
+        $patron=.+@.+\..+;<br>
+        if(eregi($patron, $array[&#8220;email&#8221;])){ <br>
+        &nbsp;&nbsp;&nbsp;print(&#8220;Hemos recibido sus datos correctamente&lt;br&gt;\n&#8221;); 
+        <br>
+        }else{<br>
+        &nbsp;&nbsp;&nbsp;print(&#8220;Teclea mail v&aacute;lido&lt;br&gt;\n&#8221;); 
+        <br>
+        } <br>
+        ?&gt; <br>
+        &lt;/BODY&gt; <br>
+        &lt;/HTML&gt;</p>
+      <p>El patr&oacute;n lo definimos como al menos un car&aacute;cter (.+), 
+        el s&iacute;mbolo @, al menos otro car&aacute;cter (.+), un punto (\.)y 
+        al menos otro car&aacute;cter m&aacute;s.</p>
+      </td>
+  </tr>
+  <tr> 
+    <td></td>
+    <td>&nbsp;</td>
+    <td><div align="right"><a href="../index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

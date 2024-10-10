@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Agrupamiento  de datos Oracle</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta name="keywords" content="Manual Oracle, Tutorial Oracle, Manual SQL, Tutorial SQL, Ejercicios Oracle">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table width="555" height="268" align="left" background="../imagenes/fondologo.jpg">
+  <tr> 
+    <td height="38" colspan="2"> <h2>Agrupamiento 
+        de datos</h2></td>
+  </tr>
+  <tr> 
+    <td height="197" colspan="2"><p>SQL proporciona una forma 
+        eficiente para manejar la informaci&oacute;n con el agrupamiento de datos 
+        a trav&eacute;s de formaci&oacute;n de grupos y las funciones correspondientes, 
+        dando la posibilidad de procesar no solo registros individuales como hemos 
+        hecho hasta ahora. Tambi&eacute;n podemos agrupar registros por un criterio 
+        determinado, como por ejemplo, agrupar por clientes las ventas realizadas.</p>
+      <p>Cada grupo tendr&aacute; como resultado de la consulta 
+        una fila resumen que contiene la informaci&oacute;n del grupo.</p>
+      <p>Para la formaci&oacute;n de grupos adicionamos, a 
+        la forma b&aacute;sica de la sentencia SELECT vista anteriormente, la 
+        orden GROUP BY ubicada antes de ORDER BY, como se muestra a continuaci&oacute;n;</p>
+      <pre >SELECT    Lista... 
+FROM      Tabla, Tabla...
+
+WHERE     Condiciones
+
+GROUP BY  Expresi&oacute;n, Expresi&oacute;n,...
+          ORDER BY Expresi&oacute;n, Espresi&oacute;n,...
+; Terminador</pre>
+      <p>Las funciones para el procesamiento de grupos son:</p>
+      <p> 
+      <blockquote >- COUNT(columna) Cantidad de registros en 
+        que la columna tiene valores no nulos.
+        - COUNT(*) Cantidad de registros que hay en una tabla, incluyendo los 
+        valores nulos. 
+        - MIN(columna) valor m&iacute;nimo del grupo.
+        - MAX(columna) valor m&aacute;ximo del grupo.
+        - SUM(columna)Suma los valores del grupo.
+        - AVG(columna) Calcula valor medio del grupo, sin considerar los valores 
+        nulos.</blockquote></p>
+      <p>La lista de columnas a mostrar en la consulta puede 
+        contener las funciones de grupo, as&iacute; como la columna o expresi&oacute;n 
+        usada para formar los grupos en la orden GROUP BY. En una misma consulta 
+        no se pueden mezclar funciones de grupo con columnas o funciones que trabajan 
+        con registros individuales.</p>
+      <p>Las ventas por cliente es un buen ejemplo para mostrar 
+        el uso de los grupos.en el siguiente ejemplo se hace un resumen de ventas 
+        por cliente, con la cantidad de ventas, valor m&iacute;nimo, medio y m&aacute;ximo, 
+        as&iacute; como la suma total de ventas. La formaci&oacute;n del grupo 
+        ser&aacute; por el nombre del cliente y la columna a cuantificar para 
+        cada grupo ser&aacute; el valor de las ventas.</p>
+      <p>SELECT nombre &quot;Cliente&quot;, 
+        COUNT(valor) &quot;Ventas&quot;, 
+        MIN(valor) &quot;M&iacute;nima&quot;, 
+        AVG(valor)&quot;Media&quot;, 
+        MAX(valor)&quot;M&aacute;xima&quot;, 
+        SUM (valor)&quot;Total&quot; 
+        FROM clientes, ventas 
+        WHERE clientes.codigo=ventas.codigo 
+        GROUP BY articulo 
+        ORDER BY SUM (valor) DESC;</p></td>
+  </tr>
+  <tr> 
+    <td width="70" height="21"></td>
+    <td height="21"> <div align="right"><a href="../index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

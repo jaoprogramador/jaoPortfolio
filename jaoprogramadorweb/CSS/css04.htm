@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Selectores CSS</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación en CSS,Programas CSS,Aplicaciones en CSS,Ejercicios en CSS, Ejemplos de CSS,Tutoriales de CSS,Manuales CSS" name=description>
+<meta name="keywords" content="CSS, Manual CSS, tutorial CSS, Ejemplos CSS, ejercicios CSS, Cascading Style Sheet">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table width="555" height="329" align="left" background="../imagenes/fondologo.jpg">
+  <tr> 
+    <td height="39" colspan="3"> <h2>Selectores</h2></td>
+  </tr>
+  <tr> 
+    <td height="258" colspan="3"> <h3>Selectores CSS</h3>
+      <p> CSSS funciona a base de reglas , es decir, declaraciones sobre el estilo 
+        de uno o mas elementos. Las hojas de estilo est&aacute;n compuestas por 
+        una o mas de esas reglas <br>
+        aplicadas a un documento HTML o XML. La regla tiene dos partes: un selector 
+        y la declaraci&oacute;n. A su vez la declaraci&oacute;n est&aacute; compuesta 
+        por una propiedad y el valor que se le asigne.<br>
+        h1{color:red};<br>
+        h1 es el selector, mientras que {color:red} es la declaracion<br>
+        El selector funciona como enlace entre el documento y el estilo, especificando 
+        los elementos que se van a ver afectados por esa declaraci&oacute;n . 
+        La declaraci&oacute;n es la parte de la regla <br>
+        que establecer&aacute; cual ser&aacute; el efecto. En el ejemplo anterior, 
+        el selector h1 indica que todos elementos h1 se ver&aacute;n afectados 
+        por la declaraci&oacute;n donde se establece que la propiedad<br>
+        color va a tener el valor red(rojo) para todos los elementos h1 del documenton 
+        que este vinculado a esa hoha de estilos.</p>
+      <p>Como hemos dicho hay tres clases de selectores:<br>
+        - etiquetas:<br>
+        &lt;style type=&quot;text/css&quot;&gt;<br>
+        &lt;!--<br>
+        a{text-decoration:none;} <br>
+        &gt;<br>
+        &lt;/style&gt;<br>
+        - class: Dado que se puede necesitar el uso de diferentes versiones de 
+        estilos de un mismo elemento, CSS permite la especificaci&oacute;n de 
+        clases. Para definer una clase se a&ntilde;ade un nombre <br>
+        de clase al nombre de la etiqueta en cuesti&oacute;n<br>
+        mediante la notaci&oacute;n punto.</p>
+      <p>Definici&oacute;n:<br>
+        &lt;style type=&quot;text/css&quot;&gt;<br>
+        &lt;!--<br>
+        .clsRojo{color:red}<br>
+        h1.azul{font-size:24pt;color:blue}<br>
+        h1.verde{font-size:10pt;color:green}<br>
+        --&gt;<br>
+        &lt;/style&gt;<br>
+        Utilizaci&oacute;n:<br>
+        &lt;body&gt;<br>
+        &lt;b class=&quot;clsRojo&quot;&gt;Juantxu Arana Olalde&lt;/b&gt;<br>
+        &lt;i class=&quot;clsRojo&quot;&gt;=====================&lt;/i&gt;<br>
+        &lt;h1 class=&quot;azul&quot;&gt;JAO en Azul&lt;/h1&gt;<br>
+        &lt;h1 class=&quot;verde&quot;&gt;JAO en Verde&lt;/h1&gt;<br>
+        &lt;/body&gt;</p>
+      <p>- ID: Los identificadores funciona ee una forma similar a las clases, 
+        pero est&aacute;n limitados a la utilizaci&oacute;n para un solo elemento. 
+        Se utiliza # en lugar del punto.</p>
+      <p>Definici&oacute;n:<br>
+        &lt;style type=&quot;text/css&quot;&gt;<br>
+        &lt;!--<br>
+        #idBoldItal{font-weight:bold;font-style:italic}<br>
+        #titulo{text-align:center;color:blue}<br>
+        --&gt;<br>
+        &lt;/style&gt;<br>
+        Utilizaci&oacute;n:<br>
+        &lt;body&gt;<br>
+        &lt;b id=&quot;idBoldItal&quot;&gt;J A O&lt;/b&gt;<br>
+        &lt;H2 id=&quot;titulo&quot;&gt;J u a n t x u &lt;/H&quot;&gt;<br>
+        &lt;/body&gt;</p></td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>:.: Main/Contacto:.:</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+ <link href="../styles/estilos.css" rel="stylesheet" type="text/css">
+<script language="JavaScript" type="text/JavaScript">
+<!--
+function MM_findObj(n, d) { //v4.01
+  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
+  if(!x && d.getElementById) x=d.getElementById(n); return x;
+}
+
+function MM_validateForm() { //v4.0
+  var i,p,q,nm,test,num,min,max,errors='',args=MM_validateForm.arguments;
+  for (i=0; i<(args.length-2); i+=3) { test=args[i+2]; val=MM_findObj(args[i]);
+    if (val) { nm=val.name; if ((val=val.value)!="") {
+      if (test.indexOf('isEmail')!=-1) { p=val.indexOf('@');
+        if (p<1 || p==(val.length-1)) errors+='- '+nm+' Debes introducir una dirección de correo electrónico\n';
+      } else if (test!='R') { num = parseFloat(val);
+        if (isNaN(val)) errors+='- '+nm+' debe contener un numero.\n';
+        if (test.indexOf('inRange') != -1) { p=test.indexOf(':');
+          min=test.substring(8,p); max=test.substring(p+1);
+          if (num<min || max<num) errors+='- '+nm+' debe contener una cadena entre '+min+' y '+max+'.\n';
+    } } } else if (test.charAt(0) == 'R') errors += '- '+nm+' no introducido.\n'; }
+  } if (errors) alert('E R R O R ! ! ! por:\n'+errors);
+  document.MM_returnValue = (errors == '');
+}
+//-->
+</script>
+</head>
+
+<body bgproperties="fixed">
+<form action="mailto:jaoprogramador@gmail.com?subject=mail Contacto" method="post" enctype="text/plain" name="form1" target="_self">
+  <table width="646" height="291" align="left" background="../imagenes/fondologo.jpg"  >
+    <tr> 
+      <td height="46" colspan="3"> <h2>M 
+          A I L / C O N T A C T O </h2></td>
+    </tr>
+    <tr> 
+      <td width="18" height="183">&nbsp;</td>
+      <td width="22">&nbsp;</td>
+      <td width="499"><p>Nombre y Apellidos:   
+          <input name="Nombre" type="text"  id="Nombre"SIZE=39>
+        </p>
+        <p>  Correo Electronico:&nbsp;&nbsp;   
+          <input name="email" type="text"  id="email"SIZE=39>
+        </p>
+        <p  >Comentario: </p>
+        <p  >&nbsp;&nbsp;&nbsp; 
+          <textarea name="comentario" COLS=56 ROWS=3  id="comentario"></textarea>
+        </p></td>
+    </tr>
+    <tr> 
+      <td height="34">&nbsp;</td>
+      <td height="34">&nbsp;</td>
+      <td height="34"> <table width="27%" height="25" align="right">
+          <tr> 
+            <td width="58%"><input name="botonenviar" type="submit" id="botonenviar" onClick="MM_validateForm('Nombre','','R','email','','RisEmail','comentario','','R');return document.MM_returnValue" value="Enviar"></td>
+            <td width="42%"><input name="botonborrar" type="reset" id="botonborrar" value="Borrar"></td>
+          </tr>
+        </table></td>
+    </tr>
+    <tr>
+      <td height="16">&nbsp;</td>
+      <td height="16">&nbsp;</td>
+      <td height="16">
+<div align="right"><a href="../index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+          Inicio</a></div></td>
+    </tr>
+  </table>
+</form>
+<p>&nbsp;</p>
+</body>
+</html>

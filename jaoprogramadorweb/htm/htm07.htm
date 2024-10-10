@@ -1,0 +1,162 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Tablas</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="keywords" content="Tablas, Html, Lenguaje Html, Manual Html, Tutorial, ejercicios Html">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+  <link href="../styles/estilos.css" rel="stylesheet" type="text/css"></head>
+  
+<body>
+<table width="555" height="334" align="left" background="../imagenes/fondologo.jpg">
+  <tr> 
+    <td height="39" colspan="2"> <h2>  Tablas  </h2></td>
+  </tr>
+  <tr> 
+    <td height="230" colspan="2"> <table width="62%" border="0"  >
+        <tr> 
+          <td width="28%"  ><h3>Contenido:</h3></td>
+          <td width="72%">&nbsp;</td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="htm07.htm#intro">- Introducci&oacute;n</a></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="htm07.htm#table">- Marca &lt;TABLE&gt;</a></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="htm07.htm#tr">- Marca &lt;TR&gt;</a></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="htm07.htm#td">- Marca &lt;TD&gt;</a></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="htm07.htm#th">- Marca &lt;TH&gt;</a></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="htm07.htm#caption">- Marca &lt;CAPTION&gt;</a></td>
+        </tr>
+      </table>
+       <h3>  Introducci&oacute;n  <a name="intro"></a> </h3>
+       <p>La estructura de una tabla se define mediante: 
+      <blockquote  >- una marca de inicio de la tabla (TABLA)
+        - una marca de comienzo de una nueva l&iacute;nea (TR)
+        - una marca de comienzo de una celda (TD)
+        Al final de cada uno de estos elementos de deberá definir r la marca de 
+        final de correspondiente.
+      </blockquote>
+       <p>Una celda puede contener algunos de los siguientes 
+        elementos:
+      <blockquote  >- texto
+        - listas
+        - otras tablas
+        - imágenes
+        - enlaces de hipertexto
+        - elementos de formulario</blockquote>
+      <p></p>
+       <p>La representaci&oacute;n de una tabla es actualmente 
+        muy dependiente del rosear utilizado.</p>
+       <h3>  TABLE  <a name="table"></a></h3>
+       <p>La marca &lt;TABLE&gt; permite la apertura de una 
+        tabla, el fin de la tabla se especifica con &lt;/TABLE&gt;.</p>
+       <p>Se puede indicar alguno de los siguientes atributos:
+      <blockquote  >- BORDER: define el grosor del marco exterior 
+        (puede ser cero.)
+        - CELLPADDING: define el espacio alrededor del texto de una celda.
+        - CELLSPACING: define el espacio entre celdas. </blockquote>
+      <p></p>
+       <p>El valor de estos atributos se especifica en p&iacute;xeles. 
+        Cuando no se les asigna ning&uacute;n valor expl&iacute;citamente estos 
+        atributos tomar&aacute;n valores definidos por defecto. El valor por defecto 
+        del atributo BORDER es cerro por lo que si por defecto este atributo no 
+        se especifica se obtendr&aacute; una tabla sin bordes la cual suele ser 
+        muy &uacute;til para la alineaci&oacute;n de elementos, uno al lado del 
+        otro, o uno debajo de otro. Para que se especifiquen los bordes de la 
+        tabla bastar&aacute; asignarle a este atributo un valor, o no. Se puede 
+        determinar el tama&ntilde;o de la tabla, mediante los atributos:
+      <blockquote  > 
+        <p>- Width: que define el ancho de la tabla.
+          - Heigth: que define el alto de la tabla.</p>
+      </blockquote>
+       <h3>  TR   <a name="tr"></a></h3>
+      <p>  La marca &lt;TR&gt; inicia una l&iacute;nea 
+        de la tabla que terminar&aacute; con &lt;/TD&gt;. Admite los atributos:  
+      <blockquote  >- VALIGN: permite una alineación del texto 
+        en el sentido vertical de la celda. Admite los valores: TOP, BOTTOM y 
+        MIDDLE.
+        - ALIGN: permite una alineación del texto en el sentido horizontal de 
+        la celda. Admite los valores RIGHT, CENTER y LEFT.</blockquote>
+      <p></p>
+       <p>Estos atributos se amplifican sobre toda la fila, 
+        salvo cuando un atributo de &lt;TD&gt; contradice esta alineaci&oacute;n.</p>
+       <h3>  TD  <a name="td"></a></h3>
+       <p>La marca &lt;TD&gt; delimita el inicio de una celda. 
+        Admite los atributos: 
+      <blockquote> 
+         <p>- VALIGN: alineación del texto en sentido vertical.
+          - ALIGN: alineación del texto en sentido horizontal. 
+          - COLSPAN: define una celda con una anchura m&uacute;ltiplo de una columna 
+          b&aacute;sica.
+          - ROWSPAN: define una celda con una anchura m&uacute;ltiplo de la fila 
+          b&aacute;sica.
+          - NOWRAP: Obliga al browser a inscribir todo el texto de la celda en 
+          una sola l&iacute;nea.</p>
+      </blockquote>
+       <p>En las tablas de ajuste autom&aacute;tico la anchura 
+        de las celdas depende de texto. </p>
+      <p></p>
+       <h3>  TH  <a name="th"></a></h3>
+       <p>La marca &lt;TD&gt; es id&eacute;ntica a la &lt;TH&gt;, 
+        pero el texto de las celdas se considera como texto de cabecera. Este 
+        texto se entra autom&aacute;ticamente y se pone en negrita. Admite los 
+        mismos par&aacute;metros que la marca &lt;TD&gt; (VALIGN, ALIGN, COLSPAN, 
+        ROWSPAN, NOWRAP) .
+        
+        
+      </p>
+       <h3>  CAPTION  <a name="caption"></a></h3>
+       <p>Esta manera permite poner un t&iacute;tulo por encima 
+        (atributo ALIGN=TOP) o debajo (atributo ALIGN=BOTTON) de la tabla. Ejemplos:</p>
+      <table width="75%" border="1">
+        <tr> 
+          <td>&nbsp;</td>
+          <td colspan="3"  >  Atributos de alineaci&oacute;n, 
+            Align y VAlign  </td>
+        </tr>
+        <tr> 
+          <td  >  Alineaci&oacute;n vertical  </td>
+          <td  >Top</td>
+          <td  >Middle</td>
+          <td  >Botton</td>
+        </tr>
+        <tr> 
+          <td  >  Alineaci&oacute;n vertical  </td>
+          <td  >Left</td>
+          <td  >Center</td>
+          <td  >Right</td>
+        </tr>
+      </table>
+      <p>&nbsp;</p></td>
+  </tr>
+  <tr> 
+    <td width="70" height="21"> </td>
+    <td height="21"> <a href="../index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></h3></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Ejercicios Oracle</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Oracle, sql, pl/sql, programacion oracle, ejercicios, ejemplos, subconsultas, select in">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table width="555" height="269" align="left" background="../imagenes/fondologo.jpg">
+  <tr> 
+    <td height="39" colspan="3"> <h2>E 
+        J E R C I C I O S</h2></td>
+  </tr>
+  <tr> 
+    <td><h3>SELECT 
+        ... FROM WHERE...IN(SELECT...</h3>    <p>
+        a) Ejemplos de subconsultas con operadores aritm&eacute;ticos y relacionales.</p>
+        <p>1.- Seleccionar el apellido de los empleados que trabajen en madrid o barcelona.<br>
+select apellido from emple where dept_no in (select dept_no from depart where lon in ('MADRID','BARCELONA'));</p>
+        <p>2.- Seleccionar el apellido y el oficio de todos los empleados del departamento 20 cuyo trabajo sea identico al de los empleados del departamento ventas.<br>
+  select aoellido,oficiofrom emple where dept_no =20 and oficio in( select oficio from emple where dept_no =(select dept_no from depart where dnombre='ventas'));</p>
+        <p>3.- Obtener el departamento de los empleados con el mismo oficio y el salario de 'Gil'.<br>
+  select apellido, salario from emple where (oficio,salario)= (select oficio, salario from emple where apellido='Gil');</p>
+        <p>4.- Obtener el nombre de alumno, su asignatura y su nota.<br>
+  select apenom, nombre, nota from alumnos where alumnos.dni =notas.dni and notas.cod= asignaturas.cod;</p>
+        <p>5.- Nombre de los alumnos matriculados en FOL.<br>
+  select apenom from alumnos,asignaturas, notas where alumnos.dni = notas.dni and notas.cod = asignaturas.cod and nombre='FOL';</p></td>
+    <td>&nbsp;</td>
+    <td><a href="../oraclezip/Ejer4.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>SELECT 
+      ... FROM WHERE...IN(SELECT...</h3>
+    <p>
+      b) Ejemplos de subconsultas con operadores aritm&eacute;ticos y relacionales.</p>
+    <p>1.- seleccionar de la tabla emple aquellas filas cuyo apellido empiece por A y el oficio tenga una e en cualquier posici&oacute;n.<br>
+select apellido,oficio from emple where apellido like '%A' or oficio like '%E%';</p>
+    <p>2.- Seleccionar el apellido, el oficio y la localidad de los departamentos donde trabajan los analistas.<br>
+  select apellido,oficio,loc from emple,depart where oficio='ANALISTA';</p>
+    <p>3.- Mostrar los empleados (nombre, oficio ,salario y fecha de alta) que desempe&ntilde;en el mismo oficio que JIMENEZ o que tengan el salario mayor o igual a FERNANDEZ.<br>
+  select apellido,oficio,salario,fecha_alt from emple where oficio = (select oficio from emple where apellido = 'JIMENEZ') or salario &gt;= (select salario from emple where apellido = 'FERNANDEZ');</p>
+    <p>4.- Mostar por pantalla el nombre, el oficio y el salario de los empleados del departamento de FERNANDEZ que tengan su mismo salario.<br>
+  select apellido,salario,oficio from emple where (dept_no, salario)in (select dept_no,salario from emple where apellido = 'FERNANDEZ' );</p>
+    <p>5.- Presentar los nombres y oficios de los empleados que tienen el mismo trabajo que JIMENEZ.<br>
+  select apellido,oficio from emple where = (select oficio from emple where apellido = 'JIMENEZ');</p>
+    <p>TABLA LIBRER&Iacute;A</p>
+    <p>6.- Visualizar el tema, estante y ejemplares de las filas de libreria de ejemplares comprendidos entre 8 y 15.<br>
+  select * from libreria where ejemplares between 8 and 15;</p>
+    <p>7.- Visualizar las columnas tema, estante y ejemplares de las filas cuyo estante no este comprendido entre la B y la D.<br>
+  select * from libreria where estante not between 'B' and 'D'; </p>
+    <p>8.- Visualizar con una sola orden select todos los temas de libreria cuyo numero de ejemplares sea inferior a los que hay en medicina.<br>
+  select tema from libreria where ejmeplares &lt;(select ejemplares from libreria where tena like 'medicina');</p>
+    <p>9.- Visualizar los temas de libreria cuyos numeros de ejemplares no este entre 15 y 20, ambos incluidos.<br>
+  select tema from libreria where ejemplares not between (15) and (20);</p></td>
+    <td>&nbsp;</td>
+    <td><a href="../oraclezip/Ejer5.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>SELECT ... FROM WHERE...IN(SELECT...</h3>
+    <p> 
+      c) Ejemplos de subconsultas con operadores aritm&eacute;ticos 
+      y relacionales.</p>
+    <p>10.- Visualizar todas las asignaturas que contengan en su interior tres letras 'o' y tengan alumnos matriculados en madrid.<br>
+select nombre from asignaturas, alumnos,notas where nombre like '%O%O%O%' and pobla ='Madrid' and alumnos.cod= notas.cod and notas.dni=alumnos.dni;</p>
+    <p>11.- Visualizar los nombres de los alumnos que tengan una nota entre 7 y 8 en la asignatura de FOL.<br>
+  select apenom,nombre,nota from alumnos ,asignaturas,notaswhere nombre ='FOL' and nota between 7 and 8 and alumnos.cod=notas.cod and notas.dni=alumnos.dni;</p>
+    <p>12.- Visualizar los nombres de asignaturas que no tengan suspensos.<br>
+  select nombre from asignaturas, notas where nota between 5 and 10;</p>
+    <p>13.- Visualizar los nombres de alumnos de madrid que tengan alguna asignatura suspendida.<br>
+  select apenom,direc,nota from alumnos , notas where direc='Madrid' and nota between 3 and 4;</p>
+    <p>14.- Mostrar los nombres de alumnos que tengan la misma nota que tiene &quot;D&iacute;az Fern&aacute;ndez, Mar&iacute;a&quot; en FOL en alguna asignatura.<br>
+  select apenom from alumnos where dni in (select dni from notas where nota = <br>
+  (select nota from notas where dni = (select dni from alumnos where apenom = 'D&iacute;az Fern&aacute;ndez. Mar&iacute;a') <br>
+  and cod = (select cod from asignaturas where nombre = 'FOL')));</p></td>
+    <td>&nbsp;</td>
+    <td><a href="../oraclezip/Ejer6.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td>
+<div align="right"><a href="../index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a>
+      </div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

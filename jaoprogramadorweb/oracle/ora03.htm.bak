@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Ejercicios Oracle</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Oracle, sql, pl/sql, programacion oracle, ejercicios, ejemplos, select group by">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table width="555" height="269" align="left" background="../imagenes/fondologo.jpg">
+  <tr> 
+    <td height="39" colspan="3"> <h2>E 
+        J E R C I C I O S</h2></td>
+  </tr>
+  <tr> 
+    <td> <h3>SELECT 
+        ... FROM ...GROUP BY...HAVING...</h3>
+    <p>
+        a) Ejemplos de consultas simples con operadores aritm&eacute;ticos y 
+        relacionales.</p>
+        <p>1) Visualizar los departamentos en los que el salario medio es mayor o igual que la media de todos los salarios;</p>
+        <p> select dept_no, avg(salario) from emple group by dept_no having avg(salario) &gt;= (select avg(salario) from emple);</p>
+        <p>2) A partir de la tabla emple, visualizar el n&uacute;mero de venderores del departamentos 'VENTAS'; <br>
+            <br>
+  select count(*) from emple where dept_no = (select dept_no from depart where dnombre ='VENTAS' and oficio = 'VENDEDOR');<br>
+  <br>
+  3) Partiendo de la tabla EMPLE, visualizar por cada oficio de los empleados del departamento 'VENTAS' la suma de salarios.</p>
+        <p> select sum(salario), oficio from emple where dept_no in (select dept_no from depart where dnombre like 'VENTAS') group by oficio; </p>
+        <p>4) seleccionar aquellos pedidos de la tabla EMPLE cuyo salario sea igual a la media de su salario en su departamento.<br>
+            <br>
+  select apellido, salario from emple where (salario,dept_no) in (select avg(salario),dept_no from emple group by dept_no);<br>
+        </p>
+        <p>5) A partir de la tabla emple, visualizar el numero de empleados de cada departamento cuyo oficio sea 'EMPLEADO'</p>
+        <p> select dept_no,count(*) from emple where oficio like 'EMPLEADO' group by dept_no;</p>
+        <p>6) Desde la tabla EMPLE, visualizar el departamento que tenga m&aacute;s empleados cuyo oficio sea 'EMPLEADO'<br>
+        </p>
+        <p> select dept_no, count(*) from emple where oficio like 'EMPLEADO' group by dept_no having count(*)=(select max(count(*)) from emple where oficio like 'EMPLEADO'group by dept_no);</p>
+        <p> <br>
+          7) A partir de las tablas EMPLE y DEPART, visualizar el n&uacute;mero de departamento y el nombre de departamento que tenga m&aacute;s empleados cuyo oficio sea 'EMPLEADO'</p>
+        <p> select dept_no,dnombre from depart where dept_no=(select dept_no from emple where oficio= 'EMPLEADO' group by dept_no having count(*)=(select max(count(*)) from emple where oficio='EMPLEADO' group by dept_no));</p>
+        <p>8) Buscar los departamentos que tienen m&aacute;s de dos personas trabajando en la misma profesi&oacute;n<br>
+            <br>
+  select dept_no,count(*) from emple group by dept_no,oficio having count(*)&gt;2;</p>
+        <p>9) Dada la tabla LIBRERIA, visualizar por cada estante la suma de los ejemplares.</p>
+        <p> select estante, sum(ejemplares) from libreria group by estante;</p>
+        <p>10) Visualizar el estante con m&aacute;s ejemplares de la tabla libreria.</p>
+        <p> select estante,sum(ejemplares) from libreria group by estante having sum(ejemplares)=(select max(sum(ejemplares)) from libreria group by estante);<br>
+        </p></td>
+    <td>&nbsp;</td>
+    <td><a href="../oraclezip/Ejer7.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>SELECT 
+      ... FROM ...GROUP BY...HAVING...</h3>
+    <p>
+      b) Ejemplos de consultas simples con operadores aritm&eacute;ticos y relacionales.</p>
+    <p>11) Visualizar los nombres de los alumnos de la tabla ALUM que aparezcan en alguna de estas tablas: NUEVOS y ANTIGUOS.</p>
+    <p> select nombre from alum intersect (select nombre from nuevos union select nombre from antiguos);</p>
+    <p>12) Escribir las distintas formas en que se puede poner la consulta anterior llegando al mismo resultado<br>
+        <br>
+  select nombre from alum where nombre in(select nombre from nuevo) union select nombre from antiguo);<br>
+  select nombre from alum where nombre in (select nombre from nuevo) or nombre in (select nombre from antiguo);</p>
+    <p>13) Visualizar los nombres de los alumnos de la tabla alum que aparezcan en estas dos tablas: antiguos y nuevos</p>
+    <p> select nombre from alum intersect select nombre from antiguos intersect select nombre from nuevos;</p>
+    <p>14) Escribir las distintas formas en que se puede poner la consulta anterior llegando al mismo resultado.</p>
+    <p> select nombre from alum where nombre in(select nombre from nuevos)and nombre in(select nombre from antiguos);</p>
+    <p>15) Visualizar aquellos nombres de la tabla alum que no esten en la tabla antiguos ni en la tabla nuevos</p>
+    <p> select nombre from alum minus select nombre from antiguos minus select nombre from nuevos;</p>
+    <p>17) Realizar una consulta en la que aparezca por cada centro y en cada especialidad el numero de profesores. Si el centro no tiene profesores debe aparecer un 0 en la columna de profesores.</p>
+    <p> select nombre,especialidad,count(*) from centros,profesores group by cod_centro,especialidad;<br>
+  select nombre,especialidad,count(dni) from centros,profesores group by cod_centro having (centros.cod_centro = profesores.cod_centro);</p>
+    <p>19) Obtener la especialidad con menos empleados</p>
+    <p> select especialidad from profesores where apellidos = (select max(apellidos) from profesores); </p></td>
+    <td>&nbsp;</td>
+    <td><a href="../oraclezip/Ejer8.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>SELECT ... FROM ...GROUP 
+      BY...HAVING...</h3>
+    <p> 
+	  c) Ejemplos de consultas simples con operadores 
+      aritm&eacute;ticos y relacionales.</p>
+    <p>1.- mostrar el oficio y media de salarios de aquellos empleados cuya media de salario sea mayor que 200000<br>
+      <br>
+select avg(salario),oficio from emple group by oficio having avg(salario)&gt;200000;</p>
+    <p>2.- mostrar el nombre y la comision de aquellos empleados que tengan una comision mayor que la de sanchez</p>
+    <p> select apellido,comision from emple where comision &gt; (select comision from emple where apellido like 'S&Aacute;NCHEZ');</p>
+    <p>3.- mostrar el nombre salario y n&ordm; de departamento de aquellos empleados que ganan el salario maximo de su departamento</p>
+    <p> select apellido,salario, dept_no from emple where salario in (select max(salario) from emple group by dept_no);</p>
+    <p>4.- mostrar el nombre del departamento que tanga mas empleados cuyo oficio sea presidente</p>
+    <p> select dnombre from depart group by dnombre having count(*) = (select max(count(*)) from emple where oficio <br>
+  like 'PRESIDENTE' group by dept_no);</p>
+    <p>5.- mostrar el numero de directores de la tabla emple que sean dep departamento producci&oacute;n<br>
+  select count(oficio) from emple where oficio = 'DIRECTOR' and dept_no = (select dept_no from depart where <br>
+  dnombre = 'PRODUCCI&Oacute;N');</p></td>
+    <td>&nbsp;</td>
+    <td><a href="../oraclezip/Ejer9.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td>
+<div align="right">
+        <a href="../index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

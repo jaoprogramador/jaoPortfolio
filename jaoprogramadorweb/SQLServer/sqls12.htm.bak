@@ -1,0 +1,75 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Triggers o disparadores</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="SQL Server,SQL Server 2000, sql, Transact-sql, programacion SQL Server, ejercicios, ejemplos">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table width="555" height="269" align="left" background="../imagenes/fondologo.jpg">
+  <tr> 
+    <td height="39" colspan="3"> <h2>E J E R C I C I O S</h2></td>
+  </tr>
+  <tr> 
+    <td><h3>Trigger</h3>
+      <p> 1.- Ejemplos de como crear un desencadenador de nombre Nuevolibro de 
+        tal forma que cada vez que una persona registra un libro en la tabla libros 
+        de la base de datos Libreria en otra tabla de nombre InsercionesLibros 
+        se inserte el ISBN del libro, el ususario que lo ha insertado y la fecha 
+        de inserci&oacute;n.</p>
+      <p>CREATE TRIGGER [NuevoLibro] ON [dbo].[Libros] <br>
+        FOR INSERT<br>
+        AS<br>
+        begin<br>
+insert into InsercionesLibros<br>
+select isbn,suser_name(),getdate() from inserted<br>
+end</p></td>
+    <td>&nbsp;</td>
+    <td><a href="../SQLServerZip/p1t.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>Trigger</h3>
+      <p> 2 .- Ejemplos de como crear un desencadenador de nombre InsEditorial 
+        que se ejecute al insertar datos en la vista EditorialDistribuidora que 
+        se encargue de tomar los datos de la tabla inserted e insertarlos en cada 
+        una de las tablas.</p>
+      <p>use libreria<br>
+        go<br>
+        create trigger InsEditorial on Distribuicioneditorial<br>
+        instead of insert<br>
+        as<br>
+        begin<br>
+set nocount on<br>
+declare @codeditorial char(10), @coddistribuidora char(10)<br>
+insert into editorial (ideditorial, direccion, telefono)<br>
+select ideditorial,direccion,telefono<br>
+from inserted</p>
+      <p> set @codeditorial = @@identity<br>
+  insert into distribuidoras(nombre,direccion,telefono)<br>
+  select distribuidora,dirdistribuidora,tlfdistribuidora<br>
+  from inserted<br>
+  <br>
+  set @coddistribuidora=@@identity<br>
+  insert into Distribuicioneditorial<br>
+  values (@codeditorial,@coddistribuidora)</p>
+      <p>end </p></td>
+    <td>&nbsp;</td>
+    <td><a href="../SQLServerZip/p2t.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td> <div align="right"><a href="../index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a> </div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

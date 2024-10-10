@@ -1,0 +1,489 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Ejercicios Java</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Descargar Ejercicios de Java, Ejemplos de java, Aplicaciones  de java, JBuilder, J Builder, codigo java">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table width="555" height="6577" align="left" background="../imagenes/fondologo.jpg">
+  <tr> 
+    <td height="39" colspan="3"> <h2>E 
+        J E R C I C I O S</h2></td>
+  </tr>
+  <tr> 
+    <td> <h3>Operaciones 
+      aritm&eacute;ticas </h3>
+      <p> 6.- pcapital: Aplicaci&oacute;n que calcula el pago mensual y total 
+        para un pr&eacute;stamo con distintas salidas de formatos.</p>
+      <p>package pcapital;<br>
+        <br>
+        public class capital {<br>
+        public static void main(String[] args) {<br>
+        //Declaracion de variables<br>
+        final int MESES_EN_UN_ANIO=12;<br>
+        float cuantiaPrestamo=0.0F, interesAnual =0.0F, interesMensual;<br>
+        int duracionPrestamo=1;<br>
+        double pagoMensual = 0.0, pagoTotal=0.0;<br>
+        int numeroPagos=0;<br>
+        //parte ejecutiva del programa<br>
+        System.out.println(&quot; Este programa calcula el pago mensual y &quot;);<br>
+        System.out.println(&quot; total para un prestamo&quot;);<br>
+        //Entrada de datos<br>
+        cuantiaPrestamo =100000;<br>
+        interesAnual=3.5f;<br>
+        duracionPrestamo=15;<br>
+        //calculo de prestamos<br>
+        interesMensual= interesAnual / 100.0f / MESES_EN_UN_ANIO;<br>
+        numeroPagos=duracionPrestamo*MESES_EN_UN_ANIO;<br>
+        pagoMensual=(cuantiaPrestamo*interesMensual)/(1-Math.pow(1/(1+interesMensual),numeroPagos));<br>
+        pagoTotal=pagoMensual*numeroPagos;<br>
+        // salida datos<br>
+        System.out.println(&quot;\n Cuantia del prestamo: &quot;+cuantiaPrestamo 
+        + &quot; euros&quot;);<br>
+        System.out.println(&quot; Interes anual: &quot;+interesAnual + &quot; 
+        %&quot;);<br>
+        System.out.println(&quot; Duracion del prestamo (a&ntilde;os) &quot;+duracionPrestamo);<br>
+        System.out.println(&quot; Pago mensual &quot;+pagoMensual + &quot; euros&quot;);<br>
+        System.out.println(&quot; Cantidad total a pagar: &quot;+pagoTotal + &quot; 
+        euros&quot;);<br>
+        }<br>
+        }</p></td>
+    <td  >&nbsp;</td>
+    <td  ><a href="../JBuilderZip/6.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td> <h3>Operaciones 
+      aritm&eacute;ticas </h3>
+      <p> 7.- mesesdiashoras: Aplicaci&oacute;n que nos muestra los meses d&iacute;as, 
+        a&ntilde;os, horas minutos y segundos de 15 a&ntilde;os.</p>
+      <p>package pmesesdiashoras;<br>
+        <br>
+        public class mesesdiashoas {<br>
+        public static void main(String[] args) {<br>
+        int anios=15;<br>
+        int meses;<br>
+        int semanas;<br>
+        int dias;<br>
+        int horas;<br>
+        int minutos;<br>
+        int segundos;<br>
+        meses=anios*12;<br>
+        dias=anios*365;<br>
+        horas=dias*24;<br>
+        minutos=horas*60;<br>
+        segundos=minutos*60;<br>
+        System.out.println(&quot;CALCULO DE a&ntilde;os, meses, semanas, dias, 
+        horas, minutos y segundos&quot;);<br>
+        System.out.println(&quot;========== ====, =====, =======, ====, =====, 
+        ======= = ========&quot;);<br>
+        System.out.println(&quot;En &quot;+anios+&quot; hay &quot;+meses+&quot; 
+        meses&quot;);<br>
+        System.out.println(&quot;En &quot;+anios+&quot; hay &quot;+dias+&quot; 
+        meses&quot;);<br>
+        System.out.println(&quot;En &quot;+anios+&quot; hay &quot;+horas+&quot; 
+        horas&quot;);<br>
+        System.out.println(&quot;En &quot;+anios+&quot; hay &quot;+minutos+&quot; 
+        minutos&quot;);<br>
+        System.out.println(&quot;En &quot;+anios+&quot; hay &quot;+segundos+&quot; 
+        segundos&quot;);<br>
+        }<br>
+        }<br>
+      </p></td>
+    <td>&nbsp;</td>
+    <td><a href="../JBuilderZip/7.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3> Operaciones 
+      aritm&eacute;ticas </h3>
+      <p> 8.- pgigas: Aplicaci&oacute;n que nos permite calculas las gigas, megas, 
+        y kilobytes a partir de los cilindros, pistas y sectores de el disco duro.</p>
+      <p>package pgigas;<br>
+        <br>
+        public class pgigas {<br>
+        public static void main(String[] args) {<br>
+        int cilindros=12000;<br>
+        int pistas=16;<br>
+        int sectores=8*512;<br>
+        float capacidad=0;<br>
+        float kilobytes;<br>
+        float megabyte;<br>
+        float gigabyte;<br>
+        capacidad=cilindros*pistas*sectores;<br>
+        kilobytes=capacidad/1024;<br>
+        System.out.println(&quot;tiene &quot;+kilobytes+&quot; kilobytes&quot;);<br>
+        megabyte=kilobytes/1024;<br>
+        System.out.println(&quot;tiene &quot;+megabyte+&quot; megabytes&quot;);<br>
+        gigabyte=megabyte/1024;<br>
+        System.out.println(&quot;tiene &quot;+gigabyte+&quot; gigabytes&quot;); 
+        }<br>
+        }</p>
+      </td>
+    <td>&nbsp;</td>
+    <td><a href="../cBuilderZip/p8.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3> Operaciones 
+      aritm&eacute;ticas </h3>
+      <p> 9.- operaciones: Aplicaci&oacute;n que nos permite seleccionar una opci&oacute;n 
+        y en consecucuencia nos pide dos n&uacute;meros para hacer una cuenta 
+        aritm&eacute;tica.</p>
+      <p>package popraciones;<br>
+        <br>
+        import java.io.*;<br>
+        public class operaciones {<br>
+        private static BufferedReader stdin=new BufferedReader(new InputStreamReader(System.in));<br>
+        public static void main(String[] args)throws IOException {<br>
+        String opcion;<br>
+        int opcion1;<br>
+        float numero1;<br>
+        float numero2;<br>
+        float total=0;<br>
+        System.out.println(&quot;Programa calculadora:&quot;);<br>
+        System.out.println(&quot;=====================&quot;);<br>
+        System.out.println(&quot;1) Sumar\n2) Restar\n3) Multiplicar\n4) Dividir&quot;);<br>
+        System.out.println(&quot;Selecciona una opci&oacute;n: &quot;);<br>
+        opcion=stdin.readLine();//escaneo la opcion del menu<br>
+        opcion1=Integer.parseInt(opcion);//lo paso a entero<br>
+        System.out.println(&quot;Introduce el n&ordm; 1&quot;);<br>
+        opcion=stdin.readLine();<br>
+        numero1=Integer.parseInt(opcion);<br>
+        System.out.println(&quot;Introduce el n&ordm; 2&quot;);<br>
+        opcion=stdin.readLine();<br>
+        numero2=Integer.parseInt(opcion);<br>
+        if (opcion1 ==1)<br>
+        total=numero1 + numero2;<br>
+        if (opcion1==2)<br>
+        total=numero1 - numero2;<br>
+        if (opcion1==3)<br>
+        total=numero1 * numero2;<br>
+        if (opcion1==4)<br>
+        total=numero1/ numero2;<br>
+        System.out.println(&quot;El resultado es: &quot; + total);<br>
+        }<br>
+        }<br>
+        //solucion 2<br>
+        //opcion=stdin.readLine();<br>
+        //if (opcion.compareTo(&quot;1&quot;)==0){<br>
+        //int num1=Integer.ParseInt(stdin.readline());<br>
+        //int num2=Integer.ParseInt(stdin.readline());<br>
+        //resultado=num1+num2;<br>
+        //}</p>
+      <p><br>
+      </p></td>
+    <td  >&nbsp;</td>
+    <td  ><a href="../JBuilderZip/9.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3> Operaciones 
+      aritm&eacute;ticas </h3>
+      <p> 10.- pmenu:Aplicaci&oacute;n que nos permite seleccionar una opci&oacute;n 
+        y en consecucuencia nos pide dos n&uacute;meros para hacer una cuenta 
+        aritm&eacute;tica.(con switch).</p>
+      <p>package pmenu;<br>
+        <br>
+        import java.io.*;<br>
+        public class menu {<br>
+        private static BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));<br>
+        public static void main(String[] args) throws IOException {<br>
+        //opciones del menu<br>
+        String eleccion;<br>
+        int eleccion1;<br>
+        int primero1;<br>
+        int segundo1;<br>
+        float resultado=0;<br>
+        System.out.println(&quot; 1) Realizar una suma&quot;);<br>
+        System.out.println(&quot; 2) Realizar una resta&quot;);<br>
+        System.out.println(&quot; 3) Realizar una multiplicaci&oacute;n&quot;);<br>
+        System.out.println(&quot; 4) Realizar una divici&oacute;n&quot;);<br>
+        System.out.println(&quot; 5) Salir del programa&quot;);<br>
+        System.out.println(&quot;\n Elige una opci&oacute;n del men&uacute;: &quot;);<br>
+        eleccion = stdin.readLine();<br>
+        eleccion1=Integer.parseInt(eleccion);<br>
+        System.out.println(&quot;Introduzca un n&uacute;mero: &quot;);<br>
+        eleccion =stdin.readLine();<br>
+        primero1=Integer.parseInt(eleccion);<br>
+        System.out.println(&quot;Introduzca el segundo n&uacute;mero: &quot;);<br>
+        eleccion = stdin.readLine();<br>
+        segundo1=Integer.parseInt(eleccion);<br>
+        switch(eleccion1){<br>
+        case 1:<br>
+        resultado=primero1+segundo1;<br>
+        break;<br>
+        case 2:<br>
+        resultado=primero1-segundo1;<br>
+        break;<br>
+        case 3:<br>
+        resultado=primero1*segundo1;<br>
+        break;<br>
+        case 4:<br>
+        resultado=primero1/segundo1;<br>
+        break;<br>
+        case 5:<br>
+        System.exit(0);<br>
+        break;<br>
+        default:<br>
+        System.out.println(&quot;La opcion no es valida&quot;);<br>
+        break;<br>
+        }<br>
+        System.out.println(&quot;El resultado es &quot; + resultado);<br>
+        }<br>
+        }</p>
+      <p>&nbsp;</p></td>
+    <td>&nbsp;</td>
+    <td><a href="../JBuilderZip/10.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3> Operaciones 
+      aritm&eacute;ticas </h3>
+      <p> 11.- conversorbilletes: aplicaci&oacute;n que nos permite introducir 
+        una cantidad en euros y desglosarla en billetes de 50, 20, 10 y 5.</p>
+      <p>package pconversorbilletes;</p>
+      <p> import java.io.*;<br>
+        import javax.swing.*;<br>
+        public class conversorbilletes {<br>
+        private static BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));</p>
+      <p> public static void main(String[] args)throws IOException {<br>
+        String leer;<br>
+        float cantidad=0;<br>
+        int cincuenta=0;<br>
+        int veinte=0;<br>
+        int diez=0;<br>
+        int cinco=0;<br>
+        int conta=0;<br>
+        float valor=0;<br>
+        while (valor==0||(cantidad&lt;5&amp;&amp;cantidad!=0)){<br>
+        if (conta!=0){<br>
+        System.out.println(&quot;Error!! cantidad de dinero no valida&quot;);<br>
+        }<br>
+        conta++;<br>
+        System.out.println(&quot;Introduce una cantidad de dinero en euros: &quot;);<br>
+        leer= stdin.readLine();//capturamos lo introducido<br>
+        cantidad=Integer.parseInt(leer);//lo pasamos a n&ordm; entero<br>
+        valor=cantidad;</p>
+      <p> cantidad=cantidad/50;//calculamos el n&ordm; de billetes de 50<br>
+        cincuenta=(int)cantidad;//sacamos como entero<br>
+        cantidad=cantidad*50-cincuenta*50;</p>
+      <p> cantidad=cantidad/20;<br>
+        veinte=(int)cantidad;<br>
+        cantidad=cantidad*20-veinte*20;</p>
+      <p> cantidad=cantidad/10;<br>
+        diez=(int)cantidad;<br>
+        cantidad=cantidad*10-diez*10;</p>
+      <p> cantidad=cantidad/5;<br>
+        cinco=(int)cantidad;<br>
+        cantidad=cantidad*5-cinco*5;<br>
+        }<br>
+        System.out.println(&quot;Contiene &quot;+cincuenta+&quot; billetes de 
+        cincuenta&quot;);<br>
+        System.out.println(&quot;Contiene &quot;+veinte+&quot; billetes de veinte&quot;);<br>
+        System.out.println(&quot;Contiene &quot;+diez+&quot; billetes de diez&quot;);<br>
+        System.out.println(&quot;Contiene &quot;+cinco+&quot; billetes de cinco&quot;);<br>
+        }<br>
+        }<br>
+        /*<br>
+        tambien valdr&iacute;a comprobando tras escanear la cifra si el numero 
+        es divisible entre 0 y 5:<br>
+        if(cantidad%5==0)&amp;&amp;(cantidad%0==0);<br>
+        luego haria el algoritmo de los correspondientes billetes<br>
+        */<br>
+      </p></td>
+    <td>&nbsp;</td>
+    <td><a href="../JBuilderZip/11.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>&nbsp; </h3>
+      <h3>Operaciones aritm&eacute;ticas </h3>
+      <p> 12.- pcajero: aplicaci&oacute;n que nos permite introducir una cantidad 
+        en euros y desglosarla en billetes de 50, 20, 10 y 5.(con do while) y 
+        nos deja continuar introduciendo cifras.</p>
+      <p>package pcajero;<br>
+        <br>
+        import java.io.*;</p>
+      <p>public class cajero {<br>
+        private static BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));<br>
+        public static void main(String[] args) throws IOException{<br>
+        String leer,ocpion;<br>
+        int total=1500;//dinero total disponible en el banco<br>
+        int contidad=0;<br>
+        int cincuenta=0,veinte=0,dies=0,cinco=0;<br>
+        int n50=20,n20=10,n10=5,n5=2;</p>
+      <p> do{<br>
+        cincuenta=0;<br>
+        veinte=0;<br>
+        dies=0;<br>
+        cinco=0;</p>
+      <p> System.out.println(&quot;---------------------------------------&quot;);<br>
+        System.out.println(&quot;Introduce la cantidad de dinero: &quot;);<br>
+        leer = stdin.readLine();<br>
+        contidad = Integer.parseInt(leer);</p>
+      <p> if (contidad % 5!=0 || contidad &gt; total){<br>
+        System.out.println(&quot;ERROR, no tienes tanto saldo disponible &quot;);<br>
+        System.exit(0);<br>
+        }<br>
+        total=total-contidad;//restamos el dinero extraido al total</p>
+      <p> if (contidad/50&gt;0 &amp;&amp; n50!=0){<br>
+        cincuenta= contidad/50;<br>
+        if (cincuenta &gt; n50)<br>
+        cincuenta=n50;<br>
+        n50=n50-cincuenta;<br>
+        contidad = contidad-(cincuenta*50);</p>
+      <p> }<br>
+        if (contidad/20&gt;0){<br>
+        veinte= contidad/20;<br>
+        if (veinte &gt; n20)<br>
+        veinte=n20;<br>
+        n20=n20-veinte;</p>
+      <p> contidad = contidad-(veinte*20);<br>
+        }<br>
+        if (contidad/10&gt;0){<br>
+        dies= contidad/10;<br>
+        if (dies &gt; n10)<br>
+        dies=n10;<br>
+        n10=n10-dies;</p>
+      <p> contidad = contidad-(dies*10);<br>
+        }<br>
+        if (contidad/5&gt;0){<br>
+        cinco= contidad/5;<br>
+        if (cinco &gt; n5)<br>
+        cinco=n5;<br>
+        n5=n5-cinco;</p>
+      <p> contidad = contidad-(cinco*5);<br>
+        }<br>
+        //mostramos los resultados de los billetes<br>
+        System.out.println(&quot;Bietes de cincuenta : &quot;+cincuenta);<br>
+        System.out.println(&quot;Bietes de veinte : &quot;+veinte);<br>
+        System.out.println(&quot;Bietes de dies : &quot;+dies);<br>
+        System.out.println(&quot;Bietes de cinco : &quot;+cinco);<br>
+        System.out.print(&quot;pulse c para continuar : &quot;);<br>
+        ocpion=stdin.readLine();<br>
+        }while(ocpion.compareTo(&quot;c&quot;)==0);//repite los procesos de arriba 
+        a menos que no metamos c<br>
+        }<br>
+        }</p>
+      <p><br>
+      </p></td>
+    <td>&nbsp;</td>
+    <td><a href="../JBuilderZip/12.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td>
+<h3>Operaciones aritm&eacute;ticas </h3>
+      <p> 13.- psuma: Aplicaci&oacute;n que nos muestra la suma comprendida entre 
+        dos intervalos y los n&uacute;meros pares y no divisibles comprendidos 
+        entre ellos.</p>
+      <p>package psuma;</p>
+      <p> import java.io.*;<br>
+        public class suma {<br>
+        private static BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));<br>
+        public static void main(String[] args) throws IOException{<br>
+        String leer;<br>
+        int i,suma=0,escan,escan2,intermedia;<br>
+        System.out.println(&quot;Introduce el minimo: &quot;);<br>
+        leer = stdin.readLine();<br>
+        escan = Integer.parseInt(leer);<br>
+        System.out.println(&quot;Introduce el maximo: &quot;);<br>
+        leer = stdin.readLine();<br>
+        escan2 = Integer.parseInt(leer);<br>
+        if(escan&gt;escan2){<br>
+        intermedia=escan2;<br>
+        escan2=escan;<br>
+        intermedia=escan;<br>
+        }<br>
+        for (escan=0;escan&lt;=escan2;escan++){<br>
+        if (escan%2==0 &amp;&amp; escan%4!=0)//si el numero es par y no divisible 
+        entre 4<br>
+        System.out.println(escan);<br>
+        suma = suma + escan;<br>
+        }<br>
+        System.out.println(&quot;La suma entre los dos intervalos es: &quot;+suma);<br>
+        }<br>
+        }<br>
+      </p></td>
+    <td>&nbsp;</td>
+    <td><a href="../JBuilderZip/13.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td height="866">
+<h3> Operaciones 
+      aritm&eacute;ticas </h3>
+      <p> 14.- pareaperimetro: Aplicaci&oacute;n que permite mediante un men&uacute; 
+        calcular el &aacute;rea, per&iacute;metro de un c&iacute;rculo, cuadrado 
+        o tri&aacute;ngulo.</p>
+      <p>package pareaperimetro;<br>
+        <br>
+        import java.io.*;<br>
+        public class areaperimetro {<br>
+        private static BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));<br>
+        public static void main(String[] args)throws IOException {<br>
+        final float PI=3.1416f;//declaramos una constante PI<br>
+        String leer;<br>
+        float area=0,perimetro=0,a=0,b=0,radio=0,lado=0;<br>
+        int eleccion=0;<br>
+        do{<br>
+        System.out.println(&quot;AREAS Y PERIMETROS&quot;);<br>
+        System.out.println(&quot;==================&quot;);<br>
+        System.out.println(&quot;1.- C&iacute;rculo&quot;);<br>
+        System.out.println(&quot;2.- Cuadrado&quot;);<br>
+        System.out.println(&quot;3.- Tri&aacute;ngulo&quot;);<br>
+        System.out.println(&quot;4.- Salir&quot;);<br>
+        System.out.println(&quot;Elige una opci&oacute;n: &quot;);<br>
+        leer = stdin.readLine();//escaneo la opcion introducida<br>
+        eleccion = Integer.parseInt(leer);//lo transformo a entero if (eleccion==1){<br>
+        System.out.println(&quot;Introduce el radio: &quot;);<br>
+        leer = stdin.readLine();//escaneo la opcion introducida<br>
+        radio = Integer.parseInt(leer);//lo transformo a entero<br>
+        area=PI*radio*radio;<br>
+        perimetro=2*PI*radio;<br>
+        System.out.println(&quot;El per&iacute;metro del c&iacute;rculo es: &quot;+perimetro+&quot; 
+        y su &aacute;rea: &quot;+area);<br>
+        }<br>
+        if (eleccion==2){<br>
+        System.out.println(&quot;Introduce el lado: &quot;);<br>
+        leer = stdin.readLine();//escaneo la opcion introducida<br>
+        lado = Integer.parseInt(leer);//lo transformo a entero<br>
+        area=lado*lado;<br>
+        perimetro=4*lado;<br>
+        System.out.println(&quot;El per&iacute;metro del cuadrado es: &quot;+perimetro+&quot; 
+        y su &aacute;rea: &quot;+area);<br>
+        }<br>
+        if (eleccion==3){<br>
+        System.out.println(&quot;Introduce el valor para la base: &quot;);<br>
+        leer = stdin.readLine();//escaneo la opcion introducida<br>
+        b = Integer.parseInt(leer);//lo transformo a entero<br>
+        System.out.println(&quot;Introduce el valor para la altura: &quot;);<br>
+        leer = stdin.readLine();//escaneo la opcion introducida<br>
+        a = Integer.parseInt(leer);//lo transformo a entero<br>
+        area=(a*b)/2;<br>
+        perimetro=3*b;<br>
+        System.out.println(&quot;El per&iacute;metro del tri&aacute;ngulo es: 
+        &quot;+perimetro+&quot; y su &aacute;rea: &quot;+area);<br>
+        }<br>
+        }while (eleccion!=4);//a menos ke pulsemos 4 no sale del bucle<br>
+        System.out.println(&quot;:*:*:*:--Aplicaci&oacute;n terminada:--*:*:*:&quot;);<br>
+        }<br>
+        }<br>
+      </p></td>
+    <td>&nbsp;</td>
+    <td><a href="../cBuilderZip/p14.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  
+  
+  <tr> 
+    <td> 
+      <div align="right"><a href="../index3.htm" target="_parent">&lt;&lt;Menu 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Marcos</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="keywords" content="Marcos, Frames, Html, Lenguaje Html, Manual Html, Tutorial, ejercicios Html">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+  <link href="../styles/estilos.css" rel="stylesheet" type="text/css"></head>
+  
+<body>
+<table width="555" height="1367" align="left" background="../imagenes/fondologo.jpg">
+  <tr> 
+    <td height="38" colspan="2"> <h2> Marcos</h2></td>
+  </tr>
+  <tr> 
+    <td height="1298" colspan="2"> <table width="62%" border="0"  >
+        <tr> 
+          <td width="28%"  ><h3>Contenido:</h3></td>
+          <td width="72%">&nbsp;</td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="htm08.htm#intro">- Introducci&oacute;n</a></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="htm08.htm#frameset">- Marca &lt;FRAMESET&gt;</a></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="htm08.htm#frame">- Marca &lt;FRAME&gt;</a></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="htm08.htm#noframes">- Marca &lt;NOFRAMES&gt;</a></td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+          <td><a href="htm08.htm#target1">- Atributo TARGET</a></td>
+        </tr>
+      </table>
+       <h3>  Introducci&oacute;n  <a name="into"></a></h3>
+       <p>Los Frames permiten dividir la pantalla en distintas 
+        &aacute;reas, unas independientes de otras. Cada una de estas zonas son 
+        capaces de mostrar de mostrar c&oacute;digo HTML, como en las celdas de 
+        una tabla. En el caso de los frames cada zona de la pantalla es un documento 
+        HTML propio. La funcionalidad de los Frames es dedicar cada uno de ellos 
+        a cierta tareas bien definidas, como por ejemplo tener en una zona un 
+        men&uacute; que casi nunca ser&aacute; necesario recargar. La peculiaridad 
+        de los marcos, a nivel de definici&oacute;n es que a diferencia de una 
+        p&aacute;gina normal, cuyo cuerpo va definido por las marcas &lt;BODY&gt; 
+        y &lt;/BODY&gt;, es que los marcos van definidos por las marcas &lt;FRAMESET&gt; 
+        y &lt;/FRAMESET&gt;. El elemento Frameset permitir&aacute; precisar la 
+        forma de los diferentes paneles por medio de dos atributos: ROWS y COLS.</p>
+       <h3>  FRAMESET  <a name="frameset"></a></h3>
+       <p>Este elemento sustituye al elemento &lt;BODY&gt; 
+        y permite dividir una zona en subzonas, bien verticalmente, bien horizontalmente. 
+        Esta marca posee dos atributos: 
+      <blockquote> 
+         <p>- ROWS: Se utiliza para dividir la zona en subzonas 
+          horizontales. La sintaxis es: ROWS=&quot;altura_zona1,altura_zona2..., 
+          altura_zonaN&quot;
+          - COLS: Se utiliza para dividir la zona en subzonas verticales. La sintaxis 
+          es: 
+          COLS=&quot;altura_zona1,altura_zona2..., altura_zonaN&quot;</p>
+        <p>&nbsp;</p>
+      </blockquote>
+       <h3>  FRAME  <a name="frame"></a></h3>
+       <p>Es la marca utilizada para caracterizar las zonas 
+        definidas mediante la marca &lt;FRAMESET&gt;. Esta caracterizaci&oacute;n 
+        se realiza mediante los siguientes atributos: 
+      <blockquote> 
+         <p>- SCR: Indica el URL del documento que debe montarse 
+          en esa zona. Si el atributo no se indica, entonces la zona estar&aacute; 
+          vac&iacute;a.
+          - NAME: Se utiliza para nombrar la zona a fin de que pueda convertirse 
+          en el destino de cualquier enlace de hipertexto. La sintaxis del atributo 
+          es: NAME=&quot;nombre_de_la_zona&quot;
+          - MARGINWIDTH: Se utiliza para precisar el n&uacute;mero de p&iacute;xels 
+          entre los bordes izquierdo y derecho de la zona y el documento HTML 
+          a visualizar, en definitiva marca el margen izquierdo. La sintaxis es: 
+          MARGINWIDTH=&quot;n&quot;
+          - MARGINHEIGHT: Se utiliza para el n&uacute;mero de pixels entre los 
+          bodis superior e inferior. de la zona y el documento HTML a visualizar. 
+          La sintaxis es: MARGINHEIGHT=&quot;n&quot;
+          - SCROLLING: Indica si la zona debe de poseer una barra de desplazamiento. 
+          Su sintaxis es: SCROLLING=&quot;yes/no/auto&quot;
+          - NORESIZE: Indica que el usuario no puede modificar el tama&ntilde;o 
+          de la zona.</p>
+      </blockquote>
+      <p>
+        <h3>   NOFRAMES  <a name="noframes"></a>  </h3>
+       <p>Esta marca indica al browser que incapaz de gestionar 
+        los frames el texto que debe presentar al usuario en lugar de los paneles. 
+        Dicho texto ir&aacute; entre las marcas &lt;NOFRAMES&gt; Y &lt;/NOFRAMES&gt;.</p>
+       <h3>   EL ATRIBUTO TARGET  <a name="target1" id="target1"></a></h3>
+       <p>Este nuevo atributo afecta a las marcas que caracterizan 
+        los enlaces de hipertexto, en particular a las marcas &lt;A y &lt;FORM&gt;. 
+        TARGET permite precisar el el nombre de la zona que debe recibir el el 
+        documento correspondiente al enlace. Por ejemplo: &lt;a href=&quot;/dossier.html&quot; 
+        target=&quot;zonadossier&quot;&gt;ver el dossier&lt;/a&gt;
+        El atributo TARGET existe para indicar al browser que, en respuesta a 
+        un click, debe mostrar el documento dossier.html en el panel cuyo nombre 
+        es &quot;zonadossier&quot;. El atributo TARGET puede tomar los siguientes 
+        valores: 
+      <blockquote  >_blank, indica que se cargar&aacute; una 
+        nueva ventana con el fin de mostrar el documento.
+        _selft, indica que el nuevo documento se cargar&aacute; donde se encuentra 
+        el enlace hipertexto.
+        _top, indica al browser que suprima todos los paneles existentes y visualice 
+        el documento de forma normal.
+        _parent,indica al browser que visualice el documento ocupando toda la 
+        superficie de la zona en la que se ha visualizado el documento que contiene 
+        el enlace.</blockquote></td>
+  </tr>
+  <tr> 
+    <td width="70" height="21"> </td>
+    <td height="21"> <a href="../index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

@@ -1,0 +1,487 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Ejercicios Java</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Descargar Ejercicios de Java, Ejemplos de java, Aplicaciones  de java, JBuilder, J Builder, codigo java">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table width="555" height="272" align="left" background="../imagenes/fondologo.jpg">
+  <tr> 
+    <td height="39" colspan="3"> <h2>E 
+        J E R C I C I O S</h2></td>
+  </tr>
+  <tr> 
+    <td><h3>  Clases 
+        y objetos  </h3>
+      <p> 15.- pareasyperimetros: Aplicaci&oacute;n que permite mediante dos men&uacute;s 
+        calcular el &aacute;rea, per&iacute;metro de un c&iacute;rculo, cuadrado 
+        o tri&aacute;ngulo.</p>
+      <p>package pareasyperimetros;<br>
+        <br>
+        import java.io.*;<br>
+        public class areasyperimetros {<br>
+        private static BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));<br>
+        public static void main(String[] args) throws IOException{<br>
+        //variables<br>
+        final float pi=3.1416f;<br>
+        float radio=0;<br>
+        float area=0;<br>
+        float linea=0;<br>
+        float a=0;<br>
+        float b=0;<br>
+        String leer;<br>
+        int eleccion=0;<br>
+        int eleccion1=0;<br>
+        //menu<br>
+        do{<br>
+        System.out.println(&quot;\n\n Areas y Perimertos&quot;);<br>
+        System.out.println(&quot;*******************************************&quot;);<br>
+        System.out.println(&quot;1-Circulo&quot;);<br>
+        System.out.println(&quot;2-Cuadrado&quot;);<br>
+        System.out.println(&quot;3-Triangulo&quot;);<br>
+        System.out.println(&quot;4-Salir&quot;);<br>
+        System.out.println(&quot;Eliga una opcin: &quot;);<br>
+        leer = stdin.readLine();<br>
+        eleccion = Integer.parseInt(leer);<br>
+        switch(eleccion){<br>
+        case 1:<br>
+        System.out.println(&quot;1-Area&quot;);<br>
+        System.out.println(&quot;2-Perimetro&quot;);<br>
+        leer = stdin.readLine();<br>
+        eleccion1 = Integer.parseInt(leer);<br>
+        System.out.println(&quot;Introduce el radio del circulo: &quot;);<br>
+        leer = stdin.readLine();<br>
+        radio = Integer.parseInt(leer);<br>
+        switch (eleccion1){<br>
+        case 1:<br>
+        System.out.println(&quot;La area es: &quot;+pi*radio*radio);<br>
+        break;<br>
+        case 2:<br>
+        System.out.println(&quot;La perimetro es: &quot;+pi*2*radio);<br>
+        break;<br>
+        }<br>
+        break;<br>
+        case 2:<br>
+        System.out.println(&quot;1-Area&quot;);<br>
+        System.out.println(&quot;2-Perimetro&quot;);<br>
+        leer = stdin.readLine();<br>
+        eleccion1 = Integer.parseInt(leer); System.out.println(&quot;Introduce 
+        le linea del cadrado: &quot;);<br>
+        leer = stdin.readLine();<br>
+        linea = Integer.parseInt(leer);<br>
+        switch (eleccion1){<br>
+        case 1:<br>
+        System.out.println(&quot;La area es: &quot;+linea*linea);<br>
+        break;<br>
+        case 2:<br>
+        System.out.println(&quot;La perimetro es: &quot;+4*linea);<br>
+        break;<br>
+        }<br>
+        break;<br>
+        case 3:<br>
+        System.out.println(&quot;1-Area&quot;);<br>
+        System.out.println(&quot;2-Perimetro&quot;);<br>
+        leer = stdin.readLine();<br>
+        eleccion1 = Integer.parseInt(leer);<br>
+        System.out.println(&quot;Introduce ancho: &quot;);<br>
+        leer = stdin.readLine();<br>
+        b = Integer.parseInt(leer);<br>
+        switch (eleccion1){<br>
+        case 1:<br>
+        System.out.println(&quot;Introduce altura: &quot;);<br>
+        leer = stdin.readLine();<br>
+        a = Integer.parseInt(leer);<br>
+        System.out.println(&quot;La area es: &quot;+(a*b)/2);<br>
+        break;<br>
+        case 2:<br>
+        System.out.println(&quot;La perimetro es: &quot;+3*b);<br>
+        break;<br>
+        }<br>
+        break; }<br>
+        }while(eleccion!=4);<br>
+        }<br>
+        }<br>
+      </p></td>
+    <td>&nbsp;</td>
+    <td><p><a href="http://es.geocities.com/juantxu28/JBuilderZip/15.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></p></td>
+  </tr>
+  <tr> 
+    <td><h3>Clases 
+      y objetos </h3>
+      <p> 16.- pteoria: Aplicacion que mediante clases nos permite calcular el 
+        area y perimetro de un circulo.</p>
+      <p>//En la clase teoria.java:</p>
+      <p>package pteoria;</p>
+      <p>import java.io.*;</p>
+      <p>public class teoria {//para crear un nuevo objeto se utiliza &quot;new&quot;. 
+        Con new le asignamos memoria<br>
+        private static BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));<br>
+        private static menu c0=new menu();<br>
+        private static circulo c1=new circulo();<br>
+        private static cuadrado c2=new cuadrado();</p>
+      <p> public static void main(String[] args) throws IOException {<br>
+        do{<br>
+        switch (c0.principal()){<br>
+        case 1:<br>
+        c1.area();<br>
+        c1.perimetro();<br>
+        case 2:<br>
+        c2.area();<br>
+        c2.perimetro();<br>
+        case 3:<br>
+        System.exit(0);<br>
+        default:<br>
+        System.out.println(&quot;ERROR!!! opci&oacute;n seleccionada no disponible&quot;);<br>
+        }<br>
+        System.out.println(&quot;&iquest;Desea salir de la aplici&oacute;n? (s/n)&quot;);<br>
+        }while(stdin.readLine().compareTo(&quot;s&quot;)==0 );<br>
+        }<br>
+        }</p>
+      <p>//En la clase menu.java:</p>
+      <p>package pteoria;</p>
+      <p> import java.io.*;<br>
+        public class menu {<br>
+        private static BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));<br>
+        int principal()throws java.io.IOException{<br>
+        String leer;<br>
+        int eleccion;<br>
+        System.out.println(&quot;Areas y Perimertos&quot;);<br>
+        System.out.println(&quot;*******************************************&quot;);<br>
+        System.out.println(&quot;1-Circulo&quot;);<br>
+        System.out.println(&quot;2-Cuadrado&quot;);<br>
+        System.out.println(&quot;3-Salir&quot;);<br>
+        System.out.println(&quot;Eliga una opci&oacute;n de las disponibles: &quot;);<br>
+        leer = stdin.readLine();<br>
+        eleccion = Integer.parseInt(leer);<br>
+        return eleccion;<br>
+        }<br>
+        }<br>
+      </p>
+      <p>//En la clase circulo.java:</p>
+      <p>package pteoria;</p>
+      <p><br>
+        /*<br>
+        - Atributos es lo que en c conocemos como variables globales<br>
+        - Metodos es lo que en c conocemos como funciones<br>
+        - Constructor/Destructor(es un metodo especial que se llama<br>
+        igual que la clase, que puede tener parametros de entrada distintos)<br>
+        */<br>
+        import java.io.*;</p>
+      <p>public class circulo {<br>
+        private static BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));<br>
+        final float pi=3.1416f;<br>
+        float radio=0,perimetro=0;<br>
+        String leer;<br>
+        public void area()throws IOException{<br>
+        System.out.println(&quot;Introduzca el radio: &quot;);<br>
+        leer = stdin.readLine();<br>
+        radio = Float.parseFloat(leer);<br>
+        System.out.println(&quot;El area es del circulo es: &quot;+pi*radio*radio);<br>
+        }<br>
+        public void perimetro()throws IOException{<br>
+        System.out.println(&quot;Introduzca el radio: &quot;);<br>
+        leer = stdin.readLine();<br>
+        perimetro = Float.parseFloat(leer);<br>
+        System.out.println(&quot;El perimetro del circulo es: &quot;+pi*2*radio);<br>
+        }</p>
+      <p>}<br>
+      </p>
+      <p>//En la clase cuadrado.java:</p>
+      <p>package pteoria;<br>
+        /**<br>
+        * &lt;p&gt;T&iacute;tulo: &lt;/p&gt;<br>
+        * &lt;p&gt;Descripci&oacute;n: &lt;/p&gt;<br>
+        * &lt;p&gt;Copyright: Copyright (c) 2005&lt;/p&gt;<br>
+        * &lt;p&gt;Empresa: &lt;/p&gt;<br>
+        * @author sin atribuir<br>
+        * @version 1.0<br>
+        */<br>
+        import java.io.*;<br>
+        public class cuadrado {<br>
+        private static BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));<br>
+        float lado=0,lado2=0;<br>
+        String leer;<br>
+        public void area()throws IOException{<br>
+        System.out.println(&quot;Introduzca el radio: &quot;);<br>
+        leer = stdin.readLine();<br>
+        lado = Float.parseFloat(leer);<br>
+        System.out.println(&quot;El area del cuadrado es: &quot;+lado*lado);<br>
+        }<br>
+        public void perimetro()throws IOException{<br>
+        System.out.println(&quot;Introduzca el radio: &quot;);<br>
+        leer = stdin.readLine();<br>
+        lado2 = Float.parseFloat(leer);<br>
+        System.out.println(&quot;El perimetro del cuadrado es: &quot;+lado2*4);<br>
+        }<br>
+        }<br>
+        <br>
+      </p>
+      </td>
+    <td>&nbsp;</td>
+    <td><a href="http://es.geocities.com/juantxu28/JBuilderZip/16.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>Clases 
+      y objetos </h3>
+      <p> 17.- pteorio1: Aplicacion que nos muestra como crear objetos y como 
+        presentar los datos asignados.
+      <p>//en la clase teoria1.java
+      <p>package pteorio1;<br>
+        <br>
+        public class teoria1 {<br>
+        public static void main(String[] args) {<br>
+        //no hace falta poner statci xq no emos utilizado la linea de BufferedReader...<br>
+        //CREAMOS LOS OBJETOS<br>
+        circulo c1=new circulo(10);//introducimos el valor 10 para el radio de 
+        c1 a la vez que reservamos memoria para c1<br>
+        circulo c2=new circulo(1500);//introducimos el valor 1500 para el radio 
+        de c2 a la vez que reservamos memoria para c2<br>
+        //SALIDAS DE DATOS<br>
+        System.out.println(&quot;Radio de c1 &quot;+c1.verRadio());<br>
+        System.out.println(&quot;Radio de c2 &quot;+c2.verRadio());<br>
+        c1.actualiza(99);<br>
+        System.out.println(&quot;Valor de c1 &quot;+c1.verRadio());<br>
+        c1=c2;<br>
+        System.out.println(&quot;Valor de c1 &quot;+c1.verRadio());<br>
+        c2.actualiza(3800);<br>
+        System.out.println(&quot;Valor de c1 &quot;+c1.verRadio());<br>
+        //Integer num= new Integer();<br>
+        }<br>
+        }
+      <p>//en la clase circulo.java
+      <p>package pteorio1;<br>
+        /**<br>
+        * &lt;p&gt;T&iacute;tulo: &lt;/p&gt;<br>
+        * &lt;p&gt;Descripci&oacute;n: &lt;/p&gt;<br>
+        * &lt;p&gt;Copyright: Copyright (c) 2005&lt;/p&gt;<br>
+        * &lt;p&gt;Empresa: &lt;/p&gt;<br>
+        * @author sin atribuir<br>
+        * @version 1.0<br>
+        */<br>
+        public class circulo {<br>
+        //creaci&oacute;n de atributos<br>
+        final float PI=3.1416f;<br>
+        private float radio=0;<br>
+        public float area(){return PI*radio*radio;}<br>
+        circulo(float RADIO){//CONSTRUCTOR (se llama igual que la clase y puede 
+        haber varios)<br>
+        radio=RADIO;<br>
+        }<br>
+        public float verRadio(){return radio;}<br>
+        public void actualiza(float RADIO){<br>
+        radio = RADIO;<br>
+        }<br>
+        }<br>
+<p></td>
+    <td>&nbsp;</td>
+    <td><a href="http://es.geocities.com/juantxu28/JBuilderZip/17.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>Clases 
+      y objetos </h3>
+      <p> 19.- pgestion: Aplicaci&oacute;n que nos permite a trav&eacute;s de 
+        un men&uacute; introducir una nueva factura o contrato, verlos y actualizarlos 
+        mediante objetos y clases.</p>
+      <p>//En la clase gestion.java</p>
+      <p>package pgestion;</p>
+      <p>import java.io.IOException;</p>
+      <p>public class gestion</p>
+      <p>{<br>
+        //diferentes tipos de INSTANCIACI&Oacute;N DE OBJETOS</p>
+      <p> //--DECLARACI&Oacute;N--- | -------ASIGNACION DE DIRECCI&Oacute;N -------<br>
+        CONTRATO contrato2 = new CONTRATO(&quot;C1000&quot;,&quot;25-10-2005&quot;);<br>
+        //CADA VEZ Q HAY UN NEW HAY UN OBJETO<br>
+        //=====================================<br>
+        //=====================================</p>
+      <p><br>
+        public static void main(String[] args)throws IOException {<br>
+        MENU menu2=new MENU();//creamos el objeto MENU<br>
+        FACTURA factura2=new FACTURA(&quot;&quot;,&quot;&quot;,0);<br>
+        CONTRATO contrato2=new CONTRATO(&quot;&quot;,&quot;&quot;);<br>
+        short eleccion=0;<br>
+        do{<br>
+        eleccion=menu2.Crear();//capturamos la opcion seleccionada y la almacenamos 
+        en eleccion<br>
+        switch (eleccion) { //llamamos al menu y gestionamos la opcion pulsada<br>
+        case 1: //FACTURA NUEVA<br>
+        factura2 = new FACTURA();<br>
+        break;<br>
+        case 2: //CONTRATO NUEVO<br>
+        System.out.println(&quot;Contrato nuevo....&quot;);<br>
+        System.out.println(&quot;===============&quot;);<br>
+        contrato2 = new CONTRATO(&quot;C1000&quot;, &quot;17/05/81&quot;);//asignando 
+        valores<br>
+        break;<br>
+        case 3: //VER FACTURA<br>
+        System.out.println(&quot;Ver factura....&quot;);<br>
+        System.out.println(&quot;===============&quot;);<br>
+        System.out.println(factura2.getNombre());<br>
+        System.out.println(factura2.getDni());<br>
+        System.out.println(factura2.getCuantia());<br>
+        break;<br>
+        case 4: //VER CONTRATO<br>
+        System.out.println(&quot;Ver contacto....&quot;);<br>
+        System.out.println(&quot;================&quot;);<br>
+        System.out.println(contrato2.getCodigo());<br>
+        System.out.println(contrato2.getFecha());<br>
+        break;<br>
+        case 5: //ACTUALIZAR FACTURA<br>
+        System.out.println(&quot;Actualizar factura....&quot;);<br>
+        System.out.println(&quot;======================&quot;);<br>
+        factura2.setNombre();<br>
+        break;<br>
+        case 6: //ACTUALIZAR CONTRATO<br>
+        System.out.println(&quot;Actualizar contrato....&quot;);<br>
+        System.out.println(&quot;=======================&quot;);<br>
+        contrato2.setCodigo();<br>
+        break;<br>
+        }<br>
+        }while(eleccion&gt;=1 &amp;&amp; eleccion&lt;=6);<br>
+        <br>
+        }<br>
+        }<br>
+      </p>
+      <p>//en la clase menu.java</p>
+      <p>package pgestion;</p>
+      <p>import java.io.BufferedReader;<br>
+        import java.io.InputStreamReader;<br>
+        import java.io.IOException;</p>
+      <p> public class MENU {<br>
+        BufferedReader entrada = new BufferedReader(new InputStreamReader(System.in));<br>
+        public short Crear() throws IOException, NumberFormatException {<br>
+        short opcion=0;<br>
+        // Construir men&uacute;<br>
+        System.out.println(&quot;LISTA DE OPCIONES:&quot;);<br>
+        System.out.println(&quot;====================&quot;);<br>
+        System.out.println(&quot;1-. FACTURA NUEVA&quot;);<br>
+        System.out.println(&quot;2-. CONTRATO NUEVO&quot;);<br>
+        System.out.println(&quot;3-. VER FACTURA&quot;);<br>
+        System.out.println(&quot;4-. VER CONTRATO&quot;);<br>
+        System.out.println(&quot;5-. ACTUALIZAR FACTURA&quot;);<br>
+        System.out.println(&quot;6-. ACTUALIZAR CONTRATO&quot;);<br>
+        System.out.println(&quot;ELIGE UNA OPCI&Oacute;N: &quot;);<br>
+        opcion=Short.parseShort(entrada.readLine());//ESCANEAMOS LA OPCION<br>
+        return opcion;<br>
+        }</p>
+      <p>}</p>
+      <p>//en la clase contrato.java</p>
+      <p>package pgestion;</p>
+      <p>import java.io.BufferedReader;<br>
+        import java.io.InputStreamReader;<br>
+        import java.io.IOException;</p>
+      <p>public class CONTRATO {<br>
+        //atributos en general privados y m&eacute;todos p&uacute;blicos<br>
+        private String Codigo;<br>
+        private String Fecha;</p>
+      <p> BufferedReader entrada = new BufferedReader(new InputStreamReader(System.in));</p>
+      <p></p>
+      <p> public CONTRATO(String Codigo ,String Fecha ) {<br>
+        //&iquest;Para qu&eacute; sirve el puntero this?<br>
+        this.Codigo = Codigo;//Es para diferenciar los atributos de los argumentos(si 
+        se llamasen de distinta forma no har&iacute;an falta)<br>
+        this.Fecha = Fecha;</p>
+      <p> }<br>
+        /*Normalmente se utiliza un m&eacute;todo por atributo de entrada<br>
+        para seguir el convenio de JAVA empezar&aacute; por setX***** */</p>
+      <p> public void setCodigo() throws IOException {<br>
+        System.out.print(&quot;Introduce nombre : &quot;);<br>
+        Codigo =entrada.readLine();</p>
+      <p> }<br>
+        //sobreacarga de setCodigo<br>
+        public void setCodigo(String Codigo){//dos metodos llamados de la misma 
+        forma en la misma clase<br>
+        this.Codigo=Codigo;<br>
+        }<br>
+        public void setFecha(String Fecha){<br>
+        this.Fecha =Fecha;}</p>
+      <p> /* Normalmente se utiliza un m&eacute;todo por atributo de salida complementario<br>
+        al anterior para seguir el convenio de JAVA empezar&aacute; por getX*****<br>
+        devolver&aacute; el atributo correspondiente<br>
+        */</p>
+      <p> public String getCodigo(){<br>
+        return this.Codigo;}</p>
+      <p> public String getFecha(){<br>
+        return this.Fecha;}</p>
+      <p>}<br>
+      </p>
+      <p>//en la clase factura.java</p>
+      <p>package pgestion;</p>
+      <p>import java.io.BufferedReader;<br>
+        import java.io.InputStreamReader;<br>
+        import java.io.IOException;</p>
+      <p>public class FACTURA {<br>
+        //atributos en general privados y m&eacute;todos p&uacute;blicos</p>
+      <p> private String Nombre;<br>
+        private String Dni;<br>
+        private float cuantia;<br>
+        BufferedReader entrada = new BufferedReader(new InputStreamReader(System.in));</p>
+      <p>//M&Eacute;TODOS<br>
+        public FACTURA() throws IOException {<br>
+        //constructor sin par&aacute;metros<br>
+        //&iquest;C&oacute;mo s&eacute; y para que sirve un constructor ?<br>
+        //&iquest;Qu&eacute; 2 reglas cumplen los constructores ?<br>
+        //&iquest;Para qu&eacute; se pone throws IOException?Para tratar los posibles 
+        errores que se den al capturar datos y mostrarlos por pantalla<br>
+        //JAVA AL CAPTURA UN NUMERO LOS CAPTURA POR DEFECTO COMO INT, O DOUBLE<br>
+        System.out.print(&quot;Introduce nombre : &quot;);<br>
+        Nombre=entrada.readLine();<br>
+        System.out.print(&quot;Introduce Dni : &quot;);<br>
+        Dni=entrada.readLine();<br>
+        System.out.print(&quot;Introduce cuantia : &quot;);</p>
+      <p> /* -----------------------------------------------------------------------<br>
+        Es necesario convertir de String a Float porque readline devuelve<br>
+        String y cuantia es Float .<br>
+        &iquest;Por qu&eacute; no vale esta conversi&oacute;n cuantia=(float)entrada.readLine(); 
+        ?<br>
+        ------------------------------------------------------------------------- 
+        */<br>
+        cuantia=Float.parseFloat(entrada.readLine());<br>
+        }<br>
+        //SOBRECARGA DE CONSTRUCTOR<br>
+        public FACTURA(String Nombre ,String Dni , float CUANTIA) {<br>
+        //&iquest;Para qu&eacute; sirve el puntero this?<br>
+        cuantia=CUANTIA;<br>
+        this.Nombre=Nombre;<br>
+        this.Dni=Dni;</p>
+      <p> }<br>
+        /*Normalmente se utiliza un m&eacute;todo por atributo de entrada<br>
+        para seguir el convenio de JAVA empezar&aacute; por setX***** */</p>
+      <p> public void setNombre() throws IOException {<br>
+        System.out.print(&quot;Introduce nombre : &quot;);<br>
+        Nombre=entrada.readLine();<br>
+        }<br>
+        public void setNombre(String Nombre){<br>
+        this.Nombre=Nombre;}</p>
+      <p> /* Normalmente se utiliza un m&eacute;todo por atributo de salida complementario<br>
+        al anterior para seguir el convenio de JAVA empezar&aacute; por getX***** 
+        */</p>
+      <p> public String getNombre(){<br>
+        return this.Nombre;}</p>
+      <p> public String getDni(){<br>
+        return this.Dni;}</p>
+      <p> public float getCuantia(){<br>
+        return this.cuantia;}</p>
+      <p> }</p>
+      <p><br>
+      </p></td>
+    <td>&nbsp;</td>
+    <td><a href="http://es.geocities.com/juantxu28/cBuilderZip/p19.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td> <div align="right"><a href="http://es.geocities.com/juantxu28/index3.htm" target="_parent">&lt;&lt;Menu 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

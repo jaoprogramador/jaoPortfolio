@@ -1,0 +1,293 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Ejercicios Java</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Descargar Ejercicios de Java, Ejemplos de java, Aplicaciones  de java, JBuilder, J Builder, codigo java">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table width="555" height="265" align="left" background="../imagenes/fondologo.jpg">
+  <tr> 
+    <td height="39" colspan="3"> <h2>E 
+        J E R C I C I O S</h2></td>
+  </tr>
+  <tr> 
+    <td > <h3>Arrays</h3>
+      <p> 20.- pcadenas: Aplicaci&oacute;n que nos muestra como manipular cadenas 
+        de caracteres por medio de arrays y funciones como length, tolowercase, 
+        touppercase, concat... </p>
+      <p>package pcadenas;</p>
+      <p>public class cadenas {<br>
+        static String cadena = &quot;HOY ES LUNES&quot;;<br>
+        static String cadena2 = &quot;qu&eacute; bien&quot;;<br>
+        static int num=0;<br>
+        static char []cad=new char[30];<br>
+        public static void main(String args[]) {<br>
+        System.out.println(&quot;longitud de cadena : &quot; + cadena.length());<br>
+        //cad[0]=cadena[3] ; ERROR aunque sean letras los tipos de datos son diferentes<br>
+        //cad es un array de char(tipo de dato primitivo) mientras que String 
+        es una clase</p>
+      <p> cad[0]=cadena.charAt(5);//charAt(5)--&gt;saca el caracter q esta en 
+        esa posicion<br>
+        System.out.println(&quot;cadena desde posicion 2 hasta 9 : &quot; +<br>
+        cadena.substring(2, 9));//se situa en una posicion de la cadena y nos 
+        muestra desde ahi llos caraceres que queramos<br>
+        num=4;<br>
+        System.out.println(&quot;posicion de L : &quot; + cadena.indexOf(&quot;L&quot;));//devuelve 
+        el indice o posicion de la cadena</p>
+      <p> System.out.println(&quot;Letra colocada en posic&oacute;n 5 : &quot; 
+        + cadena.charAt(5));//devuelve el caracter en la posicion indicada en 
+        la cadena</p>
+      <p><br>
+        System.out.println(&quot;CONVIRTIENDO A MAY&Uacute;SCULAS CADENA2 : &quot; 
+        +<br>
+        cadena2.toUpperCase());//convierte la cadena a mayusculas<br>
+        System.out.println(&quot;CONVIRTIENDO A MIN&Uacute;SCULAS CADENA : &quot; 
+        + cadena.toLowerCase());//convierte a minusculas<br>
+        System.out.println(&quot;CONCATENADO CADENAS : &quot; + cadena.concat(cadena2));}// 
+        une dos cadenas de caracteres</p>
+      <p> }</p>
+      <p>&nbsp; </p></td>
+    <td>&nbsp;</td>
+    <td><a href="../JBuilderZip/20.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>Arrays 
+      y conversi&oacute;n de datos</h3>
+      <p> 21.- pconversiones: Aplicaciones que nos permite hacer conversiones 
+        con arrays de tipo num&eacute;rico.</p>
+      <p>package pconversiones;</p>
+      <p>import java.util.Arrays;</p>
+      <p>public class conversiones {</p>
+      <p> public static void main(String args[]) {<br>
+        int num=5;<br>
+        float num2=5.87f;<br>
+        String datos=&quot;567&quot;;<br>
+        Integer inum;<br>
+        int []aaa={3,89,1,99,4};<br>
+        Arrays.sort(aaa);</p>
+      <p> //entre primitivas char , int , short , long , float , double<br>
+        //------------------------------------------------------------//<br>
+        System.out.println(&quot;Convirtiendo int a float : &quot;+(float)num);<br>
+        System.out.println(&quot;Convirtiendo float a int : &quot;+(int)num2);<br>
+        //-----------------------------------------------------------//</p>
+      <p><br>
+        // De primitivas a clases Integer , Float , Character , Short , String 
+        ....<br>
+        inum=new Integer(num);<br>
+        System.out.println(&quot;Convirtiendo int a Integer : &quot;+inum);<br>
+        //la ventaja es que num no tiene m&eacute;todos accesibles directamente<br>
+        //ej num. noi nos sales nada<br>
+        //sin embargo si pongo inum. me sale una gran colecci&oacute;n de m&eacute;todos</p>
+      <p><br>
+        //de Clases a Primitivas num=inum+num ERROR<br>
+        num=inum.intValue()+num;</p>
+      <p> //-------------------------------------------------------------------//<br>
+        //DE PRIMITIVAS A STRING datos=num ERROR<br>
+        datos=Integer.toString(num);<br>
+        //CLASES A STRING<br>
+        datos=inum.toString(num);</p>
+      <p> //STRING A primitivas<br>
+        num=Integer.parseInt(datos);<br>
+        //-----------------------------------------------------------------------//</p>
+      <p> //STRING A CLASES<br>
+        inum=Integer.getInteger(datos);<br>
+        }</p>
+      <p>}<br>
+      </p></td>
+    <td>&nbsp;</td>
+    <td><a href="../JBuilderZip/21.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td ><h3>Clases 
+      y objetos</h3>
+      <p> 23.- pbiblioteca: Aplicaci&oacute;n que mediante clases, objetos, funciones 
+        y menus nos permite introducir usuarios (nombre y dni) y libros, para 
+        luego verlos o modificarlos.</p>
+      <p>//en la clase biblioteca.java</p>
+      <p>package pbiblioteca;</p>
+      <p>import java.io.IOException;</p>
+      <p>public class biblioteca {<br>
+        public static final short cantidad=3;//constante para el numero de usuarios 
+        totales<br>
+        public static void main(String args[]) throws IOException {<br>
+        menu menu2=new menu();//creamos el objeto MENU<br>
+        short eleccion=0;</p>
+      <p><br>
+        //creamos un array de usuarios y libros (USUARIOS y LIBROS) para 3 usuarios<br>
+        usuario [] USUARIOS=new usuario[cantidad];<br>
+        libro [] LIBROS=new libro[cantidad];</p>
+      <p>//reservamos memoria para los 3 usuarios<br>
+        for(int i=0;i&lt;cantidad;i++){<br>
+        USUARIOS[i]=new usuario();<br>
+        LIBROS[i]=new libro();<br>
+        }</p>
+      <p>//////////////////////<br>
+        do{<br>
+        eleccion=menu2.Crear();//capturamos la opcion seleccionada y la almacenamos 
+        en eleccion<br>
+        switch (eleccion) { //llamamos al menu y gestionamos la opcion pulsada<br>
+        case 1: //Nuevo usuario<br>
+        //introducir datos para el usuario<br>
+        for(int i=0;i&lt;cantidad;i++)<br>
+        USUARIOS[i].setDatos();<br>
+        break;<br>
+        case 2: //Ver usuario<br>
+        //Mostramos los datos de los 3 usuarios y los tres libros<br>
+        for(int i=0;i&lt;cantidad;i++)<br>
+        USUARIOS[i].verDatos();<br>
+        break;<br>
+        case 3: //Nuevo libro<br>
+        for(int i=0;i&lt;cantidad;i++){<br>
+        LIBROS[i].setTitulo();<br>
+        LIBROS[i].setReservado();<br>
+        }<br>
+        break;<br>
+        case 4: //Ver libro<br>
+        for(int i=0;i&lt;cantidad;i++)<br>
+        LIBROS[i].verDatos();<br>
+        break;<br>
+        }<br>
+        }while(eleccion&gt;=1 &amp;&amp; eleccion&lt;=4);<br>
+        System.out.println(&quot;Fin de la aplicacion&quot;);<br>
+        System.out.println(&quot;====================&quot;);<br>
+        }<br>
+        }<br>
+      </p>
+      <p>//en la clase menu.java</p>
+      <p>package pbiblioteca;<br>
+        import java.io.BufferedReader;<br>
+        import java.io.InputStreamReader;<br>
+        import java.io.IOException;<br>
+        <br>
+        public class menu {<br>
+        BufferedReader entrada = new BufferedReader(new InputStreamReader(System.in));<br>
+        public short Crear() throws IOException, NumberFormatException {<br>
+        short opcion=0;<br>
+        // Construir men&uacute;<br>
+        System.out.println(&quot;LISTA DE OPCIONES:&quot;);<br>
+        System.out.println(&quot;====================&quot;);<br>
+        System.out.println(&quot;1-. Nuevo usuario&quot;);<br>
+        System.out.println(&quot;2-. Ver usuario&quot;);<br>
+        System.out.println(&quot;3-. Nuevo libro&quot;);<br>
+        System.out.println(&quot;4-. Ver libro&quot;);<br>
+        System.out.println(&quot;5-. Salir&quot;);<br>
+        System.out.println(&quot;ELIGE UNA OPCI&Oacute;N: &quot;);<br>
+        opcion=Short.parseShort(entrada.readLine());//ESCANEAMOS LA OPCION<br>
+        return opcion;<br>
+        }<br>
+        }<br>
+        //en la clase usuario.java</p>
+      <p>package pbiblioteca;</p>
+      <p>import java.io.BufferedReader;<br>
+        import java.io.InputStreamReader;<br>
+        import java.io.IOException;</p>
+      <p>public class usuario {<br>
+        String nombre;<br>
+        String dni;<br>
+        String titulo;<br>
+        BufferedReader stdin=new BufferedReader(new InputStreamReader(System.in));</p>
+      <p> public usuario() {//constructor<br>
+        nombre=&quot;&quot;;<br>
+        dni=&quot;&quot;;<br>
+        titulo=&quot;&quot;;<br>
+        }</p>
+      <p><br>
+        public String getDni(){<br>
+        return dni;<br>
+        }<br>
+        public void setTitulo(String titulo){//<br>
+        this.titulo=titulo;<br>
+        }</p>
+      <p> public void setDatos() throws IOException {<br>
+        boolean ok=false;<br>
+        System.out.println(&quot;nombre : &quot;);<br>
+        nombre=stdin.readLine();</p>
+      <p><br>
+        do{<br>
+        System.out.println(&quot;dni : &quot;);<br>
+        dni=stdin.readLine();<br>
+        dni=dni.toUpperCase();</p>
+      <p> if(dni.length()==10 &amp;&amp; dni.charAt(8)=='-'){//comprobamos q la 
+        longitud del dni sea de 10 y q la 8&ordm; sea un gui&oacute;n &quot;-&quot;<br>
+        ok=true;//si ok esta a true es ke se kumplen todas las kondiciones<br>
+        }<br>
+        try{//TRY... CATCH es para tratar posibles errores q se produzca dentro 
+        de ellos<br>
+        for(int i=0;i&lt;dni.length()-2;i++){//recorremos todo el dni y comprobamos 
+        q todos sean numericos y q la ultima sea un caracter del alfabeto<br>
+        if (Character.isDigit(dni.charAt(i))==true &amp;&amp; Character.isLetter(dni.charAt(9))==true 
+        &amp;&amp; ok==true){<br>
+        ok=true;<br>
+        }<br>
+        else{ok=false;break;}<br>
+        }<br>
+        }catch(Exception e){}</p>
+      <p><br>
+        }while (ok==false);</p>
+      <p><br>
+        }</p>
+      <p> public void verDatos(){<br>
+        System.out.println(&quot; &quot;);<br>
+        System.out.println(&quot;------------------------------------------------------&quot;);<br>
+        System.out.println(&quot;nombre : &quot;+nombre);<br>
+        System.out.println(&quot;dni : &quot;+dni);<br>
+        //System.out.println(&quot;titulo : &quot;+titulo);<br>
+        }</p>
+      <p>}<br>
+      </p>
+      <p>//en la clase libro.java</p>
+      <p>package pbiblioteca;<br>
+        <br>
+        import java.io.BufferedReader;<br>
+        import java.io.InputStreamReader;<br>
+        import java.io.IOException;<br>
+        public class libro {<br>
+        String titulo;<br>
+        boolean reservado;<br>
+        BufferedReader stdin=new BufferedReader(new InputStreamReader(System.in));<br>
+        public libro(){<br>
+        titulo = &quot;&quot;;<br>
+        reservado = false;<br>
+        }<br>
+        public void setTitulo() throws IOException {//introducimos el libro<br>
+        System.out.println(&quot;Introduce el t&iacute;tulo del libro: &quot;);<br>
+        titulo=stdin.readLine();<br>
+        }<br>
+        public void setReservado() throws IOException {//los reservamos<br>
+        reservado=true;<br>
+        }<br>
+        public String getTitulo(){<br>
+        return titulo;<br>
+        }<br>
+        public boolean GetReservado(){<br>
+        return reservado;<br>
+        }<br>
+        public void verDatos(){<br>
+        System.out.println(&quot; &quot;);<br>
+        System.out.println(&quot;------------------------------------------------------&quot;);<br>
+        System.out.println(&quot;titulo : &quot;+titulo);<br>
+        }}<br>
+      </p>
+      <p>&nbsp;</p></td>
+    <td>&nbsp;</td>
+    <td><a href="../JBuilderZip/23.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+ 
+  <tr> 
+    <td> <div align="right"><a href="../index3.htm" target="_parent">&lt;&lt;Menu 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

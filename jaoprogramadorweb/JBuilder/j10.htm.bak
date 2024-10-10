@@ -1,0 +1,360 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Ejercicios Java</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Descargar Ejercicios de Java, Ejemplos de java, Aplicaciones  de java, JBuilder, J Builder, codigo java">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table width="555" height="317" align="left" background="../imagenes/fondologo.jpg">
+  <tr> 
+    <td height="39" colspan="3"> <h2>E J E R C I C I O S</h2></td>
+  </tr>
+  <tr> 
+    <td > <h3>Ventanas</h3>
+      <p> 52.- Aplicaci&oacute;n que nos muestra como crear una ventana desde 
+        c&oacute;digo. </p>
+      <p>package pventana;<br>
+        <br>
+        import java.awt.*;<br>
+        public class ventana extends Frame{<br>
+        ventana(){<br>
+        setSize(300,200);<br>
+        setTitle(&quot;Juantxu Arana Olalde&quot;);<br>
+        }<br>
+        public static void main(String[] args) {<br>
+        ventana e1=new ventana();<br>
+        e1.setVisible(true);<br>
+        }<br>
+        }<br>
+      </p></td>
+    <td>&nbsp;</td>
+    <td><a href="../JBuilderZip/Ventana.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>Ventana</h3>
+      <p> 53.- Aplicaci&oacute;n que nos muestra como crear una ventana desde 
+        codigo con propiedades nuevas </p>
+      <p>package pventa;<br>
+        <br>
+        import javax.swing.*;<br>
+        public class PrimeraVentanaSwing { PrimeraVentanaSwing(){<br>
+        JFrame.setDefaultLookAndFeelDecorated(true);<br>
+        JFrame marco = new JFrame (&quot;Juantxu Arana Olalde&quot;);<br>
+        marco.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);<br>
+        marco.setSize(300,200);<br>
+        marco.setVisible(true);<br>
+        }<br>
+        public static void main(String[] args) {<br>
+        PrimeraVentanaSwing ap=new PrimeraVentanaSwing();<br>
+        }<br>
+        }</p></td>
+    <td>&nbsp;</td>
+    <td><a href="../JBuilderZip/Ventana2.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td > <h3>Ventanas</h3>
+      <p> 54.- Ejercicio que nos muestra una aplicaci&oacute;n con distintos opciones 
+        y controles</p>
+      <p>//en la clase JAOAplicacion.java</p>
+      <p>package pjao;</p>
+      <p>import javax.swing.UIManager;<br>
+        import java.awt.*;</p>
+      <p>/**<br>
+        * &lt;p&gt;T&iacute;tulo: Aplicaci&oacute;n JAO&lt;/p&gt;<br>
+        * &lt;p&gt;Descripci&oacute;n: &lt;/p&gt;<br>
+        * &lt;p&gt;Copyright: Copyright (c) 2006&lt;/p&gt;<br>
+        * &lt;p&gt;Empresa: JAO&lt;/p&gt;<br>
+        * @author Juantxu Arana Olalde<br>
+        * @version 1.0<br>
+        */</p>
+      <p>public class JAOAplicacion {<br>
+        boolean packFrame = false;</p>
+      <p> //Construir la aplicaci&oacute;n<br>
+        public JAOAplicacion() {<br>
+        Marco1 frame = new Marco1();<br>
+        //Validar marcos que tienen tama&ntilde;os preestablecidos<br>
+        //Empaquetar marcos que cuentan con informaci&oacute;n de tama&ntilde;o 
+        preferente &uacute;til. Ej. de su dise&ntilde;o.<br>
+        if (packFrame) {<br>
+        frame.pack();<br>
+        }<br>
+        else {<br>
+        frame.validate();<br>
+        }<br>
+        //Centrar la ventana<br>
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();<br>
+        Dimension frameSize = frame.getSize();<br>
+        if (frameSize.height &gt; screenSize.height) {<br>
+        frameSize.height = screenSize.height;<br>
+        }<br>
+        if (frameSize.width &gt; screenSize.width) {<br>
+        frameSize.width = screenSize.width;<br>
+        }<br>
+        frame.setLocation((screenSize.width - frameSize.width) / 2, (screenSize.height 
+        - frameSize.height) / 2);<br>
+        frame.setVisible(true);<br>
+        }</p>
+      <p> //M&eacute;todo Main<br>
+        public static void main(String[] args) {<br>
+        try {<br>
+        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());<br>
+        }<br>
+        catch(Exception e) {<br>
+        e.printStackTrace();<br>
+        }<br>
+        new JAOAplicacion();<br>
+        }<br>
+        }</p>
+      <p>//en la clase Marco1.java</p>
+      <p>package pjao;</p>
+      <p>import java.awt.*;<br>
+        import java.awt.event.*;<br>
+        import javax.swing.*;<br>
+        import javax.swing.border.*;</p>
+      <p>public class Marco1 extends JFrame {<br>
+        JPanel contentPane;<br>
+        JMenuBar jMenuBar1 = new JMenuBar();<br>
+        JMenu jMenuFile = new JMenu();<br>
+        JMenuItem jMenuFileExit = new JMenuItem();<br>
+        JMenu jMenuHelp = new JMenu();<br>
+        JMenuItem jMenuHelpAbout = new JMenuItem();<br>
+        JToolBar jToolBar = new JToolBar();<br>
+        JButton jButton1 = new JButton();<br>
+        JButton jButton2 = new JButton();<br>
+        JButton jButton3 = new JButton();<br>
+        ImageIcon image1;<br>
+        ImageIcon image2;<br>
+        ImageIcon image3;<br>
+        JLabel statusBar = new JLabel();<br>
+        BorderLayout borderLayout1 = new BorderLayout();<br>
+        JPanel jPanel1 = new JPanel();<br>
+        Border border1;<br>
+        JLabel jLabel1 = new JLabel();<br>
+        JButton jButton4 = new JButton();</p>
+      <p> //Construir el marco<br>
+        public Marco1() {<br>
+        enableEvents(AWTEvent.WINDOW_EVENT_MASK);<br>
+        try {<br>
+        jbInit();<br>
+        }<br>
+        catch(Exception e) {<br>
+        e.printStackTrace();<br>
+        }<br>
+        }</p>
+      <p> //Inicializaci&oacute;n de componentes<br>
+        private void jbInit() throws Exception {<br>
+        image1 = new ImageIcon(pjao.Marco1.class.getResource(&quot;openFile.png&quot;));<br>
+        image2 = new ImageIcon(pjao.Marco1.class.getResource(&quot;closeFile.png&quot;));<br>
+        image3 = new ImageIcon(pjao.Marco1.class.getResource(&quot;help.png&quot;));<br>
+        contentPane = (JPanel) this.getContentPane();<br>
+        border1 = BorderFactory.createLineBorder(Color.gray,2);<br>
+        contentPane.setLayout(borderLayout1);<br>
+        this.setSize(new Dimension(400, 300));<br>
+        this.setTitle(&quot;T&iacute;tulo del marco&quot;);<br>
+        statusBar.setText(&quot; &quot;);<br>
+        jMenuFile.setText(&quot;Archivo&quot;);<br>
+        jMenuFileExit.setText(&quot;Salir&quot;);<br>
+        jMenuFileExit.addActionListener(new Marco1_jMenuFileExit_ActionAdapter(this));<br>
+        jMenuHelp.setText(&quot;Ayuda&quot;);<br>
+        jMenuHelpAbout.setText(&quot;Acerca de&quot;);<br>
+        jMenuHelpAbout.addActionListener(new Marco1_jMenuHelpAbout_ActionAdapter(this));<br>
+        jButton1.setIcon(image1);<br>
+        jButton1.setToolTipText(&quot;Abrir archivo&quot;);<br>
+        jButton2.setIcon(image2);<br>
+        jButton2.setToolTipText(&quot;Cerrar archivo&quot;);<br>
+        jButton3.setIcon(image3);<br>
+        jButton3.setToolTipText(&quot;Ayuda&quot;);<br>
+        jPanel1.setBackground(SystemColor.activeCaption);<br>
+        jPanel1.setBorder(border1);<br>
+        jPanel1.setLayout(null);<br>
+        jLabel1.setFont(new java.awt.Font(&quot;Comic Sans MS&quot;, 1, 28));<br>
+        jLabel1.setForeground(Color.white);<br>
+        jLabel1.setText(&quot;Aplicaciones JAO&quot;);<br>
+        jLabel1.setBounds(new Rectangle(79, 116, 270, 32));<br>
+        jButton4.setBounds(new Rectangle(152, 167, 71, 23));<br>
+        jButton4.setText(&quot;Aceptar&quot;);<br>
+        jButton4.addActionListener(new Marco1_jButton4_actionAdapter(this));<br>
+        jToolBar.add(jButton1);<br>
+        jToolBar.add(jButton2);<br>
+        jToolBar.add(jButton3);<br>
+        jMenuFile.add(jMenuFileExit);<br>
+        jMenuHelp.add(jMenuHelpAbout);<br>
+        jMenuBar1.add(jMenuFile);<br>
+        jMenuBar1.add(jMenuHelp);<br>
+        this.setJMenuBar(jMenuBar1);<br>
+        contentPane.add(jToolBar, BorderLayout.NORTH);<br>
+        contentPane.add(statusBar, BorderLayout.SOUTH);<br>
+        contentPane.add(jPanel1, BorderLayout.CENTER);<br>
+        jPanel1.add(jLabel1, null);<br>
+        jPanel1.add(jButton4, null);<br>
+        }</p>
+      <p> //Realizar Archivo | Salir<br>
+        public void jMenuFileExit_actionPerformed(ActionEvent e) {<br>
+        System.exit(0);<br>
+        }</p>
+      <p> //Realizar Ayuda | Acerca de<br>
+        public void jMenuHelpAbout_actionPerformed(ActionEvent e) {<br>
+        Marco1_AcercaDe dlg = new Marco1_AcercaDe(this);<br>
+        Dimension dlgSize = dlg.getPreferredSize();<br>
+        Dimension frmSize = getSize();<br>
+        Point loc = getLocation();<br>
+        dlg.setLocation((frmSize.width - dlgSize.width) / 2 + loc.x, (frmSize.height 
+        - dlgSize.height) / 2 + loc.y);<br>
+        dlg.setModal(true);<br>
+        dlg.pack();<br>
+        dlg.show();<br>
+        }</p>
+      <p> //Modificado para poder salir cuando se cierra la ventana<br>
+        protected void processWindowEvent(WindowEvent e) {<br>
+        super.processWindowEvent(e);<br>
+        if (e.getID() == WindowEvent.WINDOW_CLOSING) {<br>
+        jMenuFileExit_actionPerformed(null);<br>
+        }<br>
+        }</p>
+      <p> void jButton4_actionPerformed(ActionEvent e) {<br>
+        jLabel1.setForeground(new Color(255,0,0));<br>
+        }<br>
+        }</p>
+      <p>class Marco1_jMenuFileExit_ActionAdapter implements ActionListener {<br>
+        Marco1 adaptee;</p>
+      <p> Marco1_jMenuFileExit_ActionAdapter(Marco1 adaptee) {<br>
+        this.adaptee = adaptee;<br>
+        }<br>
+        public void actionPerformed(ActionEvent e) {<br>
+        adaptee.jMenuFileExit_actionPerformed(e);<br>
+        }<br>
+        }</p>
+      <p>class Marco1_jMenuHelpAbout_ActionAdapter implements ActionListener {<br>
+        Marco1 adaptee;</p>
+      <p> Marco1_jMenuHelpAbout_ActionAdapter(Marco1 adaptee) {<br>
+        this.adaptee = adaptee;<br>
+        }<br>
+        public void actionPerformed(ActionEvent e) {<br>
+        adaptee.jMenuHelpAbout_actionPerformed(e);<br>
+        }<br>
+        }</p>
+      <p>class Marco1_jButton4_actionAdapter implements java.awt.event.ActionListener 
+        {<br>
+        Marco1 adaptee;</p>
+      <p> Marco1_jButton4_actionAdapter(Marco1 adaptee) {<br>
+        this.adaptee = adaptee;<br>
+        }<br>
+        public void actionPerformed(ActionEvent e) {<br>
+        adaptee.jButton4_actionPerformed(e);<br>
+        }<br>
+        }<br>
+      </p>
+      <p>//en la clase marco1_Acerdade.java</p>
+      <p>package pjao;</p>
+      <p>import java.awt.*;<br>
+        import java.awt.event.*;<br>
+        import javax.swing.*;<br>
+        import javax.swing.border.*;</p>
+      <p>&nbsp;</p>
+      <p>public class Marco1_AcercaDe extends JDialog implements ActionListener 
+        {</p>
+      <p> JPanel panel1 = new JPanel();<br>
+        JPanel panel2 = new JPanel();<br>
+        JPanel insetsPanel1 = new JPanel();<br>
+        JPanel insetsPanel2 = new JPanel();<br>
+        JPanel insetsPanel3 = new JPanel();<br>
+        JButton button1 = new JButton();<br>
+        JLabel imageLabel = new JLabel();<br>
+        JLabel label1 = new JLabel();<br>
+        JLabel label2 = new JLabel();<br>
+        JLabel label3 = new JLabel();<br>
+        JLabel label4 = new JLabel();<br>
+        ImageIcon image1 = new ImageIcon();<br>
+        BorderLayout borderLayout1 = new BorderLayout();<br>
+        BorderLayout borderLayout2 = new BorderLayout();<br>
+        FlowLayout flowLayout1 = new FlowLayout();<br>
+        GridLayout gridLayout1 = new GridLayout();<br>
+        String product = &quot;Aplicaci&oacute;n JAO&quot;;<br>
+        String version = &quot;1.0&quot;;<br>
+        String copyright = &quot;Copyright (c) 2006&quot;;<br>
+        String comments = &quot;&quot;;</p>
+      <p> public Marco1_AcercaDe(Frame parent) {<br>
+        super(parent);<br>
+        enableEvents(AWTEvent.WINDOW_EVENT_MASK);<br>
+        try {<br>
+        jbInit();<br>
+        }<br>
+        catch(Exception e) {<br>
+        e.printStackTrace();<br>
+        }<br>
+        }</p>
+      <p> Marco1_AcercaDe() {<br>
+        this(null);<br>
+        }</p>
+      <p> //Inicializaci&oacute;n de componentes<br>
+        private void jbInit() throws Exception {<br>
+        image1 = new ImageIcon(pjao.Marco1.class.getResource(&quot;about.png&quot;));<br>
+        imageLabel.setIcon(image1);<br>
+        this.setTitle(&quot;Acerca de&quot;);<br>
+        panel1.setLayout(borderLayout1);<br>
+        panel2.setLayout(borderLayout2);<br>
+        insetsPanel1.setLayout(flowLayout1);<br>
+        insetsPanel2.setLayout(flowLayout1);<br>
+        insetsPanel2.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));<br>
+        gridLayout1.setRows(4);<br>
+        gridLayout1.setColumns(1);<br>
+        label1.setText(product);<br>
+        label2.setText(version);<br>
+        label3.setText(copyright);<br>
+        label4.setText(comments);<br>
+        insetsPanel3.setLayout(gridLayout1);<br>
+        insetsPanel3.setBorder(BorderFactory.createEmptyBorder(10, 60, 10, 10));<br>
+        button1.setText(&quot;Aceptar&quot;);<br>
+        button1.addActionListener(this);<br>
+        insetsPanel2.add(imageLabel, null);<br>
+        panel2.add(insetsPanel2, BorderLayout.WEST);<br>
+        this.getContentPane().add(panel1, null);<br>
+        insetsPanel3.add(label1, null);<br>
+        insetsPanel3.add(label2, null);<br>
+        insetsPanel3.add(label3, null);<br>
+        insetsPanel3.add(label4, null);<br>
+        panel2.add(insetsPanel3, BorderLayout.CENTER);<br>
+        insetsPanel1.add(button1, null);<br>
+        panel1.add(insetsPanel1, BorderLayout.SOUTH);<br>
+        panel1.add(panel2, BorderLayout.NORTH);<br>
+        setResizable(true);<br>
+        }</p>
+      <p> //Modificado para poder salir cuando se cierra la ventana<br>
+        protected void processWindowEvent(WindowEvent e) {<br>
+        if (e.getID() == WindowEvent.WINDOW_CLOSING) {<br>
+        cancel();<br>
+        }<br>
+        super.processWindowEvent(e);<br>
+        }</p>
+      <p> //Cerrar el cuadro de di&aacute;logo<br>
+        void cancel() {<br>
+        dispose();<br>
+        }</p>
+      <p> //Cerrar el cuadro de di&aacute;logo tras un suceso de un bot&oacute;n<br>
+        public void actionPerformed(ActionEvent e) {<br>
+        if (e.getSource() == button1) {<br>
+        cancel();<br>
+        }<br>
+        }<br>
+        }</p></td>
+    <td>&nbsp;</td>
+    <td><a href="../JBuilderZip/Ventana.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td> <div align="right"><a href="../index3.htm" target="_parent">&lt;&lt;Menu 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

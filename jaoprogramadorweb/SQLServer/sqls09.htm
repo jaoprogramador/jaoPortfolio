@@ -1,0 +1,60 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Bucles</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="SQL Server,SQL Server 2000, sql, Transact-sql, programacion SQL Server, ejercicios, ejemplos">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table width="555" height="269" align="left" background="../imagenes/fondologo.jpg">
+  <tr> 
+    <td height="39" colspan="3"> <h2>E J E R C I C I O S</h2></td>
+  </tr>
+  <tr> 
+    <td><h3>While</h3>
+      <p> 1.- Ejemplos de utilizar una variable que funcione como un contador 
+        incrementable de 10 en 10 mediante la sentencia WHILE.</p>
+      <p>use libreria<br>
+        declare @contador smallint<br>
+        select @contador=1<br>
+        while @contador!&gt;10<br>
+        begin<br>
+print @contador<br>
+select @contador=@contador+1<br>
+end</p></td>
+    <td>&nbsp;</td>
+    <td><a href="http://es.geocities.com/juantxu28/SQLServerZip/p7.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>While</h3>
+      <p> 2 .- Ejemplos de como con la funci&oacute;n POWER para mostrar los valores 
+        que tendr&iacute;a el n&uacute;mero 2 elevado a distintos exponentes, 
+        desde el 0 hasta el 8 con la sentencia WHILE.</p>
+      <p>use libreria<br>
+        declare @exponente smallint<br>
+        set @exponente=0<br>
+        while @exponente !&gt;8<br>
+        begin<br>
+print '2 elevado a '+ cast(@exponente as char)+'='+cast(power(2,@exponente)as char)<br>
+set @exponente=@exponente+1<br>
+end</p></td>
+    <td>&nbsp;</td>
+    <td><a href="http://es.geocities.com/juantxu28/SQLServerZip/p12.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td> <div align="right"><a href="http://es.geocities.com/juantxu28/index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a> </div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

@@ -1,0 +1,213 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Im&amp;aacute;genes </title><META http-equiv=Content-Language content=es><META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+ 
+<meta name="keywords" content="Imagenes, Html, Lenguaje Html, Manual Html, Tutorial, ejercicios Html">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+  <link href="../styles/estilos.css" rel="stylesheet" type="text/css"></head>
+  
+<body>
+<table width="555" height="2000" align="left" background="../imagenes/fondologo.jpg">
+  <tr> 
+    <td height="31" colspan="2"> <h2>
+Im&aacute;genes 
+        II</h2></td>
+  </tr>
+  <tr> 
+    <td height="2000"  colspan="2"> 
+      <table width="80%" border="0"  >
+        <tr>
+          <td width="33%"><h3>Contenidos</h3></td>
+          <td width="67%">-Im&aacute;genes<a href="htm11.htm#imgenlace"> y enlaces 
+            &lt;IMG&gt;&lt;A&gt; </a></td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td>-<a href="htm11.htm#imgmap">Im&aacute;genes mapeadas &lt;IMG&gt;&lt;MAP&gt;&lt;AREA&gt;</a></td>
+        </tr>
+        
+      </table>
+       
+       <h3>Im&aacute;genes y enlaces<a name="imgenlace"></a></h3>
+       <p>Los enlaces hipertexto pueden ser tambi&eacute;n 
+        definidos sobre im&aacute;genes de tal forma que al picar con el rat&oacute;n 
+        sobre alg&uacute;n punto de la superficie de &eacute;stas, se pase al 
+        documento correspondiente, Esto suele ser utilizado sobre todo para introducir 
+        botones de navegaci&oacute;n en las p&aacute;ginas HTML.</p>
+       <p>Ejemplos:
+        &lt;A HREF=&quot;formulario.htm&quot;&gt;&lt; IMG SRC=&quot;img/img1.gif&quot;&gt;&lt;/A&gt; 
+        
+        &lt;A HREF=&quot;#inicio&quot;&gt;&lt; IMG SRC=&quot;img/img2.gif&quot;&gt;&lt;/A&gt; 
+        
+        &lt;A HREF=&quot;indice&quot;&gt;&lt; IMG SRC=&quot;img/img3.gif&quot;&gt;&lt;/A&gt; 
+      </p>
+       <p>Una imagen que act&uacute;a de hiperenlace se distingue 
+        mediante un borde de color alrededor de &eacute;sta, como puede observarse 
+        en el ejemplo anterior.</p>
+       <p>Si en un enlace se indica la direcci&oacute;n de 
+        una imagen dicha imagen no ser&aacute; cargada junto con la p&aacute;gina 
+        sino ser&aacute; cargada s&oacute;lo en el caso de que dicho enlace sea 
+        activado.
+        Ejemplo:
+        &lt;A HREF=&quot;imagenes/fondologo.jpg&quot;&gt;Enlace a una imagen&lt;/A&gt;
+        <a href="../imagenes/fondologo.jpg">Enlace a una imagen</a></p>
+       <p>&nbsp;</p>
+       <h3>Im&aacute;genes mapeadas  <a name="imgmap"></a></h3>
+       <p>Al utilizar las im&aacute;genes como hiperenlaces, 
+        se podr&aacute;n definir distintas conexiones en funci&oacute;n del lugar 
+        donde se pulse, dentro de la imagen, obteniendo lo que se denomina im&aacute;genes 
+        mapeadas.</p>
+       <p>A continuaci&oacute;n se detallar&aacute;n dos m&eacute;todos 
+        para definir una imagen mapeada. El principio de funcionamiento ser&aacute; 
+        diferente para cada uno de ellos: 
+      <blockquote> 
+         <p>- HTML2:(ISMAP) En este caso el servidor es quien 
+          se encarga de de detectar a partir de las coordenadas del punto activado 
+          el URL a conectar.
+          - HTML3: (USEMAP) Aqu&iacute; cuando el cliente ha recibido la p&aacute;gina 
+          HTML, tratar&aacute; enteramente la detecci&oacute;n del punto activado 
+          y la conexi&oacute;n con la URL. Adem&aacute;s de la simplificaci&oacute;n 
+          de la simplificaci&oacute;n de programaci&oacute;n (en un &uacute;nico 
+          fichero), este segundo caso es mucho m&aacute;s eficaz porque minimiza 
+          los accesos de la red. </p>
+         <p>Realizaci&oacute;n de una imagen activable con 
+          HTML2:</p>
+         <p>Se seguir&aacute;n una serie de pasos:        
+         <p>Definir la imagen con l tama&ntilde;o deseado. 
+          Es conveniente probar dicha imagen en diferentes resoluciones de pantalla 
+          (PC, Mac, Terminales X) a fin de predeterminar con seguridad el tama&ntilde;o 
+          el tama&ntilde;o &oacute;ptimo de &eacute;sta , ya que el trabajo que 
+          viene a continuaci&oacute;n es muy tedioso como para tener que volver 
+          a empezar.
+          Hacer una lista de coordenadas , zona por zona de las superficies activables. 
+          Estas zonas activables podr&aacute;n tomar las formas de: rect&aacute;ngulo, 
+          c&iacute;rculo o pol&iacute;gono.
+          El sistema de coordenadas de la imagen tendr&aacute; su origen en la 
+          parte superior izquierda de &eacute;sta. Habr&aacute; que crear un fichero 
+          en la que cada l&iacute;nea definir&aacute; una forma geom&eacute;trica 
+          para la zona activable y su URL asociado. La sintaxis ser&aacute; la 
+          siguiente: forma dir_URL x1, y1 x2, y2 . . . </p>
+         <p>El n&uacute;mero de puntos (expresados en pixeles) 
+          depender&aacute; de la forma de la zona, la cual se indicar&aacute; 
+          mediante una de las siguientes palabras clave: 
+        <blockquote>  RECT: rect&aacute;ngulo definido 
+          por dos puntos,: el externo superior izquierdo y el externo o inferior 
+          derecho.
+          CYRCLE: c&iacute;rculo definido por los dos puntos:el centros y un punto 
+          cualquiera situado sobre la circunferencia.
+          POLY: pol&iacute;gono definido por un m&aacute;ximo de 100 vectores: 
+          se da la direcci&oacute;n de cada extremo del vector.
+             </blockquote>
+      </blockquote>
+       <p>Ejemplo: 
+      <blockquote  >default /home.html
+        rect http://www.jaoprogramador.tk 5,5 21,14
+        poly http://www.jaoprogramador.tk 38,6 50,6 48,18 45,15 40,21 35,24
+        cyrcle http://www.jaoprogramador.tk 52,32 45,32</blockquote>
+      <p>  Este fichero se guardar&aacute; por ejemplo 
+        bajo el nombre de eje_mapa.map en un directorio del servidor cuyo nombre 
+        pod&iacute;a ser /map. Dicho fichero no tiene nada en com&uacute;n con 
+        un fichero HTML. A continuaci&oacute;n se detallar&aacute; c&oacute;mo 
+        se va a utilizar para hacer una imagen activable. La posibilidad de gestionar 
+        im&aacute;genes activables no se debe a la funcionalidad intr&iacute;nseca 
+        del servidor Web. Por lo tanto para poder efectuar esta operaci&oacute;n 
+        hay que ejecutar un programa especial, imagemap. Este programa se encuentra 
+        disponible de modo est&aacute;ndar en la distribuci&oacute;n del demonio 
+        HTTPD proporcionado por NCSA y debe ser instalado por el administrador 
+        en la zona CGI del servidor. Hay que declarar el fichero ej_mapa.map en 
+        un fichero del servidor, imagemap.conf, situado en la matriz del servidor. 
+        Este fichero es conocido por el programa imagemap y contendr&aacute; l&iacute;nea 
+        por l&iacute;nea, con un nombre simb&oacute;lico, la direcci&oacute;n 
+        de todos los ficheros que definen las im&aacute;genes      activables 
+        del servidor. Se edita pues el fichero imagemap.conf y se le a&ntilde;ade 
+        una l&iacute;nea donde se declara nuestro fichero atribuy&eacute;ndole 
+        un nombre simb&oacute;lico y dando su camino de acceso.  
+          El atributo ISMAP indica al browser que se encuentra 
+        ant un mapa activable y que ser&aacute; necesario que transmita las coordenadas 
+        del punto activado. Lo que aplicado a nuestro ejemplo nos da: 
+        &lt;A HREF=CGI-BIN/IMAGENMAP/EJ_MAPA.MAP&gt;&lt;IMG SRC=&quot;MM.GIF&quot; 
+        ISMAP&gt;&lt;/A&gt;  </p>
+      <p>  La &uacute;ltima operaci&oacute;n consiste 
+        en probar la imagen haciendo click sobre cada una de las zonas predefinidas, 
+        incluyendo la zona predeterminada para verificar el correcto funcionamiento 
+        del conjunto.  
+      </p>
+       <p>Realizaci&oacute;n de una imagen activable con HTML 
+        3: </p>
+       <p>La realizaci&oacute;n de un mapa activable es mucho 
+        m&aacute;s sencilla con este nivel de HTML, 
+        porque todo est&aacute; descrito en el mismo fichero y ya no se necesita 
+        un programa servidor exterior (cgi-bin).
+        Actualmente pocos browsers son capaces de utilizar mapas activables de 
+        este tipo.
+        Netscape 2.0 en versi&oacute;n Beta permite esta funcionalidad.
+        Aqu&iacute; la imagen se define con la marca &lt;IMG&gt; a la que se atribuye 
+        el atributo USEMAP. Este atributo permite referenciar 
+        un &quot;subprograma HTML&quot;que describe las zonas activables y sus 
+        URL asociados.
+        La sintaxis de llamada ser&aacute; pues:
+        &lt;IMG SRC=&quot;imagen.gif&quot; USEMAP:&quot;nombre_del_mapa&quot;&gt;
+        El elemento &lt;MAP&gt; define el principio de fin del bloque de definici&oacute;n 
+        de zona activables. Estas zonas se 
+        describir&aacute;n mediante el elemento &lt;AREA&gt;. La sintaxis general 
+        de definici&oacute;n de mapas ser&aacute; por tanto:
+        &lt;MAP NAME=&quot;nombre_del_mapa&quot;&gt;
+        &lt;AREA SHAPE=&quot;figura&quot; HREF=&quot;URL1&quot; COORD=&quot;x0,y0,x1,y1,...&quot;&gt;
+        &lt;AREA SHAPE=&quot;figura&quot; HREF=&quot;URL2&quot; COORD=&quot;x00,y00,x11,y11,...&quot;&gt;
+        &lt;/MAP&gt;
+        &quot;Figura&quot; puede tomar los valores RECT, POLY o CIRCL. El sistema 
+        de coordenadas estar&aacute; tambi&eacute;n situado en el extremo 
+        superior izquierdo de la imagen.Es posible reemplazar el atributo HREF 
+        por NOHREF para una zona neutra de la imagen.
+        Ejemplo:
+        &lt;MAP NAME=&quot;mapa1&quot;&gt;
+        &lt;AREA SHAPE=&quot;rect&quot; COORDS=&quot;1,1 75,46&quot; HREF=&quot;indice.htm&quot;&gt;
+        &lt;AREA SHAPE=&quot;rect&quot; COORDS=&quot;76,1,136,46&quot; HREF=&quot;imagenes.htm&quot;&gt;
+        &lt;/MAP&gt;</p>
+       <p>&lt;IMG SRC=&quot;sugeren.gif&quot; USEMAP=&quot;#mapa1&quot;&gt;</p>
+       <p>El atributo USEMAP indica qu&eacute; mapa de coordenadas 
+        hay que aplicar a la imagen. A una misma imagen se le pueden aplicar
+        distintos mapas si se desea. En el ejemplo mapa1, va precedido del s&iacute;mbolo 
+        #. Esto se debe a que el mapa se encuentra
+        definido en la misma p&aacute;gina que la definici&oacute;n de la imagen. 
+        Si el mapa estuviese definido en otro documento se colocar&iacute;a 
+        el nombre del fichero en cuesti&oacute;n antes del s&iacute;mbolo #, como 
+        se hace con el atributo HREF.</p>
+        </p>   <table width="96%" border="0" align="center"  >
+        <tr> 
+          <td>&lt;body background = &quot;fondo.jpg&quot; bgproperties = &quot;fixed&quot; 
+            &gt; &lt;div align=&quot;center&quot;&gt;&lt;center&gt;</td>
+          <td>bg properties=&quot;fixed&quot;es marca de agua. La imagen no se 
+            mueve al desplazarse</td>
+        </tr>
+        <tr> 
+          <td>&lt;body bgcolor=&quot;#008000&quot;&gt;</td>
+          <td>color de fondo</td>
+        </tr>
+        <tr> 
+          <td>Contrataci&oacute;n: &lt;a href=&quot;http://www.bank.es&quot; target=&quot;_top&quot;&gt;<a href="http://www.bank.es" target="_blank">Red 
+            de oficinas</a>&lt;/a&gt;</td>
+          <td>El enlace est&aacute; en red de oficinas</td>
+        </tr>
+        <tr> 
+          <td>&lt;a href=&quot;pagina.htm&quot;&gt;&lt;img src=&quot;jarron.jpg&quot; 
+            alt=&quot;texto&quot;width=&quot;186&quot; hight=&quot;220&quot;&gt;&lt;/a&gt;</td>
+          <td>Enlace, nombre imagen, texto al situar el rat&oacute;n y tama&ntilde;o.</td>
+        </tr>
+      </table></td>
+  </tr>
+  <tr> 
+    <td width="70" height="21"> </td>
+    <td height="21"> 
+      <div align="right"><a href="../index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+</body>
+</html>

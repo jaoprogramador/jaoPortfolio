@@ -1,0 +1,264 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Ejercicios de Visual Basic</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta name="keywords" content="Ejercicios de Visual Basic, descargar ejercicios de Visual Basic, descargar ejemplos de Visual Basic,descargar aplicaciones de Visual Basic, descargar programas de Visual Basic">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table width="555" height="396" align="left" background="../imagenes/fondologo.jpg">
+  <tr> 
+    <td height="39" colspan="3"> <h2>E 
+        J E R C I C I O S</h2></td>
+  </tr>
+  <tr> 
+    <td> <h3>Men&uacute;s, 
+        estructuras, CommondDialog y ficheros aleatorios</h3><p>
+        Pr&aacute;ctica 41.-Aplicaci&oacute;n que nos permite introducir datos(nombre, 
+        direcci&oacute;n tlf y notas) a una lista. Posteriormente nos permitir&aacute; 
+        crear un fichero con los datos introducidos y a su vez abrir el fichero 
+        creado con los datos almacenados.
+        <br><br>
+        Option Explicit
+
+Private Sub Abrir_Click()
+Dim filtros As String
+On Error GoTo errorabrir
+CommonDialog1.CancelError = True
+filtros = "Ficheros de datos telefonicos(*.tfn)|*.tfn|Todos los ficheros(*.*)|*.*"
+CommonDialog1.Filter = filtros
+CommonDialog1.FilterIndex = 1
+CommonDialog1.ShowOpen
+bdtfno = CommonDialog1.FileName
+Call tratabrir
+salirabrir:
+Exit Sub
+errorabrir:
+If Err.Number = cdlCancel Then Exit Sub
+    MsgBox Err.Description, vbInformation, "Error"
+    Resume salirabrir
+End Sub
+
+Private Sub Cmblista_DblClick()
+visualizar
+End Sub
+
+Private Sub Cmblista_GotFocus()
+CmdAñadir.Enabled = False
+CmdVer.Enabled = True
+CmdBorrar.Enabled = True
+End Sub
+
+Private Sub Cmblista_KeyUp(KeyCode As Integer, Shift As Integer)
+Dim i As Integer
+For i = 0 To totalreg - 1
+    If Left(Cmblista(1), 1) = LCase(Chr(KeyCode)) Then 'coje del elemento izq de la lista y lo psa a mayusculas
+        Cmblista.ListIndex = i
+    Exit For
+    End If
+Next i
+End Sub
+
+Private Sub CmdAñadir_Click()
+If TxtDatos(0).Text = "" Or TxtDatos(1).Text = "" Or TxtDatos(2).Text = "" Then
+    MsgBox "Complete todos los campos, Por Favor"
+Exit Sub
+End If
+totalreg = totalreg + 1 ' incrementamos el indice de la matriz
+ReDim Preserve Tfnos(1 To totalreg) 'redimensionamos la matriz tfnos sin
+                                    'cargarnos los datos existentes
+
+'1º nos situamos en el ultimo registro
+'2º les añadimos el contenido de las TXT a los elementos de la estructura
+Tfnos(totalreg).nom = TxtDatos(0).Text
+Tfnos(totalreg).Dir = TxtDatos(1).Text
+Tfnos(totalreg).tfno = TxtDatos(2).Text
+Tfnos(totalreg).notas = TxtDatos(3).Text
+Cmblista.AddItem TxtDatos(0).Text
+Cmblista.ListIndex = 0
+
+Call visualizar
+Cmblista.SelLength = Cmblista.ListIndex
+End Sub
+
+Private Sub CmdBorrar_Click()
+Dim i As Integer, r As Integer
+For i = 1 To totalreg 'busca en la matriz y borra el registro ke coincida con el pinchado
+    If RTrim(Tfnos(i).nom) = RTrim(Cmblista.Text) Then ' nos salimos y asi guarda en i la posicion del elemento
+        Exit For
+    End If
+Next i
+If i > totalreg Then Exit Sub 'si hay elementos en la matriz
+For r = i To totalreg - 1
+    Tfnos(r) = Tfnos(r + 1) 'rellena a blanco para borrar
+Next r
+totalreg = totalreg - 1
+If totalreg Then
+    ReDim Preserve Tfnos(1 To totalreg) 'redimensionamos la matriz hasta el total de registros
+Else 'si no hay elementos
+    Erase Tfnos 'borramos el contenido por si acaso
+End If
+r = Cmblista.ListIndex
+Cmblista.RemoveItem r
+If Cmblista.ListCount = 0 Then ' si esta vacio te borra las cajas de la matriz
+    For i = 0 To 3
+        TxtDatos(i) = ""
+    Next i
+Else
+    Cmblista.ListIndex = 0
+    visualizar
+End If
+End Sub
+
+Private Sub CmdSalir_Click()
+End
+End Sub
+
+Private Sub CmdVer_Click()
+Call visualizar 'llamada al procedimiento visualizar
+End Sub
+
+Private Sub Guardar_Click()
+Dim filtros As String
+On Error GoTo errorguardar
+CommonDialog1.CancelError = True
+filtros = "Ficheros de datos telefonicos(*.tfn)|*.tfn|Todos los ficheros(*.*)|*.*"
+CommonDialog1.Filter = filtros
+CommonDialog1.FilterIndex = 1
+CommonDialog1.ShowSave
+bdtfno = CommonDialog1.FileName
+Call tratguardar
+salirguardar:
+Exit Sub
+errorguardar:
+If Err.Number = cdlCancel Then Exit Sub
+    MsgBox Err.Description, vbInformation, "Error"
+    Resume salirguardar
+End Sub
+
+Private Sub TxtDatos_GotFocus(Index As Integer)
+TxtDatos(Index).SelStart = 0 'Te posiciona al principio de la caja de texto
+TxtDatos(Index).SelLength = Len(TxtDatos(Index).Text) 'Te selecciona el texto de la caja
+CmdAñadir.Enabled = True
+CmdVer.Enabled = False
+CmdBorrar.Enabled = False
+End Sub
+
+Private Sub TxtDatos_Validate(Index As Integer, Cancel As Boolean)
+If Not IsNumeric(TxtDatos(2).Text) And Index = 2 Then
+    MsgBox "El telefono tiene que ser numerico", vbExclamation
+    Cancel = True    ' El procedimientio que responde al evento validate
+                      ' tiene un argumento cancel que cuando esta
+                      ' establecido en true el control detiene el foco,
+                      ' lo que impide que el usuario haga click en cualquier otro boton
+End If
+End Sub
+
+Public Sub tratabrir()
+Dim numfich As Integer, numregfich As Integer
+Dim i As Integer, longreg As Integer
+On Error GoTo errortratabrir
+numfich = FreeFile
+longreg = Len(Tfnos(1))
+Open bdtfno For Random As #numfich Len = longreg
+numregfich = LOF(numfich) / longreg
+ReDim Tfnos(1 To numregfich)
+For i = 1 To numregfich
+    Get #numfich, , Tfnos(i)
+Next i
+Close numfich
+Cmblista.Clear
+totalreg = numregfich
+For i = 1 To totalreg
+    Cmblista.AddItem Tfnos(i).nom
+Next i
+TxtDatos(0) = Tfnos(1).nom
+TxtDatos(1) = Tfnos(1).Dir
+TxtDatos(2) = Tfnos(1).tfno
+TxtDatos(3) = Tfnos(1).notas
+salirabrir:
+    Exit Sub
+errortratabrir:
+MsgBox Err.Description
+Resume salirabrir
+End Sub
+
+Public Sub tratguardar()
+Dim i As Integer, numfich As Integer
+Dim cadena As String
+On Error GoTo errortratguardar
+numfich = FreeFile
+Open bdtfno For Random As #numfich Len = Len(Tfnos(1))
+If LOF(numfich) <> 0 Then 'si el fichero elegido por el usuario existe
+    cadena = "El fichero ya existe" & vbCrLf
+    cadena = cadena & "¿Desea sobreescribirlo?"
+    If MsgBox(cadena, 36, "Tfnos") = vbYes Then
+        Close numfich 'lo cierra
+        Kill bdtfno ' lo borra
+        numfich = FreeFile
+        numfich = FreeFile
+        Open bdtfno For Random As #numfich Len = Len(Tfnos(1))
+    Else 'si no sala de la rutina y cierra el fichero
+        Close numfich
+        Exit Sub
+    End If
+End If
+For i = 1 To totalreg
+    Put #numfich, , Tfnos(i)
+Next i
+Close numfich
+FrmTelefonos.TxtDatos(0).SetFocus
+salirguardar:
+    Exit Sub
+errortratguardar:
+MsgBox Err.Description
+Resume salirguardar
+End Sub
+      </p></td>
+    <td>&nbsp;</td>
+    <td><a href="http://es.geocities.com/juantxu28/vbzip/Praktika41RANDOW.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></p></td>
+  </tr>
+  <tr> 
+    <td><h3>Men&uacute;s, 
+      estructuras, CommondDialog y ficheros binarios</h3><p>
+      Pr&aacute;ctica 41.-Aplicaci&oacute;n que nos permite introducir datos(nombre, 
+      direcci&oacute;n tlf y notas) a una lista. Posteriormente nos permitir&aacute; 
+      crear un fichero con los datos introducidos y a su vez abrir el fichero 
+      creado con los datos almacenados.<p></td>
+    <td>&nbsp;</td>
+    <td><a href="http://es.geocities.com/juantxu28/vbzip/Praktika41BINARIO.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>Men&uacute;s, estructuras, 
+      CommondDialog y ficheros binarios</h3><p>
+      Pr&aacute;ctica 41EditorCodificado.- Aplicaci&oacute;n que nos permite abrir 
+      y guardar documentos de texto y mostr&aacute;rnoslas codificadas mediante 
+      el acceso a ficheros binarios.</p></td>
+    <td>&nbsp;</td>
+    <td><a href="http://es.geocities.com/juantxu28/vbzip/Praktika41Edi_codif.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>Men&uacute;s, estructuras, 
+      CommondDialog y ficheros </h3> <p>Pr&aacute;ctica 41Edi_REF.- 
+      Aplicaci&oacute;n que nos permite abrir y guardar documentos de texto y 
+      mostr&aacute;rnoslas mediante los ficheros de tipo FileSystemObject.</p></td>
+    <td>&nbsp;</td>
+    <td><a href="http://es.geocities.com/juantxu28/vbzip/Praktika41Edi_Ref.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td>
+<div align="right"><a href="http://es.geocities.com/juantxu28/index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+</body>
+</html>

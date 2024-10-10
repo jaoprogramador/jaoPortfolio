@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml-stylesheet type="text/xsl" href="index.xsl"?>
+<?xml-stylesheet type="text/xsl" href="css1.xsl"?>
+<webmasters>
+	<lenguaje nombre='C S S'>
+		<contenido>En este apartado aprenderemos a crear y utilizar estilos CSS (Cascade Style Sheet). Con ello nos ahorraremos tener que estar reescribiendo codigo
+		en nuestras etiquetas etiquetas. 
+		Podremos aplicar las hojas de estilo a cualquier pagina web, tanto este escrita en html, php, xml ...</contenido>
+		<enlace>css/indice.xsl</enlace>
+	</lenguaje>
+	<lenguaje nombre='X M L'>
+		<contenido>En este apartado aprenderemos a utilizar el lenguaje extensible de marcas XML, como se inicia un documento, los distintos elementos y atributos, como construir un documento de una forma optima y como validarlo.
+		Mas adelante podremos ver como enlazar XML con XSL y asu vez aplicar estilos CSS a nuestros documentos para asi poder darle un formato atractivo a nuestros documentos xml.
+		</contenido>
+		<enlace>xml/indice.xsl</enlace>
+	</lenguaje>
+	<lenguaje nombre='X S L'>
+		<contenido>En este apartado aprenderemos a crear y utilizar XSL (eXtensive Stylesheet languaje). Con XSL aprenderemos ha hacer hojas de estilo para nuestros documentos xml dandole un formato de salida mas atractivo. Veremos una introduccion al xml, como hacer plantillas, creacion de hojas de estilo, los distintos elementos, xpath...
+		en nuestras etiquetas etiquetas. 
+		Podremos aplicar las hojas de estilo a cualquier pagina web, tanto este escrita en html, php, xml ...</contenido>
+		<enlace>xsl/indice.xsl</enlace>
+	</lenguaje>
+	
+</webmasters>
+
+

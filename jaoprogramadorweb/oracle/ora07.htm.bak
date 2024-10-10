@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Ejercicios Oracle</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Oracle, sql, pl/sql, programacion oracle, ejercicios, ejemplos,create view, vistas">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table width="555" height="272" align="left" background="../imagenes/fondologo.jpg">
+  <tr> 
+    <td height="39" colspan="3"> <h2>E 
+        J E R C I C I O S</h2></td>
+  </tr>
+  <tr> 
+    <td> <h3>CREATE 
+        VIEW...AS... </h3>
+    <p>
+        a) Ejemplos de creaci&oacute;n de vistas mediante consultas as&iacute; 
+        como de sin&oacute;nimos.</p>
+        <p>1&ordm;) Crear una vista que se llame conserjes que contenga el nombre del centro y el nombre de sus conserjes.</p>
+        <p> CREATE VIEW CONSERJES AS<br>
+  SELECT NOMBRE,APELLIDOS FROM CENTROS , PERSONAL<br>
+  WHERE FUNCION='CONSERJE'<br>
+  AND CENTROS.COD_CENTRO=PERSONAL.COD_CENTRO;</p>
+        <p>&nbsp;</p>
+        <p>1&ordm;) Crear un sinonimo asociado a la vista creada anteriormente llamado conser<br>
+  CREATE SYNONYM CONSER FOR CONSERJES;</p></td>
+    <td>&nbsp;</td>
+    <td><a href="../oraclezip/Ejer23.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>CREATE 
+      VIEW...AS...</h3>
+    <p>
+      b) Ejemplos de operaciones sobre vistas.</p>
+    <p>1&ordm;) Crear una vista que se llame dep30 que contiene el apellido, oficio y el salario de los empleados de la tabla emple del departamento 30.<br>
+      create view dep30 as select apellido, oficio ,salario from emple where dept_no=30;</p>
+    <p>2&ordm;) Hacer una descripci&oacute;n de la vista creada anteriormente.<br>
+      desc dep30;</p>
+    <p>3&ordm;) Hacer una consulta que muestre el contenido de la vista dep30.<br>
+      select * from dep30;</p>
+    <p>4&ordm;) Crear una vista o reemplazarla dando nombre a las columnas ape, ofi y sal:<br>
+      create or replace view dep30 (ape, ofi , sal) as select apellido, oficio ,salario from emple where dept_no=30;</p>
+    <p>5&ordm;) Hacer una consulta de las vistas creadas junto con sus textos:<br>
+      select view_name, text from user_views;</p></td>
+    <td>&nbsp;</td>
+    <td><a href="../oraclezip/Ejer24.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>DROP VIEW...UPDATE...SELECT...</h3>
+    <p> 
+      c) Ejemplos borrados, inserciones y consultas 
+      sobre vistas.</p>
+    <p>1&ordm;) Borrar la vista dep30<br>
+      drop view dep30;</p>
+    <p>2&ordm;) consultar los apellidos de los vendedores dela vista dep30:<br>
+      select ape from dep30 where ofi='VENDEDOR';</p>
+    <p>3&ordm;) Modificar la vista dep30, modificamos el apellido 'MARTIN', almacenandolo <br>
+      en minucuslas y cambiamos el salario a 200000;<br>
+      update dept30 set ape='Martin', sal=200000 where ape='MARTIN';</p>
+    <p>4&ordm;) Consultamos la vista y la tabla asocidad para comprobar los resultados.<br>
+      select ape, sal from dep30 where ape='Martin';<br>
+      select apellido, salario from emple where apellido='Martin';</p>
+    <p>5&ordm;) Crear una vista a partir de la tabla depart<br>
+      create view vdep as select dept_no, dnombre from depart;</p>
+    <p>6&ordm;) insertar valores en la vista vdep.<br>
+      insert into vdep values (66,'DESARROLLO');</p>
+    <p>7&ordm;) borramos el departamento 66 y observamos como este departamento desaparece de la tabla depart.<br>
+      delete vdep where dept_no = 66;</p>
+    <p>8&ordm;) A partir de las tablas depart y emple creamos una vista que contenga el emp_no, apellido, dept_no y dnombre.<br>
+      create view dept_emp(emp_no, apellido, dept_no ,dnombre) <br>
+      as select emp_no, apellido, emple.dept_no, dnombre from emple , depart <br>
+      where emple.dept_no=depart.dept_no;</p>
+    <p>9&ordm;) Insertar una fila en la vista creada<br>
+      insert into dept_emp values(2222,'SUELA',20,'INVESTIGACI&Oacute;N');</p></td>
+    <td>&nbsp;</td>
+    <td><a href="../oraclezip/Ejer25.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><div align="right"><a href="../index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

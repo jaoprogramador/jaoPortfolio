@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Cursores</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="SQL Server,SQL Server 2000, sql, Transact-sql, programacion SQL Server, ejercicios, ejemplos">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table width="555" height="269" align="left" background="../imagenes/fondologo.jpg">
+  <tr> 
+    <td height="39" colspan="3"> <h2>E J E R C I C I O S</h2></td>
+  </tr>
+  <tr> 
+    <td><h3>Definici&oacute;n de cursor</h3>
+      <p> 1.- Ejemplos de como definir un cursor como objeto cursor para recorrer 
+        fila a fila la tabla libros, concretamente las filas T&iacute;tulo y Precio.</p>
+      <p>use libreria<br>
+        declare @cursortitulos cursor<br>
+        set @cursortitulos=cursor for<br>
+        select titulo, precio<br>
+      from libros</p></td>
+    <td>&nbsp;</td>
+    <td><a href="http://es.geocities.com/juantxu28/SQLServerZip/p15c.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>Cursores</h3>
+      <p> 2 .- Ejemplos de como definir un cursor como variable local de nombre 
+        CursorTitulos para el mismo objetivo del procedimiento anterior.</p>
+      <p>use libreria<br>
+        declare cursortitulos cursor for<br>
+        select titulo, precio<br>
+      from libros</p></td>
+    <td>&nbsp;</td>
+    <td><a href="http://es.geocities.com/juantxu28/SQLServerZip/p16c.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>Cursores</h3>
+      <p> 3 .- Ejemplos de como recuperar la fila NEXT(LAST, etc) del cursor del 
+        ejercicio anterior y almacenar el valor obtenido en una variable.</p>
+      <p>use libreria<br>
+        declare @vartitulo varchar(50), @varprecio money<br>
+        declare @tblibros table(vartitulo varchar(50), varprecio money,fecha datetime)<br>
+        declare @cursortitulos cursor<br>
+        set @cursortitulos = cursor for<br>
+select titulo, precio<br>
+from libros<br>
+open @cursortitulos <br>
+fetch next from @cursortitulos<br>
+into @vartitulo,@varprecio<br>
+while @@FETCH_STATUS=0<br>
+begin<br>
+insert @tblibros values(@vartitulo,@varprecio,getdate()) <br>
+fetch next from @cursortitulos<br>
+into @vartitulo,@varprecio<br>
+end<br>
+deallocate @cursortitulos<br>
+select * from @tblibros</p></td>
+    <td>&nbsp;</td>
+    <td><a href="http://es.geocities.com/juantxu28/SQLServerZip/p18c.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td> <div align="right"><a href="http://es.geocities.com/juantxu28/index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a> </div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Funciones y subrutinas</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta name="keywords" content="Funciones y subrutinas en ASP, Manual ASP, tutorial ASP, Ejemplos ASP, ejercicios ASP">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots>
+<link href="../styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<table width="555" height="481" align="left" background="../imagenes/fondologo.jpg">
+  <tr> 
+    <td height="39" colspan="3"> <h2>Funciones y subrutinas en ASP</h2></td>
+  </tr>
+  <tr> 
+    <td height="394" colspan="3"> <h3>Funciones y subrutinas</h3>
+      <p>Cuando escribo un c&oacute;digo que se volvera a repetir puedo utilizar 
+        subrutinas o funciones.<br>
+        Se pueden pasar par&aacute;metros a dichas funciones . La subrutina no 
+        devuelve datos, la funci&oacute;n si.</p>
+      <p><br>
+        Sub nombre_subrutina (parametros,&#8230;)<br>
+        comandos<br>
+        End sub</p>
+      <p>Para llamar a la subrutina hay dos maneras </p>
+      <p>Call nombre(valor_parametros, )</p>
+      <p>Nombre valor_parametros,&#8230;</p>
+      <p><br>
+        Para salir de la subrutina sin ejecutar todo el codigo exit sub (puede 
+        haber varios)<br>
+        Las variables declaradas en la subrutina son publicas por defecto, pueden 
+        modificarse desde otra subrutina, por lo que conviene hacerlas privadas.</p>
+      <p></p>
+      <p>Function nombre_funcion (parametros,&#8230;)<br>
+        Comandos<br>
+        Nombre_funcion=valor_devuelto<br>
+        End function</p>
+      <p>Para llamar a la funcion asignamos el valor a otra variable o lo utilizamos 
+        en otra funci&oacute;n</p>
+      <p>Var=nombre_funcion(valor par&aacute;metros,&#8230;)<br>
+        Response.write(nombre_funcion(valor parametros,&#8230;))</p>
+      <p>Cuando hay un error en la funcion, si debe devolver un valor numerico 
+        devuelve 0, si devuelve un texto devuelve &#8220;&#8221;, si devuelve 
+        una referencia a un objeto devuelve NOTHING.</p>
+      <p><br>
+        Para salir de la funcion sin ejecutar todo el codigo exit function (puede 
+        haber varios)<br>
+        Las variables declaradas en la subrutina son publicas por defecto, pueden 
+        modificarse desde otra subrutina, por lo que conviene hacerlas privadas.<br>
+      </p>
+	  <h3>Ejemplo </h3>
+      <p>&lt;%<br>
+        function areac(l)<br>
+        &nbsp;&nbsp;&nbsp;areac=l*l<br>
+        end function<br>
+        dim lado<br>
+        lado=5<br>
+        response.Write(&quot;El area del cuadrado de lado &quot;&amp;lado&amp;&quot; 
+        es &quot;&amp;areac(lado))<br>
+        %&gt;</p>
+      <p>Las rutinas y funciones se suelen agrupar en librerias. Las librerias 
+        unicamente pueden contener codigo Asp, se crean dentro de un archivo *.asp 
+        . con subrutinas y funciones.<br>
+        Para incluir una librer&iacute;a en asp</p>
+      <p> &lt;!--#include file=&#8221;area.asp&#8221;--&gt;<br>
+      </p>
+      <h3>Ejemplo</h3>
+      <p>Crearemos una p&aacute;gina que llame a una rutina que calcule el area: 
+      </p>
+      <p>&lt;%@LANGUAGE=&quot;VBSCRIPT&quot; CODEPAGE=&quot;1252&quot;%&gt;<br>
+        &lt;html&gt;<br>
+        &lt;head&gt;<br>
+        &lt;title&gt;Documento sin t&amp;iacute;tulo&lt;/title&gt;<br>
+        &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; 
+        charset=iso-8859-1&quot;&gt;<br>
+        &lt;/head&gt;</p>
+      <p>&lt;body&gt;<br>
+        &lt;!--#include file=&quot;area_Ej13.asp&quot;--&gt;<br>
+        &lt;%<br>
+        dim lado1, lado2<br>
+        lado1=5<br>
+        lado2=8<br>
+        response.Write(&quot;El area del cuadrado de lado &quot;&amp;lado1&amp;&quot; 
+        es &quot;&amp;areac(lado1)&amp;&quot;&lt;br&gt; &quot;)<br>
+        response.Write(&quot;El area del cuadrado de lado &quot;&amp;lado2&amp;&quot; 
+        es &quot;&amp;areac(lado2)&amp;&quot;&lt;br&gt; &quot;)<br>
+        response.Write(&quot;El area del cuadrado de los dos &quot;&amp;lado2&amp;&quot; 
+        y &quot;&amp;lado1&amp;&quot; es &quot; &amp;arear(lado1,lado2)&amp;&quot;&lt;br&gt; 
+        &quot;)<br>
+        %&gt;<br>
+        &lt;/body&gt;<br>
+        &lt;/html&gt;</p>
+      <p>En el la librer&iacute;a area_Ej13.asp ir&iacute;a:</p>
+      <p>&lt;%<br>
+        function arear(a,b)<br>
+        arear=a*b<br>
+        end function<br>
+        function areac(l)<br>
+        areac=l*l<br>
+        end function<br>
+        %&gt;</p></td>
+  </tr>
+  <tr> 
+    <td width="66" height="21"></td>
+    <td width="324" height="21">&nbsp;</td>
+    <td width="149"><div align="right"><a href="../index3.htm" target="_parent">&lt;&lt;Men&uacute; 
+        Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

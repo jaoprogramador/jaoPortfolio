@@ -1,0 +1,61 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Ejercicios de C para Windows</title>
+<META http-equiv=Content-Language content=es>
+<META content="Programación,Programas,Aplicaciones,Ejercicios, Ejemplos,Tutoriales,Manuales" name=description>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="Objetos, Descargar Ejercicios de C para Windows, Ejemplos de C para Windows, Aplicaciones  de C para Windows">
+<META content=euskalnet.net/jaoprogramador name=author>
+<META content="Copyright (c) 2005 jaoprogramador" name=copyright>
+<META scheme=RFC1766 content=español name=DC.Language>
+<META content=es,sp,spanish,español name=lang>
+<META content=all name=robots> 
+<link href="../styles/estilos.css" rel="stylesheet" type="text/css"></head>
+
+<body>
+<table width="555" height="326" align="left" background="../imagenes/fondologo.jpg">
+  <tr> 
+    <td height="31" colspan="3"> <h2>E 
+        J E R C I C I O S</h2></td>
+  </tr>
+  <tr> 
+    <td> <h3>Objetos</h3><p>
+        Opjeto00.- Aplicaci&oacute;n que nos muestra como crear un objeto primitivo 
+        y mediante dos funciones mostrar un numero al cuadrado por pantalla.</p>
+      </p></td>
+    <td>&nbsp;</td>
+    <td><a href="../czip/EJER77.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>Objetos</h3>
+      <p>Opjeto01.- Aplicaci&oacute;n que nos muestra como crear un objeto primitivo 
+      y mediante dos funciones nos permite visualizar el cuadrado de un n&uacute;mero 
+      introducido por nosotros en una TextBox tras pulsar un CommandButton.</p></td>
+    <td>&nbsp;</td>
+    <td><a href="../czip/ejer78.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>Objetos</h3><p>
+      Opjeto02.- Aplicaci&oacute;n que nos muestra como crear un objeto primitivo 
+      y mediante dos funciones nos permite visualizar el cuadrado de un n&uacute;mero 
+      introducido por nosotros en una TextBox tras pulsar un CommandButton,(haciendo 
+      las llamadas al objeto de otra forma).</p></td>
+    <td>&nbsp;</td>
+    <td><a href="../czip/ejer79.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td><h3>Objetos</h3><p>
+      Objeto03.- Aplicaci&oacute;n que nos permite realizar un ingreso a un banco 
+      por medio de un objeto.</p></td>
+    <td>&nbsp;</td>
+    <td><a href="../czip/ejer79.rar"><img src="../imagenes/Descarga.gif" width="16" height="16" border="0"></a></td>
+  </tr>
+  <tr> 
+    <td>
+<div align="right"><a href="../index3.htm" target="_parent">&lt;&lt;Menu Inicio</a></div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>
