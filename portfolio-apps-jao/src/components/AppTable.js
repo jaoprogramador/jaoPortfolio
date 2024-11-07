@@ -40,17 +40,25 @@ const apps = [
     {
       name: "Agenda MongoDB",
       imageUrl: "/img/mongo-persons.jpg",  
-      description: "Aplicación para gestionar contactos con front de react y back en Node-Express yMongoDB",
+      description: "Aplicación para gestionar contactos con front de react y back en Node-Express y MongoDB",
       technology: "React, MongoDB",
       repoUrl: "https://github.com/tu-usuario/react-persons-mongodb",
       appUrl: "https://persosmongodb.onrender.com/"
+    },
+    {
+      name: "Usuarios Blogs",
+      imageUrl: "/img/react-redux-css.jpg",  
+      description: "Aplicación para gestionar usuarios y sus blogs con react y back en Node-Express, Bootstrap, Redux y MongoDB",
+      technology: "React, MongoDB, redux, bootstrap",
+      repoUrl: "https://github.com/tu-usuario/react-persons-mongodb",
+      appUrl: "https://mongouserblogsstilosmenuvar.onrender.com/"
     },
     {
       name: "Login Angular",
       imageUrl: "/img/angular-login.jpg",  
       description: "Aplicación con angular v17 logueo que se autentica contra un API Rest que nos proporciona un token de acceso. Hacemos un routing securizado de distintas páginas en las que podemos ver como pasar información entre componentes. La aplicación hace uso de servicios y peticiones HTTP para el login o para obtener respuestas JSON y tratar la info por pantalla.Se hace uso de PIPE, para definir componentes genéricos control de errores, validacion de formularios, componentes de Angular material...",
       technology: "Angular, Firebase",
-      repoUrl: "https://github.com/jaoprogramador/angular-apps/tree/master",
+      repoUrl: "https://github.com/jaoprogramador/MongoUserBlogsStilosMenuVar",
       appUrl: "https://proyecto-final-angular-42db4.web.app/login"
     },
     {
