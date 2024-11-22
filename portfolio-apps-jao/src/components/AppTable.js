@@ -46,6 +46,14 @@ const apps = [
       appUrl: "https://persosmongodb.onrender.com/"
     },
     {
+      name: "Agenda MongoDB",
+      imageUrl: "/img/typeScript.jpg",  
+      description: "Aplicación para gestionar las entradas a un hospital con pacientes con front de react y back en Node-Express y typescript",
+      technology: "React, typescript",
+      repoUrl: "https://github.com/jaoprogramador/TipescriptPacientesHospital",
+      appUrl: "https://tipescriptpacienteshospital.onrender.com/"
+    },
+    {
       name: "Usuarios Blogs",
       imageUrl: "/img/react-redux-css.jpg",  
       description: "Aplicación para gestionar usuarios y sus blogs con react y back en Node-Express, Bootstrap, Redux y MongoDB",
