@@ -46,7 +46,7 @@ const apps = [
       appUrl: "https://persosmongodb.onrender.com/"
     },
     {
-      name: "Agenda MongoDB",
+      name: "Citas Hospital",
       imageUrl: "/img/typeScript.jpg",  
       description: "Aplicación para gestionar las entradas a un hospital con pacientes con front de react y back en Node-Express y typescript",
       technology: "React, typescript",
