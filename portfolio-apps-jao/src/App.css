@@ -30,6 +30,13 @@ h1 {
   padding: 10px;
   text-align: center;
 }
+/* Centrar el contenido del div con flex dentro de las cabeceras */
+.app-table th div {
+  display: inline-flex; /* Permite centrar elementos sin afectar al `th` */
+  align-items: center;
+  justify-content: center; /* Asegura el centrado horizontal */
+  gap: 10px; /* Espacio entre texto e ícono */
+}
 
 /* src/components/AppCard.css */
 .app-card {
