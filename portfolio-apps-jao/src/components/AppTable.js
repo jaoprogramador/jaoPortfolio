@@ -61,7 +61,7 @@ const apps = [
       description: "Aplicación para gestionar los libros y autores de una librería con Graphql y FRONT en react",
       technology: "React, Graphql",
       repoUrl: "https://github.com/jaoprogramador/JAOReactGraphql",
-      appUrl: "https://jaoreactgraphql.onrender.com/",
+      appUrl: "https://jaoreactgraphqlfront.onrender.com//",
       icon: "/img/react-icon.png" 
 
     },
