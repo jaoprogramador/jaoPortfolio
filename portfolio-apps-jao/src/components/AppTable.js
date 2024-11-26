@@ -56,6 +56,16 @@ const apps = [
 
     },
     {
+      name: "Librería Autores",
+      imageUrl: "/img/react-Graphql.jpg",  
+      description: "Aplicación para gestionar los libros y autores de una librería con Graphql y FRONT en react",
+      technology: "React, Graphql",
+      repoUrl: "https://github.com/jaoprogramador/JAOReactGraphql",
+      appUrl: "https://jaoreactgraphql.onrender.com/",
+      icon: "/img/react-icon.png" 
+
+    },
+    {
       name: "Citas Hospital",
       imageUrl: "/img/typeScript.jpg",  
       description: "Aplicación para gestionar las entradas a un hospital con pacientes con front de react y back en Node-Express y typescript",
