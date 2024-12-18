@@ -86,6 +86,16 @@ const apps = [
 
     },
     {
+      name: "Repositorios , revisiones, usuarios",
+      imageUrl: "/img/react-native.jpg",  
+      description: "Aplicación para gestionar usuarios y sus repositorios de GitHub con react nativo y GraphQL",
+      technology: "React native, GraphQL",
+      repoUrl: "https://github.com/jaoprogramador/FullStackOpenReact/tree/main/Parte10Reactnativo/dProbaryampliarnuestraaplicacion",
+      appUrl: "#",
+      icon: "/img/react-icon.png" 
+
+    },
+    {
       name: "Angular Material",
       imageUrl: "/img/AngularMaterialDrag.jpg",  
       description: "Aplicación con angular para usar angular material y el componente drag-drop",
@@ -146,6 +156,33 @@ const apps = [
       icon: "/img/springCloud-icon.png" 
     },
     {
+      name: "Java",
+      imageUrl: "/img/WS-RestSOAPUI.jpg",  
+      description: "Servicios Rest que valida un DNI",
+      technology: "Java",
+      repoUrl: "https://github.com/jaoprogramador/RestDNI",
+      appUrl: "https://github.com/jaoprogramador/RestDNI",
+      icon: "/img/java.png" 
+    },
+    {
+      name: "Servicio SOAP",
+      imageUrl: "/img/WS-RestSOAPUI.jpg",  
+      description: "Servicios SOAP que sube ficheros al servidor",
+      technology: "Java",
+      repoUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/tree/master/19ContentManagerSOAP",
+      appUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/tree/master/19ContentManagerSOAP",
+      icon: "/img/java.png" 
+    },
+    {
+      name: "EJB",
+      imageUrl: "/img/EJB.jpg",  
+      description: "EJB Sesión, Entidad",
+      technology: "Java",
+      repoUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/tree/master/19EJBSessionDocumentos",
+      appUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/tree/master/19EJBSessionDocumentos",
+      icon: "/img/java.png" 
+    },
+    {
       name: "Ejercicios de programación",
       imageUrl: "/img/jaoweb.jpg",  
       description: "Ejercicios de programación, BD, web...",
@@ -157,11 +194,12 @@ const apps = [
   ];
   
   // Filtramos las aplicaciones por su tecnología
-  const reactApps = apps.filter(app => app.technology.includes("React"));
+  /* const reactApps = apps.filter(app => app.technology.includes("React"));
   const angularApps = apps.filter(app => app.technology.includes("Angular"));
   const springFrameworkApps = apps.filter(app => app.technology.includes("Spring"));
   const springCloud = apps.filter(app => app.technology.includes("SpringCloud"));
-  const webEstatica = apps.filter(app => app.technology.includes("HTML"));
+  const java = apps.filter(app => app.technology.includes("Java"));
+  const webEstatica = apps.filter(app => app.technology.includes("HTML")); */
 
   // Mapeo de categorías con sus respectivas tecnologías y títulos
 const categories = [
@@ -169,6 +207,7 @@ const categories = [
   { title: "Aplicaciones en Angular", filter: "Angular", icon: "/img/icons/angular-icon.png"  },
   { title: "Aplicaciones en Spring Boot", filter: "Spring Framework", icon:"/img/icons/springboot-icon.png" },
   { title: "Aplicaciones en Spring Cloud", filter: "Spring Cloud", icon:"/img/icons/springcloud-icon.png" },
+  { title: "Aplicaciones en Java", filter: "Java", icon:"/img/icons/java.png" },
   { title: "Web jaoprogramador", filter: "HTML", icon:"/img/icons/html-icon.png"  }
 ];
   
