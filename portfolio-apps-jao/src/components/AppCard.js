@@ -3,6 +3,7 @@ import React from 'react';
 const AppCard = ({ app }) => {
   return (
     <div className="app-card">
+      <h5>{app.name}</h5>
       <a href={app.appUrl} target="_blank" rel="noopener noreferrer">
         <img src={app.imageUrl} alt={app.name} className="app-image" />
       </a>

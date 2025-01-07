@@ -2,6 +2,8 @@ import React from 'react';
 import AppCard from './AppCard';
 
 const apps = [
+  // R E A C T
+// ###########
     {
 
       name: "Carrito de la compra",
@@ -63,6 +65,7 @@ const apps = [
       repoUrl: "https://github.com/jaoprogramador/JAOReactGraphql",
       appUrl: "https://jaoreactgraphqlfront.onrender.com//",
       icon: "/img/react-icon.png" 
+      //repoLocal: "C:\Users\user\Documents\Juan PC guillermo SpringAngularAWS\JAO\reactWorkspace\projects\graphql
 
     },
     {
@@ -73,6 +76,7 @@ const apps = [
       repoUrl: "https://github.com/jaoprogramador/TipescriptPacientesHospital",
       appUrl: "https://tipescriptpacienteshospital.onrender.com/",
       icon: "/img/react-icon.png" 
+      //repoLocal: "C:\Users\user\Documents\Juan PC guillermo SpringAngularAWS\JAO\reactWorkspace\projects\TipescriptPacientesHospital
 
     },
     {
@@ -93,8 +97,58 @@ const apps = [
       repoUrl: "https://github.com/jaoprogramador/FullStackOpenReact/tree/main/Parte10Reactnativo/dProbaryampliarnuestraaplicacion",
       appUrl: "#",
       icon: "/img/react-icon.png" 
+      //repoLocal: "C:\Users\user\Documents\Juan PC guillermo SpringAngularAWS\JAO\fullstackopen REACT\Parte10Reactnativo\dProbaryampliarnuestraaplicacion
+      
 
     },
+    {
+      name: "Pokemon cards",
+      imageUrl: "/img/react-CICD.jpg",  
+      description: "Aplicación para visualizar los pokemon con react y gestionar los despliegues y tareas de test con github action , CI-CD",
+      technology: "React, CI-CD, webpack",
+      repoUrl: "https://github.com/jaoprogramador/EjemploCICD",
+      appUrl: "https://ejemplocicd.onrender.com/",
+      icon: "/img/react-icon.png" 
+      //repoLocal: "C:\Users\user\Documents\Juan PC guillermo SpringAngularAWS\JAO\reactWorkspace\projects\EjemploCICD"
+
+    },
+	{
+      name: "Hospital citas",
+      imageUrl: "/img/typeScript.jpg",  
+      description: "Aplicación para gestionar las entradas a un hospital con pacientes con front de react, back en Node-Express y typescript y gestionar los despliegues y tareas de test con github action , CI-CD",
+      technology: "React, CI-CD, webpack",
+      repoUrl: "https://github.com/jaoprogramador/my-ci-cd-app/",
+      appUrl: "https://my-ci-cd-app.onrender.com/",
+      icon: "/img/react-icon.png" 
+      //repoLocal: "C:\Users\user\Documents\Juan PC guillermo SpringAngularAWS\JAO\reactWorkspace\projects\my-ci-cd-app
+
+    },
+    //BD
+    {
+      name: "Notas - Blogs - Usuarios",
+      imageUrl: "/img/react-bd-relacional.jpg",  
+      description: "Aplicación para gestionar usuarios - notas y blogs, back en Node-Express y BD relacional con PostgresSQL en RENDER",
+      technology: "React, PostgresSQL, BD Relacional",
+      repoUrl: "https://github.com/jaoprogramador/FullStackOpenReact/blob/main/Parte%2013%20Utilizando%20bases%20de%20datos%20relacionales/b%20Unir%20tablas%20y%20consultas/notes/",
+      appUrl: "https://notaspostgresql.onrender.com/api/notes?important=true",
+      icon: "/img/react-icon.png" 
+      //repoLocal: "C:\Users\user\Documents\Juan PC guillermo SpringAngularAWS\JAO\fullstackopen REACT\Parte 13 Utilizando bases de datos relacionales\b Unir tablas y consultas
+
+    },
+    //MIGRACION BD
+    {
+      name: "Notas - Blogs - Usuarios",
+      imageUrl: "/img/react-bd-Migracion.jpg",  
+      description: "Aplicación para gestionar usuarios - notas y blogs, back en Node-Express y migraciones en BD",
+      technology: "React, PostgresSQL, BD Relacional",
+      repoUrl: "https://github.com/jaoprogramador/FullStackOpenReact/tree/main/Parte%2013%20Utilizando%20bases%20de%20datos%20relacionales/c%20Migraciones%2C%20relaciones%20de%20muchos-a-muchos/notes",
+      appUrl: "#",
+      icon: "/img/react-icon.png" 
+      //repoLocal: "C:\Users\user\Documents\Juan PC guillermo SpringAngularAWS\JAO\fullstackopen REACT\Parte 13 Utilizando bases de datos relacionales\c Migraciones, relaciones de muchos-a-muchos
+
+    },
+// A N G U L A R
+// ################
     {
       name: "Angular Material",
       imageUrl: "/img/AngularMaterialDrag.jpg",  
@@ -124,18 +178,62 @@ const apps = [
       icon: "/img/angular-icon.png" 
 
     },
-    
+    //PWA HOLAJAO
+    {
+      name: "PWA",
+      imageUrl: "/img/AngularPipes.jpg",  
+      description: "Aplicación con angular PWA",
+      technology: "Angular",
+      repoUrl: "",
+      appUrl: "",
+      icon: "/img/angular-icon.png" 
+
+    },
+    //FORMS Router6
+    {
+      name: "FORMS",
+      imageUrl: "/img/AngularForms.jpg",  
+      description: "Aplicación con angular FORMS",
+      technology: "Angular",
+      repoUrl: "https://github.com/jaoprogramador/angular-apps/tree/master/03ngRouting",
+      appUrl: "#",
+      icon: "/img/angular-icon.png" 
+
+    },
+    //PIPES HOLAJAO
+    {
+      name: "PIPES",
+      imageUrl: "/img/AngularPipes.jpg",  
+      description: "Aplicación con angular PIPES",
+      technology: "Angular",
+      repoUrl: "https://github.com/jaoprogramador/angular-apps/tree/master/HolaJAO",
+      appUrl: "#",
+      icon: "/img/angular-icon.png" 
+
+    },
+    //RxJS
+    {
+      name: "RxJS",
+      imageUrl: "/img/AngularRxJS.jpg",  
+      description: "Aplicación con angular RxJS",
+      technology: "Angular",
+      repoUrl: "https://github.com/jaoprogramador/angular-apps/tree/master/06RxJS",
+      appUrl: "#",
+      icon: "/img/angular-icon.png" 
+
+    },
     {
       name: "Login Angular",
       imageUrl: "/img/angular-login.jpg",  
       description: "Aplicación con angular v17 logueo que se autentica contra un API Rest que nos proporciona un token de acceso. Hacemos un routing securizado de distintas páginas en las que podemos ver como pasar información entre componentes. La aplicación hace uso de servicios y peticiones HTTP para el login o para obtener respuestas JSON y tratar la info por pantalla.Se hace uso de PIPE, para definir componentes genéricos control de errores, validacion de formularios, componentes de Angular material...",
       technology: "Angular, Firebase",
-      repoUrl: "https://github.com/jaoprogramador/MongoUserBlogsStilosMenuVar",
+      repoUrl: "https://github.com/jaoprogramador/angular-apps/tree/master/03ngRouting",
       appUrl: "https://proyecto-final-angular-42db4.web.app/login",
       icon: "/img/angular-icon.png" 
 
     },
-
+// S P R I N G
+// ###########    
     {
       name: "Spring Framework",
       imageUrl: "/img/spring-framework.jpg",  
@@ -146,7 +244,95 @@ const apps = [
       icon: "/img/springBoot-icon.png" 
 
     },
+    //BEAN
     {
+      name: "Spring BEAN",
+      imageUrl: "/img/spring-JBEANS.jpg",  
+      description: "Spring Boot, Beans",
+      technology: "Spring Framework ",
+      repoUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/tree/master/1EjeSpringBeans",
+      appUrl: "#",
+      icon: "/img/springBoot-icon.png" 
+
+    },
+    //DATA
+    {
+      name: "Spring DATA",
+      imageUrl: "/img/spring-DATA.jpg",  
+      description: "Spring Boot, Data, JPA",
+      technology: "Spring Framework ",
+      repoUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/tree/master/2EjeSpringDataJPA",
+      appUrl: "#",
+      icon: "/img/springBoot-icon.png" 
+
+    },
+    //MVC
+    {
+      name: "Spring MVC",
+      imageUrl: "/img/spring-REST.jpg",  
+      description: "Spring Boot, MVC, Rest",
+      technology: "Spring Framework ",
+      repoUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/tree/master/3EjeRestDatajpa",
+      appUrl: "#",
+      icon: "/img/springBoot-icon.png" 
+
+    },
+    //Security
+    {
+      name: "Spring Security",
+      imageUrl: "/img/spring-SECURITY.jpg",  
+      description: "Spring Boot, Security",
+      technology: "Spring Framework ",
+      repoUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/tree/master/5SpringSecurity",
+      appUrl: "#",
+      icon: "/img/springBoot-icon.png" 
+
+    },
+    //JWT
+    {
+      name: "JWT",
+      imageUrl: "/img/SpringJWT.jpg",  
+      description: "Spring Boot, Security, JWT",
+      technology: "Spring Framework ",
+      repoUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/tree/master/7SpringSecurityJWT",
+      appUrl: "#",
+      icon: "/img/springBoot-icon.png" 
+
+    },
+    //Oauth
+    {
+      name: "OAuth",
+      imageUrl: "/img/spring-OAuth.jpg",  
+      description: "Spring Boot, Security, Oauth",
+      technology: "Spring Framework ",
+      repoUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/tree/master/8SecurityOauthGithub",
+      appUrl: "#",
+      icon: "/img/springBoot-icon.png" 
+
+    },
+    //SWAGGER
+    {
+      name: "Swagger",
+      imageUrl: "/img/spring-SWAGGER.jpg",  
+      description: "Spring Boot, Swagger, DATA, JPA, REST",
+      technology: "Spring Framework ",
+      repoUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/tree/master/3EjeRestDatajpa",
+      appUrl: "#",
+      icon: "/img/springBoot-icon.png" 
+
+    },
+    //CONTROL DE EXCEPCIONES
+    {
+      name: "ControlExcepciones",
+      imageUrl: "/img/spring-ControlExcepciones.jpg",  
+      description: "Spring Boot, REST, Control de Excepciones",
+      technology: "Spring Framework ",
+      repoUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/tree/master/13CrtlExcepcionesRoles",
+      appUrl: "#",
+      icon: "/img/springBoot-icon.png" 
+
+    },
+    {//
       name: "Spring Cloud Microservicios",
       imageUrl: "/img/spring-cloud.jpg",  
       description: "Servicios Rest, JPA, Api Rest, Config, Eureka Server, Feighn, Hystry, Gateway, Actuator, Loombok, Gradle",
@@ -154,6 +340,18 @@ const apps = [
       repoUrl: "https://github.com/jaoprogramador/SpringCloudMicroservicios",
       appUrl: "https://github.com/jaoprogramador/SpringCloudMicroservicios",
       icon: "/img/springCloud-icon.png" 
+    },
+
+    //Patrones de diseño
+    {
+      name: "Patrones de diseño",
+      imageUrl: "/img/JavaPatters.jpg",  
+      description: "Patrones de diseño, Adapter, Singleton, Build, Facade, ",
+      technology: "Java",
+      repoUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/tree/master/11SecuritySpring-patterns",
+      appUrl: "#",
+      icon: "/img/springBoot-icon.png" 
+
     },
     {
       name: "Java",
@@ -183,6 +381,15 @@ const apps = [
       icon: "/img/java.png" 
     },
     {
+      name: "log4j",
+      imageUrl: "/img/JavaLog4j.jpg",  
+      description: "Java, log4j",
+      technology: "Java",
+      repoUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/tree/master/19ContentManagerSOAP",
+      appUrl: "#",
+      icon: "/img/java.png" 
+    },
+    {
       name: "Ejercicios de programación",
       imageUrl: "/img/jaoweb.jpg",  
       description: "Ejercicios de programación, BD, web...",
@@ -203,11 +410,11 @@ const apps = [
 
   // Mapeo de categorías con sus respectivas tecnologías y títulos
 const categories = [
-  { title: "Aplicaciones en React", filter: "React", icon: "/img/icons/react-icon.png"  },
-  { title: "Aplicaciones en Angular", filter: "Angular", icon: "/img/icons/angular-icon.png"  },
-  { title: "Aplicaciones en Spring Boot", filter: "Spring Framework", icon:"/img/icons/springboot-icon.png" },
-  { title: "Aplicaciones en Spring Cloud", filter: "Spring Cloud", icon:"/img/icons/springcloud-icon.png" },
-  { title: "Aplicaciones en Java", filter: "Java", icon:"/img/icons/java.png" },
+  { title: "React", filter: "React", icon: "/img/icons/react-icon.png"  },
+  { title: "Angular", filter: "Angular", icon: "/img/icons/angular-icon.png"  },
+  { title: "Spring Boot", filter: "Spring Framework", icon:"/img/icons/springboot-icon.png" },
+  { title: "Spring Cloud", filter: "Spring Cloud", icon:"/img/icons/springcloud-icon.png" },
+  { title: "Java", filter: "Java", icon:"/img/icons/java.png" },
   { title: "Web jaoprogramador", filter: "HTML", icon:"/img/icons/html-icon.png"  }
 ];
   
@@ -222,7 +429,7 @@ const AppTable = () => {
               <tr>
                 <th>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                    {title}
+                  <h2>{title}</h2>
                     <img 
                       src={icon} 
                       alt={`${title} icon`} 
