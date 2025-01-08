@@ -1,12 +1,25 @@
 import React from 'react';
 import AppCard from './AppCard';
 
-const apps = [
+/* const apps = [
   // R E A C T
 // ###########
+  {
+
+    //name: "Twitter Follow",
+    name: "Componente simple",
+    imageUrl: "/img/twitterFollow.jpg",
+    description: "Aplicación que contine un componente Follow como el de twitter",
+    technology: "React",
+    repoUrl: "https://github.com/jaoprogramador/jaoPortfolio/tree/master/00-hola-mundo",
+    appUrl: "https://twitterfollow.onrender.com/",
+    icon: "/img/react-icon.png" 
+
+  },
     {
 
-      name: "Carrito de la compra",
+      //name: "Carrito de la compra",
+      name: "Componente complejo",
       imageUrl: "/img/shopping-card.jpg",
       description: "Aplicación para emular un rarrito de la compra",
       technology: "React",
@@ -15,20 +28,11 @@ const apps = [
       icon: "/img/react-icon.png" 
 
     },
+    
     {
 
-      name: "Twitter Follow",
-      imageUrl: "/img/twitterFollow.jpg",
-      description: "Aplicación que contine un componente Follow como el de twitter",
-      technology: "React",
-      repoUrl: "https://github.com/jaoprogramador/jaoPortfolio/tree/master/00-hola-mundo",
-      appUrl: "https://twitterfollow.onrender.com/",
-      icon: "/img/react-icon.png" 
-
-    },
-    {
-
-      name: "Notas con React",
+      //name: "Notas con React",
+      name: "Node, Express",
       imageUrl: "/img/react-notes.jpg",
       description: "Aplicación para tomar notas con React",
       technology: "React, Express",
@@ -38,7 +42,8 @@ const apps = [
 
     },
     {
-      name: "Agenda de Personas",
+      //name: "Agenda de Personas",
+      name: "Node-Express",
       imageUrl: "/img/react-persons.jpg",  
       description: "Aplicación para gestionar contactos",
       technology: "React, Express",
@@ -48,7 +53,8 @@ const apps = [
 
     },
     {
-      name: "Agenda MongoDB",
+      //name: "Agenda MongoDB",
+      name: "MongoDB",
       imageUrl: "/img/mongo-persons.jpg",  
       description: "Aplicación para gestionar contactos con front de react y back en Node-Express y MongoDB",
       technology: "React, MongoDB",
@@ -58,7 +64,8 @@ const apps = [
 
     },
     {
-      name: "Librería Autores",
+      //name: "Librería Autores",
+      name: "Graphql",
       imageUrl: "/img/react-Graphql.jpg",  
       description: "Aplicación para gestionar los libros y autores de una librería con Graphql y FRONT en react",
       technology: "React, Graphql",
@@ -69,7 +76,8 @@ const apps = [
 
     },
     {
-      name: "Citas Hospital",
+      //name: "Citas Hospital",
+      name: "Typescript",
       imageUrl: "/img/typeScript.jpg",  
       description: "Aplicación para gestionar las entradas a un hospital con pacientes con front de react y back en Node-Express y typescript",
       technology: "React, typescript",
@@ -80,7 +88,8 @@ const apps = [
 
     },
     {
-      name: "Usuarios Blogs",
+      //name: "Usuarios Blogs",
+      name: "Bootstrap-Redux",
       imageUrl: "/img/react-redux-css.jpg",  
       description: "Aplicación para gestionar usuarios y sus blogs con react y back en Node-Express, Bootstrap, Redux y MongoDB",
       technology: "React, MongoDB, redux, bootstrap",
@@ -90,7 +99,8 @@ const apps = [
 
     },
     {
-      name: "Repositorios , revisiones, usuarios",
+      //name: "Repositorios , revisiones, usuarios",
+      name: "React nativo",
       imageUrl: "/img/react-native.jpg",  
       description: "Aplicación para gestionar usuarios y sus repositorios de GitHub con react nativo y GraphQL",
       technology: "React native, GraphQL",
@@ -102,7 +112,8 @@ const apps = [
 
     },
     {
-      name: "Pokemon cards",
+      //name: "Pokemon cards",
+      name: "github action",
       imageUrl: "/img/react-CICD.jpg",  
       description: "Aplicación para visualizar los pokemon con react y gestionar los despliegues y tareas de test con github action , CI-CD",
       technology: "React, CI-CD, webpack",
@@ -113,7 +124,8 @@ const apps = [
 
     },
 	{
-      name: "Hospital citas",
+      //name: "Hospital citas",
+      name: "CI-CD",
       imageUrl: "/img/typeScript.jpg",  
       description: "Aplicación para gestionar las entradas a un hospital con pacientes con front de react, back en Node-Express y typescript y gestionar los despliegues y tareas de test con github action , CI-CD",
       technology: "React, CI-CD, webpack",
@@ -125,7 +137,8 @@ const apps = [
     },
     //BD
     {
-      name: "Notas - Blogs - Usuarios",
+      //name: "Notas - Blogs - Usuarios",
+      name: "BD relacional con PostgresSQL",
       imageUrl: "/img/react-bd-relacional.jpg",  
       description: "Aplicación para gestionar usuarios - notas y blogs, back en Node-Express y BD relacional con PostgresSQL en RENDER",
       technology: "React, PostgresSQL, BD Relacional",
@@ -137,7 +150,8 @@ const apps = [
     },
     //MIGRACION BD
     {
-      name: "Notas - Blogs - Usuarios",
+      //name: "Notas - Blogs - Usuarios",
+      name: "Migraciones",
       imageUrl: "/img/react-bd-Migracion.jpg",  
       description: "Aplicación para gestionar usuarios - notas y blogs, back en Node-Express y migraciones en BD",
       technology: "React, PostgresSQL, BD Relacional",
@@ -398,7 +412,7 @@ const apps = [
       appUrl: "https://jaoprogramadorweb.onrender.com/j2ee/index.htm",
       icon: "/img/jaoprogramador-icon.png" 
     }
-  ];
+  ]; */
   
   // Filtramos las aplicaciones por su tecnología
   /* const reactApps = apps.filter(app => app.technology.includes("React"));
@@ -418,11 +432,16 @@ const categories = [
   { title: "Web jaoprogramador", filter: "HTML", icon:"/img/icons/html-icon.png"  }
 ];
   
-const AppTable = () => {
+/* const AppTable = ({ apps } ) => { */
+const AppTable = ({ apps = [] }) => {
+  console.log('AppTable:', apps);
+
   return (
     <table className="app-table">
       {categories.map(({ title, filter, icon }) => {
-        const filteredApps = apps.filter(app => app.technology.includes(filter));
+        //const filteredApps = apps.filter(app => app.technology.includes(filter));
+        const filteredApps = apps.filter(app => app.technology && app.technology.includes(filter));
+
         return (
           <React.Fragment key={title}>
             <thead>
@@ -442,9 +461,16 @@ const AppTable = () => {
             <tbody>
               <tr>
                 <td>
-                  {filteredApps.map(app => (
+                  {/* {filteredApps.map(app => (
                     <AppCard key={app.name} app={app} />
-                  ))}
+                  ))} */}
+                  {filteredApps.length > 0 ? (
+                    filteredApps.map((app) => (
+                      <AppCard key={app.name} app={app} />
+                    ))
+                  ) : (
+                    <p>No hay aplicaciones en esta categoría.</p>
+                  )}
                 </td>
               </tr>
             </tbody>
