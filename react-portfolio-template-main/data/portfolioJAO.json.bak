@@ -1,0 +1,154 @@
+{
+    "name":"JAO",
+    "headerTaglineOne":"Hello 👋",
+    "headerTaglineTwo":"I'm Juan Arana Olalde",
+    "headerTaglineThree":"designer and devloper",
+    "headerTaglineFour":" based in Bizkaia, Spain.",
+    "showCursor":true,
+    "showBlog":true,
+    "darkMode":true,
+    "showResume":true,
+    "socials":[
+       {
+          "id":"1",
+          "title":"Github",
+          "link":"https://github.com/jaoprogramador"
+       },
+       {
+          "id":"2",
+          "title":"LinkedIn",
+          "link":"https://www.linkedin.com/in/juan-arana-olalde-8b77a266/"
+       },
+       {
+          "id":"3",
+          "title":"Twitter",
+          "link":"https://twitter.com/jaoprogramador"
+       },
+       {
+          "id":"4",
+          "title":"Blog",
+          "link":"https://blog.jaoprogramador.com/"
+       },
+       {
+          "id":"5",
+          "title":"Email",
+          "link":"mailto:jaoprogramador@gmail.com"
+       }
+    ],
+    "projects":[
+        {
+       "id": "1",
+       "title": "Project Web JAO",
+       "description": "Web Design",
+       "imageSrc": "/img/jaoweb.jpg",
+       "url": "https://jaoprogramadorweb.onrender.com/j2ee/index.htm"
+     },
+     {
+       "id": "2",
+       "title": "Project React",
+       "description": "Design & Development",
+       "imageSrc": "/img/react-Graphql.jpg",
+       "url": "https://jaoreactgraphqlfront.onrender.com/"
+     },
+     {
+       "id": "3",
+       "title": "Project Angular",
+       "description": "Web Development",
+       "imageSrc": "/img/angular-login.jpg",
+       "url": "https://proyecto-final-angular-42db4.web.app/login"
+     },
+     {
+       "id": "4",
+       "title": "Java Development",
+       "description": "Programming",
+       "imageSrc": "/img/JavaLog4j.jpg",
+       "url": "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/tree/master/19ContentManagerSOAP"
+     },
+     {
+       "id": "5",
+       "title": "Project Spring",
+       "description": "Development",
+       "imageSrc": "/img/spring-SECURITY.jpg",
+       "url": "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/tree/master/5SpringSecurity"
+     },
+     {
+       "id": "6",
+       "title": "Project Spring Cloud Microservices",
+       "description": "Development",
+       "imageSrc": "https://images.unsplash.com/photo-1517479149777-5f3b1511d5ad?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTAyfHxwYXN0ZWx8ZW58MHx8MHw%3D&auto=format&fit=crop&w=400&q=60",
+       "url": "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/tree/master/5SpringSecurity"
+     }
+    ],
+    "services":[
+       {
+       "id": "1",
+       "title": "Server configuration",
+       "description": "Configuration of environments, servers and web applications with Java, Angular, React, JQuery, Tomcat, Wildfly, JBoss, Weblogic..."
+     },
+     {
+       "id": "2",
+       "title": "Development",
+       "description": "Programming with various Java frameworks such as Spring, Spring Cloud, Hibernate, JDBC, EJB, Jquery, Angular, React..."
+     },
+     {
+       "id": "3",
+       "title": "Web Design",
+       "description": "I build and optimize your online presence.  Website is the digital entry point into your business and a powerful revenue channel."
+     },
+     {
+       "id": "4",
+       "title": "Data Base",
+       "description": "I work with different relational databases such as Oracle, SQL server, PostgresSql and non-relational databases such as MongoDB"
+     },
+     {
+       "id": "5",
+       "title": "Deploy",
+       "description": "I have done deployments with different tools such as Firebase, Render, AWS, Jira, Bamboo, AnthillPro and manually"
+     }
+     ,
+     {
+       "id": "6",
+       "title": "Version Controller",
+       "description": "I have worked with SVN, Git... among other code version controllers"
+     }
+    ],
+    "aboutpara": "👋Hi, I'm Juan Arana Olalde and I studied computer application development and computer systems administration along with different courses to complete my training. 🛤️Since 2006 I have been participating in different Java and j2ee projects, carrying out fullstack tasks, development, analysis, requirements gathering, estimates, migrations, tests, deployments, incidents, dealing with clients... 🎯My goal is to develop my professional career in a project that allows me to grow while contributing my knowledge and experience.ℹ️If you have any questions, do not hesitate to contact me on LinkedIn or email and I will clarify them for you.",
+   "resume": {
+     "tagline": "👋  I'm a software engineer, product designer, and maker.",
+     "description": "I have worked in public and private companies participating in Java and J2EE projects. Knowledgeable in React, Javascript and most web frameworks.",
+     "experiences": [
+       {
+         "id": "1",
+         "dates": "March 2022 - Present",
+         "type": "Full Time",
+         "position": "Frontend Engineer for EJIE",
+         "bullets": [
+           "Worked on the frontend-backend of a UDA application",
+           "Worked on the frontend-backend of a UDA application"
+         ]
+       },
+       {
+         "id": "2",
+         "dates": "May 2019 - Oct 2022",
+         "type": "Full Time",
+         "position": "Frontend-backend Engineer for Vaillant",
+         "bullets": ["Worked on the J2EE application"]
+       },
+       {
+         "id": "3",
+         "dates": "May 2017 - Feb 2019",
+         "type": "Full Time",
+         "position": "backend Engineer for BBVA",
+         "bullets": ["Worked on the J2EE application"]
+       }
+     ],
+     "education": {
+       "universityName": "CFGS San Jorge",
+       "universityDate": "2003-2005",
+       "universityPara": "Higher education centre for the development of computer applications together with other courses in programming, web design, local area networks..."
+     },
+     "languages": ["Javascript", "HTML5", "CSS", "Java"],
+     "frameworks": ["React", "Angular","Typescript", "NodeJs", "Spring"],
+     "others": ["MongoDB", "Oracle", "AWS"]
+   }
+ }
