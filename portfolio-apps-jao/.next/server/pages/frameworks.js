@@ -335,7 +335,7 @@ const apps = [
         icon: "/img/springBoot-icon.png"
     },
     {
-        name: "Java",
+        name: "Servicio Rest",
         imageUrl: "/img/WS-RestSOAPUI.jpg",
         description: "Servicios Rest que valida un DNI",
         technology: "Java",

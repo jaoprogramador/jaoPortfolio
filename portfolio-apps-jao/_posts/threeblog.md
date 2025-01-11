@@ -1,5 +1,5 @@
 ---
-date: "2025-01-09T17:00:00.000Z"
+date: "2025-04-09T17:00:00.000Z"
 title: Introduction to MongoDB
 tagline: MongoDB – The most popular NoSQL database.
 preview: >-

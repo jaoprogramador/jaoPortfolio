@@ -6,13 +6,13 @@
   "/api/portfolio": "pages/api/portfolio.js",
   "/edit": "pages/edit.html",
   "/frameworks/AppCard": "pages/frameworks/AppCard.html",
-  "/frameworks/AppTable": "pages/frameworks/AppTable.html",
   "/": "pages/index.html",
   "/resume": "pages/resume.html",
-  "/blog": "pages/blog.js",
   "/_document": "pages/_document.js",
-  "/frameworks/[slug]": "pages/frameworks/[slug].js",
   "/blog/[slug]": "pages/blog/[slug].js",
+  "/frameworks/AppTable": "pages/frameworks/AppTable.html",
+  "/frameworks/[slug]": "pages/frameworks/[slug].js",
+  "/blog": "pages/blog.js",
   "/frameworks": "pages/frameworks.js",
   "/404": "pages/404.html"
 }
