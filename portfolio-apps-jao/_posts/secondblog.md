@@ -1,5 +1,5 @@
 ---
-date: '2025-01-09T16:00:00.000Z'
+date: '2025-02-09T16:00:00.000Z'
 title: Introduction to Angular
 tagline: Building dynamic web applications with Angular.
 preview: >-

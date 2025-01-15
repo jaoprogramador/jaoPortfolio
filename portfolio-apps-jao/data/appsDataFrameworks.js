@@ -25,6 +25,18 @@ const apps = [
         icon: "/img/react-icon.png" 
   
       },
+      {
+  
+        //name: "Tecnica Scraping",
+        name: "Tecnica Scraping",
+        imageUrl: "/img/react-scraping.jpg",
+        description: "Aplicación que nos muestra como hacer una captura json de la info de una web",
+        technology: "React",
+        repoUrl: "https://github.com/jaoprogramador/jaoPortfolio/tree/master/scrappingEjemplo",
+        appUrl: "https://github.com/jaoprogramador/jaoPortfolio/tree/master/scrappingEjemplo",
+        icon: "/img/react-icon.png" 
+  
+      },
       
       {
   
@@ -122,7 +134,7 @@ const apps = [
       },
       {
         //name: "Hospital citas",
-        name: "CI-CD",
+        name: "CI-CD Actions",
         imageUrl: "/img/typeScript.jpg",  
         description: "Aplicación para gestionar las entradas a un hospital con pacientes con front de react, back en Node-Express y typescript y gestionar los despliegues y tareas de test con github action , CI-CD",
         technology: "React, CI-CD, webpack",
@@ -132,6 +144,18 @@ const apps = [
         //repoLocal: "C:\Users\user\Documents\Juan PC guillermo SpringAngularAWS\JAO\reactWorkspace\projects\my-ci-cd-app
   
       },
+      {
+      //name: "Hospital citas",
+      name: "Contenedores Dockerfile",
+      imageUrl: "/img/react-Docker.jpg",  
+      description: "Aplicación para como gestionar un contenedor por medio de docker",
+      technology: "React, docker",
+      repoUrl: "https://github.com/jaoprogramador/FullStackOpenReact/tree/main/Parte%2012%20Contenedores/b%20Construir%20y%20configurar%20entornos/part12-containers-applications-main/todo-app",
+      appUrl: "https://github.com/jaoprogramador/FullStackOpenReact/tree/main/Parte%2012%20Contenedores/b%20Construir%20y%20configurar%20entornos/part12-containers-applications-main/todo-app",
+      icon: "/img/react-icon.png" 
+      //repoLocal: "C:\Users\user\Documents\Juan PC guillermo SpringAngularAWS\JAO\reactWorkspace\projects\my-ci-cd-app
+
+    },
       //BD - API EN RENDER
       {
         //name: "Notas - Blogs - Usuarios",
