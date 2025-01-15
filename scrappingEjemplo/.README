@@ -1,0 +1,14 @@
+# Web scraping o raspado web es una técnica utilizada mediante programas 
+# de software para extraer información de sitios web.1​ Usualmente, estos 
+# programas simulan la navegación de un humano en la World Wide Web ya sea 
+# utilizando el protocolo HTTP manualmente, o incrustando un navegador en una 
+# aplicación.
+# COMO HACERLO: 
+# ==============
+# 1.- creas un proyecto node 
+#    npm init -y
+# 2.- instalar en el proyecto playwright
+#    npm install playwright
+# 3.- creamos index.mjs
+# 4.- Codificar: en el navefgador vamos al listado web de Amazon con los productos,
+# y vamos capturando con el explorador de Developper los elementos, image , title, price y luego los pintamos
