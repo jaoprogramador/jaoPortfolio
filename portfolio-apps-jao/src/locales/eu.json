@@ -1,0 +1,18 @@
+{
+    "home": {
+      "welcome": "Welcome to my portfolio!_eu",
+      "about": "About Me_eu",
+      "projects": "Projects_eu",
+      "contact": "Contact_eu"
+    },
+    "headers": {
+      "work": "Work_eu",
+      "about": "About_eu",
+      "blog": "Blog_eu",
+      "frameworks": "Frameworks_eu",
+      "resume": "Resume_eu",
+      "contact": "Contact_eu",
+      "language": "Language_eu"
+    }
+
+  }

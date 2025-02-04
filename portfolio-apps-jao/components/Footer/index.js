@@ -1,22 +1,26 @@
-import React from "react";
+import { useContext } from "react";
 import Socials from "../Socials";
 import Link from "next/link";
 import Button from "../Button";
+import { LanguageContext } from "../../context/LanguageContext"; // Importa el contexto
 
 const Footer = ({}) => {
+  // Contexto de idioma
+  const { language } = useContext(LanguageContext);
+  const dataInit = require(`../../src/translations/${language}/${language}.json`);
   return (
     <>
       <div className="mt-5 laptop:mt-40 p-2 laptop:p-0">
         <div>
-          <h1 className="text-2xl text-bold">Contact.</h1>
+          <h1 className="text-2xl text-bold">{dataInit.footer.contact}</h1>
           <div className="mt-10">
             <h1 className="text-3xl tablet:text-6xl laptop:text-6xl laptopl:text-8xl text-bold">
-              LET&apos;S WORK
+              {dataInit.footer.workTogether}
             </h1>
             <h1 className="text-3xl tablet:text-6xl laptop:text-6xl laptopl:text-8xl text-bold">
-              TOGETHER
+              
             </h1>
-            <Button type="primary">Schedule a call</Button>
+            <Button type="primary">{dataInit.footer.scheduleButton}</Button>
             <div className="mt-10">
               <Socials />
             </div>

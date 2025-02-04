@@ -1,0 +1,35 @@
+{
+    "home": {
+      "welcome": "¡Bienvenido a mi portafolio!",
+      "about": "Sobre mí",
+      "projects": "Proyectos",
+      "contact": "Contacto"
+    },
+    "headers": {
+      "work": "Trabajo",
+      "about": "Sobre mí",
+      "blog": "Blog",
+      "frameworks": "Frameworks",
+      "resume": "Currículum",
+      "contact": "Contacto",
+      "language": "Idioma"
+    },"init": {
+      "work": "Proyectos.",
+      "services": "Servicios.",
+      "about": "Sobre mí"
+    } ,"footer": {
+      "contact": "Contacto.",
+      "workTogether": "TRABAJEMOS JUNTOS",
+      "scheduleButton": "Programa una llamada"
+    }  
+    , "resume": {
+      "formations": "Formaciones",
+      "education": "Educación",
+      "experience": "Experiencia",
+      "skills": "Habilidades",
+      "frameworks": "Frameworks",
+      "others": "Otros",
+      "languages": "Idiomas"
+      
+    }
+  }

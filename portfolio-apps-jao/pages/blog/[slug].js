@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useContext } from "react";
 import { getPostBySlug, getAllPosts } from "../../utils/api";
 import Header from "../../components/Header";
 import ContentSection from "../../components/ContentSection";
@@ -11,8 +11,9 @@ import BlogEditor from "../../components/BlogEditor";
 import { useRouter } from "next/router";
 import Cursor from "../../components/Cursor";
 import data from "../../data/portfolio.json";
-
+import { LanguageContext } from "../../context/LanguageContext";
 const BlogPost = ({ post }) => {
+  const { language } = useContext(LanguageContext);
   const [showEditor, setShowEditor] = useState(false);
   const textOne = useRef();
   const textTwo = useRef();
@@ -77,25 +78,34 @@ const BlogPost = ({ post }) => {
   );
 };
 
-export async function getStaticProps({ params }) {
-  const post = getPostBySlug(params.slug, [
-    "date",
-    "slug",
-    "preview",
-    "title",
-    "tagline",
-    "preview",
-    "image",
-    "content",
-  ]);
+export async function getStaticProps({ params  }) {
+  try {
+    console.log("Obteniendo post para:", params.slug);
+    
 
-  return {
-    props: {
-      post: {
-        ...post,
+    const post = getPostBySlug(params.slug, [
+      "date",
+      "slug",
+      "preview",
+      "title",
+      "tagline",
+      "preview",
+      "image",
+      "content",
+    ]);
+
+    return {
+      props: {
+        post: {
+          ...post,
+           
+        },
       },
-    },
-  };
+    };
+} catch (error) {
+  console.error("Error en getStaticProps:", error);
+  return { notFound: true };
+}
 }
 
 export async function getStaticPaths() {
@@ -111,5 +121,51 @@ export async function getStaticPaths() {
     }),
     fallback: false,
   };
-}
+} 
+  /* export async function getStaticPaths() {
+    try {
+      const posts = getAllPosts(["slug"]);
+      console.log("📌 Rutas generadas para posts:", posts);
+  
+      return {
+        paths: posts.map((post) => ({
+          params: { slug: post.slug },
+        })),
+        fallback: false,
+      };
+    } catch (error) {
+      console.error("🚨 Error en getStaticPaths:", error);
+      return { paths: [], fallback: false };
+    }
+  }
+  export async function getStaticProps({ params, locale }) {
+    try {
+      console.log("📌 Obteniendo post para:", params.slug);
+      const language = locale || "en";
+      const post = getPostBySlug(language, params.slug, [
+        "date",
+        "slug",
+        "preview",
+        "title",
+        "tagline",
+        "image",
+        "content",
+      ]);
+  
+      if (!post) {
+        console.error(`🚨 Error: No se encontró el post con slug ${params.slug}`);
+        return { notFound: true };
+      }
+  
+      return {
+        props: {
+          post: { ...post, language },
+        },
+      };
+    } catch (error) {
+      console.error("🚨 Error en getStaticProps:", error);
+      return { notFound: true };
+    }
+  } */
+  
 export default BlogPost;

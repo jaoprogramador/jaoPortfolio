@@ -113,8 +113,8 @@ const apps = [
         imageUrl: "/img/react-native.jpg",  
         description: "Aplicación para gestionar usuarios y sus repositorios de GitHub con react nativo y GraphQL",
         technology: "React native, GraphQL",
-        repoUrl: "https://github.com/jaoprogramador/FullStackOpenReact/tree/main/Parte10Reactnativo/dProbaryampliarnuestraaplicacion",
-        appUrl: "#",
+        repoUrl: "https://github.com/jaoprogramador/jaoPortfolio/tree/master/ReactNativo",
+        appUrl: "https://rate-repository-front.onrender.com/",
         icon: "/img/react-icon.png" 
         //repoLocal: "C:\Users\user\Documents\Juan PC guillermo SpringAngularAWS\JAO\fullstackopen REACT\Parte10Reactnativo\dProbaryampliarnuestraaplicacion
         

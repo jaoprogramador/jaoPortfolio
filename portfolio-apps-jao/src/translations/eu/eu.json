@@ -1,0 +1,36 @@
+{
+  "home": {
+    "welcome": "Ongi etorri nire portfoliora!",
+    "about": "Niri buruz",
+    "projects": "Proiektuak",
+    "contact": "Harremana"
+  },
+  "headers": {
+    "work": "Lana",
+    "about": "Niri buruz",
+    "blog": "Bloga",
+    "frameworks": "Esparruak",
+    "resume": "Curriculuma",
+    "contact": "Harremana",
+    "language": "Hizkuntza"
+  },
+  "init": {
+    "work": "Lanak.",
+    "services": "Zerbitzuak.",
+    "about": "Niri buruz."
+  },
+  "footer": {
+    "contact": "Harremana.",
+    "workTogether": "ELKARREKIN LAN EGIN DEZAGUN",
+    "scheduleButton": "Dei bat programatu"
+  },
+  "resume": {
+    "formations": "Formazioak",
+    "education": "Hezkuntza",
+    "experience": "Esperientzia",
+    "skills": "Trebetasunak",
+    "frameworks": "Esparruak",
+    "others": "Beste batzuk",
+    "languages": "Hizkuntzak"
+  }
+}

@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useContext } from "react";
 import Header from "../components/Header";
 import ServiceCard from "../components/ServiceCard";
 import Socials from "../components/Socials";
@@ -10,9 +10,8 @@ import Head from "next/head";
 import Button from "../components/Button";
 import Link from "next/link";
 import Cursor from "../components/Cursor";
+import { LanguageContext } from "../context/LanguageContext"; // Importa el contexto
 
-// Local Data
-import data from "../data/portfolio.json";
 
 export default function Home() {
   // Ref
@@ -24,6 +23,13 @@ export default function Home() {
   const textFour = useRef();
   const textFive = useRef();
 
+  // Contexto de idioma
+  const { language } = useContext(LanguageContext);
+
+  // Cargar datos dinámicamente según el idioma
+  const data = require(`../src/translations/${language}/portfolio.json`);
+  const dataInit = require(`../src/translations/${language}/${language}.json`);
+  
   // Handling Scroll
   const handleWorkScroll = () => {
     window.scrollTo({
@@ -47,7 +53,7 @@ export default function Home() {
       { y: 40, x: -10, transform: "scale(0.95) skew(10deg)" },
       { y: 0, x: 0, transform: "scale(1)" }
     );
-  }, []);
+  }, [language]); // Añade language como dependencia para que se actualice al cambiar el idioma
 
   return (
     <div className={`relative ${data.showCursor && "cursor-none"}`}>
@@ -101,7 +107,7 @@ export default function Home() {
           <Socials className="mt-2 laptop:mt-5" />
         </div>
         <div className="mt-10 laptop:mt-30 p-2 laptop:p-0" ref={workRef}>
-          <h1 className="text-2xl text-bold">Work.</h1>
+          <h1 className="text-2xl text-bold">{dataInit.init.work}</h1>
 
           <div className="mt-5 laptop:mt-10 grid grid-cols-1 tablet:grid-cols-2 gap-4">
             {data.projects.map((project) => (
@@ -117,7 +123,7 @@ export default function Home() {
         </div>
 
         <div className="mt-10 laptop:mt-30 p-2 laptop:p-0">
-          <h1 className="tablet:m-10 text-2xl text-bold">Services.</h1>
+          <h1 className="tablet:m-10 text-2xl text-bold">{dataInit.init.services}</h1>
           <div className="mt-5 tablet:m-10 grid grid-cols-1 laptop:grid-cols-2 gap-6">
             {data.services.map((service, index) => (
               <ServiceCard
@@ -137,9 +143,18 @@ export default function Home() {
           </div>
         )}
         <div className="mt-10 laptop:mt-40 p-2 laptop:p-0" ref={aboutRef}>
-          <h1 className="tablet:m-10 text-2xl text-bold">About.</h1>
+          <h1 className="tablet:m-10 text-2xl text-bold">{dataInit.init.about}</h1>
           <p className="tablet:m-10 mt-2 text-xl laptop:text-3xl w-full laptop:w-3/5">
-            {data.aboutpara}
+            {data.aboutparaBloque1}
+          </p>
+          <p className="tablet:m-10 mt-2 text-xl laptop:text-3xl w-full laptop:w-3/5">
+            {data.aboutparaBloque2}
+          </p>
+          <p className="tablet:m-10 mt-2 text-xl laptop:text-3xl w-full laptop:w-3/5">
+            {data.aboutparaBloque3}
+          </p>
+          <p className="tablet:m-10 mt-2 text-xl laptop:text-3xl w-full laptop:w-3/5">
+            {data.aboutparaBloque4}
           </p>
         </div>
         <Footer />

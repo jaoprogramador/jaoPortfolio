@@ -1,0 +1,18 @@
+{
+    "home": {
+      "welcome": "Welcome to my portfolio!",
+      "about": "About Me",
+      "projects": "Projects",
+      "contact": "Contact"
+    },
+    "headers": {
+      "work": "Work",
+      "about": "About",
+      "blog": "Blog",
+      "frameworks": "Frameworks",
+      "resume": "Resume",
+      "contact": "Contact",
+      "language": "Language"
+    }
+
+  }

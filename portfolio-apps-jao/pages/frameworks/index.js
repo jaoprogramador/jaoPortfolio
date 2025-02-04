@@ -7,8 +7,11 @@ import Button from "../../components/Button";
 import Cursor from "../../components/Cursor";
 import Header from "../../components/Header";
 import data from "../../data/portfolio.json";
-import AppTable from "../../pages/frameworks/AppTable";
+//import AppTable from "../../pages/frameworks/AppTable";
 import dataFrameworks from "../../data/appsDataFrameworks"
+import AppTable from "../../components/FrameworkListCards/AppTable";
+
+
 //"../../data/appsDataFrameworks.json";
 import { ISOToDate, useIsomorphicLayoutEffect } from "../../utils";
 import { getAllPosts } from "../../utils/api";
