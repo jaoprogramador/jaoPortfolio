@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { getPostBySlug, getAllPosts } from "../../utils/api";
+//import { getPostBySlug, getAllPosts } from "../../utils/api";
 import Header from "../../components/Header";
 import ContentSection from "../../components/ContentSection";
 import Footer from "../../components/Footer";
@@ -25,8 +25,8 @@ const BlogPost = ({ post }) => {
   return (
     <>
       <Head>
-        <title>{"Blog - " + post.title}</title>
-        <meta name="description" content={post.preview} />
+        <title>{/* {"Blog - " + post.title} */}</title>
+       {/*  <meta name="description" content={post.preview} /> */}
       </Head>
       {data.showCursor && <Cursor />}
 
@@ -37,25 +37,25 @@ const BlogPost = ({ post }) => {
       >
         <Header isBlog={true} />
         <div className="mt-10 flex flex-col">
-          <img
+          {/* <img
             className="w-full h-96 rounded-lg shadow-lg object-cover"
             src={post.image}
             alt={post.title}
-          ></img>
+          ></img> */}
           <h1
             ref={textOne}
             className="mt-10 text-4xl mob:text-2xl laptop:text-6xl text-bold"
           >
-            {post.title}
+            {/* {post.title} */}
           </h1>
           <h2
             ref={textTwo}
             className="mt-2 text-xl max-w-4xl text-darkgray opacity-50"
           >
-            {post.tagline}
+            {/* {post.tagline} */}
           </h2>
         </div>
-        <ContentSection content={post.content}></ContentSection>
+        {/* <ContentSection content={post.content}></ContentSection> */}
         <Footer />
       </div>
       {process.env.NODE_ENV === "development" && (
@@ -77,7 +77,7 @@ const BlogPost = ({ post }) => {
   );
 };
 
-export async function getStaticProps({ params }) {
+/* export async function getStaticProps({ params }) {
   const post = getPostBySlug(params.slug, [
     "date",
     "slug",
@@ -111,5 +111,5 @@ export async function getStaticPaths() {
     }),
     fallback: false,
   };
-}
+} */
 export default BlogPost;

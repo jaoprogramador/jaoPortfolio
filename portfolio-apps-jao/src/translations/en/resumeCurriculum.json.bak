@@ -1,0 +1,111 @@
+{
+    "showResume": true,
+    "resume": {
+      "name": "Juan Pérez",
+      "tagline": "Desarrollador Fullstack",
+      "description": "Desarrollador con más de 10 años de experiencia en la industria del software, especializado en aplicaciones web y backend.",
+      "education": [
+        {
+          "program": "CFGS Desarrollo de aplicaciones Informáticas",
+          "universityName": "San Jorge Santurce",
+          "dates": "2003 - 2005",
+          "description": ""
+        },
+        {
+          "program": "CFGS Administración de Sistemas Informáticos",
+          "universityName": "Saturnino de la Peña",
+          "dates": "2001 - 2003",
+          "description": "Estudios enfocados en redes y administración de sistemas."
+        }
+      ],
+      "experiences": [
+        {
+          "id": "1",
+          "dates": "10/2022-10/2023",
+          "type": "EJIE",
+          "position": "Analista Funcional",
+          "bullets": [
+            "Responsable de proyectos",
+            "Optimicé el login mediante mejoras en la codificación, reduciendo tiempos de carga en un 30% y mejorando la seguridad con OAuth.",
+            "Pruebas, documentación, despliegues",
+            "Trato cliente",
+            "Dando soporte a compañeros JR",
+            "Resolver incidencias",
+            "Diseñé y ejecuté migraciones de datos"
+          ]
+        },
+        {
+          "id": "2",
+          "dates": "05/2019-10/2022",
+          "type": "Saunier Duval",
+          "position": "Analista Funcional",
+          "bullets": [
+            "Responsable de Proyectos",
+            "Diseñé e implementé un sistema de encriptación para login, fortaleciendo la seguridad de accesos con tokens REST y reduciendo riesgos de vulnerabilidad.",
+            "Documentación y soporte compañeros",
+            "Ejecuté la migración de la aplicación junto con las versiones java, servidor y certificados",
+            "Ejecuté migraciones de datos"
+          ]
+        }
+      ],
+      "certifications": [
+        {
+          "id": "1",
+          "title": "FullStackOpen React de Universidad de Helsinki",
+          "date": "22/01/2025"
+        },
+        {
+          "id": "2",
+          "title": "Angular, Campus Open Bootcamp",
+          "date": "21/05/2024"
+        },
+        {
+          "id": "3",
+          "title": "Amazon Web Service. Coursera",
+          "date": "17/06/2024"
+        },
+        {
+          "id": "4",
+          "title": "Spring Framework. Campus Open Bootcamp",
+          "date": "10/01/2024"
+        }
+      ],
+      "skills": [
+        "Lenguajes de Programación: Java, JavaScript, PL/SQL, T-SQL",
+        "Frameworks y Librerías: Spring Boot, Angular, React, Node.js, GraphQL, RxJS, JQuery, APX",
+        "APIs y Servicios Web: REST, SOAP, GraphQL, OAuth, JWT",
+        "Bases de Datos: MongoDB, Oracle, SQL Server",
+        "DevOps y Cloud: Docker, AWS, Firebase, CICD",
+        "Control de Versiones y Gestión: GIT, SVN, Jira, Bamboo",
+        "Patrones de diseño: Singleton, MVC, Facade, Adapter, Build, Estrategia…",
+        "Servidores: Tomcat, JBoss, Wildfly, Weblogic"
+      ],
+      "projects": [
+        {
+          "title": "PORTFOLIO EN REACT",
+          "description": "Aplicación desarrollada en Angular durante el curso de fullstack",
+          "url": "https://jaoportfolio.onrender.com/"
+        },
+        {
+          "title": "PROYECTO EN ANGULAR",
+          "description": "Aplicación desarrollada en Angular durante el curso de OpenBoot Camp.",
+          "url": "https://proyecto-final-angular-42db4.web.app/login"
+        },
+        {
+          "title": "REPOSITORIO GIT",
+          "description": "Repositorio de mis proyectos en GitHub.",
+          "url": "https://github.com/jaoprogramador/"
+        }
+      ]
+    },
+    "dataInit": {
+      "resume": {
+        "education": "Educación",
+        "experience": "Experiencia profesional",
+        "certifications": "Certificaciones y formaciones",
+        "skills": "Habilidades técnicas",
+        "projects": "Proyectos personales"
+      }
+    }
+  }
+  

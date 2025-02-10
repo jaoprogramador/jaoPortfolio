@@ -1,0 +1,262 @@
+{
+  "showResume": true,
+  "resume": {
+    "fullName": "Juan Arana Olalde",
+    "name": "Juan Arana Olalde",
+    "tagline": "Software Garatzailea & Analista Funtzionala",
+    "description": "Enpresa publiko eta pribatuetan lan egin dut Java eta J2EE proiektutan parte hartuz. React, Angular, JQuery, JavaScript eta web framework gehienetan ezagutza dut. Sistemen eta aplikazioen diseinu teknikoa egiten dut, probak eta doikuntza, baita erabiltzaileen eta erabileraren laguntza eta prestakuntza eskaintzen ditut, proiektuetan parte hartuz egungo metodologia erabiliz.",
+    "education": [
+      {
+        "program": "CFGS Informazio Aplikazioen Garapena",
+        "universityName": "San Jorge Santurce",
+        "dates": "2003 - 2005"
+      },
+      {
+        "program": "CFGS Sistema Informatikoen Kudeaketa",
+        "universityName": "Saturnino de la Peña (Sestao)",
+        "dates": "2001 - 2003"
+      }
+    ],
+    "experiences": [
+      {
+        "company": "EJIE",
+        "position": "Analista Funtzionala",
+        "location": "Bizkaia",
+        "dates": "10/2022 - 10/2023",
+        "bullets": [
+          "Proiektuen arduraduna",
+          "Login optimizatu nuen kodigazio hobetuz, kargatzeko denbora %30 murriztuz eta segurtasuna hobetuz OAuth erabiliz.",
+          "Probak, dokumentazioa, plangintza",
+          "Bezeroarekin harremana",
+          "Junior lankideei laguntza ematea",
+          "Gertaeren ebazpena",
+          "Datu migrazioak diseinatu eta exekutatu nituen"
+        ]
+      },
+      {
+        "company": "Saunier Duval",
+        "position": "Analista Funtzionala",
+        "location": "Bizkaia",
+        "dates": "05/2019 - 10/2022",
+        "bullets": [
+          "Proiektuen arduraduna",
+          "Login-en enkriptatze sistema bat diseinatu eta inplementatu nuen, REST tokenekin sarbideen segurtasuna indartuz eta ahultasun arriskua murriztuz.",
+          "Aplikazioaren migrazioa egin nuen Java bertsioak, zerbitzaria eta ziurtagiriak eguneratuz",
+          "Dokumentazioa eta lankideei laguntza",
+          "Datu migrazioak exekutatu nituen"
+        ]
+      },
+      {
+        "company": "Lantik",
+        "position": "Analista Funtzionala",
+        "location": "Bizkaia",
+        "dates": "10/2018 - 02/2019",
+        "bullets": [
+          "Analisi eta garapena, plangintza, gertaerak, probak, dokumentazioa, konfigurazioa",
+          "Token bidezko zerbitzuetara sarbideak"
+        ]
+      },
+      {
+        "company": "EJIE",
+        "position": "Analista Funtzionala",
+        "location": "Bizkaia",
+        "dates": "12/2017 - 10/2018",
+        "bullets": [
+          "Analisi eta garapena, gertaerak, dokumentazioa, probak",
+          "Eskakizunen matrizeak",
+          "UDA framework-eko egokitzapena"
+        ]
+      },
+      {
+        "company": "BBVA",
+        "position": "Analista Funtzionala",
+        "location": "Bizkaia",
+        "dates": "05/2017 - 12/2017",
+        "bullets": [
+          "Analisi eta garapena, eskakizunak bildu, gertaerak, dokumentazioa, probak",
+          "APX azpiegiturara egokitzapena",
+          "Arkitektura definitzea",
+          "Lanaren delegazioa",
+          "Lagunarteko guardiak"
+        ]
+      },
+      {
+        "company": "Lantik",
+        "position": "Analista Funtzionala",
+        "location": "Bizkaia",
+        "dates": "07/2015 - 02/2017",
+        "bullets": [
+          "Analisi eta garapena, gertaerak, plangintza, dokumentazioa, probak",
+          "Atom framework-eko egokitzapena",
+          "Modulu berriak garatu eta integratu"
+        ]
+      },
+      {
+        "company": "Sanidad de Cantabria",
+        "position": "Analista Programatzailea",
+        "location": "Bizkaia",
+        "dates": "07/2014 - 05/2015",
+        "bullets": [
+          "Analisi eta garapena, dokumentazioa, probak, eskakizunak bildu, plangintza",
+          "Datu migrazioa"
+        ]
+      },
+      {
+        "company": "EJIE",
+        "position": "Analista Programatzailea",
+        "location": "Bizkaia",
+        "dates": "10/2010 - 02/2013",
+        "bullets": [
+          "Analisi eta garapena, dokumentazioa, probak, eskakizunak bildu",
+          "Modulu berriak eta azpiegiturara egokitzapena",
+          "Arkitektura definitzea"
+        ]
+      },
+      {
+        "company": "Parlamento Vasco",
+        "position": "Analista Programatzailea",
+        "location": "Bizkaia",
+        "dates": "12/2009 - 02/2010",
+        "bullets": [
+          "Elektroniko sinadura modulua inplementatu, diseinatu eta antolatu nuen, zehaztapen eta teknologiak betez"
+        ]
+      },
+      {
+        "company": "Lantik",
+        "position": "Analista Programatzailea",
+        "location": "Bizkaia",
+        "dates": "01/2008 - 03/2009",
+        "bullets": [
+          "Gizarte ekintza eta emakumeentzako laguntzak sistema garatu nuen, bezeroaren azpiegituren eta zehaztapenetan egokitzen"
+        ]
+      },
+      {
+        "company": "Eroski",
+        "position": "Programatzailea",
+        "location": "Bizkaia",
+        "dates": "03/2007 - 12/2007",
+        "bullets": [
+          "Hornitzaileen sistema garatu eta mantendu nuen",
+          "Probak, plangintza, konfigurazioa, dokumentazioa"
+        ]
+      },
+      {
+        "company": "Lantik",
+        "position": "Programatzailea",
+        "location": "Bizkaia",
+        "dates": "02/2006 - 09/2006",
+        "bullets": [
+          "Adinekoen trasladoen kontrol sistema garatu eta mantendu nuen",
+          "Probak, plangintza eta gertaerak"
+        ]
+      }
+    ],
+    "certifications": [
+      { "title": "FullStackOpen React - Helsinkiko Unibertsitatea", "date": "22/01/2025" },
+      { "title": "Angular - Campus Open Bootcamp", "date": "21/05/2024" },
+      { "title": "Amazon Web Services - Coursera", "date": "17/06/2024" },
+      { "title": "Spring Framework - Campus Open Bootcamp", "date": "10/01/2024" },
+      { "title": "Spring Cloud Microservizioak - Digital Lab Academy", "date": "01/03/2024" },
+      { "title": "Git - Campus Open Bootcamp", "date": "01/04/2023" },
+      { "title": "React - Campus Open Bootcamp", "date": "01/02/2023" },
+      { "title": "UDA (Desarrollador JQuery, Spring y Oracle) - Tecnalia", "date": "25/10/2018" },
+      { "title": "Desarrollo de Aplicaciones Web SPA", "date": "11/06/2018" },
+      { "title": "Desarrollo de Aplicaciones con Spring e Hibernate", "date": "16/05/2016" },
+      { "title": "Programación para iOS y Android - Consultec", "date": "24/05/2013" },
+      { "title": "JQuery y CSS Avanzado - Consultec", "date": "12/04/2012" },
+      { "title": "Alfresco - Campus", "date": "01/12/2015" },
+      { "title": "Java-J2EE - Consultec", "date": "15/09/2010" },
+      { "title": "Segurtasunaren Teknikaria Sareetan (CCNA Cisco) - Centro Campus", "date": "07/10/2010" },
+      { "title": "Linux/Unix - Consultec", "date": "13/01/2011" },
+      { "title": "HTML5 para dispositivos móviles - Consultec", "date": "24/05/2013" },
+      { "title": "Bases de datos - Consultec", "date": "31/03/2013" },
+      { "title": "Programación de Componentes - AGM Consulting", "date": "01/07/2006" },
+      { "title": "Programación Orientada a Objetos", "date": "01/06/2005" },
+      { "title": "Diseño de Páginas Web - Centro de Informática y Ordenadores", "date": "04/06/2004" },
+      { "title": "Análisis y Diseño de Aplica. Informáticas - Centro Informática Meatze", "date": "01/07/2002" },
+      { "title": "Programador de Bases de Datos Relacionales - Meatze. Barakaldo", "date": "08/04/2002" }
+    ],
+    "projects": [
+      {
+        "title": "Portfolio React-en",
+        "description": "Angular-en garatutako aplikazioa fullstack ikastaroan zehar",
+        "url": "https://jaoportfolio.onrender.com/"
+      },
+      {
+        "title": "Proiektua Angular-en",
+        "description": "Angular-en garatutako aplikazioa OpenBootcamp ikastaroan zehar",
+        "url": "https://proyecto-final-angular-42db4.web.app/login"
+      },
+      {
+        "title": "Git Erregistroa",
+        "description": "Nire proiektuen erregistroa GitHub-en",
+        "url": "https://github.com/jaoprogramador/"
+      }
+    ],
+    "skills": {
+    "programmingLanguages": [
+      "Java",
+      "JavaScript",
+      "PL/SQL",
+      "T-SQL"
+    ],
+    "frameworksAndLibraries": [
+      "Spring Boot",
+      "Angular",
+      "React",
+      "Node.js",
+      "GraphQL",
+      "RxJS",
+      "JQuery",
+      "APX"
+    ],
+    "apisAndWebServices": [
+      "REST",
+      "SOAP",
+      "GraphQL",
+      "OAuth",
+      "JWT"
+    ],
+    "databases": [
+      "MongoDB",
+      "Oracle",
+      "SQL Server"
+    ],
+    "devOpsAndCloud": [
+      "Docker",
+      "AWS",
+      "Firebase",
+      "CICD"
+    ],
+    "versionControlAndManagement": [
+      "GIT",
+      "SVN",
+      "Jira",
+      "Bamboo"
+    ],
+    "designPatterns": [
+      "Singleton",
+      "MVC",
+      "Facade",
+      "Adapter",
+      "Build",
+      "Strategy"
+    ],
+    "servers": [
+      "Tomcat",
+      "JBoss",
+      "Wildfly",
+      "Weblogic"
+    ]
+  },
+    "resume": {
+      "formations": "Formazioak",
+      "education": "Hezkuntza",
+      "experience": "Esperientzia",
+      "skills": "Trebetasunak",
+      "frameworks": "Esparruak",
+      "others": "Beste batzuk",
+      "languages": "Hizkuntzak"
+    }
+  }
+}

@@ -6,7 +6,7 @@ preview: >-
   React es una potente biblioteca de JavaScript para construir interfaces de usuario. 
   Con su arquitectura basada en componentes, simplifica la creación de aplicaciones web dinámicas e interactivas.
 image: >-
-  https://images.unsplash.com/photo-1656188505561-19f1a1b6cda8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80
+  https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80
 ---
 
 # Comenzando con React

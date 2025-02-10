@@ -1,9 +1,3 @@
-
----
-
-### **Euskera (EU)**
-
-```yaml
 ---
 date: '2025-02-09T16:00:00.000Z'
 title: Angular-en Sarrera

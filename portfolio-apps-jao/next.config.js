@@ -7,6 +7,7 @@ const nextConfig = {
     unoptimized: true,     // Desactiva la optimización de imágenes si no se soporta en Render
   },
  
+
 };
 
 module.exports = nextConfig;

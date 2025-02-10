@@ -1,9 +1,3 @@
-
----
-
-### **Euskera (EU)**
-
-```yaml
 ---
 date: "2025-03-09T17:00:00.000Z"
 title: Spring Ekoizpenaren Sarrera

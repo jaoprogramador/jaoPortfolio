@@ -1,9 +1,3 @@
-
----
-
-### **Euskera (EU)**  
-
-```yaml
 ---
 date: "2025-01-09T17:00:00.000Z"
 title: AWS-en Sarrera
@@ -13,7 +7,7 @@ preview: >-
   Oinarrizko kontzeptuak ikasi, hala nola MFA bidezko segurtasuna, AWS CLI erabilera,
   EC2 konputaziorako, S3 biltegiratzeko, RDS datu-baseetarako eta Lambda zerbitzurik gabeko funtzioetarako.
 image: >-
-  https://images.unsplash.com/photo-1593642532842-98d0fd5ebc1a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1332&q=80
+  https://images.unsplash.com/photo-1657295791913-5074c912398e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=996&q=80
 ---
 
 # AWS-ekin Hastea

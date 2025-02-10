@@ -1,9 +1,3 @@
-
----
-
-### **Euskera (EU)**
-
-```yaml
 ---
 date: "2025-04-09T17:00:00.000Z"
 title: MongoDB-ri Sarrera

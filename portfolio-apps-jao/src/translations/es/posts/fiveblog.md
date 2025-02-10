@@ -7,7 +7,7 @@ preview: >-
   Aprende lo básico, incluyendo seguridad con MFA, uso de AWS CLI, EC2 para computación,
   S3 para almacenamiento, RDS para bases de datos y Lambda para funciones sin servidor.
 image: >-
-  https://images.unsplash.com/photo-1593642532842-98d0fd5ebc1a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1332&q=80
+  https://images.unsplash.com/photo-1657295791913-5074c912398e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=996&q=80
 ---
 
 # Introducción a AWS

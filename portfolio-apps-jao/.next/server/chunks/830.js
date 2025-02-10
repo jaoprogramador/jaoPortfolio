@@ -265,6 +265,7 @@ const CodeBlock = {
     }
 };
 const ContentSection = ({ content  })=>{
+    console.log("ContentSection::content ", content);
     return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_markdown__WEBPACK_IMPORTED_MODULE_2__["default"], {
         components: CodeBlock,
         className: "markdown-class",

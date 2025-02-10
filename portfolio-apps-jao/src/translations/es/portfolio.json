@@ -5,7 +5,7 @@
     "headerTaglineThree": "diseñador y desarrollador fullstack",
     "headerTaglineFour": "ubicado en Bizkaia, España.",
     "headerTaglineFive": "En la sección Framework encontrarás un conjunto de ejercicios de diferentes frameworks como React, Angular, Spring Boot, Spring Cloud, Mongo...",
-    "showCursor": true,
+    "showCursor": false,
     "showBlog": true,
     "darkMode": true,
     "showResume": true,
@@ -119,6 +119,7 @@
   "aboutparaBloque3": "🎯 Mi objetivo es desarrollar mi carrera profesional en un proyecto que me permita crecer mientras aporto mis conocimientos y experiencia.\n\n",
   "aboutparaBloque4": "ℹ️ Si tienes alguna pregunta, no dudes en contactarme por LinkedIn o correo electrónico y te la aclararé.",
   "resume": {
+    "fullName":"Juan Arana Olalde",
     "tagline": "👋 Soy desarrollador de software, diseñador y creador WEB.",
     "description": "He trabajado en empresas públicas y privadas participando en proyectos de Java y J2EE. Conocedor de React, Angular, JQuery, JavaScript y la mayoría de frameworks web. Me encargo del diseño técnico del sistema y/o programas de aplicación, sus pruebas y puesta a punto, así como de proporcionar formación y asistencia técnica a usuarios y explotación, participando en los proyectos según la metodología vigente.",
     "formations": [

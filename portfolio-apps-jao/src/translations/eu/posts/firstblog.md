@@ -1,9 +1,3 @@
-
----
-
-### **Euskera (EU)**  
-
-```yaml
 ---
 date: '2025-01-09T15:30:00.000Z'
 title: React Garapena Aztertzen
@@ -12,7 +6,7 @@ preview: >-
   React JavaScripteko liburutegi indartsua da erabiltzaile-interfazeak eraikitzeko. 
   Bere osagaietan oinarritutako arkitekturarekin, aplikazio dinamiko eta interaktiboak sortzea errazten du.
 image: >-
-  https://images.unsplash.com/photo-1656188505561-19f1a1b6cda8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80
+  https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80
 ---
 
 # React-en Hastera

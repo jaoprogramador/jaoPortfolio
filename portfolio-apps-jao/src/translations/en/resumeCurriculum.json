@@ -1,0 +1,262 @@
+{
+  "showResume": true,
+  "resume": {
+    "fullName": "Juan Arana Olalde",
+    "name": "Juan Arana Olalde",
+    "tagline": "Software Developer & Functional Analyst",
+    "description": "I have worked in both public and private companies, participating in Java and J2EE projects. I have expertise in React, Angular, JQuery, JavaScript, and most web frameworks. I design technical architecture for systems and applications, perform testing and adjustments, and offer user support and training, participating in projects using current methodologies.",
+    "education": [
+      {
+        "program": "CFGS Application Development",
+        "universityName": "San Jorge Santurce",
+        "dates": "2003 - 2005"
+      },
+      {
+        "program": "CFGS Systems Administration",
+        "universityName": "Saturnino de la Peña (Sestao)",
+        "dates": "2001 - 2003"
+      }
+    ],
+    "experiences": [
+      {
+        "company": "EJIE",
+        "position": "Functional Analyst",
+        "location": "Bizkaia",
+        "dates": "10/2022 - 10/2023",
+        "bullets": [
+          "Project Manager",
+          "Optimized the login by improving the coding, reducing load times by 30% and enhancing security using OAuth.",
+          "Testing, documentation, planning",
+          "Client interaction",
+          "Provided support to Junior colleagues",
+          "Issue resolution",
+          "Designed and executed data migrations"
+        ]
+      },
+      {
+        "company": "Saunier Duval",
+        "position": "Functional Analyst",
+        "location": "Bizkaia",
+        "dates": "05/2019 - 10/2022",
+        "bullets": [
+          "Project Manager",
+          "Designed and implemented an encryption system for login, strengthening access security with REST tokens and reducing vulnerability risks.",
+          "Executed the migration of the application along with Java versions, server updates, and certificates",
+          "Documentation and support for colleagues",
+          "Executed data migrations"
+        ]
+      },
+      {
+        "company": "Lantik",
+        "position": "Functional Analyst",
+        "location": "Bizkaia",
+        "dates": "10/2018 - 02/2019",
+        "bullets": [
+          "Analysis and development, planning, issues, testing, documentation, configuration",
+          "Access to services using tokens"
+        ]
+      },
+      {
+        "company": "EJIE",
+        "position": "Functional Analyst",
+        "location": "Bizkaia",
+        "dates": "12/2017 - 10/2018",
+        "bullets": [
+          "Analysis and development, issues, documentation, testing",
+          "Requirements matrices",
+          "Adaptation to UDA framework"
+        ]
+      },
+      {
+        "company": "BBVA",
+        "position": "Functional Analyst",
+        "location": "Bizkaia",
+        "dates": "05/2017 - 12/2017",
+        "bullets": [
+          "Analysis and development, gathering requirements, issues, documentation, testing",
+          "Adaptation to APX infrastructure",
+          "Defined architecture",
+          "Task delegation",
+          "On-call duties"
+        ]
+      },
+      {
+        "company": "Lantik",
+        "position": "Functional Analyst",
+        "location": "Bizkaia",
+        "dates": "07/2015 - 02/2017",
+        "bullets": [
+          "Analysis and development, issues, planning, documentation, testing",
+          "Adaptation to Atom framework infrastructure",
+          "Developed and integrated new modules"
+        ]
+      },
+      {
+        "company": "Sanidad de Cantabria",
+        "position": "Programmer Analyst",
+        "location": "Bizkaia",
+        "dates": "07/2014 - 05/2015",
+        "bullets": [
+          "Analysis and development, documentation, testing, gathering requirements, planning",
+          "Data migration"
+        ]
+      },
+      {
+        "company": "EJIE",
+        "position": "Programmer Analyst",
+        "location": "Bizkaia",
+        "dates": "10/2010 - 02/2013",
+        "bullets": [
+          "Analysis and development, documentation, testing, gathering requirements",
+          "Developed new modules and adapted to infrastructure",
+          "Defined architecture"
+        ]
+      },
+      {
+        "company": "Parlamento Vasco",
+        "position": "Programmer Analyst",
+        "location": "Bizkaia",
+        "dates": "12/2009 - 02/2010",
+        "bullets": [
+          "Implemented, designed, and organized the electronic signature module, adhering to specifications and current technologies"
+        ]
+      },
+      {
+        "company": "Lantik",
+        "position": "Programmer Analyst",
+        "location": "Bizkaia",
+        "dates": "01/2008 - 03/2009",
+        "bullets": [
+          "Developed the social action and women’s aid system, adapting to the client's architecture and specifications"
+        ]
+      },
+      {
+        "company": "Eroski",
+        "position": "Programmer",
+        "location": "Bizkaia",
+        "dates": "03/2007 - 12/2007",
+        "bullets": [
+          "Developed and maintained the supplier system",
+          "Testing, planning, configuration, documentation"
+        ]
+      },
+      {
+        "company": "Lantik",
+        "position": "Programmer",
+        "location": "Bizkaia",
+        "dates": "02/2006 - 09/2006",
+        "bullets": [
+          "Developed and maintained the elderly transport control system",
+          "Testing, planning, issue resolution"
+        ]
+      }
+    ],
+    "certifications": [
+      { "title": "FullStackOpen React - University of Helsinki", "date": "22/01/2025" },
+      { "title": "Angular - Campus Open Bootcamp", "date": "21/05/2024" },
+      { "title": "Amazon Web Services - Coursera", "date": "17/06/2024" },
+      { "title": "Spring Framework - Campus Open Bootcamp", "date": "10/01/2024" },
+      { "title": "Spring Cloud Microservices - Digital Lab Academy", "date": "01/03/2024" },
+      { "title": "Git - Campus Open Bootcamp", "date": "01/04/2023" },
+      { "title": "React - Campus Open Bootcamp", "date": "01/02/2023" },
+      { "title": "UDA (JQuery, Spring, and Oracle Developer) - Tecnalia", "date": "25/10/2018" },
+      { "title": "Development of Web SPA Applications", "date": "11/06/2018" },
+      { "title": "Development of Applications with Spring and Hibernate", "date": "16/05/2016" },
+      { "title": "Programming for iOS and Android - Consultec", "date": "24/05/2013" },
+      { "title": "Advanced JQuery and CSS - Consultec", "date": "12/04/2012" },
+      { "title": "Alfresco - Campus", "date": "01/12/2015" },
+      { "title": "Java-J2EE - Consultec", "date": "15/09/2010" },
+      { "title": "Network Security Technician (CCNA Cisco) - Centro Campus", "date": "07/10/2010" },
+      { "title": "Linux/Unix - Consultec", "date": "13/01/2011" },
+      { "title": "HTML5 for Mobile Devices - Consultec", "date": "24/05/2013" },
+      { "title": "Databases - Consultec", "date": "31/03/2013" },
+      { "title": "Component Programming - AGM Consulting", "date": "01/07/2006" },
+      { "title": "Object-Oriented Programming", "date": "01/06/2005" },
+      { "title": "Web Page Design - Computer Science and Computer Center", "date": "04/06/2004" },
+      { "title": "Application Analysis and Design - Meatze Computer Science Center", "date": "01/07/2002" },
+      { "title": "Relational Database Programmer - Meatze. Barakaldo", "date": "08/04/2002" }
+    ],
+    "projects": [
+      {
+        "title": "React Portfolio",
+        "description": "Application developed in Angular during the fullstack course",
+        "url": "https://jaoportfolio.onrender.com/"
+      },
+      {
+        "title": "Angular Project",
+        "description": "Application developed in Angular during the OpenBootCamp course",
+        "url": "https://proyecto-final-angular-42db4.web.app/login"
+      },
+      {
+        "title": "Git Repository",
+        "description": "My project repository on GitHub",
+        "url": "https://github.com/jaoprogramador/"
+      }
+    ],
+    "skills": {
+    "programmingLanguages": [
+      "Java",
+      "JavaScript",
+      "PL/SQL",
+      "T-SQL"
+    ],
+    "frameworksAndLibraries": [
+      "Spring Boot",
+      "Angular",
+      "React",
+      "Node.js",
+      "GraphQL",
+      "RxJS",
+      "JQuery",
+      "APX"
+    ],
+    "apisAndWebServices": [
+      "REST",
+      "SOAP",
+      "GraphQL",
+      "OAuth",
+      "JWT"
+    ],
+    "databases": [
+      "MongoDB",
+      "Oracle",
+      "SQL Server"
+    ],
+    "devOpsAndCloud": [
+      "Docker",
+      "AWS",
+      "Firebase",
+      "CICD"
+    ],
+    "versionControlAndManagement": [
+      "GIT",
+      "SVN",
+      "Jira",
+      "Bamboo"
+    ],
+    "designPatterns": [
+      "Singleton",
+      "MVC",
+      "Facade",
+      "Adapter",
+      "Build",
+      "Strategy"
+    ],
+    "servers": [
+      "Tomcat",
+      "JBoss",
+      "Wildfly",
+      "Weblogic"
+    ]
+  },
+    "resume": {
+      "formations": "Formations",
+      "education": "Education",
+      "experience": "Experience",
+      "skills": "Skills",
+      "frameworks": "Frameworks",
+      "others": "Others",
+      "languages": "Languages"
+    }  
+  }
+}

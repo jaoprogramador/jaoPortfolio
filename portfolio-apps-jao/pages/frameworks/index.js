@@ -13,15 +13,15 @@ import AppTable from "../../components/FrameworkListCards/AppTable";
 
 
 //"../../data/appsDataFrameworks.json";
-import { ISOToDate, useIsomorphicLayoutEffect } from "../../utils";
-import { getAllPosts } from "../../utils/api";
+//import { ISOToDate, useIsomorphicLayoutEffect } from "../../utils";
+/* import { getAllPosts } from "../../utils/api"; */
 const Framework = ({ posts }) => {
   const showBlog = useRef(data.showBlog);
   const text = useRef();
   const router = useRouter();
   const [mounted, setMounted] = useState(false);
 
-  useIsomorphicLayoutEffect(() => {
+  /* useIsomorphicLayoutEffect(() => {
     stagger(
       [text.current],
       { y: 40, x: -10, transform: "scale(0.95) skew(10deg)" },
@@ -29,7 +29,7 @@ const Framework = ({ posts }) => {
     );
     if (showBlog.current) stagger([text.current], { y: 30 }, { y: 0 });
     else router.push("/");
-  }, []);
+  }, []); */
 
   useEffect(() => {
     console.log('Frameworksindex :::dataFrameworks',);
@@ -70,7 +70,7 @@ const Framework = ({ posts }) => {
   );
 };
 
-export async function getStaticProps() {
+/* export async function getStaticProps() {
   const posts = getAllPosts([
     "slug",
     "title",
@@ -85,6 +85,6 @@ export async function getStaticProps() {
       posts: [...posts],
     },
   };
-}
+} */
 
 export default Framework;

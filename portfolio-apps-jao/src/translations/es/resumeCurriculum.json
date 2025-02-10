@@ -1,0 +1,263 @@
+{
+  "showResume": true,
+  "resume": {
+    "fullName": "Juan Arana Olalde",
+    "name": "Juan Arana Olalde",
+    "tagline": "Desarrollador de Software y Analista Funcional",
+    "description": "He trabajado en empresas tanto públicas como privadas, participando en proyectos de Java y J2EE. Tengo experiencia con React, Angular, JQuery, JavaScript y la mayoría de frameworks web. Diseño la arquitectura técnica de sistemas y aplicaciones, realizo pruebas y ajustes, ofrezco soporte y formación a usuarios, participando en proyectos utilizando metodologías actuales.",
+    "education": [
+      {
+        "program": "CFGS Desarrollo de Aplicaciones Informáticas",
+        "universityName": "San Jorge Santurce",
+        "dates": "2003 - 2005"
+      },
+      {
+        "program": "CFGS Administración de Sistemas Informáticos",
+        "universityName": "Saturnino de la Peña (Sestao)",
+        "dates": "2001 - 2003"
+      }
+    ],
+    "experiences": [
+      {
+        "company": "EJIE",
+        "position": "Analista Funcional",
+        "location": "Bizkaia",
+        "dates": "10/2022 - 10/2023",
+        "bullets": [
+          "Responsable de proyectos",
+          "Optimicé el login mejorando la codificación, reduciendo los tiempos de carga un 30% y mejorando la seguridad con OAuth.",
+          "Pruebas, documentación, planificación",
+          "Interacción con clientes",
+          "Soporte a compañeros junior",
+          "Resolución de incidencias",
+          "Diseñé y ejecuté migraciones de datos"
+        ]
+      },
+      {
+        "company": "Saunier Duval",
+        "position": "Analista Funcional",
+        "location": "Bizkaia",
+        "dates": "05/2019 - 10/2022",
+        "bullets": [
+          "Responsable de proyectos",
+          "Diseñé e implementé un sistema de encriptación para login, fortaleciendo la seguridad de los accesos con tokens REST y reduciendo los riesgos de vulnerabilidad.",
+          "Ejecuté la migración de la aplicación junto con versiones de Java, servidores y certificados",
+          "Documentación y soporte a compañeros",
+          "Ejecuté migraciones de datos"
+        ]
+      },
+      {
+        "company": "Lantik",
+        "position": "Analista Funcional",
+        "location": "Bizkaia",
+        "dates": "10/2018 - 02/2019",
+        "bullets": [
+          "Análisis y desarrollo, planificación, incidencias, pruebas, documentación, configuración",
+          "Accesos a servicios mediante tokens"
+        ]
+      },
+      {
+        "company": "EJIE",
+        "position": "Analista Funcional",
+        "location": "Bizkaia",
+        "dates": "12/2017 - 10/2018",
+        "bullets": [
+          "Análisis y desarrollo, incidencias, documentación, pruebas",
+          "Matrices de requerimientos",
+          "Adaptación al framework UDA"
+        ]
+      },
+      {
+        "company": "BBVA",
+        "position": "Analista Funcional",
+        "location": "Bizkaia",
+        "dates": "05/2017 - 12/2017",
+        "bullets": [
+          "Análisis y desarrollo, toma de requisitos, incidencias, documentación, pruebas",
+          "Adaptación a la infraestructura APX",
+          "Definición de arquitectura",
+          "Delegación de tareas",
+          "Guardias"
+        ]
+      },
+      {
+        "company": "Lantik",
+        "position": "Analista Funcional",
+        "location": "Bizkaia",
+        "dates": "07/2015 - 02/2017",
+        "bullets": [
+          "Análisis y desarrollo, incidencias, planificación, documentación, pruebas",
+          "Adaptación a la infraestructura del framework Atom",
+          "Desarrollé e integré nuevos módulos"
+        ]
+      },
+      {
+        "company": "Sanidad de Cantabria",
+        "position": "Analista Programador",
+        "location": "Bizkaia",
+        "dates": "07/2014 - 05/2015",
+        "bullets": [
+          "Análisis y desarrollo, documentación, pruebas, toma de requisitos, planificación",
+          "Migración de datos"
+        ]
+      },
+      {
+        "company": "EJIE",
+        "position": "Analista Programador",
+        "location": "Bizkaia",
+        "dates": "10/2010 - 02/2013",
+        "bullets": [
+          "Análisis y desarrollo, documentación, pruebas, toma de requisitos",
+          "Desarrollo de nuevos módulos y adaptación a la infraestructura",
+          "Definición de arquitectura"
+        ]
+      },
+      {
+        "company": "Parlamento Vasco",
+        "position": "Analista Programador",
+        "location": "Bizkaia",
+        "dates": "12/2009 - 02/2010",
+        "bullets": [
+          "Implementé, diseñé y organicé el módulo de firma electrónica, adaptándome a las especificaciones y tecnologías actuales"
+        ]
+      },
+      {
+        "company": "Lantik",
+        "position": "Analista Programador",
+        "location": "Bizkaia",
+        "dates": "01/2008 - 03/2009",
+        "bullets": [
+          "Desarrollé el sistema de acción social y ayudas a mujeres, adaptándome a la arquitectura y especificaciones del cliente"
+        ]
+      },
+      {
+        "company": "Eroski",
+        "position": "Programador",
+        "location": "Bizkaia",
+        "dates": "03/2007 - 12/2007",
+        "bullets": [
+          "Desarrollé y facilité el mantenimiento del sistema de proveedores",
+          "Pruebas, planificación, configuración, documentación"
+        ]
+      },
+      {
+        "company": "Lantik",
+        "position": "Programador",
+        "location": "Bizkaia",
+        "dates": "02/2006 - 09/2006",
+        "bullets": [
+          "Desarrollé y facilité el mantenimiento del sistema de control de traslados de ancianos",
+          "Pruebas, planificación, resolución de incidencias"
+        ]
+      }
+    ],
+    "certifications": [
+      { "title": "FullStackOpen React - Universidad de Helsinki", "date": "22/01/2025" },
+      { "title": "Angular - Campus Open Bootcamp", "date": "21/05/2024" },
+      { "title": "Amazon Web Services - Coursera", "date": "17/06/2024" },
+      { "title": "Spring Framework - Campus Open Bootcamp", "date": "10/01/2024" },
+      { "title": "Spring Cloud Microservices - Digital Lab Academy", "date": "01/03/2024" },
+      { "title": "Git - Campus Open Bootcamp", "date": "01/04/2023" },
+      { "title": "React - Campus Open Bootcamp", "date": "01/02/2023" },
+      { "title": "UDA (Desarrollador JQuery, Spring y Oracle) - Tecnalia", "date": "25/10/2018" },
+      { "title": "Desarrollo de Aplicaciones WEB SPA", "date": "11/06/2018" },
+      { "title": "Desarrollo de Aplicaciones con Spring e Hibernate", "date": "16/05/2016" },
+      { "title": "Programación para IOS y Android - Consultec", "date": "24/05/2013" },
+      { "title": "JQuery y CSS Avanzado - Consultec", "date": "12/04/2012" },
+      { "title": "Alfresco - Campus", "date": "01/12/2015" },
+      { "title": "Java-J2EE - Consultec", "date": "15/09/2010" },
+      { "title": "Técnico de Seguridad en Redes (CCNA Cisco) - Centro Campus", "date": "07/10/2010" },
+      { "title": "Linux/Unix - Consultec", "date": "13/01/2011" },
+      { "title": "HTML5 para dispositivos móviles - Consultec", "date": "24/05/2013" },
+      { "title": "Bases de datos - Consultec", "date": "31/03/2013" },
+      { "title": "Programación de Componentes - AGM Consulting", "date": "01/07/2006" },
+      { "title": "Programación Orientada a Objetos", "date": "01/06/2005" },
+      { "title": "Diseño de Páginas Web - Centro de Informática y Ordenadores", "date": "04/06/2004" },
+      { "title": "Análisis y Diseño de Aplicaciones Informáticas - Centro Informática Meatze", "date": "01/07/2002" },
+      { "title": "Programador de Bases de Datos Relacionales - Meatze. Barakaldo", "date": "08/04/2002" }
+    ],
+    "projects": [
+      {
+        "title": "Portfolio en React",
+        "description": "Aplicación desarrollada en Angular durante el curso de Fullstack",
+        "url": "https://jaoportfolio.onrender.com/"
+      },
+      {
+        "title": "Proyecto en Angular",
+        "description": "Aplicación desarrollada en Angular durante el curso de OpenBootCamp",
+        "url": "https://proyecto-final-angular-42db4.web.app/login"
+      },
+      {
+        "title": "Repositorio en Git",
+        "description": "Mi repositorio de proyectos en GitHub",
+        "url": "https://github.com/jaoprogramador/"
+      }
+    ],"skills": {
+    "programmingLanguages": [
+      "Java",
+      "JavaScript",
+      "PL/SQL",
+      "T-SQL"
+    ],
+    "frameworksAndLibraries": [
+      "Spring Boot",
+      "Angular",
+      "React",
+      "Node.js",
+      "GraphQL",
+      "RxJS",
+      "JQuery",
+      "APX"
+    ],
+    "apisAndWebServices": [
+      "REST",
+      "SOAP",
+      "GraphQL",
+      "OAuth",
+      "JWT"
+    ],
+    "databases": [
+      "MongoDB",
+      "Oracle",
+      "SQL Server"
+    ],
+    "devOpsAndCloud": [
+      "Docker",
+      "AWS",
+      "Firebase",
+      "CICD"
+    ],
+    "versionControlAndManagement": [
+      "GIT",
+      "SVN",
+      "Jira",
+      "Bamboo"
+    ],
+    "designPatterns": [
+      "Singleton",
+      "MVC",
+      "Facade",
+      "Adapter",
+      "Build",
+      "Strategy"
+    ],
+    "servers": [
+      "Tomcat",
+      "JBoss",
+      "Wildfly",
+      "Weblogic"
+    ]
+  }
+  
+    , "resume": {
+      "formations": "Formaciones",
+      "education": "Educación",
+      "experience": "Experiencia",
+      "skills": "Habilidades",
+      "frameworks": "Frameworks",
+      "others": "Otros",
+      "languages": "Idiomas"
+      
+    }
+  }
+}

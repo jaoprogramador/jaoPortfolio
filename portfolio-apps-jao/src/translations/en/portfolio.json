@@ -5,7 +5,7 @@
     "headerTaglineThree":"designer and fullstack developer",
     "headerTaglineFour":" based in Bizkaia, Spain.",
     "headerTaglineFive":" In the Framework section you will find a group of exercises from different frameworks such as React, Angular, Spring Boot, Spring Cloud, Mongo...",
-    "showCursor":true,
+    "showCursor":false,
     "showBlog":true,
     "darkMode":true,
     "showResume":true,
@@ -117,9 +117,10 @@
     "aboutpara": "👋Hi, I'm Juan Arana Olalde and I studied computer application development and computer systems administration along with different courses to complete my training.\n\n\n\n 🛤️Since 2006 I have been participating in different Java and j2ee projects, carrying out fullstack tasks, development, analysis, requirements gathering, estimates, migrations, tests, deployments, incidents, dealing with clients... \n\n\n\n🎯My goal is to develop my professional career in a project that allows me to grow while contributing my knowledge and experience.\n\n\n\n ℹ️If you have any questions, do not hesitate to contact me on LinkedIn or email and I will clarify them for you.",
     "aboutparaBloque1": "👋Hi, I'm Juan Arana Olalde and I studied computer application development and computer systems administration along with different courses to complete my training.",
     "aboutparaBloque2": "🛤️Since 2006 I have been participating in different Java and j2ee projects with differents FRONTS and BDs, carrying out fullstack tasks, development, analysis, requirements gathering, estimates, migrations, tests, deployments, incidents, dealing with clients... ",
-    "aboutparaBloque3": "🎯My goal is to develop my professional career in a project that allows me to grow while contributing my knowledge and experience.\n\n\n\n ℹ️If you have any questions, do not hesitate to contact me on LinkedIn or email and I will clarify them for you.",
+    "aboutparaBloque3": "🎯My goal is to develop my professional career in a project that allows me to grow while contributing my knowledge and experience.\n\n\n\n ",
     "aboutparaBloque4": "ℹ️If you have any questions, do not hesitate to contact me on LinkedIn or email and I will clarify them for you.",
     "resume": {
+      "fullName":"Juan Arana Olalde",
      "tagline": "👋  I'm a software developer, product designer, and maker.",
      "description": "I have worked in public and private companies participating in Java and J2EE projects. Knowledgeable in React, Angular, JQuery, Javascript and most web frameworks. Carry out the technical design of the system and/or application programs, their testing and fine-tuning, as well as provide training and technical assistance to users and exploitation, participating in the projects according to the current methodology.",
      "formations": [

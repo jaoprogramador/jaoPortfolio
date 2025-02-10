@@ -24,6 +24,7 @@ const CodeBlock = {
 };
 
 const ContentSection = ({ content }) => {
+  console.log('ContentSection::content ',content);
   return (
     <ReactMarkdown components={CodeBlock} className="markdown-class">
       {content}

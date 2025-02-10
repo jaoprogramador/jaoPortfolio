@@ -1,4 +1,4 @@
-import React, { useRef, useState, useContext } from "react";
+import React, { useRef, useState, useContext,useEffect } from "react";
 import { getPostBySlug, getAllPosts } from "../../utils/api";
 import Header from "../../components/Header";
 import ContentSection from "../../components/ContentSection";
@@ -13,7 +13,10 @@ import Cursor from "../../components/Cursor";
 import data from "../../data/portfolio.json";
 import { LanguageContext } from "../../context/LanguageContext";
 const BlogPost = ({ post }) => {
+  // Contexto de idioma
   const { language } = useContext(LanguageContext);
+  const [posts, setPosts] = useState(post);
+  
   const [showEditor, setShowEditor] = useState(false);
   const textOne = useRef();
   const textTwo = useRef();
@@ -22,12 +25,34 @@ const BlogPost = ({ post }) => {
   useIsomorphicLayoutEffect(() => {
     stagger([textOne.current, textTwo.current], { y: 30 }, { y: 0 });
   }, []);
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        console.log("🔍 Solicitando post en idioma:", language);
+  
+        const res = await fetch(`/api/postDetail?lang=${language}&slug=${router.query.slug}`);
+        const data = await res.json();
+  
+        console.log("📥 Respuesta de la API:", data);
+        console.log("📥 Respuesta de la API content:", data.content);
+  
+        // 🔥 FORZAR RE-RENDER: Evitar que React ignore la actualización si el objeto es idéntico
+        setPosts((prevPosts) => JSON.stringify(prevPosts) !== JSON.stringify(data) ? data : { ...data });
+      } catch (error) {
+        console.error("Error fetching posts:", error);
+      }
+    };
+  
+    fetchPosts();
+  }, [language, router.query.slug]); // Asegúrate de que el efecto depende del slug también
+
+  
 
   return (
     <>
       <Head>
-        <title>{"Blog - " + post.title}</title>
-        <meta name="description" content={post.preview} />
+        <title>{"Blog - " + posts.title}</title>
+        <meta name="description" content={posts.preview} />
       </Head>
       {data.showCursor && <Cursor />}
 
@@ -41,22 +66,22 @@ const BlogPost = ({ post }) => {
           <img
             className="w-full h-96 rounded-lg shadow-lg object-cover"
             src={post.image}
-            alt={post.title}
+            alt={posts.title}
           ></img>
           <h1
             ref={textOne}
             className="mt-10 text-4xl mob:text-2xl laptop:text-6xl text-bold"
           >
-            {post.title}
+            {posts.title}
           </h1>
           <h2
             ref={textTwo}
             className="mt-2 text-xl max-w-4xl text-darkgray opacity-50"
           >
-            {post.tagline}
+            {posts.tagline}
           </h2>
         </div>
-        <ContentSection content={post.content}></ContentSection>
+        <ContentSection content={posts.content}></ContentSection>
         <Footer />
       </div>
       {process.env.NODE_ENV === "development" && (
@@ -77,13 +102,16 @@ const BlogPost = ({ post }) => {
     </>
   );
 };
-
-export async function getStaticProps({ params  }) {
+export async function getStaticProps( context ) {
   try {
-    console.log("Obteniendo post para:", params.slug);
     
-
-    const post = getPostBySlug(params.slug, [
+    
+    const { locale, params } = context;
+    const { slug } = params; 
+    const language = locale || 'en';
+    
+    console.log("BlogPostSLUG--getStaticProps Obteniendo post para:locale", language);
+    const post = getPostBySlug(language,slug, [
       "date",
       "slug",
       "preview",
@@ -108,8 +136,13 @@ export async function getStaticProps({ params  }) {
 }
 }
 
-export async function getStaticPaths() {
-  const posts = getAllPosts(["slug"]);
+export async function getStaticPaths(context) {
+  const { locale } = context;
+  const language = locale || 'en';
+
+  console.log("Obteniendo getStaticPaths para locale:", language);
+
+  const posts = getAllPosts(language,["slug"]);
 
   return {
     paths: posts.map((post) => {
@@ -122,50 +155,5 @@ export async function getStaticPaths() {
     fallback: false,
   };
 } 
-  /* export async function getStaticPaths() {
-    try {
-      const posts = getAllPosts(["slug"]);
-      console.log("📌 Rutas generadas para posts:", posts);
-  
-      return {
-        paths: posts.map((post) => ({
-          params: { slug: post.slug },
-        })),
-        fallback: false,
-      };
-    } catch (error) {
-      console.error("🚨 Error en getStaticPaths:", error);
-      return { paths: [], fallback: false };
-    }
-  }
-  export async function getStaticProps({ params, locale }) {
-    try {
-      console.log("📌 Obteniendo post para:", params.slug);
-      const language = locale || "en";
-      const post = getPostBySlug(language, params.slug, [
-        "date",
-        "slug",
-        "preview",
-        "title",
-        "tagline",
-        "image",
-        "content",
-      ]);
-  
-      if (!post) {
-        console.error(`🚨 Error: No se encontró el post con slug ${params.slug}`);
-        return { notFound: true };
-      }
-  
-      return {
-        props: {
-          post: { ...post, language },
-        },
-      };
-    } catch (error) {
-      console.error("🚨 Error en getStaticProps:", error);
-      return { notFound: true };
-    }
-  } */
   
 export default BlogPost;

@@ -1,3 +1,4 @@
+---
 date: "2025-01-09T17:00:00.000Z"
 title: Introduction to AWS
 tagline: Unlock the power of cloud computing with Amazon Web Services.
@@ -6,7 +7,7 @@ preview: >-
   Learn the basics, including security with MFA, AWS CLI usage, EC2 for compute,
   S3 for storage, RDS for databases, and Lambda for serverless functions.
 image: >-
-  https://images.unsplash.com/photo-1593642532842-98d0fd5ebc1a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1332&q=80
+  https://images.unsplash.com/photo-1657295791913-5074c912398e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=996&q=80
 ---
 
 # Getting Started with AWS

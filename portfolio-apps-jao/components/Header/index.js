@@ -37,6 +37,7 @@ const Header = ({ handleWorkScroll, handleAboutScroll, isBlog }) => {
               </h1>
 
               <div className="flex items-center">
+              {/* <SelectLanguaje value={language} onChange={setLanguage} /> */}
               <Select
                 value={language}
                 onChange={handleLanguageChange}
@@ -46,7 +47,6 @@ const Header = ({ handleWorkScroll, handleAboutScroll, isBlog }) => {
                   { value: "eu", label: "🇪🇺 Euskera" }
                 ]}
               />
-
                 {data.darkMode && (
                   <Button onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
                     <img className="h-6" src={`/images/${theme === "dark" ? "moon.svg" : "sun.svg"}`} alt="Toggle theme" />
@@ -88,30 +88,16 @@ const Header = ({ handleWorkScroll, handleAboutScroll, isBlog }) => {
           <Button onClick={() => window.open("mailto:jaoprogramador@gmail.com")}>{dataHeader.headers.contact}</Button>
 
           
+          {/* <SelectLanguaje value={language} onChange={setLanguage} /> */}
           <Select
-            value={language}
-            onChange={handleLanguageChange}
-            options={[
-              { value: "es", label: "🇪🇸 Castellano" },
-              { value: "en", label: "🇺🇸 English" },
-              { value: "eu", label: "🇪🇺 Euskera" }
-            ]}
-              /* value={language}
-              onChange={handleLanguageChange}
-              options={[
-                { value: "es", label: "🇪🇸 Castellano" },
-                { value: "en", label: "US English" },
-                { 
-                  value: "eu", 
-                  label: (
-                    <>
-                      <img src="/img/icons/euskadiBandera.png" alt="Euskadi" style={{ width: 20, marginRight: 5 }} />
-                      Euskera
-                    </>
-                  )
-                }
-              ]} */
-            />
+                value={language}
+                onChange={handleLanguageChange}
+                options={[
+                  { value: "es", label: "🇪🇸 Castellano" },
+                  { value: "en", label: "🇬🇧 English" },
+                  { value: "eu", label: "🇪🇺 Euskera" }
+                ]}
+              />
           {mounted && theme && data.darkMode && (
             <Button onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
               <img className="h-6" src={`/images/${theme === "dark" ? "moon.svg" : "sun.svg"}`} alt="Toggle theme" />

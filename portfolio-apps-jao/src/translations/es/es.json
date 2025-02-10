@@ -24,6 +24,7 @@
     }  
     , "resume": {
       "formations": "Formaciones",
+      "certifications":"Certificaciones",
       "education": "Educación",
       "experience": "Experiencia",
       "skills": "Habilidades",

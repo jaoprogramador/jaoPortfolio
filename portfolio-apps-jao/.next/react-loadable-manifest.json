@@ -1,4 +1,21 @@
 {
+  "..\\node_modules\\jspdf\\dist\\jspdf.es.min.js -> canvg": {
+    "id": 80237,
+    "files": [
+      "static/chunks/72a30a16.799faa4ae4c285b5.js",
+      "static/chunks/385.997fe4cddb7f1218.js"
+    ]
+  },
+  "..\\node_modules\\jspdf\\dist\\jspdf.es.min.js -> dompurify": {
+    "id": 27856,
+    "files": [
+      "static/chunks/856.913748ecb6bb4c56.js"
+    ]
+  },
+  "..\\node_modules\\jspdf\\dist\\jspdf.es.min.js -> html2canvas": {
+    "id": 61120,
+    "files": []
+  },
   "..\\node_modules\\react-syntax-highlighter\\dist\\esm\\async-languages\\hljs.js -> highlight.js/lib/languages/1c": {
     "id": null,
     "files": []

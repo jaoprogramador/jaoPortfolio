@@ -52,7 +52,9 @@ var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_com
 
 
 const BlogPost = ({ post  })=>{
+    // Contexto de idioma
     const { language  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useContext)(_context_LanguageContext__WEBPACK_IMPORTED_MODULE_14__/* .LanguageContext */ .A);
+    const { 0: posts , 1: setPosts  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(post);
     const { 0: showEditor , 1: setShowEditor  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
     const textOne = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)();
     const textTwo = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)();
@@ -67,16 +69,38 @@ const BlogPost = ({ post  })=>{
             y: 0
         });
     }, []);
+    (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(()=>{
+        const fetchPosts = async ()=>{
+            try {
+                console.log("\uD83D\uDD0D Solicitando post en idioma:", language);
+                const res = await fetch(`/api/postDetail?lang=${language}&slug=${router.query.slug}`);
+                const data1 = await res.json();
+                console.log("\uD83D\uDCE5 Respuesta de la API:", data1);
+                console.log("\uD83D\uDCE5 Respuesta de la API content:", data1.content);
+                // 🔥 FORZAR RE-RENDER: Evitar que React ignore la actualización si el objeto es idéntico
+                setPosts((prevPosts)=>JSON.stringify(prevPosts) !== JSON.stringify(data1) ? data1 : {
+                        ...data1
+                    }
+                );
+            } catch (error) {
+                console.error("Error fetching posts:", error);
+            }
+        };
+        fetchPosts();
+    }, [
+        language,
+        router.query.slug
+    ]); // Asegúrate de que el efecto depende del slug también
     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
         children: [
             /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)((next_head__WEBPACK_IMPORTED_MODULE_6___default()), {
                 children: [
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("title", {
-                        children: "Blog - " + post.title
+                        children: "Blog - " + posts.title
                     }),
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("meta", {
                         name: "description",
-                        content: post.preview
+                        content: posts.preview
                     })
                 ]
             }),
@@ -93,22 +117,22 @@ const BlogPost = ({ post  })=>{
                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("img", {
                                 className: "w-full h-96 rounded-lg shadow-lg object-cover",
                                 src: post.image,
-                                alt: post.title
+                                alt: posts.title
                             }),
                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("h1", {
                                 ref: textOne,
                                 className: "mt-10 text-4xl mob:text-2xl laptop:text-6xl text-bold",
-                                children: post.title
+                                children: posts.title
                             }),
                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("h2", {
                                 ref: textTwo,
                                 className: "mt-2 text-xl max-w-4xl text-darkgray opacity-50",
-                                children: post.tagline
+                                children: posts.tagline
                             })
                         ]
                     }),
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_ContentSection__WEBPACK_IMPORTED_MODULE_4__/* ["default"] */ .Z, {
-                        content: post.content
+                        content: posts.content
                     }),
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Footer__WEBPACK_IMPORTED_MODULE_5__/* ["default"] */ .Z, {})
                 ]
@@ -123,10 +147,13 @@ const BlogPost = ({ post  })=>{
         ]
     });
 };
-async function getStaticProps({ params  }) {
+async function getStaticProps(context) {
     try {
-        console.log("Obteniendo post para:", params.slug);
-        const post = (0,_utils_api__WEBPACK_IMPORTED_MODULE_2__/* .getPostBySlug */ .zQ)(params.slug, [
+        const { locale , params  } = context;
+        const { slug  } = params;
+        const language = locale || "en";
+        console.log("BlogPostSLUG--getStaticProps Obteniendo post para:locale", language);
+        const post = (0,_utils_api__WEBPACK_IMPORTED_MODULE_2__/* .getPostBySlug */ .zQ)(language, slug, [
             "date",
             "slug",
             "preview",
@@ -150,8 +177,11 @@ async function getStaticProps({ params  }) {
         };
     }
 }
-async function getStaticPaths() {
-    const posts = (0,_utils_api__WEBPACK_IMPORTED_MODULE_2__/* .getAllPosts */ .Bd)([
+async function getStaticPaths(context) {
+    const { locale  } = context;
+    const language = locale || "en";
+    console.log("Obteniendo getStaticPaths para locale:", language);
+    const posts = (0,_utils_api__WEBPACK_IMPORTED_MODULE_2__/* .getAllPosts */ .Bd)(language, [
         "slug"
     ]);
     return {
@@ -165,51 +195,7 @@ async function getStaticPaths() {
         fallback: false
     };
 }
-/* export async function getStaticPaths() {
-    try {
-      const posts = getAllPosts(["slug"]);
-      console.log("📌 Rutas generadas para posts:", posts);
-  
-      return {
-        paths: posts.map((post) => ({
-          params: { slug: post.slug },
-        })),
-        fallback: false,
-      };
-    } catch (error) {
-      console.error("🚨 Error en getStaticPaths:", error);
-      return { paths: [], fallback: false };
-    }
-  }
-  export async function getStaticProps({ params, locale }) {
-    try {
-      console.log("📌 Obteniendo post para:", params.slug);
-      const language = locale || "en";
-      const post = getPostBySlug(language, params.slug, [
-        "date",
-        "slug",
-        "preview",
-        "title",
-        "tagline",
-        "image",
-        "content",
-      ]);
-  
-      if (!post) {
-        console.error(`🚨 Error: No se encontró el post con slug ${params.slug}`);
-        return { notFound: true };
-      }
-  
-      return {
-        props: {
-          post: { ...post, language },
-        },
-      };
-    } catch (error) {
-      console.error("🚨 Error en getStaticProps:", error);
-      return { notFound: true };
-    }
-  } */ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (BlogPost);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (BlogPost);
 
 __webpack_async_result__();
 } catch(e) { __webpack_async_result__(e); } });
@@ -454,7 +440,7 @@ module.exports = require("path");
 var __webpack_require__ = require("../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [505,664,57,835,134,382,3,830], () => (__webpack_exec__(4238)));
+var __webpack_exports__ = __webpack_require__.X(0, [505,664,57,835,134,3,830,382], () => (__webpack_exec__(4238)));
 module.exports = __webpack_exports__;
 
 })();
