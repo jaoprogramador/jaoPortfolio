@@ -742,7 +742,7 @@ module.exports = JSON.parse('{"name":"JAO","headerTaglineOne":"Hello 👋","head
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"home":{"welcome":"Welcome to my portfolio!","about":"About Me","projects":"Projects","contact":"Contact"},"headers":{"work":"Work","about":"About","blog":"Blog","frameworks":"Frameworks","resume":"Resume","contact":"Contact","language":"Language"},"init":{"work":"Works.","services":"Services.","about":"About Me"},"footer":{"contact":"Contact.","workTogether":"LET\'S WORK TOGETHER","scheduleButton":"Schedule a call"},"resume":{"formations":"Formations","education":"Education","experience":"Experience","skills":"Skills","frameworks":"Frameworks","others":"Others","languages":"Languages"}}');
+module.exports = JSON.parse('{"home":{"welcome":"Welcome to my portfolio!","about":"About Me","projects":"Projects","contact":"Contact"},"headers":{"work":"Work","about":"About","blog":"Blog","frameworks":"Frameworks","resume":"Resume","contact":"Contact","language":"Language"},"init":{"work":"Works.","services":"Services.","about":"About Me"},"footer":{"contact":"Contact.","workTogether":"LET\'S WORK TOGETHER","scheduleButton":"Schedule a call"},"resume":{"formations":"Formations","education":"Education","certifications":"Certifications","experience":"Experience","skills":"Skills","frameworks":"Frameworks","others":"Others","languages":"Languages"}}');
 
 /***/ }),
 
