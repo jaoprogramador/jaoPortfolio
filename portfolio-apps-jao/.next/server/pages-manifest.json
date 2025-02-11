@@ -1,6 +1,5 @@
 {
   "/_app": "pages/_app.js",
-  "/_error": "pages/_error.js",
   "/api/blog/edit": "pages/api/blog/edit.js",
   "/api/blog": "pages/api/blog.js",
   "/api/portfolio": "pages/api/portfolio.js",
@@ -9,10 +8,11 @@
   "/edit": "pages/edit.html",
   "/": "pages/index.html",
   "/resume": "pages/resume.html",
-  "/frameworks/[slug]": "pages/frameworks/[slug].html",
-  "/_document": "pages/_document.js",
-  "/frameworks": "pages/frameworks.html",
-  "/blog": "pages/blog.js",
   "/blog/[slug]": "pages/blog/[slug].js",
+  "/blog": "pages/blog.js",
+  "/frameworks": "pages/frameworks.html",
+  "/frameworks/[slug]": "pages/frameworks/[slug].html",
+  "/_error": "pages/_error.js",
+  "/_document": "pages/_document.js",
   "/404": "pages/404.html"
 }
