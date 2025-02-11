@@ -40,6 +40,7 @@ import { LanguageContext } from "../../context/LanguageContext";
       try {
         const res = await fetch(`/api/posts?lang=${language}`);
         const data = await res.json();
+        console.log("blog.index.js --data", data);
         setPosts(data);
       } catch (error) {
         console.error("Error fetching posts:", error);
