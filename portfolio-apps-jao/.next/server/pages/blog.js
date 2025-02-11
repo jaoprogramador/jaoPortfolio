@@ -81,6 +81,9 @@ const Blog = ({ initialPosts  })=>{
     console.log("blog.index.js --showBlog.current", showBlog.current); */ const fetchPosts = async ()=>{
             try {
                 const res = await fetch(`/api/posts?lang=${language}`);
+                if (!res.ok) {
+                    throw new Error(`Error ${res.status}: ${await res.text()}`);
+                }
                 const data1 = await res.json();
                 console.log("blog.index.js --data", data1);
                 setPosts(data1);
