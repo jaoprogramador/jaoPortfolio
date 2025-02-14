@@ -257,6 +257,58 @@ const apps = [
         icon: "/img/angular-icon.png" 
   
       },
+      //Animaciones
+      {
+        name: "Animaciones",
+        imageUrl: "/img/AngularAnimaciones.jpg",  
+        description: "Aplicación con angular para hacer y gestionar animaciones",
+        technology: "Angular",
+        repoUrl: "https://github.com/jaoprogramador/angular-apps/tree/master/HolaJAO",
+        appUrl: "#",
+        icon: "/img/angular-icon.png" 
+  
+      },
+      {
+        name: "Directivas",
+        imageUrl: "/img/AngularDirectivas.jpg",  
+        description: "Usar directivas ngStyle, ngClass, *ngIf,*ngFor, ngSwitch,ngFor",
+        technology: "Angular",
+        repoUrl: "https://github.com/jaoprogramador/angular-apps/tree/master/HolaJAO",
+        appUrl: "#",
+        icon: "/img/angular-icon.png" 
+  
+      },
+      {
+        name: "Angular material",
+        imageUrl: "/img/AngularMaterial.jpg",  
+        description: "Angular Material nos proporciona, una serie de modulos y nos pasa componentes de diseño que podemos usar desde nuestro proyecto: paginación, árbol, datepicker, menus, tables con ordenación..",
+        technology: "Angular",
+        repoUrl: "https://github.com/jaoprogramador/angular-apps/tree/master/04EJANGULARMATERIAL",
+        appUrl: "#",
+        icon: "/img/angular-icon.png" 
+  
+      },
+      {
+        name: "Routing",
+        imageUrl: "/img/Routing.jpg",  
+        description: "Sistema de enrutado: pasar información entre rutas con el hisorico de navegación, queryparams, sessionStore, tokens, hacer peticiones http, servicio que tiene un array de Contactos… Logarnos, restringir pantallas, ir a login-home-contactos-detalle",
+        technology: "Angular",
+        repoUrl: "https://github.com/jaoprogramador/angular-apps/tree/master/03ngRouting",
+        appUrl: "#",
+        icon: "/img/angular-icon.png" 
+  
+      },
+      {
+        name: "Peticiones HTTP y gestión de errores",
+        imageUrl: "/img/AngularHTTP.jpg",  
+        description: "Ver como hacer peticiones HTTP a APIs y gestionar errores",
+        technology: "Angular",
+        repoUrl: "https://github.com/jaoprogramador/angular-apps/tree/master/03ngRouting",
+        appUrl: "#",
+        icon: "/img/angular-icon.png" 
+  
+      },
+      
       {
         name: "Login Angular",
         imageUrl: "/img/angular-login.jpg",  

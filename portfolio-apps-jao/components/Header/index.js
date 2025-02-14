@@ -37,7 +37,7 @@ const Header = ({ handleWorkScroll, handleAboutScroll, isBlog }) => {
               </h1>
 
               <div className="flex items-center">
-              {/* <SelectLanguaje value={language} onChange={setLanguage} /> */}
+              
               <Select
                 value={language}
                 onChange={handleLanguageChange}
@@ -86,9 +86,7 @@ const Header = ({ handleWorkScroll, handleAboutScroll, isBlog }) => {
           <Button onClick={() => router.push("/frameworks")}>{dataHeader.headers.frameworks}</Button>
           <Button onClick={() => router.push("/resume")}>{dataHeader.headers.resume}</Button>
           <Button onClick={() => window.open("mailto:jaoprogramador@gmail.com")}>{dataHeader.headers.contact}</Button>
-
-          
-          {/* <SelectLanguaje value={language} onChange={setLanguage} /> */}
+         
           <Select
                 value={language}
                 onChange={handleLanguageChange}
@@ -109,7 +107,7 @@ const Header = ({ handleWorkScroll, handleAboutScroll, isBlog }) => {
   );
 };
 
-export default Header; 
+export default Header;
 /* import { Popover } from "@headlessui/react";
 import { useTheme } from "next-themes";
 import { useRouter } from "next/router";

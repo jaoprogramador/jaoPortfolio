@@ -94,6 +94,7 @@ Page                                       Size     First Load JS
 
 
  #HE QUITADO LA LINEA "export": "next export" PORQUE CONVIERTE EL PROYECTO A STATICO Y NO FUNCIONAN LAS APIS EN render
+        warn  - Statically exporting a Next.js application via `next export` disables API routes
  "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -101,6 +102,11 @@ Page                                       Size     First Load JS
     "start": "next start",
     "lint": "next lint"
   },
+# he tenido tambien en render el build command :
+  npm install --legacy-peer-deps && npm run build && npm run export
+por 
+  npm install --legacy-peer-deps && npm run build 
 
+  he cambiado Publish Directory out por .next/static
 
 

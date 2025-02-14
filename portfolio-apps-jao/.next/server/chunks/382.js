@@ -54,7 +54,7 @@ function getAllPosts(language, fields = []) {
     .sort((post1, post2)=>post1.date > post2.date ? -1 : 1
     );
     return posts;
-}
+} // utils/api.js
 
 
 /***/ })
