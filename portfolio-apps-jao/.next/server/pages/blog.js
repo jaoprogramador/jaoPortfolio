@@ -78,7 +78,9 @@ const Blog = ({ initialPosts  })=>{
         setMounted(true);
         /* console.log("blog.index.js --posts", posts);
     console.log("blog.index.js --language", language);
-    console.log("blog.index.js --showBlog.current", showBlog.current); */ const fetchPosts = async ()=>{
+    console.log("blog.index.js --showBlog.current", showBlog.current); */ console.log("blog.index.js --data.showCursor", _data_portfolio_json__WEBPACK_IMPORTED_MODULE_8__.showCursor);
+        console.log("blog.index.js --data.showCursor", _data_portfolio_json__WEBPACK_IMPORTED_MODULE_8__);
+        const fetchPosts = async ()=>{
             try {
                 const res = await fetch(`/api/posts?lang=${language}`);
                 if (!res.ok) {
@@ -171,7 +173,26 @@ async function getStaticProps(context) {
         }
     };
 }
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Blog);
+/*export async function getStaticProps({ locale }) {
+      const language = locale || "en"; // Idioma por defecto
+      console.log("🛠️ getStaticProps - Fetching posts for language:", language);
+    
+      const posts = getAllPosts(language, ["slug", "title", "image", "preview", "author", "date"]);
+    
+      return {
+        props: { posts },
+      };
+    }
+     export async function getStaticPaths() {
+      return {
+        paths: [
+          { params: {}, locale: "en" }, // Inglés
+          { params: {}, locale: "es" }, // Español
+          { params: {}, locale: "eu" },
+        ],
+        fallback: false,
+      };
+    } */ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Blog);
 
 __webpack_async_result__();
 } catch(e) { __webpack_async_result__(e); } });

@@ -1,4 +1,4 @@
-import { useRef, useContext } from "react";
+import { useRef, useContext,useEffect } from "react";
 import Header from "../components/Header";
 import ServiceCard from "../components/ServiceCard";
 import Socials from "../components/Socials";
@@ -39,6 +39,9 @@ export default function Home() {
     });
   };
 
+  useEffect(() => {
+    console.log("home.index.js --data.showCursor", data.showCursor); 
+  }, []); 
   const handleAboutScroll = () => {
     window.scrollTo({
       top: aboutRef.current.offsetTop,

@@ -35,7 +35,8 @@ import { LanguageContext } from "../../context/LanguageContext";
     /* console.log("blog.index.js --posts", posts);
     console.log("blog.index.js --language", language);
     console.log("blog.index.js --showBlog.current", showBlog.current); */
-
+    console.log("blog.index.js --data.showCursor", data.showCursor); 
+    console.log("blog.index.js --data.showCursor", data); 
     const fetchPosts = async () => {
       try {
         const res = await fetch(`/api/posts?lang=${language}`);
@@ -50,7 +51,7 @@ import { LanguageContext } from "../../context/LanguageContext";
       }
     };
   
-    fetchPosts();
+    fetchPosts(); 
   
   }, [language]);
 
@@ -138,7 +139,27 @@ import { LanguageContext } from "../../context/LanguageContext";
       "author",
       "date",]);
     return { props: { initialPosts: posts } };
-  }
-  
+  } 
+    /*export async function getStaticProps({ locale }) {
+      const language = locale || "en"; // Idioma por defecto
+      console.log("🛠️ getStaticProps - Fetching posts for language:", language);
+    
+      const posts = getAllPosts(language, ["slug", "title", "image", "preview", "author", "date"]);
+    
+      return {
+        props: { posts },
+      };
+    }
+     export async function getStaticPaths() {
+      return {
+        paths: [
+          { params: {}, locale: "en" }, // Inglés
+          { params: {}, locale: "es" }, // Español
+          { params: {}, locale: "eu" },
+        ],
+        fallback: false,
+      };
+    } */
+    
   
 export default Blog;

@@ -125,7 +125,7 @@ const Resume = () => {
                 <h1 className="text-2xl font-bold">{dataInit.resume.experience}</h1>
                 {resume.experiences.map(({ id, dates, type, position, bullets }) => (
                   <div key={id} className="mt-4">
-                    <p className="font-semibold">► {position} ({type})</p>
+                    <p className="font-semibold">► {position}</p>
                     <p className="text-sm opacity-75">{dates}</p>
                     <ul className="mt-2">
                       {bullets.map((bullet, idx) => (

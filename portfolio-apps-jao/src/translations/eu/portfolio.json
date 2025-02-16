@@ -5,7 +5,7 @@
     "headerTaglineThree": "diseinatzailea eta fullstack garatzailea",
     "headerTaglineFour": "Bizkaian, Espainian kokatuta.",
     "headerTaglineFive": "Framework atalean hainbat framework-en ariketak aurkituko dituzu, hala nola React, Angular, Spring Boot, Spring Cloud, Mongo...",
-    "showCursor": false,
+    "showCursor": true,
     "showBlog": true,
     "darkMode": true,
     "showResume": true,

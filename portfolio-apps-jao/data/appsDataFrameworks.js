@@ -308,7 +308,18 @@ const apps = [
         icon: "/img/angular-icon.png" 
   
       },
-      
+      //https://github.com/jaoprogramador/angular-apps/tree/master/08PrimeNG/ejemploprimerong
+      //PRIMENG
+      {
+        name: "PrimeNG",
+        imageUrl: "/img/AngularPrimeng.jpg",  
+        description: "Ver como congigurar y usar primeng en nuestra aplicación gestionando en modulos",
+        technology: "Angular",
+        repoUrl: "https://github.com/jaoprogramador/angular-apps/tree/master/08PrimeNG/ejemploprimerong",
+        appUrl: "#",
+        icon: "/img/angular-icon.png" 
+  
+      },
       {
         name: "Login Angular",
         imageUrl: "/img/angular-login.jpg",  

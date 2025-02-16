@@ -6,8 +6,8 @@ import { useEffect, useRef, useState } from "react";
 
   // Mapeo de categorías con sus respectivas tecnologías y títulos
 const categories = [
-  { title: "React", filter: "React", icon: "/img/icons/react-icon.png"  },
-  { title: "Angular", filter: "Angular", icon: "/img/icons/angular-icon.png"  },
+  { title: "React 18", filter: "React", icon: "/img/icons/react-icon.png"  },
+  { title: "Angular 17", filter: "Angular", icon: "/img/icons/angular-icon.png"  },
   { title: "Spring Boot", filter: "Spring Framework", icon:"/img/icons/springboot-icon.png" },
   { title: "Spring Cloud", filter: "Spring Cloud", icon:"/img/icons/springcloud-icon.png" },
   { title: "Java", filter: "Java", icon:"/img/icons/java.png" },

@@ -5,7 +5,7 @@
     "headerTaglineThree": "diseñador y desarrollador fullstack",
     "headerTaglineFour": "ubicado en Bizkaia, España.",
     "headerTaglineFive": "En la sección Framework encontrarás un conjunto de ejercicios de diferentes frameworks como React, Angular, Spring Boot, Spring Cloud, Mongo...",
-    "showCursor": false,
+    "showCursor": true,
     "showBlog": true,
     "darkMode": true,
     "showResume": true,
