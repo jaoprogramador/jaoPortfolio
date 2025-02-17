@@ -109,4 +109,40 @@ por
 
   he cambiado Publish Directory out por .next/static
 
+  ===========================================================================GIT
+  Git es un sistema de control de versiones distribuido que permite gestionar cambios en el código de manera eficiente y segura. Facilita la colaboración entre desarrolladores, evita la pérdida de código y mantiene un historial detallado de modificaciones.
+
+🔍 Estructura de Git
+Git se organiza en cuatro áreas clave:
+📂 Espacio de Trabajo: Donde editas y desarrollas el código.
+📌 Área de Preparación: Donde seleccionas qué cambios guardar.
+💾 Repositorio Local: Almacena los cambios confirmados en tu computadora.
+☁️ Repositorio Remoto: Copia en la nube (GitHub, GitLab, Bitbucket) para compartir y sincronizar con otros desarrolladores.
+
+⚙️ Flujo de Trabajo en Git
+1️⃣ Añadir cambios al Área de Preparación:
+→ git add .
+Si necesitas revertir cambios antes de confirmarlos, usa git reset .
+2️⃣ Guardar los cambios en el Repositorio Local:
+→ git commit -m "Mensaje descriptivo del cambio"
+3️⃣ Enviar los cambios al Repositorio Remoto:
+→ git push origin main
+4️⃣ Obtener los últimos cambios del Repositorio Remoto:
+→ git pull
+
+🔄 ¿Qué hace realmente git pull?
+👉 git fetch descarga los cambios del repositorio remoto.
+👉 git merge los integra en tu código local.
+⚡ Tip PRO: Si solo quieres ver los cambios sin aplicarlos aún, usa:
+→ git fetch
+
+🎯 ¿Por qué usar Git?
+✅ Seguridad: Nunca pierdes tu código, puedes volver a versiones anteriores.
+✅ Colaboración eficiente: Permite que varios desarrolladores trabajen sin sobrescribir código.
+✅ Flujo de trabajo estructurado: Usa ramas (branches) para desarrollar nuevas funciones sin afectar el código principal.
+
+Dominar Git optimiza el trabajo en equipo, protege tu código y mejora la productividad en el desarrollo de software. 🚀
+
+
+
 
