@@ -26,7 +26,7 @@
         "dates": "10/2022 - 10/2023",
         "bullets": [
           "Proiektuen arduraduna",
-          "Login optimizatu nuen kodigazio hobetuz, kargatzeko denbora %30 murriztuz eta segurtasuna hobetuz OAuth erabiliz.",
+          "Spring-en oinarritutako aplikazio batean autentifikazio moduluaren segurtasuna sendotu nuen, SQL Injection eta Cross-Site Scripting (XSS) bezalako ohiko erasotzeak kontra babesa bermatuz.",
           "Probak, dokumentazioa, plangintza",
           "Bezeroarekin harremana",
           "Junior lankideei laguntza ematea",

@@ -26,7 +26,7 @@
         "dates": "10/2022 - 10/2023",
         "bullets": [
           "Project Manager",
-          "Optimized the login by improving the coding, reducing load times by 30% and enhancing security using OAuth.",
+          "I strengthened the security of the authentication module in a Spring-based application, ensuring protection against common attacks such as SQL Injection and Cross-Site Scripting (XSS).",
           "Testing, documentation, planning",
           "Client interaction",
           "Provided support to Junior colleagues",

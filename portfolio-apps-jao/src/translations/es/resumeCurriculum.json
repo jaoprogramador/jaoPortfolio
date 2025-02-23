@@ -26,7 +26,7 @@
         "dates": "10/2022 - 10/2023",
         "bullets": [
           "Responsable de proyectos",
-          "Optimicé el login mejorando la codificación, reduciendo los tiempos de carga un 30% y mejorando la seguridad con OAuth.",
+          "Fortalecí la seguridad del módulo de autenticación en una aplicación basada en Spring, asegurando la protección contra ataques comunes como SQL Injection y Cross-Site Scripting (XSS). ",
           "Pruebas, documentación, planificación",
           "Interacción con clientes",
           "Soporte a compañeros junior",
