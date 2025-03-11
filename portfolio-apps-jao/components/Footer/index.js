@@ -3,8 +3,9 @@ import Socials from "../Socials";
 import Link from "next/link";
 import Button from "../Button";
 import { LanguageContext } from "../../context/LanguageContext"; // Importa el contexto
-
+import { useRouter } from "next/router";
 const Footer = ({}) => {
+  const router = useRouter();
   // Contexto de idioma
   const { language } = useContext(LanguageContext);
   const dataInit = require(`../../src/translations/${language}/${language}.json`);
@@ -20,6 +21,8 @@ const Footer = ({}) => {
             <h1 className="text-3xl tablet:text-6xl laptop:text-6xl laptopl:text-8xl text-bold">
               
             </h1>
+            <Button onClick={() => router.push("/scheduleAppointment")}>{dataInit.footer.scheduleButton}</Button>
+
             <Button type="primary">{dataInit.footer.scheduleButton}</Button>
             <div className="mt-10">
               <Socials />

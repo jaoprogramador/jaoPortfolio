@@ -7,12 +7,13 @@
   "/api/postDetail": "pages/api/postDetail.js",
   "/api/posts": "pages/api/posts.js",
   "/edit": "pages/edit.html",
-  "/resume": "pages/resume.html",
   "/": "pages/index.html",
-  "/blog/[slug]": "pages/blog/[slug].js",
-  "/blog": "pages/blog.js",
+  "/pointmentForm": "pages/pointmentForm.html",
+  "/resume": "pages/resume.html",
   "/frameworks/[slug]": "pages/frameworks/[slug].html",
+  "/blog/[slug]": "pages/blog/[slug].js",
   "/frameworks": "pages/frameworks.html",
   "/_document": "pages/_document.js",
+  "/blog": "pages/blog.js",
   "/404": "pages/404.html"
 }

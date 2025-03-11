@@ -364,6 +364,17 @@ const apps = [
         icon: "/img/springBoot-icon.png" 
   
       },
+      //MongoDB
+      {
+        name: "Spring CRUD Mongo",
+        imageUrl: "/img/spring-CRUDMongo.jpg",  
+        description: "Spring Boot, Data, CRUD con MongoBD",
+        technology: "Spring Framework ",
+        repoUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/tree/master/16EjeRestDataMongoDB",
+        appUrl: "#",
+        icon: "/img/springBoot-icon.png" 
+  
+      },
       //MVC
       {
         name: "Spring MVC",
@@ -375,6 +386,29 @@ const apps = [
         icon: "/img/springBoot-icon.png" 
   
       },
+      
+      //Test unitarioes
+      {
+        name: "Test unitarios",
+        imageUrl: "/img/spring-JUNIT.jpg",  
+        description: "Spring Boot, Security, Tipos de cifrado en claves",
+        technology: "Spring Framework ",
+        repoUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/tree/master/3EjeRestDatajpa",
+        appUrl: "#",
+        icon: "/img/springBoot-icon.png" 
+  
+      },
+      //Cifrado
+      {
+        name: "Cifrados",
+        imageUrl: "/img/spring-cifrado.jpg",  
+        description: "Spring Boot, Security, Tipos de cifrado en claves",
+        technology: "Spring Framework ",
+        repoUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/tree/master/6SpringSecurityCifrado",
+        appUrl: "#",
+        icon: "/img/springBoot-icon.png" 
+  
+      },
       //Security
       {
         name: "Spring Security",
@@ -382,6 +416,17 @@ const apps = [
         description: "Spring Boot, Security",
         technology: "Spring Framework ",
         repoUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/tree/master/5SpringSecurity",
+        appUrl: "#",
+        icon: "/img/springBoot-icon.png" 
+  
+      },
+      //Security Roles
+      {
+        name: "Spring Security Roles",
+        imageUrl: "/img/spring-SecurityRol.jpg",  
+        description: "Spring Boot, Security, Roles de usuario",
+        technology: "Spring Framework ",
+        repoUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/tree/master/9SecurityRoles",
         appUrl: "#",
         icon: "/img/springBoot-icon.png" 
   
@@ -404,6 +449,17 @@ const apps = [
         description: "Spring Boot, Security, Oauth",
         technology: "Spring Framework ",
         repoUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/tree/master/8SecurityOauthGithub",
+        appUrl: "#",
+        icon: "/img/springBoot-icon.png" 
+  
+      },
+      //Medidas de seguridad CSRF,
+      {
+        name: "CSRF",
+        imageUrl: "/img/spring-SecurityCSRF.jpg",  
+        description: "Spring Boot, Security, CSRF",
+        technology: "Spring Framework ",
+        repoUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/tree/master/10SecurityCSRF",
         appUrl: "#",
         icon: "/img/springBoot-icon.png" 
   

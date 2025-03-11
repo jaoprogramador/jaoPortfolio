@@ -18,13 +18,17 @@ exports.modules = {
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _Button__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(5542);
 /* harmony import */ var _context_LanguageContext__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(4745);
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(1853);
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_6__);
 
 
 
 
 
  // Importa el contexto
+
 const Footer = ({})=>{
+    const router = (0,next_router__WEBPACK_IMPORTED_MODULE_6__.useRouter)();
     // Contexto de idioma
     const { language  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useContext)(_context_LanguageContext__WEBPACK_IMPORTED_MODULE_5__/* .LanguageContext */ .A);
     const dataInit = __webpack_require__(84)(`./${language}/${language}.json`);
@@ -47,6 +51,11 @@ const Footer = ({})=>{
                                 }),
                                 /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("h1", {
                                     className: "text-3xl tablet:text-6xl laptop:text-6xl laptopl:text-8xl text-bold"
+                                }),
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_Button__WEBPACK_IMPORTED_MODULE_4__/* ["default"] */ .Z, {
+                                    onClick: ()=>router.push("/scheduleAppointment")
+                                    ,
+                                    children: dataInit.footer.scheduleButton
                                 }),
                                 /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_Button__WEBPACK_IMPORTED_MODULE_4__/* ["default"] */ .Z, {
                                     type: "primary",
