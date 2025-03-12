@@ -22,7 +22,7 @@ const Footer = ({}) => {
               
             </h1>
             
-            <Button onClick={() => router.push("/pointmentForm")}>{dataInit.footer.scheduleButton}</Button>
+           {/*  <Button onClick={() => router.push("/pointmentForm")}>{dataInit.footer.scheduleButton}</Button> */}
 
             <Button type="primary" onClick={() => router.push("/pointmentForm")}>{dataInit.footer.scheduleButton}</Button>
             <div className="mt-10">
