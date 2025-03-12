@@ -742,7 +742,7 @@ module.exports = JSON.parse('{"name":"JAO","headerTaglineOne":"Hello 👋","head
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"home":{"welcome":"Welcome to my portfolio!","about":"About Me","projects":"Projects","contact":"Contact"},"headers":{"work":"Work","about":"About","blog":"Blog","frameworks":"Frameworks","resume":"Resume","contact":"Contact","language":"Language"},"init":{"work":"Works.","services":"Services.","about":"About Me"},"footer":{"contact":"Contact.","workTogether":"LET\'S WORK TOGETHER","scheduleButton":"Schedule a call"},"resume":{"formations":"Formations","education":"Education","certifications":"Certifications","experience":"Experience","skills":"Skills","frameworks":"Frameworks","others":"Others","languages":"Languages"}}');
+module.exports = JSON.parse('{"home":{"welcome":"Welcome to my portfolio!","about":"About Me","projects":"Projects","contact":"Contact"},"headers":{"work":"Work","about":"About","blog":"Blog","frameworks":"Frameworks","resume":"Resume","contact":"Contact","language":"Language","pointmentForm":"Programar cita"},"init":{"work":"Works.","services":"Services.","about":"About Me"},"footer":{"contact":"Contact.","workTogether":"LET\'S WORK TOGETHER","scheduleButton":"Schedule a call"},"resume":{"formations":"Formations","education":"Education","certifications":"Certifications","experience":"Experience","skills":"Skills","frameworks":"Frameworks","others":"Others","languages":"Languages"}}');
 
 /***/ }),
 
@@ -766,7 +766,7 @@ module.exports = JSON.parse('{"showCursor":true,"showResume":true,"resume":{"ful
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"home":{"welcome":"¡Bienvenido a mi portafolio!","about":"Sobre mí","projects":"Proyectos","contact":"Contacto"},"headers":{"work":"Trabajo","about":"Sobre mí","blog":"Blog","frameworks":"Frameworks","resume":"Currículum","contact":"Contacto","language":"Idioma"},"init":{"work":"Proyectos.","services":"Servicios.","about":"Sobre mí"},"footer":{"contact":"Contacto.","workTogether":"TRABAJEMOS JUNTOS","scheduleButton":"Programa una llamada"},"resume":{"formations":"Formaciones","certifications":"Certificaciones","education":"Educación","experience":"Experiencia","skills":"Habilidades","frameworks":"Frameworks","others":"Otros","languages":"Idiomas"}}');
+module.exports = JSON.parse('{"home":{"welcome":"¡Bienvenido a mi portafolio!","about":"Sobre mí","projects":"Proyectos","contact":"Contacto"},"headers":{"work":"Trabajo","about":"Sobre mí","blog":"Blog","frameworks":"Frameworks","resume":"Currículum","contact":"Contacto","language":"Idioma","pointmentForm":"Programar cita"},"init":{"work":"Proyectos.","services":"Servicios.","about":"Sobre mí"},"footer":{"contact":"Contacto.","workTogether":"TRABAJEMOS JUNTOS","scheduleButton":"Programa una llamada"},"resume":{"formations":"Formaciones","certifications":"Certificaciones","education":"Educación","experience":"Experiencia","skills":"Habilidades","frameworks":"Frameworks","others":"Otros","languages":"Idiomas"}}');
 
 /***/ }),
 
@@ -790,7 +790,7 @@ module.exports = JSON.parse('{"showCursor":true,"showResume":true,"resume":{"ful
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"home":{"welcome":"Ongi etorri nire portfoliora!","about":"Niri buruz","projects":"Proiektuak","contact":"Harremana"},"headers":{"work":"Lana","about":"Niri buruz","blog":"Bloga","frameworks":"Esparruak","resume":"Curriculuma","contact":"Harremana","language":"Hizkuntza"},"init":{"work":"Lanak.","services":"Zerbitzuak.","about":"Niri buruz."},"footer":{"contact":"Harremana.","workTogether":"ELKARREKIN LAN EGIN DEZAGUN","scheduleButton":"Dei bat programatu"},"resume":{"formations":"Formazioak","education":"Hezkuntza","certifications":"Ziurtagiriak","experience":"Esperientzia","skills":"Trebetasunak","frameworks":"Esparruak","others":"Beste batzuk","languages":"Hizkuntzak"}}');
+module.exports = JSON.parse('{"home":{"welcome":"Ongi etorri nire portfoliora!","about":"Niri buruz","projects":"Proiektuak","contact":"Harremana"},"headers":{"work":"Lana","about":"Niri buruz","blog":"Bloga","frameworks":"Esparruak","resume":"Curriculuma","contact":"Harremana","language":"Hizkuntza","pointmentForm":"Programar cita"},"init":{"work":"Lanak.","services":"Zerbitzuak.","about":"Niri buruz."},"footer":{"contact":"Harremana.","workTogether":"ELKARREKIN LAN EGIN DEZAGUN","scheduleButton":"Dei bat programatu"},"resume":{"formations":"Formazioak","education":"Hezkuntza","certifications":"Ziurtagiriak","experience":"Esperientzia","skills":"Trebetasunak","frameworks":"Esparruak","others":"Beste batzuk","languages":"Hizkuntzak"}}');
 
 /***/ }),
 

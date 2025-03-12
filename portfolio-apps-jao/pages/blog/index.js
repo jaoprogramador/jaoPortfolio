@@ -128,7 +128,7 @@ import { LanguageContext } from "../../context/LanguageContext";
 
   
   export async function getStaticProps(context) {
-    const language = context.locale || "eu";
+    const language = context.locale || "es";
     console.log("🛠️ getStaticProps - Fetching posts for language:", language);
     
     const posts = getAllPosts(language, [ 

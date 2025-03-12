@@ -12,7 +12,8 @@
       "frameworks": "Frameworks",
       "resume": "Currículum",
       "contact": "Contacto",
-      "language": "Idioma"
+      "language": "Idioma",
+      "pointmentForm": "Programar cita"
     },"init": {
       "work": "Proyectos.",
       "services": "Servicios.",

@@ -6,8 +6,8 @@
 ## npm start
 
 
-#PONER IDIOMA
-npm install i18next react-i18next i18next-browser-languagedetector --legacy-peer-deps
+# PONER IDIOMA
+# npm install i18next react-i18next i18next-browser-languagedetector --legacy-peer-deps
 
 crear fichero src/i18n.js
 
@@ -143,6 +143,14 @@ Si necesitas revertir cambios antes de confirmarlos, usa git reset .
 
 Dominar Git optimiza el trabajo en equipo, protege tu código y mejora la productividad en el desarrollo de software. 🚀
 
+
+
+# MAIL PROGRAMA CITA
+===================
+#  npm install emailjs-com
+#  npm install emailjs-com --legacy-peer-deps
+
+#  https://dashboard.emailjs.com/sign-up
 
 
 

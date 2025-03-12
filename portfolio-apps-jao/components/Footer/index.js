@@ -21,9 +21,10 @@ const Footer = ({}) => {
             <h1 className="text-3xl tablet:text-6xl laptop:text-6xl laptopl:text-8xl text-bold">
               
             </h1>
-            <Button onClick={() => router.push("/scheduleAppointment")}>{dataInit.footer.scheduleButton}</Button>
+            
+            <Button onClick={() => router.push("/pointmentForm")}>{dataInit.footer.scheduleButton}</Button>
 
-            <Button type="primary">{dataInit.footer.scheduleButton}</Button>
+            <Button type="primary" onClick={() => router.push("/pointmentForm")}>{dataInit.footer.scheduleButton}</Button>
             <div className="mt-10">
               <Socials />
             </div>

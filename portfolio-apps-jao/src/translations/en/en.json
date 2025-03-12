@@ -12,7 +12,9 @@
       "frameworks": "Frameworks",
       "resume": "Resume",
       "contact": "Contact",
-      "language": "Language"
+      "language": "Language",
+      "pointmentForm": "Programar cita"
+      
     },"init": {
       "work": "Works.",
       "services": "Services.",

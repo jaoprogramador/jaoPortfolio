@@ -12,7 +12,8 @@
     "frameworks": "Esparruak",
     "resume": "Curriculuma",
     "contact": "Harremana",
-    "language": "Hizkuntza"
+    "language": "Hizkuntza",
+    "pointmentForm": "Programar cita"
   },
   "init": {
     "work": "Lanak.",

@@ -157,7 +157,7 @@ const Blog = ({ initialPosts  })=>{
     });
 };
 async function getStaticProps(context) {
-    const language = context.locale || "eu";
+    const language = context.locale || "es";
     console.log("\uD83D\uDEE0\uFE0F getStaticProps - Fetching posts for language:", language);
     const posts = (0,_utils_api__WEBPACK_IMPORTED_MODULE_10__/* .getAllPosts */ .Bd)(language, [
         "slug",

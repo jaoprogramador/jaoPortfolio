@@ -486,6 +486,7 @@ const apps = [
         icon: "/img/springBoot-icon.png" 
   
       },
+      //SPRING CLOUD
       {//
         name: "Spring Cloud Microservicios",
         imageUrl: "/img/springCloud.jpg",  
@@ -495,7 +496,115 @@ const apps = [
         appUrl: "https://github.com/jaoprogramador/SpringCloudMicroservicios",
         icon: "/img/springCloud-icon.png" 
       },
-  
+      {//SPRING CLOUD:::Hola Mundo
+        name: "Hola Mundo",
+        imageUrl: "/img/spring-Cloud-HolaMundo.jpg",  
+        description: "Primer micrsoservicio Hola Mundo",
+        technology: "Spring Cloud",
+        repoUrl: "https://github.com/jaoprogramador/SpringCloudMicroservicios/tree/master/demo01",
+        appUrl: "https://github.com/jaoprogramador/SpringCloudMicroservicios/demo01",
+        icon: "/img/springCloud-icon.png" 
+      },
+      {//SPRING CLOUD:::Products-Category
+        name: "Products-Category",
+        imageUrl: "/img/spring-Cloud-ProductsJPA.jpg",  
+        description: "Segundo microservicio Products-Category con JPA ",
+        technology: "Spring Cloud",
+        repoUrl: "https://github.com/jaoprogramador/SpringCloudMicroservicios/tree/master/product-service",
+        appUrl: "https://github.com/jaoprogramador/SpringCloudMicroservicios/product-service",
+        icon: "/img/springCloud-icon.png" 
+      },
+      {//SPRING CLOUD:::Tests con mockito
+        name: "Tests con mockito",
+        imageUrl: "/img/spring-Cloud-TestMockito.jpg",  
+        description: "Testear con mockito el servicio products-category ",
+        technology: "Spring Cloud",
+        repoUrl: "https://github.com/jaoprogramador/SpringCloudMicroservicios/tree/master/product-service",
+        appUrl: "https://github.com/jaoprogramador/SpringCloudMicroservicios/product-service",
+        icon: "/img/springCloud-icon.png" 
+      },
+      {//SPRING CLOUD:::Servicios
+        name: "Servicios",
+        imageUrl: "/img/spring-Cloud-TestMockito.jpg",  
+        description: "Como crear un servicio para Products-Category",
+        technology: "Spring Cloud",
+        repoUrl: "https://github.com/jaoprogramador/SpringCloudMicroservicios/tree/master/product-service/",
+        appUrl: "https://github.com/jaoprogramador/SpringCloudMicroservicios/product-service",
+        icon: "/img/springCloud-icon.png" 
+      },
+      {//SPRING CLOUD:::Controller
+        name: "Controller",
+        imageUrl: "/img/spring-Cloud-TestMockito.jpg",  
+        description: "Como crear un controller para comunicarse con el service de Products-Category",
+        technology: "Spring Cloud",
+        repoUrl: "https://github.com/jaoprogramador/SpringCloudMicroservicios/tree/master/product-service/",
+        appUrl: "https://github.com/jaoprogramador/SpringCloudMicroservicios/product-service",
+        icon: "/img/springCloud-icon.png" 
+      },
+      
+      {//SPRING CLOUD:::customer-service
+        name: "customer-service",
+        imageUrl: "/img/spring-Cloud-TestMockito.jpg",  
+        description: "Creamos otro microservicio independiente customer-service",
+        technology: "Spring Cloud",
+        repoUrl: "https://github.com/jaoprogramador/SpringCloudMicroservicios/tree/master/customer-service/",
+        appUrl: "https://github.com/jaoprogramador/SpringCloudMicroservicios/customer-service",
+        icon: "/img/springCloud-icon.png" 
+      },
+      {//SPRING CLOUD::: Config-------DESDE AQUI
+        name: "Config",
+        imageUrl: "/img/spring-Cloud-TestMockito.jpg",  
+        description: "Config",
+        technology: "Spring Cloud",
+        repoUrl: "https://github.com/jaoprogramador/SpringCloudMicroservicios/tree/master/customer-service/",
+        appUrl: "https://github.com/jaoprogramador/SpringCloudMicroservicios/customer-service",
+        icon: "/img/springCloud-icon.png" 
+      },
+      {//SPRING CLOUD::: Eureka Server
+        name: "Eureka Server",
+        imageUrl: "/img/spring-Cloud-TestMockito.jpg",  
+        description: "Eureka Server",
+        technology: "Spring Cloud",
+        repoUrl: "https://github.com/jaoprogramador/SpringCloudMicroservicios/tree/master/customer-service/",
+        appUrl: "https://github.com/jaoprogramador/SpringCloudMicroservicios/customer-service",
+        icon: "/img/springCloud-icon.png" 
+      },
+       {//SPRING CLOUD::: Feighn
+        name: "Feighn",
+        imageUrl: "/img/spring-Cloud-TestMockito.jpg",   
+        description: "Feighn",
+        technology: "Spring Cloud",
+        repoUrl: "https://github.com/jaoprogramador/SpringCloudMicroservicios/tree/master/customer-service/",
+        appUrl: "https://github.com/jaoprogramador/SpringCloudMicroservicios/customer-service",
+        icon: "/img/springCloud-icon.png" 
+      },
+       {//SPRING CLOUD::: Hystry
+        name: "Hystry",
+        imageUrl: "/img/spring-Cloud-TestMockito.jpg",  
+        description: "Hystry",
+        technology: "Spring Cloud",
+        repoUrl: "https://github.com/jaoprogramador/SpringCloudMicroservicios/tree/master/customer-service/",
+        appUrl: "https://github.com/jaoprogramador/SpringCloudMicroservicios/customer-service",
+        icon: "/img/springCloud-icon.png" 
+      },
+      {//SPRING CLOUD::: Gateway
+        name: "Gateway",
+        imageUrl: "/img/spring-Cloud-TestMockito.jpg",   
+        description: "Gateway",
+        technology: "Spring Cloud",
+        repoUrl: "https://github.com/jaoprogramador/SpringCloudMicroservicios/tree/master/customer-service/",
+        appUrl: "https://github.com/jaoprogramador/SpringCloudMicroservicios/customer-service",
+        icon: "/img/springCloud-icon.png" 
+      },
+      {//SPRING CLOUD::: Actuator
+        name: "Actuator",
+        imageUrl: "/img/spring-Cloud-TestMockito.jpg",  
+        description: "Actuator",
+        technology: "Spring Cloud",
+        repoUrl: "https://github.com/jaoprogramador/SpringCloudMicroservicios/tree/master/customer-service/",
+        appUrl: "https://github.com/jaoprogramador/SpringCloudMicroservicios/customer-service",
+        icon: "/img/springCloud-icon.png" 
+      },
       //Patrones de diseño
       {
         name: "Patrones de diseño",
@@ -507,6 +616,7 @@ const apps = [
         icon: "/img/springBoot-icon.png" 
   
       },
+
       {
         name: "Servicio Rest",
         imageUrl: "/img/WS-RestSOAPUI.jpg",  

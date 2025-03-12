@@ -67,6 +67,7 @@ const Header = ({ handleWorkScroll, handleAboutScroll, isBlog }) => {
                 <Button onClick={() => router.push("/blog")}>{dataHeader.headers.blog}</Button>
                 <Button onClick={() => router.push("/frameworks")}>{dataHeader.headers.frameworks}</Button>
                 <Button onClick={() => router.push("/resume")}>{dataHeader.headers.resume}</Button>
+               {/*  <Button onClick={() => router.push("/pointmentForm")}>{dataHeader.headers.pointmentForm}</Button> */}
                 <Button onClick={() => window.open("mailto:jaoprogramador@gmail.com")}>{dataHeader.headers.contact}</Button>
               </div>
             </Popover.Panel>
@@ -85,6 +86,7 @@ const Header = ({ handleWorkScroll, handleAboutScroll, isBlog }) => {
           <Button onClick={() => router.push("/blog")}>{dataHeader.headers.blog}</Button>
           <Button onClick={() => router.push("/frameworks")}>{dataHeader.headers.frameworks}</Button>
           <Button onClick={() => router.push("/resume")}>{dataHeader.headers.resume}</Button>
+          {/* <Button onClick={() => router.push("/pointmentForm")}>{dataHeader.headers.pointmentForm}</Button> */}
           <Button onClick={() => window.open("mailto:jaoprogramador@gmail.com")}>{dataHeader.headers.contact}</Button>
          
           <Select
