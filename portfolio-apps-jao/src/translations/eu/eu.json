@@ -34,5 +34,13 @@
     "frameworks": "Esparruak",
     "others": "Beste batzuk",
     "languages": "Hizkuntzak"
-  }
+  },
+  "pointmentForm": {
+    "programarCita": "Hitzordua programatu",
+    "enviarBoton": "Bidali",
+    "fecha": "Data",
+    "email": "Email",
+    "nombre": "Izena",
+    "apellidos": "Abizenak"
+}
 }

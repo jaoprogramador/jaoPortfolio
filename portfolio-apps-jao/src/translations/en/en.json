@@ -33,6 +33,15 @@
       "frameworks": "Frameworks",
       "others": "Others",
       "languages": "Languages"
-    }  
+    } ,
+    "pointmentForm": {
+      "programarCita": "Schedule appointment",
+      "enviarBoton": "Send",
+      "fecha": "Date",
+      "email": "Email",
+      "nombre": "Name",
+      "apellidos": "Last name"
+  }
+     
 
   }

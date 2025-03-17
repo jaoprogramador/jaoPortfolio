@@ -33,5 +33,13 @@
       "others": "Otros",
       "languages": "Idiomas"
       
-    }
+    },
+    "pointmentForm": {
+      "programarCita": "Programar cita",
+      "enviarBoton": "Enviar",
+      "fecha":"Fecha",
+      "email": "Email",
+      "nombre": "Nombre",
+      "apellidos": "Apellidos"
+    }  
   }

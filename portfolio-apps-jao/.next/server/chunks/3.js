@@ -53,11 +53,6 @@ const Footer = ({})=>{
                                     className: "text-3xl tablet:text-6xl laptop:text-6xl laptopl:text-8xl text-bold"
                                 }),
                                 /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_Button__WEBPACK_IMPORTED_MODULE_4__/* ["default"] */ .Z, {
-                                    onClick: ()=>router.push("/pointmentForm")
-                                    ,
-                                    children: dataInit.footer.scheduleButton
-                                }),
-                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_Button__WEBPACK_IMPORTED_MODULE_4__/* ["default"] */ .Z, {
                                     type: "primary",
                                     onClick: ()=>router.push("/pointmentForm")
                                     ,

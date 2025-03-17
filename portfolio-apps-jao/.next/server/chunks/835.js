@@ -17,23 +17,62 @@ exports.modules = {
 /* harmony import */ var next_themes__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(next_themes__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _data_portfolio_json__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(9954);
 
+/* import React from "react";
+import { useTheme } from "next-themes";
+import data from "../../data/portfolio.json";
+
+const Button = ({ children, type, onClick, classes }) => {
+  const { theme } = useTheme();
+  if (type === "primary") {
+    return (
+      <button
+        onClick={onClick}
+        type="button"
+        className={`text-sm tablet:text-base p-1 laptop:p-2 m-1 laptop:m-2 rounded-lg ${
+          theme === "dark" ? "bg-white text-black" : "bg-black text-white"
+        }  transition-all duration-300 ease-out first:ml-0 hover:scale-105 active:scale-100 link ${
+          data.showCursor && "cursor-none"
+        }  ${classes}`}
+      >
+        {children}
+      </button>
+    );
+  }
+  return (
+    <button
+      onClick={onClick}
+      type="button"
+      className={`text-sm tablet:text-base p-1 laptop:p-2 m-1 laptop:m-2 rounded-lg flex items-center transition-all ease-out duration-300 ${
+        theme === "dark"
+          ? "hover:bg-slate-600 text-white"
+          : "hover:bg-slate-100"
+      } hover:scale-105 active:scale-100  tablet:first:ml-0  ${
+        data.showCursor && "cursor-none"
+      } ${classes} link`}
+    >
+      {children}
+    </button>
+  );
+};
+
+export default Button;
+ */ 
 
 
-
-const Button = ({ children , type , onClick , classes  })=>{
+const Button = ({ children , type , onClick , submitForm , classes  })=>{
     const { theme  } = (0,next_themes__WEBPACK_IMPORTED_MODULE_2__.useTheme)();
-    if (type === "primary") {
-        return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("button", {
-            onClick: onClick,
-            type: "button",
-            className: `text-sm tablet:text-base p-1 laptop:p-2 m-1 laptop:m-2 rounded-lg ${theme === "dark" ? "bg-white text-black" : "bg-black text-white"}  transition-all duration-300 ease-out first:ml-0 hover:scale-105 active:scale-100 link ${_data_portfolio_json__WEBPACK_IMPORTED_MODULE_3__.showCursor && "cursor-none"}  ${classes}`,
-            children: children
-        });
-    }
+    const handleClick = (e)=>{
+        if (submitForm) {
+            //e.preventDefault(); // Evita que la página se recargue si está dentro de un formulario
+            submitForm(e); // Ejecuta la función que se pasa como prop
+        } else if (onClick) {
+            onClick(e);
+        }
+    };
     return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("button", {
-        onClick: onClick,
+        onClick: handleClick,
         type: "button",
-        className: `text-sm tablet:text-base p-1 laptop:p-2 m-1 laptop:m-2 rounded-lg flex items-center transition-all ease-out duration-300 ${theme === "dark" ? "hover:bg-slate-600 text-white" : "hover:bg-slate-100"} hover:scale-105 active:scale-100  tablet:first:ml-0  ${_data_portfolio_json__WEBPACK_IMPORTED_MODULE_3__.showCursor && "cursor-none"} ${classes} link`,
+        className: `text-sm tablet:text-base p-1 laptop:p-2 m-1 laptop:m-2 rounded-lg ${type === "primary" ? theme === "dark" ? "bg-white text-black" : "bg-black text-white" : theme === "dark" ? "hover:bg-slate-600 text-white" : "hover:bg-slate-100"}  transition-all duration-300 ease-out hover:scale-105 active:scale-100 ${_data_portfolio_json__WEBPACK_IMPORTED_MODULE_3__.showCursor && "cursor-none"} ${classes}`,
         children: children
     });
 };
@@ -742,7 +781,7 @@ module.exports = JSON.parse('{"name":"JAO","headerTaglineOne":"Hello 👋","head
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"home":{"welcome":"Welcome to my portfolio!","about":"About Me","projects":"Projects","contact":"Contact"},"headers":{"work":"Work","about":"About","blog":"Blog","frameworks":"Frameworks","resume":"Resume","contact":"Contact","language":"Language","pointmentForm":"Programar cita"},"init":{"work":"Works.","services":"Services.","about":"About Me"},"footer":{"contact":"Contact.","workTogether":"LET\'S WORK TOGETHER","scheduleButton":"Schedule a call"},"resume":{"formations":"Formations","education":"Education","certifications":"Certifications","experience":"Experience","skills":"Skills","frameworks":"Frameworks","others":"Others","languages":"Languages"}}');
+module.exports = JSON.parse('{"home":{"welcome":"Welcome to my portfolio!","about":"About Me","projects":"Projects","contact":"Contact"},"headers":{"work":"Work","about":"About","blog":"Blog","frameworks":"Frameworks","resume":"Resume","contact":"Contact","language":"Language","pointmentForm":"Programar cita"},"init":{"work":"Works.","services":"Services.","about":"About Me"},"footer":{"contact":"Contact.","workTogether":"LET\'S WORK TOGETHER","scheduleButton":"Schedule a call"},"resume":{"formations":"Formations","education":"Education","certifications":"Certifications","experience":"Experience","skills":"Skills","frameworks":"Frameworks","others":"Others","languages":"Languages"},"pointmentForm":{"programarCita":"Schedule appointment","enviarBoton":"Send","fecha":"Date","email":"Email","nombre":"Name","apellidos":"Last name"}}');
 
 /***/ }),
 
@@ -766,7 +805,7 @@ module.exports = JSON.parse('{"showCursor":true,"showResume":true,"resume":{"ful
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"home":{"welcome":"¡Bienvenido a mi portafolio!","about":"Sobre mí","projects":"Proyectos","contact":"Contacto"},"headers":{"work":"Trabajo","about":"Sobre mí","blog":"Blog","frameworks":"Frameworks","resume":"Currículum","contact":"Contacto","language":"Idioma","pointmentForm":"Programar cita"},"init":{"work":"Proyectos.","services":"Servicios.","about":"Sobre mí"},"footer":{"contact":"Contacto.","workTogether":"TRABAJEMOS JUNTOS","scheduleButton":"Programa una llamada"},"resume":{"formations":"Formaciones","certifications":"Certificaciones","education":"Educación","experience":"Experiencia","skills":"Habilidades","frameworks":"Frameworks","others":"Otros","languages":"Idiomas"}}');
+module.exports = JSON.parse('{"home":{"welcome":"¡Bienvenido a mi portafolio!","about":"Sobre mí","projects":"Proyectos","contact":"Contacto"},"headers":{"work":"Trabajo","about":"Sobre mí","blog":"Blog","frameworks":"Frameworks","resume":"Currículum","contact":"Contacto","language":"Idioma","pointmentForm":"Programar cita"},"init":{"work":"Proyectos.","services":"Servicios.","about":"Sobre mí"},"footer":{"contact":"Contacto.","workTogether":"TRABAJEMOS JUNTOS","scheduleButton":"Programa una llamada"},"resume":{"formations":"Formaciones","certifications":"Certificaciones","education":"Educación","experience":"Experiencia","skills":"Habilidades","frameworks":"Frameworks","others":"Otros","languages":"Idiomas"},"pointmentForm":{"programarCita":"Programar cita","enviarBoton":"Enviar","fecha":"Fecha","email":"Email","nombre":"Nombre","apellidos":"Apellidos"}}');
 
 /***/ }),
 
@@ -790,7 +829,7 @@ module.exports = JSON.parse('{"showCursor":true,"showResume":true,"resume":{"ful
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"home":{"welcome":"Ongi etorri nire portfoliora!","about":"Niri buruz","projects":"Proiektuak","contact":"Harremana"},"headers":{"work":"Lana","about":"Niri buruz","blog":"Bloga","frameworks":"Esparruak","resume":"Curriculuma","contact":"Harremana","language":"Hizkuntza","pointmentForm":"Programar cita"},"init":{"work":"Lanak.","services":"Zerbitzuak.","about":"Niri buruz."},"footer":{"contact":"Harremana.","workTogether":"ELKARREKIN LAN EGIN DEZAGUN","scheduleButton":"Dei bat programatu"},"resume":{"formations":"Formazioak","education":"Hezkuntza","certifications":"Ziurtagiriak","experience":"Esperientzia","skills":"Trebetasunak","frameworks":"Esparruak","others":"Beste batzuk","languages":"Hizkuntzak"}}');
+module.exports = JSON.parse('{"home":{"welcome":"Ongi etorri nire portfoliora!","about":"Niri buruz","projects":"Proiektuak","contact":"Harremana"},"headers":{"work":"Lana","about":"Niri buruz","blog":"Bloga","frameworks":"Esparruak","resume":"Curriculuma","contact":"Harremana","language":"Hizkuntza","pointmentForm":"Programar cita"},"init":{"work":"Lanak.","services":"Zerbitzuak.","about":"Niri buruz."},"footer":{"contact":"Harremana.","workTogether":"ELKARREKIN LAN EGIN DEZAGUN","scheduleButton":"Dei bat programatu"},"resume":{"formations":"Formazioak","education":"Hezkuntza","certifications":"Ziurtagiriak","experience":"Esperientzia","skills":"Trebetasunak","frameworks":"Esparruak","others":"Beste batzuk","languages":"Hizkuntzak"},"pointmentForm":{"programarCita":"Hitzordua programatu","enviarBoton":"Bidali","fecha":"Data","email":"Email","nombre":"Izena","apellidos":"Abizenak"}}');
 
 /***/ }),
 
