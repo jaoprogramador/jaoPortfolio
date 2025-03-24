@@ -151,7 +151,7 @@ async function getStaticProps(context) {
     try {
         const { locale , params  } = context;
         const { slug  } = params;
-        const language = locale || "en";
+        const language = locale || "es";
         console.log("BlogPostSLUG--getStaticProps Obteniendo post para:locale", language);
         const post = (0,_utils_api__WEBPACK_IMPORTED_MODULE_2__/* .getPostBySlug */ .zQ)(language, slug, [
             "date",
@@ -363,7 +363,7 @@ module.exports = require("react");
 
 /***/ }),
 
-/***/ 8743:
+/***/ 983:
 /***/ ((module) => {
 
 module.exports = require("react-datepicker");

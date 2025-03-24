@@ -250,7 +250,7 @@ const apps = [
       {
         name: "RxJS",
         imageUrl: "/img/angular/AngularRxJS.jpg",  
-        description: "Aplicación con angular RxJS",
+        description: "RxJS es una biblioteca para manejar programación reactiva basada en observables. Se usa para manejar flujos de datos asíncronos, como peticiones HTTP, eventos del usuario y manipulación de estados en la aplicación.",
         technology: "Angular",
         repoUrl: "https://github.com/jaoprogramador/angular-apps/tree/master/06RxJS",
         appUrl: "#",
@@ -313,7 +313,7 @@ const apps = [
       {
         name: "PrimeNG",
         imageUrl: "/img/angular/AngularPrimeng.jpg",  
-        description: "Ver como congigurar y usar primeng en nuestra aplicación gestionando en modulos",
+        description: "Ver como congigurar y usar primeng en nuestra aplicación gestionando en modulos. PrimeNG es una biblioteca de componentes UI para Angular, desarrollada por PrimeTek, que proporciona una colección de componentes ricos y personalizables para construir aplicaciones web modernas con un diseño atractivo y funcional.",
         technology: "Angular",
         repoUrl: "https://github.com/jaoprogramador/angular-apps/tree/master/08PrimeNG/ejemploprimerong",
         appUrl: "#",
@@ -346,7 +346,7 @@ const apps = [
       {
         name: "Spring BEAN",
         imageUrl: "/img/springBoot/spring-JBEANS.jpg",  
-        description: "Spring Boot, Beans",
+        description: "En Spring Framework, un Bean es un objeto gestionado por el contenedor de Spring. Se trata de una instancia de una clase que es creada, configurada y administrada por el contenedor de inversión de control (IoC Container) de Spring.",
         technology: "Spring Framework ",
         repoUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/tree/master/1EjeSpringBeans",
         appUrl: "#",
@@ -357,7 +357,7 @@ const apps = [
       {
         name: "Spring DATA",
         imageUrl: "/img/springBoot/spring-DATA.jpg",  
-        description: "Spring Boot, Data, JPA",
+        description: "Spring Data es un módulo del Spring Framework que simplifica la interacción con bases de datos al proporcionar una capa de abstracción sobre JPA, JDBC, MongoDB, Redis, entre otros. Su objetivo es reducir el código repetitivo en la gestión de datos y facilitar la implementación del acceso a datos en aplicaciones Java.",
         technology: "Spring Framework ",
         repoUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/tree/master/2EjeSpringDataJPA",
         appUrl: "#",
@@ -368,7 +368,7 @@ const apps = [
       {
         name: "Spring CRUD Mongo",
         imageUrl: "/img/springBoot/spring-CRUDMongo.jpg",  
-        description: "Spring Boot, Data, CRUD con MongoBD",
+        description: "MongoDB, una base de datos NoSQL basada en documentos. Permite interactuar con MongoDB de forma sencilla, sin necesidad de escribir consultas manuales, utilizando la arquitectura de repositorios de Spring.",
         technology: "Spring Framework ",
         repoUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/tree/master/16EjeRestDataMongoDB",
         appUrl: "#",
@@ -379,7 +379,7 @@ const apps = [
       {
         name: "Spring MVC",
         imageUrl: "/img/springBoot/spring-REST.jpg",  
-        description: "Spring Boot, MVC, Rest",
+        description: "Spring MVC es un módulo de Spring Framework que sigue el patrón Modelo-Vista-Controlador (MVC) para desarrollar aplicaciones web en Java de manera estructurada y eficiente. Proporciona herramientas para manejar peticiones HTTP, formularios, validaciones, vistas dinámicas y más.",
         technology: "Spring Framework ",
         repoUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/tree/master/3EjeRestDatajpa",
         appUrl: "#",
@@ -391,7 +391,7 @@ const apps = [
       {
         name: "Test unitarios",
         imageUrl: "/img/springBoot/spring-JUNIT.jpg",  
-        description: "Spring Boot, Security, Tipos de cifrado en claves",
+        description: "Test unitarios para probar con Spring Boot, Security, Tipos de cifrado en claves",
         technology: "Spring Framework ",
         repoUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/tree/master/3EjeRestDatajpa",
         appUrl: "#",
@@ -413,7 +413,7 @@ const apps = [
       {
         name: "Spring Security",
         imageUrl: "/img/springBoot/spring-SECURITY.jpg",  
-        description: "Spring Boot, Security",
+        description: "Spring Security es un módulo de Spring Framework que proporciona autenticación, autorización y protección contra ataques en aplicaciones Java. Se integra fácilmente con Spring Boot y permite asegurar aplicaciones web y APIs REST",
         technology: "Spring Framework ",
         repoUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/tree/master/5SpringSecurity",
         appUrl: "#",
@@ -424,7 +424,7 @@ const apps = [
       {
         name: "Spring Security Roles",
         imageUrl: "/img/springBoot/spring-SecurityRol.jpg",  
-        description: "Spring Boot, Security, Roles de usuario",
+        description: "En Spring Security, los roles y permisos se utilizan para restringir el acceso a ciertas partes de la aplicación. Un rol (ROLE_USER, ROLE_ADMIN) es un conjunto de permisos que definen lo que un usuario puede hacer.",
         technology: "Spring Framework ",
         repoUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/tree/master/9SecurityRoles",
         appUrl: "#",
@@ -435,7 +435,7 @@ const apps = [
       {
         name: "JWT",
         imageUrl: "/img/springBoot/SpringJWT.jpg",  
-        description: "Spring Boot, Security, JWT",
+        description: "Spring Security + JWT permite autenticación sin estado, ideal para APIs REST. En lugar de almacenar sesiones, el usuario recibe un token JWT tras iniciar sesión y lo usa en cada solicitud.",
         technology: "Spring Framework ",
         repoUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/tree/master/7SpringSecurityJWT",
         appUrl: "#",
@@ -446,7 +446,7 @@ const apps = [
       {
         name: "OAuth",
         imageUrl: "/img/springBoot/spring-OAuth.jpg",  
-        description: "Spring Boot, Security, Oauth",
+        description: "OAuth2 es un protocolo de autorización que permite a los usuarios compartir acceso a recursos sin exponer sus credenciales. Se usa comúnmente para autenticación en Google, Facebook, GitHub, Keycloak, etc.",
         technology: "Spring Framework ",
         repoUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/tree/master/8SecurityOauthGithub",
         appUrl: "#",
@@ -457,7 +457,7 @@ const apps = [
       {
         name: "CSRF",
         imageUrl: "/img/springBoot/spring-SecurityCSRF.jpg",  
-        description: "Spring Boot, Security, CSRF",
+        description: "CSRF (Cross-Site Request Forgery) en Spring SecurityCSRF es un ataque de falsificación de solicitudes entre sitios, en el que un atacante engaña a un usuario autenticado para que ejecute una acción no deseada en una aplicación web. Este tipo de ataque explota la confianza que un sitio tiene en el navegador del usuario.",
         technology: "Spring Framework ",
         repoUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/tree/master/10SecurityCSRF",
         appUrl: "#",
@@ -468,7 +468,7 @@ const apps = [
       {
         name: "Swagger",
         imageUrl: "/img/springBoot/spring-SWAGGER.jpg",  
-        description: "Spring Boot, Swagger, DATA, JPA, REST",
+        description: "Swagger es una herramienta de documentación interactiva para APIs RESTful. Permite a los desarrolladores documentar, probar y explorar sus APIs de una manera sencilla. En el contexto de Spring Boot, Swagger se utiliza para generar automáticamente documentación interactiva de la API, lo que facilita la prueba de las diferentes rutas del sistema sin necesidad de herramientas externas como Postman.",
         technology: "Spring Framework ",
         repoUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/tree/master/3EjeRestDatajpa",
         appUrl: "#",
@@ -479,18 +479,29 @@ const apps = [
       {
         name: "ControlExcepciones",
         imageUrl: "/img/springBoot/spring-ControlExcepciones.jpg",  
-        description: "Spring Boot, REST, Control de Excepciones",
+        description: "En Spring Boot, el control de excepciones es fundamental para manejar los errores de manera consistente y proporcionar respuestas adecuadas a los clientes. Spring proporciona varias formas de gestionar excepciones, tanto globalmente como de manera específica para ciertos controladores.",
         technology: "Spring Framework ",
         repoUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/tree/master/13CrtlExcepcionesRoles",
         appUrl: "#",
         icon: "/img/springBoot-icon.png" 
   
       },
-      //SPRING CLOUD
+      //SPRING BATCH
+      {
+        name: "Spring Batch",
+        imageUrl: "/img/springBoot/spring-Batch.jpg",  
+        description: "Spring Batch es un framework de Spring diseñado para el procesamiento por lotes (batch processing). Permite procesar grandes volúmenes de datos de manera eficiente, automatizada y escalable. Es ampliamente utilizado en escenarios como importación/exportación de datos, generación de informes, migración de bases de datos y procesamiento masivo de transacciones.",
+        technology: "Spring Framework ",
+        repoUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/tree/master/21demoBatch",
+        appUrl: "#",
+        icon: "/img/springBoot-icon.png" 
+  
+      },
+      //SPRING CLOUD 
       {//
         name: "Spring Cloud Microservicios",
         imageUrl: "/img/springCloud/spring-Cloud-Arquitec.jpg",  
-        description: "Servicios Rest, JPA, Api Rest, Config, Eureka Server, Feighn, Hystry, Gateway, Actuator, Loombok, Gradle",
+        description: "Spring Cloud es un conjunto de herramientas y marcos de trabajo que se utiliza para desarrollar aplicaciones distribuidas basadas en microservicios. Está diseñado para simplificar la construcción de sistemas complejos con arquitecturas basadas en microservicios, brindando soluciones para retos comunes en este tipo de arquitectura, como la gestión de configuración, la detección de servicios, el enrutamiento dinámico, la tolerancia a fallos y más. Servicios Rest, JPA, Api Rest, Config, Eureka Server, Feighn, Hystry, Gateway, Actuator, Loombok, Gradle",
         technology: "Spring Cloud",
         repoUrl: "https://github.com/jaoprogramador/SpringCloudMicroservicios",
         appUrl: "https://github.com/jaoprogramador/SpringCloudMicroservicios",
@@ -512,6 +523,15 @@ const apps = [
         technology: "Spring Cloud",
         repoUrl: "https://github.com/jaoprogramador/SpringCloudMicroservicios/tree/master/product-service",
         appUrl: "https://github.com/jaoprogramador/SpringCloudMicroservicios/product-service",
+        icon: "/img/springCloud-icon.png" 
+      },
+      {//SPRING Lombok :::Products-Category
+        name: "Lombok",
+        imageUrl: "/img/springCloud/spring-Cloud-Lombock.jpg",  
+        description: "Lombok es una biblioteca que reduce el código repetitivo en Java, especialmente en la gestión de POJOs (Plain Old Java Objects). Lombok utiliza anotaciones para generar automáticamente código como getters, setters, constructores, métodos toString(), equals(), hashCode(), y más, sin que el desarrollador tenga que escribirlos manualmente.",
+        technology: "Spring Cloud",
+        repoUrl: "https://github.com/jaoprogramador/SpringCloudMicroservicios/blob/master/product-service/src/main/java/academy/digitallab/store/product/entity/Category.java",
+        appUrl: "https://github.com/jaoprogramador/SpringCloudMicroservicios/blob/master/product-service/src/main/java/academy/digitallab/store/product/entity/Category.java",
         icon: "/img/springCloud-icon.png" 
       },
       {//SPRING CLOUD:::Tests con mockito

@@ -108,7 +108,7 @@ export async function getStaticProps( context ) {
     
     const { locale, params } = context;
     const { slug } = params; 
-    const language = locale || 'en';
+    const language = locale || 'es';
     
     console.log("BlogPostSLUG--getStaticProps Obteniendo post para:locale", language);
     const post = getPostBySlug(language,slug, [
