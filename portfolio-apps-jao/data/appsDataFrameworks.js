@@ -643,6 +643,15 @@ const apps = [
         appUrl: "https://github.com/jaoprogramador/SpringCloudMicroservicios/customer-service",
         icon: "/img/springCloud-icon.png" 
       },
+      {//SPRING CLOUD::: Arquitectura Hexagonal
+        name: "Arquitectura Hexagonal",
+        imageUrl: "/img/springBoot/spring-ArquitecturaHexagonal.jpg",  
+        description: "Como construir una arquitectura hexagonal",
+        technology: "Spring Cloud",
+        repoUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/tree/master/22jaoArcHexa",
+        appUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/tree/master/22jaoArcHexa",
+        icon: "/img/springCloud-icon.png" 
+      },
       //Patrones de diseño
       {
         name: "Patrones de diseño",
