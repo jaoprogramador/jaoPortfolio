@@ -652,6 +652,52 @@ const apps = [
         appUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/tree/master/22jaoArcHexa",
         icon: "/img/springCloud-icon.png" 
       },
+      {//SPRING CLOUD:::KAFKA:
+        name: "KAFKA",
+        imageUrl: "/img/springCloud/springArquitecturaKafka.jpg",  
+        description: "Apache Kafka es una plataforma de mensajería distribuida y event streaming que permite manejar grandes volúmenes de datos en tiempo real. Se usa para enviar, recibir, almacenar y procesar flujos de datos de manera eficiente",
+        technology: "Spring Cloud",
+        repoUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/tree/master/SpringJaoForKafka",
+        appUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/tree/master/SpringJaoForKafka",
+        //C:\Users\user\Documents\Juan PC guillermo SpringAngularAWS\WORKSPACES\workspace\SpringJaoForKafka
+        icon: "/img/springCloud-icon.png" 
+      },
+      {//SPRING CLOUD:::ZOOKEEPER:
+        name: "ZOOKEEPER",
+        imageUrl: "/img/springCloud/springZookeeper.jpg",  
+        description: "Listados de comandos para arrancar Kafka, el resurso zookeeper y crear topics, listarlos",
+        technology: "Spring Cloud",
+        repoUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/blob/master/SpringJaoForKafka/README.md",
+        appUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/blob/master/SpringJaoForKafka/README.md",
+        icon: "/img/springCloud-icon.png" 
+      },
+      {//SPRING CLOUD:::MODULOPADRE:
+        name: "Modulo Padre",
+        imageUrl: "/img/springCloud/springModuloPadre.jpg",  
+        description: "Modulo contenedor de Consumer y Provider que comparte dependencias",
+        technology: "Spring Cloud",
+        repoUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/blob/master/SpringJaoForKafka/",
+        appUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/blob/master/SpringJaoForKafka/",
+        icon: "/img/springCloud-icon.png" 
+      },
+      {//SPRING CLOUD:::CONSUMER:
+        name: "Modulo Consumer",
+        imageUrl: "/img/springCloud/springKafkaListener.jpg",  
+        description: "Modulo Consumer que escucha los mensajes",
+        technology: "Spring Cloud",
+        repoUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/blob/master/SpringJaoForKafka/SpringJaoConsumer/",
+        appUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/blob/master/SpringJaoForKafka/SpringJaoConsumer/",
+        icon: "/img/springCloud-icon.png" 
+      },
+      {//SPRING CLOUD:::PROVIDER:
+        name: "Modulo Provider",
+        imageUrl: "/img/springCloud/springKafkaProvider.jpg",  
+        description: "Modulo Provider que lanza los mensajes",
+        technology: "Spring Cloud",
+        repoUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/blob/master/SpringJaoForKafka/SpringJaoProvider/",
+        appUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/blob/master/SpringJaoForKafka/SpringJaoProvider/",
+        icon: "/img/springCloud-icon.png" 
+      },
       //Patrones de diseño
       {
         name: "Patrones de diseño",
