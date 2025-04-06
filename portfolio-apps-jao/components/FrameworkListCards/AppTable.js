@@ -10,6 +10,9 @@ const categories = [
   { title: "Angular 17", filter: "Angular", icon: "/img/icons/angular-icon.png"  },
   { title: "Spring Boot", filter: "Spring Framework", icon:"/img/icons/springboot-icon.png" },
   { title: "Spring Cloud Microservicios 17", filter: "Spring Cloud", icon:"/img/icons/springcloud-icon.png" },
+  { title: "Spring Apache Kafka", filter: "Spring KAFKA", icon:"/img/icons/kafka-icon.png" },
+  { title: "Spring RabbitMQ", filter: "Spring RabbitMQ", icon:"/img/icons/rabbitMQ-icon.png" },
+  { title: "Docker", filter: "Docker", icon:"/img/icons/docker-icon.png" },
   { title: "Java", filter: "Java", icon:"/img/icons/java.png" },
   { title: "Web jaoprogramador", filter: "HTML", icon:"/img/icons/html-icon.png"  }
 ];

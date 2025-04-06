@@ -652,51 +652,132 @@ const apps = [
         appUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/tree/master/22jaoArcHexa",
         icon: "/img/springCloud-icon.png" 
       },
-      {//SPRING CLOUD:::KAFKA:
+      {//SPRING :::KAFKA:
         name: "KAFKA",
         imageUrl: "/img/springCloud/springArquitecturaKafka.jpg",  
         description: "Apache Kafka es una plataforma de mensajería distribuida y event streaming que permite manejar grandes volúmenes de datos en tiempo real. Se usa para enviar, recibir, almacenar y procesar flujos de datos de manera eficiente",
-        technology: "Spring Cloud",
+        technology: "Spring KAFKA",
         repoUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/tree/master/SpringJaoForKafka",
         appUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/tree/master/SpringJaoForKafka",
         //C:\Users\user\Documents\Juan PC guillermo SpringAngularAWS\WORKSPACES\workspace\SpringJaoForKafka
-        icon: "/img/springCloud-icon.png" 
+        icon: "/img/kafka-icon.png" 
       },
-      {//SPRING CLOUD:::ZOOKEEPER:
+      {//SPRING KAFKA:::ZOOKEEPER:
         name: "ZOOKEEPER",
         imageUrl: "/img/springCloud/springZookeeper.jpg",  
         description: "Listados de comandos para arrancar Kafka, el resurso zookeeper y crear topics, listarlos",
-        technology: "Spring Cloud",
+        technology: "Spring KAFKA",
         repoUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/blob/master/SpringJaoForKafka/README.md",
         appUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/blob/master/SpringJaoForKafka/README.md",
-        icon: "/img/springCloud-icon.png" 
+        icon: "/img/kafka-icon.png" 
       },
-      {//SPRING CLOUD:::MODULOPADRE:
+      {//SPRING KAFKA:::MODULOPADRE:
         name: "Modulo Padre",
         imageUrl: "/img/springCloud/springModuloPadre.jpg",  
         description: "Modulo contenedor de Consumer y Provider que comparte dependencias",
-        technology: "Spring Cloud",
+        technology: "Spring KAFKA",
         repoUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/blob/master/SpringJaoForKafka/",
         appUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/blob/master/SpringJaoForKafka/",
-        icon: "/img/springCloud-icon.png" 
+        icon: "/img/kafka-icon.png" 
       },
-      {//SPRING CLOUD:::CONSUMER:
+      {//SPRING KAFKA:::CONSUMER:
         name: "Modulo Consumer",
         imageUrl: "/img/springCloud/springKafkaListener.jpg",  
         description: "Modulo Consumer que escucha los mensajes",
-        technology: "Spring Cloud",
+        technology: "Spring KAFKA",
         repoUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/blob/master/SpringJaoForKafka/SpringJaoConsumer/",
         appUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/blob/master/SpringJaoForKafka/SpringJaoConsumer/",
-        icon: "/img/springCloud-icon.png" 
+        icon: "/img/kafka-icon.png" 
       },
-      {//SPRING CLOUD:::PROVIDER:
+      {//SPRING KAFKA:::PROVIDER:
         name: "Modulo Provider",
         imageUrl: "/img/springCloud/springKafkaProvider.jpg",  
         description: "Modulo Provider que lanza los mensajes",
-        technology: "Spring Cloud",
+        technology: "Spring KAFKA",
         repoUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/blob/master/SpringJaoForKafka/SpringJaoProvider/",
         appUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/blob/master/SpringJaoForKafka/SpringJaoProvider/",
-        icon: "/img/springCloud-icon.png" 
+        icon: "/img/kafka-icon.png" 
+      },
+      {//SPRING CLOUD:::RabbitMQ:
+        name: "RabbitMQ",
+        imageUrl: "/img/springCloud/springRabbitMQ.jpg",  
+        description: "RabbitMQ es un sistema de mensajería de código abierto que implementa el protocolo AMQP (Advanced Message Queuing Protocol). Es utilizado para enviar, recibir y gestionar mensajes entre aplicaciones o servicios de manera fiable y eficiente. Permite la comunicación asíncrona, lo que significa que los productores de mensajes no tienen que esperar a que los consumidores los procesen, mejorando la escalabilidad y la fiabilidad del sistema.",
+        technology: "Spring RabbitMQ",
+        repoUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/blob/master/23RabbitMQ/",
+        appUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/blob/master/23RabbitMQ/",
+        icon: "/img/rabbitMQ-icon.png" 
+      },
+      {//SPRING RabbitMQ:::Docker:
+        name: "Docker",
+        imageUrl: "/img/springCloud/springRabbitMQDocker.jpg",  
+        description: "Docker es una plataforma de software que permite empaquetar, distribuir y ejecutar aplicaciones de manera ligera y eficiente dentro de contenedores.",
+        technology: "Spring RabbitMQ",
+        repoUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/blob/master/23RabbitMQ/docker-compose.yml/",
+        appUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/blob/master/23RabbitMQ/docker-compose.yml/",
+        icon: "/img/rabbitMQ-icon.png" 
+      },
+      {//SPRING RabbitMQ:::Consumer:
+        name: "Consumer",
+        imageUrl: "/img/springCloud/springRabbitMQConsumer.jpg",  
+        description: "Modulo Consumer que escucha los mensajes",
+        technology: "Spring RabbitMQ",
+        repoUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/blob/master/23RabbitMQ/23RabbitConsumer/",
+        appUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/blob/master/23RabbitMQ/23RabbitConsumer/",
+        icon: "/img/rabbitMQ-icon.png" 
+      },
+      {//SPRING RabbitMQ:::Publisher:
+        name: "Publisher",
+        imageUrl: "/img/springCloud/springRabbitMQPublisher.jpg",  
+        description: "Modulo Publisher que publica los mensajes.",
+        technology: "Spring RabbitMQ",
+        repoUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/blob/master/23RabbitMQ/23RabbitPublisher/",
+        appUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/blob/master/23RabbitMQ/23RabbitPublisher/",
+        icon: "/img/rabbitMQ-icon.png" 
+      },
+      {//DOCKER docker:::Desktop:
+        name: "Docker",
+        imageUrl: "/img/docker/docker-desktop.jpg",  
+        description: "Docker, contenedores, imagenes, comandos",
+        technology: "Docker",
+        repoUrl: "https://github.com/jaoprogramador/Docker/tree/master/",
+        appUrl: "https://github.com/jaoprogramador/Docker/tree/master/",
+        icon: "/img/icons/docker-icon.png" 
+      },
+      {//DOCKER docker::::
+        name: "Comandos",
+        imageUrl: "/img/docker/docker-comandos.jpg",  
+        description: "Comandos Docker",
+        technology: "Docker",
+        repoUrl: "https://github.com/jaoprogramador/Docker/blob/master/DOCKER-EXAMPLE-SPRING-MySQL/ComandosDocker.txt",
+        appUrl: "https://github.com/jaoprogramador/Docker/blob/master/DOCKER-EXAMPLE-SPRING-MySQL/ComandosDocker.txt",
+        icon: "/img/icons/docker-icon.png" 
+      },
+      {//DOCKER docker::::
+        name: "Html en container",
+        imageUrl: "/img/docker/docker-html.jpg",  
+        description: "Desplegar una pagina en docker container",
+        technology: "Docker",
+        repoUrl: "https://github.com/jaoprogramador/Docker/tree/master/DOCKER-EXAMPLE",
+        appUrl: "https://github.com/jaoprogramador/Docker/tree/master/DOCKER-EXAMPLE",
+        icon: "/img/icons/docker-icon.png"  
+      },
+      {//DOCKER docker:::Publisher:
+        name: "Postgresql en container",
+        imageUrl: "/img/docker/docker-postgresql.jpg",  
+        description: "Desplegar postgresql en un contenedor de docker",
+        technology: "Docker",
+        repoUrl: "https://github.com/jaoprogramador/Docker/tree/master/DOCKER-EXAMPLE",
+        appUrl: "https://github.com/jaoprogramador/Docker/tree/master/DOCKER-EXAMPLE",
+        icon: "/img/icons/docker-icon.png"  
+      },
+      {//DOCKER docker:::Publisher:
+        name: "Spring y MySQL en container",
+        imageUrl: "/img/docker/docker-Springpostgresql.jpg",  
+        description: "Desplegar una API Rest de Spring en un contenedor que se comunica con otro contenedor de MySQL",
+        technology: "Docker",
+        repoUrl: "https://github.com/jaoprogramador/Docker/tree/master/DOCKER-EXAMPLE-SPRING-MySQL",
+        appUrl: "https://github.com/jaoprogramador/Docker/tree/master/DOCKER-EXAMPLE-SPRING-MySQL",
+        icon: "/img/icons/docker-icon.png"  
       },
       //Patrones de diseño
       {
