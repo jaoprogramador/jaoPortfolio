@@ -486,7 +486,7 @@ const apps = [
         icon: "/img/springBoot-icon.png" 
   
       },
-      //SPRING BATCH
+      //SPRING BATCH  
       {
         name: "Spring Batch",
         imageUrl: "/img/springBoot/spring-Batch.jpg",  
@@ -494,6 +494,39 @@ const apps = [
         technology: "Spring Framework ",
         repoUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/tree/master/21demoBatch",
         appUrl: "#",
+        icon: "/img/springBoot-icon.png" 
+  
+      },
+      //SPRING LAMBDA  
+      {
+        name: "Funciones Lambda",
+        imageUrl: "/img/springBoot/spring-lambda.jpg",  
+        description: "LAs funciones lambda son una característica de java 8 que te permite escribir funciones anónimas sin un nombre específico",
+        technology: "Spring Framework ",
+        repoUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/blob/master/21demoBatch/src/main/java/com/example/jao/batch/demo/listener/JobListener.java",
+        appUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/blob/master/21demoBatch/src/main/java/com/example/jao/batch/demo/listener/JobListener.java",
+        icon: "/img/springBoot-icon.png" 
+  
+      },
+      //SPRING MapStruct  
+      {
+        name: "MapStruct",
+        imageUrl: "/img/springBoot/spring-Mapper.jpg",  
+        description: "MapStruct es una herramienta (un code generator) que te ayuda a convertir automáticamente objetos entre clases: de una Entidad (UserEntity) a un DTO (UserDTO)",
+        technology: "Spring Framework ",
+        repoUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/tree/master/25MapStructExample",
+        appUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/tree/master/25MapStructExample",
+        icon: "/img/springBoot-icon.png" 
+  
+      },
+      //SPRING REDIS
+      {
+        name: "Redis",
+        imageUrl: "/img/springBoot/spring-redis.jpg",  
+        description: "Estrategias de carga en cache",
+        technology: "Spring Framework ",
+        repoUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/tree/master/24RedisDockerEstrategiaCache/24JaoFilmsApp",
+        appUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/tree/master/24RedisDockerEstrategiaCache/24JaoFilmsApp",
         icon: "/img/springBoot-icon.png" 
   
       },
@@ -735,12 +768,21 @@ const apps = [
         icon: "/img/rabbitMQ-icon.png" 
       },
       {//DOCKER docker:::Desktop:
-        name: "Docker",
+        name: "Dockerfile",
         imageUrl: "/img/docker/docker-desktop.jpg",  
-        description: "Docker, contenedores, imagenes, comandos",
+        description: "Dockerfile es el fichero con el que se va a generar la plantilla de la imagen docker",
         technology: "Docker",
-        repoUrl: "https://github.com/jaoprogramador/Docker/tree/master/",
-        appUrl: "https://github.com/jaoprogramador/Docker/tree/master/",
+        repoUrl: "https://github.com/jaoprogramador/Docker/blob/master/DOCKER-EXAMPLE/Dockerfile",
+        appUrl: "https://github.com/jaoprogramador/Docker/blob/master/DOCKER-EXAMPLE/Dockerfile",
+        icon: "/img/icons/docker-icon.png" 
+      },
+       {//DOCKER docker:::Desktop:
+        name: "Docker compose",
+        imageUrl: "/img/springboot/spring-docker-compose.jpg",  
+        description: "Docker Compose es una herramienta que te permite levantar varios contenedores Docker al mismo tiempo, definidos en un solo archivo .yml",
+        technology: "Docker",
+        repoUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/blob/master/23RabbitMQ/docker-compose.yml",
+        appUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/blob/master/23RabbitMQ/docker-compose.yml",
         icon: "/img/icons/docker-icon.png" 
       },
       {//DOCKER docker::::
