@@ -92,6 +92,7 @@ const PointmentForm = () => {
             email: "",
             fecha: "",
             hora: "",
+            emailCliente: formData.email, 
           }); // Limpia el formulario tras enviarlo
         },
         (error) => {

@@ -685,6 +685,15 @@ const apps = [
         appUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/tree/master/22jaoArcHexa",
         icon: "/img/springCloud-icon.png" 
       },
+       {//SPRING CLOUD::: Arquitectura Hexagonal Hinditex
+        name: "Arquitectura Hexagonal ",
+        imageUrl: "/img/springBoot/spring-ArquitecturaHexagonal2.jpg",  
+        description: "API Rest con spring, maven, JPA, Swagger, Lombock, Mapper, Junit, Docker, slf4j, Control de Excepciones… servicio que devuelve ordenados los articulos de inditex",
+        technology: "Spring Cloud",
+        repoUrl: "https://github.com/jaoprogramador/InditexProductosSpringRest",
+        appUrl: "https://github.com/jaoprogramador/InditexProductosSpringRest",
+        icon: "/img/springCloud-icon.png" 
+      },
       {//SPRING :::KAFKA:
         name: "KAFKA",
         imageUrl: "/img/springCloud/springArquitecturaKafka.jpg",  
@@ -778,7 +787,7 @@ const apps = [
       },
        {//DOCKER docker:::Desktop:
         name: "Docker compose",
-        imageUrl: "/img/springboot/spring-docker-compose.jpg",  
+        imageUrl: "/img/springBoot/spring-GITACTIONS.jpg",  
         description: "Docker Compose es una herramienta que te permite levantar varios contenedores Docker al mismo tiempo, definidos en un solo archivo .yml",
         technology: "Docker",
         repoUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/blob/master/23RabbitMQ/docker-compose.yml",
@@ -821,6 +830,140 @@ const apps = [
         appUrl: "https://github.com/jaoprogramador/Docker/tree/master/DOCKER-EXAMPLE-SPRING-MySQL",
         icon: "/img/icons/docker-icon.png"  
       },
+    
+    //KUBERNETES
+    //=============
+    //SPRING API BACK
+	  {
+      name: "API BACK",
+      imageUrl: "/img/springKubernetes/1BackAPI.jpg",  
+      description: "Crear API Back con Spring para devolver los marcadores de blogs con paginación por medio de REST",
+      technology: "Kubernetes",
+      repoUrl: "https://github.com/jaoprogramador/workspaceReactSpringKubernetesDockerFINAL/tree/main/26bookmarker-api",
+      appUrl: "https://github.com/jaoprogramador/workspaceReactSpringKubernetesDockerFINAL/tree/main/26bookmarker-api",
+      icon: "/img/springBoot-icon.png" 
+
+    },
+  
+  
+// TEST CONTROLLER 
+{
+      name: "Test Controller",
+      imageUrl: "/img/springKubernetes/2.TestController.jpg",  
+      description: "Vemos como testear un controller con los parametros que debe devolver un JSON parametrizando la llamada",
+      technology: "Kubernetes",
+      repoUrl: "https://github.com/jaoprogramador/workspaceReactSpringKubernetesDockerFINAL/blob/main/26bookmarker-api/src/test/java/com/jao/_bookmarker_api/BookmarksControllerTest.java",
+      appUrl: "https://github.com/jaoprogramador/workspaceReactSpringKubernetesDockerFINAL/blob/main/26bookmarker-api/src/test/java/com/jao/_bookmarker_api/BookmarksControllerTest.java",
+      icon: "/img/springBoot-icon.png" 
+
+    },
+//SPRING GIT ACTIONS
+    {
+      name: "GitHub Actions CI/CD Pipeline",
+      imageUrl: "/img/springKubernetes/3.GitHubActions.jpg",  
+      description: "Este workflow automatiza el proceso de construcción y empaquetado de una aplicación web basada en Spring Boot, Compila el proyecto con Maven, construye una imagen Docker usando Jib, y la publica en Docker Hub cuando hay cambios en la rama main",
+      technology: "Kubernetes",
+      repoUrl: "https://github.com/jaoprogramador/workspaceReactSpringKubernetesDockerFINAL/blob/main/26bookmarker-api/.github/workflows/build.yml",
+      appUrl: "https://github.com/jaoprogramador/workspaceReactSpringKubernetesDockerFINAL/blob/main/26bookmarker-api/.github/workflows/build.yml",
+      icon: "/img/springBoot-icon.png" 
+
+    },
+  //SPRING DOCKER-COMPOSE
+  {
+      name: "Docker compose",
+      imageUrl: "/img/springKubernetes/4.DockerizarAPI.jpg",  
+      description: "Crear dos docker-compose uno para API y otro para BD",
+      technology: "Kubernetes",
+      repoUrl: "https://github.com/jaoprogramador/workspaceReactSpringKubernetesDockerFINAL/blob/main/docker-compose-app.yml",
+      appUrl: "https://github.com/jaoprogramador/workspaceReactSpringKubernetesDockerFINAL/blob/main/docker-compose.yml",
+      icon: "/img/springBoot-icon.png" 
+
+    },
+  // FRONT
+  {
+      name: "Front con ReactJS, NextJS y Bootstrap",
+      imageUrl: "/img/springKubernetes/5.ReactNextJS.jpg",  
+      description: "Crear un front con con ReactJS, NextJS y Bootstrap para poder listar, buscar y crear marcadores de blogs",
+      technology: "Kubernetes",
+      repoUrl: "https://github.com/jaoprogramador/workspaceReactSpringKubernetesDockerFINAL/tree/main/bookmarker-ui-nextjs",
+      appUrl: "https://github.com/jaoprogramador/workspaceReactSpringKubernetesDockerFINAL/tree/main/bookmarker-ui-nextjs",
+      icon: "/img/springBoot-icon.png" 
+
+    },
+  // FRONT DOCKERDIZADO NEXTUI
+  {
+      name: "Como dockerizar el front",
+      imageUrl: "/img/springKubernetes/5.ReactNextJSDockerizing.jpg",  
+      description: "Crear un Dockerfile y un docker-compose para desplegar en docker la aplicacion UI por fases",
+      technology: "Kubernetes",
+      repoUrl: "https://github.com/jaoprogramador/workspaceReactSpringKubernetesDockerFINAL/blob/main/bookmarker-ui-nextjs/Dockerfile",
+      appUrl: "https://github.com/jaoprogramador/workspaceReactSpringKubernetesDockerFINAL/blob/main/26bookmarker-api/Dockerfile",
+      icon: "/img/springBoot-icon.png" 
+
+    },
+  // COMANDOS KUBERNETES
+  {
+      name: "Comandos de Kubernetes",
+      imageUrl: "/img/springKubernetes/22Comandos.jpg",  
+      description: "Como crear pods , borrar, aplicarlos, deploys",
+      technology: "Kubernetes ",
+      repoUrl: "https://github.com/jaoprogramador/workspaceReactSpringKubernetesDockerFINAL/blob/main/Kubernetes/ComandosKubernetes.txt",
+      appUrl: "https://github.com/jaoprogramador/workspaceReactSpringKubernetesDockerFINAL/blob/main/Kubernetes/ComandosKubernetes.txt",
+      icon: "/img/kubernetes-icon.png" 
+
+    },
+  {
+      name: "Pods y Deploy",
+      imageUrl: "/img/springKubernetes/22Pods.jpg",  
+      description: "Como crear pods ,  deploys",
+      technology: "Kubernetes ",
+      repoUrl: "https://github.com/jaoprogramador/workspaceReactSpringKubernetesDockerFINAL/blob/main/k8s/pod.yaml",
+      appUrl: "https://github.com/jaoprogramador/workspaceReactSpringKubernetesDockerFINAL/blob/main/k8s/pod.yaml",
+      icon: "/img/kubernetes-icon.png" 
+
+    },
+   {
+      name: "Config Maps y Secretos",
+      imageUrl: "/img/springKubernetes/22SecretsMaps.jpg",  
+      description: "Como crear mapas de SECRETS para tener menos accesible la información de las claves",
+      technology: "Kubernetes ",
+      repoUrl: "https://github.com/jaoprogramador/workspaceReactSpringKubernetesDockerFINAL/blob/main/k8s/1-config.yaml",
+      appUrl: "https://github.com/jaoprogramador/workspaceReactSpringKubernetesDockerFINAL/blob/main/k8s/1-config.yaml",
+      icon: "/img/kubernetes-icon.png" 
+
+    },
+  {
+      name: "Persistence Vol",
+      imageUrl: "/img/springKubernetes/22PersistenceVolumen.jpg",  
+      description: "Como definir un servicio de BD con volumenes de datos para no perder la información cada vez que reiniciamos",
+      technology: "Kubernetes ",
+      repoUrl: "https://github.com/jaoprogramador/workspaceReactSpringKubernetesDockerFINAL/blob/main/k8s/1-postgresdb.yaml",
+      appUrl: "https://github.com/jaoprogramador/workspaceReactSpringKubernetesDockerFINAL/blob/main/k8s/1-postgresdb.yaml",
+      icon: "/img/kubernetes-icon.png" 
+
+    },
+  {
+      name: "Exposing Pods",
+      imageUrl: "/img/springKubernetes/22Services.jpg",  
+      description: "Como exponer los servicios en kubernetes",
+      technology: "Kubernetes ",
+      repoUrl: "https://github.com/jaoprogramador/workspaceReactSpringKubernetesDockerFINAL/blob/main/k8s/3-bookmarker-api.yaml",
+      appUrl: "https://github.com/jaoprogramador/workspaceReactSpringKubernetesDockerFINAL/blob/main/k8s/3-bookmarker-api.yaml",
+      icon: "/img/kubernetes-icon.png" 
+
+    },
+  
+  {
+      name: "Routing",
+      imageUrl: "/img/springKubernetes/22Routing.jpg",  
+      description: "Como definir el enrutado de kubernetes con NGINX",
+      technology: "Kubernetes ",
+      repoUrl: "https://github.com/jaoprogramador/workspaceReactSpringKubernetesDockerFINAL/blob/main/k8s/5-ingress-api.yaml",
+      appUrl: "https://github.com/jaoprogramador/workspaceReactSpringKubernetesDockerFINAL/blob/main/k8s/6-ingress-ui.yaml",
+      icon: "/img/kubernetes-icon.png" 
+
+    },
+  
       //Patrones de diseño
       {
         name: "Patrones de diseño",
