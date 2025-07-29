@@ -530,6 +530,17 @@ const apps = [
         icon: "/img/springBoot-icon.png" 
   
       },
+      //SPRING Caffeine
+      {
+        name: "Redis",
+        imageUrl: "/img/springBoot/spring-caffeine.jpg",  
+        description: "Estrategias de carga en cache con la librería caffeine",
+        technology: "Spring Framework ",
+        repoUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/tree/master/24spring-caffeine-poc-main",
+        appUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/tree/master/24spring-caffeine-poc-main",
+        icon: "/img/springBoot-icon.png" 
+  
+      },
       //SPRING CLOUD 
       {//
         name: "Spring Cloud Microservicios",
@@ -694,6 +705,148 @@ const apps = [
         appUrl: "https://github.com/jaoprogramador/InditexProductosSpringRest",
         icon: "/img/springCloud-icon.png" 
       },
+      //------------------------------------------------------------------------------------------------PROYECTO MICROSERVICIOS
+      //PRIMER MICROSERVICIO
+      //DISCOVERY SERVICE
+      //CONFIG SERVICE
+      //REFRESCANDO CONFIGURACIONES
+      //HASHCORP VAULT
+      //MESSAGE BROKER, REFRESHH CONF RABBITMQ DOCKER
+      //API GATEWAY
+      //KEYCLOACK
+      //JWT OAUTH
+      //PATRON CIRCUIT BREAKER
+       //----------------------------------------------------------------------------------------------/PROYECTO MICROSERVICIOS
+    {//PRIMER MICROSERVICIO
+    name: "Primer Microservicio Reserva-ms ",
+    imageUrl: "/img/springMS17/spring-primerMS.jpg",  
+    description: "API Rest con spring, maven, JPA, Swagger, Lombock, Mapper, Junit, Docker, slf4j, Control de Excepciones… servicio que devuelve ordenados los articulos de inditex",
+    technology: "Microservicios",
+    repoUrl: "https://github.com/jaoprogramador/workspaceMSBookingJAO/tree/microserviciosConfigDiscovery1/Reservas-ms",
+    appUrl: "https://github.com/jaoprogramador/workspaceMSBookingJAO/tree/microserviciosConfigDiscovery1/Reservas-ms",
+    repoLOCAL: "C:\Users\Documents\Juan PC guillermo SpringAngularAWS\WORKSPACES\workspaceMSBookingJAO",
+    icon: "/img/springCloud-icon.png" 
+    },
+
+    {//DISCOVERY SERVICE
+    name: "Discovery service ",
+    imageUrl: "/img/springMS17/spring-Discovery.jpg",  
+    description: "Servicio Eureka para registro y localización automática de microservicios dentro del ecosistema distribuido.",
+    technology: "Microservicios",
+    repoUrl: "https://github.com/jaoprogramador/workspaceMSBookingJAO/tree/microserviciosConfigDiscovery1/Discovery-service",
+    appUrl: "https://github.com/jaoprogramador/workspaceMSBookingJAO/tree/microserviciosConfigDiscovery1/Discovery-service",
+    repoLOCAL: "C:\Users\Documents\Juan PC guillermo SpringAngularAWS\WORKSPACES\workspaceMSBookingJAO",
+    icon: "/img/springCloud-icon.png" 
+  },
+ 
+  {//CONFIG SERVICE
+    name: "Config service ",
+    imageUrl: "/img/springMS17/spring-Config.jpg",  
+    description: "",
+    technology: "Servidor centralizado de configuración. Proporciona archivos de propiedades a los microservicios desde un repositorio Git.",
+    repoUrl: "https://github.com/jaoprogramador/workspaceMSBookingJAO/tree/microserviciosConfigDiscovery1/Config-server",
+    appUrl: "https://github.com/jaoprogramador/workspaceMSBookingJAO/tree/microserviciosConfigDiscovery1/Config-server",
+    repoLOCAL: "C:\Users\Documents\Juan PC guillermo SpringAngularAWS\WORKSPACES\workspaceMSBookingJAO",
+    icon: "/img/springCloud-icon.png" 
+    },
+    {//REFRESCANDO CONFIGURACIONES
+    name: "Refrescar configuraciones",
+    imageUrl: "/img/springMS17/spring-Refresh.jpg",  
+    description: "",
+    technology: "Mecanismo para actualizar configuraciones en caliente sin reiniciar servicios usando Spring Actuator y Bus.",
+    repoUrl: "https://github.com/jaoprogramador/workspaceMSBookingJAO/blob/microserviciosConfigDiscovery1/Service-configuration/GestVuelos-ms-dev.properties",
+    appUrl: "https://github.com/jaoprogramador/workspaceMSBookingJAO/blob/microserviciosConfigDiscovery1/Service-configuration/GestVuelos-ms-dev.properties",
+    repoLOCAL: "C:\Users\Documents\Juan PC guillermo SpringAngularAWS\WORKSPACES\workspaceMSBookingJAO",
+    icon: "/img/springCloud-icon.png" 
+    },
+    {//HASHCORP VAULT 
+    name: "HashCorp Vault",
+    imageUrl: "/img/springMS17/spring-Vault.jpg",  
+    description: "Gestión segura de secretos y credenciales mediante integración con HashiCorp Vault y Spring Cloud Config.",
+    technology: "Microservicios",
+    repoUrl: "https://github.com/jaoprogramador/workspaceMSBookingJAO/blob/microserviciosVaultAPIGatewayKeycloak/Service-configuration/Reservas-ms-dev.properties",
+    appUrl: "https://github.com/jaoprogramador/workspaceMSBookingJAO/blob/microserviciosVaultAPIGatewayKeycloak/Service-configuration/Reservas-ms-dev.properties",
+    repoLOCAL: "C:\UsersDocuments\Juan PC guillermo SpringAngularAWS\WORKSPACES\workspaceMSBookingJAO",
+    icon: "/img/springCloud-icon.png" 
+    },
+    {//MESSAGE BROKER, REFRESH CONF RABBITMQ DOCKER
+    name: "Message broker, Refresh, RabbitMQ, Docker",
+    imageUrl: "/img/springMS17/spring-Message.jpg",  
+    description: "Comunicación asincrónica con RabbitMQ, refresco de configuración vía Spring Cloud Bus, todo orquestado con Docker.",
+    technology: "Microservicios",
+    repoUrl: "https://github.com/jaoprogramador/workspaceMSBookingJAO/blob/microserviciosVaultAPIGatewayKeycloak/Reservas-ms/docker-compose.yml",
+    appUrl: "https://github.com/jaoprogramador/workspaceMSBookingJAO/blob/microserviciosVaultAPIGatewayKeycloak/Reservas-ms/docker-compose.yml",
+    repoLOCAL: "C:\Users\Documents\Juan PC guillermo SpringAngularAWS\WORKSPACES\workspaceMSBookingJAO",
+    icon: "/img/springCloud-icon.png" 
+    },
+    {//API GATEWAY
+    name: "API GATEWAY",
+    imageUrl: "/img/springMS17/spring-apigateway.jpg",  
+    description: "Puerta de entrada unificada. Maneja enrutamiento, seguridad, balanceo y control de tráfico hacia microservicios.",
+    technology: "Microservicios",
+    repoUrl: "https://github.com/jaoprogramador/workspaceMSBookingJAO/tree/microserviciosVaultAPIGatewayKeycloak/Api-gateway",
+    appUrl: "https://github.com/jaoprogramador/workspaceMSBookingJAO/tree/microserviciosVaultAPIGatewayKeycloak/Api-gateway",
+    repoLOCAL: "C:\Users\Documents\Juan PC guillermo SpringAngularAWS\WORKSPACES\workspaceMSBookingJAO",
+    icon: "/img/springCloud-icon.png" 
+    },
+    {//KEYCLOACK
+    name: "KEYCLOACK",
+    imageUrl: "/img/springMS17/spring-keycloak.jpg",  
+    description: "Proveedor de identidad que gestiona autenticación y autorización con OAuth2/OpenID Connect para toda la arquitectura.",
+    technology: "Microservicios",
+    repoUrl: "https://github.com/jaoprogramador/workspaceMSBookingJAO/blob/microserviciosNotificacionesReservas/Api-gateway/src/main/resources/application.properties",
+    appUrl: "https://github.com/jaoprogramador/workspaceMSBookingJAO/blob/microserviciosNotificacionesReservas/Api-gateway/src/main/resources/application.properties",
+    repoLOCAL: "C:\Users\Documents\Juan PC guillermo SpringAngularAWS\WORKSPACES\workspaceMSBookingJAO",
+    icon: "/img/springCloud-icon.png" 
+    },
+    {//JWT OAUTH
+    name: "JWT OAUTH",
+    imageUrl: "/img/springMS17/spring-JWT.jpg",  
+    description: "Implementación de autenticación segura basada en tokens JWT y protocolo OAuth2 usando Spring Security.",
+    technology: "Microservicios",
+    repoUrl: "https://github.com/jaoprogramador/workspaceMSBookingJAO/blob/microserviciosNotificacionesReservas/Reservas-ms/src/main/java/com/jao/booking/config/SecurityConfiguration.java",
+    appUrl: "https://github.com/jaoprogramador/workspaceMSBookingJAO/blob/microserviciosNotificacionesReservas/Reservas-ms/src/main/java/com/jao/booking/config/SecurityConfiguration.java",
+    repoLOCAL: "C:\Users\Documents\Juan PC guillermo SpringAngularAWS\WORKSPACES\workspaceMSBookingJAO",
+    icon: "/img/springCloud-icon.png" 
+    },
+    {//PATRON CIRCUIT BREAKER
+    name: "Patron Circuit breaker",
+    imageUrl: "/img/springMS17/spring-circuitbreaker.jpg",  
+    description: "Mecanismo de tolerancia a fallos con Resilience4j para evitar cascadas de errores entre microservicios dependientes.",
+    technology: "Microservicios",
+    repoUrl: "https://github.com/jaoprogramador/workspaceMSBookingJAO/blob/microserviciosNotificacionesReservas/Reservas-ms/src/main/java/com/jao/booking/controller/ReservaController.java",
+    appUrl: "https://github.com/jaoprogramador/workspaceMSBookingJAO/blob/microserviciosNotificacionesReservas/Reservas-ms/src/main/java/com/jao/booking/controller/ReservaController.java",
+    repoLOCAL: "C:\Users\Documents\Juan PC guillermo SpringAngularAWS\WORKSPACES\workspaceMSBookingJAO",
+    icon: "/img/springCloud-icon.png" 
+    },
+    {//FLYWAY
+    name: "Flyway",
+    imageUrl: "/img/springMS17/spring-flyway.jpg",  
+    description: "Control de versiones de base de datos. Permite aplicar migraciones SQL de forma automática y segura al iniciar la app.",
+    technology: "Microservicios",
+    repoUrl: "https://github.com/jaoprogramador/workspaceMSBookingJAO/blob/microserviciosNotificacionesReservas/Reservas-ms/src/main/java/com/jao/booking/controller/ReservaController.java",
+    appUrl: "https://github.com/jaoprogramador/workspaceMSBookingJAO/blob/microserviciosNotificacionesReservas/Reservas-ms/src/main/java/com/jao/booking/controller/ReservaController.java",
+    repoLOCAL: "C:\UsersDocuments\Juan PC guillermo SpringAngularAWS\WORKSPACES\workspaceMSBookingJAO",
+    icon: "/img/springCloud-icon.png" 
+    },
+    {//GRAFANA PROMETHEUS
+    "name": "Monitorización con Prometheus y Grafana",
+    "imageUrl": "/img/springMS17/spring-monitoring.jpg",
+    "description": "Integración de Prometheus para recolectar métricas y Grafana para visualizar en tiempo real el estado de los microservicios.",
+    "technology": "Microservicios",
+    "repoUrl": "https://github.com/jaoprogramador/workspaceMSBookingJAO/tree/microserviciosMonitoringGrafanaPrometheus",
+    "appUrl": "https://github.com/jaoprogramador/workspaceMSBookingJAO/tree/microserviciosMonitoringGrafanaPrometheus",
+    "repoLOCAL": "C:\\Users\\user\\Documents\\Juan PC guillermo SpringAngularAWS\\WORKSPACES\\workspaceMSBookingJAO",
+    "icon": "/img/springCloud-icon.png"
+  },
+       //----------------------------------------------------------------------------------------------TEMAS PENDIENTES
+       // CAFFEINE
+       // SOLID
+       // MIGRACIONES DATOS
+       // OPEN API API FIRST
+       //----------------------------------------------------------------------------------------------/TEMAS PENDIENTES
+
+
       {//SPRING :::KAFKA:
         name: "KAFKA",
         imageUrl: "/img/springCloud/springArquitecturaKafka.jpg",  
@@ -971,6 +1124,17 @@ const apps = [
         description: "Patrones de diseño, Adapter, Singleton, Build, Facade, ",
         technology: "Java",
         repoUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/tree/master/11SecuritySpring-patterns",
+        appUrl: "#",
+        icon: "/img/springBoot-icon.png" 
+  
+      },
+      //Principios SOLID
+      {
+        name: "Principios SOLID",
+        imageUrl: "/img/java/PrincipiosSOLID.jpg",  
+        description: "Ejemplo sencillo de como aplicar los principios SOLID ",
+        technology: "Java",
+        repoUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/tree/master/PrindipiosSOLID",
         appUrl: "#",
         icon: "/img/springBoot-icon.png" 
   
