@@ -742,7 +742,7 @@ const apps = [
   {//CONFIG SERVICE
     name: "Config service ",
     imageUrl: "/img/springMS17/spring-Config.jpg",  
-    description: "",
+    description: "Microservicios",
     technology: "Servidor centralizado de configuración. Proporciona archivos de propiedades a los microservicios desde un repositorio Git.",
     repoUrl: "https://github.com/jaoprogramador/workspaceMSBookingJAO/tree/microserviciosConfigDiscovery1/Config-server",
     appUrl: "https://github.com/jaoprogramador/workspaceMSBookingJAO/tree/microserviciosConfigDiscovery1/Config-server",
@@ -752,7 +752,7 @@ const apps = [
     {//REFRESCANDO CONFIGURACIONES
     name: "Refrescar configuraciones",
     imageUrl: "/img/springMS17/spring-Refresh.jpg",  
-    description: "",
+    description: "Microservicios",
     technology: "Mecanismo para actualizar configuraciones en caliente sin reiniciar servicios usando Spring Actuator y Bus.",
     repoUrl: "https://github.com/jaoprogramador/workspaceMSBookingJAO/blob/microserviciosConfigDiscovery1/Service-configuration/GestVuelos-ms-dev.properties",
     appUrl: "https://github.com/jaoprogramador/workspaceMSBookingJAO/blob/microserviciosConfigDiscovery1/Service-configuration/GestVuelos-ms-dev.properties",
@@ -829,13 +829,54 @@ const apps = [
     repoLOCAL: "C:\UsersDocuments\Juan PC guillermo SpringAngularAWS\WORKSPACES\workspaceMSBookingJAO",
     icon: "/img/springCloud-icon.png" 
     },
-    {//GRAFANA PROMETHEUS
-    "name": "Monitorización con Prometheus y Grafana",
+    {//GRAFANA 
+    "name": "Monitorización con  Grafana",
     "imageUrl": "/img/springMS17/spring-monitoring.jpg",
     "description": "Integración de Prometheus para recolectar métricas y Grafana para visualizar en tiempo real el estado de los microservicios.",
     "technology": "Microservicios",
     "repoUrl": "https://github.com/jaoprogramador/workspaceMSBookingJAO/tree/microserviciosMonitoringGrafanaPrometheus",
     "appUrl": "https://github.com/jaoprogramador/workspaceMSBookingJAO/tree/microserviciosMonitoringGrafanaPrometheus",
+    "repoLOCAL": "C:\\Users\\user\\Documents\\Juan PC guillermo SpringAngularAWS\\WORKSPACES\\workspaceMSBookingJAO",
+    "icon": "/img/springCloud-icon.png"
+  },
+  {// PROMETHEUS
+    "name": "Monitorización con Prometheus",
+    "imageUrl": "/img/springMS17/spring-monitoring-prometheus.jpg",
+    "description": "Integración de Prometheus para recolectar métricas y Grafana para visualizar en tiempo real el estado de los microservicios.",
+    "technology": "Microservicios",
+    "repoUrl": "https://github.com/jaoprogramador/workspaceMSBookingJAO/tree/microserviciosMonitoringGrafanaPrometheus",
+    "appUrl": "https://github.com/jaoprogramador/workspaceMSBookingJAO/tree/microserviciosMonitoringGrafanaPrometheus",
+    "repoLOCAL": "C:\\Users\\user\\Documents\\Juan PC guillermo SpringAngularAWS\\WORKSPACES\\workspaceMSBookingJAO",
+    "icon": "/img/springCloud-icon.png"
+  },
+   {// GESTIONHOTELES
+    "name": "Microservicio para la Gestión de Hoteles",
+    "imageUrl": "/img/springMS17/spring-monitoring.jpg",
+    "description": "Microservicio para gestionar todo lo referente a los hoteles.",
+    "technology": "Microservicios",
+    "repoUrl": "https://github.com/jaoprogramador/workspaceMSBookingJAO/tree/release_Usuarios_GestHoteles20250730/GestHoteles-ms",
+    "appUrl": "https://github.com/jaoprogramador/workspaceMSBookingJAO/tree/release_Usuarios_GestHoteles20250730/GestHoteles-ms",
+    "repoLOCAL": "C:\\Users\\user\\Documents\\Juan PC guillermo SpringAngularAWS\\WORKSPACES\\workspaceMSBookingJAO",
+    "icon": "/img/springCloud-icon.png"
+  },
+  {// USUARIOS
+    "name": "Microservicio para la Gestión de usuarios de la aplicación",
+    "imageUrl": "/img/springMS17/spring-monitoring.jpg",
+    "description": "Microservicio para gestionar todo lo referente a los usuarios de la aplicación.",
+    "technology": "Microservicios",
+    "repoUrl": "https://github.com/jaoprogramador/workspaceMSBookingJAO/tree/release_Usuarios_GestHoteles20250730/Usuarios-ms",
+    "appUrl": "https://github.com/jaoprogramador/workspaceMSBookingJAO/tree/release_Usuarios_GestHoteles20250730/Usuarios-ms",
+    "repoLOCAL": "C:\\Users\\user\\Documents\\Juan PC guillermo SpringAngularAWS\\WORKSPACES\\workspaceMSBookingJAO",
+    "icon": "/img/springCloud-icon.png"
+  },
+  ,
+  {// WEBFLUX
+    "name": "Programación Reactiva asincrona con webflux",
+    "imageUrl": "/img/springMS17/spring-monitoring.jpg",
+    "description": "Programación Reactiva asincrona con webflux",
+    "technology": "Microservicios",
+    "repoUrl": "https://github.com/jaoprogramador/workspaceMSBookingJAO/tree/release_Usuarios_GestHoteles20250730/Usuarios-ms",
+    "appUrl": "https://github.com/jaoprogramador/workspaceMSBookingJAO/tree/release_Usuarios_GestHoteles20250730/Usuarios-ms",
     "repoLOCAL": "C:\\Users\\user\\Documents\\Juan PC guillermo SpringAngularAWS\\WORKSPACES\\workspaceMSBookingJAO",
     "icon": "/img/springCloud-icon.png"
   },
