@@ -5,9 +5,9 @@
   "devFiles": [],
   "ampDevFiles": [],
   "lowPriorityFiles": [
-    "static/vFAohrnX1kgwAiRgBz15_/_buildManifest.js",
-    "static/vFAohrnX1kgwAiRgBz15_/_ssgManifest.js",
-    "static/vFAohrnX1kgwAiRgBz15_/_middlewareManifest.js"
+    "static/5ccLUP11GEvaQh1vRFLDg/_buildManifest.js",
+    "static/5ccLUP11GEvaQh1vRFLDg/_ssgManifest.js",
+    "static/5ccLUP11GEvaQh1vRFLDg/_middlewareManifest.js"
   ],
   "pages": {
     "/": [
@@ -75,7 +75,7 @@
       "static/chunks/144-4ce2b94271136310.js",
       "static/chunks/941-ca823945d5078c94.js",
       "static/css/9210560280e27ebb.css",
-      "static/chunks/pages/frameworks-6cb13e4588395d41.js"
+      "static/chunks/pages/frameworks-dfe218c4886ebacd.js"
     ],
     "/frameworks/[slug]": [
       "static/chunks/webpack-570070fdbf91d417.js",
@@ -97,8 +97,8 @@
       "static/chunks/94726e6d-c72a854d4bfca4da.js",
       "static/chunks/144-4ce2b94271136310.js",
       "static/chunks/941-ca823945d5078c94.js",
-      "static/css/9210560280e27ebb.css",
-      "static/chunks/pages/pointmentForm-67c4d924bc260613.js"
+      "static/chunks/pages/pointmentForm-67c4d924bc260613.js",
+      "static/css/9210560280e27ebb.css"
     ],
     "/resume": [
       "static/chunks/webpack-570070fdbf91d417.js",
