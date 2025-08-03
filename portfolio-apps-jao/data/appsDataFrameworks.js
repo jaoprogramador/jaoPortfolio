@@ -851,7 +851,7 @@ const apps = [
   },
    {// GESTIONHOTELES
     "name": "Microservicio para la Gestión de Hoteles",
-    "imageUrl": "/img/springMS17/spring-monitoring.jpg",
+    "imageUrl": "/img/springMS17/spring-usuarios-ms.jpg",
     "description": "Microservicio para gestionar todo lo referente a los hoteles.",
     "technology": "Microservicios",
     "repoUrl": "https://github.com/jaoprogramador/workspaceMSBookingJAO/tree/release_Usuarios_GestHoteles20250730/GestHoteles-ms",
@@ -861,7 +861,7 @@ const apps = [
   },
   {// USUARIOS
     "name": "Microservicio para la Gestión de usuarios de la aplicación",
-    "imageUrl": "/img/springMS17/spring-monitoring.jpg",
+    "imageUrl": "/img/springMS17/spring-usuarios-ms.jpg",
     "description": "Microservicio para gestionar todo lo referente a los usuarios de la aplicación.",
     "technology": "Microservicios",
     "repoUrl": "https://github.com/jaoprogramador/workspaceMSBookingJAO/tree/release_Usuarios_GestHoteles20250730/Usuarios-ms",
@@ -872,7 +872,7 @@ const apps = [
   ,
   {// WEBFLUX
     "name": "Programación Reactiva asincrona con webflux",
-    "imageUrl": "/img/springMS17/spring-monitoring.jpg",
+    "imageUrl": "/img/springMS17/spring-webflux.jpg",
     "description": "Programación Reactiva asincrona con webflux",
     "technology": "Microservicios",
     "repoUrl": "https://github.com/jaoprogramador/workspaceMSBookingJAO/tree/release_Usuarios_GestHoteles20250730/Usuarios-ms",
