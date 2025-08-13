@@ -532,7 +532,7 @@ const apps = [
       },
       //SPRING Caffeine
       {
-        name: "Redis",
+        name: "Caffeine",
         imageUrl: "/img/springBoot/spring-caffeine.jpg",  
         description: "Estrategias de carga en cache con la librería caffeine",
         technology: "Spring Framework ",
@@ -718,9 +718,9 @@ const apps = [
       //PATRON CIRCUIT BREAKER
        //----------------------------------------------------------------------------------------------/PROYECTO MICROSERVICIOS
     {//PRIMER MICROSERVICIO
-    name: "Primer Microservicio Reserva-ms ",
+    name: "Primer Microservicio",
     imageUrl: "/img/springMS17/spring-primerMS.jpg",  
-    description: "API Rest con spring, maven, JPA, Swagger, Lombock, Mapper, Junit, Docker, slf4j, Control de Excepciones… servicio que devuelve ordenados los articulos de inditex",
+    description: "API Rest con spring, maven, JPA, Swagger, Lombock, Mapper, Junit, Docker, slf4j, Control de Excepciones… servicio cn el que gestionamos las reservas de Vuelos",
     technology: "Microservicios",
     repoUrl: "https://github.com/jaoprogramador/workspaceMSBookingJAO/tree/microserviciosConfigDiscovery1/Reservas-ms",
     appUrl: "https://github.com/jaoprogramador/workspaceMSBookingJAO/tree/microserviciosConfigDiscovery1/Reservas-ms",
@@ -742,8 +742,8 @@ const apps = [
   {//CONFIG SERVICE
     name: "Config service ",
     imageUrl: "/img/springMS17/spring-Config.jpg",  
-    description: "Microservicios",
-    technology: "Servidor centralizado de configuración. Proporciona archivos de propiedades a los microservicios desde un repositorio Git.",
+    description: "Servidor centralizado de configuración. Proporciona archivos de propiedades a los microservicios desde un repositorio Git",
+    technology: "Microservicios",
     repoUrl: "https://github.com/jaoprogramador/workspaceMSBookingJAO/tree/microserviciosConfigDiscovery1/Config-server",
     appUrl: "https://github.com/jaoprogramador/workspaceMSBookingJAO/tree/microserviciosConfigDiscovery1/Config-server",
     repoLOCAL: "C:\Users\Documents\Juan PC guillermo SpringAngularAWS\WORKSPACES\workspaceMSBookingJAO",
@@ -752,8 +752,8 @@ const apps = [
     {//REFRESCANDO CONFIGURACIONES
     name: "Refrescar configuraciones",
     imageUrl: "/img/springMS17/spring-Refresh.jpg",  
-    description: "Microservicios",
-    technology: "Mecanismo para actualizar configuraciones en caliente sin reiniciar servicios usando Spring Actuator y Bus.",
+    description: "Mecanismo para actualizar configuraciones en caliente sin reiniciar servicios usando Spring Actuator y Bus.",
+    technology: "Microservicios",
     repoUrl: "https://github.com/jaoprogramador/workspaceMSBookingJAO/blob/microserviciosConfigDiscovery1/Service-configuration/GestVuelos-ms-dev.properties",
     appUrl: "https://github.com/jaoprogramador/workspaceMSBookingJAO/blob/microserviciosConfigDiscovery1/Service-configuration/GestVuelos-ms-dev.properties",
     repoLOCAL: "C:\Users\Documents\Juan PC guillermo SpringAngularAWS\WORKSPACES\workspaceMSBookingJAO",
@@ -780,7 +780,7 @@ const apps = [
     icon: "/img/springCloud-icon.png" 
     },
     {//API GATEWAY
-    name: "API GATEWAY",
+    name: "API Gateway",
     imageUrl: "/img/springMS17/spring-apigateway.jpg",  
     description: "Puerta de entrada unificada. Maneja enrutamiento, seguridad, balanceo y control de tráfico hacia microservicios.",
     technology: "Microservicios",
@@ -790,7 +790,7 @@ const apps = [
     icon: "/img/springCloud-icon.png" 
     },
     {//KEYCLOACK
-    name: "KEYCLOACK",
+    name: "KEYCLOAK",
     imageUrl: "/img/springMS17/spring-keycloak.jpg",  
     description: "Proveedor de identidad que gestiona autenticación y autorización con OAuth2/OpenID Connect para toda la arquitectura.",
     technology: "Microservicios",
@@ -830,7 +830,7 @@ const apps = [
     icon: "/img/springCloud-icon.png" 
     },
     {//GRAFANA 
-    "name": "Monitorización con  Grafana",
+    "name": "Grafana",
     "imageUrl": "/img/springMS17/spring-monitoring.jpg",
     "description": "Integración de Prometheus para recolectar métricas y Grafana para visualizar en tiempo real el estado de los microservicios.",
     "technology": "Microservicios",
@@ -840,7 +840,7 @@ const apps = [
     "icon": "/img/springCloud-icon.png"
   },
   {// PROMETHEUS
-    "name": "Monitorización con Prometheus",
+    "name": "Prometheus",
     "imageUrl": "/img/springMS17/spring-monitoring-prometheus.jpg",
     "description": "Integración de Prometheus para recolectar métricas y Grafana para visualizar en tiempo real el estado de los microservicios.",
     "technology": "Microservicios",
@@ -850,7 +850,7 @@ const apps = [
     "icon": "/img/springCloud-icon.png"
   },
    {// GESTIONHOTELES
-    "name": "Microservicio para la Gestión de Hoteles",
+    "name": "Gestión de Hoteles",
     "imageUrl": "/img/springMS17/spring-usuarios-ms.jpg",
     "description": "Microservicio para gestionar todo lo referente a los hoteles.",
     "technology": "Microservicios",
@@ -860,20 +860,30 @@ const apps = [
     "icon": "/img/springCloud-icon.png"
   },
   {// USUARIOS
-    "name": "Microservicio para la Gestión de usuarios de la aplicación",
+    "name": "Usuarios",
     "imageUrl": "/img/springMS17/spring-usuarios-ms.jpg",
     "description": "Microservicio para gestionar todo lo referente a los usuarios de la aplicación.",
     "technology": "Microservicios",
-    "repoUrl": "https://github.com/jaoprogramador/workspaceMSBookingJAO/tree/release_Usuarios_GestHoteles20250730/Usuarios-ms",
-    "appUrl": "https://github.com/jaoprogramador/workspaceMSBookingJAO/tree/release_Usuarios_GestHoteles20250730/Usuarios-ms",
+    "repoUrl": "https://github.com/jaoprogramador/workspaceMSBookingJAO/blob/UsuariosNotificacionesKafka20259813/Usuarios-ms",
+    "appUrl": "https://github.com/jaoprogramador/workspaceMSBookingJAO/blob/UsuariosNotificacionesKafka20259813/Usuarios-ms",
+    "repoLOCAL": "C:\\Users\\user\\Documents\\Juan PC guillermo SpringAngularAWS\\WORKSPACES\\workspaceMSBookingJAO",
+    "icon": "/img/springCloud-icon.png"
+  },
+  {// KAFKA
+    "name": "Usuarios-Notificaciones",
+    "imageUrl": "/img/springMS17/spring-usuarios-ms.jpg",
+    "description": "Ver como comunicar el microservicio Usuario con Notificaciones con Apache Kafka-zookeeper con una petición asincrona cuando demos de alta a un usuario, mandando un mail al admin del sistema.",
+    "technology": "Microservicios",
+    "repoUrl": "https://github.com/jaoprogramador/workspaceMSBookingJAO/blob/UsuariosNotificacionesKafka20259813/Notificaciones-ms/src/main/java/com/jao/booking/listener/ReservasRBTListener.java",
+    "appUrl": "https://github.com/jaoprogramador/workspaceMSBookingJAO/blob/UsuariosNotificacionesKafka20259813/Notificaciones-ms/src/main/java/com/jao/booking/listener/ReservasRBTListener.java",
     "repoLOCAL": "C:\\Users\\user\\Documents\\Juan PC guillermo SpringAngularAWS\\WORKSPACES\\workspaceMSBookingJAO",
     "icon": "/img/springCloud-icon.png"
   },
   ,
   {// WEBFLUX
-    "name": "Programación Reactiva asincrona con webflux",
+    "name": "Webflux",
     "imageUrl": "/img/springMS17/spring-webflux.jpg",
-    "description": "Programación Reactiva asincrona con webflux",
+    "description": "Programación Reactiva asincrona con webflux. Miroservicio de Alquiler de Vehículos",
     "technology": "Microservicios",
     "repoUrl": "https://github.com/jaoprogramador/workspaceMSBookingJAO/tree/release_Usuarios_GestHoteles20250730/Usuarios-ms",
     "appUrl": "https://github.com/jaoprogramador/workspaceMSBookingJAO/tree/release_Usuarios_GestHoteles20250730/Usuarios-ms",
