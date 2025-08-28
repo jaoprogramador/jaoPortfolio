@@ -6,7 +6,7 @@ preview: >-
   OAuth erabiltzaileen baliabideetarako sarbidea ematen duen autorizazio estandar bat da, haien kredentzialak partekatu gabe. Post honetan, OAuth konfiguratzen irakatsiko dizugu Spring Security erabiliz Java aplikazio batean.
 
 image: >-
-  /images/blogs/moritz-ludtke-K4n6CW8so84-unsplash.jpg
+  https://images.unsplash.com/photo-1618367588411-d9a90fefa881?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80
 ---
 
 # OAuth-ri sarrera Spring Security-rekin

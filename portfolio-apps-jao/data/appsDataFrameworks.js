@@ -849,6 +849,16 @@ const apps = [
     "repoLOCAL": "C:\\Users\\user\\Documents\\Juan PC guillermo SpringAngularAWS\\WORKSPACES\\workspaceMSBookingJAO",
     "icon": "/img/springCloud-icon.png"
   },
+  {// MICROMETER
+    "name": "Micrometer",
+    "imageUrl": "/img/springMS17/spring-monitoring-micrometer.jpg",
+    "description": "Micrometer actúa como una capa de abstracción para métricas. Te permite recolectar datos de monitoreo (como conteos, tiempos de ejecución, uso de memoria, etc.) sin atarte a una sola herramienta de monitoreo",
+    "technology": "Microservicios",
+    "repoUrl": "https://github.com/jaoprogramador/workspaceMSBookingJAO/tree/microserviciosMonitoringGrafanaPrometheus",
+    "appUrl": "https://github.com/jaoprogramador/workspaceMSBookingJAO/tree/microserviciosMonitoringGrafanaPrometheus",
+    "repoLOCAL": "C:\\Users\\user\\Documents\\Juan PC guillermo SpringAngularAWS\\WORKSPACES\\workspaceMSBookingJAO",
+    "icon": "/img/springCloud-icon.png"
+  },
    {// GESTIONHOTELES
     "name": "Gestión de Hoteles",
     "imageUrl": "/img/springMS17/spring-usuarios-ms.jpg",
@@ -879,14 +889,24 @@ const apps = [
     "repoLOCAL": "C:\\Users\\user\\Documents\\Juan PC guillermo SpringAngularAWS\\WORKSPACES\\workspaceMSBookingJAO",
     "icon": "/img/springCloud-icon.png"
   },
+   {// RESERVA-HOTELES
+    "name": "Reserva-Hoteles",
+    "imageUrl": "/img/springMS17/spring-reservahoteles.jpg",
+    "description": "Ver como comunicar el microservicio Reserva con Hoteles con feign.",
+    "technology": "Microservicios",
+    "repoUrl": "https://github.com/jaoprogramador/workspaceMSBookingJAO/blob/release_Usuarios_GestHoteles20250730/Reservas-ms/src/main/java/com/jao/booking/client/GestVuelosClient.java",
+    "appUrl": "https://github.com/jaoprogramador/workspaceMSBookingJAO/blob/release_Usuarios_GestHoteles20250730/Reservas-ms/src/main/java/com/jao/booking/client/GestVuelosClient.java",
+    "repoLOCAL": "C:\\Users\\user\\Documents\\Juan PC guillermo SpringAngularAWS\\WORKSPACES\\workspaceMSBookingJAO",
+    "icon": "/img/springCloud-icon.png"
+  },
   ,
   {// WEBFLUX
     "name": "Webflux",
     "imageUrl": "/img/springMS17/spring-webflux.jpg",
     "description": "Programación Reactiva asincrona con webflux. Miroservicio de Alquiler de Vehículos",
     "technology": "Microservicios",
-    "repoUrl": "https://github.com/jaoprogramador/workspaceMSBookingJAO/tree/release_Usuarios_GestHoteles20250730/Usuarios-ms",
-    "appUrl": "https://github.com/jaoprogramador/workspaceMSBookingJAO/tree/release_Usuarios_GestHoteles20250730/Usuarios-ms",
+    "repoUrl": "https://github.com/jaoprogramador/workspaceMSBookingJAO/blob/UsuariosNotificacionesKafka20259813/AlquilVehiculos-ms/src/main/java/com/jao/booking/controller/AlquilerVehiculosController.java",
+    "appUrl": "https://github.com/jaoprogramador/workspaceMSBookingJAO/blob/UsuariosNotificacionesKafka20259813/AlquilVehiculos-ms/src/main/java/com/jao/booking/controller/AlquilerVehiculosController.java",
     "repoLOCAL": "C:\\Users\\user\\Documents\\Juan PC guillermo SpringAngularAWS\\WORKSPACES\\workspaceMSBookingJAO",
     "icon": "/img/springCloud-icon.png"
   },
@@ -1087,7 +1107,18 @@ const apps = [
   {
       name: "Front con ReactJS, NextJS y Bootstrap",
       imageUrl: "/img/springKubernetes/5.ReactNextJS.jpg",  
-      description: "Crear un front con con ReactJS, NextJS y Bootstrap para poder listar, buscar y crear marcadores de blogs",
+      description: "Crear un front con ReactJS, NextJS y Bootstrap para poder listar, buscar y crear marcadores de blogs",
+      technology: "Kubernetes",
+      repoUrl: "https://github.com/jaoprogramador/workspaceReactSpringKubernetesDockerFINAL/tree/main/bookmarker-ui-nextjs",
+      appUrl: "https://github.com/jaoprogramador/workspaceReactSpringKubernetesDockerFINAL/tree/main/bookmarker-ui-nextjs",
+      icon: "/img/springBoot-icon.png" 
+
+    },
+    // FRONT PASO A PASO
+    {
+      name: "Apariencia final de nuestro front",
+      imageUrl: "/img/springKubernetes/23Front.jpg",  
+      description: "Apariencia del front con listar, buscar y crear marcadores de blogs",
       technology: "Kubernetes",
       repoUrl: "https://github.com/jaoprogramador/workspaceReactSpringKubernetesDockerFINAL/tree/main/bookmarker-ui-nextjs",
       appUrl: "https://github.com/jaoprogramador/workspaceReactSpringKubernetesDockerFINAL/tree/main/bookmarker-ui-nextjs",
