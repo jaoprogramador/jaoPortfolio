@@ -1,6 +1,6 @@
 ---
 date: "2025-04-09T17:00:00.000Z"
-title: "OAuth con Spring Security: Autenticación y Autorización en Aplicaciones Java"
+title: "OAuth con Spring Security"
 tagline: "Aprende a integrar OAuth en tus aplicaciones Java usando Spring Security."
 preview: >-
   OAuth es un estándar de autorización ampliamente utilizado para permitir que las aplicaciones accedan a recursos de usuarios sin compartir sus credenciales. En este post, te explicamos cómo configurar OAuth con Spring Security en una aplicación Java.

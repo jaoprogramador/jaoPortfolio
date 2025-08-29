@@ -1,6 +1,6 @@
 ---
 date: "2025-08-28T17:00:00.000Z"
-title: "Microservicios con Spring Boot: Arquitectura, Patrones y Migración desde Monolíticos"
+title: "Microservicios con Spring Boot"
 tagline: "Aprende cómo diseñar, implementar y escalar microservicios en el ecosistema Spring"
 preview: >-
   Los microservicios han revolucionado el desarrollo backend. Descubre qué son, cómo funcionan, patrones clave, anti-patrones y la ruta para migrar desde una arquitectura monolítica usando Spring Boot.

@@ -1,6 +1,6 @@
 ---
 date: "2025-08-28T17:00:00.000Z"
-title: Entendiendo la reactividad en Spring WebFlux. ¿Por qué es clave para los desarrolladores Java modernos?
+title: Reactividad en Spring WebFlux
 tagline: Descubre cómo Spring WebFlux revoluciona la forma de construir APIs en el ecosistema Java
 preview: >-
   El desarrollo moderno exige aplicaciones más rápidas y escalables. Conoce por qué la programación reactiva y Spring WebFlux son fundamentales en arquitecturas modernas y cómo empezar a implementarlas.

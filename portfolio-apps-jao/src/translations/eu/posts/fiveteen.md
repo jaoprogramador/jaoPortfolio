@@ -1,6 +1,6 @@
 ---
 date: "2025-08-26T17:00:00.000Z"
-title: Arquitectura Hexagonal en Java Spring. Guía para construir aplicaciones mantenibles y escalables
+title: Arquitectura Hexagonal en Java
 tagline: Cómo aplicar la Arquitectura Hexagonal para mejorar tus proyectos Spring
 preview: >-
   La Arquitectura Hexagonal, también conocida como Ports and Adapters, es un patrón que ayuda a diseñar aplicaciones desacopladas y fáciles de mantener. Aprende cómo implementarla en tus proyectos Java Spring y organiza tu código con una arquitectura de paquetes clara.

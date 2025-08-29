@@ -493,7 +493,7 @@ const apps = [
         description: "Spring Batch es un framework de Spring diseñado para el procesamiento por lotes (batch processing). Permite procesar grandes volúmenes de datos de manera eficiente, automatizada y escalable. Es ampliamente utilizado en escenarios como importación/exportación de datos, generación de informes, migración de bases de datos y procesamiento masivo de transacciones.",
         technology: "Spring Framework ",
         repoUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/tree/master/21demoBatch",
-        appUrl: "#",
+        appUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/tree/master/21demoBatch",
         icon: "/img/springBoot-icon.png" 
   
       },
@@ -501,7 +501,7 @@ const apps = [
       {
         name: "Funciones Lambda",
         imageUrl: "/img/springBoot/spring-lambda.jpg",  
-        description: "LAs funciones lambda son una característica de java 8 que te permite escribir funciones anónimas sin un nombre específico",
+        description: "Las funciones lambda son una característica de java 8 que te permite escribir funciones anónimas sin un nombre específico",
         technology: "Spring Framework ",
         repoUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/blob/master/21demoBatch/src/main/java/com/example/jao/batch/demo/listener/JobListener.java",
         appUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/blob/master/21demoBatch/src/main/java/com/example/jao/batch/demo/listener/JobListener.java",
