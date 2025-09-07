@@ -899,7 +899,6 @@ const apps = [
     "repoLOCAL": "C:\\Users\\user\\Documents\\Juan PC guillermo SpringAngularAWS\\WORKSPACES\\workspaceMSBookingJAO",
     "icon": "/img/springCloud-icon.png"
   },
-  ,
   {// WEBFLUX
     "name": "Webflux",
     "imageUrl": "/img/springMS17/spring-webflux.jpg",
@@ -910,6 +909,40 @@ const apps = [
     "repoLOCAL": "C:\\Users\\user\\Documents\\Juan PC guillermo SpringAngularAWS\\WORKSPACES\\workspaceMSBookingJAO",
     "icon": "/img/springCloud-icon.png"
   },
+  {// MODULO PADRE
+    "name": "Modulo Padre",
+    "imageUrl": "/img/springMS17/spring-moduloParent.jpg",
+    "description": "Herencia de dependencias:mostrar cómo estructurar un entorno modular en el que los servicios sean independientes, pero al mismo tiempo compartan una base coherente de dependencias y buenas prácticas, reduciendo duplicidad de configuraciones y favoreciendo la reutilización de código.",
+    "technology": "Microservicios",
+    "repoUrl": "https://github.com/jaoprogramador/workspaceMSBookingJAO/blob/release_OpenAPIModulosParent20250907/booking-jao-parent/pom.xml",
+    "appUrl": "https://github.com/jaoprogramador/workspaceMSBookingJAO/blob/release_OpenAPIModulosParent20250907/booking-jao-parent/pom.xml",
+    "repoLOCAL": "C:\\Users\\user\\Documents\\Juan PC guillermo SpringAngularAWS\\WORKSPACES\\workspaceMSBookingJAO",
+    "icon": "/img/springCloud-icon.png"
+  },
+  
+  {// MODULO HIJO
+    "name": "Modulo hijo",
+    "imageUrl": "/img/springMS17/spring-moduloHijo.jpg",
+    "description": "Herencia de dependencias: mostrar como heredar las dependencias en los modulos hijos sin tener que duplicar depencencias evitando versiones diferentes y centralizando las dependencias",
+    "technology": "Microservicios",
+    "repoUrl": "https://github.com/jaoprogramador/workspaceMSBookingJAO/blob/release_OpenAPIModulosParent20250907/Usuarios-ms/pom.xml",
+    "appUrl": "https://github.com/jaoprogramador/workspaceMSBookingJAO/blob/release_OpenAPIModulosParent20250907/Usuarios-ms/pom.xml",
+    "repoLOCAL": "C:\\Users\\user\\Documents\\Juan PC guillermo SpringAngularAWS\\WORKSPACES\\workspaceMSBookingJAO",
+    "icon": "/img/springCloud-icon.png"
+  },
+  ,
+  
+  {// OPENAPI y SWAGGER
+    "name": "OpenAPI - Swagger",
+    "imageUrl": "/img/springMS17/spring-Swagger.jpg",
+    "description": "Como documentar nuestros microservicios de forma sencilla para evitar facilitar el consumo de APIs para el FRONT",
+    "technology": "Microservicios",
+    "repoUrl": "https://github.com/jaoprogramador/workspaceMSBookingJAO/blob/release_OpenAPIModulosParent20250907/Usuarios-ms/src/main/java/com/jao/booking/config/OpenApiConfig.java",
+    "appUrl": "https://github.com/jaoprogramador/workspaceMSBookingJAO/blob/release_OpenAPIModulosParent20250907/Usuarios-ms/src/main/java/com/jao/booking/config/OpenApiConfig.java",
+    "repoLOCAL": "C:\\Users\\user\\Documents\\Juan PC guillermo SpringAngularAWS\\WORKSPACES\\workspaceMSBookingJAO",
+    "icon": "/img/springCloud-icon.png"
+  },
+  //
        //----------------------------------------------------------------------------------------------TEMAS PENDIENTES
        // CAFFEINE
        // SOLID
