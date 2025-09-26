@@ -942,6 +942,26 @@ const apps = [
     "repoLOCAL": "C:\\Users\\user\\Documents\\Juan PC guillermo SpringAngularAWS\\WORKSPACES\\workspaceMSBookingJAO",
     "icon": "/img/springCloud-icon.png"
   },
+  {// Encriptacion
+    "name": "Encriptación claves",
+    "imageUrl": "/img/springMS17/spring-encript.jpg",
+    "description": "En el microservicio login-auth-md centralizaremos el login con encriptación de pass-salt y JWT en keycloak de nuestro ecosistema de booking. Esto dará mayor seguridad a nuestros accesos ya que no estarán las claves en texto plano.",
+    "technology": "Microservicios",
+    "repoUrl": "https://github.com/jaoprogramador/workspaceMSBookingJAO/tree/release_login-auth-ms_20250917/login-auth-ms",
+    "appUrl": "https://github.com/jaoprogramador/workspaceMSBookingJAO/tree/release_login-auth-ms_20250917/login-auth-ms",
+    "repoLOCAL": "C:\\Users\\user\\Documents\\Juan PC guillermo SpringAngularAWS\\WORKSPACES\\workspaceMSBookingJAO",
+    "icon": "/img/springCloud-icon.png"
+  },
+  {// JPA
+    "name": "HQL con JPA",
+    "imageUrl": "/img/springMS17/spring-JPA.jpg",
+    "description": "En el microservicio vamos a crear una consulta para mostrar las resevas del día anterior",
+    "technology": "Microservicios",
+    "repoUrl": "https://github.com/jaoprogramador/workspaceMSBookingJAO/blob/release_login-auth-ms_20250917/Reservas-ms/src/main/java/com/jao/booking/repository/ReservaRepository.java",
+    "appUrl": "https://github.com/jaoprogramador/workspaceMSBookingJAO/blob/release_login-auth-ms_20250917/Reservas-ms/src/main/java/com/jao/booking/repository/ReservaRepository.java",
+    "repoLOCAL": "C:\\Users\\user\\Documents\\Juan PC guillermo SpringAngularAWS\\WORKSPACES\\workspaceMSBookingJAO",
+    "icon": "/img/springCloud-icon.png"
+  },
   //
        //----------------------------------------------------------------------------------------------TEMAS PENDIENTES
        // CAFFEINE

@@ -92,6 +92,8 @@ Page                                       Size     First Load JS
   # 3.- AÑADIR A LA PLANTILLA EN:
   # image: >-
   # /images/blogs/moritz-ludtke-K4n6CW8so84-unsplash.jpg
+  # 4.- PARA BAJAR TAMAÑO
+  # https://squoosh.app/
 
   # IMAGEN POSTS https://unsplash.com/es/fotos/un-fondo-azul-muy-bonito-con-una-gran-cantidad-de-pliegues-LAsBMFrH_WY
   # "https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80",
