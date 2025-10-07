@@ -962,6 +962,26 @@ const apps = [
     "repoLOCAL": "C:\\Users\\user\\Documents\\Juan PC guillermo SpringAngularAWS\\WORKSPACES\\workspaceMSBookingJAO",
     "icon": "/img/springCloud-icon.png"
   },
+  {// Paginación
+    "name": "Paginación",
+    "imageUrl": "/img/springMS17/spring-paginacion.jpg",
+    "description": "En el microservicio de Reservas vamos a paginar nuestras respuestas en el json por medio de un parametro pagina=num",
+    "technology": "Microservicios",
+    "repoUrl": "https://github.com/jaoprogramador/workspaceMSBookingJAO/blob/release_login-auth-ms_20250917/Reservas-ms/src/main/java/com/jao/booking/controller/ReservaController.java",
+    "appUrl": "https://github.com/jaoprogramador/workspaceMSBookingJAO/blob/release_login-auth-ms_20250917/Reservas-ms/src/main/java/com/jao/booking/controller/ReservaController.java",
+    "repoLOCAL": "C:\\Users\\user\\Documents\\Juan PC guillermo SpringAngularAWS\\WORKSPACES\\workspaceMSBookingJAO",
+    "icon": "/img/springCloud-icon.png"
+  },
+  {// Dockerizar la aplicacion
+    "name": "Dockerizar",
+    "imageUrl": "/img/springMS17/spring-docker.jpg",
+    "description": "Vamos a dockerizar nuestro microservicio reserva para crear una imagen y desplegarla en un contenedor de docker",
+    "technology": "Microservicios",
+    "repoUrl": "https://github.com/jaoprogramador/workspaceMSBookingJAO/blob/release_login-auth-ms_20250917/Reservas-ms/Dockerfile",
+    "appUrl": "https://github.com/jaoprogramador/workspaceMSBookingJAO/blob/release_login-auth-ms_20250917/Reservas-ms/Dockerfile",
+    "repoLOCAL": "C:\\Users\\user\\Documents\\Juan PC guillermo SpringAngularAWS\\WORKSPACES\\workspaceMSBookingJAO",
+    "icon": "/img/springCloud-icon.png"
+  },
   //
        //----------------------------------------------------------------------------------------------TEMAS PENDIENTES
        // CAFFEINE
@@ -1051,6 +1071,52 @@ const apps = [
         technology: "Spring RabbitMQ",
         repoUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/blob/master/23RabbitMQ/23RabbitPublisher/",
         appUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/blob/master/23RabbitMQ/23RabbitPublisher/",
+        icon: "/img/rabbitMQ-icon.png" 
+      },
+      
+      {//SPRING AI
+        name: "Dependencias",
+        imageUrl: "/img/spring21/dependencias.jpg",  
+        description: "Dependencias de Spring AI",
+        technology: "Spring IA",
+        repoUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/tree/master/springAI-Demo/pom.xml",
+        appUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/tree/master/springAI-Demo/pom.xml",
+        icon: "/img/rabbitMQ-icon.png" 
+      },
+      {//SPRING AI
+        name: "Configuración",
+        imageUrl: "/img/spring21/configuracion.jpg",  
+        description: "Denifinermos la configuración en con el token de la cuenta bancaria",
+        technology: "Spring IA",
+        repoUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/blob/master/springAI-Demo/src/main/resources/application.yml",
+        appUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/blob/master/springAI-Demo/src/main/resources/application.yml",
+        icon: "/img/rabbitMQ-icon.png" 
+      },
+      {//SPRING AI
+        name: "Controller",
+        imageUrl: "/img/spring21/controller.jpg",  
+        description: "Definiremos un controller para gestionar peticiones de texto",
+        technology: "Spring IA",
+        repoUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/tree/master/springAI-Demo/src/main/java/com/jao/springai/controller",
+        appUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/tree/master/springAI-Demo/src/main/java/com/jao/springai/controller",
+        icon: "/img/rabbitMQ-icon.png" 
+      },
+      {//SPRING AI
+        name: "Testeo en postman con texto",
+        imageUrl: "/img/spring21/postmanTxt.jpg",  
+        description: "Dependencias de Spring AI",
+        technology: "Spring IA",
+        repoUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/tree/master/springAI-Demo",
+        appUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/tree/master/springAI-Demo",
+        icon: "/img/rabbitMQ-icon.png" 
+      },
+       {//SPRING AI
+        name: "Testeo en postman con imagenes",
+        imageUrl: "/img/spring21/postmanImg.jpg",  
+        description: "Dependencias de Spring AI",
+        technology: "Spring IA",
+        repoUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/tree/master/springAI-Demo",
+        appUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/tree/master/springAI-Demo",
         icon: "/img/rabbitMQ-icon.png" 
       },
       {//DOCKER docker:::Desktop:
