@@ -37,6 +37,20 @@
        }
     ],
     "projects":[
+      {
+        "id": "4",
+        "title": "Project Spring",
+        "description": "Development",
+        "imageSrc": "/img/logos/SBoot.jpg",
+        "url": "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/tree/master/5SpringSecurity"
+      },
+      {
+        "id": "5",
+        "title": "Project Spring Cloud Microservices",
+        "description": "Development",
+        "imageSrc": "/img/logos/SpringCloud.jpg",
+         "url": "https://github.com/jaoprogramador/workspaceMSBookingJAO/tree/release_login-auth-ms_20250917"
+      },
         
         {
           "id": "1",
@@ -59,20 +73,7 @@
           "imageSrc": "/img/logos/Java.jpg",
           "url": "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/tree/master/19ContentManagerSOAP"
         },
-        {
-          "id": "4",
-          "title": "Project Spring",
-          "description": "Development",
-          "imageSrc": "/img/logos/SpringCloud.jpg",
-          "url": "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/tree/master/5SpringSecurity"
-        },
-        {
-          "id": "5",
-          "title": "Project Spring Cloud Microservices",
-          "description": "Development",
-          "imageSrc": "/img/logos/SpringCloud.jpg",
-           "url": "https://github.com/jaoprogramador/workspaceMSBookingJAO/tree/release_login-auth-ms_20250917"
-        },
+        
         {
           "id": "6",
           "title": "Project Web JAO",
@@ -113,7 +114,7 @@
       "description": "He trabajado con SVN, Git... entre otros sistemas de control de versiones de código."
     }
   ],
-  "aboutpara": "👋 Hola, soy Juan Arana Olalde y estudié desarrollo de aplicaciones informáticas y administración de sistemas informáticos, además de realizar diferentes cursos para completar mi formación.\n\n🛤️ Desde 2006 he participado en diferentes proyectos de Java y J2EE, realizando tareas fullstack, desarrollo, análisis, recopilación de requisitos, estimaciones, migraciones, pruebas, despliegues, resolución de incidencias y trato con clientes...\n\n🎯 Mi objetivo es desarrollar mi carrera profesional en un proyecto que me permita crecer mientras aporto mis conocimientos y experiencia.\n\nℹ️ Si tienes alguna pregunta, no dudes en contactarme por LinkedIn o correo electrónico y te la aclararé.",
+  "aboutpara": "👋 Hola, soy Juan Arana Olalde y estudié desarrollo de aplicaciones informáticas y administración de sistemas informáticos, además de realizar diferentes cursos para completar mi formación.\n\n🛤️ Desde 2006 he participado en diferentes proyectos de Java, realizando tareas fullstack, desarrollo, análisis, recopilación de requisitos, estimaciones, migraciones, pruebas, despliegues, resolución de incidencias y trato con clientes...\n\n🎯 Mi objetivo es desarrollar mi carrera profesional en un proyecto que me permita crecer mientras aporto mis conocimientos y experiencia.\n\nℹ️ Si tienes alguna pregunta, no dudes en contactarme por LinkedIn o correo electrónico y te la aclararé.",
   "aboutparaBloque1": "👋 Hola, soy Juan Arana Olalde y estudié desarrollo de aplicaciones informáticas y administración de sistemas informáticos, además de realizar diferentes cursos para completar mi formación.",
   "aboutparaBloque2": "🛤️ Desde 2006 he participado en diferentes proyectos de Java-J2EE con distintos FRONTS y BDs, realizando tareas fullstack, desarrollo, análisis, recopilación de requisitos, estimaciones, migraciones, pruebas, despliegues, resolución de incidencias y trato con clientes...",
   "aboutparaBloque3": "🎯 Mi objetivo es desarrollar mi carrera profesional en un proyecto que me permita crecer mientras aporto mis conocimientos y experiencia.\n\n",

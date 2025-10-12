@@ -37,6 +37,20 @@
        }
     ],
     "projects":[
+      {
+        "id": "4",
+        "title": "Project Spring",
+        "description": "Development",
+        "imageSrc": "/img/logos/SBoot.jpg",
+        "url": "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/tree/master/5SpringSecurity"
+      },
+      {
+        "id": "5",
+        "title": "Project Spring Cloud Microservices",
+        "description": "Development",
+        "imageSrc": "/img/logos/SpringCloud.jpg",
+        "url": "https://github.com/jaoprogramador/workspaceMSBookingJAO/tree/release_login-auth-ms_20250917"
+      },
         
         {
           "id": "1",
@@ -59,20 +73,7 @@
           "imageSrc": "/img/logos/Java.jpg",
           "url": "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/tree/master/19ContentManagerSOAP"
         },
-        {
-          "id": "4",
-          "title": "Project Spring",
-          "description": "Development",
-          "imageSrc": "/img/logos/SpringCloud.jpg",
-          "url": "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/tree/master/5SpringSecurity"
-        },
-        {
-          "id": "5",
-          "title": "Project Spring Cloud Microservices",
-          "description": "Development",
-          "imageSrc": "/img/logos/SpringCloud.jpg",
-          "url": "https://github.com/jaoprogramador/workspaceMSBookingJAO/tree/release_login-auth-ms_20250917"
-        },
+        
         {
           "id": "6",
           "title": "Project Web JAO",
@@ -113,15 +114,15 @@
       "description": "SVN, Git... eta beste hainbat kodearen bertsio-kontrolatzaileekin lan egin dut."
     }
   ],
-  "aboutpara": "👋 Kaixo, Juan Arana Olalde naiz eta aplikazio informatikoen garapena eta sistema informatikoen administrazioa ikasi ditut, nire prestakuntza osatzeko hainbat ikastaro eginez.\n\n🛤️ 2006tik Java eta J2EE proiektu ezberdinetan parte hartu dut, fullstack zereginak, garapena, analisia, eskakizunen bilketa, estimazioak, migrazioak, probak, inplementazioak, gorabeherak konpontzea eta bezeroekin harremanak kudeatuz...\n\n🎯 Nire helburua nire ibilbide profesionala garatzea da, nire ezagutzak eta esperientzia ekarriz hazteko aukera emango didan proiektu batean.\n\nℹ️ Zalantzarik baduzu, jar zaitez nirekin harremanetan LinkedIn edo posta elektroniko bidez eta argituko dizut.",
+  "aboutpara": "👋 Kaixo, Juan Arana Olalde naiz eta aplikazio informatikoen garapena eta sistema informatikoen administrazioa ikasi ditut, nire prestakuntza osatzeko hainbat ikastaro eginez.\n\n🛤️ 2006tik Java proiektu ezberdinetan parte hartu dut, fullstack zereginak, garapena, analisia, eskakizunen bilketa, estimazioak, migrazioak, probak, inplementazioak, gorabeherak konpontzea eta bezeroekin harremanak kudeatuz...\n\n🎯 Nire helburua nire ibilbide profesionala garatzea da, nire ezagutzak eta esperientzia ekarriz hazteko aukera emango didan proiektu batean.\n\nℹ️ Zalantzarik baduzu, jar zaitez nirekin harremanetan LinkedIn edo posta elektroniko bidez eta argituko dizut.",
   "aboutparaBloque1": "👋 Kaixo, Juan Arana Olalde naiz eta aplikazio informatikoen garapena eta sistema informatikoen administrazioa ikasi ditut, nire prestakuntza osatzeko hainbat ikastaro eginez.",
-  "aboutparaBloque2": "🛤️ 2006tik Java eta J2EE proiektu ezberdinetan parte hartu dut, fullstack zereginak, garapena, analisia, eskakizunen bilketa, estimazioak, migrazioak, probak, inplementazioak, gorabeherak konpontzea eta bezeroekin harremanak kudeatuz...",
+  "aboutparaBloque2": "🛤️ 2006tik Java proiektu ezberdinetan parte hartu dut, fullstack zereginak, garapena, analisia, eskakizunen bilketa, estimazioak, migrazioak, probak, inplementazioak, gorabeherak konpontzea eta bezeroekin harremanak kudeatuz...",
   "aboutparaBloque3": "🎯 Nire helburua nire ibilbide profesionala garatzea da, nire ezagutzak eta esperientzia ekarriz hazteko aukera emango didan proiektu batean.\n\n",
   "aboutparaBloque4": "ℹ️ Zalantzarik baduzu, jar zaitez nirekin harremanetan LinkedIn edo posta elektroniko bidez eta argituko dizut.",
   "resume": {
     "fullName":"Juan Arana Olalde",
     "tagline": "👋 Software garatzailea, produktu diseinatzailea eta sortzailea naiz.",
-    "description": "Enpresa publiko eta pribatuetan lan egin dut, Java eta J2EE proiektuetan parte hartuz. React, Angular, JQuery, JavaScript eta web framework gehienak ezagutzen ditut. Sistemaren eta/edo aplikazio-programen diseinu teknikoa, haien probak eta abian jartzea egiten ditut, baita erabiltzaileei eta ustiapenari prestakuntza eta laguntza teknikoa ematea ere, metodologia egokian parte hartuz.",
+    "description": "Enpresa publiko eta pribatuetan lan egin dut, Java proiektuetan parte hartuz. React, Angular, JQuery, JavaScript eta web framework gehienak ezagutzen ditut. Sistemaren eta/edo aplikazio-programen diseinu teknikoa, haien probak eta abian jartzea egiten ditut, baita erabiltzaileei eta ustiapenari prestakuntza eta laguntza teknikoa ematea ere, metodologia egokian parte hartuz.",
     "formations": [
        
       {

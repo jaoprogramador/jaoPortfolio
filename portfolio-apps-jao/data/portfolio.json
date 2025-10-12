@@ -37,6 +37,20 @@
        }
     ],
     "projects":[
+      {
+        "id": "4",
+        "title": "Project Spring",
+        "description": "Development",
+        "imageSrc": "/img/logos/SBoot.jpg",
+        "url": "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/tree/master/5SpringSecurity"
+      },
+      {
+        "id": "5",
+        "title": "Project Spring Cloud Microservices",
+        "description": "Development",
+        "imageSrc": "/img/logos/SpringCloud.jpg",
+        "url": "https://github.com/jaoprogramador/workspaceMSBookingJAO/tree/release_login-auth-ms_20250917"
+      },
         
         {
           "id": "1",
@@ -59,20 +73,7 @@
           "imageSrc": "/img/logos/Java.jpg",
           "url": "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/tree/master/19ContentManagerSOAP"
         },
-        {
-          "id": "4",
-          "title": "Project Spring",
-          "description": "Development",
-          "imageSrc": "/img/logos/SpringCloud.jpg",
-          "url": "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/tree/master/5SpringSecurity"
-        },
-        {
-          "id": "5",
-          "title": "Project Spring Cloud Microservices",
-          "description": "Development",
-          "imageSrc": "/img/logos/SpringCloud.jpg",
-          "url": "https://github.com/jaoprogramador/workspaceMSBookingJAO/tree/release_login-auth-ms_20250917"
-        },
+        
         {
           "id": "6",
           "title": "Project Web JAO",
@@ -114,10 +115,10 @@
        "description": "I have worked with SVN, Git... among other code version controllers"
      }
     ],
-    "aboutpara": "👋Hi, I'm Juan Arana Olalde and I studied computer application development and computer systems administration along with different courses to complete my training.\n\n\n\n 🛤️Since 2006 I have been participating in different Java and j2ee projects, carrying out fullstack tasks, development, analysis, requirements gathering, estimates, migrations, tests, deployments, incidents, dealing with clients... \n\n\n\n🎯My goal is to develop my professional career in a project that allows me to grow while contributing my knowledge and experience.\n\n\n\n ℹ️If you have any questions, do not hesitate to contact me on LinkedIn or email and I will clarify them for you.",
+    "aboutpara": "👋Hi, I'm Juan Arana Olalde and I studied computer application development and computer systems administration along with different courses to complete my training.\n\n\n\n 🛤️Since 2006 I have been participating in different Java projects, carrying out fullstack tasks, development, analysis, requirements gathering, estimates, migrations, tests, deployments, incidents, dealing with clients... \n\n\n\n🎯My goal is to develop my professional career in a project that allows me to grow while contributing my knowledge and experience.\n\n\n\n ℹ️If you have any questions, do not hesitate to contact me on LinkedIn or email and I will clarify them for you.",
    "resume": {
      "tagline": "👋  I'm a software developer, product designer, and maker.",
-     "description": "I have worked in public and private companies participating in Java and J2EE projects. Knowledgeable in React, Angular, JQuery, Javascript and most web frameworks. Carry out the technical design of the system and/or application programs, their testing and fine-tuning, as well as provide training and technical assistance to users and exploitation, participating in the projects according to the current methodology.",
+     "description": "I have worked in public and private companies participating in Java projects. Knowledgeable in React, Angular, JQuery, Javascript and most web frameworks. Carry out the technical design of the system and/or application programs, their testing and fine-tuning, as well as provide training and technical assistance to users and exploitation, participating in the projects according to the current methodology.",
      "experiences": [
        
         {
@@ -236,7 +237,7 @@
       "education":{
          "universityName":"Higher degree training cycle: Computer systems administration and Development of computer applications",
          "universityDate":"2003 - 2005 and 2001 – 2003",
-         "universityPara":"Throughout my career I have been complementing my training with different Java-J2EE programming courses, relational databases, local area networks, Operating Systems and Application Servers, web design, Frameworks Fonts, etc..."
+         "universityPara":"Throughout my career I have been complementing my training with different Java programming courses, relational databases, local area networks, Operating Systems and Application Servers, web design, Frameworks Fonts, etc..."
       },
       "languages":[
          "Javascript",
