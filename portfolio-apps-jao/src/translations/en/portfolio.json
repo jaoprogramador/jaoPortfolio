@@ -18,7 +18,7 @@
        {
           "id":"2",
           "title":"LinkedIn",
-          "link":"https://www.linkedin.com/in/juan-arana-olalde-8b77a266/"
+          "link":"https://www.linkedin.com/in/juanaranaolalde/"
        },
        {
           "id":"3",
@@ -117,7 +117,7 @@
     ],
     "aboutpara": "👋Hi, I'm Juan Arana Olalde and I studied computer application development and computer systems administration along with different courses to complete my training.\n\n\n\n 🛤️Since 2006 I have been participating in different Java projects, carrying out fullstack tasks, development, analysis, requirements gathering, estimates, migrations, tests, deployments, incidents, dealing with clients... \n\n\n\n🎯My goal is to develop my professional career in a project that allows me to grow while contributing my knowledge and experience.\n\n\n\n ℹ️If you have any questions, do not hesitate to contact me on LinkedIn or email and I will clarify them for you.",
     "aboutparaBloque1": "👋Hi, I'm Juan Arana Olalde and I studied computer application development and computer systems administration along with different courses to complete my training.",
-    "aboutparaBloque2": "🛤️Since 2006 I have been participating in different Java projects with differents FRONTS and BDs, carrying out fullstack tasks, development, analysis, requirements gathering, estimates, migrations, tests, deployments, incidents, dealing with clients... ",
+    "aboutparaBloque2": "🛤️Since 2006 I have been participating in different Java-J2EE-JEE projects with differents FRONTS and BDs, carrying out fullstack tasks, development, analysis, requirements gathering, estimates, migrations, tests, deployments, incidents, dealing with clients... ",
     "aboutparaBloque3": "🎯My goal is to develop my professional career in a project that allows me to grow while contributing my knowledge and experience.\n\n\n\n ",
     "aboutparaBloque4": "ℹ️If you have any questions, do not hesitate to contact me on LinkedIn or email and I will clarify them for you.",
     "resume": {

@@ -18,7 +18,7 @@
        {
           "id":"2",
           "title":"LinkedIn",
-          "link":"https://www.linkedin.com/in/juan-arana-olalde-8b77a266/"
+          "link":"https://www.linkedin.com/in/juanaranaolalde/"
        },
        {
           "id":"3",
@@ -116,13 +116,13 @@
   ],
   "aboutpara": "👋 Hola, soy Juan Arana Olalde y estudié desarrollo de aplicaciones informáticas y administración de sistemas informáticos, además de realizar diferentes cursos para completar mi formación.\n\n🛤️ Desde 2006 he participado en diferentes proyectos de Java, realizando tareas fullstack, desarrollo, análisis, recopilación de requisitos, estimaciones, migraciones, pruebas, despliegues, resolución de incidencias y trato con clientes...\n\n🎯 Mi objetivo es desarrollar mi carrera profesional en un proyecto que me permita crecer mientras aporto mis conocimientos y experiencia.\n\nℹ️ Si tienes alguna pregunta, no dudes en contactarme por LinkedIn o correo electrónico y te la aclararé.",
   "aboutparaBloque1": "👋 Hola, soy Juan Arana Olalde y estudié desarrollo de aplicaciones informáticas y administración de sistemas informáticos, además de realizar diferentes cursos para completar mi formación.",
-  "aboutparaBloque2": "🛤️ Desde 2006 he participado en diferentes proyectos de Java-J2EE con distintos FRONTS y BDs, realizando tareas fullstack, desarrollo, análisis, recopilación de requisitos, estimaciones, migraciones, pruebas, despliegues, resolución de incidencias y trato con clientes...",
+  "aboutparaBloque2": "🛤️ Desde 2006 he participado en diferentes proyectos de Java-J2EE-JEE con distintos FRONTS y BDs, realizando tareas fullstack, desarrollo, análisis, recopilación de requisitos, estimaciones, migraciones, pruebas, despliegues, resolución de incidencias y trato con clientes...",
   "aboutparaBloque3": "🎯 Mi objetivo es desarrollar mi carrera profesional en un proyecto que me permita crecer mientras aporto mis conocimientos y experiencia.\n\n",
   "aboutparaBloque4": "ℹ️ Si tienes alguna pregunta, no dudes en contactarme por LinkedIn o correo electrónico y te la aclararé.",
   "resume": {
     "fullName":"Juan Arana Olalde",
     "tagline": "👋 Soy desarrollador de software, diseñador y creador WEB.",
-    "description": "He trabajado en empresas públicas y privadas participando en proyectos de Java y J2EE. Conocedor de React, Angular, JQuery, JavaScript y la mayoría de frameworks web. Me encargo del diseño técnico del sistema y/o programas de aplicación, sus pruebas y puesta a punto, así como de proporcionar formación y asistencia técnica a usuarios y explotación, participando en los proyectos según la metodología vigente.",
+    "description": "He trabajado en empresas públicas y privadas participando en proyectos de Java. Conocedor de React, Angular, JQuery, JavaScript y la mayoría de frameworks web. Me encargo del diseño técnico del sistema y/o programas de aplicación, sus pruebas y puesta a punto, así como de proporcionar formación y asistencia técnica a usuarios y explotación, participando en los proyectos según la metodología vigente.",
     "formations": [
        
       {

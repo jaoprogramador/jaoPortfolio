@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://jaoportfolio.onrender.com/
+
+# Sitemaps
+Sitemap: https://jaoportfolio.onrender.com/sitemap.xml
