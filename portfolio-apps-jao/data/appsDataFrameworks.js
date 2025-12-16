@@ -1037,6 +1037,109 @@ const apps = [
         appUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/blob/master/SpringJaoForKafka/SpringJaoProvider/",
         icon: "/img/kafka-icon.png" 
       },
+      {//PATRON SAGA:::COREOGRAFIA:
+        name: "Patrón SAGA",
+        imageUrl: "/img/patronSAGA/coreografia.jpg",  
+        description: "Vemos como coreografiar una arquitectura SAGA con microservicios",
+        technology: "SAGA",
+        localManual: "C:\Users\USER\Documents\Juan PC guillermo SpringAngularAWS\JAO\SpringCloudMicrosBooking\PatronSAGA\Microservicios.docx",
+        localWorkspace:"C:\Users\USER\Documents\Juan PC guillermo SpringAngularAWS\WORKSPACES\workspaceSAGASki",
+        repoUrl: "https://github.com/jaoprogramador/reservasSAGACoreografiaKafka/tree/releaseCoreografiaSAGA",
+        appUrl: "https://github.com/jaoprogramador/reservasSAGACoreografiaKafka/tree/releaseCoreografiaSAGA",
+        icon: "/img/kafka-icon.png" 
+      },
+      {//PATRON SAGA::COREOGRAFIA:TOPICS:
+        name: "Topics",
+        imageUrl: "/img/patronSAGA/topics.jpg",  
+        description: "Creamos los topics necesarios agrupados en grupos",
+        technology: "SAGA",
+        localManual: "C:\Users\USER\Documents\Juan PC guillermo SpringAngularAWS\JAO\SpringCloudMicrosBooking\PatronSAGA\Microservicios.docx",
+        localWorkspace:"C:\Users\USER\Documents\Juan PC guillermo SpringAngularAWS\WORKSPACES\workspaceSAGASki",
+        repoUrl: "https://github.com/jaoprogramador/reservasSAGACoreografiaKafka/tree/releaseCoreografiaSAGA",
+        appUrl: "https://github.com/jaoprogramador/reservasSAGACoreografiaKafka/tree/releaseCoreografiaSAGA",
+        icon: "/img/kafka-icon.png" 
+      },
+      {//PATRON SAGA::COREOGRAFIA:COMMONS:
+        name: "Commons",
+        imageUrl: "/img/patronSAGA/Commons.jpg",  
+        description: "Creamos un proyecto con recursos comunes como constantes para los topics, dtos comunes, eventos...",
+        technology: "SAGA",
+        localManual: "C:\Users\USER\Documents\Juan PC guillermo SpringAngularAWS\JAO\SpringCloudMicrosBooking\PatronSAGA Microservicios.docx",
+        localWorkspace:"C:\Users\USER\Documents\Juan PC guillermo SpringAngularAWS\WORKSPACES\workspaceSAGASki",
+        repoUrl: "https://github.com/jaoprogramador/reservasSAGACoreografiaKafka/tree/releaseCoreografiaSAGA/Sky-reservas-commons",
+        appUrl: "https://github.com/jaoprogramador/reservasSAGACoreografiaKafka/tree/releaseCoreografiaSAGA/Sky-reservas-commons",
+        icon: "/img/kafka-icon.png" 
+      },
+      {//PATRON SAGA:COREOGRAFIA::Reservas:
+        name: "Reservas-ms",
+        imageUrl: "/img/patronSAGA/Commons.jpg",  
+        description: "Creamos el microservicio reservas",
+        technology: "SAGA",
+        localManual: "C:\Users\USER\Documents\Juan PC guillermo SpringAngularAWS\JAO\SpringCloudMicrosBooking\PatronSAGA Microservicios.docx",
+        localWorkspace:"C:\Users\USER\Documents\Juan PC guillermo SpringAngularAWS\WORKSPACES\workspaceSAGASki",
+        repoUrl: "https://github.com/jaoprogramador/reservasSAGACoreografiaKafka/tree/releaseCoreografiaSAGA/Sky-reservas-commons",
+        appUrl: "https://github.com/jaoprogramador/reservasSAGACoreografiaKafka/tree/releaseCoreografiaSAGA/Sky-reservas-commons",
+        icon: "/img/kafka-icon.png" 
+      },
+       {//PATRON SAGA:COREOGRAFIA::BusAsiento-ms:
+        name: "BusAsiento-ms",
+        imageUrl: "/img/patronSAGA/busAsiento.jpg",  
+        description: "Creamos el microservicio busASiento-ms para reservar el asiento en el autobus",
+        technology: "SAGA",
+        localManual: "C:\Users\USER\Documents\Juan PC guillermo SpringAngularAWS\JAO\SpringCloudMicrosBooking\PatronSAGA Microservicios.docx",
+        localWorkspace:"C:\Users\USER\Documents\Juan PC guillermo SpringAngularAWS\WORKSPACES\workspaceSAGASki",
+        repoUrl: "https://github.com/jaoprogramador/reservasSAGACoreografiaKafka/tree/releaseCoreografiaSAGA/BusAsiento-MS",
+        appUrl: "https://github.com/jaoprogramador/reservasSAGACoreografiaKafka/tree/releaseCoreografiaSAGA/BusAsiento-MS",
+        icon: "/img/kafka-icon.png" 
+      },
+      {//PATRON SAGA:COREOGRAFIA::Pago-MS:
+        name: "Pago-ms",
+        imageUrl: "/img/patronSAGA/Pago.jpg",  
+        description: "Creamos el microservicio Pago-ms que es el último del circuito y que si va bien dejará todo listo",
+        technology: "SAGA",
+        localManual: "C:\Users\USER\Documents\Juan PC guillermo SpringAngularAWS\JAO\SpringCloudMicrosBooking\PatronSAGA Microservicios.docx",
+        localWorkspace:"C:\Users\USER\Documents\Juan PC guillermo SpringAngularAWS\WORKSPACES\workspaceSAGASki",
+        repoUrl: "https://github.com/jaoprogramador/reservasSAGACoreografiaKafka/tree/releaseCoreografiaSAGA/Pago-MS",
+        appUrl: "https://github.com/jaoprogramador/reservasSAGACoreografiaKafka/tree/releaseCoreografiaSAGA/Pago-MS",
+        icon: "/img/kafka-icon.png" 
+      },
+      {//PATRON SAGA:COREOGRAFIA::Testeo:
+        name: "Testeo",
+        imageUrl: "/img/patronSAGA/testeo.jpg",  
+        description: "Probaremos con openAPI nuestros endpoint",
+        technology: "SAGA",
+        localManual: "C:\Users\USER\Documents\Juan PC guillermo SpringAngularAWS\JAO\SpringCloudMicrosBooking\PatronSAGA Microservicios.docx",
+        localWorkspace:"C:\Users\USER\Documents\Juan PC guillermo SpringAngularAWS\WORKSPACES\workspaceSAGASki",
+        repoUrl: "https://github.com/jaoprogramador/reservasSAGACoreografiaKafka/tree/releaseCoreografiaSAGA/Sky-reservas-commons",
+        appUrl: "https://github.com/jaoprogramador/reservasSAGACoreografiaKafka/tree/releaseCoreografiaSAGA/Sky-reservas-commons",
+        icon: "/img/kafka-icon.png" 
+      },
+      {//PATRON SAGA:COREOGRAFIA::BusAsiento-ms:
+        name: "Escenario OK",
+        imageUrl: "/img/patronSAGA/escenarioOK.jpg",  
+        description: "Veremos como se comunican los microservicios y modifican los estados",
+        technology: "SAGA",
+        localManual: "C:\Users\USER\Documents\Juan PC guillermo SpringAngularAWS\JAO\SpringCloudMicrosBooking\PatronSAGA Microservicios.docx",
+        localWorkspace:"C:\Users\USER\Documents\Juan PC guillermo SpringAngularAWS\WORKSPACES\workspaceSAGASki",
+        repoUrl: "https://github.com/jaoprogramador/reservasSAGACoreografiaKafka/tree/releaseCoreografiaSAGA/Sky-reservas-commons",
+        appUrl: "https://github.com/jaoprogramador/reservasSAGACoreografiaKafka/tree/releaseCoreografiaSAGA/Sky-reservas-commons",
+        icon: "/img/kafka-icon.png" 
+      },
+      {//PATRON SAGA:COREOGRAFIA::BusAsiento-ms:
+        name: "Escenario Failure",
+        imageUrl: "/img/patronSAGA/escenarioRollback.jpg",  
+        description: "Veremos como se comunican los microservicios, modifican los estados y si falla deja todo en el estado inicial",
+        technology: "SAGA",
+        localManual: "C:\Users\USER\Documents\Juan PC guillermo SpringAngularAWS\JAO\SpringCloudMicrosBooking\PatronSAGA Microservicios.docx",
+        localWorkspace:"C:\Users\USER\Documents\Juan PC guillermo SpringAngularAWS\WORKSPACES\workspaceSAGASki",
+        repoUrl: "https://github.com/jaoprogramador/reservasSAGACoreografiaKafka/tree/releaseCoreografiaSAGA/BusAsiento-MS",
+        appUrl: "https://github.com/jaoprogramador/reservasSAGACoreografiaKafka/tree/releaseCoreografiaSAGA/BusAsiento-MS",
+        icon: "/img/kafka-icon.png" 
+      },
+      //PATRON SAGA:::ORQUESTADO
+      //PATRON SAGA:::API GATEWAY
+      //PATRON Circuit Breacker
+
       {//SPRING CLOUD:::RabbitMQ:
         name: "RabbitMQ",
         imageUrl: "/img/springCloud/springRabbitMQ.jpg",  
