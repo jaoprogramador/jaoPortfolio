@@ -19,6 +19,7 @@ const categories = [
   { title: "Observabilidad", filter: "ELK", icon:"/img/icons/ELK.png", descBlock:"En este apartado veremos como con Java 21 configurar mi API con ELK gestionar los logs con un dasboard mediante Elastic Search, logdash y Kibana" },
   { title: "Jenkins", filter: "Jenkins", icon:"/img/icons/Jenkins.png", descBlock:"En este apartado veremos como con Java 21 configurar mi API para hacer CICD mediante Jenkins" },
   { title: "Docker", filter: "Docker", icon:"/img/icons/docker-icon.png" , descBlock:"En este apartado podemos ver que es Docker y como usarlo"},
+  { title: "gRPC", filter: "gRPC", icon:"/img/icons/gRPC-icon.png" , descBlock:"En este apartado podemos ver como crear un servicio gRPC cliente servidor"},
   { title: "Kubernetes", filter: "Kubernetes", icon:"/img/icons/kubernetes-icon.png", descBlock:"Proyecto en tres capas con Spring para el BACK con APIs y react con next-js para el FRONT. El proyecto está orquestado con Kubernetes y emula una aplicación para crear POSTs con paginación y operaciones CRUD" },
   { title: "Java", filter: "Java", icon:"/img/icons/java.png", descBlock:"En este modulo podemos encontrar pcontenidos java como servicios, EJBs, patrones de diseño..." },
   { title: "Web jaoprogramador", filter: "HTML", icon:"/img/icons/html-icon.png", descBlock:"Mi primer portalweb con contenidos de programación, BDs, web..." }

@@ -1543,8 +1543,89 @@ const apps = [
       icon: "/img/kubernetes-icon.png" 
 
     },
+    //gRPC
+    //=============
+    //Servicio gRPC
+	  {
+      name: "Cliente-servidor gRPC",
+      imageUrl: "/img/gRPG/quees.jpg",  
+      description: "Creamos dos microservicios con gRPC de tal forma que hagan un CRUD básico",
+      technology: "gRPC",
+      repoUrl: "https://github.com/jaoprogramador/Ejemplo-gRPC/tree/01-releaseAPIs",
+      appUrl: "https://github.com/jaoprogramador/Ejemplo-gRPC/tree/01-releaseAPIs",
+      repoLocal: "C:\\Users\\user\\Documents\\Juan PC guillermo SpringAngularAWS\\WORKSPACES\\workspacegRPC",
+      maunalDoc: "C:\\Users\\user\Documents\Juan PC guillermo SpringAngularAWS\JAO\gRPC.docx",
+      icon: "/img/springBoot-icon.png" 
+
+    },
+    //Servicio gRPC
+	  {
+      name: "Implementando el contrato proto",
+      imageUrl: "/img/gRPG/protos.jpg",  
+      description: "Veremos como crear el fichero proto que actúa como contrato",
+      technology: "gRPC",
+      repoUrl: "https://github.com/jaoprogramador/Ejemplo-gRPC/blob/02-releaseProtoFileImpServ/restaurantes/src/main/proto/restaurantesgrpc.proto",
+      appUrl: "https://github.com/jaoprogramador/Ejemplo-gRPC/blob/02-releaseProtoFileImpServ/restaurantes/src/main/proto/restaurantesgrpc.proto",
+      repoLocal: "C:\\Users\\user\\Documents\\Juan PC guillermo SpringAngularAWS\\WORKSPACES\\workspacegRPC",
+      maunalDoc: "C:\\Users\\user\Documents\Juan PC guillermo SpringAngularAWS\JAO\gRPC.docx",
+      icon: "/img/springBoot-icon.png" 
+
+    },
+    //Servicio gRPC
+	  {
+      name: "Implementando el servidor gRPC",
+      imageUrl: "/img/gRPG/impServidor.jpg",  
+      description: "Configuramos nuestro fichero protos del lado del servidor",
+      technology: "gRPC",
+      repoUrl: "https://github.com/jaoprogramador/Ejemplo-gRPC/blob/03-releaseImplementarServGRPC/restaurantes/src/main/java/com/restaurantes/api/grpcserviceimpl/GrpcRestaurantesServiceImpl.java",
+      appUrl: "https://github.com/jaoprogramador/Ejemplo-gRPC/blob/03-releaseImplementarServGRPC/restaurantes/src/main/java/com/restaurantes/api/grpcserviceimpl/GrpcRestaurantesServiceImpl.java",
+      repoLocal: "C:\\Users\\user\\Documents\\Juan PC guillermo SpringAngularAWS\\WORKSPACES\\workspacegRPC",
+      maunalDoc: "C:\\Users\\user\Documents\Juan PC guillermo SpringAngularAWS\JAO\gRPC.docx",
+      icon: "/img/springBoot-icon.png" 
+
+    },
+    //Servicio gRPC
+	  {
+      name: "Probando con BloomRPC",
+      imageUrl: "/img/gRPG/BloomRPC.jpg",  
+      description: "Testeamos nuestro servicio gRPC con BloomRPC",
+      technology: "gRPC",
+      repoUrl: "https://github.com/jaoprogramador/Ejemplo-gRPC/tree/01-releaseAPIs",
+      appUrl: "https://github.com/jaoprogramador/Ejemplo-gRPC/tree/01-releaseAPIs",
+      repoLocal: "C:\\Users\\user\\Documents\\Juan PC guillermo SpringAngularAWS\\WORKSPACES\\workspacegRPC",
+      maunalDoc: "C:\\Users\\user\Documents\Juan PC guillermo SpringAngularAWS\JAO\gRPC.docx",
+      icon: "/img/springBoot-icon.png" 
+
+    },
+        //Servicio gRPC
+	  {
+      name: "Implementando el cliente gRPC",
+      imageUrl: "/img/gRPG/implCliente.jpg",  
+      description: "Ahora implementamos el cliente recetasAPI que llama a restaurantes",
+      technology: "gRPC",
+      repoUrl: "https://github.com/jaoprogramador/Ejemplo-gRPC/tree/04-releaseImplementarClienteGRPC",
+      appUrl: "https://github.com/jaoprogramador/Ejemplo-gRPC/tree/04-releaseImplementarClienteGRPC",
+      repoLocal: "C:\\Users\\user\\Documents\\Juan PC guillermo SpringAngularAWS\\WORKSPACES\\workspacegRPC",
+      maunalDoc: "C:\\Users\\user\Documents\Juan PC guillermo SpringAngularAWS\JAO\gRPC.docx",
+      icon: "/img/springBoot-icon.png" 
+
+    },
+            //Servicio gRPC
+	  {
+      name: "Testeo cliente-servicodr gRPC",
+      imageUrl: "/img/gRPG/testgRPC.jpg",  
+      description: "Ahora testearemos con postman como es la comunicación cliente-servidor gRPC",
+      technology: "gRPC",
+      repoUrl: "https://github.com/jaoprogramador/Ejemplo-gRPC/tree/04-releaseImplementarClienteGRPC",
+      appUrl: "https://github.com/jaoprogramador/Ejemplo-gRPC/tree/04-releaseImplementarClienteGRPC",
+      repoLocal: "C:\\Users\\user\\Documents\\Juan PC guillermo SpringAngularAWS\\WORKSPACES\\workspacegRPC",
+      maunalDoc: "C:\\Users\\user\Documents\Juan PC guillermo SpringAngularAWS\JAO\gRPC.docx",
+      icon: "/img/springBoot-icon.png" 
+
+    },
   
       //Patrones de diseño
+      //=============
       {
         name: "Patrones de diseño",
         imageUrl: "/img/java/JavaPatters.jpg",  
