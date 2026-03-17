@@ -1610,9 +1610,9 @@ const apps = [
       icon: "/img/springBoot-icon.png" 
 
     },
-            //Servicio gRPC
+    //Servicio gRPC
 	  {
-      name: "Testeo cliente-servicodr gRPC",
+      name: "Testeo cliente-servidor gRPC",
       imageUrl: "/img/gRPG/testgRPC.jpg",  
       description: "Ahora testearemos con postman como es la comunicación cliente-servidor gRPC",
       technology: "gRPC",
@@ -1623,7 +1623,86 @@ const apps = [
       icon: "/img/springBoot-icon.png" 
 
     },
-  
+    //GraphQL
+    //=============
+    //Servicio GraphQL
+	  {
+      name: "Consultas dinámicas con API GraphQL",
+      imageUrl: "/img/GraphQL/001graphql.jpg",  
+      description: "Creamos dos microservicios con GraphQL para hacer un CRUD con mutaciones",
+      technology: "GraphQL-Spring",
+      repoUrl: "https://github.com/jaoprogramador/Ejemplo-GraphQL",
+      appUrl: "https://github.com/jaoprogramador/Ejemplo-GraphQL",
+      repoLocal: "C:\\Users\\user\\Documents\\Juan PC guillermo SpringAngularAWS\\WORKSPACES\\workspaceGraphQL",
+      maunalDoc: "C:\\Users\\user\Documents\Juan PC guillermo SpringAngularAWS\JAO\GraphQL.docx",
+      icon: "/img/springBoot-icon.png" 
+
+    },
+     //Esquema
+     {
+      name: "Esquema graphql",
+      imageUrl: "/img/GraphQL/002graphql.jpg",  
+      description: "Creamos el esquema graphql con los obtegos y metodos que vamos a mutar",
+      technology: "GraphQL-Spring",
+      repoUrl: "https://github.com/jaoprogramador/Ejemplo-GraphQL",
+      appUrl: "https://github.com/jaoprogramador/Ejemplo-GraphQL",
+      repoLocal: "C:\\Users\\user\\Documents\\Juan PC guillermo SpringAngularAWS\\WORKSPACES\\workspaceGraphQL",
+      maunalDoc: "C:\\Users\\user\Documents\Juan PC guillermo SpringAngularAWS\JAO\GraphQL.docx",
+      icon: "/img/springBoot-icon.png" 
+
+    },
+     //Controller
+     {
+      name: "Controller",
+      imageUrl: "/img/GraphQL/003graphql.jpg",  
+      description: "Creamos el controller con sus anotaciones específicas",
+      technology: "GraphQL-Spring",
+      repoUrl: "https://github.com/jaoprogramador/Ejemplo-GraphQL",
+      appUrl: "https://github.com/jaoprogramador/Ejemplo-GraphQL",
+      repoLocal: "C:\\Users\\user\\Documents\\Juan PC guillermo SpringAngularAWS\\WORKSPACES\\workspaceGraphQL",
+      maunalDoc: "C:\\Users\\user\Documents\Juan PC guillermo SpringAngularAWS\JAO\GraphQL.docx",
+      icon: "/img/springBoot-icon.png" 
+
+    },
+     //Pruebas con herramienta GraphQ
+     {
+      name: "Testeo con GraphQL",
+      imageUrl: "/img/GraphQL/004graphql.jpg",  
+      description: "Testeo de querys con grahql",
+      technology: "GraphQL-Spring",
+      repoUrl: "https://github.com/jaoprogramador/Ejemplo-GraphQL",
+      appUrl: "https://github.com/jaoprogramador/Ejemplo-GraphQL",
+      repoLocal: "C:\\Users\\user\\Documents\\Juan PC guillermo SpringAngularAWS\\WORKSPACES\\workspaceGraphQL",
+      maunalDoc: "C:\\Users\\user\Documents\Juan PC guillermo SpringAngularAWS\JAO\GraphQL.docx",
+      icon: "/img/springBoot-icon.png" 
+
+    },
+     //Pruebas Con Postman
+     {
+      name: "Testeo con Postman",
+      imageUrl: "/img/GraphQL/005graphql.jpg",  
+      description: "Testeo postman de nuestro servicio con GraphQL",
+      technology: "GraphQL-Spring",
+      repoUrl: "https://github.com/jaoprogramador/Ejemplo-GraphQL",
+      appUrl: "https://github.com/jaoprogramador/Ejemplo-GraphQL",
+      repoLocal: "C:\\Users\\user\\Documents\\Juan PC guillermo SpringAngularAWS\\WORKSPACES\\workspaceGraphQL",
+      maunalDoc: "C:\\Users\\user\Documents\Juan PC guillermo SpringAngularAWS\JAO\GraphQL.docx",
+      icon: "/img/springBoot-icon.png" 
+
+    },
+     //Pruebas de integración continua
+     {
+      name: "Integración continua",
+      imageUrl: "/img/GraphQL/006graphql.jpg",  
+      description: "Pruebas de integración continua JUNIT",
+      technology: "GraphQL-Spring",
+      repoUrl: "https://github.com/jaoprogramador/Ejemplo-GraphQL",
+      appUrl: "https://github.com/jaoprogramador/Ejemplo-GraphQL",
+      repoLocal: "C:\\Users\\user\\Documents\\Juan PC guillermo SpringAngularAWS\\WORKSPACES\\workspaceGraphQL",
+      maunalDoc: "C:\\Users\\user\Documents\Juan PC guillermo SpringAngularAWS\JAO\GraphQL.docx",
+      icon: "/img/springBoot-icon.png" 
+
+    },
       //Patrones de diseño
       //=============
       {
@@ -1642,7 +1721,7 @@ const apps = [
         imageUrl: "/img/java/PrincipiosSOLID.jpg",  
         description: "Ejemplo sencillo de como aplicar los principios SOLID ",
         technology: "Java",
-        repoUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/tree/master/PrindipiosSOLID",
+        repoUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/tree/master/PrincipiosSOLID",
         appUrl: "#",
         icon: "/img/springBoot-icon.png" 
   
