@@ -1715,6 +1715,136 @@ const apps = [
         icon: "/img/springBoot-icon.png" 
   
       },
+      //QUARKCUS
+      //=============
+      //Servicio QUARKUS
+      {
+        name: "Primer microservicio con Quarkus",
+        imageUrl: "/img/Quarkus/001Quarkus.jpg",  
+        description: "Creamos un microservicios con Quarkus para hacer un mostrar mensajes",
+        technology: "Quarkus-Spring",
+        repoUrl: "https://github.com/jaoprogramador/Ejemplo-Quarkus",
+        appUrl: "https://github.com/jaoprogramador/Ejemplo-Quarkus",
+        repoLocal: "C:\\Users\\user\\Documents\\Juan PC guillermo SpringAngularAWS\\WORKSPACES\\workspaceQuarkus",
+        maunalDoc: "C:\\Users\\user\Documents\Juan PC guillermo SpringAngularAWS\JAO\Quarkus.docx",
+        URLsInteres:[
+                 "https://es.quarkus.io/","https://microprofile.io/",
+                    ],  
+        icon: "/img/springBoot-icon.png" 
+
+      },
+      //Mi primer endpoint
+      {
+        name: "Mi primer endpoint",
+        imageUrl: "/img/Quarkus/002Quarkus.jpg",  
+        description: "Veremos como crear end points y gestion de rutas",
+        technology: "Quarkus-Spring",
+        repoUrl: "https://github.com/jaoprogramador/Ejemplo-Quarkus/blob/release001API/quarkus-recetas-api/src/main/java/resources/EcoResource.java",
+        appUrl: "https://github.com/jaoprogramador/Ejemplo-Quarkus/blob/release001API/quarkus-recetas-api/src/main/java/resources/EcoResource.java",
+        repoLocal: "C:\\Users\\user\\Documents\\Juan PC guillermo SpringAngularAWS\\WORKSPACES\\workspaceQuarkus",
+        maunalDoc: "C:\\Users\\user\Documents\Juan PC guillermo SpringAngularAWS\JAO\Quarkus.docx",
+        URLsInteres:[
+                 "https://es.quarkus.io/","https://microprofile.io/",
+                    ],  
+        icon: "/img/springBoot-icon.png" 
+
+      },
+      //Resource
+      {
+        name: "Resource",
+        imageUrl: "/img/Quarkus/003Quarkus.jpg",  
+        description: "Veremos que anotaciones usamos en quarkus para definir endpoints",
+        technology: "Quarkus-Spring",
+        repoUrl: "https://github.com/jaoprogramador/Ejemplo-Quarkus/blob/release001API/quarkus-recetas-api/src/main/java/resources/TemperaturaResource.java",
+        appUrl: "https://github.com/jaoprogramador/Ejemplo-Quarkus/blob/release001API/quarkus-recetas-api/src/main/java/resources/TemperaturaResource.java",
+        repoLocal: "C:\\Users\\user\\Documents\\Juan PC guillermo SpringAngularAWS\\WORKSPACES\\workspaceQuarkus",
+        maunalDoc: "C:\\Users\\user\Documents\Juan PC guillermo SpringAngularAWS\JAO\Quarkus.docx",
+        URLsInteres:[
+                 "https://es.quarkus.io/","https://microprofile.io/",
+                    ],  
+        icon: "/img/springBoot-icon.png" 
+
+      },
+      //Entitys y repository
+      {
+        name: "Entitys y repository",
+        imageUrl: "/img/Quarkus/004Quarkus.jpg",  
+        description: "Veremos como crear Entitys y repository con quarkus",
+        technology: "Quarkus-Spring",
+        repoUrl: "https://github.com/jaoprogramador/Ejemplo-Quarkus/blob/release004EntRepositorio/quarkus-recetas-api/src/main/java/entities/Receta.java",
+        appUrl: "https://github.com/jaoprogramador/Ejemplo-Quarkus/blob/release004EntRepositorio/quarkus-recetas-api/src/main/java/entities/Receta.java",
+        repoLocal: "C:\\Users\\user\\Documents\\Juan PC guillermo SpringAngularAWS\\WORKSPACES\\workspaceQuarkus",
+        maunalDoc: "C:\\Users\\user\Documents\Juan PC guillermo SpringAngularAWS\JAO\Quarkus.docx",
+        URLsInteres:[
+                 "https://es.quarkus.io/","https://microprofile.io/",
+                    ],  
+        icon: "/img/springBoot-icon.png" 
+
+      },
+      //config BD
+      {
+        name: "Configurar la BD",
+        imageUrl: "/img/Quarkus/005Quarkus.jpg",  
+        description: "Veremos como configurar la BD de H2 con quarkus",
+        technology: "Quarkus-Spring",
+        repoUrl: "https://github.com/jaoprogramador/Ejemplo-Quarkus/blob/release004EntRepositorio/quarkus-recetas-api/src/main/resources/application.properties",
+        appUrl: "https://github.com/jaoprogramador/Ejemplo-Quarkus/blob/release004EntRepositorio/quarkus-recetas-api/src/main/resources/application.properties",
+        repoLocal: "C:\\Users\\user\\Documents\\Juan PC guillermo SpringAngularAWS\\WORKSPACES\\workspaceQuarkus",
+        maunalDoc: "C:\\Users\\user\Documents\Juan PC guillermo SpringAngularAWS\JAO\Quarkus.docx",
+        URLsInteres:[
+                 "https://es.quarkus.io/","https://microprofile.io/",
+                    ],  
+        icon: "/img/springBoot-icon.png" 
+
+      },
+      //Active record y panache Entity
+      {
+        name: "Active record y panache Entity",
+        imageUrl: "/img/Quarkus/006Quarkus.jpg",  
+        description: "Active record y panache Entity",
+        technology: "Quarkus-Spring",
+        repoUrl: "https://github.com/jaoprogramador/Ejemplo-Quarkus/blob/release005FiltrosyPaginacion/quarkus-recetas-api/src/main/java/dto/RespuestaPaginada.java",
+        appUrl: "https://github.com/jaoprogramador/Ejemplo-Quarkus/blob/release005FiltrosyPaginacion/quarkus-recetas-api/src/main/java/dto/RespuestaPaginada.java",
+        repoLocal: "C:\\Users\\user\\Documents\\Juan PC guillermo SpringAngularAWS\\WORKSPACES\\workspaceQuarkus",
+        maunalDoc: "C:\\Users\\user\Documents\Juan PC guillermo SpringAngularAWS\JAO\Quarkus.docx",
+        URLsInteres:[
+                 "https://es.quarkus.io/","https://microprofile.io/",
+                    ],  
+        icon: "/img/springBoot-icon.png" 
+
+      },
+      //Paginacion
+      {
+        name: "Paginacion",
+        imageUrl: "/img/Quarkus/007Quarkus.jpg",  
+        description: "Como configurar e implementar la paginación con quarkus",
+        technology: "Quarkus-Spring",
+        repoUrl: "https://github.com/jaoprogramador/Ejemplo-Quarkus/blob/release005FiltrosyPaginacion/quarkus-recetas-api/src/main/java/repositories/CategoriaRepository.java",
+        appUrl: "https://github.com/jaoprogramador/Ejemplo-Quarkus/blob/release005FiltrosyPaginacion/quarkus-recetas-api/src/main/java/repositories/CategoriaRepository.java",
+        repoLocal: "C:\\Users\\user\\Documents\\Juan PC guillermo SpringAngularAWS\\WORKSPACES\\workspaceQuarkus",
+        maunalDoc: "C:\\Users\\user\Documents\Juan PC guillermo SpringAngularAWS\JAO\Quarkus.docx",
+        URLsInteres:[
+                 "https://es.quarkus.io/","https://microprofile.io/",
+                    ],  
+        icon: "/img/springBoot-icon.png" 
+
+      },
+      //Filtros dinamicos
+      {
+        name: "Filtros dinámicos",
+        imageUrl: "/img/Quarkus/008Quarkus.jpg",  
+        description: "En nuestro enpoint definiremos filtros dinámicos que entrar al endpoint por URL",
+        technology: "Quarkus-Spring",
+        repoUrl: "https://github.com/jaoprogramador/Ejemplo-Quarkus/blob/release005FiltrosyPaginacion/quarkus-recetas-api/src/main/java/resources/CategoriaResource.java",
+        appUrl: "https://github.com/jaoprogramador/Ejemplo-Quarkus/blob/release005FiltrosyPaginacion/quarkus-recetas-api/src/main/java/resources/CategoriaResource.java",
+        repoLocal: "C:\\Users\\user\\Documents\\Juan PC guillermo SpringAngularAWS\\WORKSPACES\\workspaceQuarkus",
+        maunalDoc: "C:\\Users\\user\Documents\Juan PC guillermo SpringAngularAWS\JAO\Quarkus.docx",
+        URLsInteres:[
+                 "https://es.quarkus.io/","https://microprofile.io/",
+                    ],  
+        icon: "/img/springBoot-icon.png" 
+
+      },
       //Principios SOLID
       {
         name: "Principios SOLID",
