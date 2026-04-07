@@ -1765,6 +1765,22 @@ const apps = [
         icon: "/img/springBoot-icon.png" 
 
       },
+       //Optional y lambdas
+       {
+        name: "Optional y lambdas",
+        imageUrl: "/img/Quarkus/012Quarkus.jpg",  
+        description: "Veremos como usar Optional y lambdas, para evitar nullpointers",
+        technology: "Quarkus-Spring",
+        repoUrl: "https://github.com/jaoprogramador/Ejemplo-Quarkus/blob/release001API/quarkus-recetas-api/src/main/java/resources/TemperaturaResource.java",
+        appUrl: "https://github.com/jaoprogramador/Ejemplo-Quarkus/blob/release001API/quarkus-recetas-api/src/main/java/resources/TemperaturaResource.java",
+        repoLocal: "C:\\Users\\user\\Documents\\Juan PC guillermo SpringAngularAWS\\WORKSPACES\\workspaceQuarkus",
+        maunalDoc: "C:\\Users\\user\Documents\Juan PC guillermo SpringAngularAWS\JAO\Quarkus.docx",
+        URLsInteres:[
+                 "https://es.quarkus.io/","https://microprofile.io/",
+                    ],  
+        icon: "/img/springBoot-icon.png" 
+
+      },
       //Entitys y repository
       {
         name: "Entitys y repository",
@@ -1837,6 +1853,70 @@ const apps = [
         technology: "Quarkus-Spring",
         repoUrl: "https://github.com/jaoprogramador/Ejemplo-Quarkus/blob/release005FiltrosyPaginacion/quarkus-recetas-api/src/main/java/resources/CategoriaResource.java",
         appUrl: "https://github.com/jaoprogramador/Ejemplo-Quarkus/blob/release005FiltrosyPaginacion/quarkus-recetas-api/src/main/java/resources/CategoriaResource.java",
+        repoLocal: "C:\\Users\\user\\Documents\\Juan PC guillermo SpringAngularAWS\\WORKSPACES\\workspaceQuarkus",
+        maunalDoc: "C:\\Users\\user\Documents\Juan PC guillermo SpringAngularAWS\JAO\Quarkus.docx",
+        URLsInteres:[
+                 "https://es.quarkus.io/","https://microprofile.io/",
+                    ],  
+        icon: "/img/springBoot-icon.png" 
+
+      },
+      //records, mappers y DTOs
+      {
+        name: "records, mappers y DTOs",
+        imageUrl: "/img/Quarkus/009Quarkus.jpg",  
+        description: "Crearemos records, mappers y DTOs para optimizar la legibilidad de nuestros endpoints",
+        technology: "Quarkus-Spring",
+        repoUrl: "https://github.com/jaoprogramador/Ejemplo-Quarkus/tree/release006DTOsRecordTestsEtoEMigraciones/quarkus-recetas-api/src/main/java/com/jao/quarkus/mappers",
+        appUrl: "https://github.com/jaoprogramador/Ejemplo-Quarkus/tree/release006DTOsRecordTestsEtoEMigraciones/quarkus-recetas-api/src/main/java/com/jao/quarkus/mappers",
+        repoLocal: "C:\\Users\\user\\Documents\\Juan PC guillermo SpringAngularAWS\\WORKSPACES\\workspaceQuarkus",
+        maunalDoc: "C:\\Users\\user\Documents\Juan PC guillermo SpringAngularAWS\JAO\Quarkus.docx",
+        URLsInteres:[
+                 "https://es.quarkus.io/","https://microprofile.io/",
+                    ],  
+        icon: "/img/springBoot-icon.png" 
+
+      },
+      //Validaciones
+      {
+        name: "Validaciones",
+        imageUrl: "/img/Quarkus/010Quarkus.jpg",  
+        description: "Crearemos Validaciones en Quarkus para validar los datos que pasamos a nuestro endpoint",
+        technology: "Quarkus-Spring",
+        repoUrl: "https://github.com/jaoprogramador/Ejemplo-Quarkus/blob/release006DTOsRecordTestsEtoEMigraciones/quarkus-recetas-api/src/main/java/com/jao/quarkus/resources/RecetaResource.java",
+        appUrl: "https://github.com/jaoprogramador/Ejemplo-Quarkus/blob/release006DTOsRecordTestsEtoEMigraciones/quarkus-recetas-api/src/main/java/com/jao/quarkus/resources/RecetaResource.java",
+        repoLocal: "C:\\Users\\user\\Documents\\Juan PC guillermo SpringAngularAWS\\WORKSPACES\\workspaceQuarkus",
+        maunalDoc: "C:\\Users\\user\Documents\Juan PC guillermo SpringAngularAWS\JAO\Quarkus.docx",
+        URLsInteres:[
+                 "https://es.quarkus.io/","https://microprofile.io/",
+                    ],  
+        icon: "/img/springBoot-icon.png" 
+
+      },
+      //Test E2E
+      {
+        name: "Test E2E",
+        imageUrl: "/img/Quarkus/011Quarkus.jpg",  
+        description: "Crearemos test en Quarkus End to End pasando por las distintas capas de microservicio desde el endpoint",
+        technology: "Quarkus-Spring",
+        repoUrl: "https://github.com/jaoprogramador/Ejemplo-Quarkus/blob/release006DTOsRecordTestsEtoEMigraciones/quarkus-recetas-api/src/test/java/com/jao/recetas/RecetaTest.java",
+        appUrl: "https://github.com/jaoprogramador/Ejemplo-Quarkus/blob/release006DTOsRecordTestsEtoEMigraciones/quarkus-recetas-api/src/test/java/com/jao/recetas/RecetaTest.java",
+        repoLocal: "C:\\Users\\user\\Documents\\Juan PC guillermo SpringAngularAWS\\WORKSPACES\\workspaceQuarkus",
+        maunalDoc: "C:\\Users\\user\Documents\Juan PC guillermo SpringAngularAWS\JAO\Quarkus.docx",
+        URLsInteres:[
+                 "https://es.quarkus.io/","https://microprofile.io/",
+                    ],  
+        icon: "/img/springBoot-icon.png" 
+
+      },
+      //Migración de datos
+      {
+        name: "Migración de datos",
+        imageUrl: "/img/Quarkus/008Quarkus.jpg",  
+        description: "Migraremos nuestra entidad con campos nuevos mediante Flyway y creando scripts de BD",
+        technology: "Quarkus-Spring",
+        repoUrl: "https://github.com/jaoprogramador/Ejemplo-Quarkus/blob/release006DTOsRecordTestsEtoEMigraciones/quarkus-recetas-api/src/main/resources/db/migration/V1.0.0__Create_Receta_Table.sql",
+        appUrl: "https://github.com/jaoprogramador/Ejemplo-Quarkus/blob/release006DTOsRecordTestsEtoEMigraciones/quarkus-recetas-api/src/main/resources/db/migration/V1.0.0__Create_Receta_Table.sql",
         repoLocal: "C:\\Users\\user\\Documents\\Juan PC guillermo SpringAngularAWS\\WORKSPACES\\workspaceQuarkus",
         maunalDoc: "C:\\Users\\user\Documents\Juan PC guillermo SpringAngularAWS\JAO\Quarkus.docx",
         URLsInteres:[
