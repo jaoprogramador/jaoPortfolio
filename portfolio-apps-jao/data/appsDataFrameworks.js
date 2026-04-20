@@ -1996,7 +1996,7 @@ const apps = [
       //CRUD Listado con paginación
       {
         name: "CRUD Listado con paginación",
-        imageUrl: "/img/Quarkus/016QuarkusFRONT.jpg",  
+        imageUrl: "/img/Quarkus/017QuarkusFRONT.jpg",  
         description: "En el listado crearemos un boton bara buscar recetas por ingredientes",
         technology: "Quarkus-Spring",
         repoUrl: "https://github.com/jaoprogramador/Ejemplo-Quarkus/tree/release008BuscadorInciPaginacion/recetas-web-an",
