@@ -7,7 +7,7 @@ import { useEffect, useRef, useState } from "react";
 // Mapeo de categorías con sus respectivas tecnologías y títulos
 const categories = [
   { title: "React 18", filter: "React", icon: "/img/icons/react-icon.png" , descBlock:"En este apartado podemos ver aplicaciones creadas en React, Node, Express, GraphQL, Typescript, Bootstrap" },
-  { title: "Angular 17", filter: "Angular", icon: "/img/icons/angular-icon.png", descBlock:"En este apartado encontrarás los disntintos modulos de angular, PWA, Pipes, Angular Materia, Primeng, directivas y con todo ello hacer una aplicación final"},
+  { title: "Angular 17-19", filter: "Angular", icon: "/img/icons/angular-icon.png", descBlock:"En este apartado encontrarás los disntintos modulos de angular, PWA, Pipes, Angular Materia, Primeng, directivas y con todo ello hacer una aplicación final"},
   { title: "Spring Boot", filter: "Spring Framework", icon:"/img/icons/springboot-icon.png", descBlock:"En este apartado encontras distintos temas o módulos de Spring Boot" },
   { title: "Spring Cloud Microservicios 8", filter: "Spring Cloud", icon:"/img/icons/springcloud-icon.png", descBlock:"En este apartado veremos como crear un proyecto de microservicios con Spring , java 8 y Gradle" },
   { title: "Proyecto Microservicios 17", filter: "Microservicios", icon:"/img/icons/springcloud-icon.png", descBlock:"Proyecto de booking de viajes con microservicios con Java 17 y Maven, Login-aut, Usuarios, Reservas, Hoteles, Vuelos, Alquileres, Notifiaciones y Pagos. El proyecto tiene Config-server, Discovery-service, patrón Api-gateway, Mensajería con Kafka y Rabbit, WebFlux, Keycloak, Vault, OAuth-JWT, Encriptación, Domain-Driven Design" },
@@ -21,7 +21,7 @@ const categories = [
   { title: "Docker", filter: "Docker", icon:"/img/icons/docker-icon.png" , descBlock:"En este apartado podemos ver que es Docker y como usarlo"},
   { title: "gRPC", filter: "gRPC", icon:"/img/icons/gRPC-icon.png" , descBlock:"En este apartado podemos ver como crear un servicio gRPC cliente servidor"},
   { title: "GraphQL", filter: "GraphQL-Spring", icon:"/img/icons/GraphQL-icon.png" , descBlock:"En este apartado podemos ver como crear un servicio con GraphQL mediante mutaciones y hacer consultas dinámicas"},
-  { title: "Quarkus", filter: "Quarkus-Spring", icon:"/img/icons/Quarkus-icon.png" , descBlock:"En este apartado podemos ver como crear un API con Quarkus"},
+  { title: "Quarkus", filter: "Quarkus-Spring", icon:"/img/icons/Quarkus-icon.png" , descBlock:"En este apartado podemos ver como crear un API con Quarkus y consumirlo con un front desde un front en Angular"},
   
   
   { title: "Kubernetes", filter: "Kubernetes", icon:"/img/icons/kubernetes-icon.png", descBlock:"Proyecto en tres capas con Spring para el BACK con APIs y react con next-js para el FRONT. El proyecto está orquestado con Kubernetes y emula una aplicación para crear POSTs con paginación y operaciones CRUD" },

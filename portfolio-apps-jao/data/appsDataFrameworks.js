@@ -313,12 +313,28 @@ const apps = [
       {
         name: "PrimeNG",
         imageUrl: "/img/angular/AngularPrimeng.jpg",  
-        description: "Ver como congigurar y usar primeng en nuestra aplicación gestionando en modulos. PrimeNG es una biblioteca de componentes UI para Angular, desarrollada por PrimeTek, que proporciona una colección de componentes ricos y personalizables para construir aplicaciones web modernas con un diseño atractivo y funcional.",
+        description: "Ver como configurar en angular 19 y usar primeng en nuestra aplicación gestionando en modulos. PrimeNG es una biblioteca de componentes UI para Angular, desarrollada por PrimeTek, que proporciona una colección de componentes ricos y personalizables para construir aplicaciones web modernas con un diseño atractivo y funcional.",
         technology: "Angular",
         repoUrl: "https://github.com/jaoprogramador/angular-apps/tree/master/08PrimeNG/ejemploprimerong",
         appUrl: "#",
         icon: "/img/angular-icon.png" 
   
+      },
+      //CRUD Angular
+      {
+        name: "Desarrollo FRONT",
+        imageUrl: "/img/Quarkus/017QuarkusFRONT.jpg",  
+        description: "Crearemos un front con Angular 19 y PrimeNG para hacer un CRUD contra nuestra API en QUARKUS que representa las recetas de un cocinero",
+        technology: "Angular",
+        repoUrl: "https://github.com/jaoprogramador/Ejemplo-Quarkus/tree/release007FrontAngularCRUD/recetas-web-an",
+        appUrl: "https://github.com/jaoprogramador/Ejemplo-Quarkus/tree/release007FrontAngularCRUD/recetas-web-an",
+        repoLocal: "C:\\Users\\user\\Documents\\Juan PC guillermo SpringAngularAWS\\WORKSPACES\\workspaceQuarkus\\recetas-web-an",
+        maunalDoc: "C:\\Users\\user\Documents\Juan PC guillermo SpringAngularAWS\JAO\Quarkus.docx",
+        URLsInteres:[
+                 "https://es.quarkus.io/","https://microprofile.io/",
+                    ],  
+        icon: "/img/springBoot-icon.png" 
+
       },
       {
         name: "Login Angular",
@@ -1925,6 +1941,75 @@ const apps = [
         icon: "/img/springBoot-icon.png" 
 
       },
+      ,
+      //CRUD Angular
+      {
+        name: "Desarrollo FRONT",
+        imageUrl: "/img/Quarkus/013QuarkusFRONT.jpg",  
+        description: "Crearemos un front con Angular 19 y PrimeNG para hacer un CRUD contra nuestra API en QUARKUS",
+        technology: "Quarkus-Spring",
+        repoUrl: "https://github.com/jaoprogramador/Ejemplo-Quarkus/tree/release007FrontAngularCRUD/recetas-web-an",
+        appUrl: "https://github.com/jaoprogramador/Ejemplo-Quarkus/tree/release007FrontAngularCRUD/recetas-web-an",
+        repoLocal: "C:\\Users\\user\\Documents\\Juan PC guillermo SpringAngularAWS\\WORKSPACES\\workspaceQuarkus\\recetas-web-an",
+        maunalDoc: "C:\\Users\\user\Documents\Juan PC guillermo SpringAngularAWS\JAO\Quarkus.docx",
+        URLsInteres:[
+                 "https://es.quarkus.io/","https://microprofile.io/",
+                    ],  
+        icon: "/img/springBoot-icon.png" 
+
+      },
+      //estructura proyecto
+      {
+        name: "Estructura proyecto",
+        imageUrl: "/img/Quarkus/015QuarkusFRONT.jpg",  
+        description: "Definiremos la arquitectura del proyecto FRONT",
+        technology: "Quarkus-Spring",
+        repoUrl: "https://github.com/jaoprogramador/Ejemplo-Quarkus/tree/release007FrontAngularCRUD/recetas-web-an",
+        appUrl: "https://github.com/jaoprogramador/Ejemplo-Quarkus/tree/release007FrontAngularCRUD/recetas-web-an",
+        repoLocal: "C:\\Users\\user\\Documents\\Juan PC guillermo SpringAngularAWS\\WORKSPACES\\workspaceQuarkus\\recetas-web-an",
+        maunalDoc: "C:\\Users\\user\Documents\Juan PC guillermo SpringAngularAWS\JAO\Quarkus.docx",
+        URLsInteres:[
+                 "https://es.quarkus.io/","https://microprofile.io/",
+                    ],  
+        icon: "/img/springBoot-icon.png" 
+
+      },
+      //CRUD Listado con paginación
+      {
+        name: "Service con CRUD",
+        imageUrl: "/img/Quarkus/016QuarkusFRONT.jpg",  
+        description: "Definiremos nuestro service que hará todas las acciones de un CRUD",
+        technology: "Quarkus-Spring",
+        repoUrl: "https://github.com/jaoprogramador/Ejemplo-Quarkus/tree/release007FrontAngularCRUD/recetas-web-an",
+        appUrl: "https://github.com/jaoprogramador/Ejemplo-Quarkus/tree/release007FrontAngularCRUD/recetas-web-an",
+        repoLocal: "C:\\Users\\user\\Documents\\Juan PC guillermo SpringAngularAWS\\WORKSPACES\\workspaceQuarkus\\recetas-web-an",
+        maunalDoc: "C:\\Users\\user\Documents\Juan PC guillermo SpringAngularAWS\JAO\Quarkus.docx",
+        URLsInteres:[
+                 "https://es.quarkus.io/","https://microprofile.io/",
+                    ],  
+        icon: "/img/springBoot-icon.png" 
+
+      },
+      //borrar
+      //editar crear
+      //buscar
+      //CRUD Listado con paginación
+      {
+        name: "CRUD Listado con paginación",
+        imageUrl: "/img/Quarkus/016QuarkusFRONT.jpg",  
+        description: "En el listado crearemos un boton bara buscar recetas por ingredientes",
+        technology: "Quarkus-Spring",
+        repoUrl: "https://github.com/jaoprogramador/Ejemplo-Quarkus/tree/release008BuscadorInciPaginacion/recetas-web-an",
+        appUrl: "https://github.com/jaoprogramador/Ejemplo-Quarkus/tree/release008BuscadorInciPaginacion/recetas-web-an",
+        repoLocal: "C:\\Users\\user\\Documents\\Juan PC guillermo SpringAngularAWS\\WORKSPACES\\workspaceQuarkus\\recetas-web-an",
+        maunalDoc: "C:\\Users\\user\Documents\Juan PC guillermo SpringAngularAWS\JAO\Quarkus.docx",
+        URLsInteres:[
+                 "https://es.quarkus.io/","https://microprofile.io/",
+                    ],  
+        icon: "/img/springBoot-icon.png" 
+
+      },
+      
       //Principios SOLID
       {
         name: "Principios SOLID",
