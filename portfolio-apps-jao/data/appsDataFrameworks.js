@@ -1284,6 +1284,118 @@ const apps = [
         appUrl: "https://github.com/jaoprogramador/CursoSpringOpenBootCamp/tree/master/users-api/Jenkinsfile",
         icon: "/img/rabbitMQ-icon.png" 
       },
+      {//OPENTELEMETRY
+        name: "Opentelemetry",
+        imageUrl: "/img/opentelemetry/001.jpg",  
+        description: "web oficial de OpenTelemetry",
+        technology: "OpenTelemetry",
+        localManual: "C:\Users\USER\Documents\Juan PC guillermo SpringAngularAWS\JAO\openTelemetryTracingID",
+        localWorkspace:"C:\Users\USER\Documents\Juan PC guillermo SpringAngularAWS\JAO\openTelemetryTracingID",
+        repoUrl: "https://github.com/jaoprogramador/OpenTelemetryJaegerTraceID",
+        appUrl: "https://github.com/jaoprogramador/OpenTelemetryJaegerTraceID",
+        URLsInteres:[
+          "https://opentelemetry.io/","",
+             ],  
+        icon: "/img/rabbitMQ-icon.png" 
+      },
+      {//OPENTELEMETRY
+        name: "Documentación oficial",
+        imageUrl: "/img/opentelemetry/002.jpg",  
+        description: "VamoRevisaremos la documentación oficial de OpenTelemetry",
+        technology: "OpenTelemetry",
+        localManual: "C:\Users\USER\Documents\Juan PC guillermo SpringAngularAWS\JAO\openTelemetryTracingID",
+        localWorkspace:"C:\Users\USER\Documents\Juan PC guillermo SpringAngularAWS\JAO\openTelemetryTracingID",
+        repoUrl: "https://github.com/jaoprogramador/OpenTelemetryJaegerTraceID",
+        appUrl: "https://github.com/jaoprogramador/OpenTelemetryJaegerTraceID",
+        URLsInteres:[
+          "https://opentelemetry.io/","",
+             ],  
+        icon: "/img/rabbitMQ-icon.png" 
+      },
+      {//OPENTELEMETRY
+        name: "Dependencias",
+        imageUrl: "/img/opentelemetry/003.jpg",  
+        description: "Añadiremos la dependencias necesarias para la trazabilidad entre microservicios: sleuth, otel y opentelemetry-exporter-oyl-trace",
+        technology: "OpenTelemetry",
+        localManual: "C:\Users\USER\Documents\Juan PC guillermo SpringAngularAWS\JAO\openTelemetryTracingID",
+        localWorkspace:"C:\Users\USER\Documents\Juan PC guillermo SpringAngularAWS\JAO\openTelemetryTracingID",
+        repoUrl: "https://github.com/jaoprogramador/OpenTelemetryJaegerTraceID",
+        appUrl: "https://github.com/jaoprogramador/OpenTelemetryJaegerTraceID",
+        URLsInteres:[
+          "https://opentelemetry.io/","",
+             ],   
+        icon: "/img/rabbitMQ-icon.png" 
+      },
+      {//OPENTELEMETRY
+        name: "Configuración de opentelemetry",
+        imageUrl: "/img/opentelemetry/004.jpg",  
+        description: "Configuración",
+        technology: "OpenTelemetry",
+        localManual: "C:\Users\USER\Documents\Juan PC guillermo SpringAngularAWS\JAO\openTelemetryTracingID",
+        localWorkspace:"C:\Users\USER\Documents\Juan PC guillermo SpringAngularAWS\JAO\openTelemetryTracingID",
+        repoUrl: "https://github.com/jaoprogramador/OpenTelemetryJaegerTraceID",
+        appUrl: "https://github.com/jaoprogramador/OpenTelemetryJaegerTraceID",
+        URLsInteres:[
+          "https://opentelemetry.io/","",
+             ],  
+        icon: "/img/rabbitMQ-icon.png" 
+      },
+      {//OPENTELEMETRY
+        name: "Dockerizar opentelemetry",
+        imageUrl: "/img/opentelemetry/005.jpg",  
+        description: "Generamos un docker compose con los servicios necesarios de Opentelemetry",
+        technology: "OpenTelemetry",
+        localManual: "C:\Users\USER\Documents\Juan PC guillermo SpringAngularAWS\JAO\openTelemetryTracingID",
+        localWorkspace:"C:\Users\USER\Documents\Juan PC guillermo SpringAngularAWS\JAO\openTelemetryTracingID",
+        repoUrl: "https://github.com/jaoprogramador/OpenTelemetryJaegerTraceID",
+        appUrl: "https://github.com/jaoprogramador/OpenTelemetryJaegerTraceID",
+        URLsInteres:[
+          "https://opentelemetry.io/","",
+             ],  
+        icon: "/img/rabbitMQ-icon.png" 
+      },
+      {//OPENTELEMETRY
+        name: "Crear microservicios",
+        imageUrl: "/img/opentelemetry/006.jpg",  
+        description: "Implementacion, comunicación y traceo de microservicios",
+        technology: "OpenTelemetry",
+        localManual: "C:\Users\USER\Documents\Juan PC guillermo SpringAngularAWS\JAO\openTelemetryTracingID",
+        localWorkspace:"C:\Users\USER\Documents\Juan PC guillermo SpringAngularAWS\JAO\openTelemetryTracingID",
+        repoUrl: "https://github.com/jaoprogramador/OpenTelemetryJaegerTraceID",
+        appUrl: "https://github.com/jaoprogramador/OpenTelemetryJaegerTraceID",
+        URLsInteres:[
+          "https://opentelemetry.io/","",
+             ],  
+        icon: "/img/rabbitMQ-icon.png" 
+      },
+      {//OPENTELEMETRY
+        name: "Jager UI",
+        imageUrl: "/img/opentelemetry/007.jpg",  
+        description: "Herramienta para tracear una petición entre microservicios y sus relaciones en un diagrama",
+        technology: "OpenTelemetry",
+        localManual: "C:\Users\USER\Documents\Juan PC guillermo SpringAngularAWS\JAO\openTelemetryTracingID",
+        localWorkspace:"C:\Users\USER\Documents\Juan PC guillermo SpringAngularAWS\JAO\openTelemetryTracingID",
+        repoUrl: "https://github.com/jaoprogramador/OpenTelemetryJaegerTraceID",
+        appUrl: "https://github.com/jaoprogramador/OpenTelemetryJaegerTraceID",
+        URLsInteres:[
+          "https://opentelemetry.io/","",
+             ],  
+        icon: "/img/rabbitMQ-icon.png" 
+      },
+      {//OPENTELEMETRY
+        name: "TraceID",
+        imageUrl: "/img/opentelemetry/008.jpg",  
+        description: "Si nos da un error podemos con Jager UI tracear el ID y ver que lo originó",
+        technology: "OpenTelemetry",
+        localManual: "C:\Users\USER\Documents\Juan PC guillermo SpringAngularAWS\JAO\openTelemetryTracingID",
+        localWorkspace:"C:\Users\USER\Documents\Juan PC guillermo SpringAngularAWS\JAO\openTelemetryTracingID",
+        repoUrl: "https://github.com/jaoprogramador/OpenTelemetryJaegerTraceID",
+        appUrl: "https://github.com/jaoprogramador/OpenTelemetryJaegerTraceID",
+        URLsInteres:[
+          "https://opentelemetry.io/","",
+             ],  
+        icon: "/img/rabbitMQ-icon.png" 
+      },
       {//ELK
         name: "Observabilidad con ELK",
         imageUrl: "/img/spring21/ELK.jpg",  

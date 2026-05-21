@@ -17,6 +17,7 @@ const categories = [
   { title: "Spring AI", filter: "Spring IA", icon:"/img/icons/springAI-icon.png", descBlock:"En este apartado veremos como con Java 21 conectar mi proyecto con ChatGPT para hacer un API que le pregunta a ChatGPT y nos devuelve resultados" },
   { title: "Spring Security", filter: "Spring Security", icon:"/img/icons/SpringSecurity.png", descBlock:"En este apartado veremos como con Java 21 crear un microservicio securizado con JWT, encriptación de claves para acceder al ecosistema de microservicios..." },
   { title: "Observabilidad", filter: "ELK", icon:"/img/icons/ELK.png", descBlock:"En este apartado veremos como con Java 21 configurar mi API con ELK gestionar los logs con un dasboard mediante Elastic Search, logdash y Kibana" },
+  { title: "OpenTelemetry", filter: "OpenTelemetry", icon:"/img/icons/openTelemetry.png", descBlock:"En este apartado veremos como con Java 21 configurar opentelemetry, jaegger y TraceId en 3 microservicios que comparten información" },
   { title: "Jenkins", filter: "Jenkins", icon:"/img/icons/Jenkins.png", descBlock:"En este apartado veremos como con Java 21 configurar mi API para hacer CICD mediante Jenkins" },
   { title: "Docker", filter: "Docker", icon:"/img/icons/docker-icon.png" , descBlock:"En este apartado podemos ver que es Docker y como usarlo"},
   { title: "gRPC", filter: "gRPC", icon:"/img/icons/gRPC-icon.png" , descBlock:"En este apartado podemos ver como crear un servicio gRPC cliente servidor"},
